@@ -1,0 +1,245 @@
+{
+  "generator": "OpenAI built-in image generation",
+  "illustrations": {
+    "anatomy-01": {
+      "asset": "public/images/anatomy-illustrations/anatomy-01.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Open humanoid skull frame on stand, removable face shell beside it, clearly visible internal brackets."
+    },
+    "anatomy-02": {
+      "asset": "public/images/anatomy-illustrations/anatomy-02.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Twin robot camera eyes with glass optics mounted in an exposed brow frame."
+    },
+    "anatomy-03": {
+      "asset": "public/images/anatomy-illustrations/anatomy-03.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Robot ear module with curved outer acoustic housing and a visible array of small microphone ports and electronics."
+    },
+    "anatomy-04": {
+      "asset": "public/images/anatomy-illustrations/anatomy-04.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Friendly expressive robot face panel with animated blue eyes and simple visible eyelid linkage."
+    },
+    "anatomy-05": {
+      "asset": "public/images/anatomy-illustrations/anatomy-05.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Robot neck gimbal supporting a small head, stacked yaw and tilt pivots visible."
+    },
+    "anatomy-06": {
+      "asset": "public/images/anatomy-illustrations/anatomy-06.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Exposed humanoid shoulder assembly with two intersecting rotary joints and a short arm link."
+    },
+    "anatomy-07": {
+      "asset": "public/images/anatomy-illustrations/anatomy-07.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Single upper-arm structural link with lightweight ribbed metal frame and motor mounting bosses."
+    },
+    "anatomy-08": {
+      "asset": "public/images/anatomy-illustrations/anatomy-08.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Robot elbow close-up, geared hinge joining upper arm and forearm with circular encoder housing."
+    },
+    "anatomy-09": {
+      "asset": "public/images/anatomy-illustrations/anatomy-09.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Robotic forearm with an open service panel revealing neatly routed wires and compact actuators."
+    },
+    "anatomy-10": {
+      "asset": "public/images/anatomy-illustrations/anatomy-10.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Three-axis robotic wrist with nested pivots and a round end-tool flange."
+    },
+    "anatomy-11": {
+      "asset": "public/images/anatomy-illustrations/anatomy-11.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Skeletal robotic hand palm plate with finger mounts and actuator bays, fingers omitted to expose palm."
+    },
+    "anatomy-12": {
+      "asset": "public/images/anatomy-illustrations/anatomy-12.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Articulated robotic fingers showing knuckles and three rigid phalange segments per finger, close up."
+    },
+    "anatomy-13": {
+      "asset": "public/images/anatomy-illustrations/anatomy-13.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Opposable robotic thumb rotating toward the index finger, focus on thumb base and opposing grip."
+    },
+    "anatomy-14": {
+      "asset": "public/images/anatomy-illustrations/anatomy-14.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Tendon-driven robotic finger mechanism with visible cables running over small pulleys."
+    },
+    "anatomy-15": {
+      "asset": "public/images/anatomy-illustrations/anatomy-15.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Interchangeable robotic end effectors on an organized fixture: suction cup, parallel jaws, and tool flange."
+    },
+    "anatomy-16": {
+      "asset": "public/images/anatomy-illustrations/anatomy-16.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Open robot chest chassis with structural cross members and removable curved shell."
+    },
+    "anatomy-17": {
+      "asset": "public/images/anatomy-illustrations/anatomy-17.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Flexible robotic spine with a vertical chain of articulated vertebra-like metal segments."
+    },
+    "anatomy-18": {
+      "asset": "public/images/anatomy-illustrations/anatomy-18.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Compact waist yaw bearing between torso frame and pelvic mount, circular drive visible."
+    },
+    "anatomy-19": {
+      "asset": "public/images/anatomy-illustrations/anatomy-19.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Robot torso electronics bay with organized cable channels, connectors and strain-relief clamps."
+    },
+    "anatomy-20": {
+      "asset": "public/images/anatomy-illustrations/anatomy-20.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Robot electronics cooling assembly with exposed fins, heat pipes and compact fans."
+    },
+    "anatomy-21": {
+      "asset": "public/images/anatomy-illustrations/anatomy-21.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Robot pelvis crossmember with two symmetrical rotary hip actuator sockets."
+    },
+    "anatomy-22": {
+      "asset": "public/images/anatomy-illustrations/anatomy-22.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: One exposed robotic thigh link with hollow ribbed structure and integrated motor mount."
+    },
+    "anatomy-23": {
+      "asset": "public/images/anatomy-illustrations/anatomy-23.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Robot knee hinge in a bent leg, encoder and mechanical travel stops visible."
+    },
+    "anatomy-24": {
+      "asset": "public/images/anatomy-illustrations/anatomy-24.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Robotic lower-leg shin structure with exposed routed harness and recessed motor housing."
+    },
+    "anatomy-25": {
+      "asset": "public/images/anatomy-illustrations/anatomy-25.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Robot ankle assembly with articulated pitch and roll joints above a broad textured foot sole."
+    },
+    "anatomy-26": {
+      "asset": "public/images/anatomy-illustrations/anatomy-26.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Cutaway mobile-robot wheel hub with visible electric motor and bearing inside one rubber tire."
+    },
+    "anatomy-27": {
+      "asset": "public/images/anatomy-illustrations/anatomy-27.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Tracked robot undercarriage close-up showing continuous track belt, drive sprocket and idlers."
+    },
+    "anatomy-28": {
+      "asset": "public/images/anatomy-illustrations/anatomy-28.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Small vehicle front steering axle showing tie rod, steering knuckles, springs and dampers."
+    },
+    "anatomy-29": {
+      "asset": "public/images/anatomy-illustrations/anatomy-29.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Underbody close-up of a quadruped with clearly separated articulated leg attachments."
+    },
+    "anatomy-30": {
+      "asset": "public/images/anatomy-illustrations/anatomy-30.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Shrouded underwater electric thruster on workbench, visible propeller and nozzle."
+    },
+    "anatomy-31": {
+      "asset": "public/images/anatomy-illustrations/anatomy-31.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Compact smart servo actuator with splined output horn and wiring connector."
+    },
+    "anatomy-32": {
+      "asset": "public/images/anatomy-illustrations/anatomy-32.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Three visibly distinct electric motors on a bench, brushed DC can, brushless outrunner, and square stepper."
+    },
+    "anatomy-33": {
+      "asset": "public/images/anatomy-illustrations/anatomy-33.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Opened compact robot reduction gearbox with visible planetary gears and ring gear."
+    },
+    "anatomy-34": {
+      "asset": "public/images/anatomy-illustrations/anatomy-34.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Braided pneumatic artificial muscle actuator with end fittings, arching beside a soft silicone actuator."
+    },
+    "anatomy-35": {
+      "asset": "public/images/anatomy-illustrations/anatomy-35.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Exposed hydraulic cylinder on a robot arm link, piston rod and hoses visible."
+    },
+    "anatomy-36": {
+      "asset": "public/images/anatomy-illustrations/anatomy-36.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Robot main computer with heatsink and ports on a removable torso compute tray."
+    },
+    "anatomy-37": {
+      "asset": "public/images/anatomy-illustrations/anatomy-37.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Compact microcontroller board installed on robot control tray with headers and neatly routed harness."
+    },
+    "anatomy-38": {
+      "asset": "public/images/anatomy-illustrations/anatomy-38.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Robotic motor driver board with power terminals, heat sink and attached motor leads."
+    },
+    "anatomy-39": {
+      "asset": "public/images/anatomy-illustrations/anatomy-39.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Robot internal communication harness connecting three controller modules with clearly visible daisy-chain connectors."
+    },
+    "anatomy-40": {
+      "asset": "public/images/anatomy-illustrations/anatomy-40.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Robot perception and control lab bench with a stereo camera, embedded computer, and monitor showing abstract vision overlays."
+    },
+    "anatomy-41": {
+      "asset": "public/images/anatomy-illustrations/anatomy-41.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Close-up of an optical rotary encoder disk and sensor at the end of a robotic joint shaft."
+    },
+    "anatomy-42": {
+      "asset": "public/images/anatomy-illustrations/anatomy-42.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Robot balance sensor module mounted near the center of an exposed chassis, tiny IMU board visible."
+    },
+    "anatomy-43": {
+      "asset": "public/images/anatomy-illustrations/anatomy-43.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Force torque sensing puck at a robot wrist and tactile sensing pads on a gripper fingertip."
+    },
+    "anatomy-44": {
+      "asset": "public/images/anatomy-illustrations/anatomy-44.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Mobile robot environmental sensing bar with two ultrasonic transducers and a compact lidar scanner."
+    },
+    "anatomy-45": {
+      "asset": "public/images/anatomy-illustrations/anatomy-45.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Close-up of a robot perception pod containing twin stereo lenses and a central depth projector."
+    },
+    "anatomy-46": {
+      "asset": "public/images/anatomy-illustrations/anatomy-46.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Removable robot battery pack sliding into its protective chassis cradle with handle and keyed connector."
+    },
+    "anatomy-47": {
+      "asset": "public/images/anatomy-illustrations/anatomy-47.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Robot battery charging bay with charge port and separate visible cell-management board."
+    },
+    "anatomy-48": {
+      "asset": "public/images/anatomy-illustrations/anatomy-48.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Robot power distribution panel with fuses, keyed power rails and DC converters."
+    },
+    "anatomy-49": {
+      "asset": "public/images/anatomy-illustrations/anatomy-49.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Industrial robot safety station with prominent red mushroom emergency-stop button, guarded enclosure and interlock."
+    },
+    "anatomy-50": {
+      "asset": "public/images/anatomy-illustrations/anatomy-50.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Gasketed rugged robot electronics enclosure with a removable lid, bumper and cable gland."
+    },
+    "anatomy-51": {
+      "asset": "public/images/anatomy-illustrations/anatomy-51.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Series elastic robot joint with exposed spring between actuator and output link."
+    },
+    "anatomy-52": {
+      "asset": "public/images/anatomy-illustrations/anatomy-52.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Adaptive robotic hand with linked fingers wrapping around an irregular foam object."
+    },
+    "anatomy-53": {
+      "asset": "public/images/anatomy-illustrations/anatomy-53.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Variable stiffness robot joint with two opposing springs and a visible adjustable tension mechanism."
+    },
+    "anatomy-54": {
+      "asset": "public/images/anatomy-illustrations/anatomy-54.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Modular robot body on bench with one detached arm and clearly matching docking interfaces."
+    },
+    "anatomy-55": {
+      "asset": "public/images/anatomy-illustrations/anatomy-55.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Bio-inspired robotic limb assembly resembling an insect leg, lightweight jointed exoskeleton."
+    },
+    "anatomy-56": {
+      "asset": "public/images/anatomy-illustrations/anatomy-56.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Bare full humanoid skeleton frame with structural links and no exterior panels."
+    },
+    "anatomy-57": {
+      "asset": "public/images/anatomy-illustrations/anatomy-57.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Robot test fixture showing clearly distinct rotational hinge and linear sliding joint, no labels."
+    },
+    "anatomy-58": {
+      "asset": "public/images/anatomy-illustrations/anatomy-58.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Three-link articulated robot arm reaching toward a colored target marker on a clean bench."
+    },
+    "anatomy-59": {
+      "asset": "public/images/anatomy-illustrations/anatomy-59.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Exploded robotic wrist assembly arranged in order, housing, bearings, fasteners and cable harness."
+    },
+    "anatomy-60": {
+      "asset": "public/images/anatomy-illustrations/anatomy-60.webp",
+      "prompt": "Realistic engineering illustration for Robot Anatomy educational catalogue. Landscape 4:3, premium photoreal industrial product photography style, soft cool-gray studio background, clean softbox lighting, graphite and brushed aluminum with restrained blue accents. Main subject large and centered, all key parts visible within the central 80%, accurate plausible construction, distinct silhouette, no lettering, logos, labels or watermark. Subject: Robotic hand prototype on a maker bench with small servo controller, breadboard and tools."
+    }
+  }
+}

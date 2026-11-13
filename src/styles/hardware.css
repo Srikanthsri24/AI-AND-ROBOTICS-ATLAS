@@ -1,0 +1,329 @@
+.ha-page{--ha-ink:#23304b;--ha-muted:#69768b;--ha-purple:#7953ab;max-width:1500px;margin:0 auto;color:var(--ha-ink)}.ha-page *{box-sizing:border-box}.ha-page button,.ha-page input,.ha-page select{font:inherit}.ha-page button:focus-visible,.ha-page input:focus-visible,.ha-page select:focus-visible{outline:3px solid #a88be3;outline-offset:3px}.ha-kicker,.ha-eyebrow{display:flex;align-items:center;gap:7px;font-size:9px;letter-spacing:1.5px;font-weight:700;color:#8664aa}.ha-hero{display:grid;grid-template-columns:1.12fr 1fr;overflow:hidden;border-radius:20px;border:1px solid #cbd4e8;background:#19253f;min-height:310px;box-shadow:0 12px 30px #1c32500c}.ha-hero-copy{padding:36px 34px;align-self:center}.ha-eyebrow{color:#c6b3ef;font-size:8px;letter-spacing:1.3px}.ha-hero h1{font-size:39px;line-height:1.12;letter-spacing:-1.3px;color:#fff;margin:20px 0 17px;max-width:520px}.ha-hero p{font-size:12px;line-height:1.9;color:#c3cde0;max-width:460px}.ha-hero-actions{display:flex;gap:20px;align-items:center;margin-top:24px}.atlas .ha-hero-actions button{border:1px solid #decdf3;background:#f1e8ff;border-radius:25px;padding:11px 16px;color:#64458d;font-size:10px;font-weight:700}.ha-hero-actions>span{display:flex;gap:7px;align-items:center;white-space:nowrap;font-size:9px;color:#bbbad3}.ha-hero-actions i{width:3px;height:3px;border-radius:50%;background:#b092d5}.ha-hero-art{position:relative;background:#e9edf8;min-width:0}.ha-hero-art img{width:100%;height:100%;object-fit:cover;display:block}.ha-hero-art>span{position:absolute;bottom:17px;left:20px;right:20px;display:flex;align-items:center;gap:8px;padding:10px 13px;background:#ffffffc9;backdrop-filter:blur(12px);border:1px solid #fff;border-radius:8px;font-size:7px;letter-spacing:1.1px;color:#71598d}.ha-learning-promise{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #dce1ec;border-radius:12px;background:#ffffffb8;margin-top:13px}.ha-learning-promise>div{display:flex;gap:12px;align-items:center;padding:19px 17px;min-width:0;border-right:1px solid #e4e5ef}.ha-learning-promise>div:last-child{border:0}.ha-learning-promise svg{flex-shrink:0;color:#9776b9}.ha-learning-promise strong{font-size:10px;display:block}.ha-learning-promise span{font-size:8px;color:#7f899b;display:block;margin-top:4px}.ha-section-caption{display:flex;align-items:center;gap:17px;margin:33px 0 16px}.ha-section-caption>span{font-size:7px;letter-spacing:1.4px;color:#9474b1}.ha-section-caption h2{font-size:20px;letter-spacing:-.4px;margin:0}.ha-collection-nav>div:last-child{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.atlas .ha-collection-nav button{display:grid;grid-template-columns:26px 1fr auto;grid-template-rows:auto auto;gap:3px 9px;text-align:left;background:#ffffffbf;border:1px solid #dce0ee;border-radius:10px;padding:13px;min-width:0}.ha-collection-nav button>span{grid-row:1/3;align-self:center;display:grid;place-items:center;width:25px;height:29px;border-radius:7px;background:#eee6f8;color:#916ab4;font-size:10px}.ha-collection-nav strong{font-size:10px;line-height:1.5}.ha-collection-nav small{font-size:8px;color:#8990a2}.ha-collection-nav svg{grid-column:3;grid-row:1/3;align-self:center;color:#b3a0c5}.atlas .ha-collection-nav button.active,.atlas .ha-collection-nav button:hover{border-color:#bca2d9;background:#f1e9fa}.ha-catalogue{scroll-margin-top:90px;margin-top:39px}.ha-section-heading{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:20px}.ha-section-heading h2{font-size:29px;letter-spacing:-.8px;line-height:1.2;margin:11px 0 0}.ha-view-label{display:flex;align-items:center;gap:7px;font-size:9px;color:#8b759f;white-space:nowrap}.ha-filter{display:flex;align-items:center;gap:10px;padding:10px;background:#eaf0fa8c;border:1px solid #dce1ed;border-radius:11px;margin-bottom:20px}.ha-filter>label:first-child{flex:1;display:flex;align-items:center;gap:9px;border:1px solid #dce0eb;border-radius:8px;background:#fff;padding:10px 12px;min-width:0;color:#9b85b1}.ha-filter input{border:0;background:none;min-width:0;width:100%;font-size:11px;color:#475870;outline:none}.atlas .ha-filter>label>button{border:0;background:none;padding:0;color:#8f7aab}.ha-select{display:flex;align-items:center;gap:7px;color:#9a82b4}.ha-select select{border:1px solid #dce0eb;background:#fff;border-radius:7px;padding:10px 8px;color:#667289;font-size:10px;width:210px}.ha-filter>span{font-size:9px;color:#7e8a9c;white-space:nowrap;padding:0 6px}.ha-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.ha-card{border:1px solid #d9dfed;border-radius:15px;overflow:hidden;background:linear-gradient(145deg,#fff,#f9f8ff);box-shadow:0 5px 15px #30446505;transition:transform .2s,border-color .2s,box-shadow .2s;display:flex;flex-direction:column;min-width:0}.ha-card:hover{transform:translateY(-3px);border-color:#bda4d8;box-shadow:0 10px 24px #694b8b12}.atlas .ha-card-visual{position:relative;border:0;padding:0;border-radius:0;background:#eef0fb;display:block;width:100%;aspect-ratio:1.8;overflow:hidden}.ha-card-visual img{height:100%;width:100%;object-fit:cover;transition:transform .35s}.ha-card:hover img{transform:scale(1.025)}.ha-card-index{position:absolute;top:12px;left:12px;background:#ffffffd6;color:#8c71ac;padding:6px 8px;border:1px solid #fff;border-radius:6px;font-size:9px}.ha-card-view{position:absolute;right:10px;bottom:10px;display:flex;gap:5px;align-items:center;background:#ffffffd9;color:#77559d;border:1px solid white;border-radius:5px;padding:5px 7px;font-size:6px;letter-spacing:1px}.ha-card-copy{padding:19px;display:flex;flex-direction:column;flex:1}.ha-card .ha-kicker{font-size:6px;line-height:1.65;letter-spacing:.6px}.ha-card h2{font-size:18px;line-height:1.35;letter-spacing:-.35px;margin:11px 0 10px}.atlas .ha-card h2 button{font:inherit;color:inherit;background:none;border:0;padding:0;text-align:left}.ha-card-copy>p{font-size:10px;line-height:1.85;color:#738097;margin:0 0 13px}.ha-card-example{font-size:8px;line-height:1.8;color:#8d80a1;margin-top:auto;padding-bottom:16px}.ha-card-actions{display:flex;justify-content:space-between;border-top:1px solid #e8e4ef;padding-top:12px;gap:8px}.atlas .ha-card-actions button{border:0;background:none;padding:0;font-size:9px;color:#8760ad;display:flex;gap:6px;align-items:center}.ha-compare-check{display:flex;align-items:center;gap:6px;font-size:8px;color:#8c889f;margin-top:13px}.ha-compare-check input{accent-color:#8b60b4}.ha-load-more{text-align:center;margin:25px auto 0}.ha-load-more p{font-size:9px;color:#8792a5}.atlas .ha-load-more button,.atlas .ha-empty button{margin:auto;background:#f1e9fc;border:1px solid #d8c8e9;color:#7953a4;border-radius:22px;padding:10px 18px;font-size:10px}.ha-editorial{display:flex;align-items:flex-start;gap:22px;margin:35px 0 15px;padding:28px 31px;background:linear-gradient(110deg,#25314e,#3a2d59);border:1px solid #42395d;border-radius:15px;color:#e2d6f3}.ha-editorial>svg{flex-shrink:0;color:#af8dd4}.ha-editorial p{font-size:22px;line-height:1.65;letter-spacing:-.4px;margin:0 0 11px}.ha-editorial cite{font-size:8px;color:#aea5c3;font-style:normal;letter-spacing:.5px}.ha-art-note{font-size:8px;line-height:1.9;color:#8b91a4}.ha-anatomy-link{display:flex;align-items:center;gap:20px;background:#eee8f8;border:1px solid #d6c7e7;border-radius:13px;margin-top:25px;padding:23px;color:#9063b0}.ha-anatomy-link h2{font-size:20px;color:#554368;margin:8px 0}.ha-anatomy-link p{font-size:10px;line-height:1.8;color:#8c7c9b;margin:0}.atlas .ha-anatomy-link button{margin-left:auto;flex-shrink:0;font-size:9px;background:#fff;border:1px solid #d4c2e5;color:#8760ab;padding:10px 12px;border-radius:8px}.ha-empty{text-align:center;padding:50px 20px;color:#7b6a91}.ha-empty p{font-size:11px;line-height:1.8}.ha-comparison{margin-top:30px;padding:23px;background:#fff;border:1px solid #dcdced;border-radius:14px}.ha-comparison>div:first-child{position:relative}.ha-comparison h2{font-size:24px;letter-spacing:-.5px}.atlas .ha-comparison>div:first-child>button{position:absolute;right:0;top:0;font-size:9px;padding:6px 9px;background:#f3edfa;color:#8a69a8;border:1px solid #ded0eb}.ha-table-scroll{overflow-x:auto}.ha-comparison table{border-collapse:collapse;width:100%;min-width:550px;font-size:10px;line-height:1.9}.ha-comparison th,.ha-comparison td{text-align:left;padding:16px;border:1px solid #e4e0ef;vertical-align:top}.ha-comparison th{background:#f2edf9;color:#77588e}.ha-comparison td{color:#69768c}.ha-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.ha-guide-topline{display:flex;align-items:center;gap:18px;margin-bottom:27px;flex-wrap:wrap}.atlas .ha-guide-topline button{font-size:9px;background:#ffffffb3;border:1px solid #ddddeb;border-radius:7px;padding:8px 10px;color:#7c6697}.ha-guide-topline>span{font-size:7px;letter-spacing:1.2px;color:#9990aa}.ha-guide-topline>div{display:flex;gap:7px;margin-left:auto}.ha-guide-heading{max-width:850px;margin:0 0 25px}.ha-guide-heading h1{font-size:42px;line-height:1.12;letter-spacing:-1.4px;margin:16px 0}.ha-guide-heading>p{font-size:14px;line-height:1.9;color:#768299;max-width:740px}.ha-guide-heading>div{display:flex;gap:8px;flex-wrap:wrap;margin-top:17px}.ha-guide-heading>div>span{font-size:8px;padding:6px 9px;background:#efe9f8;border:1px solid #e1d5ed;color:#8c72a5;border-radius:5px}.ha-guide-nav{display:flex;gap:4px;overflow-x:auto;position:sticky;top:68px;z-index:8;background:#f5f7ffef;backdrop-filter:blur(15px);border-top:1px solid #e3e3ef;border-bottom:1px solid #dbdeed;padding:9px 0;margin-bottom:29px}.atlas .ha-guide-nav button{white-space:nowrap;font-size:10px;background:none;border:1px solid transparent;color:#7f7e95;border-radius:7px;padding:10px 12px}.atlas .ha-guide-nav button.active{background:#ede3f9;border-color:#ddcdeb;color:#8a60ae}.ha-guide section{scroll-margin-top:138px}.ha-guide-visual>.ha-section-heading h2{font-size:27px}.ha-functional{border:1px solid #cfd9e9;border-radius:15px;overflow:hidden;background:#fafcff}.ha-diagram-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #dce3ef;background:#fff;padding:12px 17px}.ha-diagram-toolbar>span{display:flex;gap:8px;align-items:center;font-size:10px;color:#7d6b91}.ha-diagram-toolbar>div{display:flex;gap:5px}.atlas .ha-diagram-toolbar button{padding:5px;border:1px solid #e2d9ed;background:#faf7ff;color:#9b7db6;border-radius:5px}.ha-diagram-grid{background-image:linear-gradient(#8fa4c010 1px,transparent 1px),linear-gradient(90deg,#8fa4c010 1px,transparent 1px);background-size:22px 22px;padding:25px}.ha-diagram-title>span{font-size:7px;letter-spacing:1.6px;color:#97a3b6}.ha-diagram-title h3{font-size:22px;letter-spacing:-.5px;line-height:1.4;margin:11px 0 24px;color:#52617b;max-width:440px}.ha-flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:38px;align-items:stretch}.ha-flow-step{position:relative;min-width:0}.atlas .ha-flow-step button{display:flex;flex-direction:column;align-items:flex-start;text-align:left;height:100%;width:100%;background:#ffffffed;border:1px solid #d3dded;border-radius:11px;padding:17px;color:#6b7c98;min-width:0;box-shadow:0 5px 15px #25426405}.atlas .ha-flow-step button.selected{background:linear-gradient(135deg,#f2e9ff,#f7f9ff);border-color:#aa8cca;box-shadow:0 0 0 3px #c2a2e21a}.ha-flow-order{font-size:6px;letter-spacing:1px;color:#a293b3;line-height:1.6}.ha-flow-symbol{height:69px;display:flex;align-items:center;color:#9a7bb8}.ha-flow-step strong{font-size:15px;line-height:1.5;font-weight:650;min-height:45px}.ha-flow-select{font-size:7px;color:#a294b2;display:flex;align-items:center;gap:7px;margin-top:18px}.ha-flow-arrow{position:absolute;right:-31px;top:calc(50% - 12px);color:#a99bc5}.ha-diagram-detail{display:grid;grid-template-columns:1fr 2fr;gap:7px 25px;background:#ffffffd9;border:1px solid #dce3ef;border-left:3px solid #9b79c2;border-radius:8px;margin-top:23px;padding:18px 20px}.ha-diagram-detail>span{font-size:6px;letter-spacing:1.2px;color:#a18ab6}.ha-diagram-detail h4{grid-column:1;font-size:13px;line-height:1.6;margin:0;color:#716283}.ha-diagram-detail p{grid-column:2;grid-row:1/3;font-size:11px;line-height:1.9;margin:0;color:#75829a;align-self:center}.ha-diagram-footnote{display:flex;justify-content:space-between;gap:15px;background:#fff;border-top:1px solid #dfe5ef;padding:12px 17px;font-size:7px;color:#929eb2;line-height:1.7}.ha-diagram-footnote>span:first-child{display:flex;align-items:center;gap:6px}.ha-diagram-footnote>span>span{width:5px;height:5px;border-radius:50%;background:#a284c0}.ha-functional-expanded .ha-diagram-grid{padding:45px 30px}.ha-functional-expanded .ha-flow-step button{min-height:220px}.ha-visual-context{display:grid;grid-template-columns:250px 1fr;gap:30px;align-items:center;background:#ffffffa3;border:1px solid #e0e3ef;border-radius:12px;overflow:hidden;margin-top:16px}.ha-visual-context img{width:100%;height:100%;object-fit:cover;aspect-ratio:1.5}.ha-visual-context>div{padding:20px 25px 20px 0}.ha-visual-context h3{font-size:21px;letter-spacing:-.4px;margin:12px 0}.ha-visual-context p{font-size:11px;line-height:1.95;color:#748198}.ha-mini-note{display:block;font-size:8px;color:#9a91a7;line-height:1.9}.ha-purpose{display:grid;grid-template-columns:1.4fr 1fr;gap:35px;align-items:center;margin:40px 0;padding:30px 0;border-top:1px solid #dfe2ed;border-bottom:1px solid #dfe2ed}.ha-guide section h2{font-size:29px;letter-spacing:-.7px;line-height:1.3;margin:12px 0 17px}.ha-purpose>div>p{font-size:15px;line-height:1.95;color:#6b7991;max-width:560px}.ha-purpose aside{padding:25px;background:#eee7f8;border:1px solid #d9cce9;border-radius:12px;color:#9472b4}.ha-purpose aside>span{display:block;font-size:7px;letter-spacing:1.3px;margin:15px 0 10px}.ha-purpose aside p{font-size:12px;line-height:1.9;color:#816d96;margin:0}.ha-section-intro{font-size:11px;line-height:1.9;color:#7b869c;max-width:730px}.ha-steps ol{list-style:none;padding:0;margin:24px 0 40px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:steps}.ha-steps li{display:flex;gap:13px;border:1px solid #dce1ed;border-radius:12px;padding:24px 20px;background:#fff}.ha-steps li>span{display:grid;place-items:center;width:32px;height:32px;flex-shrink:0;border:1px solid #e3d5ef;background:#f1eafa;color:#a181bd;font-size:10px;border-radius:8px}.ha-steps strong{font-size:13px;line-height:1.6;display:block}.ha-steps li p{font-size:11px;line-height:1.9;color:#7c879c;margin:10px 0 0}.ha-applications{margin:0 0 40px}.ha-applications>div:not(.ha-practice){display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}.ha-applications article{padding:24px;border:1px solid #dce1ed;border-radius:12px;background:linear-gradient(135deg,#f7faff,#f4effb)}.ha-applications article>svg{color:#a18aba}.ha-applications article>span{display:block;margin:16px 0 10px;font-size:6px;letter-spacing:1.4px;color:#ac9bbb}.ha-applications h3{font-size:17px;line-height:1.4;letter-spacing:-.3px}.ha-applications article p{font-size:10px;line-height:1.9;color:#8691a5}.ha-practice{display:flex;gap:16px;background:#eef3fb;border:1px solid #d7e0ef;border-radius:10px;padding:22px;margin-top:16px;color:#8095b3}.ha-practice>svg{flex-shrink:0}.ha-practice strong{font-size:12px;color:#667d9f}.ha-practice p{font-size:11px;line-height:1.95;color:#7d8ca4;margin:8px 0 0}.ha-variants{padding:30px;background:#fff;border:1px solid #dfe1ed;border-radius:14px;margin-bottom:37px}.ha-variants>div{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}.ha-variants>div>span{display:flex;align-items:center;gap:7px;border:1px solid #e0d6ed;background:#f8f4fe;color:#8b70a2;font-size:10px;line-height:1.6;padding:9px 11px;border-radius:7px}.ha-variants>div>span>svg{flex-shrink:0;color:#b499ca}.ha-selection>div{display:grid;grid-template-columns:1fr 1fr;gap:17px;margin:22px 0 40px}.ha-selection article{padding:25px;background:#f0f5fb;border:1px solid #d7e2ed;border-radius:12px;color:#91a4bb}.ha-selection article:last-child{background:#f4edf9;border-color:#e1d4eb;color:#ae91c0}.ha-selection h3{font-size:18px;color:#62718b;margin:16px 0 12px}.ha-selection p{font-size:12px;line-height:1.95;color:#7b87a0;margin:0}.ha-related{border-top:1px solid #dfe1ec;padding-top:28px}.ha-related>div{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.atlas .ha-related button{display:flex;text-align:left;align-items:center;gap:12px;background:#fff;border:1px solid #dcddec;border-radius:10px;padding:17px;color:#776186}.ha-related button>span{font-size:10px;color:#b196c4}.ha-related strong{font-size:11px;line-height:1.6;flex:1}.ha-related svg{flex-shrink:0;color:#a88bbd}
+@media(min-width:1400px){.ha-hero{min-height:350px}.ha-hero h1{font-size:48px}.ha-hero-copy{padding:42px}.ha-hero p{font-size:13px}.ha-card h2{font-size:21px}.ha-card-copy>p{font-size:12px}.ha-card-copy{padding:23px}.ha-card .ha-kicker{font-size:7px}.ha-card-actions button{font-size:10px!important}.ha-card-example{font-size:9px}}
+@media(max-width:1100px){.ha-hero h1{font-size:32px}.ha-hero-copy{padding:27px 24px}.ha-hero-actions{flex-wrap:wrap;gap:13px}.ha-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.ha-learning-promise{grid-template-columns:repeat(2,1fr)}.ha-learning-promise>div:nth-child(2){border-right:0}.ha-learning-promise>div:nth-child(-n+2){border-bottom:1px solid #e4e5ef}.ha-collection-nav>div:last-child{grid-template-columns:repeat(2,1fr)}.ha-hero p{font-size:11px}.ha-steps ol{grid-template-columns:1fr}.ha-steps li{padding:20px}.ha-visual-context{grid-template-columns:190px 1fr;gap:22px}.ha-visual-context>div{padding-right:20px}.ha-flow{gap:24px}.ha-flow-arrow{width:17px;right:-21px}.ha-flow-step strong{font-size:12px}.ha-flow-select{font-size:6px}.ha-flow-order{font-size:5px}.ha-diagram-grid{padding:20px}.ha-applications article{padding:18px}.ha-applications h3{font-size:15px}.ha-applications article p{font-size:9px}.ha-anatomy-link{flex-wrap:wrap}.ha-anatomy-link>div{flex:1}.ha-anatomy-link>button{margin-left:45px!important}.ha-filter{flex-wrap:wrap}.ha-filter>label:first-child{flex-basis:100%}.ha-filter>span{margin-left:auto}.ha-purpose{gap:23px}.ha-purpose>div>p{font-size:13px}.ha-guide-heading h1{font-size:35px}.ha-guide-nav{gap:1px}.atlas .ha-guide-nav button{font-size:9px;padding:9px}.ha-related>div{grid-template-columns:1fr}}
+@media(max-width:760px){.ha-hero{grid-template-columns:1fr 1fr;min-height:260px}.ha-hero h1{font-size:33px}.ha-hero-copy{padding:25px}.ha-section-caption{margin-top:28px}.ha-section-heading h2{font-size:27px}.ha-card h2{font-size:20px}.ha-card-copy>p{font-size:11px}.ha-guide-nav{top:58px}.ha-guide section{scroll-margin-top:125px}.ha-guide-topline{gap:12px}.ha-guide-topline>span{display:none}.ha-guide-topline>div{gap:5px}.ha-guide-topline button{font-size:8px!important}.ha-guide-heading h1{font-size:34px}.ha-guide-heading>p{font-size:13px}.ha-flow{gap:24px}.ha-purpose{grid-template-columns:1fr}.ha-purpose>div>p{font-size:14px}.ha-applications>div:not(.ha-practice){grid-template-columns:1fr}.ha-applications article{padding:22px}.ha-applications article>svg{float:right}.ha-applications article>span{margin-top:0}.ha-applications article p{font-size:11px}.ha-applications h3{font-size:20px}.ha-selection>div{grid-template-columns:1fr}.ha-diagram-detail{grid-template-columns:1fr}.ha-diagram-detail p{grid-column:auto;grid-row:auto}.ha-diagram-detail h4{margin:4px 0}.ha-visual-context{grid-template-columns:180px 1fr}.ha-diagram-footnote{flex-wrap:wrap;gap:4px}}
+@media(max-width:540px){.ha-hero{grid-template-columns:1fr}.ha-hero h1{font-size:36px;max-width:350px}.ha-hero-copy{padding:29px 24px}.ha-hero p{font-size:12px}.ha-hero-art{height:210px}.ha-hero-art img{object-position:center}.ha-hero-art>span{font-size:6px;left:14px;right:14px;bottom:12px}.ha-eyebrow{font-size:6px;letter-spacing:.8px}.ha-learning-promise>div{padding:14px 11px;gap:8px}.ha-learning-promise strong{font-size:9px}.ha-learning-promise span{font-size:7px;line-height:1.7}.ha-learning-promise svg{width:17px}.ha-section-caption{display:block;margin-top:29px}.ha-section-caption h2{font-size:23px;margin-top:9px}.ha-section-caption>span{font-size:6px}.ha-collection-nav>div:last-child{grid-template-columns:1fr}.atlas .ha-collection-nav button{padding:11px 13px}.ha-collection-nav strong{font-size:10px}.ha-collection-nav small{font-size:7px}.ha-catalogue{margin-top:31px;scroll-margin-top:75px}.ha-section-heading{align-items:flex-start;gap:10px}.ha-section-heading h2{font-size:27px}.ha-view-label{font-size:6px;white-space:normal;line-height:1.7;margin-top:2px;text-align:right;max-width:80px}.ha-view-label>svg{flex-shrink:0;width:12px}.ha-kicker{font-size:7px;line-height:1.8;letter-spacing:1px}.ha-grid{grid-template-columns:1fr;gap:20px}.ha-card-visual{aspect-ratio:1.7!important}.ha-card-copy{padding:23px}.ha-card .ha-kicker{font-size:7px}.ha-card h2{font-size:24px}.ha-card-copy>p{font-size:12px}.ha-card-example{font-size:9px}.ha-card-actions button{font-size:10px!important}.ha-compare-check{font-size:9px}.ha-select{flex:1;min-width:0}.ha-select select{width:100%;max-width:250px;font-size:9px;min-width:0}.ha-filter input{font-size:10px}.ha-filter>span{font-size:8px}.ha-editorial{padding:24px 20px;gap:14px}.ha-editorial p{font-size:20px}.ha-editorial>svg{width:21px;flex-shrink:0}.ha-editorial cite{font-size:7px}.ha-art-note{font-size:7px}.ha-guide-heading h1{font-size:33px}.ha-guide-heading>p{font-size:12px}.ha-guide-topline{margin-bottom:22px}.ha-guide-topline>div>button:last-child{display:none}.ha-guide-nav{margin-bottom:23px}.atlas .ha-guide-nav button{font-size:9px;padding:8px 10px}.ha-guide section h2{font-size:26px}.ha-diagram-toolbar{padding:11px 12px}.ha-diagram-toolbar>span{font-size:8px;line-height:1.6;max-width:220px}.ha-diagram-toolbar svg{flex-shrink:0}.ha-diagram-title h3{font-size:21px}.ha-diagram-title>span{font-size:6px;letter-spacing:1px}.ha-diagram-grid{padding:21px 17px}.ha-flow{grid-template-columns:1fr;gap:28px}.atlas .ha-flow-step button{display:grid;grid-template-columns:40px 1fr;gap:6px 12px;padding:15px 17px;min-height:0}.ha-flow-order{font-size:6px;grid-column:2}.ha-flow-symbol{grid-column:1;grid-row:1/4;height:auto;align-self:center}.ha-flow-symbol>svg{width:30px}.ha-flow-step strong{font-size:15px;min-height:0;grid-column:2}.ha-flow-select{font-size:6px;margin-top:1px;grid-column:2}.ha-flow-arrow{right:calc(50% - 9px);top:auto;bottom:-26px;transform:rotate(90deg);height:24px;width:18px}.ha-diagram-detail{padding:16px;margin-top:24px}.ha-diagram-detail p{font-size:11px}.ha-diagram-detail h4{font-size:14px}.ha-diagram-footnote{font-size:6px;padding:10px 14px}.ha-visual-context{grid-template-columns:1fr;gap:0}.ha-visual-context img{height:190px;object-fit:cover}.ha-visual-context>div{padding:22px}.ha-visual-context h3{font-size:22px}.ha-purpose{margin:30px 0;padding:25px 0;gap:15px}.ha-purpose>div>p{font-size:14px}.ha-purpose aside{padding:21px}.ha-steps li{padding:20px 17px;gap:12px}.ha-steps li p{font-size:12px}.ha-steps strong{font-size:14px}.ha-section-intro{font-size:11px}.ha-variants{padding:23px 20px}.ha-variants>div{gap:7px}.ha-variants>div>span{font-size:9px;padding:8px}.ha-selection article{padding:23px}.ha-selection p{font-size:12px}.ha-practice{padding:20px 17px;gap:12px}.ha-practice p{font-size:11px}.ha-related strong{font-size:12px}.ha-anatomy-link{padding:20px 17px;gap:12px}.ha-anatomy-link>button{margin-left:0!important}.ha-anatomy-link h2{font-size:19px}.ha-anatomy-link .ha-kicker{font-size:6px}.ha-comparison{padding:18px}.ha-comparison h2{font-size:22px}.atlas .ha-comparison>div:first-child>button{position:static;margin-bottom:15px}}
+@media(prefers-reduced-motion:reduce){.ha-card,.ha-card-visual img{transition:none}.ha-card:hover{transform:none}}
+/* Scope out the legacy lesson's element-level header/navigation defaults. */
+.ha-page .ha-guide-heading{display:block;height:auto;padding:0;border:0;gap:0;justify-content:initial;align-items:initial}.ha-page .ha-guide-nav{height:auto;display:flex;align-items:center;justify-content:flex-start}.ha-page .ha-guide-nav>button{color:#7f7e95}
+.ha-construction{border:1px solid #d9e1ee;border-radius:14px;overflow:hidden;background:#f8fbff;margin:23px 0}.ha-construction-head{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:15px 20px;border-bottom:1px solid #e0e4ef;background:white}.ha-construction-head>span:last-child{font-size:8px;color:#97a2b4}.ha-construction-body{display:grid;grid-template-columns:1.5fr 1fr;align-items:center}.ha-construction-body>svg{display:block;width:100%;height:auto}.ha-construction-notes{padding:24px 22px 24px 0}.ha-construction-notes>div{display:flex;flex-direction:column;gap:7px}.atlas .ha-construction-notes button{display:flex;gap:11px;align-items:center;text-align:left;padding:11px;background:#fff;border:1px solid #dce1ed;border-radius:7px;color:#7f8ca3}.ha-construction-notes button>span{font-size:7px;color:#b49fc6}.ha-construction-notes strong{font-size:10px;line-height:1.5}.atlas .ha-construction-notes button.active{background:#eee5f9;border-color:#c8b3de;color:#84629f}.ha-construction-notes>p{font-size:10px;line-height:1.9;color:#7a879d;margin:16px 0 0}.ha-construction+.ha-functional{margin-top:18px}@media(max-width:1100px){.ha-construction-body{grid-template-columns:1fr}.ha-construction-body>svg{max-height:290px}.ha-construction-notes{padding:0 22px 22px}.ha-construction-notes>div{flex-direction:row}.ha-construction-notes button{flex:1;align-items:flex-start!important;gap:6px!important;padding:10px 8px!important}.ha-construction-notes strong{font-size:8px}.ha-construction-notes>p{font-size:11px}}@media(max-width:540px){.ha-construction-head{padding:13px 15px}.ha-construction-head .ha-kicker{font-size:6px}.ha-construction-head>span:last-child{font-size:6px;max-width:85px;text-align:right;line-height:1.6}.ha-construction-body>svg{height:210px;width:100%}.ha-construction-notes{padding:0 17px 19px}.ha-construction-notes>div{flex-direction:column}.ha-construction-notes button{padding:11px!important}.ha-construction-notes strong{font-size:10px}.ha-construction-notes>p{font-size:11px}}
+.ha-open-studio{display:flex;align-items:center;gap:25px;justify-content:space-between;border:1px solid #d6c6e7;border-radius:13px;padding:26px 29px;margin-top:26px;background:linear-gradient(120deg,#f0e7fc,#eef4fc)}.ha-open-studio h2{font-size:24px!important;margin:11px 0!important}.ha-open-studio p{font-size:11px;line-height:1.9;color:#8c7e9e;margin:0}.atlas .ha-open-studio button{flex-shrink:0;font-size:10px;padding:11px 15px;border:1px solid #cdb7e0;border-radius:8px;background:#fff;color:#8e68ad}@media(max-width:760px){.ha-open-studio{display:block;padding:24px}.ha-open-studio button{margin-top:17px}.ha-open-studio h2{font-size:23px!important}}
+
+.ha-card-visual.ha-photo,
+.ha-visual-context.ha-photo img {
+  background: #fff;
+}
+
+.ha-card-visual.ha-photo img,
+.ha-visual-context.ha-photo img {
+  box-sizing: border-box;
+  object-fit: contain;
+  padding: 12px 18px;
+}
+
+.ha-large-visual-card .ha-card-visual.ha-photo {
+  aspect-ratio: 4 / 3 !important;
+  border-bottom: 1px solid #e5e8ef;
+  background: #f5f6f9;
+}
+
+.ha-large-visual-card .ha-card-visual.ha-photo img {
+  display: block;
+  padding: 0;
+}
+
+.ha-large-visual-context {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.ha-large-visual-context.ha-photo img {
+  aspect-ratio: 4 / 3;
+  height: auto;
+  padding: 0;
+  background: #f5f6f9;
+}
+
+@media (max-width: 540px) {
+  .ha-large-visual-context {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ha-guide-visual .ha-visual-title {
+  margin: 0 0 16px;
+  color: #26344d;
+  font-size: clamp(24px, 3vw, 34px);
+}
+
+.ha-visual-board {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  overflow: hidden;
+  border: 1px solid #d9e1ee;
+  border-radius: 18px;
+  background: #fff;
+}
+
+.ha-visual-figure {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  margin: 0;
+  background: #edf1f8;
+}
+
+.ha-visual-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: contain;
+}
+
+.ha-visual-figure-photo img {
+  padding: 12px;
+}
+
+.ha-visual-figure figcaption {
+  display: grid;
+  gap: 5px;
+  padding: 12px 16px;
+  color: #40516b;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.ha-visual-figure figcaption span {
+  font-size: 11px;
+}
+
+.ha-visual-stages {
+  display: grid;
+  align-content: center;
+  gap: 0;
+  list-style: none;
+  padding: 8px 20px;
+  margin: 0;
+}
+
+.ha-visual-stages li {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 12px;
+  padding: 15px 0;
+}
+
+.ha-visual-stages li + li {
+  border-top: 1px solid #e1e7f0;
+}
+
+.ha-visual-step {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #ebe4fb;
+  color: #523583;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.ha-visual-stage-name {
+  color: #654a93;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.ha-visual-stages h3 {
+  margin: 4px 0 6px;
+  font-size: 16px;
+  line-height: 1.3;
+  color: #26344d;
+}
+
+.ha-visual-stages p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: #44536b;
+}
+
+.ha-schematic-disclosure {
+  margin-top: 14px;
+  padding: 0 16px;
+  border: 1px solid #d9e1ee;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.ha-schematic-disclosure summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 0;
+  color: #50377c;
+  font-size: 14px;
+  font-weight: 650;
+  cursor: pointer;
+  list-style: none;
+}
+
+.ha-schematic-disclosure summary::-webkit-details-marker { display: none; }
+.ha-schematic-disclosure[open] summary svg { transform: rotate(180deg); }
+
+@media (max-width: 740px) {
+  .ha-visual-board { grid-template-columns: minmax(0, 1fr); }
+  .ha-visual-stages { padding-inline: 16px; }
+}
+
+.ha-hotspot-image { position: relative; }
+.ha-visual-figure .ha-hotspot-image img {
+  padding: 0;
+  aspect-ratio: auto;
+}
+
+.atlas .ha-hotspot {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0;
+  transform: translate(-14px, -50%);
+  color: #fff;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.ha-hotspot > span:first-child {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #332454;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 6px #15122788;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.ha-hotspot-label {
+  padding: 4px 7px;
+  border-radius: 5px;
+  color: #fff;
+  background: #2b2440;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.ha-hotspot[aria-pressed="true"] { z-index: 2; }
+.ha-hotspot[aria-pressed="true"] > span:first-child {
+  background: #713bc1;
+  box-shadow: 0 0 0 5px #b78af9b3, 0 1px 8px #22173a;
+}
+.ha-hotspot-left .ha-hotspot-label {
+  position: absolute;
+  right: calc(100% + 5px);
+}
+
+.ha-part-inspector {
+  padding: 20px;
+  align-self: center;
+  color: #26344d;
+}
+
+.ha-part-inspector h3 { margin: 12px 0; font-size: 21px; }
+.ha-inspector-hint { color: #594281; font-size: 12px; margin: 0; }
+.ha-part-inspector dl { margin: 0; font-size: 13px; line-height: 1.55; }
+.ha-part-inspector dt { font-weight: 700; margin-top: 12px; }
+.ha-part-inspector dd { margin: 4px 0 0; color: #44536b; }
+.ha-visual-step { border: 0; cursor: pointer; }
+.ha-visual-step[aria-pressed="true"] { color: #fff; background: #65459e; }
+.ha-visual-stages .ha-stage-connection { margin-top: 6px; color: #594281; }
+.ha-schematic-marker { cursor: pointer; }
+.ha-schematic-marker:focus-visible { outline: 2px solid #7545b0; }
+.ha-schematic-explanation p + p { margin-top: 6px; }
+
+/* Keep the numbered markers centered over the source image at every viewport size. */
+.atlas .ha-hotspot {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  transform: translate(-50%, -50%);
+}
+.ha-hotspot-label {
+  display: none;
+  position: absolute;
+  left: calc(100% + 1px);
+  width: max-content;
+  max-width: min(34vw, 200px);
+  white-space: normal;
+  pointer-events: none;
+}
+.ha-hotspot-left .ha-hotspot-label { left: auto; right: calc(100% + 1px); }
+.ha-hotspot[aria-pressed="true"] .ha-hotspot-label,
+.ha-hotspot:focus-visible .ha-hotspot-label { display: block; }
+.ha-hotspot:focus-visible { z-index: 3; outline: 2px solid #fff; border-radius: 50%; }
+@media (hover: hover) {
+  .ha-hotspot:hover { z-index: 3; }
+  .ha-hotspot:hover .ha-hotspot-label { display: block; }
+}
+.ha-part-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 12px 0;
+  padding: 0;
+  list-style: none;
+}
+.atlas .ha-part-list button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 4px 8px;
+  border: 1px solid #d9d0ec;
+  border-radius: 7px;
+  background: #fff;
+  color: #362450;
+  font-size: 12px;
+  cursor: pointer;
+}
+.ha-part-list button span {
+  display: grid;
+  place-items: center;
+  flex: 0 0 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #e9e0f7;
+  font-weight: 700;
+}
+.atlas .ha-part-list button[aria-pressed="true"] {
+  background: #f1e9fd;
+  border-color: #8153bd;
+}
+
+.ha-part-highlight {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.ha-part-veil { fill: rgba(15, 12, 32, .38); }
+.ha-part-halo { fill: none; stroke: rgba(29, 17, 46, .88); stroke-width: 4px; }
+.ha-part-outline { fill: none; stroke: #f4e6ff; stroke-width: 2px; }
+.atlas .ha-hotspot { width: 30px; height: 30px; }
+.ha-hotspot > span:first-child { width: 22px; height: 22px; font-size: 11px; }
+.ha-hotspot[aria-pressed="true"] > span:first-child {
+  background: #6940ad;
+  box-shadow: 0 1px 6px #22173a;
+}

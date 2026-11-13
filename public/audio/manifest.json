@@ -1,0 +1,770 @@
+[
+  {
+    "path": "public/audio/english/1-1.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 13.890748299319728,
+    "slotDuration": 15,
+    "rate": 165
+  },
+  {
+    "path": "public/audio/telugu/1-1.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.208798185941044,
+    "slotDuration": 15,
+    "rate": 216
+  },
+  {
+    "path": "public/audio/hindi/1-1.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.71795918367347,
+    "slotDuration": 15,
+    "rate": 189
+  },
+  {
+    "path": "public/audio/english/1-2.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 14.081678004535148,
+    "slotDuration": 15,
+    "rate": 181
+  },
+  {
+    "path": "public/audio/telugu/1-2.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.59859410430839,
+    "slotDuration": 15,
+    "rate": 200
+  },
+  {
+    "path": "public/audio/hindi/1-2.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.571111111111112,
+    "slotDuration": 15,
+    "rate": 203
+  },
+  {
+    "path": "public/audio/english/1-3.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 13.993378684807256,
+    "slotDuration": 15,
+    "rate": 177
+  },
+  {
+    "path": "public/audio/telugu/1-3.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.623219954648526,
+    "slotDuration": 15,
+    "rate": 201
+  },
+  {
+    "path": "public/audio/hindi/1-3.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.762222222222222,
+    "slotDuration": 15,
+    "rate": 182
+  },
+  {
+    "path": "public/audio/english/1-4.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 13.900589569160998,
+    "slotDuration": 15,
+    "rate": 183
+  },
+  {
+    "path": "public/audio/telugu/1-4.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.45251700680272,
+    "slotDuration": 15,
+    "rate": 229
+  },
+  {
+    "path": "public/audio/hindi/1-4.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.643900226757369,
+    "slotDuration": 15,
+    "rate": 190
+  },
+  {
+    "path": "public/audio/english/2-1.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 13.803945578231293,
+    "slotDuration": 15,
+    "rate": 165
+  },
+  {
+    "path": "public/audio/telugu/2-1.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.80888888888889,
+    "slotDuration": 15,
+    "rate": 179
+  },
+  {
+    "path": "public/audio/hindi/2-1.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 14.539410430839002,
+    "slotDuration": 15,
+    "rate": 165
+  },
+  {
+    "path": "public/audio/english/2-2.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 13.94358276643991,
+    "slotDuration": 15,
+    "rate": 180
+  },
+  {
+    "path": "public/audio/telugu/2-2.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.214965986394558,
+    "slotDuration": 15,
+    "rate": 218
+  },
+  {
+    "path": "public/audio/hindi/2-2.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.759365079365079,
+    "slotDuration": 15,
+    "rate": 188
+  },
+  {
+    "path": "public/audio/english/2-3.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 14.664761904761905,
+    "slotDuration": 15,
+    "rate": 165
+  },
+  {
+    "path": "public/audio/telugu/2-3.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.90716553287982,
+    "slotDuration": 15,
+    "rate": 174
+  },
+  {
+    "path": "public/audio/hindi/2-3.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 14.408480725623583,
+    "slotDuration": 15,
+    "rate": 165
+  },
+  {
+    "path": "public/audio/english/2-4.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 13.967120181405896,
+    "slotDuration": 15,
+    "rate": 198
+  },
+  {
+    "path": "public/audio/telugu/2-4.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.622630385487529,
+    "slotDuration": 15,
+    "rate": 206
+  },
+  {
+    "path": "public/audio/hindi/2-4.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.865759637188209,
+    "slotDuration": 15,
+    "rate": 184
+  },
+  {
+    "path": "public/audio/english/3-1.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 13.976145124716552,
+    "slotDuration": 15,
+    "rate": 183
+  },
+  {
+    "path": "public/audio/telugu/3-1.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.598004535147393,
+    "slotDuration": 15,
+    "rate": 201
+  },
+  {
+    "path": "public/audio/hindi/3-1.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.813968253968254,
+    "slotDuration": 15,
+    "rate": 185
+  },
+  {
+    "path": "public/audio/english/3-2.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 14.030204081632654,
+    "slotDuration": 15,
+    "rate": 187
+  },
+  {
+    "path": "public/audio/telugu/3-2.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.865578231292517,
+    "slotDuration": 15,
+    "rate": 189
+  },
+  {
+    "path": "public/audio/hindi/3-2.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.867619047619048,
+    "slotDuration": 15,
+    "rate": 178
+  },
+  {
+    "path": "public/audio/english/3-3.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 13.927528344671202,
+    "slotDuration": 15,
+    "rate": 215
+  },
+  {
+    "path": "public/audio/telugu/3-3.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.608253968253969,
+    "slotDuration": 15,
+    "rate": 200
+  },
+  {
+    "path": "public/audio/hindi/3-3.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.79251700680272,
+    "slotDuration": 15,
+    "rate": 186
+  },
+  {
+    "path": "public/audio/english/3-4.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 13.985986394557823,
+    "slotDuration": 15,
+    "rate": 220
+  },
+  {
+    "path": "public/audio/telugu/3-4.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.46607709750567,
+    "slotDuration": 15,
+    "rate": 213
+  },
+  {
+    "path": "public/audio/hindi/3-4.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.854557823129252,
+    "slotDuration": 15,
+    "rate": 185
+  },
+  {
+    "path": "public/audio/english/4-1.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 14.289115646258503,
+    "slotDuration": 15,
+    "rate": 165
+  },
+  {
+    "path": "public/audio/telugu/4-1.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.315555555555555,
+    "slotDuration": 15,
+    "rate": 214
+  },
+  {
+    "path": "public/audio/hindi/4-1.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.778095238095238,
+    "slotDuration": 15,
+    "rate": 207
+  },
+  {
+    "path": "public/audio/english/4-2.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 13.97641723356009,
+    "slotDuration": 15,
+    "rate": 190
+  },
+  {
+    "path": "public/audio/telugu/4-2.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.692154195011337,
+    "slotDuration": 15,
+    "rate": 202
+  },
+  {
+    "path": "public/audio/hindi/4-2.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.509705215419501,
+    "slotDuration": 15,
+    "rate": 214
+  },
+  {
+    "path": "public/audio/english/4-3.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 14.052380952380952,
+    "slotDuration": 15,
+    "rate": 219
+  },
+  {
+    "path": "public/audio/telugu/4-3.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.563219954648526,
+    "slotDuration": 15,
+    "rate": 200
+  },
+  {
+    "path": "public/audio/hindi/4-3.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.771292517006803,
+    "slotDuration": 15,
+    "rate": 180
+  },
+  {
+    "path": "public/audio/english/4-4.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 13.982403628117915,
+    "slotDuration": 15,
+    "rate": 178
+  },
+  {
+    "path": "public/audio/telugu/4-4.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.598911564625851,
+    "slotDuration": 15,
+    "rate": 207
+  },
+  {
+    "path": "public/audio/hindi/4-4.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.684897959183674,
+    "slotDuration": 15,
+    "rate": 188
+  },
+  {
+    "path": "public/audio/english/5-1.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 14.050113378684808,
+    "slotDuration": 15,
+    "rate": 197
+  },
+  {
+    "path": "public/audio/telugu/5-1.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.779727891156462,
+    "slotDuration": 15,
+    "rate": 175
+  },
+  {
+    "path": "public/audio/hindi/5-1.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.772925170068028,
+    "slotDuration": 15,
+    "rate": 175
+  },
+  {
+    "path": "public/audio/english/5-2.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 13.99297052154195,
+    "slotDuration": 15,
+    "rate": 165
+  },
+  {
+    "path": "public/audio/telugu/5-2.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.600816326530612,
+    "slotDuration": 15,
+    "rate": 195
+  },
+  {
+    "path": "public/audio/hindi/5-2.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.640498866213152,
+    "slotDuration": 15,
+    "rate": 188
+  },
+  {
+    "path": "public/audio/english/5-3.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 13.94013605442177,
+    "slotDuration": 15,
+    "rate": 192
+  },
+  {
+    "path": "public/audio/telugu/5-3.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.51873015873016,
+    "slotDuration": 15,
+    "rate": 236
+  },
+  {
+    "path": "public/audio/hindi/5-3.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.744580498866213,
+    "slotDuration": 15,
+    "rate": 201
+  },
+  {
+    "path": "public/audio/english/5-4.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 13.814421768707483,
+    "slotDuration": 15,
+    "rate": 188
+  },
+  {
+    "path": "public/audio/telugu/5-4.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.598185941043084,
+    "slotDuration": 15,
+    "rate": 223
+  },
+  {
+    "path": "public/audio/hindi/5-4.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.762222222222222,
+    "slotDuration": 15,
+    "rate": 199
+  },
+  {
+    "path": "public/audio/english/6-1.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 13.968934240362811,
+    "slotDuration": 15,
+    "rate": 175
+  },
+  {
+    "path": "public/audio/telugu/6-1.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.723537414965987,
+    "slotDuration": 15,
+    "rate": 200
+  },
+  {
+    "path": "public/audio/hindi/6-1.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.750884353741496,
+    "slotDuration": 15,
+    "rate": 190
+  },
+  {
+    "path": "public/audio/english/6-2.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 13.893560090702948,
+    "slotDuration": 15,
+    "rate": 183
+  },
+  {
+    "path": "public/audio/telugu/6-2.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.725532879818594,
+    "slotDuration": 15,
+    "rate": 196
+  },
+  {
+    "path": "public/audio/hindi/6-2.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.852471655328799,
+    "slotDuration": 15,
+    "rate": 184
+  },
+  {
+    "path": "public/audio/english/6-3.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 13.958548752834467,
+    "slotDuration": 15,
+    "rate": 180
+  },
+  {
+    "path": "public/audio/telugu/6-3.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.448344671201815,
+    "slotDuration": 15,
+    "rate": 211
+  },
+  {
+    "path": "public/audio/hindi/6-3.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.660907029478459,
+    "slotDuration": 15,
+    "rate": 193
+  },
+  {
+    "path": "public/audio/english/6-4.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 13.912108843537416,
+    "slotDuration": 15,
+    "rate": 192
+  },
+  {
+    "path": "public/audio/telugu/6-4.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.269478458049887,
+    "slotDuration": 15,
+    "rate": 220
+  },
+  {
+    "path": "public/audio/hindi/6-4.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.455646258503402,
+    "slotDuration": 15,
+    "rate": 213
+  },
+  {
+    "path": "public/audio/english/7-1.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 13.983628117913833,
+    "slotDuration": 15,
+    "rate": 212
+  },
+  {
+    "path": "public/audio/telugu/7-1.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.448616780045352,
+    "slotDuration": 15,
+    "rate": 212
+  },
+  {
+    "path": "public/audio/hindi/7-1.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.667392290249433,
+    "slotDuration": 15,
+    "rate": 194
+  },
+  {
+    "path": "public/audio/english/7-2.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 13.953151927437641,
+    "slotDuration": 15,
+    "rate": 193
+  },
+  {
+    "path": "public/audio/telugu/7-2.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.564444444444444,
+    "slotDuration": 15,
+    "rate": 210
+  },
+  {
+    "path": "public/audio/hindi/7-2.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.86485260770975,
+    "slotDuration": 15,
+    "rate": 191
+  },
+  {
+    "path": "public/audio/english/7-3.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 13.950430839002268,
+    "slotDuration": 15,
+    "rate": 189
+  },
+  {
+    "path": "public/audio/telugu/7-3.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.542448979591837,
+    "slotDuration": 15,
+    "rate": 216
+  },
+  {
+    "path": "public/audio/hindi/7-3.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.8437641723356,
+    "slotDuration": 15,
+    "rate": 184
+  },
+  {
+    "path": "public/audio/english/7-4.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 14.055419501133787,
+    "slotDuration": 15,
+    "rate": 200
+  },
+  {
+    "path": "public/audio/telugu/7-4.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.424897959183674,
+    "slotDuration": 15,
+    "rate": 222
+  },
+  {
+    "path": "public/audio/hindi/7-4.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.73655328798186,
+    "slotDuration": 15,
+    "rate": 200
+  },
+  {
+    "path": "public/audio/english/8-1.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 14.118775510204081,
+    "slotDuration": 15,
+    "rate": 213
+  },
+  {
+    "path": "public/audio/telugu/8-1.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.451201814058956,
+    "slotDuration": 15,
+    "rate": 224
+  },
+  {
+    "path": "public/audio/hindi/8-1.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.945759637188209,
+    "slotDuration": 15,
+    "rate": 207
+  },
+  {
+    "path": "public/audio/english/8-2.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 13.867981859410431,
+    "slotDuration": 15,
+    "rate": 230
+  },
+  {
+    "path": "public/audio/telugu/8-2.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.469478458049887,
+    "slotDuration": 15,
+    "rate": 231
+  },
+  {
+    "path": "public/audio/hindi/8-2.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.43297052154195,
+    "slotDuration": 15,
+    "rate": 232
+  },
+  {
+    "path": "public/audio/english/8-3.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 13.869387755102041,
+    "slotDuration": 15,
+    "rate": 191
+  },
+  {
+    "path": "public/audio/telugu/8-3.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.56326530612245,
+    "slotDuration": 15,
+    "rate": 204
+  },
+  {
+    "path": "public/audio/hindi/8-3.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.591383219954649,
+    "slotDuration": 15,
+    "rate": 212
+  },
+  {
+    "path": "public/audio/english/8-4.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "en-in",
+    "spokenDuration": 14.051791383219955,
+    "slotDuration": 15,
+    "rate": 207
+  },
+  {
+    "path": "public/audio/telugu/8-4.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "te",
+    "spokenDuration": 13.341904761904761,
+    "slotDuration": 15,
+    "rate": 240
+  },
+  {
+    "path": "public/audio/hindi/8-4.wav",
+    "engine": "eSpeak NG 1.52.0",
+    "voice": "hi",
+    "spokenDuration": 13.700907029478458,
+    "slotDuration": 15,
+    "rate": 199
+  }
+]

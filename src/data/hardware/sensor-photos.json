@@ -1,0 +1,302 @@
+{
+  "sensors-01": {
+    "label": "Waterproof DS18B20 temperature probe",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/381",
+    "original": "https://www.adafruit.com/images/1200x900/381-01.jpg"
+  },
+  "sensors-02": {
+    "label": "AHT20 temperature and humidity sensor",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/5181",
+    "original": "https://www.adafruit.com/images/1200x900/5181-05.jpg"
+  },
+  "sensors-03": {
+    "label": "BMP388 barometric pressure breakout",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/3966",
+    "original": "https://www.adafruit.com/images/1200x900/3966-10.jpg"
+  },
+  "sensors-04": {
+    "label": "Sensirion SCD40 carbon dioxide sensor",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/5187",
+    "original": "https://www.adafruit.com/images/1200x900/5187-08.jpg"
+  },
+  "sensors-05": {
+    "label": "Plantower PMSA003I particulate sensor breakout",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/4632",
+    "original": "https://www.adafruit.com/images/1200x900/4632-10.jpg"
+  },
+  "sensors-06": {
+    "label": "GUVA-S12SD ultraviolet sensor",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/1918",
+    "original": "https://www.adafruit.com/images/1200x900/1918-03.jpg"
+  },
+  "sensors-07": {
+    "label": "SparkFun weather meter kit with anemometer and rain gauge",
+    "credit": "SparkFun Electronics",
+    "source": "https://www.sparkfun.com/weather-meter-kit.html?___store=default",
+    "original": "https://www.sparkfun.com/media/catalog/product/1/5/15901-Weather_Meter-02.jpg?optimize=low&bg-color=255,255,255&fit=bounds&height=265&width=265&canvas=265:265"
+  },
+  "sensors-08": {
+    "label": "HC-SR04 ultrasonic rangefinder",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/3942",
+    "original": "https://www.adafruit.com/images/1200x900/3942-00.jpg"
+  },
+  "sensors-09": {
+    "label": "Sharp GP2Y0A21YK infrared distance sensor",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/164",
+    "original": "https://www.adafruit.com/images/1200x900/164-00.jpg"
+  },
+  "sensors-10": {
+    "label": "DFRobot Gravity VL53L0X optical time-of-flight sensor",
+    "credit": "DFRobot",
+    "source": "https://www.dfrobot.com/product-1706.html",
+    "original": "https://dfimg.dfrobot.com/enshop/image/data/SEN0245/SEN0245_Main_01.jpg"
+  },
+  "sensors-11": {
+    "label": "Benewake TFmini lidar rangefinder",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/3978",
+    "original": "https://www.adafruit.com/images/1200x900/3978-04.jpg"
+  },
+  "sensors-12": {
+    "label": "DFRobot 24 GHz presence radar module",
+    "credit": "DFRobot",
+    "source": "https://wiki.dfrobot.com/sen0557/",
+    "original": "https://dfimg.dfrobot.com/enshop/SEN0557/SEN0557_Main_01_1200x630.jpg.webp"
+  },
+  "sensors-13": {
+    "label": "PIR motion sensor module",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/189",
+    "original": "https://www.adafruit.com/images/1200x900/189-04.jpg"
+  },
+  "sensors-14": {
+    "label": "ADXL345 accelerometer",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/1231",
+    "original": "https://www.adafruit.com/images/1200x900/1231-04.jpg"
+  },
+  "sensors-15": {
+    "label": "MPU-6050 angular-rate and acceleration breakout",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/3886",
+    "original": "https://www.adafruit.com/images/1200x900/3886-06.jpg"
+  },
+  "sensors-16": {
+    "label": "BNO055 sensor-fusion breakout",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/4646",
+    "original": "https://www.adafruit.com/images/1200x900/4646-06.jpg"
+  },
+  "sensors-17": {
+    "label": "LIS3MDL three-axis magnetometer",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/4479",
+    "original": "https://www.adafruit.com/images/1200x900/4479-05.jpg"
+  },
+  "sensors-18": {
+    "label": "Mini GPS receiver breakout",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/4415",
+    "original": "https://www.adafruit.com/images/1200x900/4415-05.jpg"
+  },
+  "sensors-19": {
+    "label": "AS5600 magnetic rotary position sensor",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/6357",
+    "original": "https://www.adafruit.com/images/1200x900/6357-00.jpg"
+  },
+  "sensors-20": {
+    "label": "Tilt ball switch",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/173",
+    "original": "https://www.adafruit.com/images/1200x900/173-02.jpg"
+  },
+  "sensors-21": {
+    "label": "CdS photoresistor",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/161",
+    "original": "https://www.adafruit.com/images/1200x900/161-00.jpg"
+  },
+  "sensors-22": {
+    "label": "AS7341 multispectral breakout",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/4698",
+    "original": "https://www.adafruit.com/images/1200x900/4698-10.jpg"
+  },
+  "sensors-23": {
+    "label": "MAX4466 electret microphone module",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/1063",
+    "original": "https://www.adafruit.com/images/1200x900/1063-06.jpg"
+  },
+  "sensors-24": {
+    "label": "MPR121 capacitive touch breakout",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/1982",
+    "original": "https://www.adafruit.com/images/1200x900/1982-08.jpg"
+  },
+  "sensors-25": {
+    "label": "Strain-gauge load cell",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/4540",
+    "original": "https://www.adafruit.com/images/1200x900/4540-01.jpg"
+  },
+  "sensors-26": {
+    "label": "Short flex sensor",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/1070",
+    "original": "https://www.adafruit.com/images/1200x900/1070-01.jpg"
+  },
+  "sensors-27": {
+    "label": "STEMMA capacitive soil moisture sensor",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/4026",
+    "original": "https://www.adafruit.com/images/1200x900/4026-01.jpg"
+  },
+  "sensors-28": {
+    "label": "DFRobot Gravity non-contact liquid level sensor",
+    "credit": "DFRobot",
+    "source": "https://www.dfrobot.com/product-1493.html?description=true&search=SEN0204",
+    "original": "https://dfimg.dfrobot.com/enshop/image/data/SEN0204/SEN0204_ShipList_05.jpg"
+  },
+  "sensors-29": {
+    "label": "Inline turbine liquid flow meter",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/828",
+    "original": "https://www.adafruit.com/images/1200x900/828-00.jpg"
+  },
+  "sensors-30": {
+    "label": "DFRobot analog pH probe and interface board",
+    "credit": "DFRobot",
+    "source": "https://www.dfrobot.com/product-1782.html",
+    "original": "https://dfimg.dfrobot.com/enshop/SEN0161-V2/SEN0161-V2_Main_01.jpg"
+  },
+  "sensors-31": {
+    "label": "DFRobot MQ-2 combustible gas sensing module",
+    "credit": "DFRobot",
+    "source": "https://wiki.dfrobot.com/sen0127/",
+    "original": "https://dfimg.dfrobot.com/enshop/image/data/SEN0127/SEN0127_Main_01_1200x630.jpg.webp"
+  },
+  "sensors-32": {
+    "label": "DFRobot Gravity infrared flame sensor",
+    "credit": "DFRobot",
+    "source": "https://wiki.dfrobot.com/dfr0076/",
+    "original": "https://dfimg.dfrobot.com/enshop/image/data/DFR0076/DFR0076-260810 (1)_1200x630.jpg.webp"
+  },
+  "sensors-33": {
+    "label": "DFRobot Gravity pressure transducer with threaded process connection",
+    "credit": "DFRobot",
+    "source": "https://www.dfrobot.com/product-1675.html",
+    "original": "https://dfimg.dfrobot.com/enshop/SEN0257/SEN0257_Main_01.jpg"
+  },
+  "sensors-34": {
+    "label": "INA260 voltage, current and power monitor",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/4226",
+    "original": "https://www.adafruit.com/images/1200x900/4226-12.jpg"
+  },
+  "sensors-35": {
+    "label": "US5881 Hall-effect switch",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/158",
+    "original": "https://www.adafruit.com/images/1200x900/158-02.jpg"
+  },
+  "sensors-36": {
+    "label": "DFRobot electrochemical oxygen sensor module",
+    "credit": "DFRobot",
+    "source": "https://www.dfrobot.com/product-2510.html",
+    "original": "https://dfimg.dfrobot.com/enshop/image/data/SEN0465/SEN0465_ShipList_06.jpg"
+  },
+  "sensors-37": {
+    "label": "Raspberry Pi Camera Module 3",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/5657",
+    "original": "https://www.adafruit.com/images/1200x900/5657-04.jpg"
+  },
+  "sensors-38": {
+    "label": "MLX90640 infrared thermal array",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/4407",
+    "original": "https://www.adafruit.com/images/480x360/4407-05.jpg"
+  },
+  "sensors-39": {
+    "label": "Luxonis OAK-D stereo depth camera",
+    "credit": "Luxonis",
+    "source": "https://shop.luxonis.com/products/oak-d",
+    "original": "https://cdn.shopify.com/s/files/1/0106/8325/2802/files/f_502f0305-a60e-4a45-b2b7-b68288bc9866.png?v=1683804325"
+  },
+  "sensors-40": {
+    "label": "Pulse Sensor Amped optical heart-rate sensor",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/1093",
+    "original": "https://www.adafruit.com/images/1200x900/1093-09.jpg"
+  },
+  "sensors-41": {
+    "label": "Optical fingerprint sensor",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/751",
+    "original": "https://www.adafruit.com/images/1200x900/751-04.jpg"
+  },
+  "sensors-42": {
+    "label": "TinyPICO V3 ESP32 Wi-Fi and Bluetooth board",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/5750",
+    "original": "https://www.adafruit.com/images/1200x900/5750-00.jpg"
+  },
+  "sensors-43": {
+    "label": "ESP32-C6-DevKitC-1 with IEEE 802.15.4 radio",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/5672",
+    "original": "https://www.adafruit.com/images/1200x900/5672-00.jpg"
+  },
+  "sensors-44": {
+    "label": "RFM95W LoRa transceiver breakout",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/3072",
+    "original": "https://www.adafruit.com/images/1200x900/3072-07.jpg"
+  },
+  "sensors-45": {
+    "label": "Nordic Thingy:91 LTE-M and NB-IoT device",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/5047",
+    "original": "https://www.adafruit.com/images/1200x900/5047-00.jpg"
+  },
+  "sensors-46": {
+    "label": "PN532 NFC and RFID breakout",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/364",
+    "original": "https://www.adafruit.com/images/1200x900/364-04.jpg"
+  },
+  "sensors-47": {
+    "label": "CAN Pal wired CAN transceiver",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/5708",
+    "original": "https://www.adafruit.com/images/1200x900/5708-04.jpeg"
+  },
+  "sensors-48": {
+    "label": "MagTag Wi-Fi e-paper dashboard terminal",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/4800",
+    "original": "https://www.adafruit.com/images/1200x900/4800-10.jpg"
+  },
+  "sensors-49": {
+    "label": "Relay-controlled outlet module",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/2935",
+    "original": "https://www.adafruit.com/images/1200x900/2935-13.jpg"
+  },
+  "sensors-50": {
+    "label": "Arduino Nano 33 BLE Sense Rev2",
+    "credit": "Arduino",
+    "source": "https://store-usa.arduino.cc/products/nano-33-ble-sense-rev2",
+    "original": "https://store-usa.arduino.cc/cdn/shop/files/ABX00069_02.front_1200x900.jpg?v=1727105663"
+  }
+}

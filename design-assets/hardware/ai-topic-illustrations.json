@@ -1,0 +1,109 @@
+{
+  "generator": "OpenAI built-in image generation",
+  "illustrations": {
+    "fundamentals": {
+      "asset": "public/images/ai-topic-illustrations/fundamentals.webp",
+      "prompt": "Photorealistic educational editorial illustration for an AI Robotics topic. Landscape 3:2. small tabletop sorting robot with camera, controller board and three colored sample blocks in one compact setup. Use physical, plausible hardware and clean studio lighting on a cool gray lab bench with restrained cobalt accents. Center key objects with 10% edge clearance, crisp detail. Any screen graphics must be minimal and free of text. No text, brand logos, watermarks or title cards."
+    },
+    "machine-learning": {
+      "asset": "public/images/ai-topic-illustrations/machine-learning.webp",
+      "prompt": "Photorealistic educational editorial illustration for an AI Robotics topic. Landscape 3:2. desktop screen with blue scatter points and a single fitted line, next to a wheeled robot collecting a sensor reading. Use physical, plausible hardware and clean studio lighting on a cool gray lab bench with restrained cobalt accents. Center key objects with 10% edge clearance, crisp detail. Any screen graphics must be minimal and free of text. No text, brand logos, watermarks or title cards."
+    },
+    "neural-networks": {
+      "asset": "public/images/ai-topic-illustrations/neural-networks.webp",
+      "prompt": "Photorealistic educational editorial illustration for an AI Robotics topic. Landscape 3:2. physical museum-style neural network teaching model, layers of blue glass nodes connected by thin fiber-optic links on a black base. Use physical, plausible hardware and clean studio lighting on a cool gray lab bench with restrained cobalt accents. Center key objects with 10% edge clearance, crisp detail. Any screen graphics must be minimal and free of text. No text, brand logos, watermarks or title cards."
+    },
+    "deep-learning": {
+      "asset": "public/images/ai-topic-illustrations/deep-learning.webp",
+      "prompt": "Photorealistic educational editorial illustration for an AI Robotics topic. Landscape 3:2. vertical stack of four translucent feature-map plates changing from fine edge patterns to coarse shapes, beside a compact vision computer. Use physical, plausible hardware and clean studio lighting on a cool gray lab bench with restrained cobalt accents. Center key objects with 10% edge clearance, crisp detail. Any screen graphics must be minimal and free of text. No text, brand logos, watermarks or title cards."
+    },
+    "computer-vision": {
+      "asset": "public/images/ai-topic-illustrations/computer-vision.webp",
+      "prompt": "Photorealistic educational editorial illustration for an AI Robotics topic. Landscape 3:2. machine vision camera and ring light viewing a precision-machined component on a dark stage. Use physical, plausible hardware and clean studio lighting on a cool gray lab bench with restrained cobalt accents. Center key objects with 10% edge clearance, crisp detail. Any screen graphics must be minimal and free of text. No text, brand logos, watermarks or title cards."
+    },
+    "object-detection": {
+      "asset": "public/images/ai-topic-illustrations/object-detection.webp",
+      "prompt": "Photorealistic educational editorial illustration for an AI Robotics topic. Landscape 3:2. robot camera viewing three objects on a worktable, separate screen shows clean thin bounding rectangles around the objects. Use physical, plausible hardware and clean studio lighting on a cool gray lab bench with restrained cobalt accents. Center key objects with 10% edge clearance, crisp detail. Any screen graphics must be minimal and free of text. No text, brand logos, watermarks or title cards."
+    },
+    "classification": {
+      "asset": "public/images/ai-topic-illustrations/classification.webp",
+      "prompt": "Photorealistic educational editorial illustration for an AI Robotics topic. Landscape 3:2. compact camera pointed at one metal part on a tray, adjacent display showing a single large object thumbnail and three simple score bars. Use physical, plausible hardware and clean studio lighting on a cool gray lab bench with restrained cobalt accents. Center key objects with 10% edge clearance, crisp detail. Any screen graphics must be minimal and free of text. No text, brand logos, watermarks or title cards."
+    },
+    "segmentation": {
+      "asset": "public/images/ai-topic-illustrations/segmentation.webp",
+      "prompt": "Photorealistic educational editorial illustration for an AI Robotics topic. Landscape 3:2. workstation camera viewing overlapping geometric objects on a mat, adjacent display shows solid colored pixel masks matching the shapes. Use physical, plausible hardware and clean studio lighting on a cool gray lab bench with restrained cobalt accents. Center key objects with 10% edge clearance, crisp detail. Any screen graphics must be minimal and free of text. No text, brand logos, watermarks or title cards."
+    },
+    "pose": {
+      "asset": "public/images/ai-topic-illustrations/pose.webp",
+      "prompt": "Photorealistic educational editorial illustration for an AI Robotics topic. Landscape 3:2. articulated tabletop mannequin under stereo cameras, display shows sparse joint markers over the mannequin. Use physical, plausible hardware and clean studio lighting on a cool gray lab bench with restrained cobalt accents. Center key objects with 10% edge clearance, crisp detail. Any screen graphics must be minimal and free of text. No text, brand logos, watermarks or title cards."
+    },
+    "gestures": {
+      "asset": "public/images/ai-topic-illustrations/gestures.webp",
+      "prompt": "Photorealistic educational editorial illustration for an AI Robotics topic. Landscape 3:2. one open human hand held upright in front of a small camera, a stationary tabletop robot and simple hand landmark feedback on a display. Use physical, plausible hardware and clean studio lighting on a cool gray lab bench with restrained cobalt accents. Center key objects with 10% edge clearance, crisp detail. Any screen graphics must be minimal and free of text. No text, brand logos, watermarks or title cards."
+    },
+    "perception": {
+      "asset": "public/images/ai-topic-illustrations/perception.webp",
+      "prompt": "Photorealistic educational editorial illustration for an AI Robotics topic. Landscape 3:2. compact rover with clearly visible forward cameras, top lidar and short-range sensor bar scanning a small bench environment. Use physical, plausible hardware and clean studio lighting on a cool gray lab bench with restrained cobalt accents. Center key objects with 10% edge clearance, crisp detail. Any screen graphics must be minimal and free of text. No text, brand logos, watermarks or title cards."
+    },
+    "speech-recognition": {
+      "asset": "public/images/ai-topic-illustrations/speech-recognition.webp",
+      "prompt": "Photorealistic educational editorial illustration for an AI Robotics topic. Landscape 3:2. directional USB microphone on a stand beside a laptop showing an audio waveform and abstract transcription blocks. Use physical, plausible hardware and clean studio lighting on a cool gray lab bench with restrained cobalt accents. Center key objects with 10% edge clearance, crisp detail. Any screen graphics must be minimal and free of text. No text, brand logos, watermarks or title cards."
+    },
+    "text-to-speech": {
+      "asset": "public/images/ai-topic-illustrations/text-to-speech.webp",
+      "prompt": "Photorealistic educational editorial illustration for an AI Robotics topic. Landscape 3:2. desktop speaker with exposed driver grille and embedded board beside a display with a simple playback waveform. Use physical, plausible hardware and clean studio lighting on a cool gray lab bench with restrained cobalt accents. Center key objects with 10% edge clearance, crisp detail. Any screen graphics must be minimal and free of text. No text, brand logos, watermarks or title cards."
+    },
+    "language": {
+      "asset": "public/images/ai-topic-illustrations/language.webp",
+      "prompt": "Photorealistic educational editorial illustration for an AI Robotics topic. Landscape 3:2. compact keyboard connected to a computer beside a small stationary robot, display shows abstract input tokens converging to a single highlighted command tile. Use physical, plausible hardware and clean studio lighting on a cool gray lab bench with restrained cobalt accents. Center key objects with 10% edge clearance, crisp detail. Any screen graphics must be minimal and free of text. No text, brand logos, watermarks or title cards."
+    },
+    "multimodal": {
+      "asset": "public/images/ai-topic-illustrations/multimodal.webp",
+      "prompt": "Photorealistic educational editorial illustration for an AI Robotics topic. Landscape 3:2. single small robot station with distinct stereo camera, microphone and physical keypad beside one small embedded computer. Use physical, plausible hardware and clean studio lighting on a cool gray lab bench with restrained cobalt accents. Center key objects with 10% edge clearance, crisp detail. Any screen graphics must be minimal and free of text. No text, brand logos, watermarks or title cards."
+    },
+    "human-interaction": {
+      "asset": "public/images/ai-topic-illustrations/human-interaction.webp",
+      "prompt": "Photorealistic educational editorial illustration for an AI Robotics topic. Landscape 3:2. friendly table-height robot with a person pressing a clearly visible physical pause button on an external control panel. Use physical, plausible hardware and clean studio lighting on a cool gray lab bench with restrained cobalt accents. Center key objects with 10% edge clearance, crisp detail. Any screen graphics must be minimal and free of text. No text, brand logos, watermarks or title cards."
+    },
+    "agents": {
+      "asset": "public/images/ai-topic-illustrations/agents.webp",
+      "prompt": "Photorealistic educational editorial illustration for an AI Robotics topic. Landscape 3:2. tabletop robot planning demonstration with separate observation camera, compute board and a monitor showing a simple ordered three-step task timeline, domestic harmless pick-and-place task. Use physical, plausible hardware and clean studio lighting on a cool gray lab bench with restrained cobalt accents. Center key objects with 10% edge clearance, crisp detail. Any screen graphics must be minimal and free of text. No text, brand logos, watermarks or title cards."
+    },
+    "reinforcement": {
+      "asset": "public/images/ai-topic-illustrations/reinforcement.webp",
+      "prompt": "Photorealistic educational editorial illustration for an AI Robotics topic. Landscape 3:2. miniature tabletop mobile robot on a gridded learning arena with a blue reward marker and a few foam barriers. Use physical, plausible hardware and clean studio lighting on a cool gray lab bench with restrained cobalt accents. Center key objects with 10% edge clearance, crisp detail. Any screen graphics must be minimal and free of text. No text, brand logos, watermarks or title cards."
+    },
+    "sensor-fusion": {
+      "asset": "public/images/ai-topic-illustrations/sensor-fusion.webp",
+      "prompt": "Photorealistic educational editorial illustration for an AI Robotics topic. Landscape 3:2. precision rotating test stand carrying two different sensors, one small inertial board and one rotary encoder, display with two thin measurement traces converging. Use physical, plausible hardware and clean studio lighting on a cool gray lab bench with restrained cobalt accents. Center key objects with 10% edge clearance, crisp detail. Any screen graphics must be minimal and free of text. No text, brand logos, watermarks or title cards."
+    },
+    "slam": {
+      "asset": "public/images/ai-topic-illustrations/slam.webp",
+      "prompt": "Photorealistic educational editorial illustration for an AI Robotics topic. Landscape 3:2. indoor lidar mapping rover beside a monitor showing a sparse blue point cloud floor plan of the same lab. Use physical, plausible hardware and clean studio lighting on a cool gray lab bench with restrained cobalt accents. Center key objects with 10% edge clearance, crisp detail. Any screen graphics must be minimal and free of text. No text, brand logos, watermarks or title cards."
+    },
+    "localization": {
+      "asset": "public/images/ai-topic-illustrations/localization.webp",
+      "prompt": "Photorealistic educational editorial illustration for an AI Robotics topic. Landscape 3:2. small rover centered over a printed checkerboard calibration mat with fiducial markers, overhead camera on a stand. Use physical, plausible hardware and clean studio lighting on a cool gray lab bench with restrained cobalt accents. Center key objects with 10% edge clearance, crisp detail. Any screen graphics must be minimal and free of text. No text, brand logos, watermarks or title cards."
+    },
+    "path-planning": {
+      "asset": "public/images/ai-topic-illustrations/path-planning.webp",
+      "prompt": "Photorealistic educational editorial illustration for an AI Robotics topic. Landscape 3:2. overhead view of a tabletop maze with low foam obstacles and a thin blue route drawn on the floor, compact rover at the route start. Use physical, plausible hardware and clean studio lighting on a cool gray lab bench with restrained cobalt accents. Center key objects with 10% edge clearance, crisp detail. Any screen graphics must be minimal and free of text. No text, brand logos, watermarks or title cards."
+    },
+    "navigation": {
+      "asset": "public/images/ai-topic-illustrations/navigation.webp",
+      "prompt": "Photorealistic educational editorial illustration for an AI Robotics topic. Landscape 3:2. small autonomous inspection rover rounding a foam obstacle in a wide clean indoor practice lane. Use physical, plausible hardware and clean studio lighting on a cool gray lab bench with restrained cobalt accents. Center key objects with 10% edge clearance, crisp detail. Any screen graphics must be minimal and free of text. No text, brand logos, watermarks or title cards."
+    },
+    "edge": {
+      "asset": "public/images/ai-topic-illustrations/edge.webp",
+      "prompt": "Photorealistic educational editorial illustration for an AI Robotics topic. Landscape 3:2. fan-cooled embedded inference computer wired directly to a small camera observing two sample parts. Use physical, plausible hardware and clean studio lighting on a cool gray lab bench with restrained cobalt accents. Center key objects with 10% edge clearance, crisp detail. Any screen graphics must be minimal and free of text. No text, brand logos, watermarks or title cards."
+    },
+    "ros2": {
+      "asset": "public/images/ai-topic-illustrations/ros2.webp",
+      "prompt": "Photorealistic educational editorial illustration for an AI Robotics topic. Landscape 3:2. three linked robot bench devices, camera, controller, and motor module, neatly connected over a network switch with subtle blue status LEDs. Use physical, plausible hardware and clean studio lighting on a cool gray lab bench with restrained cobalt accents. Center key objects with 10% edge clearance, crisp detail. Any screen graphics must be minimal and free of text. No text, brand logos, watermarks or title cards."
+    },
+    "control": {
+      "asset": "public/images/ai-topic-illustrations/control.webp",
+      "prompt": "Photorealistic educational editorial illustration for an AI Robotics topic. Landscape 3:2. motor feedback test stand with a rotary encoder, small controller board and an oscilloscope showing target and measured curves. Use physical, plausible hardware and clean studio lighting on a cool gray lab bench with restrained cobalt accents. Center key objects with 10% edge clearance, crisp detail. Any screen graphics must be minimal and free of text. No text, brand logos, watermarks or title cards."
+    }
+  }
+}

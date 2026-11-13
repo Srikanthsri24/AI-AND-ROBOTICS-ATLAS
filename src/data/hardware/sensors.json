@@ -1,0 +1,502 @@
+[
+  {
+    "id": "sensors-01",
+    "module": 4,
+    "number": 1,
+    "group": "sensors-environment",
+    "groupLetter": "A",
+    "groupTitle": "Temperature, Climate & Environmental Sensors",
+    "title": "Temperature Sensors",
+    "variants": "LM35, DS18B20, TMP36, MCP9808, MAX31865, thermocouples, RTDs, NTC/PTC thermistors"
+  },
+  {
+    "id": "sensors-02",
+    "module": 4,
+    "number": 2,
+    "group": "sensors-environment",
+    "groupLetter": "A",
+    "groupTitle": "Temperature, Climate & Environmental Sensors",
+    "title": "Humidity Sensors",
+    "variants": "DHT11, DHT22, SHT30/SHT31, SHT40, AHT20, HDC1080, BME280"
+  },
+  {
+    "id": "sensors-03",
+    "module": 4,
+    "number": 3,
+    "group": "sensors-environment",
+    "groupLetter": "A",
+    "groupTitle": "Temperature, Climate & Environmental Sensors",
+    "title": "Atmospheric Pressure & Altitude Sensors",
+    "variants": "BMP180, BMP280, BMP388, BMP390, BME280, MS5611, pressure-based altitude estimation"
+  },
+  {
+    "id": "sensors-04",
+    "module": 4,
+    "number": 4,
+    "group": "sensors-environment",
+    "groupLetter": "A",
+    "groupTitle": "Temperature, Climate & Environmental Sensors",
+    "title": "Air Quality & Environmental Gas Sensors",
+    "variants": "MQ135, SGP30, SGP40, CCS811, BME680/BME688, VOC sensors, CO\u2082 sensors, particulate sensors"
+  },
+  {
+    "id": "sensors-05",
+    "module": 4,
+    "number": 5,
+    "group": "sensors-environment",
+    "groupLetter": "A",
+    "groupTitle": "Temperature, Climate & Environmental Sensors",
+    "title": "Dust, Smoke & Particulate Sensors",
+    "variants": "PMS5003, PMS7003, SDS011, optical dust sensors, PM1/PM2.5/PM10 sensors, smoke detection modules"
+  },
+  {
+    "id": "sensors-06",
+    "module": 4,
+    "number": 6,
+    "group": "sensors-environment",
+    "groupLetter": "A",
+    "groupTitle": "Temperature, Climate & Environmental Sensors",
+    "title": "UV, Solar Radiation & Weather Sensors",
+    "variants": "UV sensors, solar irradiance sensors, pyranometers, VEML6075, AS7331, solar monitoring modules"
+  },
+  {
+    "id": "sensors-07",
+    "module": 4,
+    "number": 7,
+    "group": "sensors-environment",
+    "groupLetter": "A",
+    "groupTitle": "Temperature, Climate & Environmental Sensors",
+    "title": "Weather Station Sensors",
+    "variants": "Anemometers, wind vanes, tipping-bucket rain gauges, rainfall detectors, weather station sensor kits"
+  },
+  {
+    "id": "sensors-08",
+    "module": 4,
+    "number": 8,
+    "group": "sensors-navigation",
+    "groupLetter": "B",
+    "groupTitle": "Distance, Motion, Position & Navigation",
+    "title": "Ultrasonic Distance Sensors",
+    "variants": "HC-SR04, JSN-SR04T, waterproof ultrasonic modules, industrial ultrasonic ranging"
+  },
+  {
+    "id": "sensors-09",
+    "module": 4,
+    "number": 9,
+    "group": "sensors-navigation",
+    "groupLetter": "B",
+    "groupTitle": "Distance, Motion, Position & Navigation",
+    "title": "Infrared Proximity & Distance Sensors",
+    "variants": "IR obstacle modules, Sharp IR distance sensors, reflective IR sensors, IR break-beam sensors"
+  },
+  {
+    "id": "sensors-10",
+    "module": 4,
+    "number": 10,
+    "group": "sensors-navigation",
+    "groupLetter": "B",
+    "groupTitle": "Distance, Motion, Position & Navigation",
+    "title": "Time-of-Flight Distance Sensors",
+    "variants": "VL53L0X, VL53L1X, VL53L5CX, optical ToF ranging and depth sensing"
+  },
+  {
+    "id": "sensors-11",
+    "module": 4,
+    "number": 11,
+    "group": "sensors-navigation",
+    "groupLetter": "B",
+    "groupTitle": "Distance, Motion, Position & Navigation",
+    "title": "LiDAR & Laser Scanning Sensors",
+    "variants": "RPLIDAR, YDLIDAR, TFmini, TF-Luna, 2D/3D LiDAR, laser rangefinders"
+  },
+  {
+    "id": "sensors-12",
+    "module": 4,
+    "number": 12,
+    "group": "sensors-navigation",
+    "groupLetter": "B",
+    "groupTitle": "Distance, Motion, Position & Navigation",
+    "title": "Radar & Microwave Motion Sensors",
+    "variants": "RCWL-0516, LD2410, mmWave radar, Doppler radar, FMCW radar"
+  },
+  {
+    "id": "sensors-13",
+    "module": 4,
+    "number": 13,
+    "group": "sensors-navigation",
+    "groupLetter": "B",
+    "groupTitle": "Distance, Motion, Position & Navigation",
+    "title": "PIR Motion & Presence Sensors",
+    "variants": "HC-SR501, AM312, pyroelectric motion detectors, occupancy sensing"
+  },
+  {
+    "id": "sensors-14",
+    "module": 4,
+    "number": 14,
+    "group": "sensors-navigation",
+    "groupLetter": "B",
+    "groupTitle": "Distance, Motion, Position & Navigation",
+    "title": "Accelerometers",
+    "variants": "ADXL345, MPU6050 accelerometer, LIS3DH, ADXL375, high-g acceleration sensors"
+  },
+  {
+    "id": "sensors-15",
+    "module": 4,
+    "number": 15,
+    "group": "sensors-navigation",
+    "groupLetter": "B",
+    "groupTitle": "Distance, Motion, Position & Navigation",
+    "title": "Gyroscopes & Angular Motion Sensors",
+    "variants": "MPU6050, L3GD20H, ICM-42688, angular velocity sensing"
+  },
+  {
+    "id": "sensors-16",
+    "module": 4,
+    "number": 16,
+    "group": "sensors-navigation",
+    "groupLetter": "B",
+    "groupTitle": "Distance, Motion, Position & Navigation",
+    "title": "IMU & Sensor Fusion Modules",
+    "variants": "MPU9250, BNO055, BNO085, ICM-20948, 6-axis and 9-axis IMUs"
+  },
+  {
+    "id": "sensors-17",
+    "module": 4,
+    "number": 17,
+    "group": "sensors-navigation",
+    "groupLetter": "B",
+    "groupTitle": "Distance, Motion, Position & Navigation",
+    "title": "Magnetometers & Digital Compasses",
+    "variants": "HMC5883L, QMC5883L, LIS3MDL, MMC5983MA, magnetic heading sensors"
+  },
+  {
+    "id": "sensors-18",
+    "module": 4,
+    "number": 18,
+    "group": "sensors-navigation",
+    "groupLetter": "B",
+    "groupTitle": "Distance, Motion, Position & Navigation",
+    "title": "GPS/GNSS Positioning Modules",
+    "variants": "NEO-6M, u-blox M8/M9/M10 families, RTK GNSS, multi-constellation receivers"
+  },
+  {
+    "id": "sensors-19",
+    "module": 4,
+    "number": 19,
+    "group": "sensors-navigation",
+    "groupLetter": "B",
+    "groupTitle": "Distance, Motion, Position & Navigation",
+    "title": "Encoders & Rotation Sensors",
+    "variants": "Rotary encoders, optical encoders, magnetic encoders, AS5600, incremental and absolute encoders"
+  },
+  {
+    "id": "sensors-20",
+    "module": 4,
+    "number": 20,
+    "group": "sensors-navigation",
+    "groupLetter": "B",
+    "groupTitle": "Distance, Motion, Position & Navigation",
+    "title": "Tilt, Vibration & Shock Sensors",
+    "variants": "SW-420, tilt switches, vibration sensors, piezo shock sensors, industrial accelerometers"
+  },
+  {
+    "id": "sensors-21",
+    "module": 4,
+    "number": 21,
+    "group": "sensors-interaction",
+    "groupLetter": "C",
+    "groupTitle": "Light, Sound, Touch & Human Interaction",
+    "title": "Light & Ambient Illumination Sensors",
+    "variants": "LDR, BH1750, TSL2561, VEML7700, photodiodes, phototransistors"
+  },
+  {
+    "id": "sensors-22",
+    "module": 4,
+    "number": 22,
+    "group": "sensors-interaction",
+    "groupLetter": "C",
+    "groupTitle": "Light, Sound, Touch & Human Interaction",
+    "title": "Color & Spectral Sensors",
+    "variants": "TCS3200, TCS34725, AS7341, RGB sensors, multispectral sensing"
+  },
+  {
+    "id": "sensors-23",
+    "module": 4,
+    "number": 23,
+    "group": "sensors-interaction",
+    "groupLetter": "C",
+    "groupTitle": "Light, Sound, Touch & Human Interaction",
+    "title": "Sound & Acoustic Sensors",
+    "variants": "Electret microphone modules, MEMS microphones, MAX9814, sound level sensing, acoustic detection"
+  },
+  {
+    "id": "sensors-24",
+    "module": 4,
+    "number": 24,
+    "group": "sensors-interaction",
+    "groupLetter": "C",
+    "groupTitle": "Light, Sound, Touch & Human Interaction",
+    "title": "Touch & Capacitive Sensors",
+    "variants": "TTP223, MPR121, capacitive touch pads, touch matrices, capacitive proximity"
+  },
+  {
+    "id": "sensors-25",
+    "module": 4,
+    "number": 25,
+    "group": "sensors-interaction",
+    "groupLetter": "C",
+    "groupTitle": "Light, Sound, Touch & Human Interaction",
+    "title": "Force, Weight & Tactile Sensors",
+    "variants": "FSR, load cells, HX711 interfaces, strain gauges, tactile arrays, robotic grip sensors"
+  },
+  {
+    "id": "sensors-26",
+    "module": 4,
+    "number": 26,
+    "group": "sensors-interaction",
+    "groupLetter": "C",
+    "groupTitle": "Light, Sound, Touch & Human Interaction",
+    "title": "Flex, Bend & Stretch Sensors",
+    "variants": "Flex sensors, bend sensors, stretch sensors, conductive rubber sensors, smart glove sensors"
+  },
+  {
+    "id": "sensors-27",
+    "module": 4,
+    "number": 27,
+    "group": "sensors-process",
+    "groupLetter": "D",
+    "groupTitle": "Water, Agriculture, Chemical & Industrial Sensing",
+    "title": "Soil Moisture & Agricultural Sensors",
+    "variants": "Capacitive soil moisture, resistive soil probes, soil temperature, soil EC sensors"
+  },
+  {
+    "id": "sensors-28",
+    "module": 4,
+    "number": 28,
+    "group": "sensors-process",
+    "groupLetter": "D",
+    "groupTitle": "Water, Agriculture, Chemical & Industrial Sensing",
+    "title": "Water Level & Liquid Detection Sensors",
+    "variants": "Float switches, conductive water level sensors, capacitive level sensors, ultrasonic level sensing"
+  },
+  {
+    "id": "sensors-29",
+    "module": 4,
+    "number": 29,
+    "group": "sensors-process",
+    "groupLetter": "D",
+    "groupTitle": "Water, Agriculture, Chemical & Industrial Sensing",
+    "title": "Water Flow Sensors",
+    "variants": "YF-S201, turbine flow sensors, Hall-effect flow meters, industrial flow transducers"
+  },
+  {
+    "id": "sensors-30",
+    "module": 4,
+    "number": 30,
+    "group": "sensors-process",
+    "groupLetter": "D",
+    "groupTitle": "Water, Agriculture, Chemical & Industrial Sensing",
+    "title": "pH, EC & Water Quality Sensors",
+    "variants": "pH probes, electrical conductivity, TDS, ORP, dissolved oxygen, turbidity sensors"
+  },
+  {
+    "id": "sensors-31",
+    "module": 4,
+    "number": 31,
+    "group": "sensors-process",
+    "groupLetter": "D",
+    "groupTitle": "Water, Agriculture, Chemical & Industrial Sensing",
+    "title": "Gas Leakage & Safety Sensors",
+    "variants": "MQ-2, MQ-5, MQ-7, electrochemical CO sensors, combustible gas detectors, industrial gas modules"
+  },
+  {
+    "id": "sensors-32",
+    "module": 4,
+    "number": 32,
+    "group": "sensors-process",
+    "groupLetter": "D",
+    "groupTitle": "Water, Agriculture, Chemical & Industrial Sensing",
+    "title": "Flame, Fire & Thermal Detection Sensors",
+    "variants": "IR flame sensors, thermal detectors, thermopiles, industrial fire detection modules"
+  },
+  {
+    "id": "sensors-33",
+    "module": 4,
+    "number": 33,
+    "group": "sensors-process",
+    "groupLetter": "D",
+    "groupTitle": "Water, Agriculture, Chemical & Industrial Sensing",
+    "title": "Industrial Pressure & Process Sensors",
+    "variants": "Pressure transducers, differential pressure sensors, 4\u201320 mA pressure transmitters"
+  },
+  {
+    "id": "sensors-34",
+    "module": 4,
+    "number": 34,
+    "group": "sensors-process",
+    "groupLetter": "D",
+    "groupTitle": "Water, Agriculture, Chemical & Industrial Sensing",
+    "title": "Current, Voltage & Power Sensors",
+    "variants": "ACS712, ACS758, INA219, INA226, Hall current sensors, power-monitor ICs"
+  },
+  {
+    "id": "sensors-35",
+    "module": 4,
+    "number": 35,
+    "group": "sensors-process",
+    "groupLetter": "D",
+    "groupTitle": "Water, Agriculture, Chemical & Industrial Sensing",
+    "title": "Magnetic Field & Hall Sensors",
+    "variants": "A3144, Hall switches, linear Hall sensors, magnetic field sensing modules"
+  },
+  {
+    "id": "sensors-36",
+    "module": 4,
+    "number": 36,
+    "group": "sensors-process",
+    "groupLetter": "D",
+    "groupTitle": "Water, Agriculture, Chemical & Industrial Sensing",
+    "title": "Chemical & Electrochemical Sensors",
+    "variants": "Electrochemical gas cells, ion-selective electrodes, dissolved chemical sensors"
+  },
+  {
+    "id": "sensors-37",
+    "module": 4,
+    "number": 37,
+    "group": "sensors-vision",
+    "groupLetter": "E",
+    "groupTitle": "Vision, Biometrics & Specialized Sensors",
+    "title": "Camera & Image Sensors",
+    "variants": "CMOS camera modules, OV2640, OV5640, Raspberry Pi Camera Modules, Arducam, machine vision cameras"
+  },
+  {
+    "id": "sensors-38",
+    "module": 4,
+    "number": 38,
+    "group": "sensors-vision",
+    "groupLetter": "E",
+    "groupTitle": "Vision, Biometrics & Specialized Sensors",
+    "title": "Thermal & Infrared Imaging Sensors",
+    "variants": "MLX90640, AMG8833, FLIR Lepton, thermal arrays, thermal cameras"
+  },
+  {
+    "id": "sensors-39",
+    "module": 4,
+    "number": 39,
+    "group": "sensors-vision",
+    "groupLetter": "E",
+    "groupTitle": "Vision, Biometrics & Specialized Sensors",
+    "title": "Depth, Stereo Vision & 3D Sensors",
+    "variants": "Stereo depth cameras, structured-light sensors, ToF depth cameras, RealSense-class depth systems"
+  },
+  {
+    "id": "sensors-40",
+    "module": 4,
+    "number": 40,
+    "group": "sensors-vision",
+    "groupLetter": "E",
+    "groupTitle": "Vision, Biometrics & Specialized Sensors",
+    "title": "Biomedical & Physiological Sensors",
+    "variants": "MAX30102, ECG/EMG modules, heart-rate sensors, respiration sensors, body temperature sensing"
+  },
+  {
+    "id": "sensors-41",
+    "module": 4,
+    "number": 41,
+    "group": "sensors-vision",
+    "groupLetter": "E",
+    "groupTitle": "Vision, Biometrics & Specialized Sensors",
+    "title": "Biometric & Identity Sensors",
+    "variants": "Fingerprint modules, iris imaging hardware, biometric readers, identity verification sensors"
+  },
+  {
+    "id": "sensors-42",
+    "module": 4,
+    "number": 42,
+    "group": "sensors-connectivity",
+    "groupLetter": "F",
+    "groupTitle": "IoT Connectivity, Networks & Communication",
+    "title": "Wi-Fi & Bluetooth IoT",
+    "variants": "ESP32 wireless connectivity, Wi-Fi modules, BLE beacons, wireless sensor nodes"
+  },
+  {
+    "id": "sensors-43",
+    "module": 4,
+    "number": 43,
+    "group": "sensors-connectivity",
+    "groupLetter": "F",
+    "groupTitle": "IoT Connectivity, Networks & Communication",
+    "title": "Zigbee, Thread & Matter",
+    "variants": "Zigbee radios, Thread mesh networking, Matter-compatible smart device ecosystems"
+  },
+  {
+    "id": "sensors-44",
+    "module": 4,
+    "number": 44,
+    "group": "sensors-connectivity",
+    "groupLetter": "F",
+    "groupTitle": "IoT Connectivity, Networks & Communication",
+    "title": "LoRa & LoRaWAN",
+    "variants": "SX1276, SX1262, LoRa modules, gateways, long-range low-power sensor networks"
+  },
+  {
+    "id": "sensors-45",
+    "module": 4,
+    "number": 45,
+    "group": "sensors-connectivity",
+    "groupLetter": "F",
+    "groupTitle": "IoT Connectivity, Networks & Communication",
+    "title": "Cellular IoT & Satellite Connectivity",
+    "variants": "LTE-M, NB-IoT, LTE Cat-1, GNSS-cellular modules, satellite IoT terminals"
+  },
+  {
+    "id": "sensors-46",
+    "module": 4,
+    "number": 46,
+    "group": "sensors-connectivity",
+    "groupLetter": "F",
+    "groupTitle": "IoT Connectivity, Networks & Communication",
+    "title": "RFID, NFC & UWB",
+    "variants": "RC522, PN532, RFID readers, NFC modules, UWB ranging and positioning systems"
+  },
+  {
+    "id": "sensors-47",
+    "module": 4,
+    "number": 47,
+    "group": "sensors-connectivity",
+    "groupLetter": "F",
+    "groupTitle": "IoT Connectivity, Networks & Communication",
+    "title": "Wired Industrial IoT Networks",
+    "variants": "Ethernet, RS-485, Modbus, CAN/CAN FD, industrial network gateways"
+  },
+  {
+    "id": "sensors-48",
+    "module": 4,
+    "number": 48,
+    "group": "sensors-systems",
+    "groupLetter": "G",
+    "groupTitle": "IoT Platforms, Automation & Intelligent Systems",
+    "title": "IoT Cloud, Dashboards & Data Platforms",
+    "variants": "MQTT brokers, AWS IoT, Azure IoT, ThingsBoard, Node-RED, time-series databases, telemetry dashboards"
+  },
+  {
+    "id": "sensors-49",
+    "module": 4,
+    "number": 49,
+    "group": "sensors-systems",
+    "groupLetter": "G",
+    "groupTitle": "IoT Platforms, Automation & Intelligent Systems",
+    "title": "IoT Automation & Smart Systems",
+    "variants": "Smart homes, smart classrooms, smart agriculture, smart cities, industrial IoT, energy monitoring, automation rules"
+  },
+  {
+    "id": "sensors-50",
+    "module": 4,
+    "number": 50,
+    "group": "sensors-systems",
+    "groupLetter": "G",
+    "groupTitle": "IoT Platforms, Automation & Intelligent Systems",
+    "title": "AIoT, Edge Intelligence & Sensor Fusion",
+    "variants": "TinyML, edge inference, anomaly detection, predictive maintenance, multisensor fusion, intelligent monitoring"
+  }
+]

@@ -1,0 +1,602 @@
+[
+  {
+    "id": "anatomy-01",
+    "module": 6,
+    "number": 1,
+    "group": "anatomy-head",
+    "groupLetter": "A",
+    "groupTitle": "Robot Head & Sensory Anatomy",
+    "title": "Robot Head & Skull Structure",
+    "variants": "Head frames, protective shells, internal mounting brackets, sensor housings, cooling and cable-routing mechanisms"
+  },
+  {
+    "id": "anatomy-02",
+    "module": 6,
+    "number": 2,
+    "group": "anatomy-head",
+    "groupLetter": "A",
+    "groupTitle": "Robot Head & Sensory Anatomy",
+    "title": "Robot Eyes & Vision Systems",
+    "variants": "RGB cameras, stereo cameras, depth cameras, optical lenses, IR vision, camera gimbals, artificial eye mechanisms"
+  },
+  {
+    "id": "anatomy-03",
+    "module": 6,
+    "number": 3,
+    "group": "anatomy-head",
+    "groupLetter": "A",
+    "groupTitle": "Robot Head & Sensory Anatomy",
+    "title": "Robot Ears & Hearing Systems",
+    "variants": "Microphones, MEMS microphone arrays, directional sound detection, audio localization, acoustic sensing"
+  },
+  {
+    "id": "anatomy-04",
+    "module": 6,
+    "number": 4,
+    "group": "anatomy-head",
+    "groupLetter": "A",
+    "groupTitle": "Robot Head & Sensory Anatomy",
+    "title": "Robot Face & Expression Mechanisms",
+    "variants": "LED eyes, display faces, mechanical eyelids, facial servos, expressive actuators, social interaction displays"
+  },
+  {
+    "id": "anatomy-05",
+    "module": 6,
+    "number": 5,
+    "group": "anatomy-head",
+    "groupLetter": "A",
+    "groupTitle": "Robot Head & Sensory Anatomy",
+    "title": "Robot Neck & Head Movement",
+    "variants": "Yaw/pitch/roll mechanisms, pan-tilt assemblies, neck actuators, bearings, position feedback"
+  },
+  {
+    "id": "anatomy-06",
+    "module": 6,
+    "number": 6,
+    "group": "anatomy-arms",
+    "groupLetter": "B",
+    "groupTitle": "Robot Arms & Upper-Limb Anatomy",
+    "title": "Shoulder Joints",
+    "variants": "Rotary joints, multi-axis shoulders, actuators, bearings, torque transmission"
+  },
+  {
+    "id": "anatomy-07",
+    "module": 6,
+    "number": 7,
+    "group": "anatomy-arms",
+    "groupLetter": "B",
+    "groupTitle": "Robot Arms & Upper-Limb Anatomy",
+    "title": "Upper Arms",
+    "variants": "Structural links, lightweight frames, motor housings, internal wiring"
+  },
+  {
+    "id": "anatomy-08",
+    "module": 6,
+    "number": 8,
+    "group": "anatomy-arms",
+    "groupLetter": "B",
+    "groupTitle": "Robot Arms & Upper-Limb Anatomy",
+    "title": "Elbow Joints",
+    "variants": "Hinge mechanisms, geared actuators, angle sensors, joint limits"
+  },
+  {
+    "id": "anatomy-09",
+    "module": 6,
+    "number": 9,
+    "group": "anatomy-arms",
+    "groupLetter": "B",
+    "groupTitle": "Robot Arms & Upper-Limb Anatomy",
+    "title": "Forearms",
+    "variants": "Forearm structures, embedded electronics, cable routing, actuator integration"
+  },
+  {
+    "id": "anatomy-10",
+    "module": 6,
+    "number": 10,
+    "group": "anatomy-arms",
+    "groupLetter": "B",
+    "groupTitle": "Robot Arms & Upper-Limb Anatomy",
+    "title": "Wrist Joints",
+    "variants": "Wrist pitch, yaw and roll, spherical wrists, force sensing, tool interfaces"
+  },
+  {
+    "id": "anatomy-11",
+    "module": 6,
+    "number": 11,
+    "group": "anatomy-hands",
+    "groupLetter": "C",
+    "groupTitle": "Robotic Hands, Fingers & Grippers",
+    "title": "Robotic Palm & Hand Structure",
+    "variants": "Palm frames, actuator mounting, finger bases, mechanical supports, electronics placement"
+  },
+  {
+    "id": "anatomy-12",
+    "module": 6,
+    "number": 12,
+    "group": "anatomy-hands",
+    "groupLetter": "C",
+    "groupTitle": "Robotic Hands, Fingers & Grippers",
+    "title": "Robotic Fingers & Knuckles",
+    "variants": "Finger segments, revolute joints, knuckles, linkages, tendon-driven fingers, articulated phalanges"
+  },
+  {
+    "id": "anatomy-13",
+    "module": 6,
+    "number": 13,
+    "group": "anatomy-hands",
+    "groupLetter": "C",
+    "groupTitle": "Robotic Hands, Fingers & Grippers",
+    "title": "Robotic Thumb Mechanisms",
+    "variants": "Opposable thumbs, multi-axis thumb joints, grasping geometry, thumb actuators"
+  },
+  {
+    "id": "anatomy-14",
+    "module": 6,
+    "number": 14,
+    "group": "anatomy-hands",
+    "groupLetter": "C",
+    "groupTitle": "Robotic Hands, Fingers & Grippers",
+    "title": "Tendons, Cables & Finger Actuation",
+    "variants": "Tendon cables, pulley systems, Bowden cables, tendon tensioners, cable-driven actuation"
+  },
+  {
+    "id": "anatomy-15",
+    "module": 6,
+    "number": 15,
+    "group": "anatomy-hands",
+    "groupLetter": "C",
+    "groupTitle": "Robotic Hands, Fingers & Grippers",
+    "title": "Grippers & End Effectors",
+    "variants": "Parallel grippers, adaptive grippers, suction grippers, soft grippers, magnetic grippers, interchangeable tools"
+  },
+  {
+    "id": "anatomy-16",
+    "module": 6,
+    "number": 16,
+    "group": "anatomy-torso",
+    "groupLetter": "D",
+    "groupTitle": "Robot Torso & Internal Body Structure",
+    "title": "Chest & Torso Frames",
+    "variants": "Structural chassis, load-bearing members, protective shells, mounting systems"
+  },
+  {
+    "id": "anatomy-17",
+    "module": 6,
+    "number": 17,
+    "group": "anatomy-torso",
+    "groupLetter": "D",
+    "groupTitle": "Robot Torso & Internal Body Structure",
+    "title": "Spine & Flexible Torso Mechanisms",
+    "variants": "Multi-segment spines, compliant backbones, articulated torso structures"
+  },
+  {
+    "id": "anatomy-18",
+    "module": 6,
+    "number": 18,
+    "group": "anatomy-torso",
+    "groupLetter": "D",
+    "groupTitle": "Robot Torso & Internal Body Structure",
+    "title": "Waist & Hip Rotation",
+    "variants": "Waist yaw, torso pitch/roll, rotational bearings, torque transmission"
+  },
+  {
+    "id": "anatomy-19",
+    "module": 6,
+    "number": 19,
+    "group": "anatomy-torso",
+    "groupLetter": "D",
+    "groupTitle": "Robot Torso & Internal Body Structure",
+    "title": "Internal Mounting & Cable Management",
+    "variants": "Electronics bays, cable channels, connectors, strain relief, maintenance access"
+  },
+  {
+    "id": "anatomy-20",
+    "module": 6,
+    "number": 20,
+    "group": "anatomy-torso",
+    "groupLetter": "D",
+    "groupTitle": "Robot Torso & Internal Body Structure",
+    "title": "Cooling & Thermal Management",
+    "variants": "Heat sinks, fans, heat pipes, ventilation, temperature monitoring"
+  },
+  {
+    "id": "anatomy-21",
+    "module": 6,
+    "number": 21,
+    "group": "anatomy-legs",
+    "groupLetter": "E",
+    "groupTitle": "Robot Legs, Feet & Walking Anatomy",
+    "title": "Pelvis & Hip Joints",
+    "variants": "Hip yaw/pitch/roll, pelvis frames, joint bearings, high-torque actuators"
+  },
+  {
+    "id": "anatomy-22",
+    "module": 6,
+    "number": 22,
+    "group": "anatomy-legs",
+    "groupLetter": "E",
+    "groupTitle": "Robot Legs, Feet & Walking Anatomy",
+    "title": "Thigh & Upper-Leg Structures",
+    "variants": "Load-bearing links, motor mounts, torque transfer, structural reinforcements"
+  },
+  {
+    "id": "anatomy-23",
+    "module": 6,
+    "number": 23,
+    "group": "anatomy-legs",
+    "groupLetter": "E",
+    "groupTitle": "Robot Legs, Feet & Walking Anatomy",
+    "title": "Knee Joints",
+    "variants": "Knee hinges, actuators, encoders, joint stops, compliant mechanisms"
+  },
+  {
+    "id": "anatomy-24",
+    "module": 6,
+    "number": 24,
+    "group": "anatomy-legs",
+    "groupLetter": "E",
+    "groupTitle": "Robot Legs, Feet & Walking Anatomy",
+    "title": "Lower Legs & Shins",
+    "variants": "Structural shins, motor placement, transmission systems, cable management"
+  },
+  {
+    "id": "anatomy-25",
+    "module": 6,
+    "number": 25,
+    "group": "anatomy-legs",
+    "groupLetter": "E",
+    "groupTitle": "Robot Legs, Feet & Walking Anatomy",
+    "title": "Ankles & Robotic Feet",
+    "variants": "Ankle pitch/roll, sole structures, toe joints, foot pressure sensors, traction materials"
+  },
+  {
+    "id": "anatomy-26",
+    "module": 6,
+    "number": 26,
+    "group": "anatomy-locomotion",
+    "groupLetter": "F",
+    "groupTitle": "Robot Locomotion Anatomy",
+    "title": "Wheels & Wheel Hubs",
+    "variants": "Drive wheels, hub motors, wheel encoders, bearings, tire structures"
+  },
+  {
+    "id": "anatomy-27",
+    "module": 6,
+    "number": 27,
+    "group": "anatomy-locomotion",
+    "groupLetter": "F",
+    "groupTitle": "Robot Locomotion Anatomy",
+    "title": "Tracks & Crawler Mechanisms",
+    "variants": "Track belts, sprockets, idlers, tensioners, crawler chassis"
+  },
+  {
+    "id": "anatomy-28",
+    "module": 6,
+    "number": 28,
+    "group": "anatomy-locomotion",
+    "groupLetter": "F",
+    "groupTitle": "Robot Locomotion Anatomy",
+    "title": "Steering & Suspension",
+    "variants": "Ackermann steering, differential steering, suspension arms, dampers"
+  },
+  {
+    "id": "anatomy-29",
+    "module": 6,
+    "number": 29,
+    "group": "anatomy-locomotion",
+    "groupLetter": "F",
+    "groupTitle": "Robot Locomotion Anatomy",
+    "title": "Multi-Legged Walking Mechanisms",
+    "variants": "Quadruped legs, hexapod joints, gait mechanisms, leg coordination"
+  },
+  {
+    "id": "anatomy-30",
+    "module": 6,
+    "number": 30,
+    "group": "anatomy-locomotion",
+    "groupLetter": "F",
+    "groupTitle": "Robot Locomotion Anatomy",
+    "title": "Propulsion & Thruster Systems",
+    "variants": "Drone propellers, underwater thrusters, propulsion motors, thrust control"
+  },
+  {
+    "id": "anatomy-31",
+    "module": 6,
+    "number": 31,
+    "group": "anatomy-actuators",
+    "groupLetter": "G",
+    "groupTitle": "Robot Muscles, Motors & Actuators",
+    "title": "Servo Motors & Smart Actuators",
+    "variants": "Hobby servos, smart servos, integrated actuators, position and torque feedback"
+  },
+  {
+    "id": "anatomy-32",
+    "module": 6,
+    "number": 32,
+    "group": "anatomy-actuators",
+    "groupLetter": "G",
+    "groupTitle": "Robot Muscles, Motors & Actuators",
+    "title": "DC, BLDC & Stepper Motors",
+    "variants": "Brushed DC motors, brushless motors, stepper motors, motor windings, rotor/stator construction"
+  },
+  {
+    "id": "anatomy-33",
+    "module": 6,
+    "number": 33,
+    "group": "anatomy-actuators",
+    "groupLetter": "G",
+    "groupTitle": "Robot Muscles, Motors & Actuators",
+    "title": "Gearboxes & Transmission Systems",
+    "variants": "Planetary gears, harmonic drives, cycloidal drives, belt drives, reduction mechanisms"
+  },
+  {
+    "id": "anatomy-34",
+    "module": 6,
+    "number": 34,
+    "group": "anatomy-actuators",
+    "groupLetter": "G",
+    "groupTitle": "Robot Muscles, Motors & Actuators",
+    "title": "Artificial Muscles & Soft Actuators",
+    "variants": "Pneumatic artificial muscles, shape-memory alloys, dielectric elastomers, soft pneumatic actuators"
+  },
+  {
+    "id": "anatomy-35",
+    "module": 6,
+    "number": 35,
+    "group": "anatomy-actuators",
+    "groupLetter": "G",
+    "groupTitle": "Robot Muscles, Motors & Actuators",
+    "title": "Hydraulic & Pneumatic Actuation",
+    "variants": "Hydraulic cylinders, pneumatic cylinders, valves, pressure regulation, fluid-power mechanisms"
+  },
+  {
+    "id": "anatomy-36",
+    "module": 6,
+    "number": 36,
+    "group": "anatomy-brain",
+    "groupLetter": "H",
+    "groupTitle": "Robot Brain, Electronics & Communication",
+    "title": "Robot Main Computer",
+    "variants": "Raspberry Pi, Jetson, industrial computers, embedded Linux systems"
+  },
+  {
+    "id": "anatomy-37",
+    "module": 6,
+    "number": 37,
+    "group": "anatomy-brain",
+    "groupLetter": "H",
+    "groupTitle": "Robot Brain, Electronics & Communication",
+    "title": "Microcontroller & Real-Time Control",
+    "variants": "Arduino, ESP32, STM32, motor-control MCUs, real-time control boards"
+  },
+  {
+    "id": "anatomy-38",
+    "module": 6,
+    "number": 38,
+    "group": "anatomy-brain",
+    "groupLetter": "H",
+    "groupTitle": "Robot Brain, Electronics & Communication",
+    "title": "Motor Drivers & Control Electronics",
+    "variants": "H-bridges, servo drivers, ESCs, stepper drivers, smart actuator interfaces"
+  },
+  {
+    "id": "anatomy-39",
+    "module": 6,
+    "number": 39,
+    "group": "anatomy-brain",
+    "groupLetter": "H",
+    "groupTitle": "Robot Brain, Electronics & Communication",
+    "title": "Internal Communication Networks",
+    "variants": "UART, I\u00b2C, SPI, CAN/CAN FD, Ethernet, EtherCAT, robotics communication buses"
+  },
+  {
+    "id": "anatomy-40",
+    "module": 6,
+    "number": 40,
+    "group": "anatomy-brain",
+    "groupLetter": "H",
+    "groupTitle": "Robot Brain, Electronics & Communication",
+    "title": "Robot Software & Intelligence Architecture",
+    "variants": "Firmware, ROS 2, perception, planning, control loops, AI inference pipelines"
+  },
+  {
+    "id": "anatomy-41",
+    "module": 6,
+    "number": 41,
+    "group": "anatomy-feedback",
+    "groupLetter": "I",
+    "groupTitle": "Robot Sensors & Feedback Anatomy",
+    "title": "Joint Position & Motion Sensors",
+    "variants": "Rotary encoders, absolute encoders, potentiometers, joint position feedback"
+  },
+  {
+    "id": "anatomy-42",
+    "module": 6,
+    "number": 42,
+    "group": "anatomy-feedback",
+    "groupLetter": "I",
+    "groupTitle": "Robot Sensors & Feedback Anatomy",
+    "title": "Balance & Orientation Sensors",
+    "variants": "IMUs, accelerometers, gyroscopes, magnetometers, tilt estimation"
+  },
+  {
+    "id": "anatomy-43",
+    "module": 6,
+    "number": 43,
+    "group": "anatomy-feedback",
+    "groupLetter": "I",
+    "groupTitle": "Robot Sensors & Feedback Anatomy",
+    "title": "Force, Torque & Tactile Sensors",
+    "variants": "Force-torque sensors, load cells, tactile skin, fingertip pressure arrays"
+  },
+  {
+    "id": "anatomy-44",
+    "module": 6,
+    "number": 44,
+    "group": "anatomy-feedback",
+    "groupLetter": "I",
+    "groupTitle": "Robot Sensors & Feedback Anatomy",
+    "title": "Distance & Environment Sensors",
+    "variants": "Ultrasonic, ToF, LiDAR, radar, proximity sensors"
+  },
+  {
+    "id": "anatomy-45",
+    "module": 6,
+    "number": 45,
+    "group": "anatomy-feedback",
+    "groupLetter": "I",
+    "groupTitle": "Robot Sensors & Feedback Anatomy",
+    "title": "Vision, Depth & Perception Sensors",
+    "variants": "RGB cameras, stereo vision, depth cameras, thermal imaging, sensor fusion"
+  },
+  {
+    "id": "anatomy-46",
+    "module": 6,
+    "number": 46,
+    "group": "anatomy-power",
+    "groupLetter": "J",
+    "groupTitle": "Robot Power & Safety Anatomy",
+    "title": "Batteries & Energy Storage",
+    "variants": "Li-ion/LiPo/LiFePO4 packs, battery mounting, energy storage"
+  },
+  {
+    "id": "anatomy-47",
+    "module": 6,
+    "number": 47,
+    "group": "anatomy-power",
+    "groupLetter": "J",
+    "groupTitle": "Robot Power & Safety Anatomy",
+    "title": "Battery Management & Charging",
+    "variants": "BMS, charging ports, cell balancing, battery monitoring"
+  },
+  {
+    "id": "anatomy-48",
+    "module": 6,
+    "number": 48,
+    "group": "anatomy-power",
+    "groupLetter": "J",
+    "groupTitle": "Robot Power & Safety Anatomy",
+    "title": "Power Distribution & Regulation",
+    "variants": "Power distribution boards, DC/DC converters, fuses, power rails"
+  },
+  {
+    "id": "anatomy-49",
+    "module": 6,
+    "number": 49,
+    "group": "anatomy-power",
+    "groupLetter": "J",
+    "groupTitle": "Robot Power & Safety Anatomy",
+    "title": "Emergency Stops & Safety Systems",
+    "variants": "Emergency stops, interlocks, limit switches, safety-rated controllers"
+  },
+  {
+    "id": "anatomy-50",
+    "module": 6,
+    "number": 50,
+    "group": "anatomy-power",
+    "groupLetter": "J",
+    "groupTitle": "Robot Power & Safety Anatomy",
+    "title": "Protective Structures & Environmental Sealing",
+    "variants": "Enclosures, guards, bumpers, dust/water protection, strain relief"
+  },
+  {
+    "id": "anatomy-51",
+    "module": 6,
+    "number": 51,
+    "group": "anatomy-advanced",
+    "groupLetter": "K",
+    "groupTitle": "Advanced Robotic Anatomy & Mechanisms",
+    "title": "Compliant & Series Elastic Joints",
+    "variants": "Elastic couplings, series elastic actuators, compliant torque transmission"
+  },
+  {
+    "id": "anatomy-52",
+    "module": 6,
+    "number": 52,
+    "group": "anatomy-advanced",
+    "groupLetter": "K",
+    "groupTitle": "Advanced Robotic Anatomy & Mechanisms",
+    "title": "Underactuated & Adaptive Hands",
+    "variants": "Fewer actuators than joints, adaptive fingers, differential tendon systems"
+  },
+  {
+    "id": "anatomy-53",
+    "module": 6,
+    "number": 53,
+    "group": "anatomy-advanced",
+    "groupLetter": "K",
+    "groupTitle": "Advanced Robotic Anatomy & Mechanisms",
+    "title": "Variable Stiffness Mechanisms",
+    "variants": "Adjustable compliance, stiffness control, antagonistic actuation"
+  },
+  {
+    "id": "anatomy-54",
+    "module": 6,
+    "number": 54,
+    "group": "anatomy-advanced",
+    "groupLetter": "K",
+    "groupTitle": "Advanced Robotic Anatomy & Mechanisms",
+    "title": "Modular Robot Body Systems",
+    "variants": "Replaceable limbs, modular joints, standardized mechanical/electrical interfaces"
+  },
+  {
+    "id": "anatomy-55",
+    "module": 6,
+    "number": 55,
+    "group": "anatomy-advanced",
+    "groupLetter": "K",
+    "groupTitle": "Advanced Robotic Anatomy & Mechanisms",
+    "title": "Bio-Inspired Anatomy",
+    "variants": "Animal-inspired limbs, flexible spines, fin mechanisms, insect-like joints"
+  },
+  {
+    "id": "anatomy-56",
+    "module": 6,
+    "number": 56,
+    "group": "anatomy-engineering",
+    "groupLetter": "L",
+    "groupTitle": "Robot Anatomy Engineering & Practical Learning",
+    "title": "Robot Skeleton & Structural Design",
+    "variants": "CAD models, chassis design, material selection, structural strength"
+  },
+  {
+    "id": "anatomy-57",
+    "module": 6,
+    "number": 57,
+    "group": "anatomy-engineering",
+    "groupLetter": "L",
+    "groupTitle": "Robot Anatomy Engineering & Practical Learning",
+    "title": "Degrees of Freedom & Joint Mapping",
+    "variants": "Joint types, axes, joint limits, robot coordinate frames"
+  },
+  {
+    "id": "anatomy-58",
+    "module": 6,
+    "number": 58,
+    "group": "anatomy-engineering",
+    "groupLetter": "L",
+    "groupTitle": "Robot Anatomy Engineering & Practical Learning",
+    "title": "Kinematics & Motion Chains",
+    "variants": "Forward/inverse kinematics, link lengths, joint relationships, motion planning"
+  },
+  {
+    "id": "anatomy-59",
+    "module": 6,
+    "number": 59,
+    "group": "anatomy-engineering",
+    "groupLetter": "L",
+    "groupTitle": "Robot Anatomy Engineering & Practical Learning",
+    "title": "Robot Assembly & Maintenance",
+    "variants": "Exploded assemblies, fasteners, calibration, wiring, repair, inspection"
+  },
+  {
+    "id": "anatomy-60",
+    "module": 6,
+    "number": 60,
+    "group": "anatomy-engineering",
+    "groupLetter": "L",
+    "groupTitle": "Robot Anatomy Engineering & Practical Learning",
+    "title": "Anatomy-to-Project Implementation",
+    "variants": "Select a body part, choose components, design, wire, program, test and build"
+  }
+]

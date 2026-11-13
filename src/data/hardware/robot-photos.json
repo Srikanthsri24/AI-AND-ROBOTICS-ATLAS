@@ -1,0 +1,362 @@
+{
+  "robots-01": {
+    "label": "Unitree G1 humanoid robot in a test lab",
+    "credit": "Unitree Robotics",
+    "source": "https://www.unitree.com/mobile/g1/",
+    "original": "https://www.unitree.com/images/4a3dc51a7edb45bb9e9e0d1d240d8cd0_1920x1080.jpg"
+  },
+  "robots-02": {
+    "label": "Aldebaran NAO educational humanoid",
+    "credit": "Loja do Jangão",
+    "source": "https://www.lojadojangao.com.br/produtos/aldebaran-nao-robo-humanoide-programavel/",
+    "original": "https://dcdn-us.mitiendanube.com/stores/001/888/523/products/1-216fec8db7415969ee17131463843948-640-0.jpg"
+  },
+  "robots-03": {
+    "label": "SoftBank Robotics Pepper social robot",
+    "credit": "SoftBank Robotics",
+    "source": "https://softbankrobotics.medium.com/putting-the-eye-in-robotics-9b90822a3497",
+    "original": "https://miro.medium.com/1%2AEp-dXWtfj1ptGj4yLYdfhg.jpeg"
+  },
+  "robots-04": {
+    "label": "Cassie bipedal walking robot on a running track",
+    "credit": "Oregon State University via KTVZ",
+    "source": "https://ktvz.com/news/oregon-northwest/2022/09/27/cassie-a-bipedal-robot-developed-at-osu-achieves-guinness-world-record-in-100-meters/",
+    "original": "https://ktvz.b-cdn.net/2022/09/Cassie-OSU-robot.jpg"
+  },
+  "robots-05": {
+    "label": "NASA Robonaut 2 dexterous manipulation platform",
+    "credit": "NASA",
+    "source": "https://technology.nasa.gov/patent/MSC-TOPS-104",
+    "original": "https://technology.nasa.gov/t2media/tops/img/MSC-TOPS-104/R2-Units-A-B-__1_.jpg"
+  },
+  "robots-06": {
+    "label": "KUKA industrial arm in a foundry",
+    "credit": "KUKA",
+    "source": "https://www.kuka.com/en-se/industries/solutions-database/2025/06/cie-lt-forge-lithuania---nordic",
+    "original": "https://www.kuka.com/-/media/kuka-corporate/countries/nordic/cases-kuka-nordic/cie-lt-forge/3200x1800.png?hash=D537A3EEF4652140775F87362CE4FB2E&rev=-1&w=1900"
+  },
+  "robots-07": {
+    "label": "Universal Robots collaborative arm at a production station",
+    "credit": "Universal Robots",
+    "source": "https://www.universal-robots.com/case-stories/assa-abloy-nz/",
+    "original": "https://a.storyblok.com/f/169662/1540x866/2c27f0449b/pick_and_place_with_collaborative_robots_at_assa_abloy_new_zealand.jpg"
+  },
+  "robots-08": {
+    "label": "Dobot Magician desktop arm",
+    "credit": "Dobot",
+    "source": "https://jp.dobot-robots.com/insights/news/top-10-programmable-robot-kits-for-education-in-2018.html",
+    "original": "https://jp.dobot-robots.com/media/upload/news/2018050703032264.jpg"
+  },
+  "robots-09": {
+    "label": "FANUC SR-3iA SCARA robot at a conveyor",
+    "credit": "FANUC",
+    "source": "https://www.fanuc.eu/eu-en/product/robot/sr-3ia",
+    "original": "https://d16ohktstcjvly.cloudfront.net/image/513891251684/image_ntdu0ga6e11t98tres1mrgj80t/-T1%3A1.2-FJPG%2CQ85"
+  },
+  "robots-10": {
+    "label": "ABB FlexPicker delta robot over a conveyor",
+    "credit": "Robotic Firms",
+    "source": "https://www.roboticfirms.com/product/irb-360-flexpicker",
+    "original": "https://media.roboticfirms.com/company/abb/products/irb-360-flexpicker/2.jpg"
+  },
+  "robots-11": {
+    "label": "Cartesian gantry robot on an industrial workstation",
+    "credit": "RBTX",
+    "source": "https://rbtx.com/en-US/components/robots/igus-linear-robot-x-y-z-3-axis-rg-0001",
+    "original": "https://rbtx.com/_next/image?q=75&url=https%3A%2F%2Fa.storyblok.com%2Ff%2F298593%2F6a2baabe2f%2Figus-room-linear-robot_2.jpg&w=3840"
+  },
+  "robots-12": {
+    "label": "Pololu 3pi+ 32U4 differential-drive robot",
+    "credit": "Rhydolabz",
+    "source": "https://www.rhydolabz.com/3piplus-32u4-robot-standard-edition-30-1-mp-motors-assembled",
+    "original": "https://www.rhydolabz.com/image/cache/catalog/33/ROB-3314-1100x1100.jpg"
+  },
+  "robots-13": {
+    "label": "DFRobot four-wheel rover chassis",
+    "credit": "DFRobot",
+    "source": "https://www.dfrobot.com/product-261.html",
+    "original": "https://dfimg.dfrobot.com/enshop/image/data/ROB0025/ROB00251.jpg"
+  },
+  "robots-14": {
+    "label": "DFRobot Devastator tracked robot",
+    "credit": "DFRobot",
+    "source": "https://wiki.dfrobot.com.cn/_SKU_ROB0112__%E5%B1%A5%E5%B8%A6%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%A7%BB%E5%8A%A8%E5%B9%B3%E5%8F%B0",
+    "original": "https://ws.dfrobot.com.cn/FueEGbeuPBtV04mqr156EPGaekGS"
+  },
+  "robots-15": {
+    "label": "Four-wheel mecanum robot chassis",
+    "credit": "Core Electronics",
+    "source": "https://core-electronics.com.au/4wd-mecanum-wheel-robot-kit-seeed-studio.html",
+    "original": "https://core-electronics.com.au/media/catalog/product/1/1/1100700121.jpg"
+  },
+  "robots-16": {
+    "label": "MiR autonomous mobile robots carrying warehouse loads",
+    "credit": "Mobile Industrial Robots",
+    "source": "https://mobile-industrial-robots.com/cs/vase-cesta-amr/workflows/efficiently-manage-the-flow-of-finished-goods-with-amrs-from-mir",
+    "original": "https://a.storyblok.com/f/230581/1920x1280/bedac65704/novanordisk_4440.jpg/m/fit-in/984x554/filters%3Aformat%28webp%29"
+  },
+  "robots-17": {
+    "label": "Guided transport vehicle on a factory route",
+    "credit": "Due Pi Automazioni",
+    "source": "https://www.duepiautomazioni.it/it/impianto-produzione-calzature-agv/",
+    "original": "https://i.vimeocdn.com/video/1002936210-eb01187efbe0d57f27ef67f9884f85c39d40258fbb1c5625242eb64cdba337fc-d?f=webp"
+  },
+  "robots-18": {
+    "label": "Curiosity rover self-portrait on Mars",
+    "credit": "NASA/JPL-Caltech/MSSS via Space.com",
+    "source": "https://www.space.com/mars-rovers.html",
+    "original": "https://cdn.mos.cms.futurecdn.net/v2/t%3A144%2Cl%3A0%2Ccw%3A712%2Cch%3A712%2Cq%3A80%2Cw%3A712/wwjTnTd8xmRA9p4G5sGgr6.jpg"
+  },
+  "robots-19": {
+    "label": "Boston Dynamics Spot quadruped robot",
+    "credit": "Boston Dynamics",
+    "source": "https://support.bostondynamics.com/s/spot/spot-payloads",
+    "original": "https://support.bostondynamics.com/s/spot/sfsites/c/cms/delivery/media/MCDJ2UNAO5FJEYXIBBPSM4O25AIM"
+  },
+  "robots-20": {
+    "label": "PhantomX AX six-legged walking robot",
+    "credit": "Czech Technical University in Prague",
+    "source": "https://cyber.felk.cvut.cz/theses/detail.phtml?id=513",
+    "original": "https://cyber.felk.cvut.cz/theses/pictures/513.jpg"
+  },
+  "robots-21": {
+    "label": "Robugtix T8X eight-legged robot",
+    "credit": "Robugtix",
+    "source": "https://store.robugtix.com/t8x/",
+    "original": "https://cdn11.bigcommerce.com/s-icmwg98/images/stencil/2560w/products/80/314/T8X_and_Box_73253.1430528180.1280.1280__29554.1448014402.jpg?c=2"
+  },
+  "robots-22": {
+    "label": "CMU modular snake robot",
+    "credit": "Carnegie Mellon Biorobotics Lab",
+    "source": "https://biorobotics.org/media/",
+    "original": "https://biorobotics.org/img/media/snake1.jpg"
+  },
+  "robots-23": {
+    "label": "Festo BionicFinWave in its test tank",
+    "credit": "Festo via IEEE Spectrum",
+    "source": "https://spectrum.ieee.org/video-friday-kuka-home-robot-concept-nao-v6-upgrade-bionicfinwave",
+    "original": "https://spectrum.ieee.org/media-library/festo-s-bionicfinwave-robot-fish.jpg?coordinates=102%2C0%2C102%2C0&height=1500&id=25586018&width=2000"
+  },
+  "robots-24": {
+    "label": "DJI Phantom quadcopter in flight",
+    "credit": "Stanford Student Space Initiative",
+    "source": "https://ssi-wiki.stanford.edu/SSI-24",
+    "original": "https://ssi-wiki.stanford.edu/w/images/thumb/3/36/Drone.jpg/600px-Drone.jpg"
+  },
+  "robots-25": {
+    "label": "WingtraOne fixed-wing VTOL survey aircraft",
+    "credit": "Ripping It Outdoors",
+    "source": "https://rippingitoutdoors.com/products/wingtra-wingtra-one-gen-ii-vtol-mapping-drone-61-mp-up-to-59-min-flight-time-16-m-s-flight-speed-6-25-mp-camera-gis-engineering",
+    "original": "https://rippingitoutdoors.com/cdn/shop/files/10012_5b93885b-6447-49d4-9a46-aa9414f82d7e.jpg?v=1762980792"
+  },
+  "robots-26": {
+    "label": "BlueROV2 tethered underwater robot",
+    "credit": "Blue Robotics",
+    "source": "https://bluerobotics.com/press/",
+    "original": "https://bluerobotics.com/images/media-kit/BlueROV2-Back.png"
+  },
+  "robots-27": {
+    "label": "Sentry autonomous underwater vehicle",
+    "credit": "Woods Hole Oceanographic Institution",
+    "source": "https://www.whoi.edu/ocean-learning-hub/multimedia/sentry-in-photos/",
+    "original": "https://www.whoi.edu/wp-content/uploads/2009/12/graphics-seeps2009-sentry-DSC_6696_94715_98929-1.jpg"
+  },
+  "robots-28": {
+    "label": "Canadarm2 robotic arm above Earth",
+    "credit": "NASA",
+    "source": "https://technology.nasa.gov/patent/MSC-TOPS-114",
+    "original": "https://technology.nasa.gov/t2media/tops/img/MSC-TOPS-114/front__2_.jpg"
+  },
+  "robots-29": {
+    "label": "Industrial robots on an automotive assembly line",
+    "credit": "Klett",
+    "source": "https://www2.klett.de/sixcms/list.php?artikel_id=110079&extra=Haack+Weltatlasonline&inhalt=klett71prod_1.c.133609.de&page=Infothek_artikel",
+    "original": "https://www2.klett.de/sixcms/media.php/76/autoproduktion.jpg"
+  },
+  "robots-30": {
+    "label": "FANUC industrial robot welding station",
+    "credit": "FANUC",
+    "source": "https://fanucworld.com/products/arc-mate-120ib-r-30ia/",
+    "original": "https://cdn11.bigcommerce.com/s-8zq34mp8cu/images/stencil/1280x1280/products/303788/431866/FANUC_ARC_Mate_120iB_0003__99113.1675711502.jpg?c=1"
+  },
+  "robots-31": {
+    "label": "ABB paint robot spraying a car body",
+    "credit": "ABB",
+    "source": "https://new.abb.com/news/de/detail/67603/pixelpaint-von-abb-die-zukunft-der-kundenspezifischen-fahrzeuglackierung",
+    "original": "https://resources.news.e.abb.com/images/2020/9/14/0/200914_ABB_PixelPaint_2.jpg"
+  },
+  "robots-32": {
+    "label": "Industrial robot stacking cartons on a pallet",
+    "credit": "STAC Material Handling",
+    "source": "https://www.stacmh.com/robotics",
+    "original": "https://images.squarespace-cdn.com/content/v1/5d110eaaa21b800001598255/5594a6d1-3b3b-4d7a-9ced-857a80f52778/stac-robotics-paper-palletizer-landing.jpg"
+  },
+  "robots-33": {
+    "label": "Mobile shelving robots in an Amazon fulfillment centre",
+    "credit": "YourStory",
+    "source": "https://yourstory.com/2014/12/amazon-kiva-robots",
+    "original": "https://images.yourstory.com/cs/wordpress/2014/12/Amazon_Kiva_Robots_YourStory.jpg?ar=2%3A1&crop=faces&format=auto&mode=crop&q=85&w=1920"
+  },
+  "robots-34": {
+    "label": "iRobot Roomba e5 floor-cleaning robot",
+    "credit": "iRobot Japan",
+    "source": "https://prtimes.jp/main/html/rd/p/000000020.000025142.html",
+    "original": "https://prtimes.jp/i/25142/20/resize/d25142-20-930956-0.jpg"
+  },
+  "robots-35": {
+    "label": "Pudu BellaBot restaurant delivery robot",
+    "credit": "RuTech USA",
+    "source": "https://www.rutechusa.com/blank-4",
+    "original": "https://static.wixstatic.com/media/991959_c7f8484c96a147f38037b0052ef0e88e~mv2.png/v1/fill/w_550%2Ch_714%2Cal_c%2Cq_90%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/Untitled%20design%286%29.png"
+  },
+  "robots-36": {
+    "label": "Knightscope K5 autonomous patrol robot",
+    "credit": "Knightscope",
+    "source": "https://knightscope.com/products/k5",
+    "original": "https://knightscope.com/hubfs/Website%20Graphics/Images/6572b256e58f173948f3ed53_1-2.jpg"
+  },
+  "robots-37": {
+    "label": "Da Vinci surgical robot in an operating room",
+    "credit": "Urology Associates",
+    "source": "https://www.urology.co.nz/robotic-surgery-female",
+    "original": "https://lirp.cdn-website.com/0669a157/dms3rep/multi/opt/1-1920w.jpg"
+  },
+  "robots-38": {
+    "label": "ReWalk rehabilitation exoskeleton in use",
+    "credit": "Times Union",
+    "source": "https://www.timesunion.com/news/article/At-Sunnyview-a-robot-helps-paraplegic-to-walk-6033562.php",
+    "original": "https://s.hdnux.com/photos/34/24/30/7423496/6/rawImage.jpg"
+  },
+  "robots-39": {
+    "label": "FarmBot garden robot on a raised bed",
+    "credit": "FarmBot",
+    "source": "https://farm.bot/blogs/news/farmbot-featured-in-heise-online",
+    "original": "https://farm.bot/cdn/shop/articles/Screen_Shot_2021-04-13_at_1.13.40_PM_1024x500_crop_center.png?v=1618345239"
+  },
+  "robots-40": {
+    "label": "Octinion Rubion strawberry harvesting robot",
+    "credit": "Fresh Fruit Portal",
+    "source": "https://www.freshfruitportal.com/news/2019/02/01/octinions-strawberry-picking-robot-in-commercial-launch/",
+    "original": "https://cdn.freshfruitportal.com/2019/02/2Octinions-Strawberry-Picking-Robot-Rubion-768x754.jpg"
+  },
+  "robots-41": {
+    "label": "Hadrian X bricklaying head placing blocks",
+    "credit": "FBR",
+    "source": "https://www.fbr.com.au/view/news-articles/20230530114345",
+    "original": "https://millstreamcms-01.imgix.net/2018.fbr.com.au/upload/pages/20230530114345/2023-social-square-3b.jpg?blend=00000000&fit=crop&h=630&version=1&w=1200"
+  },
+  "robots-42": {
+    "label": "Rescue robot crossing a test obstacle course",
+    "credit": "U.S. Department of Homeland Security",
+    "source": "https://www.dhs.gov/science-and-technology/news/2018/08/07/snapshot-st-test-methods-used-evaluate-rescue-robots",
+    "original": "https://www.dhs.gov/sites/default/files/images/st/Snapshots/18_0807_RoboCup_MobilityStairs.png"
+  },
+  "robots-43": {
+    "label": "Exposed spur gears in a machine transmission",
+    "credit": "The Home Shop Machinist Forum",
+    "source": "https://bbs.homeshopmachinist.net/forum/general/46606-craftex-b227l-lathe-gearbox-noise-fix",
+    "original": "https://gordsgarage.files.wordpress.com/2010/12/img_7247.jpg"
+  },
+  "robots-44": {
+    "label": "Hand-operated four-bar linkage prototype",
+    "credit": "Leo Kuipers / Fab Academy",
+    "source": "https://fabacademy.org/2024/labs/waag/students/leo-kuipers/weekly-assignments/10_mechanical-design_machine-design/10_4_group-assignment-mechanical-movement/",
+    "original": "https://fabacademy.org/2024/labs/waag/students/leo-kuipers/weekly-assignments/10_mechanical-design_machine-design/assets/10_4_group-assignment-mechanical-movement-20240402172848403.jpg"
+  },
+  "robots-45": {
+    "label": "Shaft coupling and ball bearing",
+    "credit": "Centistore",
+    "source": "https://www.centistore.com/categories/38007/coupling-dan-bearing",
+    "original": "https://d2kchovjbwl1tk.cloudfront.net/vendors/13225/assets/image/1766999687214-1.png"
+  },
+  "robots-46": {
+    "label": "GT2 timing belts and toothed pulleys",
+    "credit": "Leroy Merlin product catalogue",
+    "source": "https://www.leroymerlin.fr/produits/lot-2-poulies-gt2-alu-20t-5-mm-60t-8-mm-courroies-200-mm-96225802.html",
+    "original": "https://media.adeo.com/mkp/41dcb154501073d3249aefacd84cb3b3/media.jpeg"
+  },
+  "robots-47": {
+    "label": "Linear guide and ball screw assembly",
+    "credit": "NSK",
+    "source": "https://www.kr.nsk.com/products/precisionmachine/linearguide/",
+    "original": "https://www.kr.nsk.com/products/precisionmachine/linearguide/img/top/img_linear06.jpg"
+  },
+  "robots-48": {
+    "label": "Coil spring and damper assembly",
+    "credit": "Flyin’ Miata",
+    "source": "https://flyinmiata.com/products/na-fm-v-maxx-classic-coil-overs",
+    "original": "https://flyinmiata.com/cdn/shop/products/img_5927_3.jpg?v=1664463485&width=1946"
+  },
+  "robots-49": {
+    "label": "Omnidirectional wheel with peripheral rollers",
+    "credit": "DFRobot",
+    "source": "https://www.dfrobot.com/product-2301.html",
+    "original": "https://dfimg.dfrobot.com/enshop/FIT0780_Back_03.jpg"
+  },
+  "robots-50": {
+    "label": "Universal joint with two rotational axes",
+    "credit": "Car Builder Solutions",
+    "source": "https://www.carbuilder.com/products/universal-joint-large-diameter-72mm",
+    "original": "https://www.carbuilder.com/cdn/shop/files/ujgl-2.jpg?v=1763719571&width=600"
+  },
+  "robots-51": {
+    "label": "Micro servo motor and output horns",
+    "credit": "Adafruit Industries",
+    "source": "https://blog.adafruit.com/2009/06/03/small-stepper-motors-and-micro-servos-new-in-the-store/",
+    "original": "https://cdn-blog.adafruit.com/uploads/2009/06/tg9-lrg.jpg"
+  },
+  "robots-52": {
+    "label": "Rod-style pneumatic cylinders",
+    "credit": "SMC",
+    "source": "https://www.smc.com.cn/webcatalog/ja-jp/seriesList/?id=CJ5-S-CDJ5-S-CG5-S-CDG5-S",
+    "original": "https://www.smcworld.com/upfiles/etc/series/ja-jp/img1-026-CJ5S-CDJ5S-CG5S-CDG5S.jpg"
+  },
+  "robots-53": {
+    "label": "Robotiq adaptive gripper",
+    "credit": "Allied Automation",
+    "source": "https://www.allied-automation.com/blog/robotiq-2f-85-and-2f-140-grippers-easy-to-integrate-easy-to-use",
+    "original": "https://www.allied-automation.com/media/magefan_blog/post_ID_483.jpg"
+  },
+  "robots-54": {
+    "label": "ODrive motor with integrated drive electronics",
+    "credit": "ODrive Robotics",
+    "source": "https://wwshop.odriverobotics.com/products/s1-and-m8325s-start-kit",
+    "original": "https://wwshop.odriverobotics.com/cdn/shop/files/DSC08784.jpg?v=1744895394"
+  },
+  "robots-55": {
+    "label": "BlueROV-compatible rechargeable battery pack",
+    "credit": "Battery Bob",
+    "source": "https://www.batterybob.com/products/8925-replacement-for-bluerobotics-li-4s-156ah-r1-rp-cs-brv200rx/",
+    "original": "https://www.cameronsino.be/Admin/Products/CS-BRV200RX-1.JPG"
+  },
+  "robots-56": {
+    "label": "Soft pneumatic robotic hand grasping a test object",
+    "credit": "MIT Robotic Manipulation Group",
+    "source": "https://manipulation.mit.edu/robot.html",
+    "original": "https://manipulation.mit.edu/figures/truby_soft_hand.jpeg"
+  },
+  "robots-57": {
+    "label": "MIT M-Blocks reconfigurable robot modules",
+    "credit": "MIT News",
+    "source": "https://news.mit.edu/2019/self-transforming-robot-blocks-jump-spin-flip-identify-each-other-1030",
+    "original": "https://news.mit.edu/sites/default/files/download/201910/M-Cube-03-PRESS.jpg"
+  },
+  "robots-58": {
+    "label": "Harvard Kilobots in a swarm experiment",
+    "credit": "Harvard University via New Atlas",
+    "source": "https://newatlas.com/1000-kilobot-swarm-robots/33371/",
+    "original": "https://assets.newatlas.com/dims4/default/1f3f783/2147483647/strip/true/crop/605x403%2B0%2B0/resize/1200x800%21/quality/90/?url=https%3A%2F%2Fnewatlas-brightspot.s3.amazonaws.com%2Farchive%2F1000kilobots.jpg"
+  },
+  "robots-59": {
+    "label": "Harvard Ambulatory MicroRobot",
+    "credit": "Harvard University via IEEE Spectrum",
+    "source": "https://spectrum.ieee.org/you-cant-touch-harvards-new-ambulatory-microrobot",
+    "original": "https://spectrum.ieee.org/media-library/meet-hamr-the-harvard-ambulatory-microrobot.jpg?height=733&id=25585051&width=1200"
+  },
+  "robots-60": {
+    "label": "Boston Dynamics Stretch warehouse robot",
+    "credit": "Boston Dynamics via Design World",
+    "source": "https://www.designworldonline.com/stretch-from-boston-dynamics-puts-mobile-robots-at-the-forefront-in-intralogistics-technology/",
+    "original": "https://www.designworldonline.com/wp-content/uploads/Beckhoff_Boston-Dynamics_USA_2023_01_Note_copyright.jpg"
+  }
+}

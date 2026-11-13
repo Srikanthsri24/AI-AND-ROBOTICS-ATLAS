@@ -1,0 +1,402 @@
+[
+  {
+    "id": "components-01",
+    "module": 2,
+    "number": 1,
+    "group": "components-passive",
+    "groupLetter": "A",
+    "groupTitle": "Basic & Passive Electronic Components",
+    "title": "Resistors & Resistance Components",
+    "variants": "Carbon film, metal film, wirewound, SMD resistors, precision resistors, resistor networks, shunt resistors, thermistors (NTC/PTC), photoresistors (LDR), varistors"
+  },
+  {
+    "id": "components-02",
+    "module": 2,
+    "number": 2,
+    "group": "components-passive",
+    "groupLetter": "A",
+    "groupTitle": "Basic & Passive Electronic Components",
+    "title": "Capacitors & Energy Storage Components",
+    "variants": "Ceramic, electrolytic, tantalum, film, mica, variable capacitors, supercapacitors, SMD capacitors, safety-rated capacitors"
+  },
+  {
+    "id": "components-03",
+    "module": 2,
+    "number": 3,
+    "group": "components-passive",
+    "groupLetter": "A",
+    "groupTitle": "Basic & Passive Electronic Components",
+    "title": "Inductors, Coils & Chokes",
+    "variants": "Air-core, ferrite-core, toroidal, SMD inductors, RF chokes, common-mode chokes, coupled inductors"
+  },
+  {
+    "id": "components-04",
+    "module": 2,
+    "number": 4,
+    "group": "components-passive",
+    "groupLetter": "A",
+    "groupTitle": "Basic & Passive Electronic Components",
+    "title": "Transformers & Magnetic Components",
+    "variants": "Step-up, step-down, isolation, pulse, flyback, current transformers, ferrite cores, magnetic beads"
+  },
+  {
+    "id": "components-05",
+    "module": 2,
+    "number": 5,
+    "group": "components-passive",
+    "groupLetter": "A",
+    "groupTitle": "Basic & Passive Electronic Components",
+    "title": "Variable & Adjustable Components",
+    "variants": "Potentiometers, trimpots, rheostats, rotary encoders, variable capacitors, adjustable inductors"
+  },
+  {
+    "id": "components-06",
+    "module": 2,
+    "number": 6,
+    "group": "components-switching",
+    "groupLetter": "B",
+    "groupTitle": "Switching, Input & Control Components",
+    "title": "Buttons & Mechanical Switches",
+    "variants": "Push buttons, tactile buttons, toggle switches, slide switches, rocker switches, DIP switches, rotary switches, limit switches, emergency-stop switches, reed switches"
+  },
+  {
+    "id": "components-07",
+    "module": 2,
+    "number": 7,
+    "group": "components-switching",
+    "groupLetter": "B",
+    "groupTitle": "Switching, Input & Control Components",
+    "title": "Relays & Electronic Switching",
+    "variants": "Electromechanical relays, reed relays, solid-state relays, latching relays, relay modules, contactors, electronic load switches"
+  },
+  {
+    "id": "components-08",
+    "module": 2,
+    "number": 8,
+    "group": "components-switching",
+    "groupLetter": "B",
+    "groupTitle": "Switching, Input & Control Components",
+    "title": "Human Input & Control Devices",
+    "variants": "Joysticks, keypads, rotary encoders, touch buttons, membrane keyboards, trackballs, control knobs, navigation switches"
+  },
+  {
+    "id": "components-09",
+    "module": 2,
+    "number": 9,
+    "group": "components-switching",
+    "groupLetter": "B",
+    "groupTitle": "Switching, Input & Control Components",
+    "title": "Touch, Proximity & Interface Components",
+    "variants": "Capacitive touch ICs, touch panels, proximity switches, touch electrodes, Hall switches, interface controllers"
+  },
+  {
+    "id": "components-10",
+    "module": 2,
+    "number": 10,
+    "group": "components-semiconductors",
+    "groupLetter": "C",
+    "groupTitle": "Semiconductor & Integrated Circuit Components",
+    "title": "Diodes & Rectifiers",
+    "variants": "Signal diodes, rectifier diodes, Schottky diodes, Zener diodes, TVS diodes, bridge rectifiers, varactor diodes"
+  },
+  {
+    "id": "components-11",
+    "module": 2,
+    "number": 11,
+    "group": "components-semiconductors",
+    "groupLetter": "C",
+    "groupTitle": "Semiconductor & Integrated Circuit Components",
+    "title": "Transistors",
+    "variants": "BJT NPN/PNP, MOSFETs, JFETs, IGBTs, Darlington pairs, power transistors"
+  },
+  {
+    "id": "components-12",
+    "module": 2,
+    "number": 12,
+    "group": "components-semiconductors",
+    "groupLetter": "C",
+    "groupTitle": "Semiconductor & Integrated Circuit Components",
+    "title": "Thyristors & Power Semiconductor Switches",
+    "variants": "SCRs, TRIACs, DIACs, GTOs, silicon-carbide and gallium-nitride power devices"
+  },
+  {
+    "id": "components-13",
+    "module": 2,
+    "number": 13,
+    "group": "components-semiconductors",
+    "groupLetter": "C",
+    "groupTitle": "Semiconductor & Integrated Circuit Components",
+    "title": "Logic Gates & Digital ICs",
+    "variants": "AND, OR, NOT, NAND, NOR, XOR, flip-flops, counters, decoders, multiplexers, shift registers"
+  },
+  {
+    "id": "components-14",
+    "module": 2,
+    "number": 14,
+    "group": "components-semiconductors",
+    "groupLetter": "C",
+    "groupTitle": "Semiconductor & Integrated Circuit Components",
+    "title": "Analog ICs & Signal Conditioning",
+    "variants": "Operational amplifiers, comparators, instrumentation amplifiers, analog switches, filters, analog front ends"
+  },
+  {
+    "id": "components-15",
+    "module": 2,
+    "number": 15,
+    "group": "components-semiconductors",
+    "groupLetter": "C",
+    "groupTitle": "Semiconductor & Integrated Circuit Components",
+    "title": "Timer, Clock & Oscillator ICs",
+    "variants": "555 timers, crystal oscillators, MEMS oscillators, RTC ICs, clock generators, PLLs"
+  },
+  {
+    "id": "components-16",
+    "module": 2,
+    "number": 16,
+    "group": "components-semiconductors",
+    "groupLetter": "C",
+    "groupTitle": "Semiconductor & Integrated Circuit Components",
+    "title": "Memory & Storage ICs",
+    "variants": "SRAM, DRAM, EEPROM, NOR Flash, NAND Flash, FRAM, eMMC and memory modules"
+  },
+  {
+    "id": "components-17",
+    "module": 2,
+    "number": 17,
+    "group": "components-semiconductors",
+    "groupLetter": "C",
+    "groupTitle": "Semiconductor & Integrated Circuit Components",
+    "title": "ADC, DAC & Data Conversion",
+    "variants": "Analog-to-digital converters, digital-to-analog converters, voltage references, data-acquisition ICs"
+  },
+  {
+    "id": "components-18",
+    "module": 2,
+    "number": 18,
+    "group": "components-semiconductors",
+    "groupLetter": "C",
+    "groupTitle": "Semiconductor & Integrated Circuit Components",
+    "title": "Communication & Interface ICs",
+    "variants": "UART bridges, USB controllers, RS-232/485 transceivers, CAN transceivers, I\u00b2C expanders, Ethernet PHYs"
+  },
+  {
+    "id": "components-19",
+    "module": 2,
+    "number": 19,
+    "group": "components-semiconductors",
+    "groupLetter": "C",
+    "groupTitle": "Semiconductor & Integrated Circuit Components",
+    "title": "Power Management ICs",
+    "variants": "LDO regulators, buck/boost controllers, PMICs, battery charging ICs, protection ICs, power monitors"
+  },
+  {
+    "id": "components-20",
+    "module": 2,
+    "number": 20,
+    "group": "components-output",
+    "groupLetter": "D",
+    "groupTitle": "Light, Sound, Display & Output Components",
+    "title": "LEDs & Lighting Components",
+    "variants": "Standard LEDs, RGB LEDs, addressable LEDs, NeoPixel-compatible LEDs, LED strips, high-power LEDs, IR LEDs, UV LEDs, laser diodes"
+  },
+  {
+    "id": "components-21",
+    "module": 2,
+    "number": 21,
+    "group": "components-output",
+    "groupLetter": "D",
+    "groupTitle": "Light, Sound, Display & Output Components",
+    "title": "Displays & Visual Output",
+    "variants": "Seven-segment displays, LCD 16\u00d72/20\u00d74, OLED, TFT LCD, IPS panels, e-paper, LED matrices, touch displays"
+  },
+  {
+    "id": "components-22",
+    "module": 2,
+    "number": 22,
+    "group": "components-output",
+    "groupLetter": "D",
+    "groupTitle": "Light, Sound, Display & Output Components",
+    "title": "Audio & Sound Components",
+    "variants": "Buzzers, piezo transducers, speakers, microphones, MEMS microphones, audio amplifiers, codecs, audio modules"
+  },
+  {
+    "id": "components-23",
+    "module": 2,
+    "number": 23,
+    "group": "components-output",
+    "groupLetter": "D",
+    "groupTitle": "Light, Sound, Display & Output Components",
+    "title": "Haptic & Feedback Components",
+    "variants": "Vibration motors, linear resonant actuators, haptic drivers, piezo actuators, tactile feedback modules"
+  },
+  {
+    "id": "components-24",
+    "module": 2,
+    "number": 24,
+    "group": "components-prototyping",
+    "groupLetter": "E",
+    "groupTitle": "Prototyping, Wiring & Electrical Connections",
+    "title": "Wires, Cables & Jumper Wires",
+    "variants": "Solid-core wire, stranded wire, Dupont jumper wires, ribbon cables, silicone wire, shielded cable, coaxial cable, twisted-pair cable"
+  },
+  {
+    "id": "components-25",
+    "module": 2,
+    "number": 25,
+    "group": "components-prototyping",
+    "groupLetter": "E",
+    "groupTitle": "Prototyping, Wiring & Electrical Connections",
+    "title": "Breadboards, PCBs & Prototyping Boards",
+    "variants": "Solderless breadboards, perfboards, stripboards, single/double/multilayer PCBs, flexible PCBs, prototype shields"
+  },
+  {
+    "id": "components-26",
+    "module": 2,
+    "number": 26,
+    "group": "components-prototyping",
+    "groupLetter": "E",
+    "groupTitle": "Prototyping, Wiring & Electrical Connections",
+    "title": "Connectors, Sockets & Terminals",
+    "variants": "Pin headers, JST connectors, terminal blocks, USB connectors, barrel jacks, IC sockets, FPC/FFC connectors, pogo pins"
+  },
+  {
+    "id": "components-27",
+    "module": 2,
+    "number": 27,
+    "group": "components-prototyping",
+    "groupLetter": "E",
+    "groupTitle": "Prototyping, Wiring & Electrical Connections",
+    "title": "Soldering & Electronic Assembly Materials",
+    "variants": "Solder, flux, solder paste, solder wick, heat-shrink tubing, insulation materials, thermal paste, adhesives"
+  },
+  {
+    "id": "components-28",
+    "module": 2,
+    "number": 28,
+    "group": "components-power",
+    "groupLetter": "F",
+    "groupTitle": "Power, Protection & Electrical Systems",
+    "title": "Batteries & Energy Storage",
+    "variants": "AA/AAA cells, coin cells, Li-ion, LiPo, LiFePO4, battery packs, supercapacitor banks"
+  },
+  {
+    "id": "components-29",
+    "module": 2,
+    "number": 29,
+    "group": "components-power",
+    "groupLetter": "F",
+    "groupTitle": "Power, Protection & Electrical Systems",
+    "title": "Power Supplies & Converters",
+    "variants": "AC/DC adapters, bench supplies, buck converters, boost converters, inverters, isolated DC/DC converters"
+  },
+  {
+    "id": "components-30",
+    "module": 2,
+    "number": 30,
+    "group": "components-power",
+    "groupLetter": "F",
+    "groupTitle": "Power, Protection & Electrical Systems",
+    "title": "Charging & Battery Management",
+    "variants": "Charging modules, BMS boards, cell-balancing circuits, fuel gauges, battery protection"
+  },
+  {
+    "id": "components-31",
+    "module": 2,
+    "number": 31,
+    "group": "components-power",
+    "groupLetter": "F",
+    "groupTitle": "Power, Protection & Electrical Systems",
+    "title": "Electrical Protection Components",
+    "variants": "Fuses, resettable PTC fuses, TVS devices, MOVs, ESD protection, surge protectors, circuit breakers"
+  },
+  {
+    "id": "components-32",
+    "module": 2,
+    "number": 32,
+    "group": "components-power",
+    "groupLetter": "F",
+    "groupTitle": "Power, Protection & Electrical Systems",
+    "title": "Measurement & Test Components",
+    "variants": "Current sensors, voltage dividers, test points, probes, shunts, reference sources, electronic loads"
+  },
+  {
+    "id": "components-33",
+    "module": 2,
+    "number": 33,
+    "group": "components-robotics",
+    "groupLetter": "G",
+    "groupTitle": "Robotics, Wireless & Advanced Electronic Modules",
+    "title": "Motors & Electronic Actuators",
+    "variants": "DC motors, geared motors, servo motors, stepper motors, BLDC motors, solenoids, linear actuators, smart servos"
+  },
+  {
+    "id": "components-34",
+    "module": 2,
+    "number": 34,
+    "group": "components-robotics",
+    "groupLetter": "G",
+    "groupTitle": "Robotics, Wireless & Advanced Electronic Modules",
+    "title": "Motor Drivers & Motion Electronics",
+    "variants": "H-bridges, motor-driver ICs, servo-driver modules, stepper drivers, ESCs, current-sensing drivers"
+  },
+  {
+    "id": "components-35",
+    "module": 2,
+    "number": 35,
+    "group": "components-robotics",
+    "groupLetter": "G",
+    "groupTitle": "Robotics, Wireless & Advanced Electronic Modules",
+    "title": "Wireless & RF Communication Modules",
+    "variants": "Wi-Fi, Bluetooth, BLE, Zigbee, Thread, LoRa, NFC, RFID, UWB, cellular modules, RF transceivers"
+  },
+  {
+    "id": "components-36",
+    "module": 2,
+    "number": 36,
+    "group": "components-robotics",
+    "groupLetter": "G",
+    "groupTitle": "Robotics, Wireless & Advanced Electronic Modules",
+    "title": "Camera, Imaging & Optical Electronics",
+    "variants": "CMOS camera modules, IR cameras, thermal camera modules, depth cameras, ToF modules, optical receivers"
+  },
+  {
+    "id": "components-37",
+    "module": 2,
+    "number": 37,
+    "group": "components-robotics",
+    "groupLetter": "G",
+    "groupTitle": "Robotics, Wireless & Advanced Electronic Modules",
+    "title": "Sensor Modules & Transducers",
+    "variants": "Temperature, humidity, ultrasonic, IR, PIR, gas, pressure, IMU, force, touch, light, environmental sensors"
+  },
+  {
+    "id": "components-38",
+    "module": 2,
+    "number": 38,
+    "group": "components-robotics",
+    "groupLetter": "G",
+    "groupTitle": "Robotics, Wireless & Advanced Electronic Modules",
+    "title": "Positioning, Identification & Navigation Modules",
+    "variants": "GNSS receivers, RFID readers, NFC modules, UWB positioning modules, compass modules, navigation interfaces"
+  },
+  {
+    "id": "components-39",
+    "module": 2,
+    "number": 39,
+    "group": "components-robotics",
+    "groupLetter": "G",
+    "groupTitle": "Robotics, Wireless & Advanced Electronic Modules",
+    "title": "Storage, Timing & Utility Modules",
+    "variants": "MicroSD modules, RTC boards, EEPROM modules, GPIO expanders, level shifters, USB-to-UART adapters, logic converters"
+  },
+  {
+    "id": "components-40",
+    "module": 2,
+    "number": 40,
+    "group": "components-robotics",
+    "groupLetter": "G",
+    "groupTitle": "Robotics, Wireless & Advanced Electronic Modules",
+    "title": "Specialized Robotics & AI Electronics",
+    "variants": "Robotic gripper electronics, smart actuator interfaces, tactile arrays, motor-control modules, AI accelerator modules, robotics interface boards"
+  }
+]

@@ -1,0 +1,1 @@
+import data from '../data/lesson.json';export type Language='english'|'telugu'|'hindi';export const lesson=data;export const sceneAt=(t:number)=>Math.min(7,Math.floor(Math.max(0,t)/60));export const segmentAt=(t:number)=>lesson.scenes[sceneAt(t)].segments[Math.min(3,Math.floor((t%60)/15))];

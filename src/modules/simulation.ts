@@ -1,0 +1,16 @@
+export type CircuitNode={id:string;kind:string;x:number;y:number};
+export type CircuitWire={from:string;to:string};
+export type CircuitData={nodes:CircuitNode[];wires:CircuitWire[];voltage:number;resistance:number;code:string};
+export function evaluateCircuit(c:CircuitData){
+ if(!Number.isFinite(c.voltage)||!Number.isFinite(c.resistance)||c.voltage<0||c.resistance<=0)return{ok:false,current:0,message:'Enter a finite nonnegative voltage and a positive resistance.'};
+ const connected=(a:string,b:string)=>c.wires.some(w=>w.from===a&&w.to===b||w.to===a&&w.from===b),nodes=c.nodes;
+ const supply=nodes.filter(n=>n.kind==='Supply'),leds=nodes.filter(n=>n.kind==='LED'),resistors=nodes.filter(n=>n.kind==='Resistor');
+ if(new Set(nodes.map(n=>n.id)).size!==nodes.length||supply.length!==1||leds.length!==1||resistors.length!==1||nodes.length!==3)return{ok:false,current:0,message:'Supported simulation: exactly one DC supply, one resistor and one red LED in series.'};
+ const[s]=supply,[r]=resistors,[l]=leds;
+ if(c.wires.length!==3||!connected(s.id+':out',r.id+':in')||!connected(r.id+':out',l.id+':in')||!connected(l.id+':out',s.id+':in'))return{ok:false,current:0,message:'Open or unsupported circuit. Connect supply + → resistor in → resistor out → LED anode → LED cathode → supply − using three wires.'};
+ const current=Math.max(0,(c.voltage-2)/c.resistance)*1000;
+ if(current>20)return{ok:false,current,message:'Illustrative LED current exceeds 20 mA. Increase resistance or reduce voltage before running.'};
+ return{ok:true,current,message:`Series path valid · estimated LED current ${current.toFixed(2)} mA (fixed 2.0 V forward-drop model).`};
+}
+export function findGridPath(blocked:number[],size=7):number[]{const walls=new Set(blocked),goal=size*size-1;if(walls.has(0)||walls.has(goal))return[];const queue:number[][]=[[0]],seen=new Set([0]);while(queue.length){const p=queue.shift()!,n=p[p.length-1];if(n===goal)return p;for(const next of[n-size,n+size,n%size>0?n-1:-1,n%size<size-1?n+1:-1])if(next>=0&&next<size*size&&!walls.has(next)&&!seen.has(next)){seen.add(next);queue.push([...p,next])}}return[]}
+export function parseCircuitJSON(source:string):{ok:true;circuit:CircuitData}|{ok:false;message:string}{try{const c=JSON.parse(source);if(!c||!Array.isArray(c.nodes)||!Array.isArray(c.wires)||c.nodes.length>50||c.wires.length>60||!Number.isFinite(c.voltage)||c.voltage<2||c.voltage>9||!Number.isFinite(c.resistance)||c.resistance<=0||c.resistance>1000000||typeof c.code!=='string'||c.code.length>200000)throw new Error();const ids=new Set<string>();for(const n of c.nodes){if(!n||typeof n.id!=='string'||!/^[a-zA-Z0-9_-]{1,80}$/.test(n.id)||ids.has(n.id)||!['Supply','Resistor','LED'].includes(n.kind)||!Number.isFinite(n.x)||!Number.isFinite(n.y)||n.x<0||n.x>580||n.y<0||n.y>260)throw new Error();ids.add(n.id)}for(const w of c.wires){if(!w||typeof w.from!=='string'||typeof w.to!=='string')throw new Error();for(const pin of [w.from,w.to]){const [id,port,...rest]=pin.split(':');if(rest.length||!ids.has(id)||!['in','out'].includes(port))throw new Error()}}return {ok:true,circuit:c as CircuitData}}catch{return {ok:false,message:'Import a valid Atlas circuit JSON with supported parts, unique IDs, known terminals, positions inside the canvas, a 2–9 V supply and positive resistance.'}}}

@@ -1,0 +1,45 @@
+{
+  "generator": "OpenAI built-in image generation",
+  "illustrations": {
+    "blink": {
+      "asset": "public/images/lab-illustrations/blink.webp",
+      "prompt": "Photorealistic educational electronics lab illustration, landscape 4:3. A red LED glowing on a white solderless breadboard with one striped axial resistor and a compact blue microcontroller board. Centered, clear subject with small margins, tidy bench, cool gray background, blue accents, clean softbox light, realistic materials and sharp component details. Concept photo for a circuit experiment, no labels, no logos, no watermarks, no readable text, no diagram overlays."
+    },
+    "button": {
+      "asset": "public/images/lab-illustrations/button.webp",
+      "prompt": "Photorealistic educational electronics lab illustration, landscape 4:3. A black square tactile push button in sharp foreground on a breadboard, a single green LED beside it and jumper wires leading to a microcontroller. Centered, clear subject with small margins, tidy bench, cool gray background, blue accents, clean softbox light, realistic materials and sharp component details. Concept photo for a circuit experiment, no labels, no logos, no watermarks, no readable text, no diagram overlays."
+    },
+    "traffic": {
+      "asset": "public/images/lab-illustrations/traffic.webp",
+      "prompt": "Photorealistic educational electronics lab illustration, landscape 4:3. A miniature upright tabletop traffic light with red amber and green LED lenses in a black housing, green lit, wired to a breadboard. Centered, clear subject with small margins, tidy bench, cool gray background, blue accents, clean softbox light, realistic materials and sharp component details. Concept photo for a circuit experiment, no labels, no logos, no watermarks, no readable text, no diagram overlays."
+    },
+    "buzzer": {
+      "asset": "public/images/lab-illustrations/buzzer.webp",
+      "prompt": "Photorealistic educational electronics lab illustration, landscape 4:3. A black cylindrical piezo buzzer with sound port on a breadboard next to a small adjustment potentiometer. Centered, clear subject with small margins, tidy bench, cool gray background, blue accents, clean softbox light, realistic materials and sharp component details. Concept photo for a circuit experiment, no labels, no logos, no watermarks, no readable text, no diagram overlays."
+    },
+    "ultrasonic": {
+      "asset": "public/images/lab-illustrations/ultrasonic.webp",
+      "prompt": "Photorealistic educational electronics lab illustration, landscape 4:3. A blue ultrasonic ranging module with two round silver transducers facing a small flat target block across an uncluttered workbench. Centered, clear subject with small margins, tidy bench, cool gray background, blue accents, clean softbox light, realistic materials and sharp component details. Concept photo for a circuit experiment, no labels, no logos, no watermarks, no readable text, no diagram overlays."
+    },
+    "servo": {
+      "asset": "public/images/lab-illustrations/servo.webp",
+      "prompt": "Photorealistic educational electronics lab illustration, landscape 4:3. A translucent blue micro servo with a white horn pointing across a simple unmarked semicircular arc on a benchtop, three-wire lead visible. Centered, clear subject with small margins, tidy bench, cool gray background, blue accents, clean softbox light, realistic materials and sharp component details. Concept photo for a circuit experiment, no labels, no logos, no watermarks, no readable text, no diagram overlays."
+    },
+    "temperature": {
+      "asset": "public/images/lab-illustrations/temperature.webp",
+      "prompt": "Photorealistic educational electronics lab illustration, landscape 4:3. A small black three-lead analog temperature sensor in TO-92 package on a breadboard with neat leads and a digital multimeter in soft background. Centered, clear subject with small margins, tidy bench, cool gray background, blue accents, clean softbox light, realistic materials and sharp component details. Concept photo for a circuit experiment, no labels, no logos, no watermarks, no readable text, no diagram overlays."
+    },
+    "iot": {
+      "asset": "public/images/lab-illustrations/iot.webp",
+      "prompt": "Photorealistic educational electronics lab illustration, landscape 4:3. An ESP32 development board with shielded radio module and small environmental sensor beside a display showing a simple blue telemetry line chart. Centered, clear subject with small margins, tidy bench, cool gray background, blue accents, clean softbox light, realistic materials and sharp component details. Concept photo for a circuit experiment, no labels, no logos, no watermarks, no readable text, no diagram overlays."
+    },
+    "motor": {
+      "asset": "public/images/lab-illustrations/motor.webp",
+      "prompt": "Photorealistic educational electronics lab illustration, landscape 4:3. A small brushed DC motor with shaft and a separate low-voltage motor driver board with green screw terminals connected by two leads. Centered, clear subject with small margins, tidy bench, cool gray background, blue accents, clean softbox light, realistic materials and sharp component details. Concept photo for a circuit experiment, no labels, no logos, no watermarks, no readable text, no diagram overlays."
+    },
+    "avoidance": {
+      "asset": "public/images/lab-illustrations/avoidance.webp",
+      "prompt": "Photorealistic educational electronics lab illustration, landscape 4:3. A small two-wheel educational rover with a front-mounted ultrasonic sensor facing a foam obstacle on a clean tabletop course. Centered, clear subject with small margins, tidy bench, cool gray background, blue accents, clean softbox light, realistic materials and sharp component details. Concept photo for a circuit experiment, no labels, no logos, no watermarks, no readable text, no diagram overlays."
+    }
+  }
+}

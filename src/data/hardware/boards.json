@@ -1,0 +1,302 @@
+[
+  {
+    "id": "boards-01",
+    "module": 3,
+    "number": 1,
+    "group": "boards-maker",
+    "groupLetter": "A",
+    "groupTitle": "Beginner, Educational & Maker Boards",
+    "title": "Arduino Development Boards",
+    "variants": "Uno R3/R4, Nano, Nano Every, Nano 33 BLE, Nano ESP32, Mega 2560, Leonardo, Micro, Due, GIGA R1, MKR, Portenta, Nicla, Opta"
+  },
+  {
+    "id": "boards-02",
+    "module": 3,
+    "number": 2,
+    "group": "boards-maker",
+    "groupLetter": "A",
+    "groupTitle": "Beginner, Educational & Maker Boards",
+    "title": "ESP8266 & ESP32 Development Boards",
+    "variants": "ESP8266, NodeMCU, D1 mini, ESP32, S2, S3, C2, C3, C5, C6, H2, P4, DevKit, ESP32-CAM"
+  },
+  {
+    "id": "boards-03",
+    "module": 3,
+    "number": 3,
+    "group": "boards-maker",
+    "groupLetter": "A",
+    "groupTitle": "Beginner, Educational & Maker Boards",
+    "title": "Raspberry Pi Pico & RP Microcontrollers",
+    "variants": "Pico, Pico H, Pico W, Pico WH, Pico 2, Pico 2 W, RP2040, RP2350, third-party RP boards"
+  },
+  {
+    "id": "boards-04",
+    "module": 3,
+    "number": 4,
+    "group": "boards-maker",
+    "groupLetter": "A",
+    "groupTitle": "Beginner, Educational & Maker Boards",
+    "title": "Educational & Classroom Controllers",
+    "variants": "BBC micro:bit, Circuit Playground, CLUE, Calliope mini, CyberPi, LEGO SPIKE, mBot controllers, VEX IQ"
+  },
+  {
+    "id": "boards-05",
+    "module": 3,
+    "number": 5,
+    "group": "boards-maker",
+    "groupLetter": "A",
+    "groupTitle": "Beginner, Educational & Maker Boards",
+    "title": "Maker & Modular Development Ecosystems",
+    "variants": "Adafruit Feather, QT Py, Trinket, Seeed XIAO, Grove, SparkFun Thing Plus, Qwiic, M5Stack, M5Stamp"
+  },
+  {
+    "id": "boards-06",
+    "module": 3,
+    "number": 6,
+    "group": "boards-architecture",
+    "groupLetter": "B",
+    "groupTitle": "Microcontroller Architectures & Chip Families",
+    "title": "AVR & ATtiny Microcontrollers",
+    "variants": "ATmega328P, ATmega2560, ATtiny85, tinyAVR, megaAVR, AVR DA/DB/EA"
+  },
+  {
+    "id": "boards-07",
+    "module": 3,
+    "number": 7,
+    "group": "boards-architecture",
+    "groupLetter": "B",
+    "groupTitle": "Microcontroller Architectures & Chip Families",
+    "title": "PIC, dsPIC & SAM Microcontrollers",
+    "variants": "PIC10/12/16/18, PIC24, PIC32, dsPIC33, SAM D/E/V families"
+  },
+  {
+    "id": "boards-08",
+    "module": 3,
+    "number": 8,
+    "group": "boards-architecture",
+    "groupLetter": "B",
+    "groupTitle": "Microcontroller Architectures & Chip Families",
+    "title": "STM32 Microcontrollers",
+    "variants": "STM32F, G, H, L, U, WB, WL, Nucleo, Discovery, Blue Pill, Black Pill"
+  },
+  {
+    "id": "boards-09",
+    "module": 3,
+    "number": 9,
+    "group": "boards-architecture",
+    "groupLetter": "B",
+    "groupTitle": "Microcontroller Architectures & Chip Families",
+    "title": "ARM Cortex-M & Cortex-R Controllers",
+    "variants": "NXP LPC, i.MX RT, Renesas RA, Infineon PSoC, ARM real-time controller families"
+  },
+  {
+    "id": "boards-10",
+    "module": 3,
+    "number": 10,
+    "group": "boards-architecture",
+    "groupLetter": "B",
+    "groupTitle": "Microcontroller Architectures & Chip Families",
+    "title": "RISC-V Microcontrollers",
+    "variants": "CH32V, GD32VF, ESP32-C3/C6, SiFive-based boards and other RISC-V MCUs"
+  },
+  {
+    "id": "boards-11",
+    "module": 3,
+    "number": 11,
+    "group": "boards-architecture",
+    "groupLetter": "B",
+    "groupTitle": "Microcontroller Architectures & Chip Families",
+    "title": "8051 & Legacy Microcontrollers",
+    "variants": "8051/8052, AT89S, STC, classic 68HC11/68HC12 and legacy embedded platforms"
+  },
+  {
+    "id": "boards-12",
+    "module": 3,
+    "number": 12,
+    "group": "boards-architecture",
+    "groupLetter": "B",
+    "groupTitle": "Microcontroller Architectures & Chip Families",
+    "title": "High-Performance & Real-Time MCUs",
+    "variants": "Teensy 4.x, STM32H7, i.MX RT, TI C2000, Renesas RA8, Infineon AURIX"
+  },
+  {
+    "id": "boards-13",
+    "module": 3,
+    "number": 13,
+    "group": "boards-architecture",
+    "groupLetter": "B",
+    "groupTitle": "Microcontroller Architectures & Chip Families",
+    "title": "Ultra-Low-Power Microcontrollers",
+    "variants": "MSP430, Ambiq Apollo, STM32U/L, EFM32, low-power Nordic controllers"
+  },
+  {
+    "id": "boards-14",
+    "module": 3,
+    "number": 14,
+    "group": "boards-architecture",
+    "groupLetter": "B",
+    "groupTitle": "Microcontroller Architectures & Chip Families",
+    "title": "Wireless Microcontrollers & Radio SoCs",
+    "variants": "Nordic nRF52/53/54, Silicon Labs EFR32, TI CC13xx/CC26xx, STM32WB/WL"
+  },
+  {
+    "id": "boards-15",
+    "module": 3,
+    "number": 15,
+    "group": "boards-architecture",
+    "groupLetter": "B",
+    "groupTitle": "Microcontroller Architectures & Chip Families",
+    "title": "Secure & Safety-Critical Microcontrollers",
+    "variants": "NXP S32K, Infineon AURIX, Renesas RH850, secure MCUs, trusted embedded controllers"
+  },
+  {
+    "id": "boards-16",
+    "module": 3,
+    "number": 16,
+    "group": "boards-computers",
+    "groupLetter": "C",
+    "groupTitle": "Single-Board Computers & Embedded Computing",
+    "title": "Raspberry Pi Single-Board Computers",
+    "variants": "Raspberry Pi 1\u20135 families, Zero, Zero 2 W, Pi 400/500, Compute Module 3/4/5"
+  },
+  {
+    "id": "boards-17",
+    "module": 3,
+    "number": 17,
+    "group": "boards-computers",
+    "groupLetter": "C",
+    "groupTitle": "Single-Board Computers & Embedded Computing",
+    "title": "Alternative ARM & RISC-V SBCs",
+    "variants": "Orange Pi, Banana Pi, Radxa ROCK, ODROID, BeagleBone, Pine64, VisionFive, Milk-V, Khadas"
+  },
+  {
+    "id": "boards-18",
+    "module": 3,
+    "number": 18,
+    "group": "boards-computers",
+    "groupLetter": "C",
+    "groupTitle": "Single-Board Computers & Embedded Computing",
+    "title": "x86 Single-Board Computers & Mini PCs",
+    "variants": "LattePanda, UP Board, Intel NUC-class systems, embedded Intel/AMD boards"
+  },
+  {
+    "id": "boards-19",
+    "module": 3,
+    "number": 19,
+    "group": "boards-computers",
+    "groupLetter": "C",
+    "groupTitle": "Single-Board Computers & Embedded Computing",
+    "title": "Computer-on-Modules & System-on-Modules",
+    "variants": "COM Express, SMARC, Qseven, Raspberry Pi Compute Modules, Toradex, Variscite, embedded SOMs"
+  },
+  {
+    "id": "boards-20",
+    "module": 3,
+    "number": 20,
+    "group": "boards-computers",
+    "groupLetter": "C",
+    "groupTitle": "Single-Board Computers & Embedded Computing",
+    "title": "Embedded Application Processors & SoCs",
+    "variants": "NXP i.MX, TI Sitara, Rockchip RK, Allwinner, Qualcomm embedded platforms, Renesas RZ"
+  },
+  {
+    "id": "boards-21",
+    "module": 3,
+    "number": 21,
+    "group": "boards-ai",
+    "groupLetter": "D",
+    "groupTitle": "AI, Accelerators & Advanced Computing",
+    "title": "AI & Edge Computing Boards",
+    "variants": "Jetson Nano, Xavier NX, Orin Nano, Orin NX, AGX Orin, Jetson Thor, AI-capable embedded computers"
+  },
+  {
+    "id": "boards-22",
+    "module": 3,
+    "number": 22,
+    "group": "boards-ai",
+    "groupLetter": "D",
+    "groupTitle": "AI, Accelerators & Advanced Computing",
+    "title": "AI Accelerators, NPUs & TPUs",
+    "variants": "Google Coral, Hailo, Intel AI accelerators, embedded NPUs, AI accelerator modules"
+  },
+  {
+    "id": "boards-23",
+    "module": 3,
+    "number": 23,
+    "group": "boards-ai",
+    "groupLetter": "D",
+    "groupTitle": "AI, Accelerators & Advanced Computing",
+    "title": "FPGA & Programmable Logic Boards",
+    "variants": "AMD/Xilinx Artix, Zynq, Kria, Intel Cyclone, Lattice iCE40/ECP5, Digilent, PYNQ"
+  },
+  {
+    "id": "boards-24",
+    "module": 3,
+    "number": 24,
+    "group": "boards-ai",
+    "groupLetter": "D",
+    "groupTitle": "AI, Accelerators & Advanced Computing",
+    "title": "DSP & Digital Signal Processing Platforms",
+    "variants": "TI C6000, SHARC, Blackfin, audio DSP boards, motor-control DSP systems"
+  },
+  {
+    "id": "boards-25",
+    "module": 3,
+    "number": 25,
+    "group": "boards-motion",
+    "groupLetter": "E",
+    "groupTitle": "Robotics, Motion & Autonomous Systems",
+    "title": "Robotics Control Boards",
+    "variants": "ROBOTIS OpenCR/OpenRB, VEX controllers, LEGO robotics hubs, dedicated mobile robot controllers"
+  },
+  {
+    "id": "boards-26",
+    "module": 3,
+    "number": 26,
+    "group": "boards-motion",
+    "groupLetter": "E",
+    "groupTitle": "Robotics, Motion & Autonomous Systems",
+    "title": "Drone, UAV & Flight Controllers",
+    "variants": "Pixhawk, CubePilot, Matek, Holybro, SpeedyBee, Betaflight/ArduPilot-compatible controllers"
+  },
+  {
+    "id": "boards-27",
+    "module": 3,
+    "number": 27,
+    "group": "boards-motion",
+    "groupLetter": "E",
+    "groupTitle": "Robotics, Motion & Autonomous Systems",
+    "title": "Motor, Servo & Motion Controllers",
+    "variants": "ODrive, VESC, Trinamic/ADI drivers, servo controllers, stepper controllers, BLDC control systems"
+  },
+  {
+    "id": "boards-28",
+    "module": 3,
+    "number": 28,
+    "group": "boards-industrial",
+    "groupLetter": "F",
+    "groupTitle": "Industrial, Specialized & Connected Systems",
+    "title": "PLCs, PACs & Industrial Controllers",
+    "variants": "Siemens, Schneider, Allen-Bradley, Omron, Mitsubishi, Delta, Beckhoff, Arduino Opta"
+  },
+  {
+    "id": "boards-29",
+    "module": 3,
+    "number": 29,
+    "group": "boards-industrial",
+    "groupLetter": "F",
+    "groupTitle": "Industrial, Specialized & Connected Systems",
+    "title": "IoT Gateways & Industrial Communication Computers",
+    "variants": "LoRaWAN gateways, cellular gateways, Modbus gateways, EtherCAT controllers, industrial edge gateways"
+  },
+  {
+    "id": "boards-30",
+    "module": 3,
+    "number": 30,
+    "group": "boards-industrial",
+    "groupLetter": "F",
+    "groupTitle": "Industrial, Specialized & Connected Systems",
+    "title": "Wearable, Biomedical & Specialized Embedded Platforms",
+    "variants": "Wearable computing boards, biometric development kits, medical sensor evaluation boards, assistive robotics controllers"
+  }
+]

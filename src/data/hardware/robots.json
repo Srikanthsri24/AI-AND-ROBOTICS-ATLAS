@@ -1,0 +1,602 @@
+[
+  {
+    "id": "robots-01",
+    "module": 5,
+    "number": 1,
+    "group": "robots-humanoid",
+    "groupLetter": "A",
+    "groupTitle": "Humanoid & Human-Like Robots",
+    "title": "Full-Body Humanoid Robots",
+    "variants": "Bipedal humanoids, human-sized robots, research humanoids, industrial humanoids, general-purpose humanoid platforms"
+  },
+  {
+    "id": "robots-02",
+    "module": 5,
+    "number": 2,
+    "group": "robots-humanoid",
+    "groupLetter": "A",
+    "groupTitle": "Humanoid & Human-Like Robots",
+    "title": "Educational Humanoid Robots",
+    "variants": "NAO-type robots, ROBOTIS OP-series, programmable miniature humanoids, classroom humanoid kits"
+  },
+  {
+    "id": "robots-03",
+    "module": 5,
+    "number": 3,
+    "group": "robots-humanoid",
+    "groupLetter": "A",
+    "groupTitle": "Humanoid & Human-Like Robots",
+    "title": "Social & Interactive Humanoid Robots",
+    "variants": "Reception robots, conversational robots, expressive faces, gesture-enabled humanoids, companion robots"
+  },
+  {
+    "id": "robots-04",
+    "module": 5,
+    "number": 4,
+    "group": "robots-humanoid",
+    "groupLetter": "A",
+    "groupTitle": "Humanoid & Human-Like Robots",
+    "title": "Bipedal Walking Robots",
+    "variants": "Two-legged walking robots, balancing systems, dynamic gait robots, walking research platforms"
+  },
+  {
+    "id": "robots-05",
+    "module": 5,
+    "number": 5,
+    "group": "robots-humanoid",
+    "groupLetter": "A",
+    "groupTitle": "Humanoid & Human-Like Robots",
+    "title": "Humanoid Manipulation Systems",
+    "variants": "Dexterous robotic hands, dual-arm manipulation, coordinated grasping, humanoid upper-body mechanisms"
+  },
+  {
+    "id": "robots-06",
+    "module": 5,
+    "number": 6,
+    "group": "robots-arms",
+    "groupLetter": "B",
+    "groupTitle": "Robotic Arms & Manipulators",
+    "title": "Industrial Robotic Arms",
+    "variants": "4-axis, 5-axis, 6-axis and 7-axis manipulators; articulated industrial robots"
+  },
+  {
+    "id": "robots-07",
+    "module": 5,
+    "number": 7,
+    "group": "robots-arms",
+    "groupLetter": "B",
+    "groupTitle": "Robotic Arms & Manipulators",
+    "title": "Collaborative Robots (Cobots)",
+    "variants": "Human-robot collaboration, force-limited arms, compliant control, collaborative assembly"
+  },
+  {
+    "id": "robots-08",
+    "module": 5,
+    "number": 8,
+    "group": "robots-arms",
+    "groupLetter": "B",
+    "groupTitle": "Robotic Arms & Manipulators",
+    "title": "Educational & Desktop Robotic Arms",
+    "variants": "Servo robotic arms, Arduino arms, 3D-printed arms, tabletop robotic manipulators"
+  },
+  {
+    "id": "robots-09",
+    "module": 5,
+    "number": 9,
+    "group": "robots-arms",
+    "groupLetter": "B",
+    "groupTitle": "Robotic Arms & Manipulators",
+    "title": "SCARA Robots",
+    "variants": "High-speed horizontal assembly robots, pick-and-place manipulators, precision positioning"
+  },
+  {
+    "id": "robots-10",
+    "module": 5,
+    "number": 10,
+    "group": "robots-arms",
+    "groupLetter": "B",
+    "groupTitle": "Robotic Arms & Manipulators",
+    "title": "Delta & Parallel Robots",
+    "variants": "Delta pick-and-place robots, Stewart platforms, parallel kinematic mechanisms"
+  },
+  {
+    "id": "robots-11",
+    "module": 5,
+    "number": 11,
+    "group": "robots-arms",
+    "groupLetter": "B",
+    "groupTitle": "Robotic Arms & Manipulators",
+    "title": "Cartesian & Gantry Robots",
+    "variants": "XYZ robots, linear-axis manipulators, gantry systems, automated positioning machines"
+  },
+  {
+    "id": "robots-12",
+    "module": 5,
+    "number": 12,
+    "group": "robots-ground",
+    "groupLetter": "C",
+    "groupTitle": "Mobile & Ground Robots",
+    "title": "Two-Wheel Robots",
+    "variants": "Differential-drive robots, self-balancing robots, two-wheel educational platforms"
+  },
+  {
+    "id": "robots-13",
+    "module": 5,
+    "number": 13,
+    "group": "robots-ground",
+    "groupLetter": "C",
+    "groupTitle": "Mobile & Ground Robots",
+    "title": "Four-Wheel Robots",
+    "variants": "4WD rovers, skid-steer platforms, Ackermann-steering robots"
+  },
+  {
+    "id": "robots-14",
+    "module": 5,
+    "number": 14,
+    "group": "robots-ground",
+    "groupLetter": "C",
+    "groupTitle": "Mobile & Ground Robots",
+    "title": "Tracked & Tank Robots",
+    "variants": "Tracked robots, crawler robots, terrain robots, inspection crawlers"
+  },
+  {
+    "id": "robots-15",
+    "module": 5,
+    "number": 15,
+    "group": "robots-ground",
+    "groupLetter": "C",
+    "groupTitle": "Mobile & Ground Robots",
+    "title": "Omnidirectional Robots",
+    "variants": "Mecanum-wheel robots, omni-wheel platforms, holonomic mobile robots"
+  },
+  {
+    "id": "robots-16",
+    "module": 5,
+    "number": 16,
+    "group": "robots-ground",
+    "groupLetter": "C",
+    "groupTitle": "Mobile & Ground Robots",
+    "title": "Autonomous Mobile Robots (AMRs)",
+    "variants": "Warehouse AMRs, delivery robots, navigation-enabled mobile platforms"
+  },
+  {
+    "id": "robots-17",
+    "module": 5,
+    "number": 17,
+    "group": "robots-ground",
+    "groupLetter": "C",
+    "groupTitle": "Mobile & Ground Robots",
+    "title": "Automated Guided Vehicles (AGVs)",
+    "variants": "Line-following AGVs, magnetic guidance, industrial material transport"
+  },
+  {
+    "id": "robots-18",
+    "module": 5,
+    "number": 18,
+    "group": "robots-ground",
+    "groupLetter": "C",
+    "groupTitle": "Mobile & Ground Robots",
+    "title": "Exploration & Planetary Rovers",
+    "variants": "Mars-style rovers, six-wheel rocker-bogie mechanisms, exploration vehicles"
+  },
+  {
+    "id": "robots-19",
+    "module": 5,
+    "number": 19,
+    "group": "robots-legged",
+    "groupLetter": "D",
+    "groupTitle": "Legged & Animal-Inspired Robots",
+    "title": "Quadruped Robots",
+    "variants": "Robot dogs, four-legged walkers, dynamic balancing, terrain navigation"
+  },
+  {
+    "id": "robots-20",
+    "module": 5,
+    "number": 20,
+    "group": "robots-legged",
+    "groupLetter": "D",
+    "groupTitle": "Legged & Animal-Inspired Robots",
+    "title": "Hexapod Robots",
+    "variants": "Six-legged walking robots, tripod gait, terrain adaptation"
+  },
+  {
+    "id": "robots-21",
+    "module": 5,
+    "number": 21,
+    "group": "robots-legged",
+    "groupLetter": "D",
+    "groupTitle": "Legged & Animal-Inspired Robots",
+    "title": "Octopod & Multi-Legged Robots",
+    "variants": "Eight-legged robots, spider-inspired robots, multi-legged locomotion"
+  },
+  {
+    "id": "robots-22",
+    "module": 5,
+    "number": 22,
+    "group": "robots-legged",
+    "groupLetter": "D",
+    "groupTitle": "Legged & Animal-Inspired Robots",
+    "title": "Snake & Serpentine Robots",
+    "variants": "Modular snake robots, flexible-body locomotion, pipe inspection"
+  },
+  {
+    "id": "robots-23",
+    "module": 5,
+    "number": 23,
+    "group": "robots-legged",
+    "groupLetter": "D",
+    "groupTitle": "Legged & Animal-Inspired Robots",
+    "title": "Bio-Inspired Robots",
+    "variants": "Robotic fish, insect-inspired robots, bird-inspired robots, soft-bodied animal robots"
+  },
+  {
+    "id": "robots-24",
+    "module": 5,
+    "number": 24,
+    "group": "robots-exploration",
+    "groupLetter": "E",
+    "groupTitle": "Aerial, Marine & Space Robots",
+    "title": "Multirotor Drones",
+    "variants": "Tricopters, quadcopters, hexacopters, octocopters, camera drones, inspection drones"
+  },
+  {
+    "id": "robots-25",
+    "module": 5,
+    "number": 25,
+    "group": "robots-exploration",
+    "groupLetter": "E",
+    "groupTitle": "Aerial, Marine & Space Robots",
+    "title": "Fixed-Wing & VTOL Drones",
+    "variants": "Fixed-wing UAVs, hybrid VTOL aircraft, autonomous aerial survey platforms"
+  },
+  {
+    "id": "robots-26",
+    "module": 5,
+    "number": 26,
+    "group": "robots-exploration",
+    "groupLetter": "E",
+    "groupTitle": "Aerial, Marine & Space Robots",
+    "title": "Underwater ROVs",
+    "variants": "Tethered underwater robots, inspection ROVs, underwater manipulators"
+  },
+  {
+    "id": "robots-27",
+    "module": 5,
+    "number": 27,
+    "group": "robots-exploration",
+    "groupLetter": "E",
+    "groupTitle": "Aerial, Marine & Space Robots",
+    "title": "Autonomous Underwater Robots",
+    "variants": "AUVs, underwater navigation, ocean monitoring, robotic submarines"
+  },
+  {
+    "id": "robots-28",
+    "module": 5,
+    "number": 28,
+    "group": "robots-exploration",
+    "groupLetter": "E",
+    "groupTitle": "Aerial, Marine & Space Robots",
+    "title": "Space & Planetary Robotics",
+    "variants": "Space rovers, satellite servicing robots, robotic arms for space stations, planetary exploration"
+  },
+  {
+    "id": "robots-29",
+    "module": 5,
+    "number": 29,
+    "group": "robots-service",
+    "groupLetter": "F",
+    "groupTitle": "Industrial, Commercial & Service Robots",
+    "title": "Manufacturing & Assembly Robots",
+    "variants": "Automated assembly, precision insertion, fastening and production robots"
+  },
+  {
+    "id": "robots-30",
+    "module": 5,
+    "number": 30,
+    "group": "robots-service",
+    "groupLetter": "F",
+    "groupTitle": "Industrial, Commercial & Service Robots",
+    "title": "Welding & Cutting Robots",
+    "variants": "Arc welding, spot welding, laser cutting, robotic machining"
+  },
+  {
+    "id": "robots-31",
+    "module": 5,
+    "number": 31,
+    "group": "robots-service",
+    "groupLetter": "F",
+    "groupTitle": "Industrial, Commercial & Service Robots",
+    "title": "Painting & Coating Robots",
+    "variants": "Automated spray painting, coating systems, surface finishing"
+  },
+  {
+    "id": "robots-32",
+    "module": 5,
+    "number": 32,
+    "group": "robots-service",
+    "groupLetter": "F",
+    "groupTitle": "Industrial, Commercial & Service Robots",
+    "title": "Packaging & Palletizing Robots",
+    "variants": "Pick-and-place, sorting, palletizing and packaging systems"
+  },
+  {
+    "id": "robots-33",
+    "module": 5,
+    "number": 33,
+    "group": "robots-service",
+    "groupLetter": "F",
+    "groupTitle": "Industrial, Commercial & Service Robots",
+    "title": "Warehouse & Logistics Robots",
+    "variants": "Sorting robots, mobile shelving robots, robotic fulfillment systems"
+  },
+  {
+    "id": "robots-34",
+    "module": 5,
+    "number": 34,
+    "group": "robots-service",
+    "groupLetter": "F",
+    "groupTitle": "Industrial, Commercial & Service Robots",
+    "title": "Cleaning & Maintenance Robots",
+    "variants": "Vacuum robots, floor scrubbers, window-cleaning robots, inspection cleaners"
+  },
+  {
+    "id": "robots-35",
+    "module": 5,
+    "number": 35,
+    "group": "robots-service",
+    "groupLetter": "F",
+    "groupTitle": "Industrial, Commercial & Service Robots",
+    "title": "Hospitality & Delivery Robots",
+    "variants": "Restaurant serving robots, hotel delivery robots, indoor delivery platforms"
+  },
+  {
+    "id": "robots-36",
+    "module": 5,
+    "number": 36,
+    "group": "robots-service",
+    "groupLetter": "F",
+    "groupTitle": "Industrial, Commercial & Service Robots",
+    "title": "Security & Surveillance Robots",
+    "variants": "Patrol robots, inspection robots, remote monitoring robots"
+  },
+  {
+    "id": "robots-37",
+    "module": 5,
+    "number": 37,
+    "group": "robots-specialized",
+    "groupLetter": "G",
+    "groupTitle": "Medical, Agricultural & Specialized Robots",
+    "title": "Surgical & Medical Robots",
+    "variants": "Robot-assisted surgery, medical manipulators, precision medical robotic systems"
+  },
+  {
+    "id": "robots-38",
+    "module": 5,
+    "number": 38,
+    "group": "robots-specialized",
+    "groupLetter": "G",
+    "groupTitle": "Medical, Agricultural & Specialized Robots",
+    "title": "Rehabilitation & Assistive Robots",
+    "variants": "Exoskeletons, robotic prosthetics, therapy robots, mobility assistance"
+  },
+  {
+    "id": "robots-39",
+    "module": 5,
+    "number": 39,
+    "group": "robots-specialized",
+    "groupLetter": "G",
+    "groupTitle": "Medical, Agricultural & Specialized Robots",
+    "title": "Agricultural Robots",
+    "variants": "Crop-monitoring robots, automated sprayers, planting robots, field navigation"
+  },
+  {
+    "id": "robots-40",
+    "module": 5,
+    "number": 40,
+    "group": "robots-specialized",
+    "groupLetter": "G",
+    "groupTitle": "Medical, Agricultural & Specialized Robots",
+    "title": "Harvesting & Sorting Robots",
+    "variants": "Fruit-picking robots, produce sorting, agricultural manipulation"
+  },
+  {
+    "id": "robots-41",
+    "module": 5,
+    "number": 41,
+    "group": "robots-specialized",
+    "groupLetter": "G",
+    "groupTitle": "Medical, Agricultural & Specialized Robots",
+    "title": "Construction & Infrastructure Robots",
+    "variants": "Bricklaying robots, demolition robots, robotic surveying, structural inspection"
+  },
+  {
+    "id": "robots-42",
+    "module": 5,
+    "number": 42,
+    "group": "robots-specialized",
+    "groupLetter": "G",
+    "groupTitle": "Medical, Agricultural & Specialized Robots",
+    "title": "Search, Rescue & Hazardous-Environment Robots",
+    "variants": "Disaster-response robots, bomb-disposal robots, firefighting robots, hazardous inspection"
+  },
+  {
+    "id": "robots-43",
+    "module": 5,
+    "number": 43,
+    "group": "robots-mechanics",
+    "groupLetter": "H",
+    "groupTitle": "Mechanical Systems & Motion Mechanisms",
+    "title": "Gears & Gear Trains",
+    "variants": "Spur, helical, bevel, worm, planetary, harmonic-drive and differential gear mechanisms"
+  },
+  {
+    "id": "robots-44",
+    "module": 5,
+    "number": 44,
+    "group": "robots-mechanics",
+    "groupLetter": "H",
+    "groupTitle": "Mechanical Systems & Motion Mechanisms",
+    "title": "Linkages & Mechanical Motion",
+    "variants": "Four-bar linkages, crank-slider, scotch yoke, cams, followers, pantographs"
+  },
+  {
+    "id": "robots-45",
+    "module": 5,
+    "number": 45,
+    "group": "robots-mechanics",
+    "groupLetter": "H",
+    "groupTitle": "Mechanical Systems & Motion Mechanisms",
+    "title": "Bearings, Shafts & Couplings",
+    "variants": "Ball bearings, roller bearings, bushings, shafts, flexible couplings, universal joints"
+  },
+  {
+    "id": "robots-46",
+    "module": 5,
+    "number": 46,
+    "group": "robots-mechanics",
+    "groupLetter": "H",
+    "groupTitle": "Mechanical Systems & Motion Mechanisms",
+    "title": "Belts, Chains & Pulley Systems",
+    "variants": "Timing belts, V-belts, chains, sprockets, pulleys, belt tensioners"
+  },
+  {
+    "id": "robots-47",
+    "module": 5,
+    "number": 47,
+    "group": "robots-mechanics",
+    "groupLetter": "H",
+    "groupTitle": "Mechanical Systems & Motion Mechanisms",
+    "title": "Linear Motion Systems",
+    "variants": "Lead screws, ball screws, linear rails, linear bearings, rack-and-pinion, linear actuators"
+  },
+  {
+    "id": "robots-48",
+    "module": 5,
+    "number": 48,
+    "group": "robots-mechanics",
+    "groupLetter": "H",
+    "groupTitle": "Mechanical Systems & Motion Mechanisms",
+    "title": "Springs, Dampers & Suspension",
+    "variants": "Compression springs, torsion springs, shock absorbers, compliant suspension, vibration isolation"
+  },
+  {
+    "id": "robots-49",
+    "module": 5,
+    "number": 49,
+    "group": "robots-mechanics",
+    "groupLetter": "H",
+    "groupTitle": "Mechanical Systems & Motion Mechanisms",
+    "title": "Wheels, Tracks & Steering",
+    "variants": "Standard wheels, omni wheels, mecanum wheels, tracks, Ackermann steering, differential steering"
+  },
+  {
+    "id": "robots-50",
+    "module": 5,
+    "number": 50,
+    "group": "robots-mechanics",
+    "groupLetter": "H",
+    "groupTitle": "Mechanical Systems & Motion Mechanisms",
+    "title": "Joints, Degrees of Freedom & Kinematics",
+    "variants": "Revolute joints, prismatic joints, spherical joints, robot kinematic chains, forward/inverse kinematics"
+  },
+  {
+    "id": "robots-51",
+    "module": 5,
+    "number": 51,
+    "group": "robots-actuation",
+    "groupLetter": "I",
+    "groupTitle": "Robot Actuation, Control & End Effectors",
+    "title": "Electric Motors & Actuation",
+    "variants": "DC motors, BLDC motors, stepper motors, servos, smart actuators, linear actuators"
+  },
+  {
+    "id": "robots-52",
+    "module": 5,
+    "number": 52,
+    "group": "robots-actuation",
+    "groupLetter": "I",
+    "groupTitle": "Robot Actuation, Control & End Effectors",
+    "title": "Hydraulic & Pneumatic Systems",
+    "variants": "Hydraulic cylinders, pneumatic actuators, valves, compressors, pumps, fluid-power control"
+  },
+  {
+    "id": "robots-53",
+    "module": 5,
+    "number": 53,
+    "group": "robots-actuation",
+    "groupLetter": "I",
+    "groupTitle": "Robot Actuation, Control & End Effectors",
+    "title": "Robotic Grippers & End Effectors",
+    "variants": "Parallel grippers, vacuum grippers, soft grippers, magnetic grippers, tool changers"
+  },
+  {
+    "id": "robots-54",
+    "module": 5,
+    "number": 54,
+    "group": "robots-actuation",
+    "groupLetter": "I",
+    "groupTitle": "Robot Actuation, Control & End Effectors",
+    "title": "Robot Control & Feedback",
+    "variants": "PID control, position control, velocity control, torque control, encoders, force feedback"
+  },
+  {
+    "id": "robots-55",
+    "module": 5,
+    "number": 55,
+    "group": "robots-actuation",
+    "groupLetter": "I",
+    "groupTitle": "Robot Actuation, Control & End Effectors",
+    "title": "Robot Power & Energy Systems",
+    "variants": "Battery packs, BMS, power distribution, charging systems, power monitoring"
+  },
+  {
+    "id": "robots-56",
+    "module": 5,
+    "number": 56,
+    "group": "robots-emerging",
+    "groupLetter": "J",
+    "groupTitle": "Advanced & Emerging Robotics",
+    "title": "Soft Robotics",
+    "variants": "Soft grippers, pneumatic artificial muscles, flexible actuators, compliant robots"
+  },
+  {
+    "id": "robots-57",
+    "module": 5,
+    "number": 57,
+    "group": "robots-emerging",
+    "groupLetter": "J",
+    "groupTitle": "Advanced & Emerging Robotics",
+    "title": "Modular & Reconfigurable Robots",
+    "variants": "Modular robot units, self-reconfiguring mechanisms, interchangeable robotic structures"
+  },
+  {
+    "id": "robots-58",
+    "module": 5,
+    "number": 58,
+    "group": "robots-emerging",
+    "groupLetter": "J",
+    "groupTitle": "Advanced & Emerging Robotics",
+    "title": "Swarm & Multi-Robot Systems",
+    "variants": "Robot coordination, collective behavior, multi-agent robotic systems, distributed exploration"
+  },
+  {
+    "id": "robots-59",
+    "module": 5,
+    "number": 59,
+    "group": "robots-emerging",
+    "groupLetter": "J",
+    "groupTitle": "Advanced & Emerging Robotics",
+    "title": "Micro & Miniature Robotics",
+    "variants": "Microrobots, miniature actuators, small-scale locomotion, micro-manipulation"
+  },
+  {
+    "id": "robots-60",
+    "module": 5,
+    "number": 60,
+    "group": "robots-emerging",
+    "groupLetter": "J",
+    "groupTitle": "Advanced & Emerging Robotics",
+    "title": "AI-Enabled & Autonomous Robots",
+    "variants": "Vision-guided robots, autonomous navigation, learning-based control, intelligent manipulation, adaptive robotic systems"
+  }
+]

@@ -1,0 +1,65 @@
+{
+  "generator": "OpenAI built-in image generation",
+  "illustrations": {
+    "rover-project": {
+      "asset": "public/images/blueprint-illustrations/rover-project.webp",
+      "prompt": "Photorealistic project illustration for a robotics education blueprint catalogue. Landscape 3:2, editorial product photograph style, clean cool-gray lab bench, soft directional studio light, cobalt blue accents, crisp realistic components, centered project with generous edge clearance. Subject: Two-wheel Arduino educational rover with a blue front ultrasonic range module paused in front of a foam obstacle, low tabletop angle. No visible text, logos, watermarks or explanatory graphics. Depict a safe low-voltage classroom prototype."
+    },
+    "home-project": {
+      "asset": "public/images/blueprint-illustrations/home-project.webp",
+      "prompt": "Photorealistic project illustration for a robotics education blueprint catalogue. Landscape 3:2, editorial product photograph style, clean cool-gray lab bench, soft directional studio light, cobalt blue accents, crisp realistic components, centered project with generous edge clearance. Subject: ESP32 home monitor prototype in an open compact wall enclosure with an indoor temperature and humidity sensor and small blue chart display. No visible text, logos, watermarks or explanatory graphics. Depict a safe low-voltage classroom prototype."
+    },
+    "hand-project": {
+      "asset": "public/images/blueprint-illustrations/hand-project.webp",
+      "prompt": "Photorealistic project illustration for a robotics education blueprint catalogue. Landscape 3:2, editorial product photograph style, clean cool-gray lab bench, soft directional studio light, cobalt blue accents, crisp realistic components, centered project with generous edge clearance. Subject: One articulated robotic finger mounted on a small bench jig with a micro servo and visible linkage, side view. No visible text, logos, watermarks or explanatory graphics. Depict a safe low-voltage classroom prototype."
+    },
+    "button-indicator": {
+      "asset": "public/images/blueprint-illustrations/button-indicator.webp",
+      "prompt": "Photorealistic project illustration for a robotics education blueprint catalogue. Landscape 3:2, editorial product photograph style, clean cool-gray lab bench, soft directional studio light, cobalt blue accents, crisp realistic components, centered project with generous edge clearance. Subject: One large tactile push button and one illuminated green LED on a small white breadboard, tidy wiring, close-up. No visible text, logos, watermarks or explanatory graphics. Depict a safe low-voltage classroom prototype."
+    },
+    "traffic-sequencer": {
+      "asset": "public/images/blueprint-illustrations/traffic-sequencer.webp",
+      "prompt": "Photorealistic project illustration for a robotics education blueprint catalogue. Landscape 3:2, editorial product photograph style, clean cool-gray lab bench, soft directional studio light, cobalt blue accents, crisp realistic components, centered project with generous edge clearance. Subject: Three separate red amber and green LEDs lined up on a breadboard, amber glowing, connected to a blue microcontroller. No visible text, logos, watermarks or explanatory graphics. Depict a safe low-voltage classroom prototype."
+    },
+    "pi-data-notebook": {
+      "asset": "public/images/blueprint-illustrations/pi-data-notebook.webp",
+      "prompt": "Photorealistic project illustration for a robotics education blueprint catalogue. Landscape 3:2, editorial product photograph style, clean cool-gray lab bench, soft directional studio light, cobalt blue accents, crisp realistic components, centered project with generous edge clearance. Subject: Raspberry Pi single board computer connected to a metal temperature probe beside a small monitor showing an abstract line graph, SD card and clean bench. No visible text, logos, watermarks or explanatory graphics. Depict a safe low-voltage classroom prototype."
+    },
+    "energy-monitor": {
+      "asset": "public/images/blueprint-illustrations/energy-monitor.webp",
+      "prompt": "Photorealistic project illustration for a robotics education blueprint catalogue. Landscape 3:2, editorial product photograph style, clean cool-gray lab bench, soft directional studio light, cobalt blue accents, crisp realistic components, centered project with generous edge clearance. Subject: Low-voltage inline power measurement bench, blue voltage-and-current breakout wired between a protected battery supply and a small low-voltage lamp. No visible text, logos, watermarks or explanatory graphics. Depict a safe low-voltage classroom prototype."
+    },
+    "ambient-light": {
+      "asset": "public/images/blueprint-illustrations/ambient-light.webp",
+      "prompt": "Photorealistic project illustration for a robotics education blueprint catalogue. Landscape 3:2, editorial product photograph style, clean cool-gray lab bench, soft directional studio light, cobalt blue accents, crisp realistic components, centered project with generous edge clearance. Subject: Photoresistor and low-voltage lamp in a tiny model room, illuminated on one side and shaded on the other, controller board visible beside model. No visible text, logos, watermarks or explanatory graphics. Depict a safe low-voltage classroom prototype."
+    },
+    "soil-observer": {
+      "asset": "public/images/blueprint-illustrations/soil-observer.webp",
+      "prompt": "Photorealistic project illustration for a robotics education blueprint catalogue. Landscape 3:2, editorial product photograph style, clean cool-gray lab bench, soft directional studio light, cobalt blue accents, crisp realistic components, centered project with generous edge clearance. Subject: A capacitive moisture probe inserted into the soil of a healthy potted seedling, neatly connected to a compact controller. No visible text, logos, watermarks or explanatory graphics. Depict a safe low-voltage classroom prototype."
+    },
+    "mechanism-study": {
+      "asset": "public/images/blueprint-illustrations/mechanism-study.webp",
+      "prompt": "Photorealistic project illustration for a robotics education blueprint catalogue. Landscape 3:2, editorial product photograph style, clean cool-gray lab bench, soft directional studio light, cobalt blue accents, crisp realistic components, centered project with generous edge clearance. Subject: Two contrasting intermeshing spur gears on parallel shafts in a small transparent bench demonstration rig, one hand crank and precise gear teeth. No visible text, logos, watermarks or explanatory graphics. Depict a safe low-voltage classroom prototype."
+    },
+    "desktop-arm": {
+      "asset": "public/images/blueprint-illustrations/desktop-arm.webp",
+      "prompt": "Photorealistic project illustration for a robotics education blueprint catalogue. Landscape 3:2, editorial product photograph style, clean cool-gray lab bench, soft directional studio light, cobalt blue accents, crisp realistic components, centered project with generous edge clearance. Subject: Small three-joint desktop robotic arm moving a blue foam cube between two clearly visible unmarked colored waypoint pads. No visible text, logos, watermarks or explanatory graphics. Depict a safe low-voltage classroom prototype."
+    },
+    "flight-bench": {
+      "asset": "public/images/blueprint-illustrations/flight-bench.webp",
+      "prompt": "Photorealistic project illustration for a robotics education blueprint catalogue. Landscape 3:2, editorial product photograph style, clean cool-gray lab bench, soft directional studio light, cobalt blue accents, crisp realistic components, centered project with generous edge clearance. Subject: Compact multirotor flight controller on a grounded bench fixture with empty propeller mounts, no propellers installed, sensor board and handheld radio on bench. No visible text, logos, watermarks or explanatory graphics. Depict a safe low-voltage classroom prototype."
+    },
+    "vision-counter": {
+      "asset": "public/images/blueprint-illustrations/vision-counter.webp",
+      "prompt": "Photorealistic project illustration for a robotics education blueprint catalogue. Landscape 3:2, editorial product photograph style, clean cool-gray lab bench, soft directional studio light, cobalt blue accents, crisp realistic components, centered project with generous edge clearance. Subject: Overhead camera inspecting a tray with blue and white geometric tokens, small monitor showing abstract bounding boxes over those same tokens. No visible text, logos, watermarks or explanatory graphics. Depict a safe low-voltage classroom prototype."
+    },
+    "command-interface": {
+      "asset": "public/images/blueprint-illustrations/command-interface.webp",
+      "prompt": "Photorealistic project illustration for a robotics education blueprint catalogue. Landscape 3:2, editorial product photograph style, clean cool-gray lab bench, soft directional studio light, cobalt blue accents, crisp realistic components, centered project with generous edge clearance. Subject: Small USB microphone next to an embedded computer and a display showing an abstract waveform, three tactile buttons and a low-voltage indicator light. No visible text, logos, watermarks or explanatory graphics. Depict a safe low-voltage classroom prototype."
+    },
+    "edge-evaluation": {
+      "asset": "public/images/blueprint-illustrations/edge-evaluation.webp",
+      "prompt": "Photorealistic project illustration for a robotics education blueprint catalogue. Landscape 3:2, editorial product photograph style, clean cool-gray lab bench, soft directional studio light, cobalt blue accents, crisp realistic components, centered project with generous edge clearance. Subject: Small fan-cooled edge AI development computer connected to a camera and a screen showing abstract latency comparison bars, test objects lined up neatly. No visible text, logos, watermarks or explanatory graphics. Depict a safe low-voltage classroom prototype."
+    }
+  }
+}

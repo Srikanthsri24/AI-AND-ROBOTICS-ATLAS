@@ -1,0 +1,5 @@
+export const clamp=(v:number,a=0,b=1)=>Math.max(a,Math.min(b,v));
+export const smooth=(a:number,b:number,t:number)=>{const u=clamp((t-a)/(b-a));return u*u*(3-2*u)};
+export function pose(t:number){const scene=Math.min(7,Math.floor(t/60)),local=t%60;return{scene,local,explode:scene===2?smooth(0,8,local)*(1-smooth(52,60,local)):0,head:scene===0?Math.sin(local*.14)*.35:scene===1?Math.sin(local*.1)*.25:0,shoulder:scene===0?-.25*Math.sin(local*.13):scene===5?-.6*smooth(32,45,local):-.12,elbow:scene===5?.3+(.7+.7*Math.sin(local*.3)):scene===1?.6+.45*Math.sin(local*.22):.22,turn:scene===1?local/60*Math.PI*2:0,walk:scene===6?local:0};}
+// Analytic two-link sagittal IK: stationary support foot; swing foot rises then returns.
+export function legPose(t:number,side:number){const phase=((t/3+(side>0?.5:0))%1+1)%1;const swing=phase<.5;const u=phase*2;const z=swing?-.22+.44*(u*u*(3-2*u)):.22-.44*((phase-.5)*2);const lift=swing?.13*Math.sin(Math.PI*u):0;const y=-1.44+lift;const l=.73;const knee=Math.PI-Math.acos(clamp((l*l+l*l-y*y-z*z)/(2*l*l),-1,1));const hip=Math.atan2(-z,-y)-knee/2;return{hip,knee,ankle:-hip-knee,z,lift,swing};}

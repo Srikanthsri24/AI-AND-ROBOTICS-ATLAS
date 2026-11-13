@@ -1,0 +1,240 @@
+[
+  {
+    "id": "boards-maker",
+    "prompt": "Use case: product-mockup. High resolution landscape 3:2 family illustration for an electronics learning atlas. Clean three-quarter overhead studio product photography aesthetic, pale ice lavender seamless background, soft realistic contact shadows, sharp intricate electronic details, restrained cyan and violet accent lighting. Center the subject with generous breathing room. Physically plausible components. No text, no logos, no watermark. Representative family illustration, not an exact model or wiring reference. Subject: A curated arrangement of beginner microcontroller boards: blue Uno-style board, slim Pico-style green board, small wireless ESP-style PCB with metal RF shield and antenna, red classroom board with 5x5 LED matrix. All separate and well spaced.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-13ad1e5d-ca1c-4d62-9b30-f986502a5864.png"
+  },
+  {
+    "id": "boards-architecture",
+    "prompt": "Use case: product-mockup. High resolution landscape 3:2 family illustration for an electronics learning atlas. Clean three-quarter overhead studio product photography aesthetic, pale ice lavender seamless background, soft realistic contact shadows, sharp intricate electronic details, restrained cyan and violet accent lighting. Center the subject with generous breathing room. Physically plausible components. No text, no logos, no watermark. Representative family illustration, not an exact model or wiring reference. Subject: A square black microcontroller IC with fine gull-wing pins beside a green development PCB with central microcontroller and debug header, small eight-pin DIP chip and a silicon die. Emphasize actual package shapes and intricate pins.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-9e8363f7-2cd3-417a-b755-052582fb0310.png"
+  },
+  {
+    "id": "boards-computers",
+    "prompt": "Use case: product-mockup. High resolution landscape 3:2 family illustration for an electronics learning atlas. Clean three-quarter overhead studio product photography aesthetic, pale ice lavender seamless background, soft realistic contact shadows, sharp intricate electronic details, restrained cyan and violet accent lighting. Center the subject with generous breathing room. Physically plausible components. No text, no logos, no watermark. Representative family illustration, not an exact model or wiring reference. Subject: A green Linux single-board computer with four USB sockets and Ethernet socket, beside a tiny compute module and silver fanless embedded mini PC.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-c988eec5-7b32-4fe3-b2b9-6d68db8a3df8.png"
+  },
+  {
+    "id": "boards-ai",
+    "prompt": "Use case: product-mockup. High resolution landscape 3:2 family illustration for an electronics learning atlas. Clean three-quarter overhead studio product photography aesthetic, pale ice lavender seamless background, soft realistic contact shadows, sharp intricate electronic details, restrained cyan and violet accent lighting. Center the subject with generous breathing room. Physically plausible components. No text, no logos, no watermark. Representative family illustration, not an exact model or wiring reference. Subject: An edge AI computing development board with substantial black heatsink, camera connector and small USB inference accelerator, beside an FPGA development board. Detailed tasteful studio product arrangement.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-7f4cb69c-b10e-4040-9ddd-de626e61b43c.png"
+  },
+  {
+    "id": "boards-motion",
+    "prompt": "Use case: product-mockup. High resolution landscape 3:2 family illustration for an electronics learning atlas. Clean three-quarter overhead studio product photography aesthetic, pale ice lavender seamless background, soft realistic contact shadows, sharp intricate electronic details, restrained cyan and violet accent lighting. Center the subject with generous breathing room. Physically plausible components. No text, no logos, no watermark. Representative family illustration, not an exact model or wiring reference. Subject: A robot control board with multiple three-pin servo sockets, a compact flight-controller PCB with micro SD slot, and motor-controller board with three heavy power terminals.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-684aff2a-c7cd-4758-9462-5c119d1c313f.png"
+  },
+  {
+    "id": "components-passive",
+    "prompt": "Use case: product-mockup. High resolution landscape 3:2 family illustration for an electronics learning atlas. Clean three-quarter overhead studio product photography aesthetic, pale ice lavender seamless background, soft realistic contact shadows, sharp intricate electronic details, restrained cyan and violet accent lighting. Center the subject with generous breathing room. Physically plausible components. No text, no logos, no watermark. Representative family illustration, not an exact model or wiring reference. Subject: An orderly collection of axial resistors with colored bands, blue metal film resistor, black electrolytic capacitor, ceramic disc capacitor, copper toroidal inductor, small transformer, and blue potentiometer.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-70ee7b92-2bff-4959-b1a1-0946568c6c4f.png"
+  },
+  {
+    "id": "boards-industrial",
+    "prompt": "Use case: product-mockup. High resolution landscape 3:2 family illustration for an electronics learning atlas. Clean three-quarter overhead studio product photography aesthetic, pale ice lavender seamless background, soft realistic contact shadows, sharp intricate electronic details, restrained cyan and violet accent lighting. Center the subject with generous breathing room. Physically plausible components. No text, no logos, no watermark. Representative family illustration, not an exact model or wiring reference. Subject: A compact industrial PLC with grey DIN rail enclosure and green terminal blocks beside an industrial Ethernet gateway with antenna and wearable development PCB.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-97777288-515b-4114-8c30-d96bea993a60.png"
+  },
+  {
+    "id": "components-switching",
+    "prompt": "Use case: product-mockup. High resolution landscape 3:2 family illustration for an electronics learning atlas. Clean three-quarter overhead studio product photography aesthetic, pale ice lavender seamless background, soft realistic contact shadows, sharp intricate electronic details, restrained cyan and violet accent lighting. Center the subject with generous breathing room. Physically plausible components. No text, no logos, no watermark. Representative family illustration, not an exact model or wiring reference. Subject: Pushbutton tactile switches, red emergency-stop mushroom button, small blue relay, joystick module with black thumb cap, rotary encoder and capacitive touch breakout. Neat arranged real components.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-6d4c1d35-886a-4869-bc27-4c52bd4f418b.png"
+  },
+  {
+    "id": "components-semiconductors",
+    "prompt": "Use case: product-mockup. High resolution landscape 3:2 family illustration for an electronics learning atlas. Clean three-quarter overhead studio product photography aesthetic, pale ice lavender seamless background, soft realistic contact shadows, sharp intricate electronic details, restrained cyan and violet accent lighting. Center the subject with generous breathing room. Physically plausible components. No text, no logos, no watermark. Representative family illustration, not an exact model or wiring reference. Subject: Black DIP logic and op amp integrated circuits with silver pins, black diode with silver cathode band, TO-220 transistor, tiny SMD memory chip and small voltage regulator circuit. Premium macro detail.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-6fc3ca57-1163-410d-84a2-0e352310a543.png"
+  },
+  {
+    "id": "components-output",
+    "prompt": "Use case: product-mockup. High resolution landscape 3:2 family illustration for an electronics learning atlas. Clean three-quarter overhead studio product photography aesthetic, pale ice lavender seamless background, soft realistic contact shadows, sharp intricate electronic details, restrained cyan and violet accent lighting. Center the subject with generous breathing room. Physically plausible components. No text, no logos, no watermark. Representative family illustration, not an exact model or wiring reference. Subject: Red and green through-hole LEDs, RGB LED, small OLED display showing abstract blue pixels without words, miniature speaker, buzzer and coin vibration motor.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-9f365554-c692-4b98-a1c4-f5fdb7ce3a9b.png"
+  },
+  {
+    "id": "components-prototyping",
+    "prompt": "Use case: product-mockup. High resolution landscape 3:2 family illustration for an electronics learning atlas. Clean three-quarter overhead studio product photography aesthetic, pale ice lavender seamless background, soft realistic contact shadows, sharp intricate electronic details, restrained cyan and violet accent lighting. Center the subject with generous breathing room. Physically plausible components. No text, no logos, no watermark. Representative family illustration, not an exact model or wiring reference. Subject: White solderless breadboard, neatly curved multicolor jumper wires, green perfboard, pin headers, screw terminal blocks, solder spool and precision soldering iron resting safely on a stand.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-098e8d5a-bbde-4261-adc6-0a74b9cd97c3.png"
+  },
+  {
+    "id": "components-power",
+    "prompt": "Use case: product-mockup. High resolution landscape 3:2 family illustration for an electronics learning atlas. Clean three-quarter overhead studio product photography aesthetic, pale ice lavender seamless background, soft realistic contact shadows, sharp intricate electronic details, restrained cyan and violet accent lighting. Center the subject with generous breathing room. Physically plausible components. No text, no logos, no watermark. Representative family illustration, not an exact model or wiring reference. Subject: Protected cylindrical battery pack, rectangular pouch cell, DC buck converter module with copper inductor, small glass fuse, battery management PCB and digital multimeter with blank dark screen. No dangerous live wiring.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-d00f917f-61c7-44a9-97db-76ad87f0514c.png"
+  },
+  {
+    "id": "components-robotics",
+    "prompt": "Use case: product-mockup. High resolution landscape 3:2 family illustration for an electronics learning atlas. Clean three-quarter overhead studio product photography aesthetic, pale ice lavender seamless background, soft realistic contact shadows, sharp intricate electronic details, restrained cyan and violet accent lighting. Center the subject with generous breathing room. Physically plausible components. No text, no logos, no watermark. Representative family illustration, not an exact model or wiring reference. Subject: Geared DC motor with yellow gearbox, blue micro servo, stepper motor, motor driver PCB, ultrasonic range module, small camera module and RF radio breakout board.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-569346c2-be8e-46a9-92d4-be87d720ef83.png"
+  },
+  {
+    "id": "sensors-environment",
+    "prompt": "Use case: product-mockup. High resolution landscape 3:2 family illustration for an electronics learning atlas. Clean three-quarter overhead studio product photography aesthetic, pale ice lavender seamless background, soft realistic contact shadows, sharp intricate electronic details, restrained cyan and violet accent lighting. Center the subject with generous breathing room. Physically plausible components. No text, no logos, no watermark. Representative family illustration, not an exact model or wiring reference. Subject: Compact temperature and humidity sensor breakout, metal barometric pressure sensor, optical particulate air sensor with vent, little rain gauge and miniature cup anemometer. Premium precise electronics product scene.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-92f4ec64-1fa7-4100-968a-bdd2e04c33f5.png"
+  },
+  {
+    "id": "sensors-navigation",
+    "prompt": "Use case: product-mockup. High resolution landscape 3:2 family illustration for an electronics learning atlas. Clean three-quarter overhead studio product photography aesthetic, pale ice lavender seamless background, soft realistic contact shadows, sharp intricate electronic details, restrained cyan and violet accent lighting. Center the subject with generous breathing room. Physically plausible components. No text, no logos, no watermark. Representative family illustration, not an exact model or wiring reference. Subject: Ultrasonic sensor with twin round silver transducers, compact square optical ToF board, small circular 2D LiDAR scanner, IMU breakout and GNSS module with ceramic patch antenna.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-84ec1efc-a28c-4496-91f4-0de8bfb97ec8.png"
+  },
+  {
+    "id": "sensors-interaction",
+    "prompt": "Use case: product-mockup. High resolution landscape 3:2 family illustration for an electronics learning atlas. Clean three-quarter overhead studio product photography aesthetic, pale ice lavender seamless background, soft realistic contact shadows, sharp intricate electronic details, restrained cyan and violet accent lighting. Center the subject with generous breathing room. Physically plausible components. No text, no logos, no watermark. Representative family illustration, not an exact model or wiring reference. Subject: Ambient light breakout with tiny clear photodiode, RGB color sensor board, MEMS microphone breakout, capacitive touch electrodes, metal bar load cell and long bend sensor.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-ae268317-4fe2-4f8f-88b3-d075c192ace0.png"
+  },
+  {
+    "id": "sensors-process",
+    "prompt": "Use case: product-mockup. High resolution landscape 3:2 family illustration for an electronics learning atlas. Clean three-quarter overhead studio product photography aesthetic, pale ice lavender seamless background, soft realistic contact shadows, sharp intricate electronic details, restrained cyan and violet accent lighting. Center the subject with generous breathing room. Physically plausible components. No text, no logos, no watermark. Representative family illustration, not an exact model or wiring reference. Subject: Capacitive soil moisture probe, white float switch, black water flow turbine sensor, blue pH probe with BNC cable, metal industrial pressure transducer and Hall current-sensing board.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-d216961a-501a-4f19-b146-4a2fbd950efc.png"
+  },
+  {
+    "id": "sensors-vision",
+    "prompt": "Use case: product-mockup. High resolution landscape 3:2 family illustration for an electronics learning atlas. Clean three-quarter overhead studio product photography aesthetic, pale ice lavender seamless background, soft realistic contact shadows, sharp intricate electronic details, restrained cyan and violet accent lighting. Center the subject with generous breathing room. Physically plausible components. No text, no logos, no watermark. Representative family illustration, not an exact model or wiring reference. Subject: Small camera PCB with black lens, infrared thermal array breakout, stereo depth camera with two lenses, red optical pulse-sensor breakout and compact fingerprint reader.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-3d13b195-68f5-44bf-99d8-dc0c27a40901.png"
+  },
+  {
+    "id": "sensors-connectivity",
+    "prompt": "Use case: product-mockup. High resolution landscape 3:2 family illustration for an electronics learning atlas. Clean three-quarter overhead studio product photography aesthetic, pale ice lavender seamless background, soft realistic contact shadows, sharp intricate electronic details, restrained cyan and violet accent lighting. Center the subject with generous breathing room. Physically plausible components. No text, no logos, no watermark. Representative family illustration, not an exact model or wiring reference. Subject: Wireless radio breakout with metal RF shield and PCB antenna, LoRa radio with spring antenna, cellular modem PCB with SIM slot, RFID reader PCB and small wired Ethernet-to-RS485 gateway.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-b31c78f9-d98d-401d-a030-bc1c155c7dc6.png"
+  },
+  {
+    "id": "sensors-systems",
+    "prompt": "Use case: product-mockup. High resolution landscape 3:2 family illustration for an electronics learning atlas. Clean three-quarter overhead studio product photography aesthetic, pale ice lavender seamless background, soft realistic contact shadows, sharp intricate electronic details, restrained cyan and violet accent lighting. Center the subject with generous breathing room. Physically plausible components. No text, no logos, no watermark. Representative family illustration, not an exact model or wiring reference. Subject: A premium tabletop IoT sensor node with green PCB and small antenna, connected visually by delicate luminous cyan data lines to a small edge computer and abstract telemetry screen with chart lines but absolutely no text or labels.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-5626a70f-748c-4434-913e-cfdb57ad61c9.png"
+  },
+  {
+    "id": "arduino-family",
+    "prompt": "Blue Arduino-style beginner board, slim Nano-style board and larger Mega-style board. High resolution pale lavender studio family illustration.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-f4ea6ccb-8b20-49ba-8ad1-8a4a61197826.png",
+    "mode": "built-in imagegen"
+  },
+  {
+    "id": "robots-arms",
+    "prompt": "An orange six-axis industrial robotic arm beside a compact white collaborative arm and a small desktop servo arm. Precise joints and grippers.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-844d4fa0-a405-4fce-98a8-5217133eedcb.png",
+    "mode": "built-in imagegen"
+  },
+  {
+    "id": "robots-emerging",
+    "prompt": "A translucent soft silicone pneumatic gripper beside small modular cube robots and a coordinated group of three miniature wheeled swarm robots. Realistically engineered research concepts.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-cb395b0d-3d32-40c8-9c35-b4b16e42ff18.png",
+    "mode": "built-in imagegen"
+  },
+  {
+    "id": "robots-humanoid",
+    "prompt": "A polished educational white and silver full-body humanoid robot standing upright, with a separate articulated robotic hand nearby. Visible mechanically plausible joints, no face expression.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-5c7cc2e5-2389-4cd7-92ba-e153b04a4bce.png",
+    "mode": "built-in imagegen"
+  },
+  {
+    "id": "robots-actuation",
+    "prompt": "A brushless motor, servo actuator, pneumatic cylinder, parallel robotic gripper and compact robot power distribution PCB. Precisely arranged mechanical components.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-c2860f1a-6bf2-4b8f-b1ce-feaeb430aba7.png",
+    "mode": "built-in imagegen"
+  },
+  {
+    "id": "robots-mechanics",
+    "prompt": "Precisely machined brass spur gear pair, steel ball bearing, four-bar linkage, timing belt and pulley assembly and miniature lead screw linear rail.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-26d9e582-655e-4ad3-833d-a338c8d692d2.png",
+    "mode": "built-in imagegen"
+  },
+  {
+    "id": "anatomy-head",
+    "prompt": "An exploded robot head assembly: white protective skull shell, twin camera lenses, microphone board, internal metal brackets and two-axis neck gimbal, mechanically plausible separated layers.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-cfd13cef-ac53-46ef-8b80-533e5f26cb54.png",
+    "mode": "built-in imagegen"
+  },
+  {
+    "id": "robots-service",
+    "prompt": "A compact warehouse mobile robot carrying a shelf tote, a circular floor cleaning robot, and a small indoor delivery robot.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-4ffd89b9-5334-447a-8046-e8892cdc2eaf.png",
+    "mode": "built-in imagegen"
+  },
+  {
+    "id": "anatomy-arms",
+    "prompt": "An exploded articulated robot arm with shoulder bearing, upper arm link, elbow geared motor, forearm shell and wrist joint aligned in assembly order.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-eda98477-15ec-4044-9984-4f0b09c504aa.png",
+    "mode": "built-in imagegen"
+  },
+  {
+    "id": "robots-exploration",
+    "prompt": "A quadcopter drone with four guarded propellers next to a small yellow underwater tethered ROV and a compact six-wheel planetary rover.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-8afbd8a4-093a-4dce-ba7e-f7c6de2b4d79.png",
+    "mode": "built-in imagegen"
+  },
+  {
+    "id": "anatomy-hands",
+    "prompt": "An open white robotic hand with articulated fingers, opposable thumb, palm frame and visible tendon cables and pulleys, exquisite mechanical detail.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-b013d5a6-da8b-4969-a28c-f40805dab2eb.png",
+    "mode": "built-in imagegen"
+  },
+  {
+    "id": "robots-specialized",
+    "prompt": "A compact agricultural robot with crop camera and soft fruit gripper, beside an assistive exoskeleton leg mechanism. No humans, no medical procedure.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-d54c49a5-1316-4b53-8a73-f564e6428090.png",
+    "mode": "built-in imagegen"
+  },
+  {
+    "id": "anatomy-torso",
+    "prompt": "An open humanoid torso chassis with metal rib-like structural rails, central articulated waist joint, neatly routed wiring and cooling fan.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-b3f5cf2d-1a28-442a-b4a0-72ab7022db77.png",
+    "mode": "built-in imagegen"
+  },
+  {
+    "id": "robots-ground",
+    "prompt": "A compact yellow four-wheel rover with range sensor next to a blue tracked inspection robot and small mecanum wheeled mobile platform.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-06a9524c-04ee-41a6-93f0-6ffa067ceb59.png",
+    "mode": "built-in imagegen"
+  },
+  {
+    "id": "anatomy-legs",
+    "prompt": "A pair of humanoid robot legs from pelvis through knees and ankles to broad feet, one outer panel removed to show geared joints and cables.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-5ba5be0c-a91a-4c88-8f6a-560db01ccab5.png",
+    "mode": "built-in imagegen"
+  },
+  {
+    "id": "robots-legged",
+    "prompt": "A detailed robotic quadruped with four articulated legs beside a small six-legged robot and a flexible modular snake robot.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-4e7b1252-b4ee-4ea4-bec5-e2ec8387dea1.png",
+    "mode": "built-in imagegen"
+  },
+  {
+    "id": "anatomy-locomotion",
+    "prompt": "A technical product arrangement of a robot wheel hub with encoder, track and sprocket assembly, suspension spring, robotic leg joint and a guarded small thruster.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-b4a824fd-e7f5-4dcd-9468-6323983fd9b3.png",
+    "mode": "built-in imagegen"
+  },
+  {
+    "id": "anatomy-actuators",
+    "prompt": "An exploded brushless servo actuator: rotor, copper stator, steel gearbox, encoder disc, output shaft and motor controller board, arranged on a common axis.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-42d3d2f3-80c6-4b57-8cca-c4678319a810.png",
+    "mode": "built-in imagegen"
+  },
+  {
+    "id": "anatomy-brain",
+    "prompt": "An open robot electronics bay showing main single-board computer with heatsink, smaller real-time control PCB, motor driver modules and tidy internal wiring.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-cb8a6913-6b9e-4717-94b6-71b2d056a452.png",
+    "mode": "built-in imagegen"
+  },
+  {
+    "id": "anatomy-feedback",
+    "prompt": "A miniature robot joint with rotary encoder, force torque sensor ring, IMU breakout, depth camera and fingertip tactile sensor array neatly arranged.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-bf6b7010-43e2-47f1-ad10-549c8550773c.png",
+    "mode": "built-in imagegen"
+  },
+  {
+    "id": "anatomy-power",
+    "prompt": "Robot battery pack secured in a metal mounting tray, BMS circuit board, fused power distribution module, DC converter, red emergency stop and protective enclosure.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-755fe97a-f935-4976-adcc-4c00ac26ff2c.png",
+    "mode": "built-in imagegen"
+  },
+  {
+    "id": "anatomy-advanced",
+    "prompt": "A close view of an elastic robot joint with visible spring and torque sensor beside adaptive tendon fingers and modular quick-connect robot limb interface.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-412dc0e5-23a8-4597-8c20-0e37fa3841d2.png",
+    "mode": "built-in imagegen"
+  },
+  {
+    "id": "anatomy-engineering",
+    "prompt": "An elegant exploded-view robot leg assembly with precisely spaced fasteners, link plates, bearings, motor and gearbox, on a subtle pale blueprint-grid background, no text.",
+    "path": "/Users/macbookpro/.codex/generated_images/01a1cb52-c70b-79c3-a798-791fc38f40ef/exec-46a23f78-0229-4f7b-b147-1539d137e0f7.png",
+    "mode": "built-in imagegen"
+  }
+]

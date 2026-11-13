@@ -1,0 +1,182 @@
+{
+  "boards-01": {
+    "label": "Arduino UNO R4 Minima",
+    "credit": "Arduino",
+    "source": "https://store-usa.arduino.cc/products/uno-r4-minima?_fid=880497bb6&_pos=5&_ss=c",
+    "original": "https://store-usa.arduino.cc/cdn/shop/files/ABX00080_00.default_1200x900.jpg?v=1727106560"
+  },
+  "boards-02": {
+    "label": "Espressif ESP32-H2-DevKitM-1",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/5715",
+    "original": "https://www.adafruit.com/images/1200x900/5715-04.jpg"
+  },
+  "boards-03": {
+    "label": "Raspberry Pi Pico 2 (RP2350)",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/6006",
+    "original": "https://www.adafruit.com/images/1200x900/6006-02.jpg"
+  },
+  "boards-04": {
+    "label": "BBC micro:bit V2",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/4781",
+    "original": "https://www.adafruit.com/images/1200x900/4781-04.jpg"
+  },
+  "boards-05": {
+    "label": "Adafruit QT Py ESP32-S3",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/5426",
+    "original": "https://www.adafruit.com/images/1200x900/5426-00.jpg"
+  },
+  "boards-06": {
+    "label": "Adafruit Trinket with ATtiny85",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/1501",
+    "original": "https://www.adafruit.com/images/1200x900/1501-12.jpg"
+  },
+  "boards-07": {
+    "label": "Adafruit Feather M0 Express with ATSAMD21",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/3403",
+    "original": "https://www.adafruit.com/images/1200x900/3403-04.jpg"
+  },
+  "boards-08": {
+    "label": "STM32 Nucleo-64 NUCLEO-F401RE",
+    "credit": "STMicroelectronics",
+    "source": "https://docs.zephyrproject.org/latest/boards/st/nucleo_f401re/doc/index.html",
+    "original": "https://docs.zephyrproject.org/latest/_images/nucleo_f401re.jpg"
+  },
+  "boards-09": {
+    "label": "NXP i.MX RT1060 Evaluation Kit",
+    "credit": "NXP Semiconductors",
+    "source": "https://www.nxp.com/design/design-center/development-boards-and-designs/i-mx-evaluation-and-development-boards/i-mx-rt1060-evaluation-kit:MIMXRT1060-EVKB",
+    "original": "https://www.nxp.com/assets/images/en/dev-board-image/BOARD-MIMXRT1060-EVK-PRODUCT-SHOT.png"
+  },
+  "boards-10": {
+    "label": "Espressif ESP32-C3-DevKit-RUST-2",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/5787",
+    "original": "https://www.adafruit.com/images/1200x900/5787-05.jpg"
+  },
+  "boards-11": {
+    "label": "KALAM 8051 development board",
+    "credit": "Silicon TechnoLabs",
+    "source": "https://silicontechnolabs.in/products/kalam-microcontroller-8051-easy-start-board",
+    "original": "http://silicontechnolabs.in/cdn/shop/files/kalam-8051-easystart-board-feature-s10044.jpg?v=1780258062"
+  },
+  "boards-12": {
+    "label": "C2000 F28379D LaunchPad",
+    "credit": "Texas Instruments",
+    "source": "https://www.ti.com/tool/LAUNCHXL-F28379D",
+    "original": "https://dam.ti.com/transform/eb7cd002-0a0f-45ab-a89b-6778e69ff5a7/LAUNCHXL-F28379D-Angled"
+  },
+  "boards-13": {
+    "label": "MSP430FR2433 LaunchPad",
+    "credit": "Texas Instruments",
+    "source": "https://www.ti.com/tool/MSP-EXP430FR2433?DCM=yes&HQS=TI-null-null-mousermode-df-pf-null-wwe",
+    "original": "https://dam.ti.com/transform/ce531c41-d65d-4bc7-ad94-1d17001667f0/msp-exp430fr2433-angled-png"
+  },
+  "boards-14": {
+    "label": "Nordic nRF52840 DK",
+    "credit": "Nordic Semiconductor",
+    "source": "https://docs.zephyrproject.org/latest/boards/nordic/nrf52840dk/doc/index.html",
+    "original": "https://docs.zephyrproject.org/latest/_images/nrf52840dk_nrf52840.jpg"
+  },
+  "boards-15": {
+    "label": "S32K144EVB automotive evaluation board",
+    "credit": "NXP Semiconductors",
+    "source": "https://www.nxp.com/design/design-center/development-boards-and-designs/automotive-development-platforms/s32k-mcu-platforms/s32k144-q100-evaluation-board-for-automotive-general-purpose:S32K144EVB",
+    "original": "https://www.nxp.com/assets/images/en/dev-board-image/S32K144EVB-OP.jpg"
+  },
+  "boards-16": {
+    "label": "Raspberry Pi 5",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/5813",
+    "original": "https://www.adafruit.com/images/1200x900/5813-01.jpg"
+  },
+  "boards-17": {
+    "label": "BeagleBone Black",
+    "credit": "BeagleBoard.org",
+    "source": "https://www.beagleboard.org/boards/beaglebone-black",
+    "original": "https://www.beagleboard.org/app/uploads/2023/07/DSC00505-scaled.webp"
+  },
+  "boards-18": {
+    "label": "LattePanda 3 Delta x86 single-board computer",
+    "credit": "DFRobot",
+    "source": "https://www.dfrobot.com/product-2594.html",
+    "original": "https://dfimg.dfrobot.com/enshop/DFR0981/DFR0981_Main_01.jpg"
+  },
+  "boards-19": {
+    "label": "Raspberry Pi Compute Module 4",
+    "credit": "Raspberry Pi",
+    "source": "https://www.raspberrypi.com/news/raspberry-pi-compute-module-4/",
+    "original": "https://www.raspberrypi.com/app/uploads/2020/10/compute-module-4-feature-image-1024x731.jpg"
+  },
+  "boards-20": {
+    "label": "i.MX 8M Plus evaluation kit",
+    "credit": "NXP Semiconductors",
+    "source": "https://www.nxp.com/design/design-center/development-boards-and-designs/i-mx-evaluation-and-development-boards/evaluation-kit-for-the-i-mx-8m-plus-applications-processor:8MPLUSLPD4-EVK",
+    "original": "https://www.nxp.com/assets/images/en/dev-board-image/iMX-8M-Plus-EVK-TOP_OG.jpg"
+  },
+  "boards-21": {
+    "label": "Jetson Orin Nano developer kit",
+    "credit": "NVIDIA",
+    "source": "https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/nano-super-developer-kit/",
+    "original": "https://www.nvidia.com/content/dam/en-zz/Solutions/autonomous-machines/embedded-systems/nano-super-developer-kit/jetson-orin-nano-super-developer-kit-og.jpg"
+  },
+  "boards-22": {
+    "label": "Raspberry Pi AI HAT+ (13 TOPS, Hailo-8L)",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/5979",
+    "original": "https://www.adafruit.com/images/1200x900/5979-09.jpg"
+  },
+  "boards-23": {
+    "label": "TinyFPGA BX with Lattice iCE40",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/4038",
+    "original": "https://www.adafruit.com/images/1200x900/4038-02.jpg"
+  },
+  "boards-24": {
+    "label": "TMS320C6748 development kit",
+    "credit": "Texas Instruments",
+    "source": "https://www.ti.com/tool/TMDSLCDK6748",
+    "original": "https://dam.ti.com/transform/03304328-03a7-4a4b-a10e-69e406331350/TMDSLCDK6748-Angled"
+  },
+  "boards-25": {
+    "label": "ROBOTIS OpenCR 1.0",
+    "credit": "ROBOTIS",
+    "source": "https://emanual.robotis.com/docs/en/parts/controller/opencr10/",
+    "original": "https://emanual.robotis.com/assets/images/parts/controller/opencr10/opencr_product.png"
+  },
+  "boards-26": {
+    "label": "Pixhawk 6C flight controller",
+    "credit": "Holybro",
+    "source": "https://holybro.com/products/pixhawk-6c",
+    "original": "http://holybro.com/cdn/shop/products/11054Pixhawk6C-Plasticcase_1.jpg?v=1775119916"
+  },
+  "boards-27": {
+    "label": "ODrive S1 motion controller",
+    "credit": "ODrive Robotics",
+    "source": "https://shop.odriverobotics.com/products/odrive-s1",
+    "original": "http://shop.odriverobotics.com/cdn/shop/files/PXL_20221103_003855089.jpg?v=1705544744"
+  },
+  "boards-28": {
+    "label": "Arduino Opta RS485 PLC",
+    "credit": "Arduino",
+    "source": "https://store.arduino.cc/products/opta-rs485",
+    "original": "https://store.arduino.cc/cdn/shop/files/AFX00001_01.iso_1200x900.jpg?v=1744099181"
+  },
+  "boards-29": {
+    "label": "The Things LoRaWAN Gateway",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/3943",
+    "original": "https://www.adafruit.com/images/1200x900/3943-03.jpg"
+  },
+  "boards-30": {
+    "label": "Adafruit FLORA wearable controller",
+    "credit": "Adafruit Industries",
+    "source": "https://www.adafruit.com/product/659",
+    "original": "https://www.adafruit.com/images/1200x900/659-07.jpg"
+  }
+}

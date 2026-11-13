@@ -1,0 +1,1476 @@
+{
+  "id": "humanoid-01",
+  "title": "How does a humanoid robot work?",
+  "duration": 480,
+  "design": "Original conceptual electric humanoid; no manufacturer specifications",
+  "scenes": [
+    {
+      "id": 0,
+      "title": "Meet your humanoid",
+      "subtitle": "Introduction to humanoid robotics",
+      "start": 0,
+      "duration": 60,
+      "objectives": [
+        "Introduction to humanoid robotics"
+      ],
+      "focus": [
+        "head",
+        "computer",
+        "elbow"
+      ],
+      "camera": {
+        "landscape": [
+          3.8,
+          2.6,
+          6.5
+        ],
+        "portrait": [
+          3.0,
+          2.7,
+          9.5
+        ]
+      },
+      "segments": [
+        {
+          "start": 0,
+          "duration": 15,
+          "text": {
+            "english": "Welcome to VisionicX. Meet a humanoid: a robot with a head, torso, arms and legs inspired by the human body. This original teaching model helps us look inside a machine, without claiming to copy a particular commercial robot.",
+            "telugu": "VisionicX కి స్వాగతం. మనిషిలా తల, మొండెం, చేతులు, కాళ్లు ఉన్న రోబోట్‌ను humanoid అంటాం. ఇది నేర్చుకోవడం కోసం రూపొందించిన నమూనా. మార్కెట్‌లో ఉన్న ఏ రోబోట్‌కీ ఇది నకలు కాదు. ఇందులో భాగాలు ఎలా కలిసి పనిచేస్తాయో చూద్దాం.",
+            "hindi": "VisionicX में आपका स्वागत है। सिर, धड़, हाथ और पैरों वाले, मानव शरीर से प्रेरित रोबोट को humanoid कहते हैं। यह सीखने के लिए बनाया गया मौलिक मॉडल है। यह किसी व्यावसायिक रोबोट की नकल नहीं है। आइए इसके अंदर देखें।"
+          },
+          "audio": {
+            "english": "/audio/english/1-1.wav",
+            "telugu": "/audio/telugu/1-1.wav",
+            "hindi": "/audio/hindi/1-1.wav"
+          }
+        },
+        {
+          "start": 15,
+          "duration": 15,
+          "text": {
+            "english": "Why a human-like shape? Our buildings, tools and workspaces were designed for people. Arms can reach shelves, and legs can negotiate steps. But a humanoid is not always the best solution. Wheels often move more efficiently on flat ground.",
+            "telugu": "మన ఇళ్లు, పనిముట్లు మనుషుల కోసం తయారయ్యాయి. అందుకే మనిషిలాంటి ఆకారం కొన్ని పనులకు ఉపయోగపడుతుంది. చేతులు అలమారకు చేరతాయి. కాళ్లు మెట్లు ఎక్కగలవు. అయితే చదునైన నేలపై చక్రాలు ఎక్కువ సమర్థంగా పనిచేయవచ్చు.",
+            "hindi": "हमारे भवन और औजार लोगों के लिए बने हैं। मानव जैसी बनावट कुछ काम आसान करती है। हाथ ऊंची जगह पहुंच सकते हैं, पैर सीढ़ियां चढ़ सकते हैं। लेकिन समतल जमीन पर पहिए अक्सर अधिक कुशल होते हैं। हर काम के लिए humanoid जरूरी नहीं।"
+          },
+          "audio": {
+            "english": "/audio/english/1-2.wav",
+            "telugu": "/audio/telugu/1-2.wav",
+            "hindi": "/audio/hindi/1-2.wav"
+          }
+        },
+        {
+          "start": 30,
+          "duration": 15,
+          "text": {
+            "english": "Watch the head turn and the arm lift. Cameras gather information. A controller computes commands. Actuators turn electrical energy into movement. The robot does not have muscles or human understanding just because its shape looks familiar.",
+            "telugu": "తల తిరగడం, చేయి పైకి లేవడం గమనించండి. కెమెరాలు సమాచారం తీసుకుంటాయి. controller ఆదేశాలు లెక్కిస్తుంది. actuators విద్యుత్ శక్తిని కదలికగా మారుస్తాయి. మనిషిలా కనిపించినంత మాత్రాన రోబోట్‌కు మనలాంటి అవగాహన ఉండదు.",
+            "hindi": "सिर का घूमना और हाथ का उठना देखिए। कैमरे जानकारी लेते हैं। controller आदेश की गणना करता है। actuators बिजली को गति में बदलते हैं। इंसान जैसा दिखने का अर्थ यह नहीं कि रोबोट के पास इंसानी समझ या मांसपेशियां हैं।"
+          },
+          "audio": {
+            "english": "/audio/english/1-3.wav",
+            "telugu": "/audio/telugu/1-3.wav",
+            "hindi": "/audio/hindi/1-3.wav"
+          }
+        },
+        {
+          "start": 45,
+          "duration": 15,
+          "text": {
+            "english": "Every useful action connects sensing, processing, deciding, moving and checking the result. As we travel through this laboratory, follow that repeating cycle. The blue lights and data paths are teaching illustrations, not measurements from real hardware.",
+            "telugu": "ముందు గుర్తించడం, ఆ సమాచారాన్ని అర్థం చేసుకోవడం, చర్య ఎంచుకోవడం, కదలడం, ఫలితం సరిచూసుకోవడం జరుగుతాయి. ఇదే చక్రం మళ్లీ మళ్లీ తిరుగుతుంది. నీలి వెలుగులు, సమాచార దారులు వివరణ కోసం మాత్రమే. ఇవి నిజమైన sensor కొలతలు కావు.",
+            "hindi": "रोबोट पहले जानकारी लेता है, उसे समझता है, कार्रवाई चुनता है, चलता है और परिणाम जांचता है। यह चक्र लगातार दोहरता है। नीली रोशनी और सूचना की रेखाएं समझाने के लिए हैं। ये वास्तविक hardware से लिए गए माप नहीं हैं।"
+          },
+          "audio": {
+            "english": "/audio/english/1-4.wav",
+            "telugu": "/audio/telugu/1-4.wav",
+            "hindi": "/audio/hindi/1-4.wav"
+          }
+        }
+      ],
+      "cameraKeyframes": [
+        {
+          "time": 0,
+          "target": [
+            0,
+            1.7,
+            0
+          ],
+          "position": {
+            "landscape": [
+              3.8,
+              2.6,
+              6.5
+            ],
+            "portrait": [
+              3.0,
+              2.7,
+              9.5
+            ]
+          }
+        },
+        {
+          "time": 60,
+          "target": [
+            0,
+            1.7,
+            0
+          ],
+          "position": {
+            "landscape": [
+              3.8,
+              2.6,
+              6.5
+            ],
+            "portrait": [
+              3.0,
+              2.7,
+              9.5
+            ]
+          }
+        }
+      ],
+      "labelEvents": [
+        {
+          "start": 0,
+          "end": 15,
+          "components": [
+            "head"
+          ]
+        },
+        {
+          "start": 15,
+          "end": 30,
+          "components": [
+            "computer"
+          ]
+        },
+        {
+          "start": 30,
+          "end": 45,
+          "components": [
+            "elbow"
+          ]
+        },
+        {
+          "start": 45,
+          "end": 60,
+          "components": [
+            "head"
+          ]
+        }
+      ],
+      "animationEvents": [
+        {
+          "start": 0,
+          "duration": 15,
+          "cue": "orbit-and-head-turn"
+        },
+        {
+          "start": 15,
+          "duration": 15,
+          "cue": "arm-lift"
+        },
+        {
+          "start": 30,
+          "duration": 15,
+          "cue": "finger-opening"
+        },
+        {
+          "start": 45,
+          "duration": 15,
+          "cue": "posture-settle"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "title": "Designed like us",
+      "subtitle": "External anatomy & degrees of freedom",
+      "start": 60,
+      "duration": 60,
+      "objectives": [
+        "External anatomy & degrees of freedom"
+      ],
+      "focus": [
+        "head",
+        "torso",
+        "hand",
+        "knee"
+      ],
+      "camera": {
+        "landscape": [
+          3.8,
+          2.6,
+          6.5
+        ],
+        "portrait": [
+          3.0,
+          2.7,
+          9.5
+        ]
+      },
+      "segments": [
+        {
+          "start": 60,
+          "duration": 15,
+          "text": {
+            "english": "Let us examine the outside. The head carries two representative cameras. The neck turns the head. The torso supports electronics and connects the shoulders to the pelvis. The frame carries loads through this entire structure.",
+            "telugu": "ఇప్పుడు బయట భాగాలు చూద్దాం. తలలో రెండు కెమెరాలు ఉన్నాయి. మెడ తలను తిప్పుతుంది. మొండెం ఎలక్ట్రానిక్ భాగాలను మోస్తుంది. భుజాలను నడుముతో కలుపుతుంది. లోపలి frame మొత్తం నిర్మాణానికి బలాన్ని ఇస్తుంది.",
+            "hindi": "बाहरी हिस्से देखिए। सिर में दो उदाहरण वाले कैमरे हैं। गर्दन सिर को घुमाती है। धड़ इलेक्ट्रॉनिक हिस्सों को सहारा देता है और कंधों को श्रोणि से जोड़ता है। अंदर का frame भार को पूरी संरचना में पहुंचाता है।"
+          },
+          "audio": {
+            "english": "/audio/english/2-1.wav",
+            "telugu": "/audio/telugu/2-1.wav",
+            "hindi": "/audio/hindi/2-1.wav"
+          }
+        },
+        {
+          "start": 75,
+          "duration": 15,
+          "text": {
+            "english": "Each arm has a shoulder, upper arm, elbow, forearm and hand. Fingers make contact with objects. Our simplified fingers demonstrate opening and closing; real hands use different numbers of motors, joints and transmission mechanisms.",
+            "telugu": "భుజం, పైచేయి, మోచేయి, ముంజేయి, అరచేయి కలిసి చేయి అవుతాయి. వేళ్లు వస్తువును తాకుతాయి. ఇక్కడ వేళ్లు తెరుచుకోవడం, మూసుకోవడం సరళంగా చూపిస్తున్నాం. నిజమైన చేతుల్లో మోటార్లు, తీగలు, కీళ్ల అమరికలు వేర్వేరుగా ఉంటాయి.",
+            "hindi": "हर बांह में कंधा, ऊपरी बांह, कोहनी, अग्रबाहु और हाथ हैं। उंगलियां वस्तु को छूती हैं। यहां उंगलियों का खुलना बंद होना सरल रूप में दिखाया गया है। वास्तविक हाथों में मोटर, जोड़ और transmission की व्यवस्था अलग हो सकती है।"
+          },
+          "audio": {
+            "english": "/audio/english/2-2.wav",
+            "telugu": "/audio/telugu/2-2.wav",
+            "hindi": "/audio/hindi/2-2.wav"
+          }
+        },
+        {
+          "start": 90,
+          "duration": 15,
+          "text": {
+            "english": "The pelvis connects to hips, thighs, knees, lower legs, ankles and feet. Joints allow relative movement between links. Their permitted axes and travel limits determine which poses the robot can reach without colliding with itself.",
+            "telugu": "నడుముకు తుంటి కీళ్లు, తొడలు, మోకాళ్లు, కింది కాళ్లు, చీలమండలు, పాదాలు కలుస్తాయి. రెండు భాగాల మధ్య కదలికను కీలు అనుమతిస్తుంది. అది ఎంతవరకు తిరగగలదో బట్టి రోబోట్ భంగిమలు మారతాయి.",
+            "hindi": "श्रोणि से कूल्हे, जांघ, घुटने, निचले पैर, टखने और पांव जुड़ते हैं। जोड़ दो हिस्सों के बीच गति की अनुमति देता है। उसकी धुरी और सीमा तय करती है कि रोबोट बिना खुद से टकराए कौन सी मुद्रा बना सकता है।"
+          },
+          "audio": {
+            "english": "/audio/english/2-3.wav",
+            "telugu": "/audio/telugu/2-3.wav",
+            "hindi": "/audio/hindi/2-3.wav"
+          }
+        },
+        {
+          "start": 105,
+          "duration": 15,
+          "text": {
+            "english": "A degree of freedom is one independent coordinate of motion. A hinge has one rotational degree of freedom. A shoulder often combines several axes. Watch these joints move separately, then together. This model demonstrates selected axes rather than a complete human skeleton.",
+            "telugu": "స్వతంత్రంగా జరిగే ఒక కదలికను ఒక degree of freedom అంటాం. తలుపు కీలు ఒక అక్షం చుట్టూ తిరుగుతుంది. భుజంలో అనేక అక్షాలు ఉండవచ్చు. విడిగా, కలిసి కీళ్లు కదలడం చూడండి. మనిషి శరీరంలోని అన్ని కీళ్లు ఇక్కడ చూపించడం లేదు.",
+            "hindi": "गति का एक स्वतंत्र निर्देशांक एक degree of freedom कहलाता है। दरवाजे का कब्जा एक धुरी पर घूमता है। कंधे में कई धुरियां हो सकती हैं। जोड़ पहले अलग फिर साथ चलते देखिए। इस मॉडल में मानव शरीर के सभी जोड़ नहीं हैं।"
+          },
+          "audio": {
+            "english": "/audio/english/2-4.wav",
+            "telugu": "/audio/telugu/2-4.wav",
+            "hindi": "/audio/hindi/2-4.wav"
+          }
+        }
+      ],
+      "cameraKeyframes": [
+        {
+          "time": 0,
+          "target": [
+            0,
+            1.7,
+            0
+          ],
+          "position": {
+            "landscape": [
+              3.8,
+              2.6,
+              6.5
+            ],
+            "portrait": [
+              3.0,
+              2.7,
+              9.5
+            ]
+          }
+        },
+        {
+          "time": 60,
+          "target": [
+            0,
+            1.7,
+            0
+          ],
+          "position": {
+            "landscape": [
+              3.8,
+              2.6,
+              6.5
+            ],
+            "portrait": [
+              3.0,
+              2.7,
+              9.5
+            ]
+          }
+        }
+      ],
+      "labelEvents": [
+        {
+          "start": 0,
+          "end": 15,
+          "components": [
+            "head"
+          ]
+        },
+        {
+          "start": 15,
+          "end": 30,
+          "components": [
+            "torso"
+          ]
+        },
+        {
+          "start": 30,
+          "end": 45,
+          "components": [
+            "hand"
+          ]
+        },
+        {
+          "start": 45,
+          "end": 60,
+          "components": [
+            "knee"
+          ]
+        }
+      ],
+      "animationEvents": [
+        {
+          "start": 0,
+          "duration": 15,
+          "cue": "head-and-torso"
+        },
+        {
+          "start": 15,
+          "duration": 15,
+          "cue": "arm-and-hand"
+        },
+        {
+          "start": 30,
+          "duration": 15,
+          "cue": "leg-and-foot"
+        },
+        {
+          "start": 45,
+          "duration": 15,
+          "cue": "joint-coordination"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Beneath the surface",
+      "subtitle": "Mechanical, electrical & computing systems",
+      "start": 120,
+      "duration": 60,
+      "objectives": [
+        "Mechanical, electrical & computing systems"
+      ],
+      "focus": [
+        "frame",
+        "motor",
+        "battery",
+        "computer"
+      ],
+      "camera": {
+        "landscape": [
+          3.8,
+          2.6,
+          6.5
+        ],
+        "portrait": [
+          3.0,
+          2.7,
+          9.5
+        ]
+      },
+      "segments": [
+        {
+          "start": 120,
+          "duration": 15,
+          "text": {
+            "english": "Now the outer panels move apart. This exploded view separates parts only to make their relationships visible. A real robot must remain assembled to operate. Notice the structural frame beneath the protective shell and the actuators located around joints.",
+            "telugu": "బయటి పలకలు విడిపోతున్నాయి చూడండి. లోపలి భాగాలు అర్థమయ్యేలా చూపించే exploded view ఇది. నిజంగా పనిచేసేటప్పుడు భాగాలు అమర్చే ఉండాలి. బయట కవచం కింద బరువును మోసే frame, కీళ్ల దగ్గర actuators కనిపిస్తున్నాయి.",
+            "hindi": "बाहरी पैनल अलग हो रहे हैं। इसे exploded view कहते हैं। इससे हिस्सों के संबंध समझ आते हैं। असली रोबोट को काम करते समय जुड़ा रहना होगा। कवच के अंदर भार संभालने वाला frame और जोड़ों के पास actuators देखिए।"
+          },
+          "audio": {
+            "english": "/audio/english/3-1.wav",
+            "telugu": "/audio/telugu/3-1.wav",
+            "hindi": "/audio/hindi/3-1.wav"
+          }
+        },
+        {
+          "start": 135,
+          "duration": 15,
+          "text": {
+            "english": "A motor produces rotation. A gearbox changes the relationship between output speed and torque, with losses from friction. An encoder measures position. The nearby motor controller regulates electrical drive using commands and feedback from its sensors.",
+            "telugu": "మోటార్ తిరుగుతుంది. gearbox వేగం, తిప్పే బలం మధ్య నిష్పత్తిని మారుస్తుంది. ఘర్షణ వల్ల కొంత శక్తి పోతుంది. encoder స్థానం కొలుస్తుంది. motor controller ఆదేశాలు, sensor సమాచారాన్ని బట్టి విద్యుత్ ప్రవాహాన్ని నియంత్రిస్తుంది.",
+            "hindi": "मोटर घुमाव पैदा करती है। gearbox गति और torque का अनुपात बदलता है। घर्षण से कुछ ऊर्जा नष्ट होती है। encoder स्थिति मापता है। motor controller आदेश और sensor feedback के आधार पर विद्युत drive को नियंत्रित करता है।"
+          },
+          "audio": {
+            "english": "/audio/english/3-2.wav",
+            "telugu": "/audio/telugu/3-2.wav",
+            "hindi": "/audio/hindi/3-2.wav"
+          }
+        },
+        {
+          "start": 150,
+          "duration": 15,
+          "text": {
+            "english": "The battery stores chemical energy and supplies electrical power. A distribution board routes that power. Computing hardware processes sensor information and coordinates tasks. The small inertial measurement unit helps estimate motion and orientation using acceleration and angular velocity.",
+            "telugu": "బ్యాటరీలో నిల్వ ఉన్న రసాయన శక్తి విద్యుత్తుగా అందుతుంది. power board దాన్ని భాగాలకు పంపుతుంది. computer sensor సమాచారాన్ని విశ్లేషిస్తుంది. IMU అనే చిన్న భాగం త్వరణం, తిరిగే వేగాన్ని కొలిచి కదలిక అంచనాకు సహాయపడుతుంది.",
+            "hindi": "बैटरी रासायनिक ऊर्जा जमा करती है और बिजली देती है। वितरण बोर्ड बिजली अलग हिस्सों तक पहुंचाता है। computer sensor जानकारी पर काम करता है। छोटा IMU त्वरण और कोणीय वेग मापकर दिशा और गति के अनुमान में मदद करता है।"
+          },
+          "audio": {
+            "english": "/audio/english/3-3.wav",
+            "telugu": "/audio/telugu/3-3.wav",
+            "hindi": "/audio/hindi/3-3.wav"
+          }
+        },
+        {
+          "start": 165,
+          "duration": 15,
+          "text": {
+            "english": "Representative cables connect the systems. Real wiring needs strain relief, insulation and clearance through moving joints. Our paths are simplified. This teaching design does not specify battery capacity, lifting strength or operating voltage because no physical robot has been built or tested.",
+            "telugu": "భాగాలను కలిపే తీగలు ఇక్కడ సరళంగా చూపించాం. నిజమైన తీగలకు రక్షణ, వంగే చోట ఖాళీ అవసరం. ఈ నమూనా తయారు చేసి పరీక్షించలేదు. అందుకే బ్యాటరీ సామర్థ్యం, ఎత్తగల బరువు, voltage వంటి వివరాలను చెప్పడం లేదు.",
+            "hindi": "तार यहां सरल रूप में दिखाए गए हैं। वास्तविक तारों को insulation और चलते जोड़ों में जगह चाहिए। यह डिजाइन बनाकर जांचा नहीं गया है। इसलिए हम बैटरी क्षमता, वजन उठाने की क्षमता या voltage के मनगढ़ंत आंकड़े नहीं देते।"
+          },
+          "audio": {
+            "english": "/audio/english/3-4.wav",
+            "telugu": "/audio/telugu/3-4.wav",
+            "hindi": "/audio/hindi/3-4.wav"
+          }
+        }
+      ],
+      "cameraKeyframes": [
+        {
+          "time": 0,
+          "target": [
+            0,
+            1.7,
+            0
+          ],
+          "position": {
+            "landscape": [
+              3.8,
+              2.6,
+              6.5
+            ],
+            "portrait": [
+              3.0,
+              2.7,
+              9.5
+            ]
+          }
+        },
+        {
+          "time": 60,
+          "target": [
+            0,
+            1.7,
+            0
+          ],
+          "position": {
+            "landscape": [
+              3.8,
+              2.6,
+              6.5
+            ],
+            "portrait": [
+              3.0,
+              2.7,
+              9.5
+            ]
+          }
+        }
+      ],
+      "labelEvents": [
+        {
+          "start": 0,
+          "end": 15,
+          "components": [
+            "frame"
+          ]
+        },
+        {
+          "start": 15,
+          "end": 30,
+          "components": [
+            "motor"
+          ]
+        },
+        {
+          "start": 30,
+          "end": 45,
+          "components": [
+            "battery"
+          ]
+        },
+        {
+          "start": 45,
+          "end": 60,
+          "components": [
+            "computer"
+          ]
+        }
+      ],
+      "animationEvents": [
+        {
+          "start": 0,
+          "duration": 15,
+          "cue": "shell-separation"
+        },
+        {
+          "start": 15,
+          "duration": 15,
+          "cue": "actuator-highlight"
+        },
+        {
+          "start": 30,
+          "duration": 15,
+          "cue": "power-and-computing"
+        },
+        {
+          "start": 45,
+          "duration": 15,
+          "cue": "wiring-highlight"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Sensing the world",
+      "subtitle": "Cameras, encoders & inertial sensing",
+      "start": 180,
+      "duration": 60,
+      "objectives": [
+        "Cameras, encoders & inertial sensing"
+      ],
+      "focus": [
+        "camera",
+        "imu",
+        "encoder"
+      ],
+      "camera": {
+        "landscape": [
+          3.8,
+          2.6,
+          6.5
+        ],
+        "portrait": [
+          3.0,
+          2.7,
+          9.5
+        ]
+      },
+      "segments": [
+        {
+          "start": 180,
+          "duration": 15,
+          "text": {
+            "english": "The cameras look toward the orange object. Their field of view is shown as a blue viewing volume. Images record light, not meaning. Software must interpret pixels, and its performance depends on lighting, training data and the scene.",
+            "telugu": "కెమెరాలు నారింజ రంగు వస్తువు వైపు చూస్తున్నాయి. నీలి ఆకారం కెమెరా చూడగల ప్రాంతాన్ని చూపిస్తుంది. కెమెరా వెలుతురును చిత్రంగా నమోదు చేస్తుంది. ఆ చిత్రానికి అర్థం చెప్పేది software. వెలుతురు, పరిసరాలు ఫలితాన్ని ప్రభావితం చేస్తాయి.",
+            "hindi": "कैमरे नारंगी वस्तु की तरफ देखते हैं। नीला आकार उनका देखने का क्षेत्र दिखाता है। चित्र में प्रकाश दर्ज होता है, अर्थ नहीं। software को pixels समझने पड़ते हैं। प्रकाश, प्रशिक्षण के उदाहरण और आसपास का दृश्य पहचान की विश्वसनीयता बदलते हैं।"
+          },
+          "audio": {
+            "english": "/audio/english/4-1.wav",
+            "telugu": "/audio/telugu/4-1.wav",
+            "hindi": "/audio/hindi/4-1.wav"
+          }
+        },
+        {
+          "start": 195,
+          "duration": 15,
+          "text": {
+            "english": "A detection system may label a region as an object. The orange box is an illustrative detection, not live camera inference. Two calibrated cameras can estimate depth from corresponding image features. Texture, occlusion and calibration errors can reduce reliability.",
+            "telugu": "వస్తువును గుర్తించే software చిత్రంలోని ఒక ప్రాంతానికి పేరు పెట్టవచ్చు. ఇక్కడ పెట్టె గీతలు వివరణ కోసం మాత్రమే. నిజమైన AI గుర్తింపు జరగడం లేదు. సరిగ్గా సర్దిన రెండు కెమెరాల చిత్రాలను పోల్చి లోతును అంచనా వేయవచ్చు.",
+            "hindi": "पहचान प्रणाली चित्र के किसी क्षेत्र को वस्तु बता सकती है। यहां नारंगी चौखटा केवल उदाहरण है, वास्तविक AI पहचान नहीं। सही calibration वाले दो कैमरे चित्रों में समान बिंदुओं से गहराई का अनुमान लगा सकते हैं। ढकी वस्तुएं और त्रुटियां इसे कठिन बनाती हैं।"
+          },
+          "audio": {
+            "english": "/audio/english/4-2.wav",
+            "telugu": "/audio/telugu/4-2.wav",
+            "hindi": "/audio/hindi/4-2.wav"
+          }
+        },
+        {
+          "start": 210,
+          "duration": 15,
+          "text": {
+            "english": "The inertial measurement unit senses acceleration and angular velocity. Estimating orientation requires processing these signals; acceleration includes gravity and movement. Sensor noise and bias accumulate, so robots often combine several sources of information rather than trust one measurement.",
+            "telugu": "IMU త్వరణం, తిరిగే వేగాన్ని కొలుస్తుంది. వాటి నుంచి దిశ అంచనా వేయాలి. త్వరణంలో గురుత్వం ప్రభావం కూడా ఉంటుంది. కొలతల్లో లోపాలు ఉండొచ్చు. అందుకే ఒక sensor మీదే ఆధారపడకుండా అనేక కొలతలను కలుపుతారు.",
+            "hindi": "IMU त्वरण और कोणीय वेग मापता है। दिशा जानने के लिए इन संकेतों पर गणना करनी होती है। त्वरण में गुरुत्व का असर भी आता है। शोर और bias से गलती बढ़ सकती है। इसलिए कई sensors की जानकारी मिलाई जाती है।"
+          },
+          "audio": {
+            "english": "/audio/english/4-3.wav",
+            "telugu": "/audio/telugu/4-3.wav",
+            "hindi": "/audio/hindi/4-3.wav"
+          }
+        },
+        {
+          "start": 225,
+          "duration": 15,
+          "text": {
+            "english": "Encoders report joint position. Their readings help compare the current pose with the desired pose. Cameras observe the outside world while joint sensors observe the mechanism. Together they support a useful estimate of the robot and its surroundings.",
+            "telugu": "encoder కీలు ఏ కోణంలో ఉందో తెలియజేస్తుంది. కావలసిన కోణంతో దాన్ని పోల్చవచ్చు. కెమెరా బయటి ప్రపంచాన్ని చూస్తే, joint sensor రోబోట్ లోపలి స్థితిని చెబుతుంది. ఇవి కలిసి రోబోట్ పరిస్థితిని అంచనా వేయడానికి ఉపయోగపడతాయి.",
+            "hindi": "encoder जोड़ की स्थिति बताता है। इससे इच्छित और वर्तमान कोण की तुलना होती है। कैमरे बाहर की दुनिया देखते हैं, joint sensors रोबोट की अपनी स्थिति बताते हैं। दोनों मिलकर रोबोट और आसपास की स्थिति के उपयोगी अनुमान में मदद करते हैं।"
+          },
+          "audio": {
+            "english": "/audio/english/4-4.wav",
+            "telugu": "/audio/telugu/4-4.wav",
+            "hindi": "/audio/hindi/4-4.wav"
+          }
+        }
+      ],
+      "cameraKeyframes": [
+        {
+          "time": 0,
+          "target": [
+            0,
+            1.7,
+            0
+          ],
+          "position": {
+            "landscape": [
+              3.8,
+              2.6,
+              6.5
+            ],
+            "portrait": [
+              3.0,
+              2.7,
+              9.5
+            ]
+          }
+        },
+        {
+          "time": 60,
+          "target": [
+            0,
+            1.7,
+            0
+          ],
+          "position": {
+            "landscape": [
+              3.8,
+              2.6,
+              6.5
+            ],
+            "portrait": [
+              3.0,
+              2.7,
+              9.5
+            ]
+          }
+        }
+      ],
+      "labelEvents": [
+        {
+          "start": 0,
+          "end": 15,
+          "components": [
+            "camera"
+          ]
+        },
+        {
+          "start": 15,
+          "end": 30,
+          "components": [
+            "imu"
+          ]
+        },
+        {
+          "start": 30,
+          "end": 45,
+          "components": [
+            "encoder"
+          ]
+        },
+        {
+          "start": 45,
+          "end": 60,
+          "components": [
+            "camera"
+          ]
+        }
+      ],
+      "animationEvents": [
+        {
+          "start": 0,
+          "duration": 15,
+          "cue": "camera-frustum"
+        },
+        {
+          "start": 15,
+          "duration": 15,
+          "cue": "object-box"
+        },
+        {
+          "start": 30,
+          "duration": 15,
+          "cue": "imu-highlight"
+        },
+        {
+          "start": 45,
+          "duration": 15,
+          "cue": "encoder-highlight"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "From perception to action",
+      "subtitle": "AI, planning & the feedback loop",
+      "start": 240,
+      "duration": 60,
+      "objectives": [
+        "AI, planning & the feedback loop"
+      ],
+      "focus": [
+        "camera",
+        "computer",
+        "controller"
+      ],
+      "camera": {
+        "landscape": [
+          3.8,
+          2.6,
+          6.5
+        ],
+        "portrait": [
+          3.0,
+          2.7,
+          9.5
+        ]
+      },
+      "segments": [
+        {
+          "start": 240,
+          "duration": 15,
+          "text": {
+            "english": "Follow the glowing information path. Sensors provide measurements. Perception extracts useful features such as an object location. State estimation combines measurements with a model to estimate quantities such as body orientation, joint positions and motion.",
+            "telugu": "వెలిగే సమాచార దారిని అనుసరించండి. sensors కొలతలు ఇస్తాయి. perception వస్తువు ఎక్కడుందో గుర్తిస్తుంది. state estimation అనేక కొలతలను నమూనాతో కలిపి శరీర దిశ, కీళ్ల స్థానం, కదలికను అంచనా వేస్తుంది.",
+            "hindi": "चमकती सूचना का रास्ता देखिए। sensors माप देते हैं। perception वस्तु का स्थान जैसी उपयोगी जानकारी निकालता है। state estimation माप और मॉडल को मिलाकर शरीर की दिशा, जोड़ों की स्थिति और गति का अनुमान बनाता है।"
+          },
+          "audio": {
+            "english": "/audio/english/5-1.wav",
+            "telugu": "/audio/telugu/5-1.wav",
+            "hindi": "/audio/hindi/5-1.wav"
+          }
+        },
+        {
+          "start": 255,
+          "duration": 15,
+          "text": {
+            "english": "Planning chooses an intended action and a feasible path. For example, reach toward the object while keeping clear of the body. A plan must respect geometry, joint limits, uncertainty and the need to keep the robot balanced.",
+            "telugu": "planning ఏ పని చేయాలో, ఎలా చేరుకోవాలో నిర్ణయిస్తుంది. ఉదాహరణకు చేయి శరీరానికి తగలకుండా వస్తువు దగ్గరకు వెళ్లాలి. కీళ్ల పరిమితులు, అడ్డంకులు, కొలతలలో సందేహం, balance అన్నీ పరిగణనలోకి తీసుకోవాలి.",
+            "hindi": "planning अगली कार्रवाई और रास्ता चुनता है। उदाहरण के लिए हाथ को शरीर से बचाते हुए वस्तु तक ले जाना। योजना में geometry, जोड़ों की सीमाएं, अनिश्चितता और संतुलन का ध्यान रखना जरूरी है। हर संभव रास्ता सुरक्षित नहीं होता।"
+          },
+          "audio": {
+            "english": "/audio/english/5-2.wav",
+            "telugu": "/audio/telugu/5-2.wav",
+            "hindi": "/audio/hindi/5-2.wav"
+          }
+        },
+        {
+          "start": 270,
+          "duration": 15,
+          "text": {
+            "english": "Control converts desired motion into actuator commands and repeatedly corrects errors. Artificial intelligence may support recognition or planning. Many low-level control loops use conventional mathematics; they do not need a language model to regulate every motor.",
+            "telugu": "control కావలసిన కదలికను motor ఆదేశాలుగా మారుస్తుంది. తప్పును పదేపదే సరిచేస్తుంది. AI వస్తువులను గుర్తించడంలో లేదా ప్రణాళికలో ఉపయోగపడవచ్చు. ప్రతి మోటార్‌ను నడపడానికి language model అవసరం లేదు. సాధారణ గణిత పద్ధతులు కూడా పనిచేస్తాయి.",
+            "hindi": "control इच्छित गति को actuator आदेशों में बदलता और त्रुटियां सुधारता है। AI पहचान या योजना बनाने में मदद कर सकता है। कई निचले स्तर के controllers सामान्य गणित इस्तेमाल करते हैं। हर मोटर को नियंत्रित करने के लिए language model जरूरी नहीं है।"
+          },
+          "audio": {
+            "english": "/audio/english/5-3.wav",
+            "telugu": "/audio/telugu/5-3.wav",
+            "hindi": "/audio/hindi/5-3.wav"
+          }
+        },
+        {
+          "start": 285,
+          "duration": 15,
+          "text": {
+            "english": "The arrows return to sensing because the world changes. An object may move, a foot may slip, or a motor may fall behind its target. Feedback lets the system revise its action. These colored signals illustrate stages, not a measured computing network.",
+            "telugu": "బాణాలు మళ్లీ sensors దగ్గరకు వస్తున్నాయి. వస్తువు కదలవచ్చు. పాదం జారవచ్చు. చేయి అనుకున్న స్థానానికి చేరకపోవచ్చు. feedback ద్వారా చర్యను మార్చుకోవచ్చు. రంగుల దారులు దశలను వివరిస్తున్నాయి. ఇవి నిజమైన computer network కొలతలు కావు.",
+            "hindi": "तीर फिर sensors तक लौटते हैं, क्योंकि दुनिया बदलती है। वस्तु हिल सकती है, पांव फिसल सकता है या मोटर पीछे रह सकती है। feedback कार्रवाई सुधारने देता है। रंगीन रास्ते केवल चरण समझाते हैं, वास्तविक computer network के माप नहीं हैं।"
+          },
+          "audio": {
+            "english": "/audio/english/5-4.wav",
+            "telugu": "/audio/telugu/5-4.wav",
+            "hindi": "/audio/hindi/5-4.wav"
+          }
+        }
+      ],
+      "cameraKeyframes": [
+        {
+          "time": 0,
+          "target": [
+            0,
+            1.7,
+            0
+          ],
+          "position": {
+            "landscape": [
+              3.8,
+              2.6,
+              6.5
+            ],
+            "portrait": [
+              3.0,
+              2.7,
+              9.5
+            ]
+          }
+        },
+        {
+          "time": 60,
+          "target": [
+            0,
+            1.7,
+            0
+          ],
+          "position": {
+            "landscape": [
+              3.8,
+              2.6,
+              6.5
+            ],
+            "portrait": [
+              3.0,
+              2.7,
+              9.5
+            ]
+          }
+        }
+      ],
+      "labelEvents": [
+        {
+          "start": 0,
+          "end": 15,
+          "components": [
+            "camera"
+          ]
+        },
+        {
+          "start": 15,
+          "end": 30,
+          "components": [
+            "computer"
+          ]
+        },
+        {
+          "start": 30,
+          "end": 45,
+          "components": [
+            "controller"
+          ]
+        },
+        {
+          "start": 45,
+          "end": 60,
+          "components": [
+            "camera"
+          ]
+        }
+      ],
+      "animationEvents": [
+        {
+          "start": 0,
+          "duration": 15,
+          "cue": "sensor-perception-flow"
+        },
+        {
+          "start": 15,
+          "duration": 15,
+          "cue": "planning-flow"
+        },
+        {
+          "start": 30,
+          "duration": 15,
+          "cue": "control-flow"
+        },
+        {
+          "start": 45,
+          "duration": 15,
+          "cue": "feedback-flow"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "The power of a joint",
+      "subtitle": "Motors, transmissions & control",
+      "start": 300,
+      "duration": 60,
+      "objectives": [
+        "Motors, transmissions & control"
+      ],
+      "focus": [
+        "motor",
+        "gearbox",
+        "encoder",
+        "elbow"
+      ],
+      "camera": {
+        "landscape": [
+          3.8,
+          2.6,
+          6.5
+        ],
+        "portrait": [
+          3.0,
+          2.7,
+          9.5
+        ]
+      },
+      "segments": [
+        {
+          "start": 300,
+          "duration": 15,
+          "text": {
+            "english": "Look closely at the elbow assembly. The cylindrical motor drives a simplified transmission and output link. The colored encoder ring represents position feedback. The panel shows joint angle as the forearm rotates within the demonstration limits.",
+            "telugu": "మోచేయి దగ్గరగా చూద్దాం. గుండ్రని మోటార్ ఒక సరళమైన transmission ద్వారా చేయి భాగాన్ని తిప్పుతుంది. రంగు ఉంగరం encoder ను సూచిస్తుంది. ముంజేయి తిరుగుతున్నప్పుడు కోణం మారుతుంది. ఇక్కడ చూపిన పరిమితుల్లోనే అది కదులుతుంది.",
+            "hindi": "कोहनी की assembly पास से देखिए। बेलनाकार मोटर सरल transmission और output link चलाती है। रंगीन encoder ring स्थिति feedback दिखाती है। अग्रबाहु के घूमने पर कोण बदलता है। यह प्रदर्शन के लिए चुनी गई सीमा के अंदर चलता है।"
+          },
+          "audio": {
+            "english": "/audio/english/6-1.wav",
+            "telugu": "/audio/telugu/6-1.wav",
+            "hindi": "/audio/hindi/6-1.wav"
+          }
+        },
+        {
+          "start": 315,
+          "duration": 15,
+          "text": {
+            "english": "Torque describes a turning effect. Speed describes how quickly angle changes. A reduction gearbox can increase output torque while reducing output speed, but cannot create energy. Friction and electrical losses mean the output power is less than the input.",
+            "telugu": "తిప్పే బలాన్ని torque అంటాం. కోణం ఎంత త్వరగా మారుతుందో speed చెబుతుంది. reduction gearbox వేగాన్ని తగ్గించి output torque పెంచగలదు. కొత్త శక్తిని సృష్టించదు. ఘర్షణ, విద్యుత్ నష్టాల వల్ల కొంత శక్తి వేడిగా మారుతుంది.",
+            "hindi": "torque घुमाने के प्रभाव को कहते हैं। गति बताती है कि कोण कितनी जल्दी बदलता है। reduction gearbox गति कम करके output torque बढ़ा सकता है, ऊर्जा नहीं बना सकता। घर्षण और विद्युत हानि के कारण output power कम होती है।"
+          },
+          "audio": {
+            "english": "/audio/english/6-2.wav",
+            "telugu": "/audio/telugu/6-2.wav",
+            "hindi": "/audio/hindi/6-2.wav"
+          }
+        },
+        {
+          "start": 330,
+          "duration": 15,
+          "text": {
+            "english": "The controller receives a desired angle and compares it with measured angle. It adjusts the drive to reduce the difference. Real controllers also need current, temperature and velocity limits. An accurate angle alone does not guarantee safe contact with a person.",
+            "telugu": "controller కావలసిన కోణాన్ని కొలిచిన కోణంతో పోలుస్తుంది. తేడా తగ్గేలా motor drive మారుస్తుంది. నిజమైన రోబోట్‌లో current, ఉష్ణోగ్రత, వేగానికి పరిమితులు అవసరం. కోణం సరిగ్గా ఉన్నంత మాత్రాన మనిషిని తాకడం సురక్షితం కాదు.",
+            "hindi": "controller इच्छित कोण और मापे हुए कोण की तुलना करता है। अंतर घटाने के लिए drive बदलता है। वास्तविक controllers में current, तापमान और गति की सीमाएं भी चाहिए। केवल सही कोण होने से किसी व्यक्ति को छूना सुरक्षित नहीं हो जाता।"
+          },
+          "audio": {
+            "english": "/audio/english/6-3.wav",
+            "telugu": "/audio/telugu/6-3.wav",
+            "hindi": "/audio/hindi/6-3.wav"
+          }
+        },
+        {
+          "start": 345,
+          "duration": 15,
+          "text": {
+            "english": "Now shoulder and elbow cooperate to move the hand. One joint changes the reachable direction; another changes reach. In Explore Mode, move the elbow slider and inspect the mechanism. Its limits are illustrative and are not certified hardware specifications.",
+            "telugu": "ఇప్పుడు భుజం, మోచేయి కలిసి చేతిని కదిలిస్తున్నాయి. ఒక కీలు దిశను మార్చుతుంది. మరొకటి చేరగల దూరాన్ని మారుస్తుంది. Explore లో slider కదిపి చూడండి. ఇవి నేర్చుకోవడానికి ఎంచుకున్న పరిమితులే. నిజమైన hardware భద్రతా ప్రమాణాలు కావు.",
+            "hindi": "अब कंधा और कोहनी मिलकर हाथ चलाते हैं। एक जोड़ दिशा बदलता है, दूसरा पहुंच बदलता है। Explore में slider चलाकर कोहनी देखें। ये उदाहरण की सीमाएं हैं, किसी वास्तविक hardware के प्रमाणित विनिर्देश नहीं। हाथ की पहुंच कई जोड़ों पर निर्भर करती है।"
+          },
+          "audio": {
+            "english": "/audio/english/6-4.wav",
+            "telugu": "/audio/telugu/6-4.wav",
+            "hindi": "/audio/hindi/6-4.wav"
+          }
+        }
+      ],
+      "cameraKeyframes": [
+        {
+          "time": 0,
+          "target": [
+            0,
+            1.7,
+            0
+          ],
+          "position": {
+            "landscape": [
+              3.8,
+              2.6,
+              6.5
+            ],
+            "portrait": [
+              3.0,
+              2.7,
+              9.5
+            ]
+          }
+        },
+        {
+          "time": 60,
+          "target": [
+            0,
+            1.7,
+            0
+          ],
+          "position": {
+            "landscape": [
+              3.8,
+              2.6,
+              6.5
+            ],
+            "portrait": [
+              3.0,
+              2.7,
+              9.5
+            ]
+          }
+        }
+      ],
+      "labelEvents": [
+        {
+          "start": 0,
+          "end": 15,
+          "components": [
+            "motor"
+          ]
+        },
+        {
+          "start": 15,
+          "end": 30,
+          "components": [
+            "gearbox"
+          ]
+        },
+        {
+          "start": 30,
+          "end": 45,
+          "components": [
+            "encoder"
+          ]
+        },
+        {
+          "start": 45,
+          "end": 60,
+          "components": [
+            "elbow"
+          ]
+        }
+      ],
+      "animationEvents": [
+        {
+          "start": 0,
+          "duration": 15,
+          "cue": "elbow-closeup"
+        },
+        {
+          "start": 15,
+          "duration": 15,
+          "cue": "motor-rotation"
+        },
+        {
+          "start": 30,
+          "duration": 15,
+          "cue": "encoder-feedback"
+        },
+        {
+          "start": 45,
+          "duration": 15,
+          "cue": "coordinated-reach"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Finding balance",
+      "subtitle": "Walking & balance feedback",
+      "start": 360,
+      "duration": 60,
+      "objectives": [
+        "Walking & balance feedback"
+      ],
+      "focus": [
+        "hip",
+        "knee",
+        "ankle"
+      ],
+      "camera": {
+        "landscape": [
+          3.8,
+          2.6,
+          6.5
+        ],
+        "portrait": [
+          3.0,
+          2.7,
+          9.5
+        ]
+      },
+      "segments": [
+        {
+          "start": 360,
+          "duration": 15,
+          "text": {
+            "english": "Walking requires more than swinging legs. Each supporting foot must remain in contact while the other foot advances. Here the robot demonstrates a slow, authored stepping pattern. The foot targets and knee bends are coordinated geometrically, rather than produced by a validated dynamics controller.",
+            "telugu": "నడక అంటే కాళ్లు ఊపడం మాత్రమే కాదు. ఒక పాదం ఆధారంగా ఉండగా మరొకటి ముందుకు రావాలి. ఇక్కడ నెమ్మదిగా అడుగు వేయడం చూపిస్తున్నాం. పాదం స్థానం, మోకాలి వంపును geometry తో అమర్చాం. ఇది పరీక్షించిన physics controller కాదు.",
+            "hindi": "चलना केवल पैर झुलाना नहीं है। एक पांव जमीन पर सहारा देता है, जबकि दूसरा आगे बढ़ता है। यहां धीमी authored stepping दिखाई गई है। पांव के लक्ष्य और घुटनों का मोड़ geometry से मिलाए गए हैं, किसी प्रमाणित dynamics controller से नहीं।"
+          },
+          "audio": {
+            "english": "/audio/english/7-1.wav",
+            "telugu": "/audio/telugu/7-1.wav",
+            "hindi": "/audio/hindi/7-1.wav"
+          }
+        },
+        {
+          "start": 375,
+          "duration": 15,
+          "text": {
+            "english": "The support region is the area associated with contacting feet. For slow static balance, keeping the center of mass projection inside that region is a useful idea. During dynamic walking, momentum and contact forces also matter, so that simple rule is insufficient.",
+            "telugu": "నేలను తాకే పాదాలు ఏర్పరిచే ప్రాంతాన్ని support region గా భావించవచ్చు. నెమ్మదిగా నిలబడేటప్పుడు ద్రవ్యరాశి కేంద్రం నీడ ఆ ప్రాంతంలో ఉండటం ఉపయోగకరమైన ఆలోచన. వేగంగా నడిచేటప్పుడు momentum, నేల నుంచి బలాలు కూడా ముఖ్యం.",
+            "hindi": "जमीन को छूते पांवों से जुड़ा क्षेत्र support region है। धीमे स्थिर संतुलन में द्रव्यमान केंद्र का जमीन पर प्रक्षेप इस क्षेत्र के अंदर रखना उपयोगी है। तेज चलने में momentum और संपर्क बल भी जरूरी हैं। यह आसान नियम अकेला पर्याप्त नहीं।"
+          },
+          "audio": {
+            "english": "/audio/english/7-2.wav",
+            "telugu": "/audio/telugu/7-2.wav",
+            "hindi": "/audio/hindi/7-2.wav"
+          }
+        },
+        {
+          "start": 390,
+          "duration": 15,
+          "text": {
+            "english": "Watch the pelvis shift and the knees bend as support changes. Ankles help orient the feet. The dot and ground projection are illustrative balance cues, not a computed physical center of mass. No force sensors or collision dynamics are being simulated here.",
+            "telugu": "నడుము పక్కకు మారడం, మోకాళ్లు వంగడం గమనించండి. చీలమండ పాదం దిశను సర్దుతుంది. చుక్క, నేలపై గీత balance ను వివరించే సూచనలు మాత్రమే. నిజంగా ద్రవ్యరాశి కేంద్రాన్ని లెక్కించడం లేదు. contact forces ను simulation చేయడం లేదు.",
+            "hindi": "सहारा बदलते समय श्रोणि का खिसकना और घुटनों का मुड़ना देखिए। टखने पांव की दिशा संभालते हैं। बिंदु और जमीन की रेखाएं केवल संतुलन के संकेत हैं। यहां असली द्रव्यमान केंद्र या contact forces की गणना नहीं हो रही है।"
+          },
+          "audio": {
+            "english": "/audio/english/7-3.wav",
+            "telugu": "/audio/telugu/7-3.wav",
+            "hindi": "/audio/hindi/7-3.wav"
+          }
+        },
+        {
+          "start": 405,
+          "duration": 15,
+          "text": {
+            "english": "Real walking controllers combine models, inertial signals, joint feedback and often contact or force measurements. They adjust motion as conditions change. Our animation teaches the relationships; it does not demonstrate that this design could walk safely in the physical world.",
+            "telugu": "నిజమైన walking controller శరీర నమూనా, IMU, కీళ్ల feedback, తరచూ force sensors ను కలిపి వాడుతుంది. పరిస్థితి మారితే కదలికను సరిచేస్తుంది. ఈ animation భాగాల సంబంధాన్ని నేర్పుతుంది. ఈ నమూనా నిజంగా సురక్షితంగా నడుస్తుందని నిరూపించదు.",
+            "hindi": "वास्तविक walking controllers मॉडल, IMU, joint feedback और अक्सर force माप मिलाते हैं। हालात बदलने पर गति सुधारी जाती है। यह animation हिस्सों का संबंध सिखाती है। इससे साबित नहीं होता कि यह डिजाइन वास्तविक दुनिया में सुरक्षित चल सकता है।"
+          },
+          "audio": {
+            "english": "/audio/english/7-4.wav",
+            "telugu": "/audio/telugu/7-4.wav",
+            "hindi": "/audio/hindi/7-4.wav"
+          }
+        }
+      ],
+      "cameraKeyframes": [
+        {
+          "time": 0,
+          "target": [
+            0,
+            1.7,
+            0
+          ],
+          "position": {
+            "landscape": [
+              3.8,
+              2.6,
+              6.5
+            ],
+            "portrait": [
+              3.0,
+              2.7,
+              9.5
+            ]
+          }
+        },
+        {
+          "time": 60,
+          "target": [
+            0,
+            1.7,
+            0
+          ],
+          "position": {
+            "landscape": [
+              3.8,
+              2.6,
+              6.5
+            ],
+            "portrait": [
+              3.0,
+              2.7,
+              9.5
+            ]
+          }
+        }
+      ],
+      "labelEvents": [
+        {
+          "start": 0,
+          "end": 15,
+          "components": [
+            "hip"
+          ]
+        },
+        {
+          "start": 15,
+          "end": 30,
+          "components": [
+            "knee"
+          ]
+        },
+        {
+          "start": 30,
+          "end": 45,
+          "components": [
+            "ankle"
+          ]
+        },
+        {
+          "start": 45,
+          "end": 60,
+          "components": [
+            "hip"
+          ]
+        }
+      ],
+      "animationEvents": [
+        {
+          "start": 0,
+          "duration": 15,
+          "cue": "alternating-foot-contact"
+        },
+        {
+          "start": 15,
+          "duration": 15,
+          "cue": "support-region"
+        },
+        {
+          "start": 30,
+          "duration": 15,
+          "cue": "body-shift"
+        },
+        {
+          "start": 45,
+          "duration": 15,
+          "cue": "balance-feedback"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "A future we build",
+      "subtitle": "Applications, limitations & recap",
+      "start": 420,
+      "duration": 60,
+      "objectives": [
+        "Applications, limitations & recap"
+      ],
+      "focus": [
+        "head",
+        "computer",
+        "hand"
+      ],
+      "camera": {
+        "landscape": [
+          3.8,
+          2.6,
+          6.5
+        ],
+        "portrait": [
+          3.0,
+          2.7,
+          9.5
+        ]
+      },
+      "segments": [
+        {
+          "start": 420,
+          "duration": 15,
+          "text": {
+            "english": "Humanoid robots can assist industrial work, move items in logistics trials, support laboratory research and offer educational demonstrations. Human-robot interaction studies investigate how people communicate with machines. The suitability of a humanoid depends on the task and environment.",
+            "telugu": "Humanoid robots పరిశ్రమల్లో సహాయం, సరకు కదిలించే ప్రయోగాలు, పరిశోధన, విద్యలో ఉపయోగపడవచ్చు. మనుషులు రోబోట్‌తో ఎలా మాట్లాడతారో కూడా అధ్యయనం చేస్తారు. ప్రతి పనికీ humanoid సరిపోదు. పని, పరిసరాలను బట్టి ఎంపిక చేయాలి.",
+            "hindi": "humanoid robots औद्योगिक सहायता, logistics के प्रयोग, शोध प्रयोगशालाओं और शिक्षा में काम आ सकते हैं। human robot interaction में लोग मशीन से कैसे संवाद करते हैं, इसका अध्ययन होता है। उपयुक्त रोबोट का चुनाव काम और वातावरण पर निर्भर करता है।"
+          },
+          "audio": {
+            "english": "/audio/english/8-1.wav",
+            "telugu": "/audio/telugu/8-1.wav",
+            "hindi": "/audio/hindi/8-1.wav"
+          }
+        },
+        {
+          "start": 435,
+          "duration": 15,
+          "text": {
+            "english": "A robot that succeeds in one carefully arranged scene may fail elsewhere. Lighting changes, clutter, fragile objects and uneven surfaces create uncertainty. Battery life, heat, cost, maintenance and reliability all limit deployment. Human supervision and task-specific safety engineering remain essential.",
+            "telugu": "ఒక చోట బాగా పనిచేసిన రోబోట్ మరోచోట విఫలం కావచ్చు. వెలుతురు మారడం, అడ్డంకులు, సున్నితమైన వస్తువులు సమస్యలు తెస్తాయి. బ్యాటరీ, వేడి, ఖర్చు, మరమ్మతులు, నమ్మకత్వం పరిమితులు. మనుషుల పర్యవేక్షణ, ప్రత్యేక భద్రతా పద్ధతులు అవసరం.",
+            "hindi": "एक व्यवस्थित जगह में सफल रोबोट दूसरी जगह असफल हो सकता है। बदलती रोशनी, बिखरा सामान, नाजुक वस्तुएं और असमतल जमीन चुनौतियां हैं। बैटरी, गर्मी, लागत, रखरखाव और विश्वसनीयता सीमाएं बनते हैं। मानवीय निगरानी और काम के अनुसार सुरक्षा व्यवस्था जरूरी रहती है।"
+          },
+          "audio": {
+            "english": "/audio/english/8-2.wav",
+            "telugu": "/audio/telugu/8-2.wav",
+            "hindi": "/audio/hindi/8-2.wav"
+          }
+        },
+        {
+          "start": 450,
+          "duration": 15,
+          "text": {
+            "english": "Remember the complete cycle: sense the world, estimate the situation, plan an action, control the actuators, and measure what happened. Intelligence emerges from the coordinated system. Neither a camera, a motor nor an AI model can do the whole job alone.",
+            "telugu": "మొత్తం చక్రం గుర్తుంచుకోండి. గుర్తించు, పరిస్థితిని అంచనా వేయి, ప్రణాళిక చేయి, కదలికను నియంత్రించు, ఫలితాన్ని కొలువు. భాగాలన్నీ కలిసి పనిచేయాలి. ఒక్క కెమెరా, మోటార్ లేదా AI model మొత్తం పనిని ఒంటరిగా చేయలేదు.",
+            "hindi": "पूरा चक्र याद करें। दुनिया को महसूस करना, स्थिति का अनुमान लगाना, योजना बनाना, actuators नियंत्रित करना और परिणाम मापना। सभी हिस्से मिलकर काम करते हैं। अकेला कैमरा, मोटर या AI model पूरा काम नहीं कर सकता। feedback चक्र को बंद करता है।"
+          },
+          "audio": {
+            "english": "/audio/english/8-3.wav",
+            "telugu": "/audio/telugu/8-3.wav",
+            "hindi": "/audio/hindi/8-3.wav"
+          }
+        },
+        {
+          "start": 465,
+          "duration": 15,
+          "text": {
+            "english": "You have explored the robot from its shell to its feedback loop. Enter Explore Mode to inspect components, move the elbow and reveal internal systems. Replay any chapter in your chosen language. VisionicX AI and Robotics Atlas is powered by VisionariesAI Labs Private Limited.",
+            "telugu": "బయటి కవచం నుంచి feedback వరకు చూశాం. ఇప్పుడు Explore లో భాగాలను ఎంచుకోండి. మోచేయి కదపండి. లోపలి వ్యవస్థలు చూడండి. ఏ అధ్యాయాన్నైనా మీ భాషలో మళ్లీ చూడవచ్చు. VisionicX AI and Robotics Atlas. Powered by VisionariesAI Labs Private Limited.",
+            "hindi": "आपने कवच से feedback तक रोबोट को देखा। Explore में हिस्से चुनें, कोहनी चलाएं और अंदर की व्यवस्था देखें। अपनी भाषा में कोई भी अध्याय दोबारा देखें। VisionicX AI and Robotics Atlas. Powered by VisionariesAI Labs Private Limited."
+          },
+          "audio": {
+            "english": "/audio/english/8-4.wav",
+            "telugu": "/audio/telugu/8-4.wav",
+            "hindi": "/audio/hindi/8-4.wav"
+          }
+        }
+      ],
+      "cameraKeyframes": [
+        {
+          "time": 0,
+          "target": [
+            0,
+            1.7,
+            0
+          ],
+          "position": {
+            "landscape": [
+              3.8,
+              2.6,
+              6.5
+            ],
+            "portrait": [
+              3.0,
+              2.7,
+              9.5
+            ]
+          }
+        },
+        {
+          "time": 60,
+          "target": [
+            0,
+            1.7,
+            0
+          ],
+          "position": {
+            "landscape": [
+              3.8,
+              2.6,
+              6.5
+            ],
+            "portrait": [
+              3.0,
+              2.7,
+              9.5
+            ]
+          }
+        }
+      ],
+      "labelEvents": [
+        {
+          "start": 0,
+          "end": 15,
+          "components": [
+            "head"
+          ]
+        },
+        {
+          "start": 15,
+          "end": 30,
+          "components": [
+            "computer"
+          ]
+        },
+        {
+          "start": 30,
+          "end": 45,
+          "components": [
+            "hand"
+          ]
+        },
+        {
+          "start": 45,
+          "end": 60,
+          "components": [
+            "head"
+          ]
+        }
+      ],
+      "animationEvents": [
+        {
+          "start": 0,
+          "duration": 15,
+          "cue": "applications"
+        },
+        {
+          "start": 15,
+          "duration": 15,
+          "cue": "limitations"
+        },
+        {
+          "start": 30,
+          "duration": 15,
+          "cue": "system-cycle"
+        },
+        {
+          "start": 45,
+          "duration": 15,
+          "cue": "explore-transition"
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "question": "Which component measures joint position?",
+      "options": [
+        "Encoder",
+        "Battery",
+        "Outer shell"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "Does every motor control loop need a language model?",
+      "options": [
+        "Yes",
+        "No"
+      ],
+      "answer": 1
+    },
+    {
+      "question": "Is this walking demonstration physically validated?",
+      "options": [
+        "Yes",
+        "No"
+      ],
+      "answer": 1
+    }
+  ],
+  "explore": {
+    "elbow": [
+      0,
+      125
+    ]
+  }
+}

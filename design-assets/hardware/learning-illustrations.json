@@ -1,0 +1,65 @@
+{
+  "generator": "OpenAI built-in image generation",
+  "illustrations": {
+    "path-electronics": {
+      "asset": "public/images/learning-illustrations/path-electronics.webp",
+      "prompt": "Photorealistic editorial engineering illustration for an educational robotics learning card. Landscape 3:2. Organized electronics learning bench with a partially populated breadboard, multimeter, loose resistors and switches sorted in separate trays. Clean modern classroom workshop, cool gray and restrained blue accents, sharp component details, soft daylight, generous edge clearance, realistic materials. No readable lettering, brands, watermarks or graphic overlays. Safe low-voltage teaching setup."
+    },
+    "path-controllers": {
+      "asset": "public/images/learning-illustrations/path-controllers.webp",
+      "prompt": "Photorealistic editorial engineering illustration for an educational robotics learning card. Landscape 3:2. Three distinct development boards arranged on a gray anti-static work mat, a compact MCU board, Linux single board computer and fan-cooled accelerator, angled overhead. Clean modern classroom workshop, cool gray and restrained blue accents, sharp component details, soft daylight, generous edge clearance, realistic materials. No readable lettering, brands, watermarks or graphic overlays. Safe low-voltage teaching setup."
+    },
+    "path-sensors": {
+      "asset": "public/images/learning-illustrations/path-sensors.webp",
+      "prompt": "Photorealistic editorial engineering illustration for an educational robotics learning card. Landscape 3:2. Small environmental sensing station with exposed temperature, light and distance sensors connected to a compact controller beside a graph display. Clean modern classroom workshop, cool gray and restrained blue accents, sharp component details, soft daylight, generous edge clearance, realistic materials. No readable lettering, brands, watermarks or graphic overlays. Safe low-voltage teaching setup."
+    },
+    "path-robotics": {
+      "asset": "public/images/learning-illustrations/path-robotics.webp",
+      "prompt": "Photorealistic editorial engineering illustration for an educational robotics learning card. Landscape 3:2. Compact wheeled rover beside a small articulated arm and exposed gear train on a training bench, all in focus. Clean modern classroom workshop, cool gray and restrained blue accents, sharp component details, soft daylight, generous edge clearance, realistic materials. No readable lettering, brands, watermarks or graphic overlays. Safe low-voltage teaching setup."
+    },
+    "path-anatomy": {
+      "asset": "public/images/learning-illustrations/path-anatomy.webp",
+      "prompt": "Photorealistic editorial engineering illustration for an educational robotics learning card. Landscape 3:2. Partially open humanoid robot on a clean engineering display stand with exposed torso, shoulder mechanisms and limbs, three-quarter full-body view. Clean modern classroom workshop, cool gray and restrained blue accents, sharp component details, soft daylight, generous edge clearance, realistic materials. No readable lettering, brands, watermarks or graphic overlays. Safe low-voltage teaching setup."
+    },
+    "assessment-electronics": {
+      "asset": "public/images/learning-illustrations/assessment-electronics.webp",
+      "prompt": "Photorealistic editorial engineering illustration for an educational robotics learning card. Landscape 3:2. Hands with insulated multimeter probes measuring a low-voltage breadboard circuit, multimeter and red LED prominently visible. Clean modern classroom workshop, cool gray and restrained blue accents, sharp component details, soft daylight, generous edge clearance, realistic materials. No readable lettering, brands, watermarks or graphic overlays. Safe low-voltage teaching setup."
+    },
+    "assessment-controllers": {
+      "asset": "public/images/learning-illustrations/assessment-controllers.webp",
+      "prompt": "Photorealistic editorial engineering illustration for an educational robotics learning card. Landscape 3:2. Close-up of a microcontroller connected to a small logic analyzer and oscilloscope displaying simple digital timing pulses. Clean modern classroom workshop, cool gray and restrained blue accents, sharp component details, soft daylight, generous edge clearance, realistic materials. No readable lettering, brands, watermarks or graphic overlays. Safe low-voltage teaching setup."
+    },
+    "assessment-sensors": {
+      "asset": "public/images/learning-illustrations/assessment-sensors.webp",
+      "prompt": "Photorealistic editorial engineering illustration for an educational robotics learning card. Landscape 3:2. Pair of ultrasonic transducers facing a matte calibration block mounted on a measurement rail, side view of the sensor test fixture. Clean modern classroom workshop, cool gray and restrained blue accents, sharp component details, soft daylight, generous edge clearance, realistic materials. No readable lettering, brands, watermarks or graphic overlays. Safe low-voltage teaching setup."
+    },
+    "assessment-robotics": {
+      "asset": "public/images/learning-illustrations/assessment-robotics.webp",
+      "prompt": "Photorealistic editorial engineering illustration for an educational robotics learning card. Landscape 3:2. Bench-top mechanical feedback rig with an encoder on a steel shaft, two exposed intermeshing gears and a motor, angled close view. Clean modern classroom workshop, cool gray and restrained blue accents, sharp component details, soft daylight, generous edge clearance, realistic materials. No readable lettering, brands, watermarks or graphic overlays. Safe low-voltage teaching setup."
+    },
+    "assessment-anatomy": {
+      "asset": "public/images/learning-illustrations/assessment-anatomy.webp",
+      "prompt": "Photorealistic editorial engineering illustration for an educational robotics learning card. Landscape 3:2. Exploded robotic elbow module with encoder disc, hinge housing, routed harness and fasteners aligned on a workbench. Clean modern classroom workshop, cool gray and restrained blue accents, sharp component details, soft daylight, generous edge clearance, realistic materials. No readable lettering, brands, watermarks or graphic overlays. Safe low-voltage teaching setup."
+    },
+    "challenge-electronics": {
+      "asset": "public/images/learning-illustrations/challenge-electronics.webp",
+      "prompt": "Photorealistic editorial engineering illustration for an educational robotics learning card. Landscape 3:2. Two tidy breadboard LED test circuits side by side with distinct striped resistors and two meters for current comparison. Clean modern classroom workshop, cool gray and restrained blue accents, sharp component details, soft daylight, generous edge clearance, realistic materials. No readable lettering, brands, watermarks or graphic overlays. Safe low-voltage teaching setup."
+    },
+    "challenge-controllers": {
+      "asset": "public/images/learning-illustrations/challenge-controllers.webp",
+      "prompt": "Photorealistic editorial engineering illustration for an educational robotics learning card. Landscape 3:2. Desktop robot arm prototype beside three different candidate controller boards laid out separately on a blue comparison mat. Clean modern classroom workshop, cool gray and restrained blue accents, sharp component details, soft daylight, generous edge clearance, realistic materials. No readable lettering, brands, watermarks or graphic overlays. Safe low-voltage teaching setup."
+    },
+    "challenge-sensors": {
+      "asset": "public/images/learning-illustrations/challenge-sensors.webp",
+      "prompt": "Photorealistic editorial engineering illustration for an educational robotics learning card. Landscape 3:2. Temperature probe in a clear water bath alongside a reference thermometer and a small telemetry screen with a trend graph. Clean modern classroom workshop, cool gray and restrained blue accents, sharp component details, soft daylight, generous edge clearance, realistic materials. No readable lettering, brands, watermarks or graphic overlays. Safe low-voltage teaching setup."
+    },
+    "challenge-robotics": {
+      "asset": "public/images/learning-illustrations/challenge-robotics.webp",
+      "prompt": "Photorealistic editorial engineering illustration for an educational robotics learning card. Landscape 3:2. Small robotic arm carrying a foam cube toward a colored target on a marked test fixture, visible mechanical end-stop and encoder. Clean modern classroom workshop, cool gray and restrained blue accents, sharp component details, soft daylight, generous edge clearance, realistic materials. No readable lettering, brands, watermarks or graphic overlays. Safe low-voltage teaching setup."
+    },
+    "challenge-anatomy": {
+      "asset": "public/images/learning-illustrations/challenge-anatomy.webp",
+      "prompt": "Photorealistic editorial engineering illustration for an educational robotics learning card. Landscape 3:2. Single articulated robotic hand prototype on a vise stand, visible tendons and servo actuator, alongside a rough unlabeled sketch and test foam block. Clean modern classroom workshop, cool gray and restrained blue accents, sharp component details, soft daylight, generous edge clearance, realistic materials. No readable lettering, brands, watermarks or graphic overlays. Safe low-voltage teaching setup."
+    }
+  }
+}

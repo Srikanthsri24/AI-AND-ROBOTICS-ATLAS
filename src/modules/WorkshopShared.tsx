@@ -1,0 +1,6 @@
+import {ArrowRight,BookOpen,Code2,Wrench,BrainCircuit,GraduationCap} from 'lucide-react';
+import {familyImage} from '../data/hardware';
+import '../styles/workshops.css';
+const icons={circuit:Code2,projects:Wrench,ai:BrainCircuit,learning:GraduationCap};
+export function WorkshopHero({kind,title,headline,description,image,stats,action,onAction}:{kind:keyof typeof icons;title:string;headline:string;description:string;image:string;stats:string[];action?:string;onAction?:()=>void}){const Icon=icons[kind];return <section className={`ws-hero ws-${kind}`}><div><span className="ha-eyebrow"><Icon size={15}/> {title.toUpperCase()}</span><h1>{headline}</h1><p>{description}</p><div className="ws-hero-bottom">{action&&<button onClick={onAction}>{action}<ArrowRight size={15}/></button>}<span>{stats.join(' · ')}</span></div></div><figure><img src={familyImage(image,1280)} alt={`${title} representative workshop illustration`} width="1280" height="853"/><figcaption><BookOpen size={13}/> UNDERSTAND · EXPERIMENT · CREATE</figcaption></figure></section>}
+export function WorkshopTitle({eyebrow,title,description}:{eyebrow:string;title:string;description?:string}){return <div className="ws-section-title"><span className="ha-kicker">{eyebrow}</span><h2>{title}</h2>{description&&<p>{description}</p>}</div>}

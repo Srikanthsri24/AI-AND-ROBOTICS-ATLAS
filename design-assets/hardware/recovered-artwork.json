@@ -1,0 +1,117 @@
+{
+  "mapping": {
+    "0": "arduino-family",
+    "1": "robots-arms",
+    "2": "robots-emerging",
+    "3": "robots-humanoid",
+    "4": "robots-actuation",
+    "5": "robots-mechanics",
+    "6": "anatomy-head",
+    "7": "robots-service",
+    "8": "anatomy-arms",
+    "9": "robots-exploration",
+    "10": "anatomy-hands",
+    "11": "robots-specialized",
+    "12": "anatomy-torso",
+    "13": "robots-ground",
+    "14": "anatomy-legs",
+    "15": "robots-legged",
+    "16": "anatomy-locomotion",
+    "17": "anatomy-actuators",
+    "18": "anatomy-brain",
+    "19": "anatomy-feedback",
+    "20": "anatomy-power",
+    "21": "anatomy-advanced",
+    "22": "anatomy-engineering"
+  },
+  "subjects": [
+    [
+      "robots-humanoid",
+      "A polished educational white and silver full-body humanoid robot standing upright, with a separate articulated robotic hand nearby. Visible mechanically plausible joints, no face expression."
+    ],
+    [
+      "robots-arms",
+      "An orange six-axis industrial robotic arm beside a compact white collaborative arm and a small desktop servo arm. Precise joints and grippers."
+    ],
+    [
+      "robots-ground",
+      "A compact yellow four-wheel rover with range sensor next to a blue tracked inspection robot and small mecanum wheeled mobile platform."
+    ],
+    [
+      "robots-legged",
+      "A detailed robotic quadruped with four articulated legs beside a small six-legged robot and a flexible modular snake robot."
+    ],
+    [
+      "robots-exploration",
+      "A quadcopter drone with four guarded propellers next to a small yellow underwater tethered ROV and a compact six-wheel planetary rover."
+    ],
+    [
+      "robots-service",
+      "A compact warehouse mobile robot carrying a shelf tote, a circular floor cleaning robot, and a small indoor delivery robot."
+    ],
+    [
+      "robots-specialized",
+      "A compact agricultural robot with crop camera and soft fruit gripper, beside an assistive exoskeleton leg mechanism. No humans, no medical procedure."
+    ],
+    [
+      "robots-mechanics",
+      "Precisely machined brass spur gear pair, steel ball bearing, four-bar linkage, timing belt and pulley assembly and miniature lead screw linear rail."
+    ],
+    [
+      "robots-actuation",
+      "A brushless motor, servo actuator, pneumatic cylinder, parallel robotic gripper and compact robot power distribution PCB. Precisely arranged mechanical components."
+    ],
+    [
+      "robots-emerging",
+      "A translucent soft silicone pneumatic gripper beside small modular cube robots and a coordinated group of three miniature wheeled swarm robots. Realistically engineered research concepts."
+    ],
+    [
+      "anatomy-head",
+      "An exploded robot head assembly: white protective skull shell, twin camera lenses, microphone board, internal metal brackets and two-axis neck gimbal, mechanically plausible separated layers."
+    ],
+    [
+      "anatomy-arms",
+      "An exploded articulated robot arm with shoulder bearing, upper arm link, elbow geared motor, forearm shell and wrist joint aligned in assembly order."
+    ],
+    [
+      "anatomy-hands",
+      "An open white robotic hand with articulated fingers, opposable thumb, palm frame and visible tendon cables and pulleys, exquisite mechanical detail."
+    ],
+    [
+      "anatomy-torso",
+      "An open humanoid torso chassis with metal rib-like structural rails, central articulated waist joint, neatly routed wiring and cooling fan."
+    ],
+    [
+      "anatomy-legs",
+      "A pair of humanoid robot legs from pelvis through knees and ankles to broad feet, one outer panel removed to show geared joints and cables."
+    ],
+    [
+      "anatomy-locomotion",
+      "A technical product arrangement of a robot wheel hub with encoder, track and sprocket assembly, suspension spring, robotic leg joint and a guarded small thruster."
+    ],
+    [
+      "anatomy-actuators",
+      "An exploded brushless servo actuator: rotor, copper stator, steel gearbox, encoder disc, output shaft and motor controller board, arranged on a common axis."
+    ],
+    [
+      "anatomy-brain",
+      "An open robot electronics bay showing main single-board computer with heatsink, smaller real-time control PCB, motor driver modules and tidy internal wiring."
+    ],
+    [
+      "anatomy-feedback",
+      "A miniature robot joint with rotary encoder, force torque sensor ring, IMU breakout, depth camera and fingertip tactile sensor array neatly arranged."
+    ],
+    [
+      "anatomy-power",
+      "Robot battery pack secured in a metal mounting tray, BMS circuit board, fused power distribution module, DC converter, red emergency stop and protective enclosure."
+    ],
+    [
+      "anatomy-advanced",
+      "A close view of an elastic robot joint with visible spring and torque sensor beside adaptive tendon fingers and modular quick-connect robot limb interface."
+    ],
+    [
+      "anatomy-engineering",
+      "An elegant exploded-view robot leg assembly with precisely spaced fasteners, link plates, bearings, motor and gearbox, on a subtle pale blueprint-grid background, no text."
+    ]
+  ]
+}
