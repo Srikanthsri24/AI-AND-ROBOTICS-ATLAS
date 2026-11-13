@@ -1,19 +1,198 @@
-import {useEffect,useRef,useState} from 'react';
-import {ArrowRight,Check,Download,GraduationCap,BookOpen,Award,Plus} from 'lucide-react';
+import {useEffect, useRef, useState} from 'react';
+import {ArrowLeft, ArrowRight, Award, BookOpen, Check, ClipboardCheck, Download, FlaskConical, GraduationCap} from 'lucide-react';
+import {assessmentBank, learningPaths, practiceCertificate, type PracticeQuiz} from '../data/learning-curriculum';
 import {entries} from '../data/atlas';
-import {assessmentBank as quizzes,learningPaths,practiceCertificate} from '../data/learning-curriculum';
-import {hardwareFamilies} from '../data/hardware';
 import {aiCurriculum} from '../data/ai-curriculum';
-import {WorkshopHero,WorkshopTitle} from './WorkshopShared';
+import {hardwareFamilies} from '../data/hardware';
 import TeacherWorkspace from './TeacherWorkspace';
-import {completeLesson,download,updateData,useAtlas} from './state';
+import {download, updateData, useAtlas} from './state';
+import '../styles/learning-center.css';
 
-const learningImage = (kind: 'path' | 'assessment' | 'challenge', id: string) =>
-  `./images/learning-illustrations/${kind}-${id}.webp`;
+const tabs = ['Learning paths', 'Assessments', 'Practical challenges', 'Progress', 'Teacher workspace'] as const;
+const image = (kind: string, id: string) => `./images/learning-illustrations/${kind}-${id}.webp`;
+const topicName = (id: string) => hardwareFamilies.find(item=>item.id===id)?.title ?? entries.find(item=>item.id===id)?.name ?? aiCurriculum.find(item=>'ai-'+item.id===id)?.title ?? id;
+const passingScore = 67;
 
-export default function Learning({initialAssessment,progressOnly=false,onEntry,onLesson,onNavigate}:{initialAssessment?:string|null;onNavigate?:(n:number)=>void;progressOnly?:boolean;onEntry:(id:string)=>void;onLesson:()=>void}){const data=useAtlas(),[tab,setTab]=useState(progressOnly?'Progress':'Learning paths'),[quiz,setQuiz]=useState<string|null>(null),[answers,setAnswers]=useState<Record<number,number>>({}),[submitted,setSubmitted]=useState(false),[assignment,setAssignment]=useState(''),[due,setDue]=useState(''),[error,setError]=useState('');useEffect(()=>{if(initialAssessment&&quizzes.some(q=>q.id===initialAssessment)){setQuiz(initialAssessment);setAnswers({});setSubmitted(false)}},[initialAssessment]);const current=quizzes.find(q=>q.id===quiz);const paths=learningPaths;const anchor=useRef<HTMLElement>(null);const topicName=(id:string)=>hardwareFamilies.find(f=>f.id===id)?.title||entries.find(e=>e.id===id)?.name||aiCurriculum.find(t=>'ai-'+t.id===id)?.title||id;if(current){const score=Math.round(current.questions.filter((q,i)=>answers[i]===q[2]).length/current.questions.length*100);return <section className="ws-page module-section quiz-center lw-quiz"><button className="module-back" onClick={()=>{setQuiz(null);setSubmitted(false);setAnswers({})}}>← Assessment center</button><span className="module-eyebrow">PRACTICE ASSESSMENT</span><h1>{current.title}</h1>
-  <img className="lw-quiz-image" src={learningImage("assessment", current.id)} alt={`AI-generated illustration for the ${current.title} assessment`} width="1200" height="800"/>
-  <p>Answer every question, then submit to see your result and explanations. {Object.keys(answers).length} / {current.questions.length} answered.</p>{current.questions.map(([question,options,correct,why],i)=><fieldset key={question}><legend>{i+1}. {question}</legend>{options.map((o,j)=><label className={submitted&&j===correct?'correct':answers[i]===j?'selected':''} key={o}><input type="radio" name={`q${i}`} checked={answers[i]===j} disabled={submitted} onChange={()=>setAnswers({...answers,[i]:j})}/>{o}</label>)}{submitted&&<p className={answers[i]===correct?'answer-correct':'answer-review'}>{answers[i]===correct?'Correct. ':'Review: '}{why}</p>}</fieldset>)}{!submitted?<button className="module-primary" disabled={Object.keys(answers).length<current.questions.length} onClick={()=>{setSubmitted(true);updateData(d=>({...d,scores:{...d.scores,[current.id]:Math.max(d.scores[current.id]||0,score)}}))}}>Submit assessment</button>:<div className="quiz-result" role="status"><Award size={36}/><h2>{score}% · {score>=67?'Good progress':'Keep practicing'}</h2><p>Your best score is saved. Review the explanations and revisit topics before trying again.</p><button onClick={()=>{setAnswers({});setSubmitted(false)}}>Try again</button><button onClick={()=>download(current.id+'-learning-record.txt',`VisionariesAI Atlas\nPractice completion record\nLearner: ${data.settings.name}\nAssessment: ${current.title}\nScore: ${score}%\nDate: ${new Date().toLocaleDateString()}\n\nSelf-study record; not an accredited certification.`)}><Download size={16}/> Download learning record</button>{score>=67&&<button onClick={()=>download(current.id+'-practice-achievement.svg',practiceCertificate(data.settings.name,current.title,score,new Date().toLocaleDateString()),'image/svg+xml')}><Award size={16}/> Download practice achievement</button>}</div>}</section>}
-return <div className="ws-page learning-workshop"><WorkshopHero kind="learning" title={progressOnly?'Your Learning Record':'Learning & Assessment'} headline="Turn exploration into understanding." description="Follow a clear learning path, explain what you observe, and check your understanding with practice and practical work. Your records stay on this device." image="anatomy-engineering" stats={['5 guided paths','30 practice questions','Practical challenges']} action="Choose a learning path" onAction={()=>{setTab('Learning paths');anchor.current?.scrollIntoView({block:'start'})}}/><section className="ws-anchor" ref={anchor}><div className="ws-tabs">{['Learning paths','Assessments','Practical challenges','Progress','Teacher workspace'].map(x=><button key={x} className={tab===x?'active':''} onClick={()=>setTab(x)}>{x}</button>)}</div>{tab==='Learning paths'?<div className="learning-paths"><WorkshopTitle eyebrow="A PURPOSEFUL LEARNING SEQUENCE" title="Start with the parts. Connect the system." description="Each curated path combines 2D and 3D family guides with a practice assessment and an applied exercise. Mark guides as explored to build your local record."/>{paths.map((p,i)=>{const complete=p.ids.filter(id=>data.completed.includes(id)).length;return <section className="module-section learning-path" key={p.title}><img className="lw-path-image" src={learningImage("path", p.quiz)} alt={`AI-generated illustration for the ${p.title} learning path`} width="1200" height="800" loading="lazy"/><div className="path-heading"><span className="path-number">0{i+1}</span><div><h2>{p.title}</h2><p>{p.desc}</p><span className="lw-level">{p.level} · {p.ids.length} family guides</span></div><span>{complete}/{p.ids.length} explored</span></div><div className="atlas-progress"><i style={{width:complete/p.ids.length*100+'%'}}/></div><div className="path-lessons">{p.ids.map((id,i)=><button key={id} onClick={()=>onEntry(id)}><span className={data.completed.includes(id)?'complete':''}>{data.completed.includes(id)?<Check size={16}/>:i+1}</span><div><strong>{topicName(id)}</strong><small>Explore · Understand · Apply</small></div><ArrowRight size={17}/></button>)}</div><button className="module-primary" onClick={()=>{setQuiz(p.quiz);setAnswers({});setSubmitted(false)}}>Practice assessment</button><button className="lw-collection-link" onClick={()=>onNavigate?.(p.module)}>Explore the full collection <ArrowRight size={14}/></button></section>})}<section className="module-section"><h2>Watch & Learn: the humanoid robot</h2><p>Eight narrated chapters with 3D inspection, subtitles, and a knowledge check.</p><button className="module-primary" onClick={onLesson}>Continue interactive lesson →</button></section></div>:tab==='Assessments'?<div className="catalog-grid">{quizzes.map(q=><article className="module-section" key={q.id}><img className="lw-assessment-image" src={learningImage("assessment", q.id)} alt={`AI-generated illustration for the ${q.title} assessment`} width="1200" height="800" loading="lazy"/><GraduationCap size={25}/><h2>{q.title}</h2><p>{q.questions.length} questions · Explanations after submission</p><p>Best score: {data.scores[q.id]===undefined?'Not attempted':data.scores[q.id]+'%'}</p><button className="module-primary" onClick={()=>{setQuiz(q.id);setSubmitted(false);setAnswers({})}}>Start assessment</button></article>)}</div>:tab==='Practical challenges'?<><WorkshopTitle eyebrow="APPLY, OBSERVE & EXPLAIN" title="Make the learning tangible." description="These exercises are self-directed practical work. Record your design, measurements and limitations in a project notebook; completion is not automatically verified."/><div className="lw-challenges">{paths.map((p,i)=><section key={p.quiz}>
-  <img className="lw-challenge-image" src={learningImage("challenge", p.quiz)} alt={`AI-generated illustration for the ${p.title} practical challenge`} width="1200" height="800" loading="lazy"/>
-  <span className="ha-kicker">CHALLENGE 0{i+1} · {p.level}</span><h2>{p.title}</h2><p>{p.challenge}</p><div className="lw-rubric"><strong>A useful submission includes</strong><span>A labeled 2D explanation</span><span>A relevant 3D inspection</span><span>An expected and observed result</span><span>One limitation or failure case</span></div><div><button onClick={()=>onEntry(p.ids[0])}>Review the starting guide <ArrowRight size={14}/></button><button onClick={()=>onNavigate?.(8)}>Open Project Builder</button></div></section>)}</div></>:tab==='Progress'?<><div className="module-stat-grid"><div><BookOpen/><strong>{data.completed.length}</strong><span>Topics explored</span></div><div><GraduationCap/><strong>{Object.keys(data.scores).length}</strong><span>Assessments attempted</span></div><div><Award/><strong>{Object.values(data.scores).filter(s=>s>=67).length}</strong><span>Assessments ≥ 67%</span></div><div><Check/><strong>{data.projects.filter(p=>p.completed.length===9).length}</strong><span>Project checklists completed</span></div></div><section className="module-section lw-achievements"><h2>Practice achievements</h2><p>Explore every guide in a path and score at least 67% in its practice assessment to earn its local self-study badge.</p><div>{paths.map(p=>{const earned=p.ids.every(id=>data.completed.includes(id))&&(data.scores[p.quiz]||0)>=67;return <article key={p.quiz} className={earned?'earned':''}><Award size={28}/><strong>{p.title}</strong><span>{earned?'Achievement recorded':'Keep exploring & practicing'}</span></article>})}</div></section><section className="module-section"><h2>Your learning activity</h2>{data.completed.length?<div className="activity-list">{data.completed.map(id=><button key={id} onClick={()=>onEntry(id)}><Check size={17}/>{topicName(id)}<ArrowRight size={15}/></button>)}</div>:<p>Explore a topic and choose “Mark as explored” to start your learning record.</p>}<button onClick={()=>download('atlas-progress.json',JSON.stringify({name:data.settings.name,completed:data.completed,scores:data.scores,projects:data.projects.map(p=>({title:p.title,stages:p.completed.length}))},null,2),'application/json')}>Export progress report</button></section></>:<TeacherWorkspace/>}</section></div>}
+type Props = {
+  initialAssessment?: string | null;
+  progressOnly?: boolean;
+  onEntry: (id:string)=>void;
+  onNavigate?: (page:number)=>void;
+};
+
+export default function Learning({initialAssessment, progressOnly=false, onEntry, onNavigate}: Props) {
+  const data = useAtlas();
+  const [tab,setTab] = useState<(typeof tabs)[number]>(progressOnly ? 'Progress' : 'Learning paths');
+  const [pathId,setPathId] = useState<string>();
+  const [quizId,setQuizId] = useState<string>();
+  const content = useRef<HTMLElement>(null);
+  useEffect(()=>{setQuizId(initialAssessment ?? undefined);},[initialAssessment]);
+  useEffect(()=>{setTab(progressOnly?'Progress':'Learning paths');setPathId(undefined);},[progressOnly]);
+  const quiz = assessmentBank.find(item=>item.id===quizId);
+  const path = learningPaths.find(item=>item.quiz===pathId);
+  function showTab(value:(typeof tabs)[number]) {
+    setTab(value);
+    setPathId(undefined);
+    setQuizId(undefined);
+  }
+  function openQuiz(id:string) {
+    setQuizId(id);
+    window.scrollTo({top:0});
+  }
+  if(initialAssessment==='watch') return <RobotLesson/>;
+  if(quiz) return <Assessment key={quiz.id} quiz={quiz} onBack={()=>{showTab('Assessments');window.scrollTo({top:0});}}/>;
+  return <div className="lc-page">
+    <header className="lc-hero">
+      <div><span><GraduationCap size={21}/> Atlas Learning</span>
+        <h1>{progressOnly?'Your learning record':'Learning & Assessment'}</h1>
+        <p>{progressOnly?'See the topics you’ve explored and review your assessment results.':'Explore how technology works, apply what you learn, and check your understanding at your own pace.'}</p>
+        <button className="lc-primary" onClick={()=>{showTab(progressOnly?'Progress':'Learning paths');content.current?.scrollIntoView({block:'start'});}}>{progressOnly?'View progress':'Explore learning paths'} <ArrowRight size={17}/></button>
+      </div>
+      <img src={image('path','robotics')} alt="Robotics learning workspace"/>
+    </header>
+    <nav className="lc-tabs" aria-label="Learning sections">{tabs.map(item=><button key={item} aria-pressed={item===tab} onClick={()=>showTab(item)}>{item}</button>)}</nav>
+    <section className="lc-content" ref={content} aria-label={tab}>
+      {tab==='Learning paths' && (path ? <div className="lc-panel">
+        <button className="lc-back" onClick={()=>setPathId(undefined)}><ArrowLeft size={16}/> All learning paths</button>
+        <h2>{path.title}</h2><p>{path.desc}</p>
+        <ol className="lc-guides">{path.ids.map(id=><li key={id}><button onClick={()=>onEntry(id)}>
+          {data.completed.includes(id)?<Check size={18}/>:<BookOpen size={18}/>}<span>{topicName(id)}</span><ArrowRight size={16}/>
+        </button></li>)}</ol>
+        <button className="lc-primary" onClick={()=>openQuiz(path.quiz)}>Practice assessment <ArrowRight size={16}/></button>
+      </div> : <>
+        <h2>Choose a learning path</h2>
+        <div className="lc-grid">{learningPaths.map(item=>{
+          const explored=item.ids.filter(id=>data.completed.includes(id)).length;
+          return <article className="lc-card" key={item.quiz}><img src={image('path',item.quiz)} alt="" loading="lazy"/>
+            <div><span className="lc-meta">{item.level} · {item.ids.length} guides</span><h3>{item.title}</h3><p>{item.desc}</p>
+              <progress value={explored} max={item.ids.length} aria-label={`${item.title} progress`}/><small>{explored} of {item.ids.length} guides explored</small>
+              <button className="lc-primary" onClick={()=>{setPathId(item.quiz);content.current?.scrollIntoView({block:'start'});}}>View path <ArrowRight size={16}/></button>
+            </div></article>;
+        })}</div>
+        <div className="lc-panel lc-feature"><div><h2>See a humanoid robot in action</h2><p>Watch how sensors, a controller, and motors work together to move a robot.</p></div><a className="lc-primary lc-link" href="#/learning/watch">Watch lesson <ArrowRight size={16}/></a></div>
+      </>)}
+      {tab==='Assessments' && <><h2>Check your understanding</h2><p>Answer one question at a time, then review the explanation for every answer.</p>
+        <div className="lc-grid">{assessmentBank.map(item=><article className="lc-card" key={item.id}><img src={image('assessment',item.id)} alt="" loading="lazy"/><div>
+          <span className="lc-meta">{item.questions.length} questions</span><h3>{item.title}</h3>
+          <p>{data.scores[item.id]===undefined?'Ready to practice':`Best score ${data.scores[item.id]}%`}</p>
+          <button className="lc-primary" onClick={()=>openQuiz(item.id)}>Start assessment <ArrowRight size={16}/></button>
+        </div></article>)}</div></>}
+      {tab==='Practical challenges' && <><h2>Put it into practice</h2><p>Pick a challenge and record what you expected, what you observed, and what you’d change.</p>
+        <div className="lc-grid">{learningPaths.map(item=><article className="lc-card" key={item.quiz}><img src={image('challenge',item.quiz)} alt="" loading="lazy"/><div>
+          <span className="lc-meta"><FlaskConical size={15}/> {item.level}</span><h3>{item.title}</h3><p>{item.challenge}</p>
+          <button className="lc-primary" onClick={()=>onEntry(item.ids[0])}>Open starting guide <ArrowRight size={16}/></button>
+        </div></article>)}</div>
+        {onNavigate&&<div className="lc-panel lc-feature"><div><h2>Document your build</h2><p>Use Project Builder to record your design and observations.</p></div><button className="lc-primary" onClick={()=>onNavigate(8)}>Open Project Builder <ArrowRight size={16}/></button></div>}
+      </>}
+      {tab==='Progress' && <div className="lc-panel"><h2>Your progress</h2><p>Progress and best scores are saved in this browser.</p>
+        <div className="lc-stats"><div><BookOpen/><strong>{data.completed.length}</strong>Topics explored</div><div><ClipboardCheck/><strong>{Object.keys(data.scores).length}</strong>Assessments attempted</div><div><Award/><strong>{Object.values(data.scores).filter(score=>score>=passingScore).length}</strong>Scores of 67% or higher</div></div>
+        <h3>Path achievements</h3><ul className="lc-progress-list">{learningPaths.map(item=>{
+          const explored=item.ids.filter(id=>data.completed.includes(id)).length;
+          const earned=explored===item.ids.length&&(data.scores[item.quiz]??0)>=passingScore;
+          return <li key={item.quiz}><strong>{item.title}</strong><span>{earned?'Achievement earned':`${explored} of ${item.ids.length} guides explored`}</span></li>;
+        })}</ul>
+        {data.completed.length>0&&<><h3>Recently explored</h3><ul className="lc-guides">{data.completed.slice(-6).reverse().map(id=><li key={id}><button onClick={()=>onEntry(id)}><Check size={16}/><span>{topicName(id)}</span><ArrowRight size={16}/></button></li>)}</ul></>}
+        <button className="lc-primary" onClick={()=>download('atlas-progress.json',JSON.stringify({name:data.settings.name,completed:data.completed,scores:data.scores,projects:data.projects.map(item=>({title:item.title,stages:item.completed.length}))},null,2),'application/json')}><Download size={16}/> Export progress</button>
+      </div>}
+      {tab==='Teacher workspace' && <TeacherWorkspace/>}
+    </section>
+  </div>;
+}
+
+function Assessment({quiz,onBack}:{quiz:PracticeQuiz;onBack:()=>void}) {
+  const data=useAtlas();
+  const [index,setIndex]=useState(0);
+  const [answers,setAnswers]=useState<Record<number,number>>({});
+  const [submitted,setSubmitted]=useState(false);
+  const heading=useRef<HTMLHeadingElement>(null);
+  useEffect(()=>{heading.current?.focus({preventScroll:true});},[index,submitted]);
+  const [question,options]=quiz.questions[index];
+  const total=quiz.questions.length;
+  const answered=Object.keys(answers).length;
+  const correctCount=quiz.questions.filter((entry,i)=>answers[i]===entry[2]).length;
+  const score=Math.round(correctCount/total*100);
+  const date=new Date().toLocaleDateString();
+  function submit() {
+    if(answered!==total) return;
+    updateData(d=>({...d,scores:{...d.scores,[quiz.id]:Math.max(d.scores[quiz.id]??0,score)}}));
+    setSubmitted(true);
+    window.scrollTo({top:0});
+  }
+  return <article className="lc-page lc-assessment">
+    <button className="lc-back" onClick={onBack}><ArrowLeft size={16}/> All assessments</button>
+    <header className="lc-assessment-heading"><img src={image('assessment',quiz.id)} alt=""/><div><span className="lc-meta">Practice assessment</span><h1>{quiz.title}</h1></div></header>
+    {submitted ? <section className="lc-panel">
+      <h2 ref={heading} tabIndex={-1}>You got {correctCount} of {total} correct</h2><p>Your score is {score}%. Your best score is saved in this browser.</p>
+      <div className="lc-actions">
+        <button className="lc-primary" onClick={()=>{setAnswers({});setIndex(0);setSubmitted(false);window.scrollTo({top:0});}}>Try again</button>
+        <button onClick={()=>download(quiz.id+'-learning-record.txt',`Atlas practice record\nLearner: ${data.settings.name}\nAssessment: ${quiz.title}\nScore: ${score}%\nDate: ${date}`)}><Download size={16}/> Learning record</button>
+        {score>=passingScore&&<button onClick={()=>download(quiz.id+'-practice-achievement.svg',practiceCertificate(data.settings.name,quiz.title,score,date),'image/svg+xml')}><Award size={16}/> Practice achievement</button>}
+      </div>
+      <h3>Review your answers</h3>
+      <ol className="lc-review">{quiz.questions.map(([prompt,choices,correct,why],i)=><li key={prompt}>
+        <strong>{prompt}</strong><p>Your answer: {choices[answers[i]]}</p><p>Correct answer: {choices[correct]}</p><p>{why}</p>
+      </li>)}</ol>
+    </section> : <section className="lc-panel">
+      <div className="lc-quiz-progress"><span>Question {index+1} of {total}</span><span>{answered} answered</span></div>
+      <progress value={answered} max={total} aria-label="Questions answered"/>
+      <h2 ref={heading} tabIndex={-1}>{question}</h2>
+      <fieldset className="lc-options"><legend className="ha-sr">Choose one answer</legend>
+        {options.map((option,i)=><label key={option}><input type="radio" name="assessment-answer" checked={answers[index]===i} onChange={()=>setAnswers(previous=>({...previous,[index]:i}))}/>{option}</label>)}
+      </fieldset>
+      <div className="lc-actions"><button disabled={index===0} onClick={()=>setIndex(index-1)}><ArrowLeft size={16}/> Previous</button>
+        {index+1<total?<button className="lc-primary" disabled={answers[index]===undefined} onClick={()=>setIndex(index+1)}>Next question <ArrowRight size={16}/></button>:<button className="lc-primary" disabled={answered!==total} onClick={submit}>See results <ArrowRight size={16}/></button>}
+      </div>
+    </section>}
+  </article>;
+}
+
+const robotChapters = [
+  {title:'Sense', part:'Sensors', caption:'The robot’s camera sees a block in its path. The sensor sends that information to the controller.'},
+  {title:'Decide', part:'Controller', caption:'The controller checks the reading and chooses to stop before stepping into the block.'},
+  {title:'Move', part:'Motors', caption:'Motors move the joints when the controller asks them to. Here the controller holds the robot in place.'},
+  {title:'Check again', part:'Feedback', caption:'The robot takes another reading before it moves. When the path clears, it can step forward again.'},
+];
+
+function RobotLesson() {
+  const [chapter,setChapter] = useState(0);
+  const [playing,setPlaying] = useState(false);
+  const [finished,setFinished] = useState(false);
+  const [answer,setAnswer] = useState<boolean>();
+  useEffect(()=>{
+    if(!playing) return;
+    const timer = window.setTimeout(()=>{
+      if(chapter<robotChapters.length-1) setChapter(chapter+1);
+      else {setPlaying(false);setFinished(true);}
+    },5500);
+    return ()=>window.clearTimeout(timer);
+  },[playing,chapter]);
+  const current=robotChapters[chapter];
+  return <article className="lc-page lc-watch">
+    <a className="lc-back lc-link" href="#/learning"><ArrowLeft size={16}/> Learning &amp; Assessment</a>
+    <div className="lc-panel">
+      <h1>How a humanoid robot responds</h1>
+      <div className="lc-watch-layout">
+        <div className="lc-watch-stage">
+          <img src={image('path','anatomy')} alt="Illustration of humanoid robot anatomy"/>
+          <div className="lc-watch-caption" aria-live="polite">
+            <span>{chapter+1} of {robotChapters.length} · {current.part}</span>
+            <strong>{current.title}</strong><p>{current.caption}</p>
+          </div>
+        </div>
+        <div>
+          <button className="lc-primary" onClick={()=>{
+            if(finished){setChapter(0);setFinished(false);}
+            setPlaying(!playing);
+          }}>{playing?'Pause lesson':finished?'Replay lesson':'Play lesson'}</button>
+          <ol className="lc-guides">{robotChapters.map((item,i)=><li key={item.title}><button aria-current={chapter===i?'step':undefined} onClick={()=>{setChapter(i);setPlaying(false);setFinished(false);}}><span>{i+1}. {item.title}</span></button></li>)}</ol>
+        </div>
+      </div>
+    </div>
+    <section className="lc-panel lc-feature">
+      <div><h2>Check your understanding</h2><p>What should the robot do after stopping?</p>
+        <div className="lc-actions"><button aria-pressed={answer===true} onClick={()=>setAnswer(true)}>Check the path again</button><button aria-pressed={answer===false} onClick={()=>setAnswer(false)}>Step forward immediately</button></div>
+        {answer!==undefined&&<p role="status">{answer?'Correct. A new reading tells it whether the path is clear.':'Try again. The block may still be in the robot’s path.'}</p>}
+      </div>
+    </section>
+  </article>;
+}

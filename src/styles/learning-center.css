@@ -1,0 +1,64 @@
+.lc-page { max-width:1380px; margin:auto; color:#192843; }
+.atlas .lc-hero,.atlas .lc-assessment-heading { display:grid; height:auto; border:0; padding:0; gap:0; overflow:hidden; border-radius:18px; }
+.atlas .lc-hero { grid-template-columns:1.25fr 1fr; background:#182645; color:#fff; }
+.lc-hero > div { padding:clamp(24px,4vw,54px); }
+.lc-hero span,.lc-meta { display:inline-flex; align-items:center; gap:7px; font-size:.82rem; font-weight:800; }
+.lc-hero span { color:#dbceff; }
+.lc-hero h1 { margin:10px 0; font-size:clamp(2rem,4.4vw,3.8rem); line-height:1.04; letter-spacing:-.045em; }
+.lc-hero p { color:#e2eafb; line-height:1.6; margin:0 0 18px; max-width:45ch; }
+.lc-hero img { width:100%; height:100%; max-height:360px; object-fit:cover; }
+.atlas .lc-tabs { display:flex; align-items:stretch; flex-wrap:wrap; height:auto; gap:8px; padding:0; margin:18px 0; }
+.atlas .lc-page button { min-height:44px; padding:8px 12px; display:inline-flex; align-items:center; gap:8px; border:1px solid #c2cde2; border-radius:8px; color:#332064; background:#fff; font-weight:750; text-align:left; }
+.atlas .lc-page button:hover { background:#f0eaff; color:#332064; }
+.atlas .lc-page .lc-primary,.atlas .lc-tabs button[aria-pressed=true] { background:#4b2e9a; color:#fff; border-color:#4b2e9a; }
+.atlas .lc-page .lc-primary:hover { background:#382079; color:#fff; }
+.atlas .lc-page button:disabled { background:#eef1f7; color:#56657c; border-color:#cbd4e3; cursor:default; }
+.lc-content { scroll-margin-top:calc(var(--atlas-header-height,68px) + 14px); }
+.lc-content h2,.lc-panel h2 { margin:0 0 10px; }
+.lc-content p,.lc-panel p { line-height:1.55; }
+.lc-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,245px),1fr)); gap:14px; }
+.lc-panel,.lc-card { background:#fff; border:1px solid #d6e0ef; border-radius:14px; }
+.lc-panel { padding:clamp(16px,3vw,27px); }
+.lc-card { overflow:hidden; display:flex; flex-direction:column; }
+.lc-card img { width:100%; aspect-ratio:16/9; object-fit:cover; display:block; }
+.lc-card > div { padding:15px; display:flex; flex:1; flex-direction:column; align-items:flex-start; }
+.lc-card h3 { margin:7px 0 0; }
+.lc-card p,.lc-card small,.lc-panel p { color:#435572; }
+.lc-card button { margin-top:auto; }
+.lc-card small { margin-bottom:12px; }
+.lc-meta { color:#583b9b; }
+.lc-page progress { width:100%; height:8px; accent-color:#6241bd; }
+.lc-feature { margin-top:16px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px; }
+.lc-feature p { margin:0; }
+.lc-guides,.lc-progress-list,.lc-review { list-style:none; padding:0; display:grid; gap:8px; }
+.atlas .lc-guides button { width:100%; }
+.lc-guides button span { flex:1; }
+.lc-stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr)); gap:10px; }
+.lc-stats > div,.lc-progress-list li,.lc-review li { display:grid; gap:6px; padding:12px; background:#f2f5fc; border-radius:8px; }
+.lc-stats strong { font-size:1.45rem; }
+.lc-assessment { max-width:850px; }
+.atlas .lc-back { margin-bottom:12px; }
+.atlas .lc-assessment-heading { grid-template-columns:155px 1fr; align-items:center; background:#edf0fb; margin-bottom:14px; }
+.lc-assessment-heading img { width:100%; height:120px; object-fit:cover; }
+.lc-assessment-heading div { padding:14px; }
+.lc-assessment-heading h1 { margin:4px 0; font-size:clamp(1.25rem,3vw,2rem); }
+.lc-quiz-progress,.lc-actions { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+.lc-assessment progress { margin:8px 0 18px; }
+.lc-options { display:grid; gap:8px; border:0; padding:0; margin:14px 0; }
+.lc-options label { display:flex; align-items:center; gap:10px; min-height:48px; border:1px solid #bdc8dc; padding:8px 12px; border-radius:8px; cursor:pointer; }
+.lc-options label:has(input:checked) { background:#f0eaff; border-color:#7555bb; }
+.lc-options input { accent-color:#4b2e9a; }
+.lc-review p { margin:0; }
+@media(max-width:620px) { .atlas .lc-hero { grid-template-columns:1fr; } .lc-hero img { height:170px; } .atlas .lc-assessment-heading { grid-template-columns:90px 1fr; } }
+.lc-link { display:inline-flex; align-items:center; gap:8px; padding:10px 13px; border-radius:8px; color:#4b2e9a; font-weight:750; text-decoration:none; }
+.lc-link.lc-primary { color:white; background:#4b2e9a; }
+.lc-watch-layout { display:grid; grid-template-columns:minmax(0,2fr) minmax(190px,1fr); gap:16px; }
+.lc-watch h1 { margin:0 0 16px; }
+.lc-watch-stage { overflow:hidden; background:#182645; color:white; border-radius:12px; }
+.lc-watch-stage img { display:block; width:100%; aspect-ratio:16/9; object-fit:cover; }
+.lc-watch-caption { padding:13px 16px; }
+.lc-watch-caption span { color:#c7c9ff; font-weight:700; }
+.lc-watch-caption strong { display:block; margin-top:6px; font-size:1.25rem; }
+.lc-watch-caption p { color:#f0f2ff; margin:6px 0 0; }
+.atlas .lc-watch button[aria-current],.atlas .lc-watch button[aria-pressed=true] { background:#eae2ff; border-color:#7253b7; }
+@media(max-width:680px) { .lc-watch-layout { grid-template-columns:1fr; } }

@@ -83,7 +83,7 @@ function OriginalWorkbench(props: Props) {
   </div>;
 }
 
-function WorldLabel({position,className,children}:{position:Point;className:string;children:ReactNode}) {
+export function WorldLabel({position,className,children}:{position:Point;className:string;children:ReactNode}) {
   const anchor=useRef<Group>(null);
   const element=useRef<HTMLDivElement>(null);
   const root=useRef<Root>(null);

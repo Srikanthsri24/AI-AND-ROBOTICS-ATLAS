@@ -1,0 +1,507 @@
+[
+  {
+    "number": 1,
+    "title": "DIY Bluetooth-Controlled RC Car",
+    "category": "Robotics and DIY robots"
+  },
+  {
+    "number": 2,
+    "title": "ESP32 Wi-Fi and Bluetooth-Controlled RC Car",
+    "category": "Robotics and DIY robots"
+  },
+  {
+    "number": 3,
+    "title": "Arduino-Based Autonomous Fire-Fighting Robot",
+    "category": "Robotics and DIY robots"
+  },
+  {
+    "number": 4,
+    "title": "Solar-Powered Floor-Cleaning Robot",
+    "category": "Robotics and DIY robots"
+  },
+  {
+    "number": 5,
+    "title": "LiDAR Micro Drone with Proximity Sensing",
+    "category": "Robotics and DIY robots"
+  },
+  {
+    "number": 6,
+    "title": "DIY Vacuum Cleaner Using a Recycled Plastic Bottle",
+    "category": "Robotics and DIY robots"
+  },
+  {
+    "number": 7,
+    "title": "DIY Water Rocket Launcher",
+    "category": "Robotics and DIY robots"
+  },
+  {
+    "number": 8,
+    "title": "Smart Flood Rescue and Early Warning System",
+    "category": "IoT, smart city and environment"
+  },
+  {
+    "number": 9,
+    "title": "Smart Flood Monitoring and Automatic Flood Gate System",
+    "category": "IoT, smart city and environment"
+  },
+  {
+    "number": 10,
+    "title": "AQUACLEAN IoT — River Waste Cleaning & Monitoring",
+    "category": "IoT, smart city and environment"
+  },
+  {
+    "number": 11,
+    "title": "IoT-Based Smart Waste Bin Monitoring System",
+    "category": "IoT, smart city and environment"
+  },
+  {
+    "number": 12,
+    "title": "IoT-Based Coal Mine Safety Monitoring and Alerting System",
+    "category": "IoT, smart city and environment"
+  },
+  {
+    "number": 13,
+    "title": "Industrial IoT Safety Monitoring System",
+    "category": "IoT, smart city and environment"
+  },
+  {
+    "number": 14,
+    "title": "Emergency Warning and Lighting System",
+    "category": "IoT, smart city and environment"
+  },
+  {
+    "number": 15,
+    "title": "Weather Imaging CubeSat",
+    "category": "IoT, smart city and environment"
+  },
+  {
+    "number": 16,
+    "title": "DIY Ultrasonic Radar System",
+    "category": "Arduino, sensors and electronics"
+  },
+  {
+    "number": 17,
+    "title": "Automatic Railway Gate System",
+    "category": "Arduino, sensors and electronics"
+  },
+  {
+    "number": 18,
+    "title": "DIY Automatic Street Light System",
+    "category": "Arduino, sensors and electronics"
+  },
+  {
+    "number": 19,
+    "title": "Arduino Electronic Piano",
+    "category": "Arduino, sensors and electronics"
+  },
+  {
+    "number": 20,
+    "title": "Electromagnet Crane Working Model",
+    "category": "Arduino, sensors and electronics"
+  },
+  {
+    "number": 21,
+    "title": "Arduino Gas and Perfume Detection System (MQ-2)",
+    "category": "Arduino, sensors and electronics"
+  },
+  {
+    "number": 22,
+    "title": "Rain Detector and Automatic Clothes Protection System",
+    "category": "Arduino, sensors and electronics"
+  },
+  {
+    "number": 23,
+    "title": "RFID-Based Door Lock System",
+    "category": "Arduino, sensors and electronics"
+  },
+  {
+    "number": 24,
+    "title": "Smart Digital School Bell",
+    "category": "Arduino, sensors and electronics"
+  },
+  {
+    "number": 25,
+    "title": "Smart Traffic Light & Parking Systems",
+    "category": "Arduino, sensors and electronics"
+  },
+  {
+    "number": 26,
+    "title": "Automatic Liquid Soap Dispenser",
+    "category": "Arduino, sensors and electronics"
+  },
+  {
+    "number": 27,
+    "title": "Arduino Automatic Tap System",
+    "category": "Arduino, sensors and electronics"
+  },
+  {
+    "number": 35,
+    "title": "Obstacle-avoiding car & 6-axis robotic arm",
+    "category": "Robotics, IoT and hardware prototypes"
+  },
+  {
+    "number": 36,
+    "title": "Pick-and-place rover & Self-balancing robot",
+    "category": "Robotics, IoT and hardware prototypes"
+  },
+  {
+    "number": 37,
+    "title": "Smart greenhouse system (IoT Smart Greenhouse Kit)",
+    "category": "Robotics, IoT and hardware prototypes"
+  },
+  {
+    "number": 38,
+    "title": "Air quality monitor & RoboGenius 20-in-1 Master Kit",
+    "category": "Robotics, IoT and hardware prototypes"
+  },
+  {
+    "number": 39,
+    "title": "Smart Door Lock project (Exhibition working model)",
+    "category": "Robotics, IoT and hardware prototypes"
+  },
+  {
+    "number": 40,
+    "title": "Women safety device with GPS Tracking and alert",
+    "category": "Robotics, IoT and hardware prototypes"
+  },
+  {
+    "number": 41,
+    "title": "Innovative ceiling fan based suicide prevention system",
+    "category": "Robotics, IoT and hardware prototypes"
+  },
+  {
+    "number": 42,
+    "title": "3D printed custom enclosures and project packaging",
+    "category": "Robotics, IoT and hardware prototypes"
+  },
+  {
+    "number": 43,
+    "title": "Raspberry Pi 5 advanced hardware prototyping",
+    "category": "Robotics, IoT and hardware prototypes"
+  },
+  {
+    "number": 44,
+    "title": "Interactive detection systems (Radar, ultrasonic, RFID)",
+    "category": "Robotics, IoT and hardware prototypes"
+  },
+  {
+    "number": 45,
+    "title": "Advanced micro-controller setups (ESP32-CAM, MPU6050)",
+    "category": "Robotics, IoT and hardware prototypes"
+  },
+  {
+    "number": 46,
+    "title": "Automated AI content generation & publishing workflows",
+    "category": "Software, AI and STEM education"
+  },
+  {
+    "number": 47,
+    "title": "Python apps for computer vision and predictive modeling",
+    "category": "Software, AI and STEM education"
+  },
+  {
+    "number": 48,
+    "title": "Multi-tenant school ERP and CRM web applications",
+    "category": "Software, AI and STEM education"
+  },
+  {
+    "number": 49,
+    "title": "Custom web dashboards integrated with AI pipelines",
+    "category": "Software, AI and STEM education"
+  },
+  {
+    "number": 50,
+    "title": "NEP 2020 aligned STEM & robotics laboratory setups",
+    "category": "Software, AI and STEM education"
+  },
+  {
+    "number": 51,
+    "title": "Swadeshi AI initiative models (Toshali Mela)",
+    "category": "Software, AI and STEM education"
+  },
+  {
+    "number": 52,
+    "title": "Smart Home Automation using Arduino and Bluetooth",
+    "category": "Arduino and hardware · Part 1"
+  },
+  {
+    "number": 53,
+    "title": "Gesture-Controlled Robot Using Arduino",
+    "category": "Arduino and hardware · Part 1"
+  },
+  {
+    "number": 54,
+    "title": "Smart Water Level Monitoring and Automatic Pump Control",
+    "category": "Arduino and hardware · Part 1"
+  },
+  {
+    "number": 55,
+    "title": "Arduino based Snake Robot Controlled via Android",
+    "category": "Arduino and hardware · Part 1"
+  },
+  {
+    "number": 56,
+    "title": "Arduino Based System To Measure Solar Power",
+    "category": "Arduino and hardware · Part 1"
+  },
+  {
+    "number": 57,
+    "title": "Arduino Covid Disinfection Box",
+    "category": "Arduino and hardware · Part 1"
+  },
+  {
+    "number": 58,
+    "title": "Fingerprint Based Bank Locker System",
+    "category": "Arduino and hardware · Part 1"
+  },
+  {
+    "number": 59,
+    "title": "Wearable Oscilloscope Smart Watch Arduino Nano",
+    "category": "Arduino and hardware · Part 1"
+  },
+  {
+    "number": 60,
+    "title": "Dual Axis Solar Tracking System with Weather Sensor",
+    "category": "Arduino and hardware · Part 1"
+  },
+  {
+    "number": 61,
+    "title": "Advanced Automatic Self-Car Parking",
+    "category": "Arduino and hardware · Part 1"
+  },
+  {
+    "number": 62,
+    "title": "DIY Ventilator using Arduino",
+    "category": "Arduino and hardware · Part 1"
+  },
+  {
+    "number": 63,
+    "title": "Animatronic Hand mimicking human gestures",
+    "category": "Arduino and hardware · Part 1"
+  },
+  {
+    "number": 64,
+    "title": "Robotic Arm controlled via Bluetooth",
+    "category": "Arduino and hardware · Part 1"
+  },
+  {
+    "number": 65,
+    "title": "Smart energy meter using GSM and Arduino",
+    "category": "Arduino and hardware · Part 1"
+  },
+  {
+    "number": 66,
+    "title": "Automatic solar tracker using sensors",
+    "category": "Arduino and hardware · Part 1"
+  },
+  {
+    "number": 67,
+    "title": "GPS and GSM based location tracker",
+    "category": "Arduino and hardware · Part 1"
+  },
+  {
+    "number": 73,
+    "title": "Sun Tracking Solar Panel & DIY Tricopter Selfie Drone",
+    "category": "Arduino and hardware · Part 2"
+  },
+  {
+    "number": 74,
+    "title": "Smart Solar Grass Cutter With Lawn Coverage",
+    "category": "Arduino and hardware · Part 2"
+  },
+  {
+    "number": 75,
+    "title": "Motion Controlled Pick & Place Obstacle Avoider Robot",
+    "category": "Arduino and hardware · Part 2"
+  },
+  {
+    "number": 76,
+    "title": "Smart Room Temperature Controller",
+    "category": "Arduino and hardware · Part 2"
+  },
+  {
+    "number": 77,
+    "title": "Autonomous Line Following Robot",
+    "category": "Arduino and hardware · Part 2"
+  },
+  {
+    "number": 78,
+    "title": "Bluetooth Gamepad for Android Gaming",
+    "category": "Arduino and hardware · Part 2"
+  },
+  {
+    "number": 79,
+    "title": "Smart Vehicle Headlight Auto Switching",
+    "category": "Arduino and hardware · Part 2"
+  },
+  {
+    "number": 80,
+    "title": "Contactless Gesture Controlled Study Lamp",
+    "category": "Arduino and hardware · Part 2"
+  },
+  {
+    "number": 81,
+    "title": "4 Slot Coin Operated Cola Vending Machine",
+    "category": "Arduino and hardware · Part 2"
+  },
+  {
+    "number": 82,
+    "title": "Waste and Garbage Recycling Vending Machine",
+    "category": "Arduino and hardware · Part 2"
+  },
+  {
+    "number": 83,
+    "title": "Auto Temperature Detector for Entrance Safety",
+    "category": "Arduino and hardware · Part 2"
+  },
+  {
+    "number": 84,
+    "title": "Women Safety Night Patrolling Robot",
+    "category": "Arduino and hardware · Part 2"
+  },
+  {
+    "number": 85,
+    "title": "Wireless Red Signal Alerting For Trains",
+    "category": "Arduino and hardware · Part 2"
+  },
+  {
+    "number": 86,
+    "title": "Voice Controlled Robotic Vehicle",
+    "category": "Arduino and hardware · Part 2"
+  },
+  {
+    "number": 87,
+    "title": "IR Wireless Underwater Communication System",
+    "category": "Arduino and hardware · Part 2"
+  },
+  {
+    "number": 88,
+    "title": "Advanced Footstep Power Generation System using RFID",
+    "category": "Arduino and hardware · Part 2"
+  },
+  {
+    "number": 89,
+    "title": "Prepaid Energy Meter With Theft Detection",
+    "category": "Arduino and hardware · Part 2"
+  },
+  {
+    "number": 90,
+    "title": "Programmable Omni Direction Robotic Arm Vehicle",
+    "category": "Arduino and hardware · Part 2"
+  },
+  {
+    "number": 91,
+    "title": "Smart Follower Shopping Trolley",
+    "category": "Arduino and hardware · Part 2"
+  },
+  {
+    "number": 92,
+    "title": "Earthquake Monitor with Alerting using Arduino",
+    "category": "Arduino and hardware · Part 2"
+  },
+  {
+    "number": 93,
+    "title": "Indoor Farming Hydroponic Plant Grow Chamber",
+    "category": "Arduino and hardware · Part 2"
+  },
+  {
+    "number": 94,
+    "title": "Fingerprint Vehicle Starter Project",
+    "category": "Arduino and hardware · Part 2"
+  },
+  {
+    "number": 95,
+    "title": "Multi Robot Coordination For Swarm Robotics",
+    "category": "Arduino and hardware · Part 2"
+  },
+  {
+    "number": 96,
+    "title": "IoT-Based Smart Home Automation Using ESP32",
+    "category": "Software, AI, IoT, Pi and ESP32"
+  },
+  {
+    "number": 97,
+    "title": "ESP32-CAM-Based Smart Security and Surveillance System",
+    "category": "Software, AI, IoT, Pi and ESP32"
+  },
+  {
+    "number": 98,
+    "title": "Face Recognition-Based Attendance System",
+    "category": "Software, AI, IoT, Pi and ESP32"
+  },
+  {
+    "number": 99,
+    "title": "Voice-Controlled Home Automation Using ESP32",
+    "category": "Software, AI, IoT, Pi and ESP32"
+  },
+  {
+    "number": 100,
+    "title": "IoT Fruit Sweetness Prediction System (ML & Flask)",
+    "category": "Software, AI, IoT, Pi and ESP32"
+  },
+  {
+    "number": 101,
+    "title": "Blockchain-based e-voting system & organic agriculture",
+    "category": "Software, AI, IoT, Pi and ESP32"
+  },
+  {
+    "number": 102,
+    "title": "Smart stand-up wheelchair using Raspberry Pi & RF",
+    "category": "Software, AI, IoT, Pi and ESP32"
+  },
+  {
+    "number": 103,
+    "title": "Face Recognition Door Lock System Using Raspberry Pi",
+    "category": "Software, AI, IoT, Pi and ESP32"
+  },
+  {
+    "number": 104,
+    "title": "IOT Garbage Monitoring Using Raspberry Pi",
+    "category": "Software, AI, IoT, Pi and ESP32"
+  },
+  {
+    "number": 105,
+    "title": "Object Tracker & Follower Robot Using Raspberry Pi",
+    "category": "Software, AI, IoT, Pi and ESP32"
+  },
+  {
+    "number": 106,
+    "title": "Voice Based Hot Cold-Water Dispenser System (Ras Pi)",
+    "category": "Software, AI, IoT, Pi and ESP32"
+  },
+  {
+    "number": 107,
+    "title": "Web app job portal for freelancers in the IT sector",
+    "category": "Software, AI, IoT, Pi and ESP32"
+  },
+  {
+    "number": 108,
+    "title": "Data analysis to improve public transport routes",
+    "category": "Software, AI, IoT, Pi and ESP32"
+  },
+  {
+    "number": 109,
+    "title": "AI tool to detect phone user demographics",
+    "category": "Software, AI, IoT, Pi and ESP32"
+  },
+  {
+    "number": 110,
+    "title": "Chat application with end-to-end encryption",
+    "category": "Software, AI, IoT, Pi and ESP32"
+  },
+  {
+    "number": 111,
+    "title": "Social media trend analysis for stock market prediction",
+    "category": "Software, AI, IoT, Pi and ESP32"
+  },
+  {
+    "number": 112,
+    "title": "Machine learning prediction app for customer attrition",
+    "category": "Software, AI, IoT, Pi and ESP32"
+  },
+  {
+    "number": 113,
+    "title": "AI early prediction of forest fires using satellite imagery",
+    "category": "Software, AI, IoT, Pi and ESP32"
+  }
+]
