@@ -1,0 +1,8 @@
+.cls-paper { min-height:230px; background:#f1ecdf; color:#334152; padding:clamp(12px,3vw,28px); border-radius:12px; }
+.cls-paper h3 { margin:0 0 14px; }
+.cls-paper-flow { display:flex; align-items:center; gap:8px; flex-wrap:wrap; padding:12px; color:#213a51; background:#fff; border-radius:9px; font-weight:700; }
+.cls-paper-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:4px; max-width:350px; }
+.cls-paper-grid span { min-height:45px; display:grid; place-items:center; border:1px solid #838c9b; background:#fff; color:#1f3349; border-radius:4px; font-weight:750; }
+.cls-evidence { padding:0; list-style:none; }
+.cls-evidence li { display:flex; justify-content:space-between; gap:12px; padding:.45rem .55rem; margin:.35rem 0; background:#f0f3fa; border-radius:6px; }
+.cls-evidence strong { color:#4d397c; }

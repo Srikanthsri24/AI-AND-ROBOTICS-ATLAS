@@ -1,0 +1,9 @@
+export type Stop={id:string;name:string;demand:number};
+export type Plan={id:string;name:string;route:string[];cycle:number};
+export type Result={served:number;missed:number;coverage:number;seats:number;overflow:number;headway:number;wait:number;buses:number};
+export const stops:Stop[];
+export const plans:Plan[];
+export const peakMinutes:number;
+export const busSeats:number;
+export function comparePlan(planId:string,departures:number):Result;
+export const stopCsv:string;

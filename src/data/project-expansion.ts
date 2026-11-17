@@ -1,4 +1,55 @@
 import type { Build } from './guided-projects';
+import {modelStreetlight} from './model-streetlight';
+import {wardrobeLight} from './wardrobe-light';
+import {readingCorner} from './reading-corner';
+import {greenhouseShade} from './greenhouse-shade';
+import {displayCaseLight} from './display-case-light';
+import {stairModelMarker} from './stair-model-marker';
+import {windowShadow} from './window-shadow';
+import {schoolDiorama} from './school-diorama';
+import {campingLantern} from './camping-lantern';
+import {tunnelModelLight} from './tunnel-model-light';
+import {terrariumTemperature} from './terrarium-temperature';
+import {deskComfort} from './desk-comfort';
+import {seedTrayTemperature} from './seed-tray-temperature';
+import {sunlitWindow} from './sunlit-window';
+import {incubatorTemperature} from './incubator-temperature';
+import {aquariumTemperature} from './aquarium-temperature';
+import {solarOvenMonitor} from './solar-oven-monitor';
+import {ventOutletTemperature} from './vent-outlet-temperature';
+import {coldPackWarming} from './cold-pack-warming';
+import {equipmentEnclosure} from './equipment-enclosure';
+import {basilPotMoisture} from './basil-pot-moisture';
+import {seedlingTrayMoisture} from './seedling-tray-moisture';
+import {sandySoilCalibration} from './sandy-soil-calibration';
+import {claySoilCalibration} from './clay-soil-calibration';
+import {mulchMoistureExperiment} from './mulch-moisture-experiment';
+import {drainageBottleExperiment} from './drainage-bottle-experiment';
+import {plantPotDepthComparison} from './plant-pot-depth-comparison';
+import {capillaryWateringModel} from './capillary-watering-model';
+import {soilDryingTimerStudy} from './soil-drying-timer-study';
+import {windowBoxComparison} from './window-box-comparison';
+import {libraryHelpButton} from './library-help-button';
+import {quizDeskResponseButton} from './quiz-desk-response-button';
+import {modelDoorbellPanel} from './model-doorbell-panel';
+import {modelElevatorCallLight} from './model-elevator-call-light';
+import {accessibleDeskSwitch} from './accessible-desk-switch';
+import {modelCrossingRequest} from './model-crossing-request';
+import {mailboxTestFlag} from './mailbox-test-flag';
+import {drawerClosedIndicator} from './drawer-closed-indicator';
+import {handheldSignalPaddle} from './handheld-signal-paddle';
+import {gameControllerInputTester} from './game-controller-input-tester';
+import {modelParkingBarrier} from './model-parking-barrier';
+import {modelWindVanePointer} from './model-wind-vane-pointer';
+import {desktopCameraPanModel} from './desktop-camera-pan-model';
+
+import {modelLetterSorterFlap} from './model-letter-sorter-flap';
+
+import {miniDrawbridgeModel} from './mini-drawbridge-model';
+
+import {cardboardDialGauge} from './cardboard-dial-gauge';
+
+const authoredExpansions=new Map([cardboardDialGauge,miniDrawbridgeModel,modelLetterSorterFlap,desktopCameraPanModel,modelWindVanePointer,modelParkingBarrier,gameControllerInputTester,handheldSignalPaddle,drawerClosedIndicator,mailboxTestFlag,modelCrossingRequest,accessibleDeskSwitch,modelElevatorCallLight,modelDoorbellPanel,quizDeskResponseButton,libraryHelpButton,windowBoxComparison,soilDryingTimerStudy,capillaryWateringModel,plantPotDepthComparison,drainageBottleExperiment,mulchMoistureExperiment,claySoilCalibration,sandySoilCalibration,seedlingTrayMoisture,basilPotMoisture,equipmentEnclosure,modelStreetlight,wardrobeLight,readingCorner,greenhouseShade,displayCaseLight,stairModelMarker,windowShadow,schoolDiorama,campingLantern,tunnelModelLight,terrariumTemperature,deskComfort,seedTrayTemperature,sunlitWindow,incubatorTemperature,aquariumTemperature,solarOvenMonitor,ventOutletTemperature,coldPackWarming].map(guide=>[guide.id,guide]));
 
 const sets = [
   ['Light sensing','ambient-light','Light level (%)','Lamp','low',[
@@ -38,7 +89,7 @@ const sets = [
     'Window box comparison|Compare a sunny sample and a shaded sample from the same soil|49',
   ]],
   ['Switches & controls','button-indicator','Button state','Indicator LED','switch',[
-    'Library help button|Send a visible help request while a button is held|1',
+    'Library help button|Send a visible help request and clear it at the staff station|1',
     'Quiz desk response button|Light a team’s response indicator|1',
     'Model doorbell panel|Show when a visitor presses a doorbell|1',
     'Model elevator call light|Show a call request on a cardboard lift panel|1',
@@ -146,7 +197,7 @@ export function expandProjects(base: Build[]) {
       if(kind==='vision') project.assembly[1]=['Set up the camera target',`${goal}. Arrange three targets on a matte background, fix the camera position, and mark a crop around the test area.`,'Count the targets by hand before running the camera program.',source.assembly[1][3]];
       if(kind==='ratio') project.parts=[['12-tooth spur gear','1','Input gear'],[`${12*limit}-tooth spur gear`,'1','Driven gear'],...source.parts.slice(2)];
       const info={category,template,input,output,kind,limit};
-      return {project,info};
+      return {project:authoredExpansions.get(id)??project,info};
     });
   });
 }

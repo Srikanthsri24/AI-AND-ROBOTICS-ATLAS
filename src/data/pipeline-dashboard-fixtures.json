@@ -1,0 +1,17 @@
+{
+  "clock": "2026-01-17T10:00:00Z",
+  "model": {
+    "id": "motor-triage-v1",
+    "bias": -1.4,
+    "vibrationWeight": 1.7,
+    "temperatureWeight": 0.08,
+    "baselineTemperature": 40,
+    "threshold": 0.65
+  },
+  "scenarios": [
+    {"id":"steady","name":"Steady motor","reading":{"source":"Bench A · motor telemetry","capturedAt":"2026-01-17T09:59:58Z","vibration":0.4,"temperature":41}},
+    {"id":"warm","name":"Warm, vibrating motor","reading":{"source":"Bench A · motor telemetry","capturedAt":"2026-01-17T09:59:58Z","vibration":1.6,"temperature":61}},
+    {"id":"delayed","name":"Delayed reading","reading":{"source":"Bench B · replay buffer","capturedAt":"2026-01-17T09:59:15Z","vibration":1.6,"temperature":61}},
+    {"id":"missing","name":"Missing sensor value","reading":{"source":"Bench B · replay buffer","capturedAt":"2026-01-17T09:59:58Z","vibration":null,"temperature":61}}
+  ]
+}

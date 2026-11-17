@@ -45,7 +45,7 @@ export default function DirectoryProject({entry,view}: {entry:DirectoryEntry; vi
     return ()=>window.clearTimeout(timer);
   },[phase,stage]);
   return <article className="gp-page gp-build">
-    <a className="gp-back" href="#/project-builder?collection=directory"><ArrowLeft size={16}/> Project directory</a>
+    <a className="gp-back" href="#/project-builder"><ArrowLeft size={16}/> Guided builds</a>
     <div className="gp-title">
       <p className="gp-overline">Project {String(entry.number).padStart(2,'0')} · {entry.category}</p>
       <h1>{entry.title}</h1>
@@ -110,8 +110,8 @@ export default function DirectoryProject({entry,view}: {entry:DirectoryEntry; vi
       </>}
     </section>
     <div className="gp-footer">
-      <a className="gp-button gp-secondary" href={stage===0?'#/project-builder?collection=directory':link(stage-1)}><ArrowLeft size={16}/>{stage===0?'Project directory':stages[stage-1][1]}</a>
-      <a className="gp-button" href={stage===4?'#/project-builder?collection=directory':link(stage+1)}>{stage===4?'Choose another project':stages[stage+1][1]}<ArrowRight size={16}/></a>
+      <a className="gp-button gp-secondary" href={stage===0?'#/project-builder':link(stage-1)}><ArrowLeft size={16}/>{stage===0?'Guided builds':stages[stage-1][1]}</a>
+      <a className="gp-button" href={stage===4?'#/project-builder':link(stage+1)}>{stage===4?'Choose another project':stages[stage+1][1]}<ArrowRight size={16}/></a>
     </div>
   </article>;
 }

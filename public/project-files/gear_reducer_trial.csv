@@ -1,0 +1,5 @@
+Input clockwise turns,Predicted output counterclockwise turns,Observed output counterclockwise turns,Notes
+1,0.333,,
+2,0.667,,
+3,1.000,,
+6,2.000,,

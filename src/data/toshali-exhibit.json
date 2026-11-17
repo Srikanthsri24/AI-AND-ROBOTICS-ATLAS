@@ -1,0 +1,50 @@
+{
+  "crafts": [
+    {
+      "id":"pattachitra",
+      "title":"Pattachitra",
+      "odia":"ପଟ୍ଟଚିତ୍ର",
+      "place":"Raghurajpur",
+      "description":"Notice the painted borders and fine detail. Raghurajpur is known for this traditional painting practice.",
+      "alt":"Odisha Pattachitra painting displayed at Raghurajpur",
+      "author":"Mike Prince",
+      "photo":"https://commons.wikimedia.org/wiki/File:Pattachitra_Painting_(17040932272).jpg",
+      "license":"CC BY 2.0",
+      "licenseUrl":"https://creativecommons.org/licenses/by/2.0/",
+      "examples":["pattachitra","patta chitra","raghurajpur painting","painted cloth","ପଟ୍ଟଚିତ୍ର","ରଘୁରାଜପୁର ପଟ୍ଟଚିତ୍ର"]
+    },
+    {
+      "id":"chandua",
+      "title":"Pipili appliqué",
+      "odia":"ପିପିଲି ଚାନ୍ଦୁଆ",
+      "place":"Pipili",
+      "description":"Look for the edges where pieces of colored cloth are stitched together. Chandua is used for canopies, umbrellas and other decorations.",
+      "alt":"Bright appliqué textiles displayed in Pipili",
+      "author":"Rahul Mukherjee",
+      "photo":"https://commons.wikimedia.org/wiki/File:Pipli_4.jpg",
+      "license":"CC BY-SA 4.0",
+      "licenseUrl":"https://creativecommons.org/licenses/by-sa/4.0/",
+      "examples":["chandua","pipili applique","appliqué canopy","stitched textile","ଚାନ୍ଦୁଆ","ପିପିଲି ଚାନ୍ଦୁଆ"]
+    },
+    {
+      "id":"tarakasi",
+      "title":"Tarakasi silver filigree",
+      "odia":"ତାରକସି",
+      "place":"Cuttack",
+      "description":"Follow the thin silver wires that form the open pattern. Cuttack is a center for this metalwork.",
+      "alt":"Examples of traditional silver filigree from Cuttack",
+      "author":"Government of Odisha",
+      "photo":"https://commons.wikimedia.org/wiki/File:Silver_Filigree_Work.jpg",
+      "license":"CC BY 4.0",
+      "licenseUrl":"https://creativecommons.org/licenses/by/4.0/",
+      "examples":["tarakasi","tara kasi","silver filigree","cuttack silver","ତାରକସି","ତାରକାସି"]
+    }
+  ],
+  "trials": [
+    {"label":"Odia craft name","phrase":"ପଟ୍ଟଚିତ୍ର","expected":"pattachitra"},
+    {"label":"English craft phrase","phrase":"Show Pipili applique","expected":"chandua"},
+    {"label":"Filigree request","phrase":"silver filigree, please","expected":"tarakasi"},
+    {"label":"Mixed request","phrase":"pattachitra or tarakasi","expected":null},
+    {"label":"Unrelated request","phrase":"train schedule","expected":null}
+  ]
+}

@@ -1,0 +1,29 @@
+.st-header{display:flex;align-items:flex-start;gap:14px;margin:12px 0 20px;padding:clamp(18px,3vw,34px);border-radius:16px;background:linear-gradient(120deg,#202d47,#314b62 62%,#395e66);color:white}
+.st-header>svg{flex:none;margin-top:4px;color:#bce6df}
+.st-header h1{margin:0;font-size:clamp(1.55rem,3.4vw,3rem);line-height:1.1}
+.st-header p{margin:10px 0 0;color:#e1f0f1;line-height:1.5}
+.st-panel{display:grid;gap:14px}
+.st-panel>h2{margin:0}
+.st-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
+.st-card{min-width:0;padding:clamp(14px,2vw,22px);border:1px solid #dbe5ee;border-radius:14px;background:white}
+.st-card h3{margin:0 0 12px;color:#294255}
+.st-card p{line-height:1.5}
+.st-cover{background:#f1f7fa}
+.st-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}
+.st-summary div,.st-day div,.st-status{padding:9px;border-radius:8px;background:#edf4f6;color:#345565}
+.st-summary strong{display:block;font-size:1.25rem}
+.st-chart{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:4px}
+.st-chart :is(button,.st-chart-day){display:grid;gap:3px;min-width:0;padding:2px;border:1px solid #cbdbe3;border-radius:6px;background:#fff;color:#29475a;font:inherit;font-size:.75rem;text-align:center}
+.st-chart button{cursor:pointer}
+.st-chart button[aria-pressed=true]{outline:2px solid #6446aa;outline-offset:1px}
+.st-axis{position:relative;height:81px;background:linear-gradient(transparent calc(50% - 1px),#b7c9d4 calc(50% - 1px),#b7c9d4 50%,transparent 50%)}
+.st-axis i{position:absolute;left:23%;right:23%;bottom:50%;background:#3a7c69;border-radius:3px 3px 0 0}
+.st-axis i[data-negative=true]{top:50%;bottom:auto;background:#a36a67;border-radius:0 0 3px 3px}
+.st-day{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.st-day dt{font-size:.84rem}
+.st-day dd{margin:2px 0 0;font-weight:700}
+.st-assets{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px}
+.st-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0;padding:0;list-style:none}
+.st-flow li{padding:9px;border-radius:8px;background:#edf3f7;font-weight:650}
+@media(max-width:850px){.st-grid{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:560px){.st-flow{grid-template-columns:repeat(2,minmax(0,1fr))}.st-header svg{width:24px;height:24px}}

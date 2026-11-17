@@ -1,0 +1,11 @@
+export type Entry = {kind:'vote'|'produce';ref:string;value:string};
+export type Block = {index:number;previous:string;hash:string;entry:Entry};
+export type Audit = {ok:boolean;index:number|null;reason:string};
+export const tokens:string[];
+export const choices:string[];
+export const batches:string[];
+export const milestones:string[];
+export const genesis:string;
+export function audit(chain:Block[]):Promise<Audit>;
+export function appendBlock(chain:Block[],entry:Entry):Promise<{ok:boolean;reason:string;chain:Block[]}>;
+export function editFirstRecord(chain:Block[]):Block[];

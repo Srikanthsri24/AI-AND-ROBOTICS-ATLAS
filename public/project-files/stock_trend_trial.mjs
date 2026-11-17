@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import { evaluate } from './stock-trend.mjs';
+const early=evaluate('fit'),later=evaluate('test');
+assert.equal(early.rule,'follow');
+assert.equal(early.correct,7);
+assert.equal(later.correct,2);
+assert.equal(later.baselineCorrect,5);
+assert.equal(later.rows[0].predicted,'Up');
+assert.equal(later.rows[0].actual,'Down');
+console.log('Early: 7/8. Later: 2/8 versus baseline 5/8. Day 9 is a missed prediction.');

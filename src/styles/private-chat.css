@@ -1,0 +1,27 @@
+.ec-header{display:flex;align-items:flex-start;gap:14px;margin:12px 0 20px;padding:clamp(18px,3vw,34px);border-radius:16px;background:linear-gradient(120deg,#172f4d,#293d64 62%,#3e5270);color:white}
+.ec-header>svg{flex:none;margin-top:4px;color:#bce5ed}
+.ec-header h1{margin:0;font-size:clamp(1.55rem,3.4vw,3rem);line-height:1.1}
+.ec-header p{margin:10px 0 0;color:#e0eaf8;line-height:1.52}
+.ec-panel{display:grid;gap:14px}
+.ec-panel>h2{margin:0}
+.ec-grid,.ec-flow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
+.ec-flow{grid-template-columns:repeat(3,minmax(0,1fr))}
+.ec-card{min-width:0;padding:clamp(14px,2vw,22px);border:1px solid #dbe4ee;border-radius:14px;background:white}
+.ec-card h3{display:flex;align-items:center;gap:7px;margin:0 0 12px;color:#2b405c}
+.ec-card p{line-height:1.52}
+.ec-card label{display:block;font-weight:700;margin-bottom:5px}
+.ec-card textarea{width:100%;min-height:88px;padding:8px;margin-bottom:8px;resize:vertical;border-radius:8px;border:1px solid #b9cadc;font:inherit;color:#223750}
+.ec-preview{display:grid;gap:8px;background:#edf4f8}
+.ec-preview>div{display:grid;grid-template-columns:30px 1fr;align-items:center;column-gap:8px;padding:10px;background:white;border:1px solid #d8e5ee;border-radius:8px;color:#2e4c65}
+.ec-preview svg{grid-row:span 2;color:#367168}
+.ec-preview p{margin:4px 0 0}
+.ec-packet,.ec-opened,.ec-status{background:#eef4f9;padding:9px;border-radius:8px;overflow-wrap:anywhere}
+.ec-packet dt{font-weight:700}
+.ec-packet dd{margin:3px 0 10px;font-family:monospace;font-size:.86rem}
+.ec-opened{white-space:pre-wrap}
+.ec-status{margin:0;font-weight:700;color:#314c68}
+.ec-map{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0;padding:0;list-style:none}
+.ec-map li{padding:9px;border-radius:8px;background:#edf3f9;font-weight:650}
+.ec-assets{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px}
+@media(max-width:850px){.ec-grid,.ec-flow{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:560px){.ec-map{grid-template-columns:repeat(2,minmax(0,1fr))}.ec-header svg{width:24px;height:24px}}

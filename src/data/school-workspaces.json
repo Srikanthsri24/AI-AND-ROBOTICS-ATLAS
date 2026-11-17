@@ -1,0 +1,21 @@
+{
+  "schools": [
+    {"id":"maple","name":"Maple Grove School","initials":"MG","term":"Term 2","room":"Robotics Lab"},
+    {"id":"river","name":"Riverbank Academy","initials":"RA","term":"Term 1","room":"Design Studio"}
+  ],
+  "learners": [
+    {"id":"mg-01","schoolId":"maple","name":"Maya Stone","group":"Robotics 8","attendance":"Present"},
+    {"id":"mg-02","schoolId":"maple","name":"Arun Park","group":"Robotics 8","attendance":"Absent"},
+    {"id":"mg-03","schoolId":"maple","name":"Nora Vale","group":"Design 9","attendance":"Present"},
+    {"id":"ra-01","schoolId":"river","name":"Leo Moss","group":"Design 8","attendance":"Present"},
+    {"id":"ra-02","schoolId":"river","name":"Isha West","group":"Design 8","attendance":"Present"},
+    {"id":"ra-03","schoolId":"river","name":"Kai Finch","group":"Computing 9","attendance":"Absent"}
+  ],
+  "inquiries": [
+    {"id":"mq-01","schoolId":"maple","name":"Robotics club visit","program":"Robotics 8","status":"New"},
+    {"id":"mq-02","schoolId":"maple","name":"Design lab tour","program":"Design 9","status":"Contacted"},
+    {"id":"mq-03","schoolId":"maple","name":"Spring workshop","program":"Robotics 8","status":"Visit booked"},
+    {"id":"rq-01","schoolId":"river","name":"Studio open day","program":"Design 8","status":"Contacted"},
+    {"id":"rq-02","schoolId":"river","name":"Computing placement","program":"Computing 9","status":"New"}
+  ]
+}

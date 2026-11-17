@@ -1,0 +1,11 @@
+export type Role = 'admin' | 'teacher' | 'student';
+export type School = { id:string; name:string; initials:string; term:string; room:string };
+export type Learner = { id:string; schoolId:string; name:string; group:string; attendance:string };
+export type Inquiry = { id:string; schoolId:string; name:string; program:string; status:string };
+export type WorkspaceData = { schools:School[]; learners:Learner[]; inquiries:Inquiry[] };
+export type Session = { schoolId:string; role:Role; group:string; learnerId:string };
+export const permissions: Record<Role,{ roster:string; attendance:boolean; admissions:boolean }>;
+export function createSession(state:WorkspaceData, schoolId:string, role:Role):Session;
+export function scopeRecords(state:WorkspaceData, session:Session):{ learners:Learner[]; inquiries:Inquiry[] };
+export function setAttendance(state:WorkspaceData, session:Session, id:string, attendance:'Present'|'Absent'):WorkspaceData;
+export function advanceInquiry(state:WorkspaceData, session:Session, id:string):WorkspaceData;

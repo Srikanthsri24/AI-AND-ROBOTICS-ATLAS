@@ -2,7 +2,7 @@ type StoryBeat = [label: string, caption: string, part: number];
 export const projectStories: Record<string, [StoryBeat, StoryBeat, StoryBeat, StoryBeat]> = {
   'rover-project': [
     ['Clear path','The rover rolls forward while the path is clear.',3],
-    ['Obstacle moves closer','The two round sensor heads send out sound and listen for its echo.',1],
+    ['Rover approaches the obstacle','The obstacle stays still as the rover drives closer. One sensor head sends out sound and the other listens for the echo.',1],
     ['Too close','A quick echo tells the controller that the obstacle is closer than 20 cm.',0],
     ['Wheels stop','The controller switches off the motor driver. Watch the wheels stop.',3],
   ],
@@ -65,7 +65,7 @@ export const projectStories: Record<string, [StoryBeat, StoryBeat, StoryBeat, St
 type DemoReading = [input: string, output: string, reacting?: boolean];
 
 export const demoReadings: Record<string, [DemoReading, DemoReading, DemoReading, DemoReading]> = {
-  'rover-project': [['45 cm ahead','Wheels turning'],['Obstacle approaching','Sensor checks distance'],['12 cm ahead','Wheels stopped',true],['12 cm ahead','Wheels stopped',true]],
+  'rover-project': [['45 cm ahead','Wheels turning'],['25 cm ahead','Sensor checks distance'],['12 cm ahead','Wheels stopped',true],['12 cm ahead','Wheels stopped',true]],
   'hand-project': [['Open command','Finger straight'],['Curl command','Servo receives command'],['Cord pulls','Finger starts to bend',true],['Cord held tight','Finger curled',true]],
   'soil-observer': [['Damp soil','Dry-soil light off'],['Probe in dry soil','Reading changes'],['Reading compared','Dry soil detected'],['Dry soil','Dry-soil light on',true]],
   'home-project': [['23 °C','Warning light off'],['Room warming','Sensor reading rises'],['Above 28 °C','Threshold crossed'],['32 °C','Warning light on',true]],

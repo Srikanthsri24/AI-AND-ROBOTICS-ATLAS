@@ -1,0 +1,43 @@
+import type { Build } from './guided-projects';
+
+export const motionPick:Build={
+  id:'directory-75',title:'Motion-Controlled Pick-and-Place Obstacle Avoider',
+  outcome:'Drive a tabletop rover with a wired tilt pad, stop at an obstacle, and switch to lift and gripper control to move a foam block.',
+  parts:[
+    ['Arduino Uno R3','1','Reads the pad and sonar. Drives the wheels and two separate servo channels.'],
+    ['Adafruit MPU-6050 IMU','1','Mount flat on the tethered tilt pad with its X and Y axes marked.'],
+    ['Momentary tactile start button','2','Label the pad buttons Enable and Gripper mode. Both are active low.'],
+    ['HC-SR04 ultrasonic module','1','Mount high on the nose, above the block, so the jaws and payload do not obscure its beam.'],
+    ['TB6612FNG breakout','1','Drives the two wheel motors from the AA pack.'],
+    ['6 V geared DC motors and wheels','2','Choose paired motors within the driver rating.'],
+    ['Chassis and caster','1 set','Mount the controller and front lift bracket on insulated supports.'],
+    ['Positional micro servo','2','Use one for a short lift arm and one to tension a spring-return gripper.'],
+    ['Cardboard lift arm and gripper','1 set','Use light layered cardboard, a tab-and-pivot lift and soft jaws held open by elastic. Add guide loops for a short closing tendon. Bring a foam test block.'],
+    ['External regulated arm servo supply','1 set','Choose a portable regulated 5 V servo supply sized for both stall currents.'],
+    ['Switched 4×AA holder','1','Supplies drive power. Keep its switch reachable.'],
+    ['Breadboard and jumper wires','1 set','Route the pad signals on a tether and secure wires clear of wheels and pivots.'],
+    ['5 V USB power bank','1','Powers the Uno for short untethered tests with the handheld pad.'],
+  ],
+  assembly:[
+    ['Build the rolling frame','Mount the motors, caster, driver and two switched supplies. Check the balance after mounting a lightweight lift bracket.','The rover rolls freely and its batteries cannot shift.',[0,4,5,6,9,10]],
+    ['Build the lift and jaw','Mount one horn on a short pivoting lift arm and attach a separate gripper to its end. Use the second servo to pull a short tendon that closes both light jaws. Release tension for the elastic to reopen them. Fit horns with the power off after checking the neutral positions unloaded.','The lift clears the tray and the jaws can hold a lightweight foam block.',[7,8,9]],
+    ['Mount the pad and sonar','Mount the IMU on stiff card alongside Enable and Gripper mode. Install sonar above the jaw travel. Use strain relief on the pad tether and aim sonar at broad targets.','The pad rests flat and the load cannot block the sonar face.',[1,2,3,11]],
+    ['Wire rails and calibrate level','With power off, follow the map. Tie both supply negatives to the Uno ground. Leave servo and motor positive rails separate from the Uno. Reset with the pad flat and Enable released.','Serial Monitor prints READY before wheel motion is possible.',[0,1,2,3,4,7,9,10,11,12]],
+    ['Pick, carry and place','First test with wheels raised. Then drive toward the foam block on a bounded tray, release Enable, hold Gripper mode, and enable a lift or jaw command. Return the pad to level before switching back to drive.','The wheels stop in gripper mode. The rover can back away from a close target and then place the block.',[0,1,2,3,5,7,8]],
+  ],
+  wiring:[
+    ['Uno 5 V / GND','MPU-6050 VIN, sonar VCC and TB6612 VCC / common ground','Logic power'],
+    ['Uno A4 / A5','MPU-6050 SDA / SCL','I²C pad link'],
+    ['Uno D2 / D3','Enable / Gripper mode switches → GND','Active-low inputs'],
+    ['Uno A0 / A1','HC-SR04 TRIG / ECHO','Front clearance'],
+    ['Uno D5 / D6','Driver PWMA / PWMB','Left / right PWM'],
+    ['Uno D4 / D7 and D8 / D11','Driver AIN1 / AIN2 and BIN1 / BIN2','Motor direction'],
+    ['Uno D12','Driver STBY','Drive disable when idle'],
+    ['Uno D9 / D10','Lift / grip servo signals','Separate servo outputs'],
+    ['AA pack / regulated 5 V servo supply','Driver VM / servo positive distribution','Keep positive rails separate and share ground'],
+    ['Driver outputs A / B','Left / right wheel motors','Check polarity on a stand'],
+    ['USB power bank','Uno USB','Controller power'],
+  ],
+  test:'Use Enable with an unambiguous tilt. Forward travel stops below 18 cm or on a missing echo. Reverse remains available. In gripper mode, pitch moves the lift and roll moves the jaws while the wheels stay stopped. Release Enable to hold position.',
+  demo:['Pad tilt and sonar','Blocked','Carrying','Front obstacle stops the approach','The gripper holds a foam block'],
+};

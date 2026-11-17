@@ -1,0 +1,9 @@
+export type ChairState={angle:number;drive:-1|0|1;link:boolean;age:number;notice:string};
+export type ChairCommand='raise'|'lower'|'stop';
+export const maxAngle:number;
+export const radioTimeout:number;
+export const speed:number;
+export function startChair():ChairState;
+export function chairCommand(state:ChairState,command:ChairCommand):ChairState;
+export function setChairLink(state:ChairState,connected:boolean):ChairState;
+export function advanceChair(state:ChairState,elapsed:number):ChairState;

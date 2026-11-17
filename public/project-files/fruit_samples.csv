@@ -1,0 +1,17 @@
+id,split,color,firmness,brix
+F01,train,22,71,8.1
+F02,train,32,54,9.8
+F03,train,38,78,8.6
+F04,train,43,46,10.7
+F05,train,51,63,10.5
+F06,train,62,75,10.2
+F07,train,66,48,12.1
+F08,train,72,30,13.3
+F09,train,78,58,12.5
+F10,train,83,37,14.1
+F11,train,89,24,14.8
+F12,train,49,33,12.0
+F13,test,29,68,8.5
+F14,test,55,51,11.4
+F15,test,75,43,13.1
+F16,test,85,31,14.0
