@@ -1,0 +1,12 @@
+import {useMemo} from 'react';
+import {CatmullRomCurve3,Vector3} from 'three';
+import {carMiniBreadboard,carMiniHole} from '../data/bluetooth-mini-breadboard';
+import type {CarPoint} from '../data/bluetooth-car-layout';
+export function beaconTie(column:number,bank:-1|1,row:number):CarPoint{return carMiniHole(column,bank,row).map((v,i)=>v+carMiniBreadboard.at[i]) as CarPoint;}
+export const beaconResistors=[{id:'left-divider',name:'Left 10 kΩ divider resistor',ends:[beaconTie(5,-1,2),beaconTie(5,1,2)],bands:['#68442f','#20242a','#e57928','#bea35c']},{id:'right-divider',name:'Right 10 kΩ divider resistor',ends:[beaconTie(10,-1,2),beaconTie(10,1,2)],bands:['#68442f','#20242a','#e57928','#bea35c']},{id:'arrival-resistor',name:'220 Ω arrival LED resistor',ends:[beaconTie(0,1,4),beaconTie(6,1,4)],bands:['#ba382e','#ba382e','#68442f','#bea35c']}] as const;
+export default function BeaconRoverDividers({selected,select}:{selected:string;select:(id:string)=>void}){return <>{beaconResistors.map(r=><Resistor key={r.id} item={r} active={selected===r.id} select={select}/>)}</>;}
+function Resistor({item,active,select}:{item:typeof beaconResistors[number];active:boolean;select:(id:string)=>void}){
+ const {ends,bands,id}=item,alongX=Math.abs(ends[0][0]-ends[1][0])>.01,centre=new Vector3(...ends[0]).add(new Vector3(...ends[1])).multiplyScalar(.5),y=centre.y+.0625;
+ const curves=useMemo(()=>ends.map((p,i)=>{const side=i?1:-1,start=new Vector3(centre.x,y,centre.z),bend=new Vector3(p[0],y,p[2]);start[alongX?'x':'z']+=side*.065;bend[alongX?'x':'z']-=side*.014;return new CatmullRomCurve3([start,bend,new Vector3(p[0],y-.014,p[2]),new Vector3(p[0],p[1]-.11,p[2])]);}),[ends,alongX]);
+ return <group userData={{partId:id}} onClick={e=>{e.stopPropagation();select(id);}}><group position={[centre.x,y,centre.z]} rotation={alongX?[0,0,Math.PI/2]:[Math.PI/2,0,0]}><mesh castShadow><cylinderGeometry args={[.025,.025,.13,24]}/><meshStandardMaterial color={active?'#b78be8':'#bdac87'} roughness={.5}/></mesh>{bands.map((color,i)=><mesh key={i} position={[0,[-.044,-.018,.008,.046][i],0]}><cylinderGeometry args={[.0256,.0256,.009,24]}/><meshStandardMaterial color={active?'#dbc2fa':color}/></mesh>)}</group>{curves.map((curve,i)=><mesh key={i} castShadow><tubeGeometry args={[curve,28,.006,8,false]}/><meshStandardMaterial color={active?'#b78be8':'#b5bcb7'} metalness={.75} roughness={.32}/></mesh>)}</group>;
+}

@@ -1,0 +1,4 @@
+import {bluetoothCarLayout as d,bluetoothCarPlacedPoint,unoR3Point,unoR3Thickness,type CarPoint} from './bluetooth-car-layout';
+const b=unoR3Point(3.81,38.1,unoR3Thickness/2+.11);b[0]-=.16;
+export const carUsbCable={id:'wire-usb',name:'USB bank → Uno USB-B',step:13,from:'USB bank · type A',to:'Uno R3 · type B',why:'The USB cable supplies the Uno and the two logic boards. Motor current comes from the separate AA pack. Use computer USB instead when uploading the real sketch.',bank:[d.usb.at[0],d.usb.at[1]-.01,d.usb.at[2]-.837] as CarPoint,uno:bluetoothCarPlacedPoint(d.uno.at,d.uno.rotation,b)};
+export function carUsbPoints():CarPoint[]{const a=carUsbCable.bank,b=carUsbCable.uno;return [[a[0],a[1],a[2]-.35],[a[0],a[1],a[2]-.42],[1.40,1.42,-.07],[1.38,1.56,-1.20],[.34,1.60,-2.35],[-.49,1.40,-2.35],[b[0],b[1],b[2]-.41],[b[0],b[1],b[2]-.34]];}

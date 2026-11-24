@@ -404,7 +404,7 @@ export const programWalkthroughs: Record<string, string[]> = {
   'directory-1': [
     'SoftwareSerial reads one byte at a time from Bluefruit TXO. It uses the built-in Arduino AVR library.',
     'The command selects a direction for each wheel. PWM sets motor speed and STBY disables both channels on Stop.',
-    'Each drive command moves the car for up to 850 ms. The timeout stops the car when commands stop arriving, including after link loss.',
+    'Each valid drive byte enables the outputs for up to 850 ms. Without another command, including after link loss, the timeout drives STBY LOW. The outputs switch off and the wheels coast; this is not an instantaneous mechanical brake.',
   ],
   'rover-project': ['pulseIn measures the echo in microseconds. Multiply by 0.01715 to estimate one-way distance in centimetres.', 'drive controls both PWM outputs and the driver enable pin. A missing echo or a distance below 20 cm disables the motors.'],
   'hand-project': ['Servo.attach assigns the signal to D9. Servo.write requests a position in degrees.', 'Serial.read accepts 0 or 1 for the open and curl positions. Adjust the two angles in small increments to match your linkage.'],

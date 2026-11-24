@@ -1,0 +1,13 @@
+import uno from './uno-r3-board-layout.json';
+import {bluetoothBoardLayouts,bluetoothBoardPoint,bluetoothBoardTop,bluetoothBoardScale,bluetoothHeaderPoint,type BluetoothBoardKind} from './bluetooth-board-geometry';
+export type CarPoint=[number,number,number];
+export const unoR3Scale=.02,unoR3Thickness=.032,unoR3ContactHeight=.186;
+export function unoR3Point(x:number,y:number,h=0):CarPoint{return [(x-34.29)*unoR3Scale,h,(26.67-y)*unoR3Scale];}
+export function unoR3HeaderPoint(name:string):CarPoint{const h=uno.headers.find(h=>h.name===name);if(!h)throw Error('Unknown R3 socket '+name);return unoR3Point(h.x,h.y,unoR3ContactHeight);}
+export const bluetoothCarLayout={chassis:{width:3.2,length:4.8,top:.99,bottom:.91},wheel:{radius:.65,width:.45,leftX:-1.9,rightX:1.9,y:.79,z:-.50},caster:{x:0,y:.34,z:1.60,radius:.20,width:.18},uno:{at:[-.72,1.12,-1.12] as CarPoint,rotation:-Math.PI/2},radio:{at:[.95,1.12,-1.85] as CarPoint,rotation:0},driver:{at:[.74,1.12,-.50] as CarPoint,rotation:0},aa:{at:[-.80,1.02,1.10] as CarPoint},usb:{at:[.83,1.12,1.20] as CarPoint},standLift:.15,ground:.14};
+export function bluetoothCarPlacedPoint(at:CarPoint,rotation:number,point:CarPoint):CarPoint{return [at[0]+Math.cos(rotation)*point[0]+Math.sin(rotation)*point[2],at[1]+point[1],at[2]-Math.sin(rotation)*point[0]+Math.cos(rotation)*point[2]];}
+export function bluetoothCarUnoPoint(name:string):CarPoint{return bluetoothCarPlacedPoint(bluetoothCarLayout.uno.at,bluetoothCarLayout.uno.rotation,unoR3HeaderPoint(name));}
+
+export const bluetoothCarBreakoutScale=unoR3Scale/bluetoothBoardScale;
+export function bluetoothCarBreakoutPoint(kind:BluetoothBoardKind,name:string):CarPoint{const target=kind==='bluefruit'?bluetoothCarLayout.radio:bluetoothCarLayout.driver;return bluetoothCarPlacedPoint(target.at,target.rotation,bluetoothHeaderPoint(kind,name).map(v=>v*bluetoothCarBreakoutScale) as CarPoint);}
+export function bluetoothCarMountPoints(){const mounts=uno.holes.map(h=>({name:'uno '+h.x+','+h.y,at:bluetoothCarPlacedPoint(bluetoothCarLayout.uno.at,bluetoothCarLayout.uno.rotation,unoR3Point(+h.x,+h.y,-unoR3Thickness/2)),top:bluetoothCarLayout.uno.at[1]+unoR3Thickness/2}));for(const kind of ['bluefruit','tb6612'] as const){const target=kind==='bluefruit'?bluetoothCarLayout.radio:bluetoothCarLayout.driver;for(const e of bluetoothBoardLayouts[kind].elements.filter(e=>e.package.startsWith('MOUNTING')))mounts.push({name:kind+' '+e.name,at:bluetoothCarPlacedPoint(target.at,target.rotation,bluetoothBoardPoint(kind,+e.x,+e.y,-bluetoothBoardTop).map(v=>v*bluetoothCarBreakoutScale) as CarPoint),top:target.at[1]+bluetoothBoardTop*bluetoothCarBreakoutScale});}return mounts;}

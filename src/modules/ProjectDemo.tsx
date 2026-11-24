@@ -1,3 +1,4 @@
+import {RoofVent} from './GreenhouseVentParts';
 import {DialFace, DialPointer} from './DialGaugeParts';
 import {DrawbridgeDeck, DrawbridgeLanding} from './DrawbridgeParts';
 import {LetterCatchBin, LetterFeedRamp, LetterTiltDeck} from './LetterSorterParts';
@@ -1909,6 +1910,8 @@ function PartGeometry({name}: {name:string}) {
       return <group scale={1.65}><AS5600Breakout/></group>;
     case 'Diametrically polarized magnet':
       return <mesh><cylinderGeometry args={[.41,.41,.22,44]}/><meshStandardMaterial color="#bcc4c6" metalness={.67} roughness={.3}/></mesh>;
+    case 'Card greenhouse frame and roof flap':
+      return <group position={[-.46,0,0]}><RoofVent angle={.35}/></group>;
     case 'Card dial face and pointer':
       return <group scale={.84}><DialFace labelled={false}/><DialPointer value={62}/></group>;
     case 'Card bridge deck, hinge supports and canal':

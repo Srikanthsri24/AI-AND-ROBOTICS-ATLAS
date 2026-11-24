@@ -1,0 +1,16 @@
+import {useLayoutEffect,useMemo,useRef} from 'react';
+import {Text} from '@react-three/drei';
+import {DoubleSide,InstancedMesh,Object3D,Path,Shape} from 'three';
+import {SolarMeterSolid as Box} from './SolarMeterParts';
+import {carMiniBreadboard as d,carMiniHole} from '../data/bluetooth-mini-breadboard';
+const font=new URL('./fonts/NotoSans-Regular.ttf',document.baseURI).href;
+export default function BluetoothMiniBreadboard({selected,supplyLabel='5 V'}:{selected:boolean;supplyLabel?:string}){
+ const bars=useRef<InstancedMesh>(null),rings=useRef<InstancedMesh>(null),springs=useRef<InstancedMesh>(null),white=selected?'#b78be8':'#e9e6db',metal=selected?'#b78be8':'#b9ac80';
+ const shape=useMemo(()=>{const s=new Shape();s.moveTo(-d.width/2,-d.length/2);s.lineTo(d.width/2,-d.length/2);s.lineTo(d.width/2,d.length/2);s.lineTo(-d.width/2,d.length/2);s.closePath();for(let col=0;col<17;col++)for(const bank of [-1,1] as const)for(let row=0;row<5;row++){const [x,,z]=carMiniHole(col,bank,row),p=new Path();p.absarc(x,-z,.014,0,Math.PI*2,true);s.holes.push(p);}const gap=new Path();gap.moveTo(-.43,-.05);gap.lineTo(-.43,.05);gap.lineTo(.43,.05);gap.lineTo(.43,-.05);gap.closePath();s.holes.push(gap);return s;},[]),settings=useMemo(()=>({depth:.18,bevelEnabled:false,curveSegments:10}),[]);
+ useLayoutEffect(()=>{const o=new Object3D();let bi=0,ri=0,si=0;for(let col=0;col<17;col++)for(const bank of [-1,1] as const){const x=(col-8)*d.pitch,z=bank*(d.bankGap/2+2*d.pitch);o.position.set(x,.07,z);o.rotation.set(0,0,0);o.updateMatrix();bars.current!.setMatrixAt(bi++,o.matrix);for(let row=0;row<5;row++){const p=carMiniHole(col,bank,row);o.position.set(p[0],.14,p[2]);o.rotation.set(-Math.PI/2,0,0);o.updateMatrix();rings.current!.setMatrixAt(ri++,o.matrix);for(const side of [-1,1]){o.position.set(p[0]+side*.008,.1075,p[2]);o.rotation.set(0,0,0);o.updateMatrix();springs.current!.setMatrixAt(si++,o.matrix);}}}for(const ref of [bars,rings,springs]){ref.current!.instanceMatrix.needsUpdate=true;ref.current!.computeBoundingBox();ref.current!.computeBoundingSphere();}},[]);
+ return <><Box at={[0,.01,0]} size={[d.width,.02,d.length]} color={white}/><mesh position={[0,.02,0]} rotation={[-Math.PI/2,0,0]} castShadow><extrudeGeometry args={[shape,settings]}/><meshStandardMaterial color={white} roughness={.7}/></mesh><Box at={[0,.145,0]} size={[.86,.01,.10]} color={white}/>
+ <instancedMesh ref={bars} args={[undefined,undefined,34]}><boxGeometry args={[.026,.010,.23]}/><meshStandardMaterial color={metal} metalness={.6} roughness={.43}/></instancedMesh>
+ <instancedMesh ref={rings} args={[undefined,undefined,170]}><ringGeometry args={[.009,.013,12]}/><meshStandardMaterial color={metal} side={DoubleSide} metalness={.65} roughness={.4}/></instancedMesh>
+ <instancedMesh ref={springs} args={[undefined,undefined,340]}><boxGeometry args={[.004,.065,.014]}/><meshStandardMaterial color={metal} metalness={.65} roughness={.4}/></instancedMesh>
+ <Box at={[-.445,.2008,-.1778]} size={[.007,.0015,.24]} color='#b55d55'/><Box at={[.445,.2008,.1778]} size={[.007,.0015,.24]} color='#577ca1'/><Text position={[-.40,.201,-.322]} rotation={[-Math.PI/2,0,0]} font={font} fontSize={.031} color='#8b4847'>{supplyLabel}</Text><Text position={[.40,.201,.322]} rotation={[-Math.PI/2,0,0]} font={font} fontSize={.029} color='#42617d'>GND</Text></>;
+}

@@ -28,12 +28,12 @@ function gearOutline(teeth:number,pitch:number) {
   return outline;
 }
 
-export const GearWheel=memo(function GearWheel({teeth,pitch,metal,highlight}:{teeth:number;pitch:number;metal:boolean;highlight:boolean}) {
+export const GearWheel=memo(function GearWheel({teeth,pitch,metal,highlight,highlightColor='#d7a366'}:{teeth:number;pitch:number;metal:boolean;highlight:boolean;highlightColor?:string}) {
   const shape=useMemo(()=>gearOutline(teeth,pitch),[teeth,pitch]);
   return <>
     <mesh castShadow>
       <extrudeGeometry args={[shape,{depth:metal?.16:.11,bevelEnabled:true,bevelThickness:.008,bevelSize:.008,bevelSegments:2,steps:1}]}/>
-      <meshStandardMaterial color={highlight?'#d7a366':metal?'#b49460':'#e0ddc8'} metalness={metal?.67:.12} roughness={metal?.34:.48}/>
+      <meshStandardMaterial color={highlight?highlightColor:metal?'#b49460':'#e0ddc8'} metalness={metal?.67:.12} roughness={metal?.34:.48}/>
     </mesh>
     <mesh position={[0,0,.19]} rotation={[Math.PI/2,0,0]}>
       <cylinderGeometry args={[metal?.16:.23,metal?.16:.23,.18,32]}/>

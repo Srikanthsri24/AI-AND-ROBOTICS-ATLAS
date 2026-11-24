@@ -1,0 +1,5 @@
+export type CarCarryStart={x:number;z:number;yaw:number};
+const ease=(n:number)=>{const p=Math.max(0,Math.min(1,n));return p*p*(3-2*p);};
+export const carParkedStandZ=9,carCarryLift=1.05;
+/** Virtual hand handling: all supplies must be off and wheels stationary before starting. */
+export function bluetoothCarHandling(toFloor:boolean,seconds:number,from:CarCarryStart){const t=Number.isFinite(seconds)?Math.max(0,seconds):0,turn=Math.atan2(Math.sin(-from.yaw),Math.cos(-from.yaw));if(toFloor){return {lift:t<1?.15+(carCarryLift-.15)*ease(t):t<2.5?carCarryLift:carCarryLift*(1-ease(t-2.5)),standZ:.20+(carParkedStandZ-.20)*ease((t-1)/1.5),x:from.x,z:from.z,yaw:from.yaw,done:t>=3.5,phase:t<1?'Lift clear':t<2.5?'Move the support out':'Lower to the floor'};}const move=ease((t-1)/1.5);return {lift:t<1?carCarryLift*ease(t):t<4?carCarryLift:carCarryLift-(carCarryLift-.15)*ease(t-4),standZ:t>=4?.20:carParkedStandZ-(carParkedStandZ-.20)*ease((t-2.5)/1.5),x:move===1?0:from.x*(1-move),z:move===1?0:from.z*(1-move),yaw:from.yaw+turn*move,done:t>=5,phase:t<1?'Lift clear':t<2.5?'Carry back to the bench':t<4?'Return the support':'Lower onto the support'};}

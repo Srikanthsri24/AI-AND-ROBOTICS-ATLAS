@@ -1,0 +1,10 @@
+/** Matches model_crossing_request.ino: tabletop sequence, no real traffic hardware. */
+export type CrossingPhase='green'|'amber'|'all-stop'|'walk'|'clearance';
+export type CrossingLamps={green:boolean;amber:boolean;red:boolean;wait:boolean;walk:boolean};
+export type CrossingState={phase:CrossingPhase;phaseStarted:number;raw:boolean;stable:boolean;changedAt:number;queued:boolean;lamps:CrossingLamps;events:{at:number;message:string}[]};
+export function crossingLamps(phase:CrossingPhase):CrossingLamps{return {green:phase==='green',amber:phase==='amber',red:['all-stop','walk','clearance'].includes(phase),wait:phase!=='walk',walk:phase==='walk'};}
+export function crossingLampWrites(phase:CrossingPhase):{pin:5|6|7|8|9;on:boolean}[]{const l=crossingLamps(phase);return [{pin:5,on:false},{pin:9,on:false},{pin:6,on:l.amber},{pin:7,on:l.red},{pin:8,on:l.wait},{pin:5,on:l.green},{pin:9,on:l.walk}];}
+export function crossingInitial(now=0):CrossingState{return {phase:'green',phaseStarted:now>>>0,raw:false,stable:false,changedAt:0,queued:false,lamps:crossingLamps('green'),events:[{at:now>>>0,message:'Vehicle green'}]};}
+export function crossingTick(previous:CrossingState,pressed:boolean,now:number):CrossingState{now=now>>>0;const s={...previous,events:[...previous.events]};let edge=false;if(pressed!==s.raw){s.raw=pressed;s.changedAt=now;}if(s.raw!==s.stable&&((now-s.changedAt)>>>0)>=25){s.stable=s.raw;edge=s.stable;}const elapsed=(now-s.phaseStarted)>>>0,event=(message:string)=>s.events.push({at:now,message});if(edge&&s.phase==='green'&&!s.queued){s.queued=true;event('Crossing queued');}const enter=(phase:CrossingPhase,message:string)=>{s.phase=phase;s.phaseStarted=now;s.lamps=crossingLamps(phase);event(message);};
+ switch(s.phase){case 'green':if(s.queued&&elapsed>=3000){s.queued=false;enter('amber','Vehicle amber');}break;case 'amber':if(elapsed>=1200)enter('all-stop','All stop');break;case 'all-stop':if(elapsed>=800)enter('walk','Walk');break;case 'walk':if(elapsed>=4000)enter('clearance','Clearance');break;case 'clearance':if(elapsed>=1500)enter('green','Vehicle green');break;}return s;
+}

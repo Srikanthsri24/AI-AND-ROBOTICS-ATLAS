@@ -3,6 +3,7 @@ import { OrbitControls } from '@react-three/drei';
 import { useEffect, useLayoutEffect, useMemo, useRef, type ReactNode } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import { CatmullRomCurve3, Group, Mesh, Vector3 } from 'three';
+import {layoutWorkshopLabel} from '../data/workshop-label-layout';
 import type { Reading } from './lab-experiments';
 import { distinctLabs } from "../data/distinct-labs";
 
@@ -83,7 +84,7 @@ function OriginalWorkbench(props: Props) {
   </div>;
 }
 
-export function WorldLabel({position,className,children}:{position:Point;className:string;children:ReactNode}) {
+export function WorldLabel({position,className,children,keepInView=false,avoidOverlap=false,calloutGap=12}:{position:Point;className:string;children:ReactNode;keepInView?:boolean;avoidOverlap?:boolean;calloutGap?:number}) {
   const anchor=useRef<Group>(null);
   const element=useRef<HTMLDivElement>(null);
   const root=useRef<Root>(null);
@@ -95,6 +96,7 @@ export function WorldLabel({position,className,children}:{position:Point;classNa
     node.style.top='0';
     node.style.left='0';
     node.className=className;
+    node.dataset.atlasWorldLabel='true';
     gl.domElement.parentElement?.append(node);
     element.current=node;
     const mounted=createRoot(node);
@@ -108,12 +110,26 @@ export function WorldLabel({position,className,children}:{position:Point;classNa
   useFrame(({camera,size})=>{
     if(!element.current||!anchor.current)return;
     anchor.current.getWorldPosition(projected).project(camera);
-    const x=(projected.x+1)*size.width/2;
-    const y=(1-projected.y)*size.height/2;
+    const projectedX=(projected.x+1)*size.width/2;
+    const halfWidth=keepInView?element.current.offsetWidth/2+8:0;
+    let x=keepInView?Math.max(halfWidth,Math.min(size.width-halfWidth,projectedX)):projectedX;
+    let y=(1-projected.y)*size.height/2;
+    const child=element.current.firstElementChild as HTMLElement|null;
+    if(avoidOverlap&&child&&child.offsetWidth&&child.offsetHeight){
+      const canvas=gl.domElement.getBoundingClientRect(),outer=element.current.getBoundingClientRect(),box=child.getBoundingClientRect();
+      const obstacles=Array.from(gl.domElement.parentElement?.querySelectorAll<HTMLElement>('[data-atlas-world-label]')??[]).filter(node=>node!==element.current&&node.style.visibility!=='hidden').map(node=>{const r=node.getBoundingClientRect();return {x:r.x-canvas.x,y:r.y-canvas.y,width:r.width,height:r.height};});
+      const placed=layoutWorkshopLabel({x:projectedX,y},size,{width:box.width,height:box.height},obstacles,8,calloutGap);
+      x=placed.x+element.current.offsetWidth/2-(box.x-outer.x);
+      y=placed.y+element.current.offsetHeight/2-(box.y-outer.y);
+      element.current.dataset.smartLabel='true';
+      element.current.dataset.leaderEdge=placed.edge;
+      element.current.style.setProperty('--atlas-leader-length',placed.length+'px');
+      element.current.style.setProperty('--atlas-leader-rotation',placed.rotation+'rad');
+    }
     element.current.style.transform=`translate3d(${x}px,${y}px,0) translate(-50%,-50%)`;
     element.current.style.visibility=projected.z>1?'hidden':'visible';
   });
-  return <group position={position} ref={anchor}/>;
+  return <group name={avoidOverlap?'atlas-smart-label-anchor':undefined} position={position} ref={anchor}/>;
 }
 
 function FitWorkbench() {

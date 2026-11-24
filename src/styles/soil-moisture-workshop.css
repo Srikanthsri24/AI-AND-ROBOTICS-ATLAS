@@ -1,0 +1,24 @@
+.sw-workshop .sw-readings {display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin:16px 0;}
+.sw-workshop .sw-readings > div {padding:10px 8px;border:1px solid #e0d8f0;border-radius:8px;background:#f8f5ff;}
+.sw-workshop .sw-readings span {display:block;font-size:10px;color:#887698;}
+.sw-workshop .sw-readings strong {display:block;font-size:22px;color:#7045ba;margin-top:5px;font-variant-numeric:tabular-nums;}
+.sw-workshop .sw-references {font-size:11px;line-height:1.7;color:#776389;padding:10px 0;border-bottom:1px solid #e7dff3;}
+.sw-workshop .sw-scale-note {font-size:10px;line-height:1.7;color:#8c7e9b;}
+.sw-cup-label {pointer-events:none;z-index:2;}
+.sw-cup-label span {display:block;font:700 9px Inter,Arial,sans-serif;letter-spacing:1px;color:#534558;padding:3px 5px;}
+@media(min-width:801px){.atlas .gp-page .sw-workshop .rw-view{position:sticky;top:96px;}}
+@media(max-width:500px){.sw-workshop .rw-view-top{flex-wrap:wrap;}.sw-workshop .rw-canvas{height:470px;}}
+.sw-workshop .sw-view-tools{display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:12px 16px;background:#f7f4ff;border-bottom:1px solid #e0d8ef;}
+.sw-workshop .sw-view-tools button{border:1px solid #d3c5eb;border-radius:8px;background:white;color:#513390;padding:9px 12px;font:600 12px inherit;cursor:pointer;}
+.sw-workshop .sw-view-tools span{font-size:11px;line-height:1.5;color:#584a70;}
+.sw-workshop .sw-readings span,.sw-workshop .sw-scale-note{color:#655372;}
+.sw-workshop .rw-panel button:disabled{opacity:.55;cursor:not-allowed;}
+.sw-workshop .rw-part-list button[aria-pressed=true]{color:white;background:#7044bb;border-color:#7044bb;}
+
+.sw-workshop .sw-lesson{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:center;padding:22px;margin:0 0 20px;border:1px solid #d6c8ed;border-radius:16px;background:linear-gradient(120deg,#f6f1ff,#fff);color:#293351;}
+.sw-workshop .sw-lesson h4{margin:4px 0 8px;font-size:20px;line-height:1.35;}
+.sw-workshop .sw-lesson p{margin:0;font-size:13px;line-height:1.7;color:#514465;}
+.sw-workshop .sw-lesson button{border:1px solid #7044bb;border-radius:10px;background:#7044bb;color:#fff;padding:12px 18px;font:600 13px inherit;cursor:pointer;min-height:44px;}
+.sw-workshop .sw-lesson button:focus-visible{outline:3px solid #b492ef;outline-offset:3px;}
+.sw-workshop .sw-lesson ol{grid-column:1/-1;margin:0;padding:0 0 0 22px;font-size:13px;line-height:1.8;color:#403554;}
+@media(max-width:600px){.sw-workshop .sw-lesson{grid-template-columns:1fr;padding:16px;}.sw-workshop .sw-lesson button{width:100%;}}

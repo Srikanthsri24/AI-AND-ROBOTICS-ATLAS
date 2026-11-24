@@ -22,3 +22,15 @@ Saved audio was generated from original text with eSpeak NG, GPL-3.0-or-later: h
 Apple system voices were tested during environment discovery but rejected for the deliverable after reviewing restrictions on their recorded output: https://www.apple.com/legal/sla/docs/macOSSequoia.pdf . All deliverable WAVs were subsequently overwritten using eSpeak NG. The local TTS fallback is intentionally identified as synthetic. Professional natural narration with commercial publication rights remains outstanding.
 
 Three.js: MIT. React: MIT. React Three Fiber: MIT. Drei: MIT. Zustand: MIT. Vite: MIT. The application optionally loads DM Sans and Space Grotesk via Google Fonts (OFL); system sans-serif fallback works without network. Do not represent these fonts as company-owned. FFmpeg and its bundled codecs have their own licensing requirements; the encoder is installed separately through imageio-ffmpeg and not redistributed with this source tree. Review the exact FFmpeg build before distributing an encoder binary.
+
+
+## USB Micro-B breakout geometry
+
+The solar sweeper workshop's Micro-B breakout geometry is adapted from Adafruit Industries' [microB Eagle board](https://github.com/adafruit/Adafruit-SMT-Breakout-PCBs/blob/master/microB.brd), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/). The source board and original license are retained in `asset-sources/adafruit-micro-b`; generated coordinates, source SHA-256 and attribution are in `src/data/usb-micro-breakout-layout.json`. `scripts/extract-usb-micro-breakout.py` reproduces the extraction.
+
+The solar sweeper's motor / source / paper-contact models are mechanism illustrations. Their inertia, friction and partial-shade current response are not measured specifications of the depicted products or predictions of cleanup efficiency. The firmware timing and ADC calculations follow the project's published Arduino sketch.
+
+
+## LiDAR micro drone workshop references
+
+The new deck meshes are independently authored code geometry informed by the existing component photos and published functional dimensions / pin positions. Reference URLs are retained in `src/data/lidar-workshop-layout.ts`: Bitcraze Crazyflie 2.1+ / Multi-ranger / Flow V2 / Crazyradio 2.0 pages and mechanical drawings, expansion-pin guidance, and ST’s VL53L1X package specification. The manufacturer’s component-placement PDF and mechanical graphics were inspected as research; they and source supplier CAD are not redistributed in these new meshes. Visual assembly choices are distinguished from published measurements. The centre-ray optical model illustrates geometric intersections and does not predict the real sensor’s full field of view, reflectance or ranging accuracy. The browser host-controller mirror follows the included Python logger’s rule and queue behaviour; that Python logger prints decisions and does not command flight.

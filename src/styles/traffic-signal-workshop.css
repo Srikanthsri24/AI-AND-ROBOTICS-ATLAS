@@ -1,0 +1,15 @@
+.tw-workshop .tw-readings{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin:16px 0;}
+.tw-workshop .tw-readings>div{padding:10px 8px;border:1px solid #e1d9ef;background:#f8f5ff;border-radius:8px;}
+.tw-workshop .tw-readings span{display:block;font-size:10px;color:#88739b;}
+.tw-workshop .tw-readings strong{display:block;font-size:21px;color:#7146b7;margin-top:5px;font-variant-numeric:tabular-nums;}
+.tw-workshop .tw-timeline{display:flex;gap:4px;margin:15px 0;}
+.tw-workshop .tw-timeline span{padding:10px 3px;background:#f8f5ff;border:1px solid #e0d8ee;color:#89749a;border-radius:5px;font-size:9px;text-align:center;}
+.tw-workshop .tw-timeline span[data-active=true]{background:#eadfff;border-color:#bb97e4;color:#7345a6;}
+.tw-workshop .tw-outputs{display:grid;gap:6px;margin:17px 0;}
+.tw-workshop .tw-outputs>div{display:flex;align-items:center;gap:9px;padding:10px;border:1px solid #e5def1;background:#fcfaff;border-radius:6px;font-size:11px;color:#836f95;}
+.tw-workshop .tw-outputs>div[data-active=true]{border-color:#c0a2e1;background:#f0e7fc;}
+.tw-workshop .tw-outputs i{width:8px;height:8px;border-radius:50%;}
+.tw-workshop .tw-outputs strong{margin-left:auto;font-size:10px;color:#6d4d96;}
+.tw-workshop .tw-note{font-size:10px;line-height:1.7;color:#8c7d9b;}
+@media(min-width:801px){.atlas .gp-page .tw-workshop .rw-view{position:sticky;top:96px;}}
+@media(max-width:500px){.tw-workshop .rw-view-top{flex-wrap:wrap;}.tw-workshop .rw-canvas{height:500px;}}

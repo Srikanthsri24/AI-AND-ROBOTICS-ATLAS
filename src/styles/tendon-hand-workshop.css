@@ -1,0 +1,9 @@
+.hw-workshop .hw-readings { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:16px 0; }
+.hw-workshop .hw-readings > div { padding:10px; border:1px solid #e3dcf1; border-radius:8px; background:#f9f7ff; }
+.hw-workshop .hw-readings span { display:block; color:#827391; font-size:10px; }
+.hw-workshop .hw-readings strong { display:block; color:#6940b8; font-size:21px; margin-top:5px; font-variant-numeric:tabular-nums; }
+.hw-workshop .hw-faults { display:flex; gap:8px; margin:14px 0; }
+.hw-workshop .hw-faults button { padding:9px; flex:1; font-size:11px; border:1px solid #cfb9e6; border-radius:7px; color:#69448f; background:#f8f4ff; }
+.hw-workshop .hw-faults button[aria-pressed=false] { background:#fff0e6; border-color:#d6a77c; color:#8d542d; }
+@media(max-width:500px) { .hw-workshop .rw-view-top { flex-wrap:wrap; } .hw-workshop .rw-canvas { height:450px; } }
+@media(min-width:801px) { .atlas .gp-page .hw-workshop .rw-view { position:sticky; top:96px; } }

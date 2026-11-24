@@ -1,0 +1,14 @@
+import {useMemo,useRef} from 'react';
+import {useFrame} from '@react-three/fiber';
+import {Group,Path,Shape} from 'three';
+import {SolarMeterSolid as Box} from './SolarMeterParts';
+import {Mount} from './RoverWorkshopModel';
+import {espCarLayout as d,espCarMounts} from '../data/esp32-car-layout';
+export const espCarCarrierParts=[['esp-carrier','Insulating retaining carrier','Four screws fasten this carrier to its own chassis bores. Narrow insulating ledges support the outer PCB margin without touching the header solder contacts.'],['esp-clamps','Retracting PCB edge jaws','Four soft-faced jaws open before the board lowers, then close against its side edges. They retain the board without covering the gold contacts or inventing PCB screw holes.']] as const;
+export default function Esp32CarCarrier({selected,select,boardFitted}:{selected:string;select:(id:string)=>void;boardFitted:boolean}){
+ const jaws=useRef<Group>(null),elapsed=useRef(0),last=useRef(boardFitted),reduced=useRef(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+ const base=useMemo(()=>{const s=new Shape(),w=d.carrier.width/2,l=d.carrier.length/2;s.moveTo(-w,-l);s.lineTo(w,-l);s.lineTo(w,l);s.lineTo(-w,l);s.closePath();for(const p of espCarMounts.filter(p=>p.name.startsWith('ESP'))){const hole=new Path();hole.absarc(p.at[0]-d.carrier.at[0],-(p.at[2]-d.carrier.at[2]),.027,0,Math.PI*2,true);s.holes.push(hole);}return s;},[]);
+ useFrame((_,dt)=>{if(last.current!==boardFitted){elapsed.current=0;last.current=boardFitted;}elapsed.current+=dt;const t=boardFitted?(reduced.current?1:Math.max(0,Math.min(1,(elapsed.current-2.3)/.8))):0,e=t*t*(3-2*t);if(jaws.current){jaws.current.children.forEach(o=>{o.position.x=o.userData.side*(.2919+d.carrier.jawTravel*(1-e));});jaws.current.userData.busy=boardFitted&&t<1;}});
+ const color=selected==='esp-carrier'?'#b78be8':'#d6d5c7',jaw=selected==='esp-clamps'?'#b78be8':'#454c55';
+ return <Mount from={[0,.7,0]}><group position={d.carrier.at}><group userData={{partId:'esp-carrier'}} onClick={e=>{e.stopPropagation();select('esp-carrier');}}><mesh rotation={[-Math.PI/2,0,0]} castShadow receiveShadow><extrudeGeometry args={[base,{depth:d.carrier.thickness,bevelEnabled:false,curveSegments:20}]}/><meshStandardMaterial color={color} roughness={.7}/></mesh>{[-1,1].flatMap(side=>[-.29,.29].map(z=><group key={side+','+z}><Box at={[side*.314,.077,z]} size={[.026,.074,.075]} color={color}/><Box at={[side*.293,.092,z]} size={[.042,.024,.075]} color={color}/></group>))}</group><group ref={jaws} name='esp-carrier-jaws' userData={{partId:'esp-clamps',busy:boardFitted}} onClick={e=>{e.stopPropagation();select('esp-clamps');}}>{[-1,1].flatMap(side=>[-.29,.29].map(z=><group key={side+','+z} position={[side*(.2919+(boardFitted?0:.08)),0,z]} userData={{side}}><Box at={[0,.120,0]} size={[.025,.032,.055]} color={jaw}/><Box at={[side*.009,.100,0]} size={[.035,.008,.055]} color={jaw}/></group>))}</group></group></Mount>;
+}

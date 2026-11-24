@@ -35,7 +35,7 @@ export const bluetoothCar: Build = {
     ['AA negative and driver GND','Uno GND','Common ground'],
     ['Computer USB or USB power bank','Uno USB port','Logic supply during upload or untethered use'],
   ],
-  test: 'With the wheels lifted, test F, B, L, R and S in that order. If a wheel turns the wrong way, power off both supplies and swap that motor’s two output leads. Send F and disconnect Bluetooth before the pulse ends to check that motion ends within 850 ms of the last command. After all checks pass, switch to the USB power bank and repeat on a clear floor at low speed.',
+  test: 'With the wheels lifted, test F, B, L, R and S in that order. If a wheel turns the wrong way, power off both supplies and swap that motor’s two output leads. Send F and disconnect Bluetooth before the pulse ends to check that the driver disables its outputs 850 ms after the last command. The wheels can coast briefly after the outputs switch off. After all checks pass, switch to the USB power bank and repeat on a clear floor at low speed.',
   demo: ['Drive command','Stopped','Forward','Both wheels are idle','Both wheels drive forward'],
 };
 

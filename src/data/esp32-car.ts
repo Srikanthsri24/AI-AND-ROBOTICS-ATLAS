@@ -10,12 +10,13 @@ export const esp32Car: Build = {
     ['1 kΩ pull-down resistor','1','Holds the motor driver in standby while the ESP32 boots or resets.'],
     ...bluetoothCar.parts.slice(2).map(([name, quantity, purpose], index): Build['parts'][number] => [
       name, quantity, index === 0 ? 'Converts the ESP32’s 3.3 V control signals into motor current from the AA pack.'
+        : index === 2 ? 'Holds the drivetrain and an insulating retaining carrier for the ESP32, which has no mounting-screw holes.'
         : index === 5 ? 'Powers the ESP32 through Micro USB during an untethered run.' : purpose,
     ]),
   ],
   assembly:[
     ['Fit and identify the drivetrain','Fit two 6 V geared motors and wheels to the chassis. Attach the caster at the rear. Label the left motor A and the right motor B.','The wheels turn freely and each pair of motor leads reaches the driver.',[3,4]],
-    ['Mount the ESP32 and driver','Use insulated standoffs and face the ESP32 antenna outward. Leave room for the Micro USB plug. Keep the antenna clear of the battery holder and motor wires.','The ESP32 antenna extends past the chassis edge and the bottom of each PCB clears exposed metal.',[0,2,4]],
+    ['Mount the ESP32 and driver','Retain the ESP32 in an insulating carrier and mount the driver on insulated standoffs. Face the ESP32 antenna outward. Leave room for the Micro USB plug. Keep the antenna clear of the battery holder and motor wires.','The ESP32 antenna extends past the chassis edge and the bottom of each PCB clears exposed metal.',[0,2,4]],
     ['Wire direction, speed and standby','Disconnect both supplies. Use 3V3 for driver VCC. Wire GPIO25 and GPIO26 to the speed inputs and wire the four direction inputs as shown below. Connect GPIO23 and the 1 kΩ pull-down to STBY.','The resistor joins STBY to GND. GPIO27 is available for the boot mode jumper.',[0,1,2,6]],
     ['Connect motor power and both channels','Wire motor A and motor B. Connect the switched AA positive to VM and AA negative to driver GND. Join ESP32 and driver grounds.','Check for reversed polarity and verify that each motor’s stall current is within the driver rating.',[2,3,5]],
     ['Set the control link and power up','Leave GPIO27 open for Wi-Fi or jumper it to GND for Bluetooth Classic. Set the jumper with both supplies off. Power the ESP32 over Micro USB, then switch on the AA pack with wheels raised.','Only the selected radio starts. Both wheels remain stationary until a valid command arrives.',[0,5,6,7]],

@@ -1,0 +1,11 @@
+.cw-workshop .cw-readings{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:16px 0;}
+.cw-workshop .cw-readings>div{padding:10px;border:1px solid #e1d9f0;border-radius:8px;background:#f8f5ff;}
+.cw-workshop .cw-readings span{display:block;font-size:10px;color:#887699;}
+.cw-workshop .cw-readings strong{display:block;font-size:21px;color:#7045ba;margin-top:5px;font-variant-numeric:tabular-nums;}
+.cw-workshop .cw-band{display:flex;gap:5px;margin:15px 0;}
+.cw-workshop .cw-band span{flex:1;text-align:center;padding:8px 5px;font-size:9px;line-height:1.5;border:1px solid #e0d8ef;border-radius:6px;color:#8b789c;}
+.cw-workshop .cw-band span.cw-active{background:#ece1ff;border-color:#bd9ae6;color:#7042a5;}
+.cw-workshop .cw-note{font-size:10px;line-height:1.7;color:#8c7d9c;}
+@media(min-width:801px){.atlas .gp-page .cw-workshop .rw-view{position:sticky;top:96px;}}
+@media(max-width:500px){.cw-workshop .rw-view-top{flex-wrap:wrap;}.cw-workshop .rw-canvas{height:460px;}}
+.cw-thermometer-reading{display:block;white-space:nowrap;padding:4px 7px;font:700 10px Inter,Arial,sans-serif;color:#544064;background:#faf7ff;border:1px solid #c9b6df;border-radius:4px;}
