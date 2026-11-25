@@ -12,7 +12,7 @@ export default function CubeSatElectronicsParts({selected='',select=()=>{},occup
  return <group name="cubesat-electronics-mm">
  {owner('cubesat-payload-deck',profile('cubesat-payload-deck',shapes.deck,[0,d.deckBottom,0],2,'#b6bec7',.7))}
  {owner('cubesat-deck-screws',<>{deckMounts.map(p=><group key={p.x+'/'+p.z}>{cylinder('cubesat-deck-screws',[p.x,31.5,p.z],.9,5,'#aeb9c6')}{cylinder('cubesat-deck-screws',[p.x,34.7,p.z],1.8,1.4,'#8e9bac',6)}</group>)}</>)}
- {owner('cubesat-stack-studs',<>{mounts.map(p=><group key={p.x+'/'+p.z}>{cylinder('cubesat-stack-studs',[p.x,60.6,p.z],.8,58.8,'#adb7c1')}{cylinder('cubesat-stack-studs',[p.x,31.4,p.z],1.7,1.2,'#8e9bac',6)}</group>)}</>)}
+ {owner('cubesat-stack-studs',<>{mounts.map(p=><group key={p.x+'/'+p.z}>{cylinder('cubesat-stack-studs',[p.x,75.1,p.z],.8,87.8,'#adb7c1')}{cylinder('cubesat-stack-studs',[p.x,31.4,p.z],1.7,1.2,'#8e9bac',6)}</group>)}</>)}
  {owner('cubesat-lower-spacers',<>{mounts.map(p=><group key={p.x+'/'+p.z}>{profile('cubesat-lower-spacers',shapes.spacer,[p.x,34,p.z],21,'#d8d1c3')}</group>)}</>)}
  {owner('cubesat-upper-spacers',<>{mounts.map(p=><group key={p.x+'/'+p.z}>{profile('cubesat-upper-spacers',shapes.spacer,[p.x,56.6,p.z],29.4,'#d8d1c3')}</group>)}</>)}
  {owner('cubesat-stack-nuts',<>{mounts.map(p=><group key={p.x+'/'+p.z}>{profile('cubesat-stack-nuts',shapes.nut,[p.x,87.6,p.z],1.6,'#a5afbd',.8)}</group>)}</>)}

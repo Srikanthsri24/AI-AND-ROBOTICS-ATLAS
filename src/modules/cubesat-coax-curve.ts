@@ -1,0 +1,3 @@
+import {CurvePath,LineCurve3,QuadraticBezierCurve3,Vector3} from 'three';
+import {cubeSatCoaxRoute} from '../data/cubesat-coax';
+export function cubeSatCoaxCurve(){const points=cubeSatCoaxRoute.map(p=>new Vector3(...p)),curve=new CurvePath<Vector3>();let last=points[0];for(let i=1;i<points.length-1;i++){const a=points[i].clone().sub(points[i-1]),b=points[i+1].clone().sub(points[i]),cut=Math.min(3,a.length()*.4,b.length()*.4),entry=points[i].clone().addScaledVector(a.normalize(),-cut),exit=points[i].clone().addScaledVector(b.normalize(),cut);curve.add(new LineCurve3(last,entry));curve.add(new QuadraticBezierCurve3(entry,points[i],exit));last=exit;}curve.add(new LineCurve3(last,points.at(-1)!));return curve;}
