@@ -45,3 +45,14 @@ export function industrialWirePoints(w:IndustrialWire):IndustrialPoint[]{const i
  return[a,aa,...via,bb,b];
 }
 export const industrialWireParts=industrialWires().map(w=>[w.id,w.name,'This insulated conductor and its two separate connectors form one individually traceable physical connection.',`${w.a.name} → ${w.b.name}. ${w.why}`]);
+/** Seat one jumper at a time, first contact then second; distances are native millimetres. */
+export function industrialWireSeating(index:number,progress:number){
+ if(!Number.isInteger(index)||index<0||index>=industrialWireIds.length||!Number.isFinite(progress)||progress<0||progress>7)throw Error('Invalid industrial jumper insertion');
+ const t=(progress-(3+index/17))*17,smooth=(n:number)=>{const f=Math.max(0,Math.min(1,n));return f*f*(3-2*f);};
+ return{visible:t>=0,a:12*(1-smooth(t*2)),b:12*(1-smooth((t-.5)*2))};
+}
+export function industrialSeatedWire(w:IndustrialWire,index:number,progress:number):IndustrialWire{
+ if(w.id!==industrialWireIds[index])throw Error('Industrial jumper order does not match its contact schedule');
+ const s=industrialWireSeating(index,progress),shift=(end:IndustrialWireEnd,d:number):IndustrialWireEnd=>({...end,at:end.at.map((v,k)=>v+end.out[k]*d) as IndustrialPoint});
+ return{...w,a:shift(w.a,s.a),b:shift(w.b,s.b)};
+}
