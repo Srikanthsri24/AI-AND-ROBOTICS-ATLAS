@@ -17,6 +17,7 @@ async function load(url){
 }
 const m=await import(await load(new URL('../src/data/radar-harness.ts',import.meta.url)));
 const power=await import(await load(new URL('../src/data/radar-power-layout.ts',import.meta.url)));
+const jumpers=await import(await load(new URL('../src/data/radar-power-jumpers.ts',import.meta.url)));
 const clamp=x=>Math.max(0,Math.min(1,x));
 // Closest distance between two finite segments, including clamped end contacts.
 function segmentDistance(p1,q1,p2,q2){
@@ -39,18 +40,23 @@ test('radar leads use the real Uno contacts and clear the sonar header when with
  assert.throws(()=>m.radarLeadPose(4,90));assert.throws(()=>m.radarLeadPose(0,NaN));
  assert.throws(()=>m.radarLeadPose(0,90,4.01));assert.throws(()=>m.radarLeadPose(0,90,0,5.01));
 });
-test('all seven sensor and fixed servo cables remain separated through the fitting range and connector travel',()=>{
+test('all twelve radar cables stay separated across head fitting, sensor travel and the ten-plug seating sequence',()=>{
  let minimum=Infinity;
- for(let heading=10;heading<=170;heading+=5)for(const[w1,w2]of[[0,0],[4,0],[0,5],[4,5]]){
+ const cases=[];
+ for(let heading=10;heading<=170;heading+=5)for(const[w1,w2]of[[0,0],[4,0],[0,5],[4,5]])cases.push({heading,w1,w2,progress:1});
+ for(let step=0;step<=40;step++)cases.push({heading:90,w1:0,w2:0,progress:step/40});
+ for(const{heading,w1,w2,progress}of cases){
   const paths=Array.from({length:4},(_,i)=>new CatmullRomCurve3(m.radarLeadPose(i,heading,w1,w2).points.map(p=>new Vector3(...p)),false,'centripetal').getPoints(160));
   paths.push(...Array.from({length:3},(_,i)=>new CatmullRomCurve3(power.radarServoTail(i).map(p=>new Vector3(...p)),false,'centripetal').getPoints(160)));
-  for(let a=0;a<7;a++)for(let b=a+1;b<7;b++)for(let i=1;i<paths[a].length;i++)for(let j=1;j<paths[b].length;j++){
+  const ws=jumpers.radarPowerSeating(progress);
+  paths.push(...Array.from({length:5},(_,i)=>new CatmullRomCurve3(jumpers.radarPowerJumperPose(i,ws[i].a,ws[i].b).points.map(p=>new Vector3(...p)),false,'centripetal').getPoints(160)));
+  for(let a=0;a<12;a++)for(let b=a+1;b<12;b++)for(let i=1;i<paths[a].length;i++)for(let j=1;j<paths[b].length;j++){
    const pa=paths[a][i-1],qa=paths[a][i],pb=paths[b][j-1],qb=paths[b][j];
    if(Math.max(Math.min(pa.x,qa.x)-Math.max(pb.x,qb.x),Math.min(pb.x,qb.x)-Math.max(pa.x,qa.x),Math.min(pa.y,qa.y)-Math.max(pb.y,qb.y),Math.min(pb.y,qb.y)-Math.max(pa.y,qa.y),Math.min(pa.z,qa.z)-Math.max(pb.z,qb.z),Math.min(pb.z,qb.z)-Math.max(pa.z,qa.z))>minimum+1.3)continue;
-   minimum=Math.min(minimum,segmentDistance(pa,qa,pb,qb)-(a<4?.65:.55)-(b<4?.65:.55));
+   minimum=Math.min(minimum,segmentDistance(pa,qa,pb,qb)-(a>=4&&a<7?.55:.65)-(b>=4&&b<7?.55:.65));
   }
  }
- assert.ok(minimum>.2,'160-segment path sampling retains surface clearance for 1.3 mm sensor / 1.1 mm servo wires; got '+minimum);
+ assert.ok(minimum>.2,'160-segment path sampling retains surface clearance for 1.3 mm jumpers / 1.1 mm servo tails; got '+minimum);
 });
 test('radar servo supply keeps its positive source separate and references one real breadboard strip',()=>{
  assert.deepEqual(power.radarSupplyPorts.map(p=>p.node),['servo-positive','common-ground','common-ground']);
@@ -74,4 +80,29 @@ test('fixed servo tails leave the actual grommet and end behind their own connec
   assert.ok(points[0][2]+.55<2.5&&points[0][2]-.55>-2.5,'Cable fits moulded strain relief');
  }
  assert.throws(()=>power.radarServoTail(3));assert.throws(()=>power.radarServoContact(-1));
+});
+test('the ten actual power plugs seat individually along their socket axes',()=>{
+ assert.equal(jumpers.radarPowerJumperParts.length,15);
+ assert.equal(new Set(jumpers.radarPowerJumperParts.map(p=>p[0])).size,15);
+ assert.deepEqual(jumpers.radarPowerJumpers.map(j=>j.a.kind),['male','banana','banana','banana','male']);
+ let previous=jumpers.radarPowerSeating(0);
+ assert.deepEqual(previous.map(w=>[w.a,w.b]),[[5,5],[8,5],[8,5],[8,5],[5,5]]);
+ for(let step=0;step<=40;step++){
+  const ws=jumpers.radarPowerSeating(step/40);let moving=0;
+  for(let i=0;i<5;i++){
+   const j=jumpers.radarPowerJumpers[i],pose=jumpers.radarPowerJumperPose(i,ws[i].a,ws[i].b);
+   for(const end of['a','b']){
+    assert.ok(ws[i][end]<=previous[i][end]+1e-10);
+    if(ws[i][end]>0&&ws[i][end]<j[end].travel)moving++;
+    assert.deepEqual(pose[end],j[end].at.map((n,k)=>n+j[end].out[k]*ws[i][end]));
+    const wireEnd=pose.points[end==='a'?0:pose.points.length-1],exit=j[end].kind==='banana'?11:8;
+    assert.deepEqual(wireEnd,pose[end].map((n,k)=>n+j[end].out[k]*exit));
+   }
+  }
+  assert.ok(moving<=1,'Only one plug travels at a time');previous=ws;
+ }
+ assert.deepEqual(previous,Array.from({length:5},()=>({a:0,b:0})));
+ assert.throws(()=>jumpers.radarPowerSeating(-.1));assert.throws(()=>jumpers.radarPowerSeating(NaN));
+ assert.throws(()=>jumpers.radarPowerJumperPose(5));assert.throws(()=>jumpers.radarPowerJumperPose(0,5.01));
+ assert.throws(()=>jumpers.radarPowerJumperPose(1,8.01));assert.throws(()=>jumpers.radarPowerJumperPose(1,0,5.01));
 });
