@@ -51,7 +51,7 @@ function RadarUsbParts({selected,select,unoWithdrawal=0,hostWithdrawal=0,usb=fal
   <group position={[-285,13,-197]} rotation={[-Math.PI/15,0,0]}>
    {tag('radar-computer-frame',box('radar-computer-frame',[0,45,0],[150,90,5],'#3e475f',.5))}
    {tag('radar-computer-screen',<>
-    <mesh name="radar-computer-display" position={[0,46,2.9]}><boxGeometry args={[137,77,.7]}/><meshStandardMaterial color={selected==='radar-computer-screen'?'#b78be8':'#17223d'} map={screen} roughness={.35} emissive="#233e65" emissiveIntensity={.15}/></mesh>
+    <mesh name="radar-computer-display" position={[0,46,2.9]}><boxGeometry args={[137,77,.7]}/><meshStandardMaterial color={selected==='radar-computer-screen'?'#b78be8':screen?'#ffffff':'#17223d'} map={screen} roughness={.35} emissive="#233e65" emissiveIntensity={.15}/></mesh>
     {!screen&&<>
      <Text position={[0,73,3.35]} font={font} fontSize={3.1} color="#eee5fc">ATLAS · RADAR WORKSHOP</Text>
      <Text name="radar-computer-usb-status" position={[0,49,3.35]} font={font} fontSize={3.2} color={connected?'#8fddc4':'#c5bbdc'}>{connected?'USB CONNECTED':mated?'USB HOST OFF':'USB DISCONNECTED'}</Text>
