@@ -1,0 +1,34 @@
+import uno from './uno-r3-board-layout.json';
+import{carMiniHole}from'./bluetooth-mini-breadboard';
+import{floodSonarContact,floodSonarPins,type FloodPoint}from'./flood-workshop-layout';
+import{gateSensorPosition}from'./flood-gate-layout';
+export const gateElectronics={uno:[-310,9,-50] as FloodPoint,board:[-310,0,35] as FloodPoint,supply:[-310,16,108] as FloodPoint,plug:[-272,4.5,40] as FloodPoint};
+export const gateSupplyPorts=[{id:'positive',label:'SERVO +5 V',node:'servo-positive',x:-326,color:'#dc6074'},{id:'negative',label:'SERVO −',node:'common-ground',x:-310,color:'#39465c'},{id:'reference',label:'LOGIC REF',node:'common-ground',x:-294,color:'#39465c'}] as const;
+const add=(a:FloodPoint,b:FloodPoint)=>a.map((n,k)=>n+b[k]) as FloodPoint;
+export function gateUnoContact(name:string){const p=uno.headers.find(p=>p.name===name);if(!p)throw Error('Unknown Uno socket '+name);return add(gateElectronics.uno,[p.x-34.29,9.3,26.67-p.y]);}
+export function gateBoardContact(column:number,row:number){return add(gateElectronics.board,carMiniHole(column,-1,row).map(n=>n*50) as FloodPoint);}
+export function gateSupplyContact(id:string):FloodPoint{const p=gateSupplyPorts.find(p=>p.id===id);if(!p)throw Error('Unknown supply terminal');return [p.x,17.5,140.5];}
+export const gateServoContacts=[{id:'brown',name:'Servo ground lead',color:'#795946',x:-274.54},{id:'red',name:'Servo 5 V lead',color:'#d9606e',x:-272},{id:'orange',name:'Servo signal lead',color:'#d99a4f',x:-269.46}] as const;
+export function gateServoSocket(index:number):FloodPoint{if(!Number.isInteger(index)||index<0||index>2)throw Error('Unknown servo socket');return [gateServoContacts[index].x,9,40];}
+export type GateWire={id:string;name:string;description:string;connection:string;color:string;points:FloodPoint[];bare?:boolean;postStart?:boolean;channel?:'up'|'down';echo?:boolean};
+export function gateWires(upGap=230,downGap=230):GateWire[]{
+ const wires:GateWire[]=[],short=(id:string,name:string,a:FloodPoint,b:FloodPoint,color:string,connection:string,lift=26,postStart=false)=>wires.push({id,name,description:'This insulated conductor connects the two labelled actual terminals. Follow its endpoints rather than a schematic-only marker.',connection,color,postStart,points:[a,[a[0],lift,a[2]+12],[b[0],lift,b[2]+10],b]});
+ short('gate-wire-sensor-5v','Uno 5 V → sensor distribution',gateUnoContact('5V'),gateBoardContact(0,0),'#cf6171','The Uno rail supplies only the two ultrasonic modules; it does not supply the servo motor.');
+ short('gate-wire-logic-ground','Uno GND → common reference',gateUnoContact('GND-D'),gateBoardContact(5,0),'#39465c','Column 6 is a real five-contact strip shared by the sensor grounds and DC supply reference.');
+ for(const side of ['up','down'] as const){const p=gateSensorPosition(side,side==='up'?upGap:downGap),index=side==='up'?0:1;for(const[pin,lane]of floodSonarPins.map((p,i)=>[p,i] as const)){const local=floodSonarContact(pin.id),a:[number,number,number]=[p[0]+local[0],p[1]-local[2],local[1]],signal=pin.name==='TRIG'?(side==='up'?'D2':'D4'):(side==='up'?'D3':'D5'),b=pin.name==='VCC'?gateBoardContact(0,1+index):pin.name==='GND'?gateBoardContact(5,1+index):gateUnoContact(signal),name=`${side==='up'?'Upstream':'Downstream'} ${pin.name} → ${pin.name==='VCC'?'Uno 5 V':pin.name==='GND'?'common ground':signal}`;
+  wires.push({id:`gate-wire-${side}-${pin.name.toLowerCase()}`,name,description:pin.name==='ECHO'?'Returns this channel’s acoustic pulse width. The controller samples the two channels sequentially.':pin.name==='TRIG'?'Requests a pulse from this channel independently of the other module.':'Carries the dry sensor supply or its shared reference.',connection:name,color:pin.color,channel:side,echo:pin.name==='ECHO',points:[a,[a[0],a[1],-27-index*3],[a[0],p[1]+23+lane*1.8,-34-index*3],[p[0]+(lane-1.5)*2.4,p[1]+25+lane*1.8,-165-index*3-lane*1.8],[-150-index*9-lane*2,p[1]+25+lane*1.8,-169-index*3-lane*1.8],[-165-index*9-lane*2,26,-169-index*3-lane*1.8],[b[0],24,b[2]-8],b]});
+ }}
+ short('gate-wire-servo-positive','Regulated 5 V → servo power socket',gateSupplyContact('positive'),gateServoSocket(1),'#d9606e','The separate 5 V supply feeds the servo red contact directly, bypassing the breadboard and Uno 5 V rail.',31,true);
+ short('gate-wire-servo-negative','Supply negative → servo ground socket',gateSupplyContact('negative'),gateServoSocket(0),'#795946','The motor return goes directly to the supply negative terminal.',27,true);
+ short('gate-wire-reference','Supply reference → Uno common ground',gateSupplyContact('reference'),gateBoardContact(5,3),'#39465c','The two negative output terminals are connected inside the model supply. This wire establishes the D9 signal reference; it is not a second 5 V source.',23,true);
+ short('gate-wire-servo-signal','Uno D9 → servo signal socket',gateUnoContact('D9'),gateServoSocket(2),'#d99a4f','D9 carries the servo position command. Common ground completes the signal reference.',34);
+ for(const[c,index]of gateServoContacts.map((c,i)=>[c,i] as const))wires.push({id:`gate-harness-${c.id}`,name:c.name,description:'A continuous lead from the servo body ends at the rear of its own three-contact connector.',connection:index===0?'Brown return → separate supply negative.':index===1?'Red power → separate regulated 5 V.':'Orange signal → Uno D9.',color:c.color,bare:true,points:[[16.5,178+index*2,10],[32+index*2,178+index*2,10],[35+index*2,195+index*2,-25],[35+index*2,210+index*2,-160],[-150-index*4,210+index*2,-168-index*3],[-170-index*4,20,-168-index*3],[c.x,12,53],[c.x,4.5,43.4]]});
+ return wires;
+}
+export const gateElectricalParts=[
+ ['gate-breadboard','Sensor supply / reference breadboard','The actual 170-contact board has isolated five-hole strips, not continuous edge rails.','Column 1 distributes Uno 5 V to sensors. Column 6 joins the sensor and logic references; servo motor power bypasses the board.'],
+ ['gate-servo-plug','Three-contact servo connector','Three separate sockets carry brown ground, red motor power and orange position signal.','The hardwired servo harness enters the rear; the external jumpers enter the top sockets.'],
+ ['gate-supply-case','Regulated 5 V servo supply model','Represents a separate regulated DC source with a positive output and two internally common negative terminals. Its housing is authored teaching geometry.','Use an actual supply rated for the selected servo’s stall current. The browser does not model a current rating or connect to hardware.'],
+ ['gate-supply-positive','Servo supply positive terminal','The separate positive terminal feeds only the servo power connection.','Direct jumper to the red servo socket; do not join this terminal to Uno 5 V.'],
+ ['gate-supply-negative','Servo supply negative terminals','Two physical negative posts share one illustrated internal bus.','One returns the servo motor current; the other joins the Uno and sensor signal reference.'],
+] as const;
