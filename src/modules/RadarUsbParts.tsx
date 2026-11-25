@@ -1,4 +1,6 @@
-import {memo,useMemo,useLayoutEffect,useRef,type ReactNode} from 'react';
+import {memo,useMemo,useLayoutEffect,useRef,type ReactNode,type RefObject} from 'react';
+import {useFrame} from '@react-three/fiber';
+import type {RadarBenchMotion} from '../data/radar-assembly';
 import {Text} from '@react-three/drei';
 import {CatmullRomCurve3,Group,Mesh,Path,Shape,Vector3,type Texture,type TubeGeometry} from 'three';
 import {radarUsbConnected,radarUsbHostFace,radarUsbPose} from '../data/radar-usb';
@@ -13,14 +15,16 @@ function bShield(){
  const h=new Path();h.moveTo(-4.55,-4.05);h.lineTo(-4.55,2.86);h.lineTo(-3.36,4.05);h.lineTo(3.36,4.05);h.lineTo(4.55,2.86);h.lineTo(4.55,-4.05);h.closePath();s.holes.push(h);return s;
 }
 /** Actual authored receptacle fits, supported contacts and a continuous two-ended cable. Native mm. */
-function RadarUsbParts({selected,select,unoWithdrawal=0,hostWithdrawal=0,usb=false,screen=null}:{selected:string;select:(id:string)=>void;unoWithdrawal?:number;hostWithdrawal?:number;usb?:boolean;screen?:Texture|null}){
+function RadarUsbParts({selected,select,unoWithdrawal=0,hostWithdrawal=0,usb=false,screen=null,motion}:{selected:string;select:(id:string)=>void;unoWithdrawal?:number;hostWithdrawal?:number;usb?:boolean;screen?:Texture|null;motion?:RefObject<RadarBenchMotion>}){
  const root=useRef<Group>(null),last=useRef('');
  const connected=radarUsbConnected(usb,unoWithdrawal,hostWithdrawal),mated=unoWithdrawal===0&&hostWithdrawal===0;
  const geometry=useMemo(()=>{
   const side=new Shape();side.moveTo(100,2);side.lineTo(200,2);side.lineTo(200,10);side.lineTo(100,10);side.closePath();opening(side,165,6,13,5.6);
   return{side,hostSocket:rectangularRing(6.4,2.7,.35),a:rectangularRing(5.9,2.2,.35),b:bShield(),curve:new CatmullRomCurve3(radarUsbPose().points.map(p=>new Vector3(...p)),false,'centripetal')};
  },[]);
- useLayoutEffect(()=>{const key=unoWithdrawal+'/'+hostWithdrawal;if(last.current===key)return;const pose=radarUsbPose(unoWithdrawal,hostWithdrawal),r=root.current!;r.getObjectByName('radar-usb-b-body')!.position.set(...pose.uno);r.getObjectByName('radar-usb-a-body')!.position.set(...pose.host);rewriteTube((r.getObjectByName('radar-usb-cable-tube') as Mesh<TubeGeometry>).geometry,new CatmullRomCurve3(pose.points.map(p=>new Vector3(...p)),false,'centripetal'));last.current=key;},[unoWithdrawal,hostWithdrawal]);
+ function update(u:number,h:number){const key=u+'/'+h;if(last.current===key)return;const pose=radarUsbPose(u,h),r=root.current!;r.getObjectByName('radar-usb-b-body')!.position.set(...pose.uno);r.getObjectByName('radar-usb-a-body')!.position.set(...pose.host);rewriteTube((r.getObjectByName('radar-usb-cable-tube') as Mesh<TubeGeometry>).geometry,new CatmullRomCurve3(pose.points.map(p=>new Vector3(...p)),false,'centripetal'));last.current=key;}
+ useLayoutEffect(()=>{if(!motion)update(unoWithdrawal,hostWithdrawal);},[unoWithdrawal,hostWithdrawal,motion]);
+ useFrame(()=>{if(!motion)return;const m=motion.current;update(m.usbUno,m.usbHost);const on=radarUsbConnected(m.usb,m.usbUno,m.usbHost),mated=m.usbUno===0&&m.usbHost===0;for(const[name,text]of[['radar-computer-usb-status',on?'USB CONNECTED':mated?'USB HOST OFF':'USB DISCONNECTED'],['radar-computer-usb-detail',on?'Serial monitor · 115200 baud':mated?'Host power off · Uno logic unpowered':'Connect Type A to host · Type B to Uno']]){const node=root.current?.getObjectByName(name) as any;if(node&&node.text!==text){node.text=text;node.sync?.();}}});
  const tag=(id:string,node:ReactNode)=><group key={id} userData={{partId:id}} onClick={e=>{e.stopPropagation();select(id);}}>{node}</group>;
  const material=(id:string,c:string,metal=0)=><meshStandardMaterial color={selected===id?'#b78be8':c} metalness={metal} roughness={metal?.3:.6}/>;
  const box=(id:string,at:P,size:P,c:string,metal=0)=><mesh position={at} castShadow receiveShadow><boxGeometry args={size}/>{material(id,c,metal)}</mesh>;
@@ -51,7 +55,7 @@ function RadarUsbParts({selected,select,unoWithdrawal=0,hostWithdrawal=0,usb=fal
     {!screen&&<>
      <Text position={[0,73,3.35]} font={font} fontSize={3.1} color="#eee5fc">ATLAS · RADAR WORKSHOP</Text>
      <Text name="radar-computer-usb-status" position={[0,49,3.35]} font={font} fontSize={3.2} color={connected?'#8fddc4':'#c5bbdc'}>{connected?'USB CONNECTED':mated?'USB HOST OFF':'USB DISCONNECTED'}</Text>
-     <Text position={[0,37,3.35]} font={font} fontSize={2.4} color="#c5bbdc">{connected?'Serial monitor · 115200 baud':mated?'Host power off · Uno logic unpowered':'Connect Type A to host · Type B to Uno'}</Text>
+     <Text name="radar-computer-usb-detail" position={[0,37,3.35]} font={font} fontSize={2.4} color="#c5bbdc">{connected?'Serial monitor · 115200 baud':mated?'Host power off · Uno logic unpowered':'Connect Type A to host · Type B to Uno'}</Text>
      <Text position={[0,20,3.35]} font={font} fontSize={2} color="#a9b8d0">Standalone browser simulation</Text>
     </>}
    </>)}

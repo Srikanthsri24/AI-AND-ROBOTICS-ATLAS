@@ -1,4 +1,6 @@
-import {memo,useMemo,useLayoutEffect,useRef,type ReactNode} from 'react';
+import {memo,useMemo,useLayoutEffect,useRef,type ReactNode,type RefObject} from 'react';
+import {useFrame} from '@react-three/fiber';
+import type {RadarBenchMotion,RadarSonarWithdrawal} from '../data/radar-assembly';
 import {CatmullRomCurve3,Group,Mesh,TubeGeometry,Vector3} from 'three';
 import {radarLeadPose,radarSonarLeads,type RadarHarnessPoint} from '../data/radar-harness';
 import {radarYaw} from '../data/radar-workshop';
@@ -6,15 +8,19 @@ import {rewriteCubeSatTube as rewriteTube} from './cubesat-tube-motion';
 
 function curve(index:number,heading:number,sonarWithdraw:number,unoWithdraw:number){return new CatmullRomCurve3(radarLeadPose(index,heading,sonarWithdraw,unoWithdraw).points.map(p=>new Vector3(...p)),false,'centripetal');}
 /** Four independently selectable flexible wires and their eight real mating plugs. */
-function RadarSonarHarness({selected,select,heading=90,sonarWithdraw=0,unoWithdraw=0}:{selected:string;select:(id:string)=>void;heading?:number;sonarWithdraw?:number;unoWithdraw?:number}){
+function RadarSonarHarness({selected,select,heading=90,sonarWithdraw=0,unoWithdraw=0,motion}:{selected:string;select:(id:string)=>void;heading?:number;sonarWithdraw?:number;unoWithdraw?:number;motion?:RefObject<RadarBenchMotion>}){
  const root=useRef<Group>(null),initial=useMemo(()=>radarSonarLeads.map((_,index)=>curve(index,90,0,0)),[]);
- useLayoutEffect(()=>{const r=root.current;if(!r)return;for(let i=0;i<radarSonarLeads.length;i++){
-  const lead=radarSonarLeads[i],pose=radarLeadPose(i,heading,sonarWithdraw,unoWithdraw);
+ const last=useRef<string[]>([]);
+ function update(angle:number,values:readonly RadarSonarWithdrawal[]){const r=root.current;if(!r)return;for(let i=0;i<radarSonarLeads.length;i++){
+  const {sonar:sw,uno:uw}=values[i],key=angle+'/'+sw+'/'+uw;if(last.current[i]===key)continue;
+  const lead=radarSonarLeads[i],pose=radarLeadPose(i,angle,sw,uw);
   const wire=r.getObjectByName(lead.id+'-tube') as Mesh<TubeGeometry>;
-  rewriteTube(wire.geometry,curve(i,heading,sonarWithdraw,unoWithdraw));
+  rewriteTube(wire.geometry,curve(i,angle,sw,uw));
   const sonar=r.getObjectByName(lead.id+'-sonar-body')!,uno=r.getObjectByName(lead.id+'-uno-body')!;
-  sonar.position.set(...pose.sonarPlug);sonar.rotation.y=radarYaw(heading);uno.position.set(...pose.unoPlug);
- }},[heading,sonarWithdraw,unoWithdraw]);
+  sonar.position.set(...pose.sonarPlug);sonar.rotation.y=radarYaw(angle);uno.position.set(...pose.unoPlug);last.current[i]=key;
+ }}
+ useLayoutEffect(()=>{if(!motion)update(heading,Array.from({length:4},()=>({sonar:sonarWithdraw,uno:unoWithdraw})));},[heading,sonarWithdraw,unoWithdraw,motion]);
+ useFrame(()=>{if(motion){const m=motion.current;update(m.actual+m.hornOffset,m.sonar);}});
  const tag=(id:string,node:ReactNode)=><group key={id} userData={{partId:id}} onClick={e=>{e.stopPropagation();select(id);}}>{node}</group>;
  const box=(id:string,at:RadarHarnessPoint,size:RadarHarnessPoint,c:string,metal=0)=><mesh position={at} castShadow><boxGeometry args={size}/><meshStandardMaterial color={selected===id?'#b78be8':c} roughness={metal?.3:.58} metalness={metal}/></mesh>;
  return <group ref={root} name="radar-sonar-harness">{radarSonarLeads.map((lead,i)=><group key={lead.id}>

@@ -1,6 +1,8 @@
-import {memo,useMemo,type ReactNode} from 'react';
+import {memo,useMemo,useRef,type ReactNode,type RefObject} from 'react';
+import {useFrame} from '@react-three/fiber';
+import type {RadarBenchMotion} from '../data/radar-assembly';
 import {Text} from '@react-three/drei';
-import {CatmullRomCurve3,Path,Shape,Vector3} from 'three';
+import {CatmullRomCurve3,Mesh,Path,Shape,Vector3,type MeshStandardMaterial} from 'three';
 import BluetoothMiniBreadboard from './BluetoothMiniBreadboard';
 import {radarReferenceBoardAt,radarServoContacts,radarServoTail,radarSupplyPorts} from '../data/radar-power-layout';
 const font=new URL('./fonts/NotoSans-Regular.ttf',document.baseURI).href;
@@ -9,7 +11,9 @@ function bore(shape:Shape,x:number,y:number,r:number){const p=new Path();p.absar
 function ring(outer:number,inner:number){const s=new Shape();s.absarc(0,0,outer,0,Math.PI*2,false);bore(s,0,0,inner);return s;}
 
 /** Authored enclosed DC source, real mating bores and three permanently attached servo leads. */
-function RadarPowerParts({selected,select,servoPower=false}:{selected:string;select:(id:string)=>void;servoPower?:boolean}){
+function RadarPowerParts({selected,select,servoPower=false,motion}:{selected:string;select:(id:string)=>void;servoPower?:boolean;motion?:RefObject<RadarBenchMotion>}){
+ const lcd=useRef<Mesh>(null),button=useRef<Mesh>(null),voltage=useRef<any>(null);
+ useFrame(()=>{if(!motion)return;const on=motion.current.servoPower;if(lcd.current){const m=lcd.current.material as MeshStandardMaterial;m.color.set(selected==='radar-supply-display'?'#b78be8':on?'#b8d7cc':'#687785');m.emissive.set(on?'#44796a':'#000000');}if(button.current)(button.current.material as MeshStandardMaterial).color.set(selected==='radar-supply-switch'?'#b78be8':on?'#865bcb':'#48536a');const text=on?'5.00 V':'OFF';if(voltage.current&&voltage.current.text!==text){voltage.current.text=text;voltage.current.sync();}});
  const shapes=useMemo(()=>{
   const front=rectangle(67,143,5,37);for(const p of radarSupplyPorts)bore(front,p.x,13,2.6);bore(front,132,28,3);
   const screen=new Path();screen.moveTo(87,22.5);screen.lineTo(87,33.5);screen.lineTo(123,33.5);screen.lineTo(123,22.5);screen.closePath();front.holes.push(screen);
@@ -35,14 +39,14 @@ function RadarPowerParts({selected,select,servoPower=false}:{selected:string;sel
   {tag('radar-supply-feet',<>{[76,134].flatMap(x=>[-138,-102].map(z=><group key={`${x}/${z}`}>{block('radar-supply-feet',[x,1.5,z],[8,3,8],'#343744')}</group>))}</>)}
   {tag('radar-supply-display',<>
    {extrusion('radar-supply-display',shapes.bezel,-95,.8,'#202a3a')}
-   <mesh name="radar-supply-lcd" position={[105,28,-95.3]}><boxGeometry args={[36,11,1]}/><meshStandardMaterial color={selected==='radar-supply-display'?'#b78be8':servoPower?'#b8d7cc':'#687785'} emissive={servoPower?'#44796a':'#000000'} emissiveIntensity={.16} roughness={.3}/></mesh>
+   <mesh ref={lcd} name="radar-supply-lcd" position={[105,28,-95.3]}><boxGeometry args={[36,11,1]}/><meshStandardMaterial color={selected==='radar-supply-display'?'#b78be8':servoPower?'#b8d7cc':'#687785'} emissive={servoPower?'#44796a':'#000000'} emissiveIntensity={.16} roughness={.3}/></mesh>
    <Text position={[105,31.3,-94.65]} font={font} fontSize={1.6} color="#24394a">SERVO OUTPUT</Text>
-   <Text position={[105,26.8,-94.65]} font={font} fontSize={4.7} color="#24394a">{servoPower?'5.00 V':'OFF'}</Text>
+   <Text ref={voltage} name="radar-supply-voltage" position={[105,26.8,-94.65]} font={font} fontSize={4.7} color="#24394a">{servoPower?'5.00 V':'OFF'}</Text>
   </>)}
   {tag('radar-supply-switch',<group position={[132,28,-95]}>
    <mesh rotation={[Math.PI/2,0,0]} position={[0,0,-1]}><cylinderGeometry args={[2.9,2.9,2,32]}/>{material('radar-supply-switch','#728093',.7)}</mesh>
    <mesh rotation={[Math.PI/2,0,0]} position={[0,0,.7]}><cylinderGeometry args={[3.5,3.5,1.4,32]}/>{material('radar-supply-switch','#aeb9c6',.8)}</mesh>
-   <mesh name="radar-supply-button" rotation={[Math.PI/2,0,0]} position={[0,0,2.2]}><cylinderGeometry args={[2.6,2.6,2,32]}/>{material('radar-supply-switch',servoPower?'#865bcb':'#48536a')}</mesh>
+   <mesh ref={button} name="radar-supply-button" rotation={[Math.PI/2,0,0]} position={[0,0,2.2]}><cylinderGeometry args={[2.6,2.6,2,32]}/>{material('radar-supply-switch',servoPower?'#865bcb':'#48536a')}</mesh>
    <Text position={[0,-6,1]} font={font} fontSize={1.8} color="#e6dff5">OUTPUT</Text>
   </group>)}
   {radarSupplyPorts.map(p=>tag(p.id,<>

@@ -22,6 +22,7 @@ const usb=await import(await load(new URL('../src/data/radar-usb.ts',import.meta
 const catalogue=await import(await load(new URL('../src/data/radar-workshop-parts.ts',import.meta.url)));
 const target=await import(await load(new URL('../src/data/radar-target.ts',import.meta.url)));
 const radar=await import(await load(new URL('../src/data/radar-workshop.ts',import.meta.url)));
+const assembly=await import(await load(new URL('../src/data/radar-assembly.ts',import.meta.url)));
 const clamp=x=>Math.max(0,Math.min(1,x));
 // Closest distance between two finite segments, including clamped end contacts.
 function segmentDistance(p1,q1,p2,q2){
@@ -49,8 +50,9 @@ test('all twelve radar cables stay separated across head fitting, sensor travel 
  const cases=[];
  for(let heading=10;heading<=170;heading+=5)for(const[w1,w2]of[[0,0],[4,0],[0,5],[4,5]])cases.push({heading,w1,w2,progress:1});
  for(let step=0;step<=40;step++)cases.push({heading:90,w1:0,w2:0,progress:step/40});
- for(const{heading,w1,w2,progress}of cases){
-  const paths=Array.from({length:4},(_,i)=>new CatmullRomCurve3(m.radarLeadPose(i,heading,w1,w2).points.map(p=>new Vector3(...p)),false,'centripetal').getPoints(160));
+ for(let step=0;step<=80;step++)cases.push({heading:90,w1:0,w2:0,progress:1,sonar:assembly.radarAssemblyMotion(6+step/80).sonar});
+ for(const{heading,w1,w2,progress,sonar}of cases){
+  const paths=Array.from({length:4},(_,i)=>new CatmullRomCurve3(m.radarLeadPose(i,heading,sonar?.[i].sonar??w1,sonar?.[i].uno??w2).points.map(p=>new Vector3(...p)),false,'centripetal').getPoints(160));
   paths.push(...Array.from({length:3},(_,i)=>new CatmullRomCurve3(power.radarServoTail(i).map(p=>new Vector3(...p)),false,'centripetal').getPoints(160)));
   const ws=jumpers.radarPowerSeating(progress);
   paths.push(...Array.from({length:5},(_,i)=>new CatmullRomCurve3(jumpers.radarPowerJumperPose(i,ws[i].a,ws[i].b).points.map(p=>new Vector3(...p)),false,'centripetal').getPoints(160)));

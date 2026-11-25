@@ -1,6 +1,8 @@
-import {memo,useMemo,type ReactNode} from 'react';
+import {memo,useMemo,useRef,type ReactNode,type RefObject} from 'react';
+import {useFrame} from '@react-three/fiber';
 import {Text} from '@react-three/drei';
-import {Path,Shape} from 'three';
+import {Group,Path,Shape} from 'three';
+import type {RadarBenchMotion} from '../data/radar-assembly';
 import FloodSonarParts from './FloodSonarParts';
 import {radarScanner as d} from '../data/radar-scanner-layout';
 import {radarYaw} from '../data/radar-workshop';
@@ -15,7 +17,9 @@ function plate(left:number,right:number,back:number,front:number,holes:readonly 
 function ring(outer:number,inner:number){const s=new Shape();s.absarc(0,0,outer,0,Math.PI*2,false);const h=new Path();h.absarc(0,0,inner,0,Math.PI*2,true);s.holes.push(h);return s;}
 
 /** Native millimetres. Reuses only the actual HC-SR04 geometry; the scanner is project-specific. */
-function RadarScannerParts({selected,select,actual=90,hornOffset=0,explode=0}:{selected:string;select:(id:string)=>void;actual?:number;hornOffset?:number;explode?:number}){
+function RadarScannerParts({selected,select,actual=90,hornOffset=0,explode=0,motion}:{selected:string;select:(id:string)=>void;actual?:number;hornOffset?:number;explode?:number;motion?:RefObject<RadarBenchMotion>}){
+ const shaft=useRef<Group>(null),head=useRef<Group>(null);
+ useFrame(()=>{if(!motion)return;shaft.current!.rotation.y=radarYaw(motion.current.actual);head.current!.rotation.y=radarYaw(motion.current.actual+motion.current.hornOffset);},-2);
  const shapes=useMemo(()=>({
   base:plate(-40,40,-30,30,d.mountAxes.map(x=>[x,0,1.3])),
   ears:d.mountAxes.map(x=>plate(x-4,x+4,-6.1,6.1,[[x,0,1.25]])),
@@ -63,10 +67,10 @@ function RadarScannerParts({selected,select,actual=90,hornOffset=0,explode=0}:{s
     {block('radar-servo-case',[16.9,12,0],[2,3,5],'#253a50')}
    </>)}
    {tag('radar-servo-bolts',<>{d.mountAxes.map(x=>fastener('radar-servo-bolts',x,0,24,29,.8,2))}</>)}
-   <group rotation={[0,radarYaw(actual),0]}>
+   <group ref={shaft} rotation={[0,radarYaw(actual),0]}>
     {tag('radar-shaft',horizontal('radar-shaft',shapes.shaft,32.5,7.5,'#e1d8c0'))}
    </group>
-   <group rotation={[0,radarYaw(actual+hornOffset),0]} position={[0,raised*.7,0]}>
+   <group ref={head} rotation={[0,radarYaw(actual+hornOffset),0]} position={[0,raised*.7,0]}>
     {tag('radar-horn',<>{horizontal('radar-horn',shapes.horn,38,2,'#efe9da')}{horizontal('radar-horn',shapes.hub,40,2,'#e7dfcc')}</>)}
     {tag('radar-hub-screw',fastener('radar-hub-screw',0,0,37,42,.5,1.2))}
     <group position={[0,raised*.8,0]}>
@@ -74,18 +78,14 @@ function RadarScannerParts({selected,select,actual=90,hornOffset=0,explode=0}:{s
       {horizontal('radar-bracket',shapes.floor,40,2,'#bb9c70')}
       {shapes.straps.map((s,i)=><mesh key={i} position={[0,0,-3.6]} castShadow><extrudeGeometry args={[s,{depth:2,bevelEnabled:false,curveSegments:24}]}/>{material('radar-bracket','#ba9b6d')}</mesh>)}
      </>)}
-     {tag('radar-bracket-bolts',<>{d.horn.fasteners.map(x=><group key={x}>
-      {fastener('radar-bracket-bolts',x,0,36.6,42,.5,1.4)}
-      <group position={[x,0,0]}>{horizontal('radar-bracket-bolts',shapes.nut,36.8,1.2,'#bac2c7',.8)}</group>
-     </group>)}</>)}
+     {tag('radar-bracket-bolts',<><group name="radar-bracket-screw-set">{d.horn.fasteners.map(x=>fastener('radar-bracket-bolts',x,0,36.6,42,.5,1.4))}</group><group name="radar-bracket-nut-set">{d.horn.fasteners.map(x=><group key={x} position={[x,0,0]}>{horizontal('radar-bracket-bolts',shapes.nut,36.8,1.2,'#bac2c7',.8)}</group>)}</group></>)}
      <group position={[0,0,raised]}>
       <group position={[0,68,0]}><FloodSonarParts partPrefix="radar-" selected={selected} select={select}/></group>
-      {tag('radar-sonar-bolts',<>{d.sonar.holes.map(([x,y])=><group key={`${x}/${y}`} position={[x,68+y,0]}>
+      {tag('radar-sonar-bolts',<><group name="radar-sonar-screw-set">{d.sonar.holes.map(([x,y])=><group key={`${x}/${y}`} position={[x,68+y,0]}>
        <mesh position={[0,0,-2.5]} rotation={[Math.PI/2,0,0]} castShadow><cylinderGeometry args={[.65,.65,6,24]}/>{material('radar-sonar-bolts','#aab5c1',.8)}</mesh>
        <mesh position={[0,0,.6]} rotation={[Math.PI/2,0,0]} castShadow><cylinderGeometry args={[1.4,1.4,1.2,24]}/>{material('radar-sonar-bolts','#c6cdd3',.8)}</mesh>
        {block('radar-sonar-bolts',[0,0,1.22],[1.8,.22,.03],'#3f4957')}
-       <mesh position={[0,0,-4.8]} castShadow><extrudeGeometry args={[shapes.rearNut,{depth:1.2,bevelEnabled:false,curveSegments:6}]}/>{material('radar-sonar-bolts','#bac2c7',.8)}</mesh>
-      </group>)}</>)}
+      </group>)}</group><group name="radar-sonar-nut-set">{d.sonar.holes.map(([x,y])=><mesh key={`${x}/${y}`} position={[x,68+y,-4.8]} castShadow><extrudeGeometry args={[shapes.rearNut,{depth:1.2,bevelEnabled:false,curveSegments:6}]}/>{material('radar-sonar-bolts','#bac2c7',.8)}</mesh>)}</group></>)}
      </group>
     </group>
    </group>
