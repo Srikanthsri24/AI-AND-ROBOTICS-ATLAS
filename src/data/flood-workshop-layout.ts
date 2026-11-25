@@ -14,3 +14,19 @@ export const floodSonarParts=[
  ['sonar-controller','Pulse timing electronics','The small packages and crystal illustrate the module’s local timing and signal conditioning. Component markings vary by module revision.','Links the TRIG input, transducers and ECHO output on the same board.'],
  ...floodSonarPins.map(p=>[p.id,`${p.name} pin → Uno ${p.pin}`,p.name==='ECHO'?'The high pulse duration encodes the acoustic round trip. Disconnecting this wire produces an unavailable reading, not a safe water level.':p.name==='TRIG'?'A 10 µs high pulse requests the next acoustic measurement.':p.name==='VCC'?'Provides the module’s 5 V supply.':'Provides the shared zero-volt reference.',`The labelled jumper connects this actual header pin to Uno ${p.pin}. Rewire only with USB unplugged.`])
 ] as const;
+
+/** Authored teaching basin, not the stock photograph's manufacturer dimensions.
+ * The inside bottom is the depth datum. Electronics remain outside the drip tray.
+ */
+export const floodBench={floorY:8,basinHeight:110,basinLower:[260,180],basinUpper:[300,220],wall:2,standX:-200,standBase:[60,8,80],tray:[324,3,244]} as const;
+export function floodWaterY(depthMm:number){if(!Number.isFinite(depthMm)||depthMm<0||depthMm>100)throw Error('Stop filling at 100 mm.');return floodBench.floorY+depthMm;}
+export function floodSensorPose(mountGapMm=230):FloodPoint{if(!Number.isFinite(mountGapMm)||mountGapMm<200||mountGapMm>300)throw Error('Unsupported dry stand height');return [0,floodBench.floorY+mountGapMm+floodSonar.canFront,0];}
+export function floodSensorWorld(local:FloodPoint,mountGapMm=230):FloodPoint{const p=floodSensorPose(mountGapMm);return [p[0]+local[0],p[1]-local[2],p[2]+local[1]];}
+export function floodWaterExtent(depthMm:number):[number,number]{floodWaterY(depthMm);const t=depthMm/floodBench.basinHeight;return [floodBench.basinLower[0]+(floodBench.basinUpper[0]-floodBench.basinLower[0])*t-2*floodBench.wall,floodBench.basinLower[1]+(floodBench.basinUpper[1]-floodBench.basinLower[1])*t-2*floodBench.wall];}
+export const floodBasinParts=[
+ ['flood-tray','Drip tray','Catches small tabletop splashes and separates the wet basin from the dry electronics.','The basin sits inside it; the controller and breadboard sit outside it.'],
+ ['flood-basin','Clear marked basin','The open basin holds the changing water level. Marks are measured from the inside bottom, not from the bench.','A clear path above the centre lets the sensor receive the water-surface echo.'],
+ ['flood-water','Water surface','The physical water level is the simulation input. The sensor reading is calculated separately after its acoustic round trip.','The reflected pulse returns to the receiver; water must not touch the sensor or its wiring.'],
+ ['flood-stand','Dry sensor stand','A weighted foot and adjustable upright keep the sensor facing straight down. The model stand dimensions are authored teaching geometry.','The overhead arm supports four insulating standoffs at the sensor mounting holes.'],
+ ['flood-mounts','Sensor mounting screws and spacers','Four insulating sleeves hold the board clear of its metal support, with visible screw heads and washers.','They align with the actual board holes. They are mechanical supports, not electrical ground connections.'],
+] as const;
