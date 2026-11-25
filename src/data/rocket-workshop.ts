@@ -1,6 +1,6 @@
 import {flightAt,flightPoint,rocketLabSpeed} from './water-rocket';
 /** Authored virtual geometry in metres. No pressure vessel, water ejection or physical launcher design is specified. */
-export const rocketWorkshop={gravity:9.81,speed:rocketLabSpeed,datum:.32,bodyRadius:.057,bodyWall:.001,neckRadius:.016,guideZ:.105,shaftZ:[.12,.23] as const,rails:[-.065,.065] as const,keeperTravel:.04,fieldEnd:17,reference:'https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/ballistic-flight-equations/'};
+export const rocketWorkshop={gravity:9.81,speed:rocketLabSpeed,datum:.32,bodyRadius:.057,bodyWall:.001,neckRadius:.016,guideZ:.105,shaftZ:[.12,.28] as const,rails:[-.065,.065] as const,keeperTravel:.04,fieldEnd:17,reference:'https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/ballistic-flight-equations/'};
 export type RocketProfile=readonly (readonly [number,number])[]; // [local axial y, radius]
 export const rocketOuter:RocketProfile=[[-.174,.016],[-.15,.016],[-.145,.022],[-.135,.034],[-.12,.047],[-.108,.057],[.11,.0545],[.13,.053],[.14,.047],[.144,.035],[.146,0]];
 export const rocketInner:RocketProfile=[[-.174,.015],[-.15,.015],[-.145,.021],[-.135,.033],[-.12,.046],[-.108,.056],[.11,.0535],[.129,.052],[.139,.046],[.143,.034],[.145,0]];
@@ -29,3 +29,12 @@ export function rocketTrialAdvance(previous:RocketTrial,seconds:number):RocketTr
 export function rocketTrialPause(s:RocketTrial){if(s.phase!=='flying')throw Error('Pause after the keepers have cleared the bottle.');return {...s,phase:'paused' as const};}
 export function rocketTrialResume(s:RocketTrial){if(s.phase!=='paused')throw Error('Only a paused flight can resume.');return {...s,phase:'flying' as const};}
 export function rocketTrialCsv(rows:RocketObservation[]){return 'angle_deg,peak_height_m,airtime_s,range_m\n'+rows.map(r=>[r.angle,r.height.toFixed(4),r.airtime.toFixed(4),r.range.toFixed(4)].join(',')).join('\n')+'\n';}
+
+export type RocketReturnInput={from:readonly[number,number,number];oldAngle:number;oldGuide:number;angle:number;progress:number;oldOpen:number;oldReceiver:number};
+/** Virtual handling: clear keepers, lift / move in front of the stand, lower, seat from the front, then close. Not a flight or impact model. */
+export function rocketReturnPose({from,oldAngle,oldGuide,angle,progress,oldOpen,oldReceiver}:RocketReturnInput){
+ if([...from,oldAngle,oldGuide,angle,progress,oldOpen,oldReceiver].some(n=>!Number.isFinite(n))||progress<0||progress>1||angle<15||angle>75)throw Error('Invalid virtual handling pose.');
+ if(progress===1)return {position:[0,rocketWorkshop.datum,0] as [number,number,number],angle,guideAngle:angle,open:0,receiverClose:0};
+ const e=(n:number)=>{const t=Math.max(0,Math.min(1,n));return t*t*(3-2*t);},f=(a:number,b:number)=>e((progress-a)/(b-a)),lift=f(.12,.3),travel=f(.3,.7),lower=f(.7,.85),seat=f(.85,.96),height=Math.max(.85,from[1]+.15);
+ return {position:[from[0]*(1-travel),from[1]+(height-from[1])*lift-(height-rocketWorkshop.datum)*lower,from[2]*(1-lift)-.4*lift+.4*seat] as [number,number,number],angle:oldAngle+(angle-oldAngle)*travel,guideAngle:oldGuide+(angle-oldGuide)*e(progress/.7),open:progress<.12?oldOpen+(1-oldOpen)*f(0,.12):1-f(.96,1),receiverClose:oldReceiver*(1-f(0,.12))};
+}

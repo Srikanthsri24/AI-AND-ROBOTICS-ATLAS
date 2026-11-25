@@ -1,4 +1,4 @@
-import {useMemo,type ReactNode} from 'react';
+import {memo,useMemo,type ReactNode} from 'react';
 import {CircleGeometry,DoubleSide,Quaternion,Vector2,Vector3} from 'three';
 import {rocketInner,rocketOuter,rocketRadiusAt,type RocketProfile} from '../data/rocket-workshop';
 export const rocketBottleParts=[
@@ -10,7 +10,7 @@ export const rocketBottleParts=[
  ['tracking-dot','Position reference dot','This small orange marker identifies the point whose horizontal position and height are measured. Height zero is its launch level, not the underside of the decorative bottle.','Shares the bottle’s horizontal and vertical coordinates; its tiny front offset only makes it visible.']
 ] as const;
 export function RocketLathe({profile,color,clear=false}:{profile:RocketProfile;color:string;clear?:boolean}){const points=useMemo(()=>profile.map(([y,r])=>new Vector2(r,y)),[profile]);return <mesh castShadow={!clear} receiveShadow><latheGeometry args={[points,80]}/>{clear?<meshPhysicalMaterial color={color} roughness={.12} transparent opacity={.3} depthWrite={false} clearcoat={.95} ior={1.57} side={DoubleSide}/>:<meshStandardMaterial color={color} roughness={.5} side={DoubleSide}/>}</mesh>;}
-export default function RocketBottleParts({selected,select,trim=0,showTrim=true}:{selected:string;select:(id:string)=>void;trim?:number;showTrim?:boolean}){
+function RocketBottleParts({selected,select,trim=0,showTrim=true}:{selected:string;select:(id:string)=>void;trim?:number;showTrim?:boolean}){
  const c=(id:string,color:string)=>selected===id?'#b78be8':color,tag=(id:string,node:ReactNode)=><group key={id} userData={{partId:id}} onClick={e=>{e.stopPropagation();select(id);}}>{node}</group>,body=useMemo(()=>[...rocketOuter.filter(([y])=>y>=-.135),...[...rocketInner.filter(([y])=>y>=-.135)].reverse(),rocketOuter.find(([y])=>y===-.135)!],[]),dot=useMemo(()=>{const g=new CircleGeometry(.0065,32),p=g.attributes.position;for(let i=0;i<p.count;i++){const r=rocketRadiusAt(p.getY(i));p.setZ(i,-Math.sqrt(r*r-p.getX(i)**2)-.0003);}g.computeVertexNormals();return g;},[]),neck=useMemo(()=>[...rocketOuter.filter(([y])=>y<=-.135),...[...rocketInner.filter(([y])=>y<=-.135)].reverse(),rocketOuter[0]],[]);
  return <>{tag('rocket-body',<RocketLathe profile={body} color={c('rocket-body','#a3d6d8')} clear/>)}{tag('rocket-neck',<><RocketLathe profile={neck} color={c('rocket-neck','#a3d6d8')} clear/>{[-.169,-.164,-.159].map(y=><mesh key={y} position={[0,y,0]} rotation={[Math.PI/2,0,0]}><torusGeometry args={[.0164,.0006,8,48]}/><meshPhysicalMaterial color={c('rocket-neck','#a3d6d8')} roughness={.22} clearcoat={.8}/></mesh>)}</>)}
  {showTrim&&<>{tag('rocket-nose',<group position={[0,trim,0]}><RocketLathe profile={[[.135,.055],[.2015,0],[.199,.001],[.135,.0535],[.135,.055]]} color={c('rocket-nose','#d7c39c')}/><RocketLathe profile={[[.135,.05],[.135,.0535],[.137,.0519],[.137,.0488],[.135,.05]]} color={c('rocket-nose','#c9bc9a')}/>{[0,1,2,3].map(i=>{const a=i*Math.PI/2,base=new Vector3(Math.sin(a)*.055,.135,Math.cos(a)*.055),tip=new Vector3(0,.2015,0),direction=tip.clone().sub(base);return <mesh key={i} position={base.clone().add(tip).multiplyScalar(.5)} quaternion={new Quaternion().setFromUnitVectors(new Vector3(0,1,0),direction.clone().normalize())}><cylinderGeometry args={[.0003,.0003,direction.length(),6]}/><meshStandardMaterial color={c('rocket-nose','#b29b71')} roughness={.85}/></mesh>;})}</group>)}
@@ -19,3 +19,5 @@ export default function RocketBottleParts({selected,select,trim=0,showTrim=true}
  {tag('tracking-dot',<mesh position={[0,0,-trim]} geometry={dot}><meshStandardMaterial color={c('tracking-dot','#e6aa51')} roughness={.65} side={DoubleSide}/></mesh>)}</>}
  </>;
 }
+
+export default memo(RocketBottleParts);
