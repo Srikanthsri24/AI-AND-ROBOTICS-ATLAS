@@ -1,10 +1,12 @@
 import {cubeSatDeckMounts} from './cubesat-chassis';
 export {cubeSatDeckMounts};
 export const cubeSatBoardMounts=[-30,30].flatMap(x=>[-30,30].map(z=>({x,z})));
+/** Native x/z perimeter, with two open side notches clearing the lower hinge ears. */
+export const cubeSatDeckContour=[[-45,-45],[45,-45],[45,31],[41,31],[41,39],[45,39],[45,45],[-45,45],[-45,39],[-41,39],[-41,31],[-45,31]] as const;
 export const cubeSatElectronics={deckBottom:32,deckTop:34,computerBottom:55,computerTop:56.6,memoryBottom:86,memoryTop:87.6};
 export const cubeSatInterfaceRows=[{key:'camera',name:'Camera → computer',x:0,y:56.6,z:28},{key:'buffer-computer',name:'Computer → frame buffer',x:0,y:56.6,z:-26},{key:'buffer-memory',name:'Frame-buffer interface',x:0,y:87.6,z:-26},{key:'memory-radio',name:'Saved frame → radio',x:18,y:87.6,z:20},{key:'radio',name:'Radio frame input',x:18,y:113.6,z:20}] as const;
 export const cubeSatElectronicsParts=[
- ['cubesat-payload-deck','Payload mounting deck','A drilled internal deck sits on the lower bus frame and supports the computer / memory stack.','Four outer screws use genuine lower-frame holes; four inner stud axes support both separate circuit boards.'],
+ ['cubesat-payload-deck','Payload mounting deck','A drilled internal deck sits on the lower bus frame and supports the three-board payload stack. Two side notches clear the lower solar-hinge ears.','Four outer screws use genuine lower-frame holes; four inner stud axes support all three separate circuit boards.'],
  ['cubesat-deck-screws','Four deck retaining screws','The outer shafts pass through the deck and the matching lower-frame bores.','Their x/z axes are ±43 mm, separate from the corner-rail screws.'],
  ['cubesat-stack-studs','Four payload stack studs','Four separate continuous metal studs align the payload boards and all their insulating spacers.','Each stud passes through its real deck, board, spacer and retaining-nut holes. It is a mechanical member, not a data connection.'],
  ['cubesat-lower-spacers','Computer-board insulating spacers','Four bored sleeves separate the lower circuit board from the mounting deck.','The sleeve tops meet the computer PCB underside at 55 mm. Their central bores leave clearance around the studs.'],
