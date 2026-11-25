@@ -1,0 +1,12 @@
+import{gateBasinParts,gateSupportParts}from'../data/flood-gate-layout';
+import{gateMechanicalParts}from'./FloodGateLinkageParts';
+import{gateServoParts}from'./FloodGateServoParts';
+import{gateElectricalParts,gateWires}from'../data/flood-gate-wiring';
+import{floodSonarParts}from'../data/flood-workshop-layout';
+import{floodControllerParts}from'../data/flood-controller';
+import{floodUnoParts}from'../data/flood-wiring';
+import{gatePartStage}from'../data/flood-gate-assembly';
+const uno=floodUnoParts.map(row=>{const[id,name,description,connection]=row;if(id==='uno-mcu')return[id,name,'Runs the two-channel Arduino sketch, keeps its opening hysteresis and checks the downstream / sensor interlocks.','D2 / D3 upstream, D4 / D5 downstream and D9 servo signal.'];if(id==='uno-headers')return[id,name,'Actual physical sockets terminate each named signal. Motor power is separate from these logic contacts.','Uno 5 V supplies both sensors; GND joins the servo supply reference.'];if(id==='uno-reset')return[id,name,'Restarts the gate sketch and its initial closed command. It does not change the two compiled empty-gap references.','Edit UP_EMPTY and DOWN_EMPTY and upload again to change calibration.'];if(id==='uno-leds')return[id,name,'ON represents USB logic power. The external supply has its own display; these are not gate-position indicators.','The serial interface reports both measured depths and the commanded state.'];return[id,name,description,connection];});
+const sensors=(['up','down'] as const).flatMap(side=>floodSonarParts.map(([id,name,description,connection])=>{const remap=(s:string)=>side==='down'?s.replaceAll('D2','D4').replaceAll('D3','D5'):s;return[`gate-${side}-${id}`,`${side==='up'?'Upstream':'Downstream'} ${remap(name)}`,remap(description),remap(connection)];}));
+export type GateWorkshopPart={id:string;name:string;description:string;connection:string;stage:number};
+export const gateWorkshopParts:GateWorkshopPart[]=[...gateBasinParts,...gateMechanicalParts,...gateSupportParts,...gateServoParts,...gateElectricalParts,...sensors,...uno,...floodControllerParts,...gateWires().map(w=>[w.id,w.name,w.description,w.connection])].map(([id,name,description,connection])=>({id,name,description,connection,stage:gatePartStage(id)}));

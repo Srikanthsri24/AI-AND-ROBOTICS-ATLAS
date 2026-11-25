@@ -1,5 +1,5 @@
 /** Authored millimetre teaching geometry, not a manufacturer's drilling drawing. */
-export const gateBasin={insideWidth:360,insideLength:220,floor:8,rim:118,wall:2,dividerThickness:2,opening:{bottom:10,top:84,halfWidth:28},flapPivotY:88,flapLength:80,flapWidth:60,linkZ:37} as const;
+export const gateBasin={insideWidth:360,insideLength:220,floor:8,rim:118,wall:2,dividerThickness:2,opening:{bottom:10,top:84,halfWidth:28},flapPivotX:4,flapPivotY:88,flapLength:80,flapWidth:60,linkZ:37} as const;
 export function gateWaterBox(side:'up'|'down',depth:number){if(!Number.isFinite(depth)||depth<0||depth>100)throw Error('Fill each chamber only between 0 and 100 mm.');return {at:[side==='up'?-90.5:90.5,8+depth/2,0] as[number,number,number],size:[178.6,depth,219.6] as[number,number,number]};}
 export const gateBasinParts=[
  ['gate-tray','Spillway drip tray','Supports the two-chamber model and catches small tabletop splashes.','The controller and both electrical supplies stay on the dry bench outside it.'],
@@ -12,7 +12,7 @@ export const gateBasinParts=[
  ['gate-down-scale','Downstream depth marks','Marks the same physical datum on the receiving chamber.','The 6 cm downstream limit is marked separately because it has priority over release.'],
 ] as const;
 
-export const gateSupport={rearZ:-155,postX:135,foot:[46,8,40] as[number,number,number],servoAxis:[0,180,35] as[number,number,number],sensorX:{up:-90,down:90}};
+export const gateSupport={rearZ:-155,postX:135,foot:[46,8,40] as[number,number,number],servoAxis:[4,180,35] as[number,number,number],sensorX:{up:-90,down:90}};
 export function gateSensorPosition(side:'up'|'down',gap=230):[number,number,number]{if(!Number.isFinite(gap)||gap<200||gap>300)throw Error('Keep the dry sensor gap between 200 and 300 mm.');return [gateSupport.sensorX[side],8+gap+14,0];}
 export const gateSupportParts=[
  ['gate-dry-frame','Dry overhead support frame','Two weighted feet and upright posts support the sensor arms and servo bracket outside the drip tray.','The rear posts are outside the wet tray; the overhead servo drive remains above the maximum water line.'],

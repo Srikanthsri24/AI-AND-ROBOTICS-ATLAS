@@ -33,8 +33,8 @@ export function gateWorkshopAdvance(previous:GateWorkshopClock,seconds:number,i:
  * basin. The pin-ended rod has one fixed length; the flap follows circle-circle
  * intersection geometry rather than an independent decorative rotation.
  */
-export const gateLinkage={flapPivot:[0,88] as const,servoPivot:[0,180] as const,flapRadius:60,hornRadius:18,closedServo:65,openServo:120};
-function hornAt(degrees:number):[number,number]{const a=(degrees-90)*Math.PI/180;return [18*Math.cos(a),180+18*Math.sin(a)];}
+export const gateLinkage={flapPivot:[4,88] as const,servoPivot:[4,180] as const,flapRadius:60,hornRadius:18,closedServo:65,openServo:120};
+function hornAt(degrees:number):[number,number]{const a=(degrees-90)*Math.PI/180;return [4+18*Math.cos(a),180+18*Math.sin(a)];}
 const closedHorn=hornAt(65);
-export const gateRodLength=Math.hypot(closedHorn[0],closedHorn[1]-28);
-export function gateLinkagePose(degrees:number){if(!Number.isFinite(degrees)||degrees<65||degrees>120)throw Error('Servo command must stay within the checked 65–120° travel.');const horn=hornAt(degrees),dx=horn[0],dy=horn[1]-88,d=Math.hypot(dx,dy),r=60,L=gateRodLength,a=(r*r-L*L+d*d)/(2*d),h=Math.sqrt(Math.max(0,r*r-a*a)),ux=dx/d,uy=dy/d,attachment:[number,number]=[a*ux+h*uy,88+a*uy-h*ux],flapDegrees=Math.atan2(attachment[0],88-attachment[1])*180/Math.PI;return {horn,attachment,flapDegrees,rodLength:Math.hypot(horn[0]-attachment[0],horn[1]-attachment[1])};}
+export const gateRodLength=Math.hypot(closedHorn[0]-4,closedHorn[1]-28);
+export function gateLinkagePose(degrees:number){if(!Number.isFinite(degrees)||degrees<65||degrees>120)throw Error('Servo command must stay within the checked 65–120° travel.');const horn=hornAt(degrees),dx=horn[0]-4,dy=horn[1]-88,d=Math.hypot(dx,dy),r=60,L=gateRodLength,a=(r*r-L*L+d*d)/(2*d),h=Math.sqrt(Math.max(0,r*r-a*a)),ux=dx/d,uy=dy/d,attachment:[number,number]=[4+a*ux+h*uy,88+a*uy-h*ux],flapDegrees=Math.atan2(attachment[0]-4,88-attachment[1])*180/Math.PI;return {horn,attachment,flapDegrees,rodLength:Math.hypot(horn[0]-attachment[0],horn[1]-attachment[1])};}
