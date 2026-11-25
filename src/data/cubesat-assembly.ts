@@ -1,4 +1,4 @@
-import {cubeSatDigitalStages,cubeSatRFStage} from './cubesat-connections';
+import {cubeSatDigitalStages,cubeSatRFStage,cubeSatPowerStages,cubeSatStationStage} from './cubesat-connections';
 import {cubeSatChassisParts,type CubeSatPoint} from './cubesat-chassis';
 import {cubeSatCameraParts} from './cubesat-camera';
 import {cubeSatElectronicsParts} from './cubesat-electronics';
@@ -36,8 +36,8 @@ assign(['cubesat-station-base','cubesat-station-feet'],5.6,5.9,[0,24,0]);assign(
 /** Each digital harness appears with both plugs withdrawn, then seats A followed by B. */
 for(const s of cubeSatDigitalStages){assign([s.harness.id],s.start,s.end);assign([s.harness.a.id],s.start,s.mid);assign([s.harness.b.id],s.start,s.end);}
 assign(['cubesat-rf-cable'],cubeSatRFStage.start,cubeSatRFStage.end);assign(['cubesat-rf-radio-plug'],cubeSatRFStage.start,cubeSatRFStage.mid);assign(['cubesat-rf-antenna-plug'],cubeSatRFStage.start,cubeSatRFStage.end);
-/** Solar and ground-station connector motion remains the following phase. */
-const pendingConnections=[...cubeSatSolarPowerParts.filter(p=>/-(lead|panel-plug|board-plug)$/.test(p[0])),...cubeSatStationParts.filter(p=>/-(cable|feed-plug|input-plug)$/.test(p[0]))].map(p=>p[0]);assign(pendingConnections,7.6,7.6);
+for(const s of cubeSatPowerStages){const id='cubesat-solar-'+s.key+'-';assign([id+'lead'],s.start,s.end);assign([id+'panel-plug'],s.start,s.mid);assign([id+'board-plug'],s.start,s.end);}
+assign(['cubesat-station-cable'],cubeSatStationStage.start,cubeSatStationStage.end);assign(['cubesat-station-feed-plug'],cubeSatStationStage.start,cubeSatStationStage.mid);assign(['cubesat-station-input-plug'],cubeSatStationStage.start,cubeSatStationStage.end);
 const known=new Set(cubeSatWorkshopParts.map(p=>p.id));if(known.size!==cubeSatWorkshopParts.length||windows.size!==known.size||[...known].some(id=>!windows.has(id)))throw Error('Incomplete CubeSat assembly coverage');
 export function cubeSatAssemblyWindow(id:string){const w=windows.get(id);if(!w)throw Error('Unknown CubeSat part '+id);return w;}
 export function cubeSatAssemblyPose(id:string,progress:number){if(!Number.isFinite(progress)||progress<0||progress>8)throw Error('CubeSat assembly progress must be 0–8');const w=cubeSatAssemblyWindow(id),fraction=w.start===w.end?(progress>=w.end?1:0):Math.max(0,Math.min(1,(progress-w.start)/(w.end-w.start))),eased=fraction*fraction*(3-2*fraction);return{visible:progress>=w.start,settled:progress>=w.end,fraction,offset:w.travel.map(v=>v*(1-eased)) as CubeSatPoint};}
