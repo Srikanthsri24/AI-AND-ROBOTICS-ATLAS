@@ -176,3 +176,9 @@ Published at `#/project-builder/directory-7/workshop`. This follows the existing
 Continue with `directory-8`, the existing tabletop Arduino Uno / ultrasonic water-level station and model-neighbourhood lesson. It needs its own detailed sixth workshop and real-part interaction / wiring / observable alarm and route demonstration. It is not registered or counted yet.
 
 Phase 1 progress is **63 of 150 workshops**, with **87 pending**. Phase 2 has **61 guides pending**.
+
+#### Flood workshop foundation — in progress, excluded from verified count
+
+Added `src/data/flood-workshop.ts` as the deterministic counterpart of the existing Arduino sketch. Acoustic round-trip timing uses the sketch’s 343 m/s assumption and rounded integer millimetres; each sample waits for its echo or the 6 ms timeout, updates the real output states, then waits 100 ms. The runtime includes calibration offsets, 50 / 80 mm thresholds, 400 ms warning / unavailable windows, a silent unavailable state and a power-off reset. Eight assembly instructions explain the basin, sensor, actual pin assignments, independent resistors, calibration, recovery and safe fault demonstration. Eight focused regression tests cover these behaviours and frame subdivision. This is an unregistered foundation; 3D geometry, real-part selection, assembly and browser verification remain pending. The verified count stays 63 / 150.
+
+Foundation validation: all **655 repository tests pass** (`/tmp/atlas-flood-foundation-tests.log`) and TypeScript passes (`/tmp/atlas-flood-foundation-tsc.log`). The existing local app responds on port 5190. No flood workshop registration or completion claim is made at this checkpoint.
