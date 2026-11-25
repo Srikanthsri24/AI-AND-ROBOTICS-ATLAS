@@ -18,6 +18,10 @@ async function load(url){
 const m=await import(await load(new URL('../src/data/radar-harness.ts',import.meta.url)));
 const power=await import(await load(new URL('../src/data/radar-power-layout.ts',import.meta.url)));
 const jumpers=await import(await load(new URL('../src/data/radar-power-jumpers.ts',import.meta.url)));
+const usb=await import(await load(new URL('../src/data/radar-usb.ts',import.meta.url)));
+const catalogue=await import(await load(new URL('../src/data/radar-workshop-parts.ts',import.meta.url)));
+const target=await import(await load(new URL('../src/data/radar-target.ts',import.meta.url)));
+const radar=await import(await load(new URL('../src/data/radar-workshop.ts',import.meta.url)));
 const clamp=x=>Math.max(0,Math.min(1,x));
 // Closest distance between two finite segments, including clamped end contacts.
 function segmentDistance(p1,q1,p2,q2){
@@ -105,4 +109,40 @@ test('the ten actual power plugs seat individually along their socket axes',()=>
  assert.throws(()=>jumpers.radarPowerSeating(-.1));assert.throws(()=>jumpers.radarPowerSeating(NaN));
  assert.throws(()=>jumpers.radarPowerJumperPose(5));assert.throws(()=>jumpers.radarPowerJumperPose(0,5.01));
  assert.throws(()=>jumpers.radarPowerJumperPose(1,8.01));assert.throws(()=>jumpers.radarPowerJumperPose(1,0,5.01));
+});
+test('USB follows the actual authored receptacle axes and powers logic only when both ends seat',()=>{
+ for(const[n,value]of usb.radarUsbUnoFace.entries())assert.ok(Math.abs(value-[-153.48,15.3,-91.43][n])<1e-10);
+ assert.deepEqual(usb.radarUsbHostFace,[-210,6,-165]);
+ for(const u of[0,3,6,9,12])for(const h of[0,3,6,9,12]){
+  const pose=usb.radarUsbPose(u,h);
+  assert.deepEqual(pose.uno,[usb.radarUsbUnoFace[0]-u,...usb.radarUsbUnoFace.slice(1)]);
+  assert.deepEqual(pose.host,[usb.radarUsbHostFace[0]+h,...usb.radarUsbHostFace.slice(1)]);
+  assert.deepEqual(pose.points[0],[pose.uno[0]-24,pose.uno[1],pose.uno[2]]);
+  assert.deepEqual(pose.points.at(-1),[pose.host[0]+24,pose.host[1],pose.host[2]]);
+  assert.equal(usb.radarUsbConnected(true,u,h),u===0&&h===0);
+  assert.equal(usb.radarUsbConnected(false,u,h),false);
+  const path=new CatmullRomCurve3(pose.points.map(p=>new Vector3(...p)),false,'centripetal');
+  for(const p of path.getPoints(200)){
+   assert.ok(p.x-1.5>-210,'Jacket stays outside host chassis');
+   assert.ok(p.x+1.5<-158,'Jacket clears Uno PCB and signal jumpers');
+   assert.ok(p.y-1.5>.5,'Jacket stays above the table');
+  }
+ }
+ assert.equal(usb.radarUsbConnected(true,.00001,0),false);
+ assert.throws(()=>usb.radarUsbPose(-1));assert.throws(()=>usb.radarUsbPose(0,12.01));
+ assert.throws(()=>usb.radarUsbConnected(true,NaN,0));assert.throws(()=>usb.radarUsbConnected(1));
+ assert.equal(catalogue.radarWorkshopParts.length,91);
+ assert.equal(new Set(catalogue.radarWorkshopParts.map(p=>p.id)).size,91);
+ for(const part of catalogue.radarWorkshopParts)for(const key of['name','what','connection'])assert.ok(part[key].length>5);
+});
+test('flat target pose uses the exact finite plane and width of the sonar teaching model',()=>{
+ for(const angle of[0,30,90,150,180])for(const yaw of[-90,-45,0,45,90])for(const distance of[200,400,1600]){
+  const input={...radar.radarDefaults,targetAngle:angle,targetYaw:yaw,targetDistanceMm:distance},pose=target.radarTargetPose(input),centre=radar.radarRotate(0,radar.radarGeometry.faceOffsetMm+distance,angle);
+  assert.deepEqual(pose.position,[centre[0],0,centre[1]]);
+  assert.equal(pose.yaw,radar.radarYaw(angle+yaw));assert.equal(pose.halfWidth,60);
+  const tangent=[Math.cos(pose.yaw),-Math.sin(pose.yaw)],normal=radar.radarRotate(0,1,angle+yaw);
+  assert.ok(Math.abs(tangent[0]*normal[0]+tangent[1]*normal[1])<1e-10);
+ }
+ assert.throws(()=>target.radarTargetPose({...radar.radarDefaults,targetAngle:181}));
+ assert.throws(()=>target.radarTargetPose({...radar.radarDefaults,targetDistanceMm:NaN}));
 });
