@@ -16,6 +16,7 @@ export const binElectronicsParts=[
  ['uno-tracks','Uno board copper','Connects the actual AVR, sockets and support components.','These are existing board routes, rather than student jumper wires.'],
  ['uno-programming','Uno main and USB ICSP headers','The main AVR header mates with the Ethernet shield underside socket.','SPI serves Ethernet; D10 selects the W5500. The separate USB AVR header is unused.'],
  ['uno-leds','Uno logic indicators','ON illustrates USB logic power. Serial/SPI activity is not individually animated.','These board lamps do not show the collection-needed state; use the separate red LED.'],
+ ['bin-uno-screws','Uno mounting screws','Four separate metal fasteners secure the board after it seats on the insulating feet.','Heads rest on the board top. Fit these after lowering the board, before stacking the shield.'],
  ['flood-controller-feet','Insulating Uno mounting feet','Four bored spacers support the board at its actual mounting-hole positions.','The shafts pass through the existing holes and keep the board off the bench.'],
  ['flood-usb-cable','USB power and upload cable','Seats in the actual Uno USB-B port and illustrated host.','The browser illustrates the cable; it does not connect to or program a physical board.'],
  ['flood-usb-host','Illustrated USB host','Represents the computer supplying USB power and running the Arduino IDE.','Use Serial Monitor at 9600 baud on the real project.'],

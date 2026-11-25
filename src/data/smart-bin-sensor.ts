@@ -7,7 +7,7 @@ export const binLever={x:148,pivotY:540,pivotZ:65,length:Math.hypot(20,11.5),rol
 /** Exact plane / circle contact against the rotating lid striker underside.
  * A 1 mm roller deflection is an authored switch trip setting, not a datasheet.
  */
-export function binSwitchPose(degrees:number){const theta=-binLidAngle(degrees),d=binLever,rhs=2-d.rollerRadius+10*Math.cos(theta)+201*Math.sin(theta),contact=theta+Math.asin(Math.max(-1,Math.min(1,rhs/d.length))),angle=Math.min(d.freeAngle,contact),roller:BinPoint=[d.x,d.pivotY+d.length*Math.sin(angle),d.pivotZ+d.length*Math.cos(angle)],stroke=d.pivotY+11.5-roller[1];const plungerCentreY=540+4*Math.tan(angle)-1.4/Math.cos(angle);return{angle,roller,stroke,closed:stroke>=1,plungerCentreY,plungerTop:plungerCentreY+1.2};}
+export function binSwitchPose(degrees:number,strikerLift=0){const theta=-binLidAngle(degrees),d=binLever,rhs=2+strikerLift-d.rollerRadius+10*Math.cos(theta)+201*Math.sin(theta),contact=theta+Math.asin(Math.max(-1,Math.min(1,rhs/d.length))),angle=Math.min(d.freeAngle,contact),roller:BinPoint=[d.x,d.pivotY+d.length*Math.sin(angle),d.pivotZ+d.length*Math.cos(angle)],stroke=d.pivotY+11.5-roller[1];const plungerCentreY=540+4*Math.tan(angle)-1.4/Math.cos(angle);return{angle,roller,stroke,closed:stroke>=1,plungerCentreY,plungerTop:plungerCentreY+1.2};}
 export const binSensorParts=[
  ['bin-sensor-plate','Ultrasonic mounting plate','A bored plate keeps the board supported beneath the lid, with the transducers pointing at the load.','Four coaxial spacers and screws meet the module holes. Do not use the model as a fabrication drilling jig.'],
  ['bin-sensor-bosses','Bonded lid mounting bosses','Four insulating bored bosses join the plate to the lid underside without an exposed electrical connection.','The screw tips end inside their blind bosses; the bonded pads attach to the lid.'],
@@ -17,6 +17,7 @@ export const binSensorParts=[
  ['bin-switch-body','Roller microswitch body','The insulated housing supports the spring contact mechanism.','Use COM and NO for the lid input; leave NC unconnected.'],
  ['bin-switch-lever','Spring roller lever','The lever deflects as the actual lid striker lowers onto its roller.','Roller motion presses the separate plunger. The illustrated trip setting is 1 mm of roller deflection.'],
  ['bin-switch-roller','Lid contact roller','The rolling contact follows the underside of the moving striker without a sharp sliding edge.','Opening the lid lets the spring return; the source then blanks fill readings.'],
+ ['bin-switch-axle','Roller axle pin','A separate metal pin holds the bored roller between the lever fork ears.','Place the wheel between the ears, align its bore, then slide the pin through all three open axes.'],
  ['bin-switch-plunger','Microswitch plunger','A small spring-return button follows the lever near its pivot.','Its short travel changes COM-to-NO continuity; the Uno D7 pull-up reads an open lid HIGH.'],
  ['bin-switch-com','Microswitch COM contact','The common terminal provides the switch reference.','Connect COM to Uno ground. It is not a supply input.'],
  ['bin-switch-no','Microswitch NO contact','Normally open contact closes to COM when the lid depresses the lever.','Connect NO to Uno D7 with INPUT_PULLUP. Closure pulls D7 LOW.'],

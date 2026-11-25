@@ -1,5 +1,5 @@
 import{binOnLid,type BinPoint}from'./smart-bin-sensor';
-export const binLidPassages=[-58,-52,-46,-40].map((x,lane)=>({x,z:-100,lane,inner:.9,barrel:2,hole:2.05,flange:2.7}));
+export const binLidPassages=[-61,-54,-47,-40].map((x,lane)=>({x,z:-100,lane,inner:1.7,barrel:2.5,hole:2.55,flange:3.2}));
 const add=(a:BinPoint,b:BinPoint):BinPoint=>a.map((v,k)=>v+b[k]) as BinPoint,scale=(a:BinPoint,n:number):BinPoint=>a.map(v=>v*n) as BinPoint;
 export function binBezier(points:BinPoint[],t:number):BinPoint{const u=1-t;return[0,1,2].map(k=>u*u*u*points[0][k]+3*u*u*t*points[1][k]+3*u*t*t*points[2][k]+t*t*t*points[3][k]) as BinPoint;}
 export function binLoopLength(points:BinPoint[],segments=256){let length=0,last=points[0];for(let n=1;n<=segments;n++){const p=binBezier(points,n/segments);length+=Math.hypot(...p.map((v,k)=>v-last[k]));last=p;}return length;}
