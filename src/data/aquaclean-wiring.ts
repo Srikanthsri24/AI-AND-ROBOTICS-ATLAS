@@ -8,7 +8,7 @@ export type AquaWireEnd={at:AquaPoint;out:AquaPoint;kind:'male'|'female'|'solder
 export type AquaWire={id:string;name:string;description:string;connection:string;color:string;a:AquaWireEnd;b:AquaWireEnd;via:AquaPoint[];echo?:boolean;motor?:boolean};
 const up:AquaPoint=[0,1,0],end=(at:AquaPoint,kind:AquaWireEnd['kind']='male',out:AquaPoint=up):AquaWireEnd=>({at,kind,out});
 export function aquaSensorContact(name:'VCC'|'TRIG'|'ECHO'|'GND'):AquaPoint{const x={VCC:-3.81,TRIG:-1.27,ECHO:1.27,GND:3.81}[name];return[sensor.x+x,sensor.boardY,-16];}
-export function aquaMotorContact(lead:0|1):AquaPoint{return[-104,lead===0?74:66,145];}
+export function aquaMotorContact(lead:0|1):AquaPoint{return[-104,lead===0?149:141,145];}
 export function aquaWireExit(e:AquaWireEnd):AquaPoint{const d=e.kind==='male'?6:e.kind==='female'?1.5:2;return e.at.map((v,k)=>v+e.out[k]*d) as AquaPoint;}
 export function aquaWires(echoConnected=true):AquaWire[]{
  const wires:AquaWire[]=[],add=(id:string,name:string,a:AquaWireEnd,b:AquaWireEnd,color:string,connection:string,via?:AquaPoint[],flags:Partial<Pick<AquaWire,'echo'|'motor'>>={})=>{const n=wires.length,h=Math.max(a.at[1],b.at[1])+18+(n%4)*2.5;wires.push({id:'aqua-wire-'+id,name,description:flags.motor?'This conductor belongs to the separate motor-current circuit.':'This insulated conductor joins the two named physical contacts.',connection,color,a,b,via:via??[[a.at[0]-7,h,a.at[2]],[-350-n*1.8,h+3,(a.at[2]+b.at[2])/2],[b.at[0]-7,h,b.at[2]]],...flags});},S=(name:string)=>end(shield(name)),D=(name:string)=>end(driver(name),'female'),H=(col:number,bank:-1|1,row:number)=>end(hole(col,bank,row));
