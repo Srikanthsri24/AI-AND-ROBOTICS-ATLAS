@@ -2,7 +2,7 @@
 
 ## Phase 1 — 150 published Guided Builds
 
-Current verified total: **66 / 150 workshops**. **84** remain in Phase 1; **61** additional guides remain in Phase 2. Counts embedded in earlier dated notes describe those earlier checkpoints.
+Current verified total: **67 / 150 workshops**. **83** remain in Phase 1; **61** additional guides remain in Phase 2. Counts embedded in earlier dated notes describe those earlier checkpoints.
 
 Use the user-approved obstacle-avoiding car as the visual and interaction benchmark. Add and verify a project-specific sixth 3D Workshop for each of the 150 published guides, continuing in catalog order.
 
@@ -434,3 +434,13 @@ Ten circuit leads seat their two actual connector ends sequentially, followed by
 Current registry: **83 unique actual owners**. **39 focused smart-bin tests pass**, including all stage mappings, open/close order, grommet relaxation, wheel/axle/striker order, board/screw/shield order, insertion sequencing and cache equivalence. Prototype/data standalone TypeScript passes. The initial native check covered **47** intermediate positions, all owner transforms / visibility / settled flags, real lid angles, compressed lip scales, unpowered indicator and staged cable rings (`/tmp/atlas-bin-assembly.log`). Follow-up native checks after caching cover the wiring / lid transitions (`/tmp/atlas-bin-assembly-final.log`). Full-mesh clearance rays verify the actual wheel/fork axle envelope, Uno/foot screw envelopes, and precrimped square housing corners through the real lid/grommet/collar openings (`/tmp/atlas-bin-assembly-bore.log`); support-arm solid boxes are included, not only bored extrusions.
 
 Still pending: actual-surface inspection and anchored labels, polished assembly / calibration / operating interface and code controls, then full built-route desktop / phone verification. Unregistered; verified workshop count remains **66/150**.
+
+
+### Completed workshop 67 — IoT-Based Smart Waste Bin Monitoring System (directory-11)
+Published the project-specific sixth workshop with eight progressive assembly stages, 83 separately selectable actual part owners, anchored surface labels and connection explanations. The hinged sensor, roller contact, bored wheel/axle, protected cable passages, fixed-length service loops, stacked Uno/Ethernet controller, 170-contact indicator circuit and independently powered local receiver follow the guide hardware and wiring. Actual connector insertion and assembly clearance checks cover the physical model.
+
+The five-scene fill/empty lesson moves the clean load through 0%, 53%, 80%, 75% and 70%, with the real indicator lens setting, holding and clearing accordingly. A labelled optional front-wall teaching cutaway exposes the rising load; an explicitly slow-motion acoustic cue explains the measurement. Normal camera presets preserve the live experiment. Lid-open/settling behaviour, disconnected ECHO, boot-time network availability, service outage, stale remote data and recovery retain independent local LED control. Calibration rejects invalid references and the downloadable Arduino sketch contains the applied values; Python receiver download and programming instructions are included. This is an authored browser teaching simulation, not real hardware execution or UDP transmission.
+
+Verification: all 83 actual-part native clicks, highlights and surface anchors pass; prior physical assembly checks cover 47 intermediate poses, connector ends, mounting bores and passage envelopes. All 46 focused smart-bin tests and **802 repository tests pass**. Full-root TypeScript and production build pass. Built-page tests verify the complete automatic lesson, visible load and signal cue, actual LED, camera-state preservation, remote outage/recovery, unchanged seated cables, invalid calibration rejection and configured download contents. Six-stage navigation, browser back/forward, seven difficult labels at both 1440 px and 390 px, status-overlay clearance, page overflow and asset/page errors pass. Source pushed to GitHub; no AWS deployment.
+
+Current count: **67/150**, with **83** Phase 1 workshops and **61** Phase 2 guides pending. Next catalog workshop: directory-12, mine safety. The overall goal remains active.

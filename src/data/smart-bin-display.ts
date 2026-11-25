@@ -1,0 +1,2 @@
+/** A schematic slow-motion echo cue, not acoustic wavefront timing. Native mm. */
+export function binSignalPose(gap:number,seconds:number){if(!Number.isFinite(gap)||gap<120||gap>500||!Number.isFinite(seconds)||seconds<0)throw Error('Invalid teaching signal pose');const phase=(seconds%1.2)/1.2,returning=phase>=.5,t=returning?(phase-.5)*2:phase*2;return{returning,x:returning?13*t:-13*(1-t),y:returning?520-gap+gap*t:520-gap*t,radius:10+20*(returning?1-t:t)};}
