@@ -14,7 +14,7 @@ export function floodWires(mountGapMm=230):FloodWire[]{
  for(const[n,i]of floodPanelNets.map((n,i)=>[n,i] as const)){
   short(`wire-${n.pin}`,`${n.pin} → 220 Ω input`,floodUnoContact(n.pin),floodAdd(floodPlacement.panel,n.input),['#55a886','#d9ac48','#dd6573','#9c7ac8'][i],`${n.pin} enters column ${i===3?16:[1,6,11][i]}, negative bank. The resistor crosses the centre trench.`,25+i*3);
   const bus=i<3?floodBoardContact(3,1,i):floodBoardContact(3,-1,0);
-  short(`wire-return-${i}`,`${i===3?'Piezo':'LED'} return → ground bus`,floodAdd(floodPlacement.panel,n.ground),bus,'#3f495c','The cathode / return strip joins the linked common-ground strips in column 4.',20+i*2);
+  short(`wire-return-${i}`,`${i===3?'Piezo':['Green LED','Amber LED','Red LED'][i]} return → ground bus`,floodAdd(floodPlacement.panel,n.ground),bus,'#3f495c','The cathode / return strip joins the linked common-ground strips in column 4.',20+i*2);
  }
  short('wire-ground-bridge','Link both ground banks',floodBoardContact(3,-1,4),floodBoardContact(3,1,4),'#3f495c','Links the two five-hole groups in column 4; neither group is an edge rail.',15);
  short('wire-uno-ground','Uno ground → common return',floodUnoContact('GND-D'),floodBoardContact(3,-1,2),'#3f495c','Connects Uno GND-D to negative-bank column 4, row 3.',22);
