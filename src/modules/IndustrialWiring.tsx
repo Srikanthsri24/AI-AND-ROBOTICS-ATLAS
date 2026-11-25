@@ -1,12 +1,13 @@
 import type {} from '@react-three/fiber';
 import { useMemo } from 'react';
-import { CatmullRomCurve3,Quaternion,Vector3 } from 'three';
-import { industrialWires,industrialWirePoints,industrialWireSeating,type IndustrialWire,type IndustrialWireEnd } from '../data/industrial-wiring';
+import { Quaternion,Vector3 } from 'three';
+import {industrialInsertionCurve} from './industrial-wire-curve';
+import { industrialWires,industrialWireSeating,type IndustrialWire,type IndustrialWireEnd } from '../data/industrial-wiring';
 export function IndustrialWireConnector({end,active}:{end:IndustrialWireEnd;active:boolean}){const q=useMemo(()=>new Quaternion().setFromUnitVectors(new Vector3(0,1,0),new Vector3(...end.out)),[end.out]),plastic=active?'#b48bec':'#29364b',metal=active?'#b48bec':'#c5b68c';return <group position={end.at} quaternion={q}>
  {end.kind==='male'?<><mesh position={[0,3.5,0]}><boxGeometry args={[2.2,5,2.2]}/><meshStandardMaterial color={plastic} roughness={.6}/></mesh><mesh name="industrial-male-pin" position={[0,-1.5,0]}><boxGeometry args={[.64,5,.64]}/><meshStandardMaterial color={metal} metalness={.8} roughness={.3}/></mesh></>:<>{[-1,1].map(side=>{const width=end.kind==='pot'?2.6:2,depth=end.kind==='pot'?2.4:4;return <group key={side}><mesh position={[side*(width/2-.2),-1,0]}><boxGeometry args={[.4,6,depth]}/><meshStandardMaterial color={plastic} roughness={.6}/></mesh><mesh position={[0,-1,side*(depth/2-.2)]}><boxGeometry args={[width-.8,6,.4]}/><meshStandardMaterial color={plastic} roughness={.6}/></mesh><mesh position={[side*(end.kind==='pot'?.75:.4),-1,0]}><boxGeometry args={[.15,4,end.kind==='pot'?1.2:2.8]}/><meshStandardMaterial color={metal} metalness={.8} roughness={.3}/></mesh></group>})}<mesh position={[0,3.5,0]}><boxGeometry args={[end.kind==='pot'?2.6:2,3,end.kind==='pot'?2.4:4]}/><meshStandardMaterial color={plastic} roughness={.6}/></mesh></>}
  </group>;}
 function Wire({wire,a,b,visible,active,select}:{wire:IndustrialWire;a:number;b:number;visible:boolean;active:boolean;select:(id:string)=>void}){
- const staged=useMemo(()=>{const shift=(end:IndustrialWireEnd,n:number):IndustrialWireEnd=>({...end,at:end.at.map((v,k)=>v+end.out[k]*n) as [number,number,number]});const w={...wire,a:shift(wire.a,a),b:shift(wire.b,b)};return {...w,curve:new CatmullRomCurve3(industrialWirePoints(w).map(p=>new Vector3(...p)),false,'centripetal')};},[wire,a,b]);
+ const staged=useMemo(()=>{const shift=(end:IndustrialWireEnd,n:number):IndustrialWireEnd=>({...end,at:end.at.map((v,k)=>v+end.out[k]*n) as [number,number,number]});const w={...wire,a:shift(wire.a,a),b:shift(wire.b,b)};return {...w,curve:industrialInsertionCurve(wire,a,b)};},[wire,a,b]);
  return <group visible={visible} userData={{partId:wire.id}} onClick={e=>{e.stopPropagation();select(wire.id);}}><mesh name={wire.id+'-insulation'}><tubeGeometry args={[staged.curve,180,.5,10,false]}/><meshStandardMaterial color={active?'#b48bec':wire.color} roughness={.6}/></mesh><IndustrialWireConnector end={staged.a} active={active}/><IndustrialWireConnector end={staged.b} active={active}/></group>;
 }
 export default function IndustrialWiring({selected='',select=()=>{},stopConnected=true,assembly=7}:{selected?:string;select?:(id:string)=>void;stopConnected?:boolean;assembly?:number}){

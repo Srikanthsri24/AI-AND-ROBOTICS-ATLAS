@@ -19,8 +19,8 @@ test('each jumper seats its two named ends in order along their actual insertion
  const start=3+i/17,end=3+(i+1)/17,mid=start+1/34;
  assert.equal(w.industrialWireSeating(i,start-.000001).visible,false);
  const first=w.industrialSeatedWire(wire,i,start),half=w.industrialSeatedWire(wire,i,mid),done=w.industrialSeatedWire(wire,i,end+1e-8);
- for(const key of['a','b']){for(let k=0;k<3;k++)assert.ok(Math.abs(first[key].at[k]-wire[key].at[k]-12*wire[key].out[k])<1e-8);assert.deepEqual(done[key].at,wire[key].at);}
- assert.ok(Math.hypot(...half.a.at.map((v,k)=>v-wire.a.at[k]))<1e-8);assert.ok(Math.abs(Math.hypot(...half.b.at.map((v,k)=>v-wire.b.at[k]))-12)<1e-8);
+ for(const key of['a','b']){for(let k=0;k<3;k++)assert.ok(Math.abs(first[key].at[k]-wire[key].at[k]-5*wire[key].out[k])<1e-8);assert.deepEqual(done[key].at,wire[key].at);}
+ assert.ok(Math.hypot(...half.a.at.map((v,k)=>v-wire.a.at[k]))<1e-8);assert.ok(Math.abs(Math.hypot(...half.b.at.map((v,k)=>v-wire.b.at[k]))-5)<1e-8);
  assert.equal(first.why,wire.why);assert.deepEqual(w.industrialSeatedWire(wire,i,7),wire);
  }
  for(const n of[-1,17,.5])assert.throws(()=>w.industrialWireSeating(n,3));assert.throws(()=>w.industrialSeatedWire(originals[1],0,3));

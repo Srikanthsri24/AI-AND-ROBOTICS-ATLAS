@@ -49,7 +49,7 @@ export const industrialWireParts=industrialWires().map(w=>[w.id,w.name,'This ins
 export function industrialWireSeating(index:number,progress:number){
  if(!Number.isInteger(index)||index<0||index>=industrialWireIds.length||!Number.isFinite(progress)||progress<0||progress>7)throw Error('Invalid industrial jumper insertion');
  const t=(progress-(3+index/17))*17,smooth=(n:number)=>{const f=Math.max(0,Math.min(1,n));return f*f*(3-2*f);};
- return{visible:t>=0,a:12*(1-smooth(t*2)),b:12*(1-smooth((t-.5)*2))};
+ return{visible:t>=0,a:5*(1-smooth(t*2)),b:5*(1-smooth((t-.5)*2))};
 }
 export function industrialSeatedWire(w:IndustrialWire,index:number,progress:number):IndustrialWire{
  if(w.id!==industrialWireIds[index])throw Error('Industrial jumper order does not match its contact schedule');

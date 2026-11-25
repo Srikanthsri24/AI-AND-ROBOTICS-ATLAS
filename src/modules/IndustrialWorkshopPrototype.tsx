@@ -13,7 +13,7 @@ import Lighting from './WorkshopStudioLighting';
 import {industrialOutputs,industrialFresh,type IndustrialInputs} from '../data/industrial-workshop';
 import type {IndustrialSession} from '../data/industrial-session';
 const target:[number,number,number]=[0,.25,0];
-/** Private staging model; publication awaits inspection and complete operating interface checks. */
+/** Authored low-voltage industrial panel, virtual conveyor and independent observer. */
 export default function IndustrialWorkshopPrototype({selected='',select=()=>{},session,input,assembly=7,stroke=0,stopConnected=true,inspection='none',controls=true,onSurface}:{selected?:string;select?:(id:string)=>void;session:IndustrialSession;input:IndustrialInputs;assembly?:number;stroke?:number;stopConnected?:boolean;inspection?:IndustrialControllerInspection;controls?:boolean;onSurface?:(event:ThreeEvent<PointerEvent>)=>void}){
  const powered=input.powered&&assembly===7&&inspection==='none',lights=industrialOutputs(session.clock,powered),r=session.receiver.record;
  const record=r?[r.uptimeMs,r.temperature,r.vibration,r.stopOpen?1:0,r.status].join(','):'Waiting for a status packet';
