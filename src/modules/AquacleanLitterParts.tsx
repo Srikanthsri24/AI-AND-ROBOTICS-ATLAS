@@ -1,6 +1,6 @@
 import{memo}from'react';
 import{RoundedBox}from'@react-three/drei';
-import{aquaBatchCount,aquaChip,aquaLitterPose,type AquaCollection}from'../data/aquaclean-collection';
-export const aquaLitterParts=Array.from({length:aquaBatchCount},(_,i)=>[`aqua-litter-${i+1}`,`Model litter batch ${i+1}`,'A foam marker follows the authored pickup, lift, ramp and basket sequence.','Each delivery represents a model litter batch; its five-millimetre fill increment is an illustration, not a physical volume calculation.'] as const);
+import{aquaLitterParts,aquaChip,aquaLitterPose,type AquaCollection}from'../data/aquaclean-collection';
+export{aquaLitterParts}from'../data/aquaclean-collection';
 function AquacleanLitterParts({selected,select,collection}:{selected:string;select:(id:string)=>void;collection:AquaCollection}){return <>{aquaLitterParts.map(([id],i)=>{const p=aquaLitterPose(collection,i),active=selected===id;return <group key={id} name={id} userData={{partId:id}} position={[p.x,p.y,p.z]} rotation={[0,0,p.rotation]} onClick={e=>{e.stopPropagation();select(id);}}><RoundedBox args={[aquaChip.width,aquaChip.height,aquaChip.depth]} radius={.65} smoothness={2} castShadow><meshStandardMaterial color={active?'#b78be8':['#e5dfca','#d6e2de','#e5d6c5'][i%3]} roughness={.96}/></RoundedBox>{Array.from({length:5},(_,n)=><mesh key={n} position={[(n-2)*1.8,aquaChip.height/2-.03,((n+i)%3-1)*2]} rotation={[-Math.PI/2,0,0]}><circleGeometry args={[.18+(n%2)*.05,8]}/><meshStandardMaterial color={active?'#b78be8':'#aeb9b5'} roughness={1}/></mesh>)}</group>;})}</>;}
 export default memo(AquacleanLitterParts);

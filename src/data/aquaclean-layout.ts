@@ -39,5 +39,6 @@ export const aquaSensorParts=[
  ['aqua-sensor-mount','Insulated sensor mounting plate','Four drilled holes and insulating sleeves align with the actual board holes.','The screws secure the board without bonding its circuitry to the stand.'],
  ['aqua-follower-card','Flat basket follower card','Provides the ideal ultrasonic reflecting surface above the collected model litter.','Its upper face is 200 mm below the sensor datum when empty, and 115 mm below it at the full threshold.'],
  ['aqua-follower-guides','Follower guide rails','Keep the lightweight card level while model scraps raise it. Motion and echoes are illustrative.','The two rails sit outside the basket mesh, away from the inlet. A lower mounting crossbar joins each to the basket frame.'],
+ ['aqua-follower-caps','Removable guide-rail caps','Retain the follower sleeves after they have been lowered over the bare rods.','Fit the caps last; the sleeves cannot pass over the wider caps.'],
  ['aqua-follower-carrier','Follower sliding carriers','Two bored sleeves slide along the guide rails and carry the flat card.','The arms attach under the card edges and move with the target, leaving its upper echo surface clear.'],
 ] as const;

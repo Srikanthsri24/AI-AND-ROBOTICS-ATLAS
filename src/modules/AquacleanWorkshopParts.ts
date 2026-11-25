@@ -1,0 +1,14 @@
+import{aquaMechanicalParts,aquaMotorParts,aquaSensorParts}from'../data/aquaclean-layout';
+import{aquaUnoParts,aquaShieldParts}from'../data/aquaclean-electronics';
+import{aquaDriverParts}from'../data/aquaclean-driver';
+import{aquaBatteryParts}from'../data/aquaclean-battery';
+import{aquaPanelParts}from'../data/aquaclean-panel';
+import{aquaNetworkParts}from'../data/aquaclean-network';
+import{aquaLitterParts}from'../data/aquaclean-collection';
+import{aquaWires}from'../data/aquaclean-wiring';
+import{floodSonarParts}from'../data/flood-workshop-layout';
+import{aquaPartStage}from'../data/aquaclean-assembly';
+const sonar=floodSonarParts.map(([id,name,description,connection])=>['aqua-'+id,name,description.replaceAll('basin','basket').replace('not a safe water level','not proof of an empty basket'),connection]);
+const host=[['flood-controller-feet','Insulating Uno mounting feet','Four bored insulating spacers support the Uno at its source-layout mounting holes.','Keep the solder joints clear of the dry bench.'],['flood-usb-cable','USB power and programming cable','Joins the illustrated USB host to the Uno for logic power / upload. Its host end stays fixed while the Uno plug is seated.','Motor VM is supplied separately from the AA pack.'],['flood-usb-host','Illustrated USB host','Represents the computer USB source used to upload the Arduino C++ sketch and supply logic power.','The browser does not program a physical board. Use Arduino IDE and Serial Monitor at 9600 baud on hardware.']];
+export type AquaWorkshopPart={id:string;name:string;description:string;connection:string;stage:number};
+export const aquaWorkshopParts:AquaWorkshopPart[]=[...aquaMechanicalParts,...aquaMotorParts,...aquaSensorParts,...aquaUnoParts,...aquaShieldParts,...aquaDriverParts,...aquaBatteryParts,...aquaPanelParts,...aquaNetworkParts,...aquaLitterParts,...sonar,...host,...aquaWires().map(w=>[w.id,w.name,w.description,w.connection])].map(([id,name,description,connection])=>({id,name,description,connection,stage:aquaPartStage(id)}));

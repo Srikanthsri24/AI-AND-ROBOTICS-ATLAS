@@ -37,3 +37,5 @@ export function aquaLitterPose(s:AquaCollection,index:number){if(!Number.isInteg
  if(t<.55){const p=smooth((t-.25)/.3);return{x:143,y:rampEnd.y+(final.y-rampEnd.y)*p,z:0,rotation:0};}
  return{x:143+(final.x-143)*smooth((t-.55)/.45),y:final.y,z:0,rotation:0};
 }
+
+export const aquaLitterParts=Array.from({length:aquaBatchCount},(_,i)=>[`aqua-litter-${i+1}`,`Model litter batch ${i+1}`,'A foam marker follows the authored pickup, lift, ramp and basket sequence.','Each delivery represents a model litter batch; its five-millimetre fill increment is an illustration, not a physical volume calculation.'] as const);
