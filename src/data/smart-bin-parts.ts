@@ -1,3 +1,5 @@
+import{binFixedWireParts}from'./smart-bin-wiring';
+import{binElectronicsParts}from'./smart-bin-electronics';
 import{binLoomParts}from'./smart-bin-loom';
 import{binMechanicalParts}from'./smart-bin-layout';import{binSensorParts}from'./smart-bin-sensor';
 /** Project-specific explanations: the shared HC-SR04 mesh is mounted on this lid. */
@@ -11,4 +13,4 @@ export const binSonarParts=[
  ['bin-sonar-echo','Sensor ECHO contact','Pulse width represents the nominal sound round trip.','Connect to Uno D3. Disconnecting it produces SENSOR_FAULT, rather than a zero-fill reading.'],
  ['bin-sonar-ground','Sensor GND contact','Provides the shared zero-volt signal reference.','Connect to Uno ground. Keep the flexible cable away from the hinge pinch point.'],
 ] as const;
-export const binFoundationParts=[...binMechanicalParts,...binSensorParts,...binSonarParts,...binLoomParts].map(([id,name,description,connection])=>({id,name,description,connection}));
+export const binFoundationParts=[...binMechanicalParts,...binSensorParts,...binSonarParts,...binLoomParts,...binElectronicsParts,...binFixedWireParts].map(([id,name,description,connection])=>({id,name,description,connection}));
