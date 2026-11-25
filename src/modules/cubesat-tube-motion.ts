@@ -1,0 +1,3 @@
+import {TubeGeometry,type Curve,type Vector3} from 'three';
+/** Rewrite existing GPU attributes, retaining geometry/buffer ownership throughout animation. */
+export function rewriteCubeSatTube(target:TubeGeometry,path:Curve<Vector3>){const p=target.parameters,next=new TubeGeometry(path,p.tubularSegments,p.radius,p.radialSegments,p.closed);try{for(const key of['position','normal']){const a=target.getAttribute(key),b=next.getAttribute(key);if(a.count!==b.count)throw Error('Tube motion changed vertex count');(a.array as Float32Array).set(b.array);a.needsUpdate=true;}target.userData.motionPath=path;target.tangents=next.tangents;target.normals=next.normals;target.binormals=next.binormals;target.boundingBox=null;target.computeBoundingSphere();}finally{next.dispose();}}
