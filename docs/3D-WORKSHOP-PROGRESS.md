@@ -2,7 +2,7 @@
 
 ## Phase 1 — 150 published Guided Builds
 
-Current verified total: **64 / 150 workshops**. **86** remain in Phase 1; **61** additional guides remain in Phase 2. Counts embedded in earlier dated notes describe those earlier checkpoints.
+Current verified total: **65 / 150 workshops**. **85** remain in Phase 1; **61** additional guides remain in Phase 2. Counts embedded in earlier dated notes describe those earlier checkpoints.
 
 Use the user-approved obstacle-avoiding car as the visual and interaction benchmark. Add and verify a project-specific sixth 3D Workshop for each of the 150 published guides, continuing in catalog order.
 
@@ -276,3 +276,11 @@ Added the project-specific private workshop screen: eight animated assembly stag
 
 ### Flood-gate private native UI verification
 Native Chrome / Playwright exercised the actual workshop UI on the local Vite server: complete eight-stage assembly, power/run, three-pair empty calibration, 90 mm upstream opening to 120° servo / 46° flap, observable conserved water transfer, 60 mm downstream interlock closing motion, and unplugged downstream ECHO fault. Desktop 1440×1000 and phone 390×844 screenshots captured; phone document width stays within the viewport, no page errors. Evidence: /tmp/atlas-gate-ui.log, /tmp/atlas-gate-ui-desktop.png and /tmp/atlas-gate-ui-phone.png. Added visibility-filtered native pointer events and near-plane support for close component inspection. Added explicit Arduino C++ upload / dry-target / linkage test instructions and actual sketch download. TypeScript passes. Still private pending complete integrated part inspection, calibration edge cases, production route and final responsive checks; completion remains 64/150.
+
+
+### Completed workshop 65 — Smart Flood Monitoring and Automatic Flood Gate (directory-9)
+Registered the sixth workshop after project-specific verification. Eight progressive mechanical/electrical assembly stages, 76 actual selectable part/wire owners, fixed-length horn/rod/flap linkage, dry separated logic/servo supplies, independent sequential ultrasonic channels, editable two-reference calibration and stable-pair capture, actual versus commanded actuator angle, threshold hysteresis, receiving-chamber interlock, ECHO failure, independent actuator supply loss and conservative illustrative water transfer. Arduino C++ sketch download and physical dry-target / unhooked-horn test instructions are included. Explicit cutaways pause operation; Run restores the full mechanism.
+
+Production native Chrome verification directly clicked and highlighted all **76 actual owners on desktop and phone**, checked actual surface-marker positions and bounded labels with no live-panel overlap. Both completed runs report `PRODUCTION ALL PARTS PASS 76` in `/tmp/atlas-gate-production-parts.log` and `/tmp/atlas-gate-production-parts-phone.log`. Integrated production route/assembly/calibration/opening/cutaway pause-resume/download/desktop-phone checks pass in `/tmp/atlas-gate-production.log`. Independent 280 / 210 mm reference recovery, water transfer, downstream closure and ECHO failure pass in `/tmp/atlas-gate-ui.log`. The final responsive refinement puts operating controls before the long code/parts sections on phones and scrolls focused parts back to the model; production verification was repeated after this refinement. Final production build passes; **707 repository tests pass**. Native model geometry/assembly/linkage evidence from the earlier checkpoint remains applicable.
+
+Remaining: **85** Phase 1 workshops, then **61** Phase 2 guides. Next catalog workshop is directory-10, AQUACLEAN IoT river-waste skimmer. No claim is made that the overall goal is complete.

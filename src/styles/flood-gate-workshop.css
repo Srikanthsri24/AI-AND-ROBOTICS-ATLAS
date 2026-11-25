@@ -1,0 +1,10 @@
+/* Keep the interactive station controls near the model on a narrow screen. */
+@media(max-width:600px){
+ .fg-workshop .fw-layout{display:flex;flex-direction:column;gap:14px}
+ .fg-workshop .fw-main{display:contents}
+ .fg-workshop .fw-view{order:0;width:100%;box-sizing:border-box}
+ .fg-workshop .fw-inspect{order:1;width:100%;box-sizing:border-box;margin:0}
+ .fg-workshop .fw-controls{order:2;width:100%}
+ .fg-workshop .fw-code{order:3;width:100%;box-sizing:border-box;margin:0}
+ .fg-workshop .fw-parts{order:4;width:100%;box-sizing:border-box;margin:0}
+}
