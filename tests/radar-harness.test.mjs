@@ -16,6 +16,7 @@ async function load(url){
  const uri='data:text/javascript;base64,'+Buffer.from(code).toString('base64');cache.set(url.href,uri);return uri;
 }
 const m=await import(await load(new URL('../src/data/radar-harness.ts',import.meta.url)));
+const power=await import(await load(new URL('../src/data/radar-power-layout.ts',import.meta.url)));
 const clamp=x=>Math.max(0,Math.min(1,x));
 // Closest distance between two finite segments, including clamped end contacts.
 function segmentDistance(p1,q1,p2,q2){
@@ -38,15 +39,39 @@ test('radar leads use the real Uno contacts and clear the sonar header when with
  assert.throws(()=>m.radarLeadPose(4,90));assert.throws(()=>m.radarLeadPose(0,NaN));
  assert.throws(()=>m.radarLeadPose(0,90,4.01));assert.throws(()=>m.radarLeadPose(0,90,0,5.01));
 });
-test('four 1.3 mm cables remain separated through the fitting range and connector travel',()=>{
+test('all seven sensor and fixed servo cables remain separated through the fitting range and connector travel',()=>{
  let minimum=Infinity;
  for(let heading=10;heading<=170;heading+=5)for(const[w1,w2]of[[0,0],[4,0],[0,5],[4,5]]){
   const paths=Array.from({length:4},(_,i)=>new CatmullRomCurve3(m.radarLeadPose(i,heading,w1,w2).points.map(p=>new Vector3(...p)),false,'centripetal').getPoints(160));
-  for(let a=0;a<4;a++)for(let b=a+1;b<4;b++)for(let i=1;i<paths[a].length;i++)for(let j=1;j<paths[b].length;j++){
+  paths.push(...Array.from({length:3},(_,i)=>new CatmullRomCurve3(power.radarServoTail(i).map(p=>new Vector3(...p)),false,'centripetal').getPoints(160)));
+  for(let a=0;a<7;a++)for(let b=a+1;b<7;b++)for(let i=1;i<paths[a].length;i++)for(let j=1;j<paths[b].length;j++){
    const pa=paths[a][i-1],qa=paths[a][i],pb=paths[b][j-1],qb=paths[b][j];
-   if(Math.max(Math.min(pa.x,qa.x)-Math.max(pb.x,qb.x),Math.min(pb.x,qb.x)-Math.max(pa.x,qa.x),Math.min(pa.y,qa.y)-Math.max(pb.y,qb.y),Math.min(pb.y,qb.y)-Math.max(pa.y,qa.y),Math.min(pa.z,qa.z)-Math.max(pb.z,qb.z),Math.min(pb.z,qb.z)-Math.max(pa.z,qa.z))>minimum)continue;
-   minimum=Math.min(minimum,segmentDistance(pa,qa,pb,qb));
+   if(Math.max(Math.min(pa.x,qa.x)-Math.max(pb.x,qb.x),Math.min(pb.x,qb.x)-Math.max(pa.x,qa.x),Math.min(pa.y,qa.y)-Math.max(pb.y,qb.y),Math.min(pb.y,qb.y)-Math.max(pa.y,qa.y),Math.min(pa.z,qa.z)-Math.max(pb.z,qb.z),Math.min(pb.z,qb.z)-Math.max(pa.z,qa.z))>minimum+1.3)continue;
+   minimum=Math.min(minimum,segmentDistance(pa,qa,pb,qb)-(a<4?.65:.55)-(b<4?.65:.55));
   }
  }
- assert.ok(minimum>1.5,'160-segment path sampling retains clearance beyond the 1.3 mm wire diameter; got '+minimum);
+ assert.ok(minimum>.2,'160-segment path sampling retains surface clearance for 1.3 mm sensor / 1.1 mm servo wires; got '+minimum);
+});
+test('radar servo supply keeps its positive source separate and references one real breadboard strip',()=>{
+ assert.deepEqual(power.radarSupplyPorts.map(p=>p.node),['servo-positive','common-ground','common-ground']);
+ assert.deepEqual(power.radarPowerConnections.map(c=>c.node),['servo-command','servo-positive','common-ground','common-ground','common-ground']);
+ assert.deepEqual(power.radarPowerConnections[0].from,m.radarUnoSocket('D9'));
+ assert.deepEqual(power.radarPowerConnections[1].to,power.radarServoContact(1));
+ assert.deepEqual(power.radarPowerConnections[2].to,power.radarServoContact(2));
+ assert.deepEqual(power.radarPowerConnections[4].to,m.radarUnoSocket('GND-P2'));
+ for(const edge of power.radarPowerConnections)for(const p of[edge.from,edge.to])assert.notDeepEqual(p,m.radarUnoSocket('5V'),'Independent servo circuit must not join Uno positive');
+ const a=power.radarReferenceContact(0),b=power.radarReferenceContact(1);
+ assert.equal(a[0],b[0]);assert.equal(a[1],10);assert.ok(Math.abs(b[2]-a[2]-2.54)<1e-10);
+ assert.ok(a[2]<power.radarReferenceBoardAt[2]&&b[2]<power.radarReferenceBoardAt[2]);
+ assert.equal(new Set(power.radarPowerParts.map(p=>p[0])).size,16);
+ assert.throws(()=>power.radarReferenceContact(5));assert.throws(()=>power.radarSupplyContact('Uno 5V'));
+});
+test('fixed servo tails leave the actual grommet and end behind their own connector contacts',()=>{
+ for(let i=0;i<3;i++){
+  const points=power.radarServoTail(i),c=power.radarServoContacts[i];
+  assert.deepEqual(points[0],[17.9,12,(i-1)*1.5]);assert.deepEqual(points.at(-1),[c.x,14,-46]);
+  assert.deepEqual(power.radarServoContact(i),[c.x,14,-40]);
+  assert.ok(points[0][2]+.55<2.5&&points[0][2]-.55>-2.5,'Cable fits moulded strain relief');
+ }
+ assert.throws(()=>power.radarServoTail(3));assert.throws(()=>power.radarServoContact(-1));
 });
