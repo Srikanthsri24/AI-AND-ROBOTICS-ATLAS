@@ -270,3 +270,6 @@ Native private checks sample **19 assembly positions**, verifying the real frame
 
 ### Flood-gate water-transfer foundation
 Added an illustrative, equal-area transfer function driven by the actual linkage's lower-edge clearance above the sill. Closed geometry blocks transfer, downstream head does not create a fictitious forward flow, and volume is conserved. Fixed-angle integration is invariant to frame subdivision. Thirteen controller/linkage/transfer tests pass. This is an authored visual flow rate, not calibrated hydraulics. Gate workshop remains private and incomplete until its calibration UI and complete operating flow are verified; published completion count stays 64/150.
+
+### Flood-gate private workshop UI checkpoint
+Added the project-specific private workshop screen: eight animated assembly stages, 76-part inspection list, labelled housing/seal cutaways, dual empty-gap capture after three stable completed pairs, separate physical depths, conservative illustrative transfer, sequential-pair readout, actual versus commanded servo angle, ECHO disconnection with both sources off and independent servo supply loss. Run restores the assembled view. TypeScript passes. This screen is deliberately unregistered until native desktop/phone UI flows and the complete operating demo are verified. Completion remains 64/150; no new guide is claimed complete.
