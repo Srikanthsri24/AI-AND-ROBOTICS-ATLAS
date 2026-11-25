@@ -4,9 +4,9 @@ import {DoubleSide,Path,Shape} from 'three';
 import {floodSonar as d,floodSonarPins} from '../data/flood-workshop-layout';
 const font=new URL('./fonts/NotoSans-Regular.ttf',document.baseURI).href;
 /** Native millimetres, front +Z. Real surfaces carry their selectable part owner. */
-function FloodSonarParts({selected,select}:{selected:string;select:(id:string)=>void}){
+function FloodSonarParts({selected,select,partPrefix=''}:{selected:string;select:(id:string)=>void;partPrefix?:string}){
  const board=useMemo(()=>{const s=new Shape();s.moveTo(-22.5,-10);s.lineTo(22.5,-10);s.lineTo(22.5,10);s.lineTo(-22.5,10);s.closePath();for(const[x,y]of d.holes){const h=new Path();h.absarc(x,y,.95,0,Math.PI*2,true);s.holes.push(h);}return s;},[]);
- const color=(id:string,c:string)=>selected===id?'#b78be8':c,tag=(id:string,children:ReactNode)=><group key={id} userData={{partId:id}} onClick={e=>{e.stopPropagation();select(id);}}>{children}</group>;
+ const color=(id:string,c:string)=>selected===partPrefix+id?'#b78be8':c,tag=(id:string,children:ReactNode)=><group key={id} userData={{partId:partPrefix+id}} onClick={e=>{e.stopPropagation();select(partPrefix+id);}}>{children}</group>;
  const block=(at:[number,number,number],size:[number,number,number],c:string)=><mesh position={at} castShadow><boxGeometry args={size}/><meshStandardMaterial color={c} roughness={.52}/></mesh>;
  return <>
  {tag('sonar-pcb',<><mesh position={[0,0,-1.6]} castShadow><extrudeGeometry args={[board,{depth:1.6,bevelEnabled:false,curveSegments:24}]}/><meshStandardMaterial color={color('sonar-pcb','#1767a3')} roughness={.5}/></mesh>{d.holes.map(([x,y])=><mesh key={`${x}/${y}`} position={[x,y,.03]}><ringGeometry args={[.95,1.5,24]}/><meshStandardMaterial color={color('sonar-pcb','#bfc2bf')} metalness={.8} roughness={.3} side={DoubleSide}/></mesh>)}<Text position={[0,8.25,.05]} font={font} fontSize={1.4} color="#eef4f7">HC-SR04</Text></>)}
