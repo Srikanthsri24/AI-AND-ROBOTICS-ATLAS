@@ -28,5 +28,6 @@ export const floodBasinParts=[
  ['flood-basin','Clear marked basin','The open basin holds the changing water level. Marks are measured from the inside bottom, not from the bench.','A clear path above the centre lets the sensor receive the water-surface echo.'],
  ['flood-water','Water surface','The physical water level is the simulation input. The sensor reading is calculated separately after its acoustic round trip.','The reflected pulse returns to the receiver; water must not touch the sensor or its wiring.'],
  ['flood-stand','Dry sensor stand','A weighted foot and adjustable upright keep the sensor facing straight down. The model stand dimensions are authored teaching geometry.','The overhead arm supports four insulating standoffs at the sensor mounting holes.'],
- ['flood-mounts','Sensor mounting screws and spacers','Four insulating sleeves hold the board clear of its metal support, with visible screw heads and washers.','They align with the actual board holes. They are mechanical supports, not electrical ground connections.'],
+ ['flood-mount-screws','Sensor mounting screws','Four shafts descend through the support plate and board holes after the sensor is seated.','The drilled spacers keep the board clear of the plate; the washers seat on its upper face.'],
+ ['flood-mounts','Sensor mounting spacers','Four insulating sleeves hold the board clear of its metal support, with visible screw heads and washers.','They align with the actual board holes. They are mechanical supports, not electrical ground connections.'],
 ] as const;
