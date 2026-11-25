@@ -18,7 +18,7 @@ function AquacleanSensorParts({selected,select,gapMm=200}:{selected:string;selec
  {tag('aqua-follower-caps',<>{[-1,1].map(s=><group key={s}>{cyl([d.guideX,floor+d.guideHeight+1,s*d.guideZ],2,2,c('aqua-follower-caps','#7a8da1'))}</group>)}</>)}
  <group name="aqua-follower-moving" position={[0,card.y,0]}>
  {tag('aqua-follower-card',box([d.x,-.6,0],[d.cardWidth,1.2,d.cardLength],c('aqua-follower-card','#e2d8bc')))}
- {tag('aqua-follower-carrier',<>{[-1,1].map(s=><group key={s}><mesh position={[d.guideX,-4,s*d.guideZ]} rotation={[-Math.PI/2,0,0]}><extrudeGeometry args={[rings.slider,{depth:6,bevelEnabled:false,curveSegments:24}]}/><meshStandardMaterial color={c('aqua-follower-carrier','#b3c3c5')} metalness={.5} roughness={.4}/></mesh>{box([(d.x+d.guideX-2)/2,-2,s*39],[d.guideX-d.x-2,2,34],c('aqua-follower-carrier','#819aa4'))}</group>)}</>)}
+ {tag('aqua-follower-carrier',<>{[-1,1].map(s=><group key={s}><mesh position={[d.guideX,-4,s*d.guideZ]} rotation={[-Math.PI/2,0,0]}><extrudeGeometry args={[rings.slider,{depth:6,bevelEnabled:false,curveSegments:24}]}/><meshStandardMaterial color={c('aqua-follower-carrier','#b3c3c5')} metalness={.5} roughness={.4}/></mesh>{box([(d.x+d.guideX-2)/2,1,s*39],[d.guideX-d.x-2,2,34],c('aqua-follower-carrier','#819aa4'))}</group>)}</>)}
  </group>
  </>;
 }
