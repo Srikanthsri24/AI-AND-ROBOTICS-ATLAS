@@ -1,0 +1,4 @@
+import{memo,useMemo}from'react';import{Shape,Path,DoubleSide}from'three';
+import{aquaLoomHeights,aquaLoomHoles}from'../data/aquaclean-loom';
+function AquacleanLoomParts({selected,select}:{selected:string;select:(id:string)=>void}){const shape=useMemo(()=>{const s=new Shape();s.moveTo(226,123);s.lineTo(239,123);s.lineTo(239,137);s.lineTo(226,137);s.closePath();for(const h of aquaLoomHoles){const p=new Path();p.absarc(h.x,-h.z,h.radius,0,Math.PI*2,true);s.holes.push(p);}return s;},[]);return <group userData={{partId:'aqua-sensor-loom'}} onClick={e=>{e.stopPropagation();select('aqua-sensor-loom');}}>{aquaLoomHeights.map(y=><mesh key={y} position={[0,y-1,0]} rotation={[-Math.PI/2,0,0]} castShadow><extrudeGeometry args={[shape,{depth:2,bevelEnabled:false,curveSegments:24}]}/><meshStandardMaterial color={selected==='aqua-sensor-loom'?'#b78be8':'#69798b'} roughness={.6} side={DoubleSide}/></mesh>)}</group>}
+export default memo(AquacleanLoomParts);
