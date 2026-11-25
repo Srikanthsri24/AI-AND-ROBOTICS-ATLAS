@@ -14,6 +14,7 @@ export default function CubeSatGroundStationParts({selected='',select=()=>{},rec
  const rod=(key:string,a:P,b:P,r:number,color:string,metal=0)=>{const av=new Vector3(...a),bv=new Vector3(...b);return <mesh position={av.clone().add(bv).multiplyScalar(.5)} quaternion={new Quaternion().setFromUnitVectors(new Vector3(0,1,0),bv.clone().sub(av).normalize())} castShadow><cylinderGeometry args={[r,r,av.distanceTo(bv),32]}/>{mat(key,color,metal)}</mesh>;};
  const socket=(key:string)=> <>{profile(key,g.socket,[0,0,0],3,'#b7ab87',.8)}{profile(key,g.dielectric,[0,0,0],2.8,'#e2ded2')}{disk(key,[0,0,1.5],.25,3,'#c8ac72',.8)}</>;
  const plug=(key:string)=><>{profile(key,g.plug,[0,0,0],3,'#b7ab87',.8)}{profile(key,g.plugCap,[0,0,3],1,'#b7ab87',.8)}{profile(key,g.dielectric,[0,0,3],1,'#e2ded2')}{profile(key,g.contact,[0,0,0],4,'#c8ac72',.8)}{disk(key,[0,0,3.5],.25,1,'#c8ac72',.8)}</>;
+ const source=image?.image as {width?:number;height?:number}|undefined,aspect=source?.width&&source?.height?source.width/source.height:62/32,screenWidth=Math.min(62,32*aspect),screenHeight=Math.min(32,62/aspect);
  const struts=[0,2*Math.PI/3,4*Math.PI/3].map(a=>({a:[31.4*Math.cos(a),31.4*Math.sin(a),cubeSatDishDepth(31.4)] as P,b:[2.7*Math.cos(a),2.7*Math.sin(a),21.3] as P}));
  return <group name="cubesat-ground-station">
  {own('base',box('base',[180,4,-55],[54,4,48],'#5d6285',.5))}
@@ -34,7 +35,7 @@ export default function CubeSatGroundStationParts({selected='',select=()=>{},rec
  {own('receiver-feet',<>{[-28,28].flatMap(x=>[-5,5].map(z=><group key={x+'/'+z}>{box('receiver-feet',[180+x,2.5,78+z],[9,5,5],'#33394b')}</group>))}</>)}
  {own('input',<group position={[218,22,78]} rotation={[0,Math.PI/2,0]}>{socket('input')}{profile('input',g.socket,[0,0,-2],2,'#b7ab87',.8)}{profile('input',g.dielectric,[0,0,-2],2,'#e2ded2')}{disk('input',[0,0,-1],.25,2,'#c8ac72',.8)}</group>)}
  {own('input-plug',<group position={[218,22,78]} rotation={[0,Math.PI/2,0]}>{plug('input-plug')}{profile('input-plug',g.jacket,[0,0,4],2,'#33394b')}</group>)}
- {own('display',<mesh position={[180,36,85.9]}><planeGeometry args={[62,32]}/><meshBasicMaterial color={selected==='cubesat-station-display'?'#c6a4ef':image?'#ffffff':'#17273f'} map={image} toneMapped={false}/></mesh>)}
+ {own('display',<><mesh position={[180,36,85.8]}><planeGeometry args={[62,32]}/><meshBasicMaterial color={selected==='cubesat-station-display'?'#c6a4ef':'#17273f'} toneMapped={false}/></mesh>{image&&<mesh position={[180,36,85.9]}><planeGeometry args={[screenWidth,screenHeight]}/><meshBasicMaterial color={selected==='cubesat-station-display'?'#c6a4ef':'#ffffff'} map={image} toneMapped={false}/></mesh>}</>)}
  {own('controls',<>{[-12,0,12].map(x=><group key={x}>{box('controls',[180+x,12,88.8],[7,3,1.6],'#8a7bc3')}</group>)}</>)}
  {own('indicator',<mesh position={[207,12,88.4]} rotation={[Math.PI/2,0,0]}><cylinderGeometry args={[1.5,1.5,.8,32]}/><meshStandardMaterial color={c('cubesat-station-indicator',receiving?'#89dac6':'#596b77')} emissive="#58c1a4" emissiveIntensity={receiving?1.5:0}/></mesh>)}
  </group>;
