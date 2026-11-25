@@ -24,7 +24,7 @@ export const cubeSatAssemblyChapters=[
 type Window={start:number;end:number;travel:CubeSatPoint};const windows=new Map<string,Window>();
 function assign(ids:string[],start:number,end:number,travel:CubeSatPoint=[0,0,0]){for(const id of ids){if(windows.has(id))throw Error('Duplicate CubeSat assembly mapping '+id);windows.set(id,{start,end,travel});}}
 assign(['cubesat-bench','cubesat-stand'],0,0);
-assign(['cubesat-bottom-frame'],0,.25,[0,45,0]);assign([1,2,3,4].map(n=>'cubesat-rail-'+n),.25,.65,[0,80,0]);assign(['cubesat-bottom-fasteners'],.65,1,[0,-16,0]);
+assign(['cubesat-bottom-frame'],.03,.25,[0,45,0]);assign([1,2,3,4].map(n=>'cubesat-rail-'+n),.25,.65,[0,80,0]);assign(['cubesat-bottom-fasteners'],.65,1,[0,-16,0]);
 assign(['cubesat-payload-deck','cubesat-stack-studs'],1,1.35,[0,100,0]);assign(['cubesat-deck-screws'],1.35,1.5,[0,20,0]);assign(['cubesat-lower-spacers'],1.5,1.8,[0,100,0]);
 assign(['cubesat-computer-pcb','cubesat-computer-processor','cubesat-computer-clock','cubesat-computer-passives','cubesat-interface-camera','cubesat-interface-buffer-computer'],1.8,2.15,[0,80,0]);assign(['cubesat-upper-spacers'],2.15,2.4,[0,80,0]);
 assign(['cubesat-memory-pcb','cubesat-memory-package','cubesat-memory-controller','cubesat-memory-indicator','cubesat-interface-buffer-memory','cubesat-interface-memory-radio'],2.4,2.7,[0,45,0]);assign(['cubesat-stack-nuts'],2.7,2.9,[0,40,0]);assign(['cubesat-radio-spacers'],2.9,3.1,[0,40,0]);
