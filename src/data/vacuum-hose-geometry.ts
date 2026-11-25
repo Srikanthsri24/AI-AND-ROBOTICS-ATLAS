@@ -4,14 +4,15 @@ export const vacuumTray={top:2,sites:[[-140,130],[-125,130],[-110,130],[-140,150
 export const vacuumPickupLength=700;
 const vec=(p:VacuumPoint)=>new Vector3(...p);
 export function vacuumNozzleAt(index:number,gap=d.nozzleGap):VacuumPoint{if(!Number.isInteger(index)||index<0||index>=6)throw Error('Select one of the six paper sites.');if(!Number.isFinite(gap)||gap<.5||gap>15)throw Error('Nozzle gap must be between 0.5 and 15 mm.');const[x,z]=vacuumTray.sites[index];return [x,vacuumTray.top+d.paper.thickness+gap,z];}
-function pickup(nozzle:VacuumPoint,bulge:number){
+function pickup(nozzle:VacuumPoint,bulge:number,feed=1){
  const path=new CurvePath<Vector3>(),front=145+bulge,line=(a:VacuumPoint,b:VacuumPoint)=>path.add(new LineCurve3(vec(a),vec(b))),bezier=(a:VacuumPoint,b:VacuumPoint,c:VacuumPoint,e:VacuumPoint)=>{const s=new CubicBezierCurve3(vec(a),vec(b),vec(c),vec(e));s.arcLengthDivisions=160;path.add(s);},[x,y,z]=nozzle;
- line([x,y,z],[x,38,z]);bezier([x,38,z],[x,60,z],[-110,60,front],[-90,60,front]);line([-90,60,front],[90,60,front]);bezier([90,60,front],[140,60,front],[155,51,100],[155,51,60]);bezier([155,51,60],[155,51,20],[145,51,0],[110,51,0]);line([110,51,0],[72,51,0]);bezier([72,51,0],[62,51,0],[55,43,0],[45,43,0]);path.arcLengthDivisions=600;return path;
+ line([x,y,z],[x,38,z]);bezier([x,38,z],[x,60,z],[-110,60,front],[-90,60,front]);line([-90,60,front],[90,60,front]);bezier([90,60,front],[140,60,front],[155,51,100],[155,51,60]);bezier([155,51,60],[155,51,20],[145,51,0],[110,51,0]);const advance=65*feed;if(advance<=38){if(advance>0)line([110,51,0],[110-advance,51,0]);}else{line([110,51,0],[72,51,0]);const t=(advance-38)/27,a=vec([72,51,0]),b=vec([62,51,0]),c=vec([55,43,0]),e=vec([45,43,0]),ab=a.clone().lerp(b,t),bc=b.clone().lerp(c,t),ce=c.clone().lerp(e,t),abc=ab.clone().lerp(bc,t),bce=bc.clone().lerp(ce,t),end=abc.clone().lerp(bce,t);bezier(a.toArray() as VacuumPoint,ab.toArray() as VacuumPoint,abc.toArray() as VacuumPoint,end.toArray() as VacuumPoint);}path.arcLengthDivisions=600;return path;
 }
 /** The real hose flexes through the outer slack loop while retaining its length. The section through the grommet stays exactly straight. */
-export function vacuumPickupCurve(nozzle:VacuumPoint){
+export function vacuumPickupCurve(nozzle:VacuumPoint,feed=1){
+ if(!Number.isFinite(feed)||feed<0||feed>1)throw Error('Pickup insertion must be between 0 and 1.');
  if(nozzle.some(v=>!Number.isFinite(v))||nozzle[0]<-150||nozzle[0]>-100||nozzle[1]<2.5||nozzle[1]>18||nozzle[2]<120||nozzle[2]>160)throw Error('Nozzle pose is outside the authored tray envelope.');
- let lo=0,hi=140;if(pickup(nozzle,lo).getLength()>vacuumPickupLength||pickup(nozzle,hi).getLength()<vacuumPickupLength)throw Error('Hose slack cannot reach this nozzle pose.');for(let i=0;i<25;i++){const mid=(lo+hi)/2;if(pickup(nozzle,mid).getLength()<vacuumPickupLength)lo=mid;else hi=mid;}return pickup(nozzle,(lo+hi)/2);
+ let lo=0,hi=140;if(pickup(nozzle,lo,feed).getLength()>vacuumPickupLength||pickup(nozzle,hi,feed).getLength()<vacuumPickupLength)throw Error('Hose slack cannot reach this nozzle pose.');for(let i=0;i<25;i++){const mid=(lo+hi)/2;if(pickup(nozzle,mid,feed).getLength()<vacuumPickupLength)lo=mid;else hi=mid;}return pickup(nozzle,(lo+hi)/2,feed);
 }
 export function vacuumOutletCurve(){const path=new CurvePath<Vector3>();path.add(new LineCurve3(vec([75,79,0]),vec([110,79,0])));const turn=new CubicBezierCurve3(vec([110,79,0]),vec([145,79,0]),vec([140,60,-75]),vec([155,60,-75]));turn.arcLengthDivisions=200;path.add(turn);path.add(new LineCurve3(vec([155,60,-75]),vec([185,60,-75])));path.arcLengthDivisions=400;return path;}
 export function vacuumHosePoint(curve:CurvePath<Vector3>,distance:number){return curve.getPointAt(Math.max(0,Math.min(1,distance/curve.getLength())));}
