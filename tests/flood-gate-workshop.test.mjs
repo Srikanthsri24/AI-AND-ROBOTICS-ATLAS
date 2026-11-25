@@ -15,3 +15,19 @@ test('servo travel is gradual and invariant to frame subdivision during motion',
 test('millimetre decisions match the existing lesson policy across both complete depth ranges',async()=>{const source=ts.transpileModule(await readFile(new URL('../src/data/flood-gate.ts',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.ESNext}}).outputText,lesson=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));for(let up=0;up<=100;up++)for(let down=0;down<=100;down++)for(const opened of[false,true]){const expected=lesson.gateDecision(up/10,down/10,opened),actual=m.gateWorkshopDecision(up,down,opened);assert.deepEqual(actual,{opened:expected.open,reason:expected.reason});}});
 
 test('the closed linkage eyelet clears the fixed divider instead of being embedded in it',()=>{const p=m.gateLinkagePose(65);assert.ok(p.attachment[0]-2.5>1);assert.equal(m.gateLinkage.flapPivot[0],4);assert.equal(m.gateLinkage.servoPivot[0],4);});
+
+test('water transfer follows actual flap clearance and conserves equal-area basin volume',()=>{
+ for(const angle of [65,75,90,105,120])for(const up of [0,50,90,100])for(const down of [0,60,100]){
+ const r=m.gateWaterTransfer(up,down,angle,1);
+ assert.ok(Math.abs(r.upMm+r.downMm-up-down)<1e-10);
+ assert.ok(r.upMm>=0&&r.upMm<=100&&r.downMm>=0&&r.downMm<=100);
+ assert.ok(r.transferredMm>=0);
+ if(angle===65||down>=up)assert.equal(r.transferredMm,0);
+ }
+ assert.ok(m.gateWaterTransfer(90,0,120,1).transferredMm>0);
+ const a=m.gateWaterTransfer(90,10,90,2);let b={upMm:90,downMm:10};
+ for(let n=0;n<200;n++)b=m.gateWaterTransfer(b.upMm,b.downMm,90,.01);
+ assert.ok(Math.abs(a.upMm-b.upMm)<1e-9);
+ assert.throws(()=>m.gateWaterTransfer(101,0,90,1));
+ assert.throws(()=>m.gateWaterTransfer(90,0,121,1));
+});

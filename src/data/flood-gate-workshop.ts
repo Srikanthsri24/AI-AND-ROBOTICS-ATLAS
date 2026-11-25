@@ -38,3 +38,18 @@ function hornAt(degrees:number):[number,number]{const a=(degrees-90)*Math.PI/180
 const closedHorn=hornAt(65);
 export const gateRodLength=Math.hypot(closedHorn[0]-4,closedHorn[1]-28);
 export function gateLinkagePose(degrees:number){if(!Number.isFinite(degrees)||degrees<65||degrees>120)throw Error('Servo command must stay within the checked 65–120° travel.');const horn=hornAt(degrees),dx=horn[0]-4,dy=horn[1]-88,d=Math.hypot(dx,dy),r=60,L=gateRodLength,a=(r*r-L*L+d*d)/(2*d),h=Math.sqrt(Math.max(0,r*r-a*a)),ux=dx/d,uy=dy/d,attachment:[number,number]=[4+a*ux+h*uy,88+a*uy-h*ux],flapDegrees=Math.atan2(attachment[0]-4,88-attachment[1])*180/Math.PI;return {horn,attachment,flapDegrees,rodLength:Math.hypot(horn[0]-attachment[0],horn[1]-attachment[1])};}
+
+/** Illustrative equal-area basin transfer, not a calibrated hydraulic model.
+ * The actual lower flap edge must clear the 10 mm sill before water transfers.
+ * With a fixed flap angle the head decays exponentially, so splitting a frame
+ * does not change the result. No reverse flow is authored for this lesson.
+ */
+export function gateWaterTransfer(upMm:number,downMm:number,servoAngle:number,seconds:number){
+ if(![upMm,downMm,seconds].every(Number.isFinite)||upMm<0||upMm>100||downMm<0||downMm>100||seconds<0||seconds>60)throw Error('Use basin depths 0–100 mm and time 0–60 seconds.');
+ const phi=gateLinkagePose(servoAngle).flapDegrees*Math.PI/180;
+ const clearanceMm=Math.max(0,88+.5*Math.sin(phi)-80*Math.cos(phi)-10);
+ const opening=Math.min(1,clearanceMm/20),head=Math.max(0,upMm-downMm);
+ // Authored visual rate. Conserves water across the two equal-area chambers.
+ const transferredMm=head/2*(-Math.expm1(-.8*opening*seconds));
+ return {upMm:upMm-transferredMm,downMm:downMm+transferredMm,transferredMm,clearanceMm};
+}
