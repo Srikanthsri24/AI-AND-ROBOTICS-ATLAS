@@ -22,7 +22,7 @@ export const lidarDeckParts=[
  ['flow-range','Downward VL53L1X height sensor','The second downward window measures height over the surface. It is not the front sensor used by this project’s Python log.'],
  ['flow-support','Flow deck supply and identification parts','The regulator, identification device and surrounding passive components support the two downward sensors.']
 ] as const;
-export function LidarSolid({at,size,color,metal=0}:{at:LidarMmPoint;size:LidarMmPoint;color:string;metal?:number}){return <mesh position={at} castShadow receiveShadow><boxGeometry args={size}/><meshStandardMaterial color={color} metalness={metal} roughness={metal?.36:.62}/></mesh>;}
+export function LidarSolid({at,size,color,metal=0,name}:{at:LidarMmPoint;size:LidarMmPoint;color:string;metal?:number;name?:string}){return <mesh name={name} position={at} castShadow receiveShadow><boxGeometry args={size}/><meshStandardMaterial color={color} metalness={metal} roughness={metal?.36:.62}/></mesh>;}
 function Mark({at,text,size=.9}:{at:LidarMmPoint;text:string;size?:number}){return <Text position={at} rotation={[-Math.PI/2,0,0]} font={font} fontSize={size} color='#d0d4cf' anchorX='center' anchorY='middle'>{text}</Text>;}
 function polygon(points:[number,number][],hole=false){const s=hole?new Path():new Shape();s.moveTo(points[0][0],-points[0][1]);points.slice(1).forEach(([x,z])=>s.lineTo(x,-z));s.closePath();return s;}
 function holes(shape:Shape){for(const p of lidarHeaderGrid){const h=new Path();h.absarc(p.x,-p.z,reference.authored.boardBoreDiameter/2,0,Math.PI*2,true);shape.holes.push(h);}return shape;}

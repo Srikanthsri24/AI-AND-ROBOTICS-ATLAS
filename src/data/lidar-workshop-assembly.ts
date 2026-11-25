@@ -1,0 +1,20 @@
+/** A continuous, reversible assembly path. Coordinates are millimetres in the drone's local frame. */
+export const lidarAssemblySteps=[
+ {title:'Inspect the propeller-free airframe',part:'cf-pcb',instruction:'Keep the battery unplugged and all four propellers removed. Find the FRONT mark, both expansion rows and the factory motor plugs.',why:'The flight board carries the motors and electronics. The stationary ranging experiment never runs these motors.'},
+ {title:'Seat the lower Flow deck',part:'flow-pcb',instruction:'Face the Flow deck FRONT mark toward the nose. Raise it beneath the flight board with both socket rows aligned. Keep both downward sensor windows unobstructed.',why:'The PMW3901 looks down for horizontal motion; its neighbouring ToF sensor measures height. Neither replaces the front distance sensor.'},
+ {title:'Position the stock battery',part:'cf-battery',instruction:'Lower the disconnected 250 mAh cell into the space between the expansion rows. Keep the short lead pair at the rear, clear of the sensor windows.',why:'The upper deck must still be absent. The cell and its disconnected connector move together; the factory board pigtail stays fixed.'},
+ {title:'Align the upper Multi-ranger',part:'multi-pcb',instruction:'Lower the upper deck with its FRONT mark facing the same direction. Align both rows before inserting any pin strip.',why:'The front, rear, left, right and upward sensors look in different directions. Correct orientation makes range.front correspond to the card ahead.'},
+ {title:'Insert the two medium pin strips',part:'cf-medium-left',instruction:'Press both straight ten-pin strips vertically through the aligned upper, flight-board and lower sockets. The plastic spacers stop against the upper sockets.',why:'The stock 15 mm long ends reach the lower deck. Power, ground and the I²C / SPI / identification signals pass through the matched 2 mm grid.'},
+ {title:'Mate the battery connector',part:'cf-battery-plug',instruction:'Bring the two keyed factory connector halves together without pulling the leads. Confirm their orientation; do not force a reversed connection.',why:'The stock harness preserves positive and ground. Connect only after the complete deck stack is seated. Motor shafts remain stopped in bench mode.'},
+ {title:'Connect the computer radio',part:'radio-usb',instruction:'Insert Crazyradio 2.0 into the computer USB port. Use the matching Crazyflie radio URI when running the downloaded Python logger.',why:'USB links the computer to the radio dongle; the 2.4 GHz wireless link carries telemetry from the drone. This static browser demonstration does not connect to hardware.'},
+ {title:'Measure against the matte card',part:'bench-card',instruction:'Use the 35, 45, 55 and 75 cm marks measured from the actual front optical face. Start the bench logger, move the card and compare its proposed ADVANCE / HOLD decisions.',why:'The logger uses 40 cm stop / 50 cm resume hysteresis. It prints decisions only; the separate virtual approach demonstration illustrates motion without sending flight commands.'}
+] as const;
+const ease=(t:number)=>t*t*(3-2*t);
+export function lidarAssemblyAt(progress:number){
+ if(!Number.isFinite(progress)||progress<0||progress>7)throw Error('Assembly progress must be between 0 and 7.');
+ const fraction=(n:number)=>ease(Math.min(1,Math.max(0,progress-(n-1))));
+ const flow=fraction(1),cell=fraction(2),multi=fraction(3),pins=fraction(4),power=fraction(5),radio=fraction(6),bench=fraction(7);
+ return {progress,stage:Math.floor(progress),flowVisible:progress>0,flowLift:flow===1?0:-16*(1-flow),cellVisible:progress>1,cellLift:15*(1-cell),multiVisible:progress>2,multiLift:28*(1-multi),pinsVisible:progress>3,pinLift:20*(1-pins),connected:power,radioVisible:progress>5,radioInserted:radio,benchVisible:progress>6,cardLift:35*(1-bench),ready:progress===7};
+}
+/** Deck disassembly is disabled while powered or logging. This is a UI interlock, not a real hardware disconnect. */
+export function lidarAssemblyCanMove({powered,logging,moving}:{powered:boolean;logging:boolean;moving:boolean}){return !powered&&!logging&&!moving;}

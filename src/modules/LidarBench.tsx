@@ -1,0 +1,18 @@
+import {Text} from '@react-three/drei';
+import {DoubleSide} from 'three';
+import {LidarSolid as Box} from './LidarDecks';
+import {lidarCardAtMark} from '../data/lidar-workshop-optics';
+import {lidarRangeSensorFaces,lidarCardMarks} from '../data/lidar-workshop-layout';
+const font=new URL('./fonts/NotoSans-Regular.ttf',document.baseURI).href;
+export const lidarBenchParts=[
+ ['bench-supports','Four open-sided bench supports','These hold the flight PCB with the propellers removed. The underside Flow and height windows remain clear between the four supports.'],
+ ['bench-ruler','Front-face distance ruler','Zero is projected from the actual front VL53L1X optical face, not the drone centre. The highlighted 35, 45, 55 and 75 cm marks match the calibration checks.'],
+ ['bench-card','Matte A4 measurement card','The front-facing matte surface is the ranging target. Move the whole card to a ruler mark; moving it sideways out of the ray gives no valid return in this illustrative model.'],
+ ['bench-card-holder','Split card supports','Two small split stands grip the card at its lower edge. They move with the card and leave its centre clear at the sensor’s height.']
+] as const;
+export default function LidarBench({selected,select,distance=750,cardX=0,cardYaw=0,cardLift=0,showCard=true}:{selected:string;select:(id:string)=>void;distance?:number;cardX?:number;cardYaw?:number;cardLift?:number;showCard?:boolean}){
+ const card={...lidarCardAtMark(distance),x:cardX,yaw:cardYaw},c=(id:string,color:string)=>selected===id?'#b78be8':color;
+ return <><group userData={{partId:'bench-ruler'}} onClick={e=>{e.stopPropagation();select('bench-ruler');}}><Box at={[-145,.6,lidarRangeSensorFaces.front[2]-400]} size={[22,1.2,800]} color={c('bench-ruler','#dddce8')}/>{Array.from({length:81},(_,i)=>{const mm=i*10,major=i%5===0;return <group key={i}><Box at={[-145+(major?3:6),1.22,lidarRangeSensorFaces.front[2]-mm]} size={[major?14:8,.04,.35]} color={c('bench-ruler',lidarCardMarks.some(m=>m===mm)?'#734dc8':'#62617a')}/>{major&&<Text position={[-150,1.26,lidarRangeSensorFaces.front[2]-mm]} rotation={[-Math.PI/2,0,Math.PI/2]} font={font} fontSize={3.5} color='#4d4765'>{mm/10}</Text>}</group>;})}<Text position={[-164,1.26,-45]} rotation={[-Math.PI/2,0,Math.PI/2]} font={font} fontSize={4} color='#65578d'>cm · from optical face</Text></group>
+ {showCard&&<group name='lidar-card-placement' position={[card.x,card.y+cardLift,card.z]} rotation={[0,card.yaw,0]}><group userData={{partId:'bench-card'}} onClick={e=>{e.stopPropagation();select('bench-card');}}><Box at={[0,0,-.5]} size={[card.width,card.height,1]} color={c('bench-card','#eeeade')}/><Text position={[0,55,.025]} font={font} fontSize={9} color='#5f5678'>MATTE TARGET</Text><Text position={[0,38,.025]} font={font} fontSize={4.5} color='#71677e'>Move the card · compare the decision</Text><mesh position={[0,38.8-card.y,.025]}><ringGeometry args={[8,8.8,48]}/><meshStandardMaterial color={c('bench-card','#8b76b5')} roughness={.8} side={DoubleSide}/></mesh><mesh position={[0,38.8-card.y,.03]}><circleGeometry args={[1.2,24]}/><meshStandardMaterial color={c('bench-card','#6a5d82')} roughness={.8} side={DoubleSide}/></mesh></group>
+ <group userData={{partId:'bench-card-holder'}} onClick={e=>{e.stopPropagation();select('bench-card-holder');}}>{[-85,85].map(x=><group key={x}>{[-1,1].map(side=><group key={side}><Box at={[x,1.5-card.y,side===1?10.25:-11.25]} size={[20,3,20.5]} color={c('bench-card-holder','#a39ab7')}/><Box at={[x,9.5-card.y,side===1?2.5:-3.5]} size={[16,16,5]} color={c('bench-card-holder','#9b91b1')}/></group>)}</group>)}</group></group>}</>;
+}
