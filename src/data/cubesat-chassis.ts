@@ -1,6 +1,7 @@
 /** Authored millimetre-scale teaching geometry, not flight-qualified CubeSat CAD. */
 export type CubeSatPoint=[number,number,number];
 export const cubeSatRails=[{x:-46,z:-46,rotation:0},{x:-46,z:46,rotation:Math.PI/2},{x:46,z:46,rotation:Math.PI},{x:46,z:-46,rotation:Math.PI*1.5}] as const;
+export const cubeSatDeckMounts=[-43,43].flatMap(x=>[-43,43].map(z=>({x,z})));
 export const cubeSatScrewAxes=[[-48.25,-48.25],[-48.25,48.25],[48.25,48.25],[48.25,-48.25]] as const;
 export const cubeSatChassisParts=[
  ['cubesat-bench','Spacecraft inspection bench','A dry tabletop supports the spacecraft assembly before switching to the virtual imaging-pass view.','The bench is a teaching aid, not a deployed spacecraft component.'],

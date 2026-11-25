@@ -1,0 +1,29 @@
+import type {} from '@react-three/fiber';
+import {useMemo,type ReactNode} from 'react';
+import {Shape,Path} from 'three';
+import {cubeSatBoardMounts as mounts,cubeSatDeckMounts as deckMounts,cubeSatElectronics as d,cubeSatInterfaceRows as rows} from '../data/cubesat-electronics';
+type P=[number,number,number];
+export default function CubeSatElectronicsParts({selected='',select=()=>{},occupied=false}:{selected?:string;select?:(id:string)=>void;occupied?:boolean}){
+ const shapes=useMemo(()=>{const rectangle=(w:number,h:number)=>{const s=new Shape();s.moveTo(-w/2,-h/2);s.lineTo(w/2,-h/2);s.lineTo(w/2,h/2);s.lineTo(-w/2,h/2);s.closePath();return s;},bore=(s:Shape,x:number,z:number,r:number)=>{const h=new Path();h.absarc(x,-z,r,0,Math.PI*2,true);s.holes.push(h);},ring=(outer:number,inner:number)=>{const s=new Shape();s.absarc(0,0,outer,0,Math.PI*2,false);bore(s,0,0,inner);return s;},deck=rectangle(90,90),board=rectangle(70,70);for(const p of deckMounts)bore(deck,p.x,p.z,1.2);for(const p of mounts){bore(deck,p.x,p.z,1.1);bore(board,p.x,p.z,1.1);}const nut=new Shape();for(let i=0;i<6;i++){const x=Math.cos(i*Math.PI/3)*2.2,z=Math.sin(i*Math.PI/3)*2.2;i?nut.lineTo(x,z):nut.moveTo(x,z);}nut.closePath();bore(nut,0,0,1.1);const socket=rectangle(13,4),slot=new Path();slot.moveTo(-5.4,-1.2);slot.lineTo(-5.4,1.2);slot.lineTo(5.4,1.2);slot.lineTo(5.4,-1.2);slot.closePath();socket.holes.push(slot);return{deck,board,nut,spacer:ring(2.4,1.1),socket};},[]);
+ const c=(id:string,color:string)=>id===selected?'#b48bec':color,owner=(id:string,node:ReactNode)=><group key={id} userData={{partId:id}} onClick={e=>{e.stopPropagation();select(id);}}>{node}</group>;
+ const profile=(id:string,shape:Shape,at:P,depth:number,color:string,metal=0)=><mesh position={at} rotation={[-Math.PI/2,0,0]} castShadow receiveShadow><extrudeGeometry args={[shape,{depth,bevelEnabled:false,curveSegments:48}]}/><meshStandardMaterial color={c(id,color)} metalness={metal} roughness={metal?.32:.65}/></mesh>;
+ const box=(id:string,at:P,size:P,color:string,metal=0)=><mesh position={at} castShadow><boxGeometry args={size}/><meshStandardMaterial color={c(id,color)} metalness={metal} roughness={metal?.3:.65}/></mesh>;
+ const cylinder=(id:string,at:P,r:number,h:number,color:string,segments=20)=><mesh position={at}><cylinderGeometry args={[r,r,h,segments]}/><meshStandardMaterial color={c(id,color)} metalness={.8} roughness={.3}/></mesh>;
+ return <group name="cubesat-electronics-mm">
+ {owner('cubesat-payload-deck',profile('cubesat-payload-deck',shapes.deck,[0,d.deckBottom,0],2,'#b6bec7',.7))}
+ {owner('cubesat-deck-screws',<>{deckMounts.map(p=><group key={p.x+'/'+p.z}>{cylinder('cubesat-deck-screws',[p.x,31.5,p.z],.9,5,'#aeb9c6')}{cylinder('cubesat-deck-screws',[p.x,34.7,p.z],1.8,1.4,'#8e9bac',6)}</group>)}</>)}
+ {owner('cubesat-stack-studs',<>{mounts.map(p=><group key={p.x+'/'+p.z}>{cylinder('cubesat-stack-studs',[p.x,60.6,p.z],.8,58.8,'#adb7c1')}{cylinder('cubesat-stack-studs',[p.x,31.4,p.z],1.7,1.2,'#8e9bac',6)}</group>)}</>)}
+ {owner('cubesat-lower-spacers',<>{mounts.map(p=><group key={p.x+'/'+p.z}>{profile('cubesat-lower-spacers',shapes.spacer,[p.x,34,p.z],21,'#d8d1c3')}</group>)}</>)}
+ {owner('cubesat-upper-spacers',<>{mounts.map(p=><group key={p.x+'/'+p.z}>{profile('cubesat-upper-spacers',shapes.spacer,[p.x,56.6,p.z],29.4,'#d8d1c3')}</group>)}</>)}
+ {owner('cubesat-stack-nuts',<>{mounts.map(p=><group key={p.x+'/'+p.z}>{profile('cubesat-stack-nuts',shapes.nut,[p.x,87.6,p.z],1.6,'#a5afbd',.8)}</group>)}</>)}
+ {owner('cubesat-computer-pcb',profile('cubesat-computer-pcb',shapes.board,[0,d.computerBottom,0],1.6,'#215e57'))}
+ {owner('cubesat-computer-processor',<>{box('cubesat-computer-processor',[-8,57.4,-5],[14,1.6,14],'#303b4b')}{[-1,1].flatMap(side=>Array.from({length:7},(_,i)=><group key={side+'/'+i}>{box('cubesat-computer-processor',[-8+side*7.6,56.8,-5+(i-3)*1.8],[1.2,.4,.7],'#b1b8b9',.8)}{box('cubesat-computer-processor',[-8+(i-3)*1.8,56.8,-5+side*7.6],[.7,.4,1.2],'#b1b8b9',.8)}</group>))}</>)}
+ {owner('cubesat-computer-clock',<>{box('cubesat-computer-clock',[18,57.2,-10],[8,1.2,4],'#aab6c5',.8)}{[-1,1].flatMap(x=>[-1,1].map(z=><group key={x+'/'+z}>{box('cubesat-computer-clock',[18+x*3.3,56.75,-10+z*1.7],[1.2,.3,1],'#b7b49c',.7)}</group>))}</>)}
+ {owner('cubesat-computer-passives',<>{[-20,-10,0,10,20].map((x,i)=><group key={x}>{box('cubesat-computer-passives',[x,57,18],[2.4,.8,3.6],i%2?'#675d4b':'#354354')}{[-1,1].map(side=>box('cubesat-computer-passives',[x,56.85,18+side*2],[2.4,.5,.5],'#b7b4a1',.7))}</group>)}</>)}
+ {owner('cubesat-memory-pcb',profile('cubesat-memory-pcb',shapes.board,[0,d.memoryBottom,0],1.6,'#31516c'))}
+ {owner('cubesat-memory-package',<>{box('cubesat-memory-package',[-5,88.3,0],[22,1.4,12],'#2e3848')}{[-1,1].flatMap(side=>Array.from({length:12},(_,i)=><group key={side+'/'+i}>{box('cubesat-memory-package',[-5+(i-5.5)*1.6,87.8,side*6.6],[.65,.4,1.2],'#b5b9b8',.8)}</group>))}</>)}
+ {owner('cubesat-memory-controller',<>{box('cubesat-memory-controller',[18,88.2,-12],[8,1.2,8],'#354053')}{[-1,1].flatMap(side=>[-2.4,-.8,.8,2.4].map(z=><group key={side+'/'+z}>{box('cubesat-memory-controller',[18+side*4.6,87.8,-12+z],[1.2,.4,.6],'#b9bebd',.8)}</group>))}</>)}
+ {owner('cubesat-memory-indicator',<><mesh name="cubesat-buffer-indicator" position={[22,88.6,12]}><cylinderGeometry args={[1.4,1.4,1.4,32]}/><meshStandardMaterial color={c('cubesat-memory-indicator',occupied?'#d9ac61':'#706454')} emissive={occupied?'#e0a144':'#000000'} emissiveIntensity={occupied?1.2:0} roughness={.25}/></mesh>{[-.4,.4].map(dx=>box('cubesat-memory-indicator',[22+dx,87.85,12],[.25,.5,.25],'#b7bdc2',.8))}</>)}
+ {rows.map(r=>{const id='cubesat-interface-'+r.key;return owner(id,<>{profile(id,shapes.socket,[r.x,r.y,r.z],4.5,'#36475c')}{Array.from({length:8},(_,i)=>box(id,[r.x+(i-3.5)*1.27,r.y+2.2,r.z],[.4,4.4,.4],'#c2b894',.8))}</>);})}
+ </group>;
+}
