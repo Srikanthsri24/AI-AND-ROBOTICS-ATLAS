@@ -1,0 +1,52 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import ts from 'typescript';
+import {CatmullRomCurve3,Vector3} from 'three';
+
+const cache=new Map();
+async function load(url){
+ if(cache.has(url.href))return cache.get(url.href);
+ const text=await readFile(url,'utf8');
+ let code=url.pathname.endsWith('.json')?'export default '+text:ts.transpileModule(text,{compilerOptions:{module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2022}}).outputText;
+ for(const match of[...code.matchAll(/from ['"]([^'"]+)['"]/g)]){
+  const path=match[1]+(match[1].endsWith('.json')?'':'.ts');
+  code=code.replace(match[0],"from '"+await load(new URL(path,url))+"'");
+ }
+ const uri='data:text/javascript;base64,'+Buffer.from(code).toString('base64');cache.set(url.href,uri);return uri;
+}
+const m=await import(await load(new URL('../src/data/radar-harness.ts',import.meta.url)));
+const clamp=x=>Math.max(0,Math.min(1,x));
+// Closest distance between two finite segments, including clamped end contacts.
+function segmentDistance(p1,q1,p2,q2){
+ const u=q1.clone().sub(p1),v=q2.clone().sub(p2),r=p1.clone().sub(p2),a=u.dot(u),e=v.dot(v),b=u.dot(v),c=u.dot(r),f=v.dot(r),den=a*e-b*b;
+ let s=den>1e-12?clamp((b*f-c*e)/den):0,t=(b*s+f)/e;
+ if(t<0){t=0;s=clamp(-c/a);}else if(t>1){t=1;s=clamp((b-c)/a);}
+ return p1.clone().addScaledVector(u,s).distanceTo(p2.clone().addScaledVector(v,t));
+}
+test('radar leads use the real Uno contacts and clear the sonar header when withdrawn',()=>{
+ assert.deepEqual(m.radarSonarLeads.map(l=>l.socket),['5V','D2','D3','GND-P1']);
+ assert.deepEqual(m.radarUnoSocket('D2'),[-90.87,18.3,-104.13]);
+ assert.equal(new Set(m.radarHarnessParts.map(p=>p[0])).size,12);
+ for(let i=0;i<4;i++){
+  const seated=m.radarLeadPose(i,90),out=m.radarLeadPose(i,90,4,5);
+  assert.equal(seated.sonar[1],52);assert.equal(55+out.sonarPlug[1],51);
+  assert.ok(49+out.sonarPlug[1]>42+.65,'Female housing clears bracket floor');
+  assert.ok(out.unoPlug[1]-2>out.socket[1],'Withdrawn male pin clears socket');
+  assert.deepEqual(seated.points.at(-1),[seated.socket[0],26.3,seated.socket[2]]);
+ }
+ assert.throws(()=>m.radarLeadPose(4,90));assert.throws(()=>m.radarLeadPose(0,NaN));
+ assert.throws(()=>m.radarLeadPose(0,90,4.01));assert.throws(()=>m.radarLeadPose(0,90,0,5.01));
+});
+test('four 1.3 mm cables remain separated through the fitting range and connector travel',()=>{
+ let minimum=Infinity;
+ for(let heading=10;heading<=170;heading+=5)for(const[w1,w2]of[[0,0],[4,0],[0,5],[4,5]]){
+  const paths=Array.from({length:4},(_,i)=>new CatmullRomCurve3(m.radarLeadPose(i,heading,w1,w2).points.map(p=>new Vector3(...p)),false,'centripetal').getPoints(160));
+  for(let a=0;a<4;a++)for(let b=a+1;b<4;b++)for(let i=1;i<paths[a].length;i++)for(let j=1;j<paths[b].length;j++){
+   const pa=paths[a][i-1],qa=paths[a][i],pb=paths[b][j-1],qb=paths[b][j];
+   if(Math.max(Math.min(pa.x,qa.x)-Math.max(pb.x,qb.x),Math.min(pb.x,qb.x)-Math.max(pa.x,qa.x),Math.min(pa.y,qa.y)-Math.max(pb.y,qb.y),Math.min(pb.y,qb.y)-Math.max(pa.y,qa.y),Math.min(pa.z,qa.z)-Math.max(pb.z,qb.z),Math.min(pb.z,qb.z)-Math.max(pa.z,qa.z))>minimum)continue;
+   minimum=Math.min(minimum,segmentDistance(pa,qa,pb,qb));
+  }
+ }
+ assert.ok(minimum>1.5,'160-segment path sampling retains clearance beyond the 1.3 mm wire diameter; got '+minimum);
+});
