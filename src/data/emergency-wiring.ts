@@ -29,3 +29,5 @@ export const emergencyWires:EmergencyWire[]=[
 ];
 export const emergencyWireParts=emergencyWires.map(w=>[w.id,w.name,'One continuous insulated conductor has two individually seated contacts.',`${w.a.name} → ${w.b.name}. ${w.why}`]);
 export function emergencyWireExit(end:EmergencyWireEnd):EmergencyPoint{return end.at.map((v,i)=>v+(end.kind==='male'?6:5)*end.out[i]) as EmergencyPoint;}
+/** Chapter 5 seats the 25 leads one at a time, first contact then second. */
+export function emergencyWireSeating(index:number,progress:number){if(!Number.isInteger(index)||index<0||index>=emergencyWires.length||!Number.isFinite(progress)||progress<0||progress>6)throw Error('Unknown emergency insertion position');const t=(progress-(4+index/25))*25,smooth=(v:number)=>{const x=Math.max(0,Math.min(1,v));return x*x*(3-2*x);};return{visible:t>=0,a:5*(1-smooth(t*2)),b:5*(1-smooth((t-.5)*2))};}
