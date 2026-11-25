@@ -2,11 +2,12 @@ import type {} from '@react-three/fiber';
 import { useMemo, type ReactNode } from 'react';
 import { Text } from '@react-three/drei';
 import { CatmullRomCurve3, Shape, Path, Vector3 } from 'three';
+import { mineRouteFraction } from '../data/mine-workshop-assembly';
 import { mineStations, type MinePoint as P } from '../data/mine-workshop-layout';
 import { mineBeaconState, type MineSession, type MineInputs } from '../data/mine-workshop';
 import { mineStationDisplay, mineConsoleLines, mineRuleAt, mineConsoleAt, mineBeaconAt, mineLogicalRoutes } from '../data/mine-workshop-stations';
 const font=new URL('./fonts/NotoSans-Regular.ttf',document.baseURI).href;
-export default function MineWorkshopStations({selected='',select=()=>{},session,input,powered=false}:{selected?:string;select?:(id:string)=>void;session:MineSession;input:MineInputs;powered?:boolean}){
+export default function MineWorkshopStations({selected='',select=()=>{},session,input,powered=false,assembly=7}:{selected?:string;select?:(id:string)=>void;session:MineSession;input:MineInputs;powered?:boolean;assembly?:number}){
  const c=(id:string,color:string)=>id===selected?'#b48bec':color;
  const owner=(id:string,children:ReactNode)=><group key={id} userData={{partId:id}} onClick={e=>{e.stopPropagation();select(id);}}>{children}</group>;
  const box=(id:string,at:P,size:P,color:string,metal=0)=><mesh key={id+at.join(',')} position={at} castShadow receiveShadow={!/-(gas|vent|screen|display|source-name)$/.test(id)}><boxGeometry args={size}/><meshStandardMaterial color={c(id,color)} roughness={metal?.36:.6} metalness={metal}/></mesh>;
@@ -33,10 +34,10 @@ export default function MineWorkshopStations({selected='',select=()=>{},session,
  {owner('mine-rule-ports',<>{[-.22,.22].map((x,i)=><group key={i} position={[x,.21,-.155]} rotation={[0,Math.PI,0]}>{port('mine-rule-ports',[0,0,0])}{text([0,.055,.016],i===0?'ENTRY':'FACE',.022)}</group>)}<group position={[-.44,.21,0]} rotation={[0,-Math.PI/2,0]}>{port('mine-rule-ports',[0,0,0])}{text([0,.055,.016],'COPY',.022)}</group></>)}
  </group>
  <group position={mineBeaconAt}>
- {owner('mine-beacon-base',<>{cyl('mine-beacon-base',[0,.035,0],.18,.07,'#4a5d74')}{cyl('mine-beacon-base',[0,.086,0],.145,.034,'#8e9cad')}{text([0,.025,.184],'LOCAL BEACON',.026,'#e6e6f6')}</>)}
+ {owner('mine-beacon-base',<>{cyl('mine-beacon-base',[0,.035,0],.18,.07,'#4a5d74')}{cyl('mine-beacon-base',[0,.086,0],.145,.034,'#8e9cad')}{cyl('mine-beacon-base',[0,.108,0],.13,.01,'#8e9cad')}{text([0,.025,.184],'LOCAL BEACON',.026,'#e6e6f6')}</>)}
  {owner('mine-beacon-cage',<>{[-1,1].flatMap(x=>[-1,1].map(z=>cyl('mine-beacon-cage',[x*.112,.285,z*.112],.009,.38,'#a7b4c3')))}</>)}
  {owner('mine-beacon-lens',<mesh name="mine-live-beacon-lens" position={[0,.285,0]}><cylinderGeometry args={[.125,.125,.35,48]}/><meshPhysicalMaterial color={c('mine-beacon-lens',powered?beacon.color:'#7c8794')} emissive={powered?beacon.color:'#000000'} emissiveIntensity={powered?pulse*1.35:0} roughness={.22} clearcoat={.8}/></mesh>)}
- {owner('mine-beacon-cap',<>{cyl('mine-beacon-cap',[0,.48,0],.17,.036,'#4a5d74')}{cyl('mine-beacon-cap',[0,.505,0],.145,.014,'#8193aa')}</>)}
+ {owner('mine-beacon-cap',<>{cyl('mine-beacon-cap',[0,.46,0],.14,.012,'#4a5d74')}{cyl('mine-beacon-cap',[0,.48,0],.17,.036,'#4a5d74')}{cyl('mine-beacon-cap',[0,.505,0],.145,.014,'#8193aa')}</>)}
  </group>
  <group position={mineConsoleAt}>
  {owner('mine-console-stand',<>{box('mine-console-stand',[0,.025,0],[.94,.05,.49],'#70829b',.5)}{box('mine-console-stand',[0,.23,-.18],[.085,.4,.07],'#8798ad',.6)}<mesh position={[0,.43,-.17]} rotation={[0,0,Math.PI/2]} castShadow><cylinderGeometry args={[.045,.045,.2,32]}/><meshStandardMaterial color={c('mine-console-stand','#8193aa')} metalness={.65} roughness={.35}/></mesh></>)}
@@ -44,11 +45,12 @@ export default function MineWorkshopStations({selected='',select=()=>{},session,
  {owner('mine-console-keys',<>{Array.from({length:4},(_,row)=>Array.from({length:13},(_,col)=>box('mine-console-keys',[(col-6)*.058,.057,-.135+row*.055],[.047,.014,.04],'#30445e')))}{box('mine-console-keys',[0,.053,.15],[.24,.006,.09],'#9aabc0')}</>)}
  {owner('mine-console-screen',<>{box('mine-console-screen',[0,.66,-.063],[.91,.52,.004],'#11243b')}{text([0,.86,-.059],powered?remote.status.toUpperCase():'OBSERVER WAITING',.043,remote.status==='Fresh'?'#75dcbb':'#f5bd75')}{(powered?remote.lines:['NO COPIED RECORD','SYNTHETIC TRAINING DATA','','']).map((line,i)=><group key={i}>{text([0,.76-i*.083,-.059],line,.032,i===2?'#e5d5fa':'#c3d0e5')}</group>)}{text([0,.43,-.059],'GAS / VENT · 0–100 INDICES',.023,'#9fb3d1')}</>)}
  </group>
- {mineLogicalRoutes.map(route=><MineLogicalPath key={route.id} route={route} selected={selected===route.id} active={powered&&(route.id!=='mine-path-remote'||input.link)} timeMs={session.nowMs} select={()=>select(route.id)}/>)}
+ {mineLogicalRoutes.map(route=><MineLogicalPath key={route.id} route={route} selected={selected===route.id} active={powered&&(route.id!=='mine-path-remote'||input.link)} timeMs={session.nowMs} fraction={mineRouteFraction(assembly)} select={()=>select(route.id)}/>)}
  </group>;
 }
-function MineLogicalPath({route,selected,active,timeMs,select}:{route:typeof mineLogicalRoutes[number];selected:boolean;active:boolean;timeMs:number;select:()=>void}){
- const curve=useMemo(()=>new CatmullRomCurve3(route.points.map(p=>new Vector3(...p)),false,'centripetal'),[route]);
+function MineLogicalPath({route,selected,active,timeMs,fraction,select}:{route:typeof mineLogicalRoutes[number];selected:boolean;active:boolean;timeMs:number;fraction:number;select:()=>void}){
+ const full=useMemo(()=>new CatmullRomCurve3(route.points.map(p=>new Vector3(...p)),false,'centripetal'),[route]);
+ const curve=useMemo(()=>new CatmullRomCurve3(Array.from({length:41},(_,i)=>full.getPoint(i/40*Math.max(.00001,fraction))),false,'centripetal'),[full,fraction]);
  const dash=useMemo(()=>Array.from({length:30},(_,i)=>[curve.getPoint(i/30),curve.getPoint((i+.55)/30)]).flat().flatMap(p=>p.toArray()),[curve]);
  const color=selected?'#b48bec':active?'#4e9cba':'#9c8ba9';
  return <group userData={{partId:route.id}} onClick={e=>{e.stopPropagation();select();}}>
