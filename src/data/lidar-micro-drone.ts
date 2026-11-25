@@ -5,15 +5,15 @@ export const lidarMicroDrone: Build = {
   title:'LiDAR Micro Drone with Proximity Sensing',
   outcome:'Assemble a Crazyflie micro drone with two ranging decks, measure a wall on the bench, and use those readings to test a forward-stop flight rule.',
   parts:[
-    ['Crazyflie 2.1+ kit','1','The flight controller reads the deck sensors. The kit supplies the frame, motors, battery and long deck headers.'],
+    ['Crazyflie 2.1+ kit','1','The flight controller reads the deck sensors. The kit supplies the frame, motors, battery and medium expansion pin strips.'],
     ['Bitcraze Multi-ranger deck','1','Its front time-of-flight sensor reports the distance to a wall. The other sensors provide additional directional measurements.'],
     ['Bitcraze Flow deck V2','1','A downward optical flow sensor estimates motion over the floor. A downward time-of-flight sensor measures height.'],
     ['Crazyradio 2.0 USB dongle','1','Carries live range readings from the drone to a computer running the Python bench program.'],
   ],
   assembly:[
-    ['Identify the nose and deck headers','Locate the front markings on the flight controller and both decks. Switch off the drone, unplug the battery and remove all propellers for the bench test. Seat the long expansion headers evenly.','Both header rows are straight and fully seated. Set the propellers aside for this project’s bench work.',[0,1,2]],
+    ['Identify the nose and deck headers','Locate the front markings on the flight controller and both decks. Switch off the drone, unplug the battery and remove all propellers for the bench test. Identify the matched stock medium pin strips (15 mm long end, 2 mm plastic spacer, 2 mm short end). Keep them aside until both decks and the disconnected battery are aligned.','Both connector rows are straight and undamaged. Set the propellers aside for this project’s bench work.',[0,1,2]],
     ['Install the downward Flow deck','Fit the Flow deck beneath the controller. Align its front marking with the nose and leave the optical window facing down. Support the frame on open-sided blocks if needed so the window stays clear.','You can see both downward sensor windows from below. The deck’s board and mounting feet sit square.',[0,2]],
-    ['Install the upper Multi-ranger deck','Seat the Multi-ranger above the controller with the front sensor pointing through the nose and its top sensor facing up. Check for offset pins before reconnecting the battery.','Both deck rows engage the headers without force, and no battery wire crosses the front sensor.',[0,1]],
+    ['Install the upper Multi-ranger deck','Position the disconnected stock cell between the expansion rows, with its short leads at the rear. Seat the Multi-ranger above the controller with the front sensor pointing through the nose and its top sensor facing up. Insert both medium strips from above through the aligned upper, flight-board and lower sockets. Check all twenty contacts before mating the keyed battery connector.','Both deck rows engage the headers without force, and no battery wire crosses the front sensor.',[0,1]],
     ['Set up the ranging bench','Connect the Crazyradio to the computer. Put the drone on the bench and set a large matte card perpendicular to the front sensor. Mark 35, 45, 55 and 75 cm from the front sensor face.','The card intersects the front sensor’s view at every mark. The drone stays stationary throughout testing.',[1,3]],
   ],
   wiring:[

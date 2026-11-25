@@ -11,8 +11,11 @@ export const lidarHardwareReference={
  pins:'https://www.bitcraze.io/documentation/system/platform/cf2-expansiondecks/',
  sensor:'https://www.st.com/en/imaging-and-photonics-solutions/vl53l1x.html',
  battery:'https://www.bitcraze.io/documentation/hardware/250mah_battery/250mah_battery-datasheet.pdf',
+ wirelessPackage:'https://docs-be.nordicsemi.com/bundle/nRF51-Series/raw/resource/enus/nRF51822_PS_v3.4.pdf',
+ motor:'https://www.bitcraze.io/documentation/hardware/motor_7mm/motor_7mm-datasheet.pdf',
+ propeller:'https://www.bitcraze.io/products/propellers-47-17/',
  radio:'https://www.bitcraze.io/products/crazyradio-2-0/',
- published:{battery:[20,7,30] as LidarMmPoint,batteryCapacityMah:250,batteryVoltage:3.7,batteryCableLength:20,headerPitch:2,headerContactsPerSide:10,multiPcbSide:32.5,multiProductEnvelope:35,flowWidth:27.940,flowLength:21.079,sensorPackage:[4.9,2.5,1.56] as LidarMmPoint,radioEnvelope:{length:63,width:18,height:8}},
+ published:{motorDiameter:7,motorLength:16,motorShaftLength:3.5,motorShaftDiameter:.8,motorWireLength:32,battery:[20,7,30] as LidarMmPoint,batteryCapacityMah:250,batteryVoltage:3.7,batteryCableLength:20,headerPitch:2,headerContactsPerSide:10,multiPcbSide:32.5,multiProductEnvelope:35,flowWidth:27.940,flowLength:21.079,sensorPackage:[4.9,2.5,1.56] as LidarMmPoint,radioEnvelope:{length:63,width:18,height:8}},
  // These visual assembly choices require mesh / clearance verification before the workshop is published.
  authored:{mainThickness:.8,pinWidth:.5,boardBoreDiameter:.8,socketApertureWidth:.76,rowX:11,motorAxis:32.5,motorPcbTip:27,benchRootY:28,multiY:9,flowY:-4,battery:[20,7,30] as LidarMmPoint,batteryBottom:1.3,mediumSpacerBottom:12.4,mediumLongEnd:15,mediumSpacer:2,mediumShortEnd:2,socketHeight:3},
 };

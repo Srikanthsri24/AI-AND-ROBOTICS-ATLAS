@@ -117,7 +117,7 @@ export function WorldLabel({position,className,children,keepInView=false,avoidOv
     const child=element.current.firstElementChild as HTMLElement|null;
     if(avoidOverlap&&child&&child.offsetWidth&&child.offsetHeight){
       const canvas=gl.domElement.getBoundingClientRect(),outer=element.current.getBoundingClientRect(),box=child.getBoundingClientRect();
-      const obstacles=Array.from(gl.domElement.parentElement?.querySelectorAll<HTMLElement>('[data-atlas-world-label]')??[]).filter(node=>node!==element.current&&node.style.visibility!=='hidden').map(node=>{const r=node.getBoundingClientRect();return {x:r.x-canvas.x,y:r.y-canvas.y,width:r.width,height:r.height};});
+      const obstacles=Array.from(gl.domElement.parentElement?.querySelectorAll<HTMLElement>('[data-atlas-world-label], [data-atlas-label-obstacle]')??[]).filter(node=>node!==element.current&&node.style.visibility!=='hidden').map(node=>{const r=node.getBoundingClientRect();return {x:r.x-canvas.x,y:r.y-canvas.y,width:r.width,height:r.height};});
       const placed=layoutWorkshopLabel({x:projectedX,y},size,{width:box.width,height:box.height},obstacles,8,calloutGap);
       x=placed.x+element.current.offsetWidth/2-(box.x-outer.x);
       y=placed.y+element.current.offsetHeight/2-(box.y-outer.y);
