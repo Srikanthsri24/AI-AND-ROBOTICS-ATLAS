@@ -1,0 +1,14 @@
+import {cubeSatSolarMounts} from './cubesat-chassis';
+export {cubeSatSolarMounts};
+export function cubeSatSolarAngle(side:number,deployment:number){if(![-1,1].includes(side)||!Number.isFinite(deployment)||deployment<0||deployment>1)throw Error('Unknown solar-panel deployment');return side*Math.PI/2*(1-deployment);}
+export const cubeSatSolarParts=cubeSatSolarMounts.flatMap(m=>{const prefix=m.side<0?'cubesat-solar-left':'cubesat-solar-right',name=m.side<0?'Left':'Right';return[
+ [prefix+'-ears',name+' panel · hinge mounting ears','Two drilled metal ears rest on the actual upper and lower frame surfaces.','One hole receives the frame screw; the separate outer hole supports the panel axle. Matching holes are present in both frame members.'],
+ [prefix+'-screws',name+' panel · mounting screws','Two separate shafts pass through the mounting ears and frame bores.','The screws retain the ears mechanically. They are not electrical power terminals.'],
+ [prefix+'-axle',name+' panel · continuous hinge axle','A separate metal axle passes through both ears and all three hollow moving knuckles.','The panel rotates around this unchanged axis. The shaft does not translate through the spacecraft during deployment.'],
+ [prefix+'-nut',name+' panel · open axle nut','A bored hexagonal nut retains the axle above the upper ear.','The exposed axle end remains visible above the nut. The lower retaining head contacts the lower ear underside.'],
+ [prefix+'-knuckles',name+' panel · three hollow hinge knuckles','Three separately bored sleeves and their welded tabs move with the panel frame.','Each bore clears the fixed axle. Tabs join the frame at its edge; the broad backing sheet does not cut through the hinge cylinder.'],
+ [prefix+'-frame',name+' panel · open perimeter frame','A separate thin frame surrounds the cell array without filling its centre.','The near edge meets the hinge tabs. Deployment rotates the frame, backing, cells and collection tracks together.'],
+ [prefix+'-backing',name+' panel · backing sheet','A separate warm-metallic backing sheet supports the visible cell array.','The sheet is a structural teaching component. This mission does not calculate real spacecraft power, temperature or battery state.'],
+ [prefix+'-cells',name+' panel · six clipped-corner cells','Six distinct dark-blue cell surfaces sit within the frame aperture.','They illustrate solar collection. Capture permission still follows the original Python rules: Earth-facing camera and a free frame buffer.'],
+ [prefix+'-tracks',name+' panel · collection tracks','Fine metallic fingers and two busbars on each cell illustrate collection paths.','The physical panel wiring is added separately. Track geometry does not claim a measured voltage, cell efficiency or product-specific circuit.'],
+];});
