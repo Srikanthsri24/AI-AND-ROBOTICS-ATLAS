@@ -1,7 +1,7 @@
-import {vacuumBulbMl,vacuumChamberMl} from './vacuum-workshop-layout';
+import {vacuumBulbMl,vacuumChamberMl,vacuumFilterSpec} from './vacuum-workshop-layout';
 export type VacuumCondition='clear'|'restricted'|'leak';
 /** Teaching parameters, not pump ratings or measured pickup predictions. Flow is ambient-equivalent mL/s, pressure Pa absolute. */
-export const vacuumAirModel={ambient:101325,crack:25,nozzleR:.4,shortHoseR:.08,filterR:.12,restrictedFactor:120,inletValveR:.25,outletR:.22,leakConductance:7.5,wallR:4,springPreload:90,springGain:550,squeezeSeconds:.65,stepSeconds:.005};
+export const vacuumAirModel={ambient:101325,crack:25,nozzleR:.4,shortHoseR:.08,filterR:.12,restrictedFactor:1/vacuumFilterSpec.restrictedOpenFraction**2,inletValveR:.25,outletR:.22,leakConductance:7.5,wallR:4,springPreload:90,springGain:550,squeezeSeconds:.65,stepSeconds:.005};
 export type VacuumFlows={nozzle:number;leak:number;inlet:number;outlet:number};
 export type VacuumAir={clock:number;compression:number;bottleGasMl:number;bulbGasMl:number;bottlePa:number;bulbPa:number;flows:VacuumFlows;inletOpen:boolean;outletOpen:boolean};
 export const vacuumAirInitial=():VacuumAir=>({clock:0,compression:0,bottleGasMl:vacuumChamberMl,bulbGasMl:vacuumBulbMl(0),bottlePa:vacuumAirModel.ambient,bulbPa:vacuumAirModel.ambient,flows:{nozzle:0,leak:0,inlet:0,outlet:0},inletOpen:false,outletOpen:false});

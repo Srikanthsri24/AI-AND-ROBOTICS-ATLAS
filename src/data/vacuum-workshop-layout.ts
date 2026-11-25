@@ -14,3 +14,5 @@ const v0=vacuumProfileMl(vacuumBulbProfile(0)),vh=vacuumProfileMl(vacuumBulbProf
 export const vacuumChamberMl=vacuumProfileMl(vacuumBottleInner)+Math.PI*35**2*(87.5-86)/1000;
 export function vacuumBulbMl(compression:number){if(!Number.isFinite(compression)||compression<0||compression>1)throw Error('Bulb compression must be between 0 and 1.');return qa*compression*compression+qb*compression+v0;}
 export const vacuumLayout={axisY:65,cap:{back:74,face:90,plateBack:87.5,outerR:40.5,innerR:38.2,pitch:3.2},ports:{pickup:{y:51,z:0},outlet:{y:79,z:0},bore:14},grommet:{innerR:5,grooveR:7,flangeR:9,flange:1.2},hose:{innerR:3,outerR:5},pump:{at:[250,60,-75] as VacuumPoint},paper:{side:2.5,thickness:.03,density:800},nozzleGap:2,cradle:{xs:[-55,45],innerR:48.3,outerR:56}};
+
+export const vacuumFilterSpec={first:61.5,last:81,coverEnd:77,strands:48,ringPitch:.9,threadRadius:.1,weaveOffset:.21,restrictedOpenFraction:.09};
