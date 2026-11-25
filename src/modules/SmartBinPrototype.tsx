@@ -1,0 +1,4 @@
+import{OrbitControls}from'@react-three/drei';
+import Mechanical from'./SmartBinMechanicalParts';import Lighting from'./WorkshopStudioLighting';
+/** Private fixture foundation; not registered as a completed workshop. */
+export default function SmartBinPrototype({selected,select,lidDegrees=0,gapMm=500,cutaway=false}:{selected:string;select:(id:string)=>void;lidDegrees?:number;gapMm?:number;cutaway?:boolean}){return <><Lighting/><hemisphereLight args={['#fff4e9','#5f6d85',1]}/><directionalLight position={[-3,8,6]} intensity={2.2} castShadow/><color attach="background" args={['#edf0f8']}/><mesh rotation={[-Math.PI/2,0,0]} receiveShadow raycast={()=>null}><planeGeometry args={[20,20]}/><meshStandardMaterial color="#d6d9e3" roughness={.9}/></mesh><group name="smart-bin-mm" scale={.01}><Mechanical {...{selected,select,lidDegrees,gapMm,cutaway}}/></group><OrbitControls makeDefault target={[0,3.8,0]} minDistance={.1} maxDistance={30} maxPolarAngle={Math.PI/2-.01}/></>}
