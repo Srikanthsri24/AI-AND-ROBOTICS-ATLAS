@@ -1,0 +1,14 @@
+import type {EmergencyPoint} from './emergency-corridor';
+export const emergencyPiezo={at:[170,0,115] as EmergencyPoint,radius:10.5,inner:9.4,floor:17,floorTop:18.2,wallTop:28,lidTop:29.2,brassY:23,brassRadius:8.7,ceramicRadius:6.3};
+export function emergencyPiezoTerminal(kind:'signal'|'return'):EmergencyPoint{if(!['signal','return'].includes(kind))throw Error('Unknown passive piezo terminal');return[170+(kind==='signal'?-3.81:3.81),12,115];}
+/** Local internal signal route passes through its real ledge notch and over the brass rim. */
+export const emergencyPiezoSignalRoute=[[-3.81,21.5,0],[-8.8,21.5,0],[-9,21.7,0],[-9,23.6,0],[-8.8,23.8,0],[-1.2,23.8,0],[-1,23.6,0],[-1,23.25,0]] as EmergencyPoint[];
+export const emergencyPiezoParts=[
+ ['emergency-piezo-cradle','Passive piezo · raised mounting cradle','A slotted base and four supports keep the sounder above the bench and leave both sockets accessible.','The central opening provides clearance when the two connectors withdraw. This support has no electrical connection.'],
+ ['emergency-piezo-case','Passive piezo · open acoustic case','The hollow case has a separate bottom plate, two actual pin holes and an internal annular support with a signal-wire notch.','The brass rim seats on that support. The cavity below it is open space, not an opaque cylinder hiding an imaginary transducer.'],
+ ['emergency-piezo-lid','Passive piezo · sound-port lid','A separate lid has an open 6.6 mm sound port. The centre electrode is visible through it.','In the browser cutaway, disconnect USB before lifting the virtual lid. This inspection is not an instruction to open a physical sealed buzzer; it is not an extra electrical switch.'],
+ ['emergency-piezo-brass','Passive piezo · brass substrate','A real thin brass disc supports the bonded ceramic layer. Its rim rests on the annular case ledge.','The return lead connects this conductive substrate to Uno GND. Use the unpowered cutaway to see the rim beyond the ceramic.'],
+ ['emergency-piezo-ceramic','Passive piezo · ceramic and top electrode','The ceramic layer and its thin upper electrode are separate from the brass substrate and remain bonded to it.','D9 tone() supplies a 1250 Hz command through its own 220 Ω resistor while the alarm pulse is on. The layer does not glow like an LED.'],
+ ['emergency-piezo-signal','Passive piezo · D9 signal pin and bond','The separate square pin joins the top electrode through an internal lead that clears the brass disc and passes through the ledge notch.','D9 → its own 220 Ω resistor → this pin. A passive piezo needs the alternating tone command; it does not contain an active-buzzer oscillator board.'],
+ ['emergency-piezo-return','Passive piezo · ground pin and bond','The second pin has its own case opening and a separate bond to the underside of the brass disc.','This return joins the front breadboard GND bus. It must not be mistaken for the D9 signal connection.'],
+];
