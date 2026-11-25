@@ -22,8 +22,8 @@ export default function IndustrialWorkshopPrototype({selected='',select=()=>{},s
   <Panel {...{selected,select}} temperatureAdc={input.temperatureAdc} vibrationAdc={input.vibrationAdc}/>
   <Stop {...{selected,select,stroke}}/><Button {...{selected,select}} pressed={powered&&input.buttonPressed}/>
   <Indicators {...{selected,select,powered}} {...lights}/>
-  <Controller {...{selected,select,powered,inspection}} link={input.link}/>
-  <group visible={inspection==='none'}><Wiring {...{selected,select,assembly}} stopConnected={stopConnected}/><Network {...{selected,select,powered,assembly,record}} connected={input.link} fresh={industrialFresh(session.receiver,session.nowMs)}/></group>
+  <Controller animateUsb {...{selected,select,powered,inspection}} link={input.link}/>
+  <group visible={inspection==='none'}><Wiring {...{selected,select,assembly}} stopConnected={stopConnected}/></group><Network hideCables={inspection!=='none'} {...{selected,select,powered,assembly,record}} connected={input.link} fresh={industrialFresh(session.receiver,session.nowMs)}/>
   <Conveyor {...{selected,select}} travelMm={session.conveyorUm/1000}/>
  </group><Motion progress={assembly}/>{controls&&<OrbitControls makeDefault target={target} minDistance={.08} maxDistance={12} maxPolarAngle={Math.PI/2-.01}/>}</>;
 }
