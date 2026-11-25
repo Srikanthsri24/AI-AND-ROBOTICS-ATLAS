@@ -2,7 +2,7 @@
 
 ## Phase 1 — 150 published Guided Builds
 
-Current verified total: **65 / 150 workshops**. **85** remain in Phase 1; **61** additional guides remain in Phase 2. Counts embedded in earlier dated notes describe those earlier checkpoints.
+Current verified total: **66 / 150 workshops**. **84** remain in Phase 1; **61** additional guides remain in Phase 2. Counts embedded in earlier dated notes describe those earlier checkpoints.
 
 Use the user-approved obstacle-avoiding car as the visual and interaction benchmark. Add and verify a project-specific sixth 3D Workshop for each of the 150 published guides, continuing in catalog order.
 
@@ -366,3 +366,13 @@ Added the private, themed workshop interface: eight assembly stages, six camera 
 Native Chrome operating checks passed assembly readiness, three empty readings, actual Start/Stop RUNNING transition, power-cycle STOPPED/fresh-press requirement, no page errors, and 390 px layout without horizontal overflow (`/tmp/atlas-aqua-ui.log`, desktop and phone screenshots). Those operating checks preceded the final retainer addition. Added a separately explained two-level rear-post cable retainer, bringing the registry to **152 owners**; swept jacket clearance passes for all four distinct passages. Coupling sleeves now have actual open radial set-screw bores joining their axial cavities, verified by geometry ray tests. Corrected screw insertion lengths for the two different shaft radii.
 
 Optimised focus ray testing by processing the nearest bounding-box candidates first while retaining exact triangle hits. The previously slow shield stack now passes native clicking/highlighting. Added explicit power-off removal of both Ethernet plugs for LAN contact inspection. **49 focused AQUACLEAN tests pass** and standalone workshop TypeScript passes. Earlier full-suite run passed **753 tests** before the three latest checks were added. Full-root TypeScript and the updated all-152 native inspection are running; full final operating / assembly / mobile label checks, build and production registration remain pending. No claim of complete part verification. Workshop remains unpublished; count **65/150**.
+
+
+### Completed workshop 66 — AQUACLEAN river-waste skimmer (directory-10)
+Registered the project-specific sixth workshop after the complete verification gates passed. It includes 152 explained actual owners, eight staged physical assembly steps, independently seated circuit and Ethernet connectors, a realistic raised paddle / descending ramp / draining basket fixture, guided follower, retained sensor loom, source-layout Uno / shield / driver, separate four-AA motor supply, moving Start/Stop cap and optional local receiver illustration. The coupling has open axial and radial bores with seated set screws.
+
+Native Chrome verifies actual clicks, triangle-anchored labels and actual highlighted materials for **all 152 owners** (`/tmp/atlas-aqua-inspect.log`). Updated physical assembly checks cover 30 intermediate poses, all owner visibility / transforms / cable seating, exact final restoration and the sensor mounting axes (`/tmp/atlas-aqua-assembly.log`). Collection geometry and source-timed full-basket stop are covered by the earlier native collection checkpoint plus the integrated pure controller / collection tests.
+
+The built production route passes assembly readiness, three empty readings, pointer and keyboard Start/Stop, separate motor power, USB-cycle fresh-press requirement, inclusive 115 mm FULL, no automatic restart after clearing, stale receiver with continued local drive, and a sampled disconnected-ECHO fault. Both code downloads return the expected filenames (`/tmp/atlas-aqua-production.log`). All six stages, Back / Forward, desktop and 390 px phone layout, inspection labels for normal / shield / LAN / terminal views, label containment / status-panel clearance and loaded assets pass (`/tmp/atlas-aqua-route-labels.log`; screenshots `/tmp/atlas-aqua-route-1440.png` and `/tmp/atlas-aqua-route-390.png`). The pause display describes the paddle as stationary when animation is paused.
+
+**756 repository tests pass; full-root TypeScript passes; the registered production build passes.** Source pushed to GitHub; no AWS deployment. Completed count is **66/150**, leaving **84** Phase 1 workshops and **61** Phase 2 guides. Next: directory-11, IoT-Based Smart Waste Bin Monitoring System.
