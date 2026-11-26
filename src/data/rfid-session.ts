@@ -1,7 +1,8 @@
+import {rfidConnectionState,type RfidConnections} from './rfid-connections';
 import {rfidWorkshopInitial,rfidWorkshopBegin,rfidWorkshopRead,type RfidWorkshopState} from './rfid-workshop';
 import {rfidLatchAdvance} from './rfid-latch';
 import {rfidClassroomTags,rfidPresentedTag,type RfidTagName} from './rfid-tags';
-export type RfidSessionSettings={assembled:boolean;usb:boolean;readerReady:boolean;servoPower:boolean;servoGround:boolean;servoSignal:boolean;tag:RfidTagName|null};
+export type RfidSessionSettings={assembled:boolean;usb:boolean;readerReady:boolean;servoPower:boolean;servoGround:boolean;servoSignal:boolean;tag:RfidTagName|null;connections?:RfidConnections;dcSeated?:boolean};
 export const rfidSessionDefaults:RfidSessionSettings={assembled:false,usb:false,readerReady:true,servoPower:false,servoGround:true,servoSignal:true,tag:null};
 export type RfidSession={controller:RfidWorkshopState|null;clockMs:number;readRemaining:number;remainderMs:number;angle:number;tagA:number;tagB:number;pendingSerial:string};
 export function rfidSessionInitial():RfidSession{return {controller:null,clockMs:0,readRemaining:180,remainderMs:0,angle:35,tagA:0,tagB:0,pendingSerial:''};}
@@ -16,6 +17,7 @@ export function rfidSessionReset(previous:RfidSession,settings:RfidSessionSettin
 export function rfidSessionAdvance(previous:RfidSession,settings:RfidSessionSettings,elapsedMs:number):RfidSession{
  if(!Number.isFinite(elapsedMs)||elapsedMs<0)throw new RangeError('Invalid RFID elapsed time');
  let s=previous,remaining=previous.remainderMs+elapsedMs;
+ const circuit=settings.connections?rfidConnectionState(settings.connections,settings.dcSeated!==false):null;
  const move=(value:number,target:number)=>Math.abs(value-target)<=1/900+1e-10?target:value+Math.sign(target-value)/900;
  while(remaining>=1-1e-9){
   const requested=settings.assembled?settings.tag:null;
@@ -26,7 +28,7 @@ export function rfidSessionAdvance(previous:RfidSession,settings:RfidSessionSett
   if(!settings.assembled||!settings.usb)s=rfidSessionReset(s,settings);
   else{
    if(s.controller===null)s=rfidSessionReset(s,settings);
-   const c=s.controller!,angle=rfidLatchAdvance(s.angle,c.commandAngle,1,settings.servoPower&&settings.servoGround&&settings.servoSignal),clockMs=(s.clockMs+1)>>>0,readRemaining=s.readRemaining-1;
+   const c=s.controller!,angle=rfidLatchAdvance(s.angle,c.commandAngle,1,settings.servoPower&&settings.servoGround&&settings.servoSignal&&(!circuit||(circuit.servoPower&&circuit.servoGround&&circuit.servoSignal))),clockMs=(s.clockMs+1)>>>0,readRemaining=s.readRemaining-1;
    s={...s,angle,clockMs,readRemaining};
    if(readRemaining===0){
     const tag=rfidPresentedTag(a,b),uid=settings.readerReady&&tag?rfidClassroomTags[tag].uid:null;
@@ -37,4 +39,10 @@ export function rfidSessionAdvance(previous:RfidSession,settings:RfidSessionSett
   remaining-=1;
  }
  return {...s,remainderMs:Math.max(0,Math.round(remaining*1e9)/1e9)};
+}
+
+/** GPIO commands and visibly lit LEDs differ when a series or return lead is absent. */
+export function rfidSessionIndicators(state:RfidSession,settings:RfidSessionSettings){
+ const circuit=settings.connections?rfidConnectionState(settings.connections,settings.dcSeated!==false):null;
+ return {red:!!state.controller?.red&&(!circuit||circuit.red),green:!!state.controller?.green&&(!circuit||circuit.green)};
 }
