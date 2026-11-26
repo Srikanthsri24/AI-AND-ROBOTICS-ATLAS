@@ -18,8 +18,10 @@ export function rfidWireRoute(index:number):readonly RfidPoint[]{
  const w=rfidWires[index];if(!w)throw new RangeError('Unknown RFID jumper');
  const a:RfidPoint=w.fromKind==='clamp'?[w.from[0],w.from[1],w.from[2]+10.7]:[w.from[0],w.from[1]+7.5,w.from[2]];
  const b:RfidPoint=w.toKind==='servo'?[w.to[0]-9.8,w.to[1],w.to[2]]:[w.to[0],w.to[1]+7.5,w.to[2]];
- if(w.toKind==='servo'){const channel=index===5?0:index===7?1:2,lane=-141+channel*3,entryX=88-channel*5;return [a,[a[0],a[1]+12,a[2]],[a[0]+8,52+(index-5)*3,lane],[25,42+(index-5)*3,lane],[entryX,22,lane],[entryX,7.4,b[2]-12],[entryX,7.4,b[2]],[b[0]-8,b[1],b[2]],[b[0]-3,b[1],b[2]],b];}
- if(index===3)return [a,[a[0],a[1]+10,a[2]],[a[0]+10,64,a[2]+12],[b[0]+12,64,b[2]+18],[b[0],b[1]+12,b[2]],b];
+ if(w.toKind==='servo'){const channel=index===5?0:index===7?1:2,lane=-141+channel*3,entryX=88-channel*5;return [a,[a[0],a[1]+12,a[2]],...(index>=6?[[a[0],85+(index-6)*8,a[2]],[a[0]+14,85+(index-6)*8,a[2]],[a[0]+20,85+(index-6)*8,lane]] as RfidPoint[]:[[a[0]+8,52+(index-5)*3,lane]] as RfidPoint[]),[25,42+(index-5)*3,lane],[entryX,22,lane],[entryX,7.4,b[2]-12],[entryX,7.4,b[2]],[b[0]-8,b[1],b[2]],[b[0]-3,b[1],b[2]],b];}
+ if(index===2)return [a,[a[0],a[1]+8,a[2]],[a[0]+8,50,a[2]],[b[0]-8,50,b[2]],[b[0],40,b[2]],[b[0],b[1]+8,b[2]],b];
+ if(index===4)return [a,[a[0],a[1]+12,a[2]],[a[0]-16,76,-36],[b[0]-16,70,b[2]],[b[0],50,b[2]],[b[0],b[1]+10,b[2]],b];
+ if(index===3)return [a,[a[0],a[1]+10,a[2]],[a[0]+10,64,a[2]+12],[b[0]+12,64,b[2]],[b[0],45,b[2]],[b[0],b[1]+12,b[2]],b];
  if(w.fromKind==='clamp')return [a,[a[0]+8,a[1]+8,a[2]+10],[-45,45+(index-8)*8,-132],[-72,45+(index-8)*8,-130],[b[0]+12,b[1]+14,b[2]],[b[0],b[1]+7,b[2]],b];
  if(w.fromPort.startsWith('shield.'))return [a,[a[0],a[1]+12,a[2]],[a[0]-16,58+index*3,-36],[b[0]-10,48+index*3,b[2]-18],[b[0],b[1]+10,b[2]],b];
  return [a,[a[0],a[1]+8,a[2]],[a[0]+8,42+index*4,a[2]+8],[b[0]+4,42+index*4,b[2]+8],[b[0],b[1]+8,b[2]],b];
