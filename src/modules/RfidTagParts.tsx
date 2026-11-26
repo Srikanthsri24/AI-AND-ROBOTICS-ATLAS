@@ -1,0 +1,13 @@
+import {memo,useMemo,type ReactNode} from 'react';
+import {Shape,Path} from 'three';
+import {Text} from '@react-three/drei';
+import type {ThreeEvent} from '@react-three/fiber';
+import {rfidTagPose} from '../data/rfid-tags';
+const font=new URL('./fonts/NotoSans-Regular.ttf',document.baseURI).href;
+function RfidTagParts({a,b,selected,choose}:{a:number;b:number;selected:string;choose:(id:string)=>void}){
+ const shapes=useMemo(()=>{const card=new Shape();card.moveTo(-29,-20);card.lineTo(29,-20);card.absarc(29,-17,3,-Math.PI/2,0,false);card.lineTo(32,17);card.absarc(29,17,3,0,Math.PI/2,false);card.lineTo(-29,20);card.absarc(-29,17,3,Math.PI/2,Math.PI,false);card.lineTo(-32,-17);card.absarc(-29,-17,3,Math.PI,Math.PI*1.5,false);card.closePath();const fob=new Shape();fob.absarc(0,0,17,0,Math.PI*2,false);const hole=new Path();hole.absarc(0,12,2.4,0,Math.PI*2,true);fob.holes.push(hole);return {card,fob};},[]);
+ const c=(id:string,normal:string)=>selected===id?'#b78be8':normal,tag=(id:string,node:ReactNode)=><group name={id} userData={{partId:id}} onClick={(e:ThreeEvent<MouseEvent>)=>{e.stopPropagation();choose(id);}}>{node}</group>;
+ return <group name="rfid-classroom-tags"><group name="rfid-tag-a-pose" position={[...rfidTagPose('A',a).position]}>{tag('rfid-card-a',<><mesh rotation={[-Math.PI/2,0,0]} castShadow><extrudeGeometry args={[shapes.card,{depth:.9,bevelEnabled:false,curveSegments:24}]}/><meshPhysicalMaterial color={c('rfid-card-a','#e9e5da')} roughness={.3} clearcoat={.4}/></mesh><mesh position={[-21,.92,0]}><boxGeometry args={[10,.03,40]}/><meshStandardMaterial color={c('rfid-card-a','#7954b2')} roughness={.45}/></mesh><Text font={font} position={[3,.95,-6]} rotation={[-Math.PI/2,0,0]} fontSize={5} color="#49336e">CARD A</Text><Text font={font} position={[3,.95,4]} rotation={[-Math.PI/2,0,0]} fontSize={2.3} color="#626376">CLASSROOM · NFC</Text></>)}</group>
+ <group name="rfid-tag-b-pose" position={[...rfidTagPose('B',b).position]}>{tag('rfid-fob-b',<><mesh rotation={[-Math.PI/2,0,0]} castShadow><extrudeGeometry args={[shapes.fob,{depth:2.2,bevelEnabled:false,curveSegments:40}]}/><meshPhysicalMaterial color={c('rfid-fob-b','#65508e')} roughness={.35} clearcoat={.4}/></mesh><Text font={font} position={[0,2.23,1]} rotation={[-Math.PI/2,0,0]} fontSize={8} color="#f4efff">B</Text><Text font={font} position={[0,2.23,9]} rotation={[-Math.PI/2,0,0]} fontSize={2.2} color="#e1d7ef">NFC</Text></>)}{tag('rfid-fob-ring',<mesh position={[0,1.1,-15.5]} rotation={[0,Math.PI/2,0]}><torusGeometry args={[5,.65,12,48]}/><meshStandardMaterial color={c('rfid-fob-ring','#b8c2ca')} metalness={.85} roughness={.25}/></mesh>)}</group></group>;
+}
+export default memo(RfidTagParts);
