@@ -15,3 +15,6 @@ export function schoolBellBusHole(net:keyof typeof schoolBellBusColumns,row:numb
 export function schoolBellPiezoContact(signal:boolean):BellPoint{const b=schoolBellWorkbench.sounder;return [b[0]+(signal?-3.81:3.81),b[1]+12,b[2]];}
 export const schoolBellUnoSupports=uno.holes.map(p=>({x:schoolBellWorkbench.uno[0]+ +p.x-34.29,z:schoolBellWorkbench.uno[2]+26.67- +p.y,height:schoolBellWorkbench.uno[1]-.8}));
 export const schoolBellRtcSupports=rtc.pads.filter(p=>p.element!=='JP1').map(p=>({x:schoolBellWorkbench.rtc[0]+p.x,z:schoolBellWorkbench.rtc[2]-p.y,height:schoolBellWorkbench.rtc[1]}));
+
+/** Eagle rotations around the PCB normal; local CAD Y maps to negative Z. */
+export const schoolBellUnoProgrammingRotations=Object.fromEntries(uno.elements.filter(e=>['ICSP','ICSP1'].includes(e.name)).map(e=>[e.name,Number((('rot' in e?e.rot:'R0')??'R0').replace('R',''))*Math.PI/180]));
