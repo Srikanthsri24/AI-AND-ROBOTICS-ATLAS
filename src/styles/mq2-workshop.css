@@ -1,0 +1,6 @@
+.mq2-workshop .crane-canvas{height:660px;grid-template-rows:auto minmax(0,1fr) auto}
+.mq2-workshop .crane-canvas>.mq2-live-controls{grid-row:3;display:flex;align-items:center;flex-wrap:wrap;gap:10px;padding:12px 16px;background:#f9f7fd;border-top:1px solid #d8cbe9}
+.mq2-live-controls label{flex:1 1 170px;margin:0;font-weight:650;color:#493366}
+.mq2-live-controls label input[type=range]{margin:8px 0 0;width:100%;display:block}
+.mq2-live-controls output{float:none;white-space:nowrap;font-size:13px;font-weight:700}
+@media(max-width:600px){.mq2-workshop .crane-canvas{height:620px}.mq2-workshop .crane-canvas>.mq2-live-controls{padding:10px;gap:8px}.mq2-live-controls label{flex-basis:100%;order:1}.mq2-live-controls output{flex-basis:100%;order:2}.mq2-live-controls button{padding:8px 10px;font-size:12px}}

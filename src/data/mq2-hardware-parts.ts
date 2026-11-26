@@ -1,0 +1,42 @@
+import {mq2ModuleParts} from './mq2-module-parts';
+import {mq2UsbParts} from './mq2-usb';
+import {mq2Wires,type Mq2Mode} from './mq2-wires';
+export type Mq2HardwarePart={id:string;name:string;what:string;connection:string;concealed?:boolean};
+const part=(id:string,name:string,what:string,connection:string):Mq2HardwarePart=>({id,name,what,connection});
+export function mq2HardwareParts(mode:Mq2Mode):readonly Mq2HardwarePart[]{return [
+ ...mq2ModuleParts.map(p=>part(p.id,p.name,p.does,p.connects)),
+ part('mq2-uno-pcb','Uno R3 circuit board','Carries the controller, USB bridge and input / output sockets.','The independent module supply shares GND; its positive output does not join Uno 5 V.'),
+ part('mq2-uno-mcu','ATmega328P controller','Samples A0, averages eight readings and compares the result with the captured baseline.','Drives D6 high at a 90-count rise; switches it low at 65 counts above baseline or below.'),
+ part('mq2-uno-headers','Uno sockets','Provide the actual A0, D6, 5 V and GND connections.','A0 receives one source at a time. D6 drives the red LED through 220 Ω. Uno 5 V powers only the test dial.'),
+ part('mq2-uno-usb','Uno USB-B receptacle','Receives USB power and the computer serial connection.','Mates with the USB-B plug. The main controller reads serial commands through the separate USB bridge.'),
+ part('mq2-uno-bridge','ATmega16U2 USB bridge','Converts the computer USB connection into serial data for the main controller.','Serial Monitor uses 115200 baud. Lowercase b requests a baseline capture in the main sketch.'),
+ part('mq2-uno-power','Uno power-conditioning circuit','Supports the controller supply. The barrel power socket is unused here.','The Uno is powered by USB; the heater module has its own regulated 5 V supply.'),
+ part('mq2-uno-reset','Uno RESET button','Restarts the sketch, clears its sample window and removes the saved baseline.','USB remains connected. Let eight fresh samples fill the window before sending b again.'),
+ part('mq2-uno-tracks','Uno copper tracks','Join the main controller, bridge and sockets across the board.','The external A0 divider and LED resistor sit on the breadboard, not on these tracks.'),
+ part('mq2-uno-programming','ICSP programming headers','Serve the two AVR chips on the Uno.','Leave these headers unconnected; this build uses the normal USB programming connection.'),
+ part('mq2-uno-leds','Uno power and activity indicators','The ON indicator shows the USB-powered controller supply.','The project warning LED is the separate red LED connected to D6, not the Uno D13 indicator.'),
+ ...mq2UsbParts.map(p=>part(p[0],p[1],p[2],p[3])),
+ ...mq2Wires(mode).map(w=>part(w.id,w.name,'An insulated jumper carries this specific electrical connection.',w.connection)),
+ part('mq2-work-mat','Insulating work mat','Keeps the experiment together on a stable surface.','It does not electrically join any grounds. Grounds are joined by the visible return wires.'),
+ part('mq2-uno-supports','Uno insulating supports','Keep underside solder joints above the work surface.','Mount at the board holes without pressing on the controller or USB bridge.'),
+ part('mq2-breadboard-support','Breadboard riser','Provides a stable base under the mini breadboard.','The breadboard contains the electrical contacts; the riser is a mechanical support.'),
+ part('mq2-ceramic-stand','Open ceramic module stand','Supports the heated sensing module clear of the mat and loose material.','Four posts support the module at its mounting holes; the mesh remains open to the air.'),
+ part('mq2-supply','Separate regulated 5 V supply','Supplies the module heater independently of the Uno regulator.','Positive goes to VCC; negative goes to module GND and the shared Uno ground strip.'),
+ part('mq2-supply-cord','Low-voltage supply lead','Carries the separate supply output to the barrel adapter.','This model shows the low-voltage side only; students do not assemble mains wiring.'),
+ part('mq2-dc-plug','DC barrel plug','Transfers the regulated output into the screw-terminal adapter.','The plug is seated in the adapter; the red and dark wires leave the labelled screw terminals.'),
+ part('mq2-dc-adapter','Barrel-to-terminal adapter','Makes the positive and negative supply connections accessible as screw terminals.','Keep the two polarities separate. The negative clamp accepts the module return and Uno reference conductors.'),
+ {...part('mq2-adapter-centre-contact','Mated barrel centre contact','Carries one side of the DC connection inside the seated plug.','Concealed while the barrel plug is mated; do not place a label on an invented visible surface.'),concealed:true},
+ part('mq2-adapter-positive','Positive supply clamp','Secures the conductor supplying MQ-2 VCC.','Do not connect this terminal to Uno 5 V. Tighten the clamp over the conductor, not the insulation.'),
+ part('mq2-adapter-negative','Negative supply clamp','Joins the module return to the Uno signal reference.','Two distinct conductors join module GND and the breadboard common-return strip.'),
+ part('mq2-breadboard','170-point mini breadboard','Each column contains two independent five-contact strips, separated by the centre gap.','There are no long power rails. The five contacts in the far return column join the visible ground wires.'),
+ part('mq2-divider-upper','Upper 10 kΩ resistor','Forms the first half of the analogue voltage divider.','AOUT → upper resistor → midpoint read by A0 in sensor mode.'),
+ part('mq2-divider-lower','Lower 10 kΩ resistor','Forms the second half of the equal-resistor divider.','Midpoint → lower resistor → common ground. With equal resistances, A0 sees half the module voltage.'),
+ part('mq2-led-resistor','220 Ω LED resistor','Limits current through the separate red warning LED.','Uno D6 → resistor → LED anode. This resistor is not part of the A0 divider.'),
+ part('mq2-warning-led','Red warning LED lens','Lights when the sketch enables D6 after a sufficient rise above baseline.','A 90-count rise turns it on; it stays on until the rise falls to 65 counts or less.'),
+ part('mq2-led-anode','LED anode lead','Receives current through the 220 Ω resistor.','Its breadboard strip connects to the resistor, separately from the cathode strip.'),
+ part('mq2-led-cathode','LED cathode lead','Returns LED current to the shared ground.','Its strip connects to the common-return column through a dark jumper.'),
+ part('mq2-test-dial','10 kΩ test dial','Provides a controllable substitute signal for learning the threshold behavior.','The two outer terminals take Uno 5 V and GND. The centre wiper goes to A0 only in dial mode.'),
+ part('mq2-dial-5v','Dial 5 V terminal','Sets the high end of the resistive track.','Connected to Uno 5 V, independently of the module supply.'),
+ part('mq2-dial-wiper','Dial centre wiper','Outputs a voltage between the two track endpoints as the dial turns.','In dial mode, the single A0 jumper joins its strip. In sensor mode, that jumper goes to the divider midpoint instead.'),
+ part('mq2-dial-ground','Dial ground terminal','Sets the low end of the resistive track.','Connects to the same reference as Uno GND, the LED cathode and the divider return.'),
+];}
