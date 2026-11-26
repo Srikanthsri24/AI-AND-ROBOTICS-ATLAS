@@ -22,7 +22,18 @@ export function mq2Wires(mode:Mq2Mode):readonly Mq2Wire[]{return [
  ];}
 /** Initial seated routes; fixed lanes preserve component endpoint positions.
  * Clearance / fitting sweeps remain separate from electrical-topology checks. */
-export function mq2WireRoute(w:Mq2Wire,index:number):P[]{
+export function mq2WireRoute(w:Mq2Wire,index:number,withdrawA=0,withdrawB=0):P[]{
+ if(![withdrawA,withdrawB].every(v=>Number.isFinite(v)&&v>=0&&v<=16))throw new RangeError('Connector withdrawal must be 0–16 mm');
  const a:P=w.fromKind==='female'?[w.from[0]+7,w.from[1],w.from[2]]:w.fromKind==='clamp'?[w.from[0],w.from[1],w.from[2]+10.7]:[w.from[0],w.from[1]+7.5,w.from[2]],b:P=w.toKind==='clamp'?[w.to[0],w.to[1],w.to[2]+10.7]:[w.to[0],w.to[1]+7.5,w.to[2]],h=index===2?39:43+index*2,lane=index===0?3:index===8?40:index===9?12:8+index*2;
- return [a,w.fromKind==='female'?[a[0]+6,a[1],a[2]]:w.fromKind==='clamp'?[a[0],a[1]+4,a[2]+4]:[a[0],a[1]+5,a[2]],[a[0],h,a[2]-lane],[b[0],h,b[2]-lane],w.toKind==='clamp'?[b[0],b[1]+4,b[2]+4]:[b[0],b[1]+5,b[2]],b];
+ const offset=(p:P,kind:string,d:number):P=>kind==='female'?[p[0]+d,p[1],p[2]]:kind==='clamp'?[p[0],p[1],p[2]+d]:[p[0],p[1]+d,p[2]];
+ const route:P[]=[a,w.fromKind==='female'?[a[0]+6,a[1],a[2]]:w.fromKind==='clamp'?[a[0],a[1]+4,a[2]+4]:[a[0],a[1]+5,a[2]],[a[0],h,a[2]-lane],[b[0],h,b[2]-lane],w.toKind==='clamp'?[b[0],b[1]+4,b[2]+4]:[b[0],b[1]+5,b[2]],b];
+ route[0]=offset(route[0],w.fromKind,withdrawA);route[1]=offset(route[1],w.fromKind,withdrawA);route[4]=offset(route[4],w.toKind??'pin',withdrawB);route[5]=offset(route[5],w.toKind??'pin',withdrawB);return route;
+}
+
+/** Eleven independent leads, two fitting actions per lead. */
+export function mq2WireSeating(index:number,cursor:number){
+ if(!Number.isInteger(index)||index<0||index>10||!Number.isFinite(cursor)||cursor<0||cursor>22)throw new RangeError('Invalid MQ-2 wire fitting cursor');
+ const ease=(v:number)=>{const t=Math.max(0,Math.min(1,v));return t*t*(3-2*t);};
+ const a=16*(1-ease(cursor-index*2)),b=16*(1-ease(cursor-index*2-1));
+ return {visible:cursor>=index*2,a,b,seated:a===0&&b===0};
 }

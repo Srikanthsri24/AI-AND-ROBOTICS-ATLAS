@@ -35,3 +35,18 @@ test('jacket routes terminate at the assigned connector exits with finite geomet
  assert.deepEqual(path[0],w.fromKind==='female'?[w.from[0]+7,w.from[1],w.from[2]]:w.fromKind==='clamp'?[w.from[0],w.from[1],w.from[2]+10.7]:[w.from[0],w.from[1]+7.5,w.from[2]]);
  });
 });
+
+test('22 fitting actions seat each end on its own axis and keep seated routes unchanged',()=>{
+ for(const mode of ['dial','sensor'])m.mq2Wires(mode).forEach((w,n)=>{
+  const start=m.mq2WireSeating(n,n*2),middle=m.mq2WireSeating(n,n*2+1),end=m.mq2WireSeating(n,n*2+2);
+  assert.deepEqual(start,{visible:true,a:16,b:16,seated:false});assert.equal(middle.a,0);assert.equal(middle.b,16);assert.equal(end.seated,true);
+  const seated=m.mq2WireRoute(w,n),moving=m.mq2WireRoute(w,n,start.a,start.b);
+  assert.deepEqual(moving[2],seated[2]);assert.deepEqual(moving[3],seated[3]);
+  assert.deepEqual(m.mq2WireRoute(w,n,end.a,end.b),seated);
+  for(const [point,kind]of [[0,w.fromKind],[5,w.toKind??'pin']]){
+   const delta=moving[point].map((v,i)=>v-seated[point][i]);assert.deepEqual(delta,kind==='female'?[16,0,0]:kind==='clamp'?[0,0,16]:[0,16,0]);
+  }
+ });
+ assert.throws(()=>m.mq2WireSeating(11,22));assert.throws(()=>m.mq2WireSeating(0,23));
+ assert.throws(()=>m.mq2WireRoute(m.mq2Wires('dial')[0],0,-1,0));
+});
