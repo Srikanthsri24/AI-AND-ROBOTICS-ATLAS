@@ -1,7 +1,9 @@
+import {rainUsbParts} from './rain-usb';
 import {rainConnections} from './rain-wires';
 export type RainHardwarePart={id:string;name:string;what:string;connection:string};
 const p=(id:string,name:string,what:string,connection:string):RainHardwarePart=>({id,name,what,connection});
 export const rainHardwareParts:readonly RainHardwarePart[]=[
+ ...rainUsbParts.map(row=>p(row[0],row[1],row[2],row[3])),
  p('rain-work-mat','Insulating work mat','Organises the dry controller area and the separate wet tray.','The mat makes no electrical connection; only the return jumpers join grounds.'),
  p('rain-uno-supports','Uno standoffs','Raise the controller so underside solder joints clear the mat.','Support the board at its mounting holes.'),
  p('rain-breadboard-support','Breadboard riser','Supports the mini breadboard above the work surface.','This is a mechanical support, not an electrical conductor.'),
