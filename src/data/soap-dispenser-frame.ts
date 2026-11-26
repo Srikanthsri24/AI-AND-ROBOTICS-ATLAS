@@ -1,0 +1,7 @@
+/** Authored millimetres. The existing servo plate joins the inner arm faces. */
+export const soapFrameDimensions={base:{min:[-80,-4,-75],max:[90,0,90]},plate:{min:[-2,228.25,-27],max:[38,246.25,-26]},leftPost:{min:[-42,0,-30],max:[-38,246.25,-23]},rightPost:{min:[66,0,-30],max:[70,246.25,-23]},leftArm:{min:[-38,228.25,-27],max:[-2,246.25,-26]},rightArm:{min:[38,228.25,-27],max:[66,246.25,-26]}} as const;
+export const soapFrameParts=[
+ {id:'soap-stand-base',label:'Dispenser stand · weighted base and feet',what:'Provides a flat support under the bottle and two upright frame members.',connection:'The bottle bottom and both upright bottoms meet its top face. Four rubber feet support the underside. The broad footprint is illustrative, not a certified stability or load calculation.'},
+ {id:'soap-stand-left',label:'Dispenser stand · left upright and bridge',what:'Supports the left side of the fixed servo mounting plate from the base.',connection:'The upright joins the bridge at its side face. The bridge ends against the violet mounting plate without entering the bottle, moving head or horn.'},
+ {id:'soap-stand-right',label:'Dispenser stand · right upright and bridge',what:'Completes the fixed support path from the servo plate to the base.',connection:'Its bridge meets the right plate edge. The case and stand remain still while the horn, roller and pump head move. These support joints represent a fabricated stand, not loose unsupported pieces.'},
+];
