@@ -1,0 +1,6 @@
+CAD source: https://raw.githubusercontent.com/adafruit/Adafruit-DS3231-Precision-RTC-Breakout-PCB/master/Adafruit%20DS3231%20RTC%20Breakout.brd
+SHA256: 94eccdcaa3acb66e469c0b006a539d414744f3d20d641aa573c948a81c32cc66
+Derived XY board / pad / copper data: src/data/ds3231-rtc-layout.json
+Extraction script: scripts/extract-ds3231-rtc.py
+Original design by Adafruit Industries; original attribution and CC BY-SA terms are in README.md and license.txt.
+3D heights and surface materials are authored visual approximations, not manufacturer CAD.
