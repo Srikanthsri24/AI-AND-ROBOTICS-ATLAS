@@ -117,3 +117,28 @@ test('host plug clears the port before lifting and lowers before final mating',(
  assert.equal(usb.streetUsbPose(12,12).host[1],34);
  assert.equal(usb.streetUsbPose(12,0).host[1],14);
 });
+
+const jumpers=await import(await load(new URL('../src/data/street-system-jumpers.ts',import.meta.url)));
+test('all 34 plug steps seat A before B and hide future wires',()=>{
+ for(let index=0;index<17;index++){
+  const chapter=index<5?5:6,count=index<5?5:12,local=index<5?index:index-5,start=chapter+local/count;
+  const before=jumpers.streetJumperSeating(index,start);assert.equal(before.visible,false);assert.equal(before.aWithdrawal,16);assert.equal(before.bWithdrawal,16);
+  const middle=jumpers.streetJumperSeating(index,start+.5/count);assert.equal(middle.aWithdrawal,0);assert.equal(middle.bWithdrawal,16);
+  const end=jumpers.streetJumperSeating(index,chapter+(local+1)/count);assert.equal(end.aWithdrawal,0);assert.equal(end.bWithdrawal,0);assert.equal(end.seated,true);
+  const w=wSource(index),route=jumpers.streetJumperRoute(index,0,16);assert.equal(route[0][1],w.a[1]+7.5);assert.equal(route.at(-1)[1],w.b[1]+23.5);
+ }
+ assert.throws(()=>jumpers.streetJumperSeating(17,6));assert.throws(()=>jumpers.streetJumperRoute(0,-1,0));
+});
+function wSource(index){return w.streetSystemCables[index];}
+test('assembly timing is partition independent and manual stepping lands on each plug',()=>{
+ assert.equal(assembly.streetAssemblyAdvance(5,1000),5.1);assert.equal(assembly.streetAssemblyAdvance(6,1000),6+1/24);
+ let p=5;for(let n=0;n<34;n++)p=assembly.streetAssemblyNextStop(p);assert.equal(p,7);
+ assert.equal(assembly.streetAssemblyAdvance(0,100000),8);
+ const one=assembly.streetAssemblyAdvance(4.7,15000);let split=4.7;for(let n=0;n<150;n++)split=assembly.streetAssemblyAdvance(split,100);assert.ok(Math.abs(one-split)<1e-10);
+ assert.throws(()=>assembly.streetAssemblyAdvance(0,-1));
+});
+test('plug instructions name actual endpoint order, including the reversed A0 descriptive arrow',()=>{
+ assert.equal(jumpers.streetJumperEndLabel(2,'a'),'Uno A0');assert.equal(jumpers.streetJumperEndLabel(2,'b'),'divider junction · front column 6');
+ assert.equal(jumpers.streetJumperEndLabel(5,'a'),'Uno D5');assert.equal(jumpers.streetJumperEndLabel(9,'a'),'Uno D6');assert.equal(jumpers.streetJumperEndLabel(13,'a'),'Uno D7');
+ for(let n=0;n<17;n++)for(const end of ['a','b'])assert.ok(jumpers.streetJumperEndLabel(n,end).length>5);
+});
