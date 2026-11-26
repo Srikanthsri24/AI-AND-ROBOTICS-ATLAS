@@ -2,7 +2,7 @@
 
 ## Phase 1 — 150 published Guided Builds
 
-Current verified total: **76 / 150 workshops**. **74** remain in Phase 1; **61** additional guides remain in Phase 2. Counts and in-progress descriptions in earlier checkpoint notes describe those earlier states.
+Current verified total: **77 / 150 workshops**. **73** remain in Phase 1; **61** additional guides remain in Phase 2. Counts and in-progress descriptions in earlier checkpoint notes describe those earlier states.
 
 Use the user-approved obstacle-avoiding car as the visual and interaction benchmark. Add and verify a project-specific sixth 3D Workshop for each of the 150 published guides, continuing in catalog order.
 
@@ -1220,3 +1220,20 @@ MQ-2 student interface / full part-description checkpoint (unregistered; 76/150 
 Added the student-facing workshop component, scene and camera with the Atlas theme: 14 assembly chapters and pause / replay controls, source-mode and power interlocks, explicit sketch RESET, live ADC / average / baseline / rise readings, baseline capture, component search / explanation and Arduino sketch download. Added in-view signal controls, baseline capture, status and LED focus so students can operate without scrolling away from the model. The complete screen fixture passes desktop and phone dial / sensor calibration, actual warning state, power sequencing, source switching, LED / MCU surface labels and no horizontal overflow; reviewed both viewport screenshots. Targeted strict TypeScript passes. Exhaustive UI-index focusing, complete timed assembly replay / collision coverage, remaining fine contact details and final registered production-route / repository checks remain pending. The UI is not registered in Guided Builds yet and does not increase the completed total.
 
 The full repository `tsc -b` check also passes after this interface checkpoint; staged whitespace checks pass. This supersedes the earlier targeted-only TypeScript status for these files. The MQ-2 workshop remains unregistered, with Phase 1 at 76/150 and 74 pending, followed by 61 Phase 2 guides.
+
+MQ-2 publication verification in progress (count remains 76/150 until final gates pass): all 71 exposed parts pass the actual student-interface index focusing check on desktop and phone, including nearest visible triangle ownership, matching callout and real material highlighting. Added two physical metal leaf contacts and a rear crimp in each of the three module female sockets; corrected the plastic opening to clear the 0.64 mm header pins. Native checks pass 12 seated / withdrawn contact poses, contact isolation and housing clearance.
+
+The full timed assembly replay passes pause / resume, unpowered fitting, final component placement, automatic host / Uno USB connection, ready-state baseline capture and byte-for-byte Arduino sketch download. All 1,076 repository tests pass. Registered `directory-21` locally for final built-route validation and confirmed 77 unique workshop IDs; full TypeScript, production build and built-route verification are not yet recorded as completed in this entry.
+
+
+## Completed milestone — MQ-2 relative signal monitor
+
+`directory-21` is registered as the **77th** completed sixth 3D Workshop. The project-specific Waveshare-style module, separate 5 V supply, Uno, true-grid mini breadboard, two 10 kΩ divider resistors, separate 220 Ω / red LED branch, test dial, physical USB host and 11 distinct jumpers support narrated assembly, actual-part inspection and working relative-baseline calibration. Both modes retain a single A0 source and explicit power / rewiring interlocks. The interface uses the Atlas theme and includes in-view signal controls, LED focus, live readings, sketch RESET and Arduino download.
+
+All **1,076 repository tests**, the direct full-project `tsc -b` verification and production build pass. The build retains the existing advisory about large shared chunks. Actual-part index focusing passes all 71 exposed owners on desktop and phone; the mated barrel centre is explicitly concealed. The socket leaf checks pass seated contact / withdrawn isolation and housing clearance. Full timed replay passes pause / resume, unpowered wiring, final placement, USB connection, baseline capture and exact sketch download. Earlier entries record the scope and limitations of geometry / insertion clearance sweeps; these are authored educational models, not fabrication CAD or gas-concentration simulation.
+
+`scripts/inspect-mq2-route.cjs` passes the built application at 1440 px and 390 px: overview-to-sixth-tab navigation, dial and module/divider calibration, actual LED / MCU surface labels, supply / USB interlock, byte-identical Arduino download, no document overflow, fifth-stage navigation and back to a fresh workshop. Reviewed both actual application screenshots. The temporary production preview was stopped after verification; development remains live on port 5190.
+
+Local check: http://127.0.0.1:5190/#/project-builder/directory-21/workshop
+
+Phase 1 remains active: **73 workshops pending**. Phase 2 remains **61 additional guides**, after Phase 1. This milestone supersedes the historical MQ-2 in-progress notes above. Next in catalog order: `directory-22`, the rain detector and automatic clothes protection system.
