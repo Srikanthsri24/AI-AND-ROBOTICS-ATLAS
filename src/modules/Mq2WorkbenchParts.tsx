@@ -14,7 +14,7 @@ function Mq2WorkbenchParts({selected,choose,usb=false,modulePower=false,led=fals
  const tag=(id:string,children:ReactNode)=><group name={id} userData={{partId:id}} onClick={(e:ThreeEvent<MouseEvent>)=>{e.stopPropagation();choose(id);}}>{children}</group>;
  const board=layout.breadboard;
  return <group name="mq2-workbench-parts">
- <group position={[...layout.uno]} scale={50}><Uno selected={selected} select={choose} powered={usb} partPrefix="mq2-"/></group>
+ <group name="mq2-controller-assembly" position={[...layout.uno]} scale={50}><Uno selected={selected} select={choose} powered={usb} partPrefix="mq2-"/></group>
  {tag('mq2-breadboard',<group position={[...board]} scale={50}><Breadboard selected={selected==='mq2-breadboard'} supplyLabel="" returnLabel=""/></group>)}
  <group position={[...layout.module]}><Module selected={selected} choose={choose} powered={modulePower}/></group>
  {mq2Resistors.map(r=>{const a=r.from,b=r.to,x=(a[0]+b[0])/2,y=a[1]+4,z=a[2];return <group key={r.id}>{tag(r.id,<><mesh position={[x,y,z]} rotation={[0,0,Math.PI/2]} castShadow><cylinderGeometry args={[1.1,1.1,5.8,24]}/><meshStandardMaterial color={c(r.id,'#c9b28c')} roughness={.6}/></mesh>{r.bands.map((band,n)=><mesh key={n} position={[x-2+n*1.15,y,z]} rotation={[0,0,Math.PI/2]}><cylinderGeometry args={[1.115,1.115,.38,24]}/><meshStandardMaterial color={c(r.id,band)} roughness={.6}/></mesh>)}<Lead points={[[a[0],a[1]-3,a[2]],[a[0],y-1,a[2]],[a[0]+1,y,a[2]],[x-2.9,y,z]]} color={c(r.id,'#bdc3c5')}/><Lead points={[[b[0],b[1]-3,b[2]],[b[0],y-1,b[2]],[b[0]-1,y,b[2]],[x+2.9,y,z]]} color={c(r.id,'#bdc3c5')}/></>)}</group>;})}
