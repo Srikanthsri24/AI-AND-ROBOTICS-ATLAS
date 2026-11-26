@@ -8,11 +8,11 @@ type Pad={name:string;x:string;y:string;dx:string;dy:string};
 const font=new URL('./fonts/NotoSans-Regular.ttf',document.baseURI).href;
 /** Millimetres, CAD X/Y mapped to X/-Z. PCB artwork is the original Adafruit
  * footprint; housing depth and lens cross-sections are authored visual geometry. */
-function SchoolBellDisplayParts({selected,choose,time='',powered=false}:{selected:string;choose:(id:string)=>void;time?:string;powered?:boolean}){
+function SchoolBellDisplayParts({selected,choose,onPick,time='',powered=false}:{selected:string;choose:(id:string)=>void;onPick?:(id:string,event:ThreeEvent<MouseEvent>)=>void;time?:string;powered?:boolean}){
  const board=useMemo(()=>{const s=new Shape();s.moveTo(-22.479,-13.335);s.lineTo(22.479,-13.335);s.quadraticCurveTo(25.019,-13.335,25.019,-10.795);s.lineTo(25.019,10.795);s.quadraticCurveTo(25.019,13.335,22.479,13.335);s.lineTo(-22.479,13.335);s.quadraticCurveTo(-25.019,13.335,-25.019,10.795);s.lineTo(-25.019,-10.795);s.quadraticCurveTo(-25.019,-13.335,-22.479,-13.335);for(const p of [...layout.pads,...layout.holes]){const h=new Path();h.absarc(+p.x,+p.y,+p.drill/2,0,Math.PI*2,true);s.holes.push(h);}return s;},[]);
  const headerHousing=useMemo(()=>{const s=new Shape();s.moveTo(-1.25,-1.25);s.lineTo(1.25,-1.25);s.lineTo(1.25,1.25);s.lineTo(-1.25,1.25);s.closePath();const h=new Path();h.moveTo(-.36,-.36);h.lineTo(-.36,.36);h.lineTo(.36,.36);h.lineTo(.36,-.36);h.closePath();s.holes.push(h);return s;},[]);
  const color=(id:string,c:string)=>selected===id?'#b994ed':c;
- const part=(id:string,node:ReactNode)=><group name={id} userData={{partId:id}} onClick={(e:ThreeEvent<MouseEvent>)=>{e.stopPropagation();choose(id);}}>{node}</group>;
+ const part=(id:string,node:ReactNode)=><group name={id} userData={{partId:id}} onClick={(e:ThreeEvent<MouseEvent>)=>{e.stopPropagation();choose(id);onPick?.(id,e);}}>{node}</group>;
  return <group name="school-display-hardware">
  {part('school-display-board',<mesh name="school-display-substrate" rotation={[-Math.PI/2,0,0]}><extrudeGeometry args={[board,{depth:1.6,bevelEnabled:false,curveSegments:32}]}/><meshStandardMaterial color={color('school-display-board','#184b77')} roughness={.48}/></mesh>)}
  {part('school-display-plating',<>{layout.pads.map((p,n)=><mesh key={n} name={'school-display-pad-'+p.element+'-'+p.name} position={[p.x,1.62,-p.y]} rotation={[-Math.PI/2,0,0]}><ringGeometry args={[p.drill/2,p.diameter/2,24]}/><meshStandardMaterial color={color('school-display-plating','#c9b785')} metalness={.8} roughness={.28}/></mesh>)}</>)}

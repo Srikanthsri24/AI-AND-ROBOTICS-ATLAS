@@ -15,6 +15,7 @@ for library in b.findall('./libraries/library'):
   packages[library.get('name')+'/'+package.get('name')]={kind:[dict(p.attrib) for p in package.findall(kind)] for kind in ['pad','smd','wire','rectangle','circle']}
 data={'source':base+urllib.parse.quote(board_name),'sha256':hashlib.sha256(raw).hexdigest(),'units':'mm','outline':[dict(w.attrib) for w in b.findall('./plain/wire') if w.get('layer')=='20'],'holes':[dict(h.attrib) for h in b.findall('./plain/hole')],'elements':[dict(e.attrib) for e in b.findall('./elements/element')],'packages':packages,'traces':[],'pads':[]}
 nets={(c.get('element'),c.get('pad')):s.get('name') for s in b.findall('./signals/signal') for c in s.findall('contactref')}
+data['nets']={s.get('name'):[dict(c.attrib) for c in s.findall('contactref')] for s in b.findall('./signals/signal')}
 for signal in b.findall('./signals/signal'):
  data['traces'] += [dict(w.attrib,net=signal.get('name')) for w in signal.findall('wire') if w.get('layer') in ['1','16']]
 for e in data['elements']:
