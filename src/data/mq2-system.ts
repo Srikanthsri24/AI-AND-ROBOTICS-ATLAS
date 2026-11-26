@@ -28,7 +28,7 @@ export function mq2Advance(previous:Mq2System,inputs:Mq2Inputs,durationMs:number
   const end=state.elapsedMs+durationMs;
   if(!inputs.ground||!inputs.signalConnected||!state.controllerKnown){
     // Floating A0 still runs on hardware, but its samples and resulting RAM are
-    // unknowable. Keep that uncertainty until a real USB power cycle resets RAM.
+    // unknowable. Keep that uncertainty until a sketch reset or USB power cycle resets RAM.
     return {...state,controllerKnown:false,elapsedMs:end,nextSampleMs:end,pendingCommands:'',led:null};
   }
   let controller=state.controller,commands=state.pendingCommands,next=state.nextSampleMs;
