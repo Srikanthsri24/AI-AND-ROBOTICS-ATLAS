@@ -1,0 +1,26 @@
+import {memo,useMemo,useRef,type ReactNode} from 'react';
+import {useFrame,type ThreeEvent} from '@react-three/fiber';
+import {CatmullRomCurve3,Path,Shape,Vector3,type Group,type Mesh} from 'three';
+import {pianoLayout,pianoPiezoTerminals,type PianoPoint as P} from '../data/piano-layout';
+import {pianoPiezoLead} from '../data/piano-sounder';
+function PianoSounderParts({selected,choose,sounding=false}:{selected:string;choose:(id:string)=>void;sounding?:boolean}){
+ const [x,,z]=pianoLayout.piezo,membrane=useRef<Group>(null),discOriginals=useRef(new Map<Mesh,Float32Array>()),previousPhase=useRef<number|null>(null);
+ useFrame(({clock})=>{const phase=sounding?Math.sin(clock.elapsedTime*Math.PI*16)*.03:0;if(phase===previousPhase.current)return;previousPhase.current=phase;membrane.current?.traverse(object=>{const mesh=object as Mesh;if(!mesh.isMesh)return;const attr=mesh.geometry.attributes.position;let base=discOriginals.current.get(mesh);if(!base){base=new Float32Array(attr.array);discOriginals.current.set(mesh,base);}for(let n=0;n<attr.count;n++){const radiusSq=base[n*3]**2+base[n*3+2]**2;attr.setY(n,base[n*3+1]+phase*Math.max(0,1-radiusSq/(9.5**2))**2);}attr.needsUpdate=true;mesh.geometry.computeVertexNormals();mesh.geometry.computeBoundingBox();mesh.geometry.computeBoundingSphere();});});
+ const shapes=useMemo(()=>{const ring=(inner:number,outer=12)=>{const s=new Shape();s.absarc(0,0,outer,0,2*Math.PI,false);if(inner){const p=new Path();p.absarc(0,0,inner,0,2*Math.PI,true);s.holes.push(p);}return s;};const floor=ring(0),ledge=ring(9,11.2);for(const side of [-1,1]){const p=new Path();p.absarc(side*10.2,0,.7,0,2*Math.PI,true);floor.holes.push(p);const h=new Path();h.absarc(side*10.2,0,.7,0,2*Math.PI,true);ledge.holes.push(h);}const grille=ring(5);for(let n=0;n<6;n++){const p=new Path(),a=n*Math.PI/3;p.absarc(Math.cos(a)*8.3,Math.sin(a)*8.3,.9,0,2*Math.PI,true);grille.holes.push(p);}return {floor,wall:ring(11.2),grille,ledge};},[]);
+ const curves=useMemo(()=>[true,false].map(positive=>new CatmullRomCurve3(pianoPiezoLead(positive).map(p=>new Vector3(...p)))),[]),extrusions=useMemo(()=>new Map([1,9,.125].map(depth=>[depth,{depth,bevelEnabled:false,curveSegments:48}])),[]);
+ const c=(id:string,color:string)=>selected===id?'#b78be8':color,tag=(id:string,children:ReactNode)=><group key={id} name={id} userData={{partId:id}} onClick={(e:ThreeEvent<MouseEvent>)=>{e.stopPropagation();choose(id);}}>{children}</group>;
+ const box=(id:string,at:P,size:P,color:string,metal=0)=><mesh position={at} castShadow><boxGeometry args={[...size]}/><meshStandardMaterial color={c(id,color)} metalness={metal} roughness={metal?.35:.65}/></mesh>;
+ const plate=(id:string,shape:Shape,y:number,depth:number)=><mesh position={[x,y,z]} rotation={[-Math.PI/2,0,0]} castShadow><extrudeGeometry args={[shape,extrusions.get(depth)!]}/><meshStandardMaterial color={c(id,'#252d39')} roughness={.52}/></mesh>;
+ return <group name="piano-passive-sounder">
+ {tag('piano-piezo-supports',<>{[-7,7].flatMap(dx=>[-7,7].map(dz=><mesh key={dx+','+dz} position={[x+dx,12,z+dz]} castShadow><cylinderGeometry args={[1.5,1.5,8,24]}/><meshStandardMaterial color={c('piano-piezo-supports','#d8d2c5')} roughness={.7}/></mesh>))}</>)}
+ {tag('piano-piezo-shell',<>{plate('piano-piezo-shell',shapes.floor,16,1)}{plate('piano-piezo-shell',shapes.wall,17,9)}{plate('piano-piezo-shell',shapes.ledge,23,.125)}</>)}
+ <group ref={membrane} name="piano-piezo-vibrating-disc">
+ {tag('piano-piezo-brass',<mesh position={[x,23.25,z]}><cylinderGeometry args={[9.5,9.5,.25,64]}/><meshStandardMaterial color={c('piano-piezo-brass','#ba9a55')} metalness={.7} roughness={.4}/></mesh>)}
+ {tag('piano-piezo-ceramic',<mesh position={[x,23.65,z]}><cylinderGeometry args={[6.5,6.5,.6,64]}/><meshStandardMaterial color={c('piano-piezo-ceramic','#d4d2bd')} metalness={.15} roughness={.58}/></mesh>)}
+ </group>
+ {tag('piano-piezo-grille',plate('piano-piezo-grille',shapes.grille,26,1))}
+ {[true,false].map(positive=>{const id='piano-piezo-'+(positive?'signal':'return')+'-lead';return tag(id,<mesh castShadow><tubeGeometry args={[curves[positive?0:1],96,.25,10,false]}/><meshStandardMaterial color={c(id,positive?'#ba5667':'#334359')} roughness={.5}/></mesh>);})}
+ {([['signal','piano-piezo-signal-socket'],['ground','piano-piezo-return-socket']] as const).map(([key,id])=>tag(id,<group position={pianoPiezoTerminals[key]}>{[-1,1].map(side=><group key={side}>{box(id,[side*.8,-3,0],[.5,6,2.1],'#263847')}{box(id,[0,-3,side*.8],[1.1,6,.5],'#263847')}{box(id,[side*.4,-3.25,0],[.2,4.5,.8],'#b9ad85',.75)}</group>)}{box(id,[0,-5.75,0],[2.1,.5,2.1],'#263847')}<mesh name={id+'-crimp'} position={[0,-5.3,0]}><boxGeometry args={[.8,.4,.8]}/><meshStandardMaterial color={c(id,'#b9ad85')} metalness={.75} roughness={.35}/></mesh></group>))}
+ </group>;
+}
+export default memo(PianoSounderParts);
