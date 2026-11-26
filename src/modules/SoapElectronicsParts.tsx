@@ -1,0 +1,20 @@
+import type {ThreeEvent} from '@react-three/fiber';
+import {memo,useMemo,type ReactNode} from 'react';
+import {Shape,Path,Vector2} from 'three';
+import Supply from './SoapSupplyParts';
+import Uno from './SoapDispenserUno';
+import Breadboard from './BluetoothMiniBreadboard';
+import {soapElectronicsLayout as layout,soapUnoMounts,soapUnoProgrammingRotations} from '../data/soap-dispenser-electronics';
+const plateOptions={depth:2,bevelEnabled:false,curveSegments:32},washerOptions={depth:.5,bevelEnabled:false,curveSegments:32},nutOptions={depth:1.4,bevelEnabled:false,curveSegments:32};
+function SoapElectronicsParts({selected,choose,powered=false,servoPowered=false}:{selected:string;choose:(id:string)=>void;powered?:boolean;servoPowered?:boolean}){
+ const shapes=useMemo(()=>{const plate=new Shape(),x=-195,y=-95,w=100,h=220,r=6;plate.moveTo(x+r,y);plate.lineTo(x+w-r,y);plate.quadraticCurveTo(x+w,y,x+w,y+r);plate.lineTo(x+w,y+h-r);plate.quadraticCurveTo(x+w,y+h,x+w-r,y+h);plate.lineTo(x+r,y+h);plate.quadraticCurveTo(x,y+h,x,y+h-r);plate.lineTo(x,y+r);plate.quadraticCurveTo(x,y,x+r,y);plate.closePath();for(const [mx,,mz]of soapUnoMounts){const h=new Path();h.absarc(mx,-mz,1.25,0,Math.PI*2,true);plate.holes.push(h);}const washer=new Shape();washer.absarc(0,0,2.4,0,Math.PI*2,false);const hole=new Path();hole.absarc(0,0,1.1,0,Math.PI*2,true);washer.holes.push(hole);const nut=new Shape();for(let n=0;n<6;n++){const a=n*Math.PI/3;n?nut.lineTo(2*Math.cos(a),2*Math.sin(a)):nut.moveTo(2,0);}nut.closePath();nut.holes.push(hole.clone());return {plate,washer,nut,sleeve:[new Vector2(1.25,10),new Vector2(2.5,10),new Vector2(2.5,23.2),new Vector2(1.25,23.2),new Vector2(1.25,10)]};},[]);
+ const c=(id:string,normal:string)=>selected===id?'#b78be8':normal,tag=(id:string,node:ReactNode)=><group name={id} userData={{partId:id}} onClick={(e:ThreeEvent<MouseEvent>)=>{e.stopPropagation();choose(id);}}>{node}</group>;
+ return <group name='soap-dry-electronics'><Supply selected={selected} choose={choose} powered={servoPowered}/>
+ {tag('soap-dry-platform',<><mesh name='soap-dry-deck-plate' position={[0,8,0]} rotation={[-Math.PI/2,0,0]}><extrudeGeometry args={[shapes.plate,plateOptions]}/><meshStandardMaterial color={c('soap-dry-platform','#27344b')} roughness={.5} metalness={.25}/></mesh>{layout.legs.map(([x,z],i)=><mesh key={i} name={'soap-dry-deck-leg-'+i} position={[x,1,z]}><cylinderGeometry args={[4,4,14,32]}/><meshStandardMaterial color={c('soap-dry-platform','#51436e')} roughness={.5}/></mesh>)}</>)}
+ <group name='soap-uno-assembly' position={[...layout.uno]} scale={50}><Uno selected={selected} select={choose} powered={powered} programmingRotations={soapUnoProgrammingRotations}/></group>
+ {tag('soap-uno-supports',<>{soapUnoMounts.map(([x,,z],i)=><mesh name={'soap-uno-support-'+i} key={i} position={[x,0,z]}><latheGeometry args={[shapes.sleeve,48]}/><meshStandardMaterial color={c('soap-uno-supports','#ded7c8')} roughness={.6}/></mesh>)}</>)}
+ {soapUnoMounts.map(([x,,z],i)=>{const id='soap-uno-fastener-'+i;return <group key={id}>{tag(id,<><mesh name={id+'-shaft'} position={[x,15.6,z]}><cylinderGeometry args={[1,1,19.4,32]}/><meshStandardMaterial color={c(id,'#b7c1cb')} metalness={.8} roughness={.3}/></mesh>{[24.8,7.5].map((y,n)=><mesh name={id+'-washer-'+n} key={n} position={[x,y,z]} rotation={[-Math.PI/2,0,0]}><extrudeGeometry args={[shapes.washer,washerOptions]}/><meshStandardMaterial color={c(id,'#b7c1cb')} metalness={.8} roughness={.3}/></mesh>)}<mesh name={id+'-head'} position={[x,25.9,z]}><cylinderGeometry args={[2.1,2.1,1.2,6]}/><meshStandardMaterial color={c(id,'#b7c1cb')} metalness={.8} roughness={.3}/></mesh><mesh name={id+'-nut'} position={[x,6.1,z]} rotation={[-Math.PI/2,0,0]}><extrudeGeometry args={[shapes.nut,nutOptions]}/><meshStandardMaterial color={c(id,'#b7c1cb')} metalness={.8} roughness={.3}/></mesh></>)}</group>;})}
+ {tag('soap-connection-board',<group position={[...layout.breadboard]} scale={50}><Breadboard flatBase selected={selected==='soap-connection-board'} supplyLabel='' returnLabel=''/></group>)}
+ </group>;
+}
+export default memo(SoapElectronicsParts);
