@@ -21,8 +21,8 @@ export function streetActiveJumper(progress:number){
 }
 export function streetJumperEndLabel(index:number,end:'a'|'b'){
  streetJumperSeating(index,8);
- const first=[['Uno 5 V','divider supply · front column 1'],['Uno GND (power header)','common ground · front column 11'],['Uno A0','divider junction · front column 6'],['5 V strip · front column 1','photoresistor positive contact'],['A0 junction · front column 6','photoresistor junction contact']];
+ const first=[['Uno 5 V','divider supply · front column 1'],['Uno GND (power header)','common ground · front column 11'],['Uno A0','divider junction · front column 6'],['5 V strip · front column 1','photoresistor positive socket'],['A0 junction · front column 6','photoresistor junction socket']];
  let names:string[];
- if(index<5)names=first[index];else {const branch=Math.floor((index-5)/4),kind=(index-5)%4,n=branch+1;names=[['Uno D'+(branch+5),`lamp ${n} resistor input · rear column ${branch*5+1}`],[`lamp ${n} resistor output · rear column ${branch*5+4}`,`lamp ${n} red anode lead`],[`lamp ${n} black cathode lead`,`lamp ${n} return · rear column ${branch*5+5}`],[`lamp ${n} return · rear column ${branch*5+5}`,'common ground · front column 11']][kind];}
+ if(index<5)names=first[index];else {const branch=Math.floor((index-5)/4),kind=(index-5)%4,n=branch+1;names=[['Uno D'+(branch+5),`lamp ${n} resistor input · rear column ${branch*5+1}`],[`lamp ${n} resistor output · rear column ${branch*5+4}`,`lamp ${n} anode lead socket (red)`],[`lamp ${n} cathode lead socket (black)`,`lamp ${n} return · rear column ${branch*5+5}`],[`lamp ${n} return · rear column ${branch*5+5}`,'common ground · front column 11']][kind];}
  return names[end==='a'?0:1];
 }

@@ -37,7 +37,7 @@ test('divider ground and junction are independent of the lamp bank',()=>{
 const assembly=await import(await load(new URL('../src/data/street-system-assembly.ts',import.meta.url)));
 const catalog=await import(await load(new URL('../src/data/street-system-parts.ts',import.meta.url)));
 test('every physical part has a bounded monotone assembly lift and seats at its chapter',()=>{
- assert.equal(catalog.streetSystemParts.length,71);
+ assert.equal(catalog.streetSystemParts.length,79);
  for(const part of catalog.streetSystemParts){let previous=Infinity;
   for(let n=0;n<=80;n++){const p=n/10,pose=assembly.streetSystemAssemblyPose(part.id,p);assert.ok(pose.lift>=0&&pose.lift<=70);assert.ok(pose.lift<=previous+1e-9);previous=pose.lift;if(p>=part.stage){assert.equal(pose.lift,0);assert.equal(pose.seated,true);assert.equal(pose.visible,true);}}
  }
@@ -141,4 +141,12 @@ test('plug instructions name actual endpoint order, including the reversed A0 de
  assert.equal(jumpers.streetJumperEndLabel(2,'a'),'Uno A0');assert.equal(jumpers.streetJumperEndLabel(2,'b'),'divider junction · front column 6');
  assert.equal(jumpers.streetJumperEndLabel(5,'a'),'Uno D5');assert.equal(jumpers.streetJumperEndLabel(9,'a'),'Uno D6');assert.equal(jumpers.streetJumperEndLabel(13,'a'),'Uno D7');
  for(let n=0;n<17;n++)for(const end of ['a','b'])assert.ok(jumpers.streetJumperEndLabel(n,end).length>5);
+});
+const sockets=await import(await load(new URL('../src/data/street-system-sockets.ts',import.meta.url)));
+test('eight supported socket mouths match actual jumper ends and leave the sensor face clear',()=>{
+ assert.equal(sockets.streetSocketSpecs.length,8);assert.equal(new Set(sockets.streetSocketSpecs.map(s=>s.id)).size,8);
+ for(const s of sockets.streetSocketSpecs){assert.equal(s.at[1],20);const ends=w.streetSystemCables.flatMap(c=>[c.a,c.b]).filter(p=>p.every((v,n)=>v===s.at[n]));assert.equal(ends.length,1);assert.equal(s.at[1]-6,14);}
+ assert.ok(w.streetSystemDivider.sensorPositive[2]-1.05>-90+3.2);
+ for(let n=0;n<3;n++){const b=w.streetSystemBranches[n],x=(b.anode[0]+b.cathode[0])/2;assert.ok(Math.abs(b.positiveTail[0]-x)-1.05>4);assert.ok(Math.abs(b.returnTail[0]-x)-1.05>4);for(const sign of [true,false]){const path=sockets.streetLampTail(n,sign);assert.equal(path.at(-1)[1],14.7);assert.equal(path.at(-1)[0],(sign?b.positiveTail:b.returnTail)[0]);}}
+ for(const positive of [true,false])assert.deepEqual(sockets.streetSensorLead(positive).at(-1),[positive?-151.27:-148.73,14.7,-85]);
 });

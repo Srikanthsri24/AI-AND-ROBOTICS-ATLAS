@@ -2,6 +2,7 @@ import {useRef,useEffect,useMemo,useCallback,type RefObject} from 'react';
 import {useFrame,type ThreeEvent} from '@react-three/fiber';
 import {OrbitControls} from '@react-three/drei';
 import {Group,Vector3,Matrix3,type Object3D} from 'three';
+import Sockets from './StreetSystemSocketParts';
 import Lamps from './StreetSystemLampParts';
 import Usb from './StreetSystemUsbParts';
 import Electrical from './StreetSystemElectricalParts';
@@ -30,7 +31,7 @@ export default function StreetSystemWorkshopScene({progress,selected,choose,lamp
  useEffect(()=>{if(anchor.current&&floodOwner(anchor.current.object)!==selected)anchor.current=null;},[selected]);
  return <><color attach="background" args={['#edf0f8']}/><ambientLight intensity={1.1}/><directionalLight position={[-4,9,7]} intensity={2.4} castShadow/>
  <mesh position={[0,-.02,0]} rotation={[-Math.PI/2,0,0]} receiveShadow><planeGeometry args={[40,40]}/><meshStandardMaterial color="#e0e5ef" roughness={.9}/></mesh>
- <group ref={root} name="street-system-assembly" scale={.01} onPointerDown={pick}><Lamps selected={selected} choose={select} stage={8} lamps={visibleLamps} cutaway={cutaway}/><Electrical selected={selected} choose={select} stage={8} powered={progress===8&&powered} links={electricalLinks} progress={assembly}/><Shade travel={shade} selected={selected} choose={select}/><Usb selected={selected} choose={select} powered={progress===8&&powered} rows={rows} motion={usbMotion}/></group>
+ <group ref={root} name="street-system-assembly" scale={.01} onPointerDown={pick}><Lamps selected={selected} choose={select} stage={8} lamps={visibleLamps} cutaway={cutaway}/><Electrical selected={selected} choose={select} stage={8} powered={progress===8&&powered} links={electricalLinks} progress={assembly}/><Sockets selected={selected} choose={select}/><Shade travel={shade} selected={selected} choose={select}/><Usb selected={selected} choose={select} powered={progress===8&&powered} rows={rows} motion={usbMotion}/></group>
  <Motion root={root} progress={progress}/><OrbitControls makeDefault minDistance={.1} maxDistance={20} maxPolarAngle={Math.PI*.49}/><Inspection selected={selected} name={name} anchor={anchor} focus={focus} busy={false} view="bench" viewVersion={view+Math.ceil(progress)*100000}/>
  </>;
 }

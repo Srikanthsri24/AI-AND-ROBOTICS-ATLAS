@@ -15,7 +15,7 @@ export function streetSystemAssemblyPose(id:string,progress:number){
   else [start,end]=[.8,1];
  }else if(chapter===2){[start,end]=id.endsWith('-lens')?[0,.5]:[.5,1];
  }else if(chapter===3){[start,end]=id==='street-uno-supports'?[0,.25]:id==='street-breadboard'?[.7,1]:[.25,.7];
- }else if(chapter===4){[start,end]=id==='street-sensor-mount'?[0,.2]:id==='street-ldr'?[.2,.5]:id==='street-divider-resistor'?[.5,.8]:[.8,1];
+ }else if(chapter===4){[start,end]=id==='street-sensor-mount'?[0,.2]:(id==='street-ldr'||id.startsWith('street-sensor-')&&id.endsWith('-socket'))?[.2,.5]:id==='street-divider-resistor'?[.5,.8]:[.8,1];
  }else if(chapter===5){const n=Number(id.match(/lamp-(\d)/)?.[1]??1)-1;start=n/3;end=(n+1)/3;}
  const fraction=Math.max(0,Math.min(1,(local-start)/(end-start)));
  const smooth=fraction*fraction*(3-2*fraction);

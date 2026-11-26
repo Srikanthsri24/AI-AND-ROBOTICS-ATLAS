@@ -1,3 +1,4 @@
+import {streetSocketSpecs} from './street-system-sockets';
 import {streetUsbParts} from './street-system-usb';
 import {streetSystemBranches,streetSystemCables} from './street-system-layout';
 export type StreetSystemPart={id:string;name:string;stage:number;what:string;connection:string};
@@ -9,7 +10,7 @@ export const streetSystemParts:readonly StreetSystemPart[]=[
   const n=index+1;
   return [
    part(b.id+'-foot',`Lamp ${n} drilled mounting foot`,1,'A bored plate anchors the post and leaves a central passage for its two wires.','The four fixing bores receive mechanical fasteners; the centre opening carries wiring.'),
-   part(b.id+'-post',`Lamp ${n} hollow post`,1,'Supports the hood while protecting the positive and return wires. Use the cutaway to inspect inside.','The insulated red and black leads remain separate inside the channel. The post is not the circuit return.'),
+   part(b.id+'-post',`Lamp ${n} hollow post`,1,'Supports the hood while protecting the positive and return wires. Use the cutaway to inspect inside. Two bottom notches let the insulated leads exit without crossing the metal wall.','The insulated red and black leads remain separate inside the channel. The post is not the circuit return.'),
    part(b.id+'-hood',`Lamp ${n} downward-facing hood`,1,'Houses the white LED and reflector above the model road.','Anode and cathode wiring enters from the post. The hood never replaces a current-limiting resistor.'),
    part(b.id+'-bolts',`Lamp ${n} fixing screws and washers`,1,'Hold the foot in position without pinching the two insulated wires.','Fit the foot before the washers and screws; keep the central cable passage clear.'),
    part(b.id+'-lens',`Lamp ${n} white LED`,2,'Turns electrical current into visible light directed toward the road. Its white output is kept separate from violet selection.','Current flows from '+b.pin+' through this lamp’s own 220 Ω resistor and anode, then through its cathode to ground.'),
@@ -36,4 +37,5 @@ export const streetSystemParts:readonly StreetSystemPart[]=[
  part('street-divider-resistor','10 kΩ divider resistor',4,'Works with the photoresistor to create a readable analogue voltage. Brown / black / orange / gold bands identify 10 kΩ.','Connects the A0 junction strip to the common ground strip. It is distinct from all three 220 Ω LED limiters.'),
  ...streetSystemCables.map((w,index)=>part(w.id,w.name,index<5?6:7,'An individually routed insulated jumper joins two specific physical contacts. Its pin enters the socket while the grip remains outside.',w.node==='gnd'?'Completes a named return connection on the common ground node. The mini breadboard has no continuous ground rail.':w.node==='5v'?'Supplies only the photoresistor divider from Uno 5 V. Do not move this lead to VIN.':w.node==='a0'?'Carries the divider junction voltage to A0. An open analogue input floats, so the workshop marks its reading and outputs unknown.':w.node.startsWith('D')?'Carries this lamp’s digital output into its own 220 Ω resistor input strip.':'Connects the resistor output to this lamp’s positive tail; the post’s internal lead continues to the LED anode.')),
  ...streetUsbParts.map(([id,name,what,connection])=>part(id,name,id.startsWith('street-host-')?0:8,what,connection)),
+ ...streetSocketSpecs.map(s=>part(s.id,s.name,s.stage,'An open insulating housing supports recessed metal spring contacts and the fixed lead termination.','Seat the jumper pin through the actual top opening. The socket base sits on its support; its springs meet the inserted pin, while the housing keeps adjacent contacts separate.')),
 ];

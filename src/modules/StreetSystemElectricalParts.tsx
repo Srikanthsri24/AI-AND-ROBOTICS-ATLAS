@@ -4,6 +4,7 @@ import type {ThreeEvent} from '@react-three/fiber';
 import {CatmullRomCurve3,Vector3} from 'three';
 import BluetoothCarUno from './BluetoothCarUno';
 import MiniBoard from './BluetoothMiniBreadboard';
+import {streetSensorLead} from '../data/street-system-sockets';
 import Jumpers from './StreetSystemJumpers';
 import type {StreetSystemSettings} from '../data/street-system-workshop';
 import unoLayout from '../data/uno-r3-board-layout.json';
@@ -27,8 +28,8 @@ function StreetSystemElectricalParts({selected,choose,stage,powered,links,progre
   {owner('street-breadboard',<><group position={layout.breadboard} scale={50}><MiniBoard selected={selected==='street-breadboard'} supplyLabel="" returnLabel=""/></group>{Array.from({length:17},(_,n)=>[61.8,94.2].map(z=><Text key={n+','+z} name={'street-board-column-'+(n+1)+'-'+z} font={font} position={[streetSystemHole(n,1,0)[0],18.05,z]} rotation={[-Math.PI/2,0,0]} fontSize={1.2} color="#35435c" anchorX="center">{n+1}</Text>))}</>)}
  </>}
  {stage>=4&&<>
-  {owner('street-sensor-mount',<>{box('street-sensor-mount',[-150,11,-90],[16,6,14],'#b6ad91')}{[-1.27,1.27].map(dx=>box('street-sensor-mount',[-150+dx,17,-90],[1.3,6,1.3],'#263847'))}</>)}
-  {owner('street-ldr',<><mesh position={layout.sensor} castShadow><cylinderGeometry args={[3.2,3.2,1.5,40]}/><meshStandardMaterial color={c('street-ldr','#d4b78c')} roughness={.65}/></mesh>{Array.from({length:6},(_,n)=>tube('street-ldr',[[-152.3+n*.8,25.8,-91.8],[-152.3+n*.8,25.8,-88.2]],'#85573e',.12))}{[-1.27,1.27].map(dx=>box('street-ldr',[-150+dx,21,-90],[.4,7,.4],'#bac3ca',.8))}</>)}
+  {owner('street-sensor-mount',box('street-sensor-mount',[-150,11,-90],[16,6,14],'#b6ad91'))}
+  {owner('street-ldr',<><mesh position={layout.sensor} castShadow><cylinderGeometry args={[3.2,3.2,1.5,40]}/><meshStandardMaterial color={c('street-ldr','#d4b78c')} roughness={.65}/></mesh>{Array.from({length:6},(_,n)=>tube('street-ldr',[[-152.3+n*.8,25.8,-91.8],[-152.3+n*.8,25.8,-88.2]],'#85573e',.12))}{[true,false].map(positive=><group key={String(positive)}>{tube('street-ldr',streetSensorLead(positive),'#bac3ca',.3)}</group>)}</>)}
   {resistor('street-divider-resistor',divider.junction,divider.ground,['#805537','#282e34','#dc9046','#c5ad65'])}
  </>}
  {stage>=5&&branches.map(b=>resistor(b.id+'-resistor',b.resistorInput,b.resistorOutput,['#ad424b','#ad424b','#805537','#c5ad65']))}

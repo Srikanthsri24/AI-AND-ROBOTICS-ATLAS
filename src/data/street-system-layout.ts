@@ -29,15 +29,15 @@ export const streetSystemBranches=streetSystemLayout.lampXs.map((x,index)=>({
   driveContact:streetSystemHole(index*5,-1,4),
   lampContact:streetSystemHole(index*5+3,-1,4),
   returnContact:streetSystemHole(index*5+4,-1,4),
-  anode:[x-1.27,streetSystemLayout.lampHeight-4,-12] as StreetPoint,
-  cathode:[x+1.27,streetSystemLayout.lampHeight-4,-12] as StreetPoint,
-  positiveTail:[x-5,18,streetSystemLayout.lampZ] as StreetPoint,
-  returnTail:[x+5,18,streetSystemLayout.lampZ] as StreetPoint,
+  anode:[x-1.27,streetSystemLayout.lampHeight+1,-12] as StreetPoint,
+  cathode:[x+1.27,streetSystemLayout.lampHeight+1,-12] as StreetPoint,
+  positiveTail:[x-6,20,streetSystemLayout.lampZ] as StreetPoint,
+  returnTail:[x+6,20,streetSystemLayout.lampZ] as StreetPoint,
 }));
 // Front bank: 5 V column 1, divider junction column 6, ground column 11.
 export const streetSystemDivider={
   power:streetSystemHole(0,1,0),junction:streetSystemHole(5,1,0),ground:streetSystemHole(10,1,0),
-  sensorPositive:[-151.27,18,-90] as StreetPoint,sensorJunction:[-148.73,18,-90] as StreetPoint,
+  sensorPositive:[-151.27,20,-85] as StreetPoint,sensorJunction:[-148.73,20,-85] as StreetPoint,
 };
 export type StreetCable={id:string;name:string;color:string;node:string;a:StreetPoint;b:StreetPoint;route:readonly StreetPoint[]};
 const cable=(id:string,name:string,color:string,node:string,a:StreetPoint,b:StreetPoint,route:readonly StreetPoint[]=[]):StreetCable=>({id,name,color,node,a,b,route});
