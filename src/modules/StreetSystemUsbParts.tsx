@@ -1,24 +1,27 @@
-import {memo,useMemo,type ReactNode} from 'react';
-import type {ThreeEvent} from '@react-three/fiber';
+import {memo,useMemo,useRef,type ReactNode,type RefObject} from 'react';
+import {useFrame,type ThreeEvent} from '@react-three/fiber';
 import {Text} from '@react-three/drei';
-import {Shape,Path,Vector3,CatmullRomCurve3} from 'three';
-import {streetUsbPose,streetUsbHostFace} from '../data/street-system-usb';
+import {Shape,Path,Vector3,CatmullRomCurve3,Group,type Mesh,type TubeGeometry} from 'three';
+import {rewriteCubeSatTube} from './cubesat-tube-motion';
+import {streetUsbPose,streetUsbHostFace,type StreetUsbMotion} from '../data/street-system-usb';
 import type {StreetPoint as P} from '../data/street-system-layout';
 const font=new URL('./fonts/NotoSans-Regular.ttf',document.baseURI).href;
 function rect(w:number,h:number){const s=new Shape();s.moveTo(-w/2,-h/2);s.lineTo(w/2,-h/2);s.lineTo(w/2,h/2);s.lineTo(-w/2,h/2);s.closePath();return s;}
 function hole(s:Shape,x:number,y:number,w:number,h:number){const p=new Path();p.moveTo(x-w/2,y-h/2);p.lineTo(x-w/2,y+h/2);p.lineTo(x+w/2,y+h/2);p.lineTo(x+w/2,y-h/2);p.closePath();s.holes.push(p);}
 function ring(w:number,h:number){const s=rect(w,h);hole(s,0,0,w-.7,h-.7);return s;}
-type Props={selected:string;choose:(id:string)=>void;powered:boolean;rows?:readonly string[]};
-function StreetSystemUsbParts({selected,choose,powered,rows=[]}:Props){
+type Props={selected:string;choose:(id:string)=>void;powered:boolean;rows?:readonly string[];motion?:RefObject<StreetUsbMotion>};
+function StreetSystemUsbParts({selected,choose,powered,rows=[],motion}:Props){
  const shapes=useMemo(()=>{const side=rect(65,10);hole(side,-10,.5,13,5.6);const b=new Shape();b.moveTo(-4.9,-4.4);b.lineTo(4.9,-4.4);b.lineTo(4.9,3);b.lineTo(3.5,4.4);b.lineTo(-3.5,4.4);b.lineTo(-4.9,3);b.closePath();const h=new Path();h.moveTo(-4.55,-4.05);h.lineTo(-4.55,2.86);h.lineTo(-3.36,4.05);h.lineTo(3.36,4.05);h.lineTo(4.55,2.86);h.lineTo(4.55,-4.05);h.closePath();b.holes.push(h);return{side,b,a:ring(11.8,4.4),port:ring(12.8,5.4)};},[]);
  const extrusionSettings=useMemo(()=>new Map([1,10].map(depth=>[depth,{depth,bevelEnabled:false,curveSegments:24} as const])),[]);
- const pose=useMemo(()=>streetUsbPose(powered?0:12),[powered]),curve=useMemo(()=>new CatmullRomCurve3(pose.points.map(p=>new Vector3(...p)),false,'centripetal'),[pose]);
+ const root=useRef<Group>(null),last=useRef('');
+ const pose=useMemo(()=>streetUsbPose(12),[]),curve=useMemo(()=>new CatmullRomCurve3(pose.points.map(p=>new Vector3(...p)),false,'centripetal'),[pose]);
+ useFrame(()=>{if(!root.current)return;const m=motion?.current??{unoWithdrawal:powered?0:12,hostWithdrawal:0},key=m.unoWithdrawal+'/'+m.hostWithdrawal;if(last.current===key)return;const p=streetUsbPose(m.unoWithdrawal,m.hostWithdrawal);root.current.getObjectByName('street-usb-b-body')!.position.set(...p.uno);root.current.getObjectByName('street-usb-a-body')!.position.set(...p.host);rewriteCubeSatTube((root.current.getObjectByName('street-usb-cable-tube') as Mesh<TubeGeometry>).geometry,new CatmullRomCurve3(p.points.map(p=>new Vector3(...p)),false,'centripetal'));last.current=key;},-2);
  const c=(id:string,color:string)=>selected===id?'#b78be8':color;
  const mat=(id:string,color:string,metal=0)=><meshStandardMaterial color={c(id,color)} metalness={metal} roughness={metal?.33:.6}/>;
  const box=(id:string,p:P,size:P,color:string,metal=0)=><mesh key={id+p.join(',')} position={p} castShadow><boxGeometry args={[...size]}/>{mat(id,color,metal)}</mesh>;
  const extrude=(id:string,s:Shape,p:P,depth:number)=><mesh position={p} rotation={[0,Math.PI/2,0]} castShadow><extrudeGeometry args={[s,extrusionSettings.get(depth)!]}/>{mat(id,'#bac4d0',.8)}</mesh>;
  const owner=(id:string,node:ReactNode)=><group name={id} userData={{partId:id}} key={id} onClick={(e:ThreeEvent<MouseEvent>)=>{e.stopPropagation();choose(id);}}>{node}</group>;
- return <group name="street-usb-hardware">
+ return <group ref={root} name="street-usb-hardware">
  {owner('street-host-platform',box('street-host-platform',[-255,4,70],[130,8,130],'#b59670'))}
  {owner('street-host-body',<>{box('street-host-body',[-260,8.5,80],[110,1,65],'#556078',.5)}{box('street-host-body',[-260,18.5,80],[110,1,65],'#8491a6',.5)}{box('street-host-body',[-314.5,13.5,80],[1,9,65],'#556078',.5)}{[-32,32].map(dz=>box('street-host-body',[-260,13.5,80+dz],[108,9,1],'#556078',.5))}{extrude('street-host-body',shapes.side,[-206,13.5,80],1)}</>)}
  {owner('street-host-input',<>{Array.from({length:4},(_,r)=>Array.from({length:11},(_,col)=>box('street-host-input',[-305+col*9,19.7,58+r*7],[7,.8,5],'#28364e')))}{box('street-host-input',[-260,19.2,99],[30,.3,17],'#64738d')}</>)}

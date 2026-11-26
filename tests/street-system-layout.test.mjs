@@ -98,3 +98,22 @@ test('USB Type-B seats on the authored Uno face and withdraws along its actual a
  for(let n=0;n<=12;n++){const pose=usb.streetUsbPose(n);assert.equal(pose.points[0][0],pose.uno[0]-24);assert.equal(pose.points.at(-1)[0],pose.host[0]+24);assert.ok(pose.points.every(p=>p[1]-1.5>8));}
  assert.throws(()=>usb.streetUsbPose(13));assert.throws(()=>usb.streetUsbPose(-1));assert.throws(()=>usb.streetUsbPose(NaN));
 });
+
+test('USB motion gates power until both plugs seat and supports reversal without overshoot',()=>{
+ let p={unoWithdrawal:12,hostWithdrawal:0};
+ assert.equal(usb.streetUsbMated(true,p),false);
+ p=usb.streetUsbAdvance(p,250,0,0);assert.equal(p.unoWithdrawal,6);assert.equal(usb.streetUsbMated(true,p),false);
+ p=usb.streetUsbAdvance(p,250,0,0);assert.equal(usb.streetUsbMated(true,p),true);assert.equal(usb.streetUsbMated(false,p),false);
+ p=usb.streetUsbAdvance(p,250,12,12);assert.deepEqual(p,{unoWithdrawal:6,hostWithdrawal:6});
+ p=usb.streetUsbAdvance(p,1000,12,12);assert.deepEqual(p,{unoWithdrawal:12,hostWithdrawal:12});
+ const exposed=usb.streetUsbPose(12,12);assert.equal(exposed.host[0]-usb.streetUsbHostFace[0],12);assert.equal(exposed.points.at(-1)[0],exposed.host[0]+24);
+ assert.equal(usb.streetUsbMated(true,{unoWithdrawal:0,hostWithdrawal:12}),false);
+ assert.deepEqual(usb.streetUsbAdvance({unoWithdrawal:6,hostWithdrawal:6},250,0,0),{unoWithdrawal:0,hostWithdrawal:0});
+ assert.throws(()=>usb.streetUsbAdvance(p,-1,0,0));assert.throws(()=>usb.streetUsbPose(0,13));
+});
+
+test('host plug clears the port before lifting and lowers before final mating',()=>{
+ for(let n=0;n<=120;n++){const withdrawal=n/10,p=usb.streetUsbPose(12,withdrawal);if(withdrawal<=6)assert.equal(p.host[1],usb.streetUsbHostFace[1]);else {assert.ok(p.host[0]-4>usb.streetUsbHostFace[0]+2);assert.ok(p.host[1]>usb.streetUsbHostFace[1]);}assert.equal(p.points.at(-2)[1],p.host[1]);assert.equal(p.points.at(-1)[1],p.host[1]);}
+ assert.equal(usb.streetUsbPose(12,12).host[1],34);
+ assert.equal(usb.streetUsbPose(12,0).host[1],14);
+});
