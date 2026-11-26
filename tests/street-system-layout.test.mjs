@@ -150,3 +150,17 @@ test('eight supported socket mouths match actual jumper ends and leave the senso
  for(let n=0;n<3;n++){const b=w.streetSystemBranches[n],x=(b.anode[0]+b.cathode[0])/2;assert.ok(Math.abs(b.positiveTail[0]-x)-1.05>4);assert.ok(Math.abs(b.returnTail[0]-x)-1.05>4);for(const sign of [true,false]){const path=sockets.streetLampTail(n,sign);assert.equal(path.at(-1)[1],14.7);assert.equal(path.at(-1)[0],(sign?b.positiveTail:b.returnTail)[0]);}}
  for(const positive of [true,false])assert.deepEqual(sockets.streetSensorLead(positive).at(-1),[positive?-151.27:-148.73,14.7,-85]);
 });
+const fasteners=await import(await load(new URL('../src/data/street-system-fasteners.ts',import.meta.url)));
+test('all twelve fixings seat their washers before screw approach and pitched tightening',()=>{
+ for(let n=0;n<12;n++){
+  const start=.8+n/60,middle=.8+(n+.5)/60,end=.8+(n+1)/60;
+  assert.equal(fasteners.streetFootFastenerPose(n,start).washerVisible,false);
+  const washer=fasteners.streetFootFastenerPose(n,middle);assert.equal(washer.washerLift,0);assert.equal(washer.screwVisible,false);
+  const approach=fasteners.streetFootFastenerPose(n,.8+(n+.75)/60);assert.equal(approach.turn,0);assert.ok(approach.screwLift>2.4);
+  const turning=fasteners.streetFootFastenerPose(n,.8+(n+.95)/60);assert.ok(turning.turn>0);assert.ok(Math.abs(turning.screwLift+turning.turn/(Math.PI*2)*.4-2.4)<1e-10);
+  const final=fasteners.streetFootFastenerPose(n,end);assert.equal(final.screwLift,0);assert.equal(final.turn,Math.PI*12);assert.equal(final.seated,true);
+ }
+ let p=.8;for(let n=0;n<24;n++)p=assembly.streetAssemblyNextStop(p);assert.equal(p,1);
+ assert.equal(assembly.streetAssemblyAdvance(.8,1000),.8+1/120);
+ assert.throws(()=>fasteners.streetFootFastenerPose(12,1));
+});
