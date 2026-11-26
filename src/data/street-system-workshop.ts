@@ -1,4 +1,5 @@
 import { lampsOn } from './street-light';
+import {streetShadeCoverage} from './street-system-shade';
 
 /** Three separate D5/D6/D7 circuits; faults never change the sketch's command. */
 export interface StreetSystemSettings {
@@ -27,7 +28,7 @@ export function streetSystemRaw(ambient: number, shade: number): number {
   if (![ambient, shade].every(Number.isFinite) || ambient < 0 || ambient > 100 || shade < 0 || shade > 100)
     throw new RangeError('Ambient light and shade must be between 0 and 100.');
   // Authored divider response, not a lux measurement or a measured LDR curve.
-  return Math.round(180 + 640 * ambient / 100 * (1 - shade / 100));
+  return Math.round(180 + 640 * ambient / 100 * (1 - streetShadeCoverage(shade) / 100));
 }
 export function streetSystemAdvance(state: StreetSystemState, elapsedMs: number, settings: StreetSystemSettings): StreetSystemState {
   if (!Number.isFinite(elapsedMs) || elapsedMs < 0) throw new RangeError('Elapsed time must be finite and nonnegative.');

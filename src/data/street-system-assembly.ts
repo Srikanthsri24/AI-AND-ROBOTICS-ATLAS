@@ -3,7 +3,18 @@ export function streetSystemAssemblyPose(id:string,progress:number){
  if(!Number.isFinite(progress)||progress<0||progress>8)throw new RangeError('Street assembly progress must be 0–8.');
  const p=streetSystemParts.find(p=>p.id===id);if(!p)throw new Error('Unknown street assembly part '+id);
  if(p.stage===0)return {visible:true,lift:0,seated:true};
- const chapter=p.stage,local=progress-(chapter-1),fraction=Math.max(0,Math.min(1,local));
+ const chapter=p.stage,local=progress-(chapter-1);
+ let start=0,end=1;
+ if(chapter===1){
+  if(id.endsWith('-foot'))[start,end]=[0,.25];
+  else if(id.endsWith('-post'))[start,end]=[.25,.55];
+  else if(id.endsWith('-hood'))[start,end]=[.55,.8];
+  else [start,end]=[.8,1];
+ }else if(chapter===2){[start,end]=id.endsWith('-lens')?[0,.5]:[.5,1];
+ }else if(chapter===3){[start,end]=id==='street-uno-supports'?[0,.25]:id==='street-breadboard'?[.7,1]:[.25,.7];
+ }else if(chapter===4){[start,end]=id==='street-sensor-mount'?[0,.2]:id==='street-ldr'?[.2,.5]:id==='street-divider-resistor'?[.5,.8]:[.8,1];
+ }else if(chapter===5){const n=Number(id.match(/lamp-(\d)/)?.[1]??1)-1;start=n/3;end=(n+1)/3;}
+ const fraction=Math.max(0,Math.min(1,(local-start)/(end-start)));
  const smooth=fraction*fraction*(3-2*fraction);
- return {visible:local>0,lift:(1-smooth)*70,seated:fraction===1};
+ return {visible:local>start,lift:(1-smooth)*70,seated:fraction===1};
 }

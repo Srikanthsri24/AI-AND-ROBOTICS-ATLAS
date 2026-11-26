@@ -37,9 +37,38 @@ test('divider ground and junction are independent of the lamp bank',()=>{
 const assembly=await import(await load(new URL('../src/data/street-system-assembly.ts',import.meta.url)));
 const catalog=await import(await load(new URL('../src/data/street-system-parts.ts',import.meta.url)));
 test('every physical part has a bounded monotone assembly lift and seats at its chapter',()=>{
- assert.equal(catalog.streetSystemParts.length,58);
+ assert.equal(catalog.streetSystemParts.length,59);
  for(const part of catalog.streetSystemParts){let previous=Infinity;
   for(let n=0;n<=80;n++){const p=n/10,pose=assembly.streetSystemAssemblyPose(part.id,p);assert.ok(pose.lift>=0&&pose.lift<=70);assert.ok(pose.lift<=previous+1e-9);previous=pose.lift;if(p>=part.stage){assert.equal(pose.lift,0);assert.equal(pose.seated,true);assert.equal(pose.visible,true);}}
  }
  assert.throws(()=>assembly.streetSystemAssemblyPose('missing',0));assert.throws(()=>assembly.streetSystemAssemblyPose('street-base',9));
+});
+
+const shade=await import(await load(new URL('../src/data/street-system-shade.ts',import.meta.url)));
+test('moving shade uses circular overlap and stays above the sensor and connector tops',()=>{
+ let previous=-1;
+ for(let n=0;n<=100;n++){
+  const p=shade.streetShadePose(n),coverage=shade.streetShadeCoverage(n),g=shade.streetShadeGeometry;
+  assert.ok(coverage>=previous);previous=coverage;
+  assert.ok(Math.abs(p.x+g.width/2-p.rightEdge)<1e-10);
+  assert.ok(g.height-g.thickness/2>27);
+  assert.ok(g.depth/2>g.radius);
+  assert.ok(Math.abs(coverage+shade.streetShadeCoverage(100-n)-100)<1e-10);
+ }
+ assert.equal(shade.streetShadeCoverage(0),0);assert.equal(shade.streetShadeCoverage(50),50);assert.equal(shade.streetShadeCoverage(100),100);
+ assert.ok(shade.streetShadeCoverage(25)<25);assert.ok(shade.streetShadeCoverage(75)>75);
+ assert.throws(()=>shade.streetShadePose(-1));assert.throws(()=>shade.streetShadePose(NaN));
+});
+test('mounts seat before supported boards, hoods and fasteners; resistors fit sequentially',()=>{
+ const pose=assembly.streetSystemAssemblyPose;
+ assert.equal(pose('street-lamp-1-foot',.25).seated,true);
+ assert.equal(pose('street-lamp-1-post',.25).visible,false);
+ assert.equal(pose('street-lamp-1-post',.55).seated,true);
+ assert.equal(pose('street-lamp-1-hood',.55).visible,false);
+ assert.equal(pose('street-lamp-1-hood',.8).seated,true);
+ assert.equal(pose('street-lamp-1-bolts',.8).visible,false);
+ assert.equal(pose('street-uno-supports',2.25).seated,true);
+ assert.equal(pose('street-uno-pcb',2.25).visible,false);
+ assert.equal(pose('street-lamp-1-resistor',4.5).seated,true);
+ assert.equal(pose('street-lamp-3-resistor',4.5).visible,false);
 });
