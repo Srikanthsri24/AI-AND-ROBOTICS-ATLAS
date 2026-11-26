@@ -1,0 +1,13 @@
+/** Flat calibration card, authored millimetres. Human-hand demonstration follows calibration. */
+export const soapTargetSize=[105,1,105] as const;
+export const soapTargetPark=[150,6,87.5] as const;
+export function soapTargetPose(distanceCm:number|null){if(distanceCm===null)return {top:[...soapTargetPark] as [number,number,number],distanceCm:null};if(!Number.isFinite(distanceCm)||distanceCm<4||distanceCm>24.9)throw new RangeError('Flat target gap must be 4–24.9 cm');return {top:[32.5,250-distanceCm*10,87.5] as [number,number,number],distanceCm};}
+/** Lift in the clear parking corridor before travelling beneath the nozzle. */
+export function soapTargetTravel(distanceCm:number,progress:number){const end=soapTargetPose(distanceCm).top;if(!Number.isFinite(progress)||progress<0||progress>1)throw new RangeError('Invalid target travel');const ease=(x:number)=>x*x*(3-2*x),t=progress<.5?ease(progress*2):ease((progress-.5)*2);return progress<.5?[soapTargetPark[0],soapTargetPark[1]+(end[1]-soapTargetPark[1])*t,end[2]] as const:[soapTargetPark[0]+(end[0]-soapTargetPark[0])*t,end[1],end[2]] as const;}
+export function soapTargetReceiver(top:readonly[number,number,number]){return Math.abs(top[0])<=soapTargetSize[0]/2&&Math.abs(45-top[2])<=soapTargetSize[2]/2&&top[1]>=0?top[1]:0;}
+export const soapTargetParts=[{id:'soap-calibration-card',label:'Calibration · flat target card',what:'Provides a broad, level reflecting surface for checking the distance thresholds before using a hand.',connection:'Its upper face is the range surface. The card spans both sonar axes and the soap outlet, clears the bottle and stays below the nozzle even at the nearest 4 cm setting. Park it away from the dispenser before the hand demonstration.'}];
+/** Ideal level-card echo. A card edge between the two axes is unavailable;
+ * a parked card leaves the base as the 25 cm reference surface. */
+export function soapTargetReading(top:readonly[number,number,number]=soapTargetPark){if(!top.every(Number.isFinite))throw new RangeError('Invalid target surface');const covers=(x:number)=>Math.abs(x-top[0])<=soapTargetSize[0]/2&&Math.abs(105-top[2])<=soapTargetSize[2]/2&&top[1]>=1,tx=covers(22),rx=covers(48);return tx&&rx?{distanceCm:(250-top[1])/10,echoPresent:true}:{distanceCm:25,echoPresent:tx===rx};}
+
+export const soapTargetStandParts=[{id:'soap-target-stand',label:'Calibration · adjustable target stand',what:'A weighted foot and vertical guide hold the level reference card beside the dispensing area.',connection:'The foot meets the bench plane. Its collar adjusts height and its horizontal carrier slides the card beneath the nozzle after lifting. This is an authored teaching aid, not a manufacturing drawing.'}];
