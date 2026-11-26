@@ -1,3 +1,4 @@
+import {trafficParkingUsbParts} from './traffic-parking-usb';
 import uno from './uno-r3-board-layout.json';
 import {trafficParkingWires} from './traffic-parking-wires';
 import {trafficParkingCircuitLayout as layout} from './traffic-parking-circuit-layout';
@@ -31,4 +32,4 @@ export const trafficParkingUnoParts=[
  part('tp-uno-programming','Uno · ICSP headers','Provide dedicated programming contacts for the two AVR chips.','Leave them unconnected in this project. The normal Arduino USB upload path is used.'),
  part('tp-uno-leds','Uno · status LEDs','Indicate board power and serial activity.','The ON indicator follows Uno USB logic power. It does not prove that the independent servo supply is enabled.'),
 ];
-export const trafficParkingHardwareParts=[...trafficParkingSignalParts,...trafficParkingBarrierParts,...trafficParkingCircuitParts,...trafficParkingSupplyParts,...trafficParkingServoLeadParts,...trafficParkingBenchParts,...trafficParkingUnoParts,...trafficParkingWires.map(w=>({id:w.id,label:w.label,what:w.what,connection:w.connection}))];
+export const trafficParkingHardwareParts=[...trafficParkingUsbParts,...trafficParkingSignalParts,...trafficParkingBarrierParts,...trafficParkingCircuitParts,...trafficParkingSupplyParts,...trafficParkingServoLeadParts,...trafficParkingBenchParts,...trafficParkingUnoParts,...trafficParkingWires.map(w=>({id:w.id,label:w.label,what:w.what,connection:w.connection}))];
