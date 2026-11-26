@@ -1,0 +1,6 @@
+CAD source: https://raw.githubusercontent.com/adafruit/Adafruit-PN532-RFID-NFC-Shield/master/Adafruit_PN532_Shield_v1.3.brd
+SHA256: b61ecd7ce096f611f7754de175fc2df90deebd0f8a5e788b2e67fc21f7ae2fd8
+Derived XY board / pad / antenna data: src/data/pn532-shield-layout.json
+Extraction script: scripts/extract-pn532-shield.py
+Original design by Adafruit Industries; original attribution and CC BY-SA terms are in README.md and license.txt.
+3D heights and surface materials are authored visual approximations, not manufacturer CAD.
