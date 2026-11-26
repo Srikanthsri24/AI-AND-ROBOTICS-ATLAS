@@ -1237,3 +1237,9 @@ All **1,076 repository tests**, the direct full-project `tsc -b` verification an
 Local check: http://127.0.0.1:5190/#/project-builder/directory-21/workshop
 
 Phase 1 remains active: **73 workshops pending**. Phase 2 remains **61 additional guides**, after Phase 1. This milestone supersedes the historical MQ-2 in-progress notes above. Next in catalog order: `directory-22`, the rain detector and automatic clothes protection system.
+
+## Rain-protection clothesline controller checkpoint — in progress
+
+Started `directory-22` with a controller matching its downloadable Arduino sketch: startup target 35°, immediate covered command on a wet reading, 130° extension only at four continuous dry seconds, repeated wet samples resetting that deadline, change-only Servo writes and 250 ms serial reporting. Unsigned subtraction matches the AVR 32-bit `millis()` rollover. `commandAngle` is explicitly a target command, not instantaneous servo / carriage position.
+
+Five focused tests and targeted strict TypeScript pass. The native compiled-sketch comparison covers 409 events, including dry deadlines, repeated wet readings, serial output, initial write-before-attach order and rollover. The harness preserves the original source text and adapts native `unsigned long` width to AVR's 32-bit ABI after standard headers. Sensor / servo geometry, carriage / linkage mechanics, power / wiring, assembly, labels, working demonstration and application verification remain pending. The workshop is unregistered and excluded from completion: **77/150**, with **73 Phase 1 workshops** and **61 Phase 2 guides** pending.
