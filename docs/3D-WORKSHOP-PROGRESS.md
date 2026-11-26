@@ -2,7 +2,7 @@
 
 ## Phase 1 — 150 published Guided Builds
 
-Current verified total: **72 / 150 workshops**. **78** remain in Phase 1; **61** additional guides remain in Phase 2. Counts embedded in earlier dated notes describe those earlier checkpoints.
+Current verified total: **73 / 150 workshops**. **77** remain in Phase 1; **61** additional guides remain in Phase 2. Counts embedded in earlier dated notes describe those earlier checkpoints.
 
 Use the user-approved obstacle-avoiding car as the visual and interaction benchmark. Add and verify a project-specific sixth 3D Workshop for each of the 150 published guides, continuing in catalog order.
 
@@ -1018,3 +1018,10 @@ Long-cable inspection now frames a visible section of the actual tube near its c
 Full-project `tsc -b` passes for the label changes (`/tmp/atlas-railway-project-tsc-final.log`, 58937 exit 0). A student centring-step check then exposed a separate sidebar bug: it displayed the completed-model 95° while the actual bare shaft was moving through 35°. The sidebar now derives its readings from the current assembly timeline before the final stage, including the paused power interlock. The completed-model session path is unchanged. Final targeted strict TypeScript passes (`/tmp/atlas-railway-readout-tsc.log`, 65469 exit 0). `scripts/inspect-railway-centring-ui.cjs` / `/tmp/atlas-railway-centring-ui-fixed.log`, 13569 exit 0, verifies the moving readout, actual source OFF on pause, matching paused physical/displayed angle (40.28° / 40.3°) and successful Continue to the completed centring step.
 
 Still required before registration: remaining student chapter/playback/recovery and fault/restore trials, final whole-project checks/build and actual project routing validation. Verified workshops remain **72/150**, with **78** Phase 1 and **61** Phase 2 pending.
+
+### Railway crossing workshop — completed (73 / 150)
+
+- Registered `directory-17/workshop` after verification. Detailed railway crossing includes 175 selectable hardware groups, two beam stations, a two-car train, servo barrier, wired warning LED, Uno, separate supply and live host display. Actual part surfaces highlight and carry their labels.
+- Fourteen assembly transitions, pause / resume, bare-servo centring, opposite-side fastener fitting, calibration, six electrical fault trials and full healthy recovery pass through the student interface. A / B station captions follow the physical brackets; the barrier close-up frames the actual crossing on phones.
+- All 175 parts pass native surface selection and highlighting at desktop and phone widths. All 975 repository tests pass. TypeScript and production build pass. The built static app passes direct workshop loading, all six stage links, reload, actual playback, station labels, desktop / phone overflow checks, Components return routing and return to Guided Builds, with no page errors.
+- Phase 1: 73 completed, 77 remaining. Phase 2: 61 additional guides remain. Next catalog guide: `directory-18`.
