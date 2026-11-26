@@ -1,3 +1,4 @@
+import Header from './SchoolBellRtcHeaderParts';
 import {memo,useMemo,type ReactNode} from 'react';
 import {Shape,Path,Vector3,Quaternion} from 'three';
 import {Text} from '@react-three/drei';
@@ -14,7 +15,7 @@ function SchoolBellRtcParts({selected,choose}:{selected:string;choose:(id:string
  const box=(id:string,p:P,size:P,color:string,metal=0)=><mesh position={[...p]} castShadow><boxGeometry args={[...size]}/><meshStandardMaterial color={c(id,color)} roughness={metal?.3:.5} metalness={metal}/></mesh>;
  const bar=(id:string,a:P,b:P)=>{const from=new Vector3(...a),to=new Vector3(...b),q=new Quaternion().setFromUnitVectors(new Vector3(0,1,0),to.clone().sub(from).normalize());return <mesh position={from.clone().add(to).multiplyScalar(.5)} quaternion={q}><boxGeometry args={[.5,from.distanceTo(to),.15]}/><meshStandardMaterial color={c(id,'#bdc6ce')} metalness={.8} roughness={.3}/></mesh>;};
  const chip=layout.elements.find(e=>e.name==='IC1')!,chipPads=(layout.packages['adafruit/SO16W'].smd as Pad[]);
- return <group name="school-rtc-hardware">
+ return <group name="school-rtc-hardware"><Header selected={selected} choose={choose}/>
  {tag('school-rtc-board',<mesh name="school-rtc-substrate" rotation={[-Math.PI/2,0,0]}><extrudeGeometry args={[board,{depth:1.6,bevelEnabled:false,curveSegments:32}]}/><meshStandardMaterial color={c('school-rtc-board','#185b77')} roughness={.55}/></mesh>)}
  {tag('school-rtc-plating',<>{layout.pads.flatMap((p,n)=>[0,1.6].map(height=><mesh key={n+':'+height} name={'school-rtc-pad-'+p.element+'-'+p.name+'-'+height} position={[p.x,height+(height?.02:-.02),-p.y]} rotation={[-Math.PI/2,0,0]}><ringGeometry args={[p.drill/2,p.diameter/2,32]}/><meshStandardMaterial color={c('school-rtc-plating','#c6b781')} metalness={.8} roughness={.3}/></mesh>))}</>)}
  {tag('school-rtc-copper',<>{layout.traces.map((w,n)=><mesh key={n} name={'school-rtc-trace-'+n} position={[(+w.x1+ +w.x2)/2,w.layer==='1'?1.61:-.01,-(+w.y1+ +w.y2)/2]} rotation={[0,Math.atan2(+w.y2- +w.y1,+w.x2- +w.x1),0]}><boxGeometry args={[Math.hypot(+w.x2- +w.x1,+w.y2- +w.y1),.015,+w.width]}/><meshStandardMaterial color={c('school-rtc-copper','#6e9c9e')} metalness={.65} roughness={.4}/></mesh>)}</>)}
