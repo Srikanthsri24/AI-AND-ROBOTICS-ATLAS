@@ -7,7 +7,7 @@ async function load(url){
  if(cache.has(url.href))return cache.get(url.href);
  let code=ts.transpileModule(await readFile(url,'utf8'),{compilerOptions:{module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2022}}).outputText;
  for(const m of [...code.matchAll(/import (\w+) from ['"]([^'"]+\.json)['"];?/g)])code=code.replace(m[0],`const ${m[1]} = ${await readFile(new URL(m[2],url),'utf8')};`);
- for(const m of [...code.matchAll(/from ['"]([^'"]+)['"]/g)])code=code.replace(m[0],`from '${await load(new URL(m[1]+'.ts',url))}'`);
+ for(const m of [...code.matchAll(/^import[ \t]+[^;\n]*?from ['"]([^'"]+)['"]/gm)])code=code.replace(m[0],m[0].slice(0,m[0].lastIndexOf('from '))+`from '${await load(new URL(m[1]+'.ts',url))}'`);
  const result='data:text/javascript;base64,'+Buffer.from(code).toString('base64');cache.set(url.href,result);return result;
 }
 const w=await import(await load(new URL('../src/data/street-system-layout.ts',import.meta.url)));
@@ -32,4 +32,14 @@ test('divider ground and junction are independent of the lamp bank',()=>{
  assert.ok(w.streetSystemBranches.every(b=>b.resistorInput[2]<w.streetSystemLayout.breadboard[2]));
  assert.throws(()=>w.streetSystemSocket('NOT-A-PIN'));assert.throws(()=>w.streetSystemHole(17,1,0));
  assert.equal(w.streetSystemAssembly.length,9);
+});
+
+const assembly=await import(await load(new URL('../src/data/street-system-assembly.ts',import.meta.url)));
+const catalog=await import(await load(new URL('../src/data/street-system-parts.ts',import.meta.url)));
+test('every physical part has a bounded monotone assembly lift and seats at its chapter',()=>{
+ assert.equal(catalog.streetSystemParts.length,58);
+ for(const part of catalog.streetSystemParts){let previous=Infinity;
+  for(let n=0;n<=80;n++){const p=n/10,pose=assembly.streetSystemAssemblyPose(part.id,p);assert.ok(pose.lift>=0&&pose.lift<=70);assert.ok(pose.lift<=previous+1e-9);previous=pose.lift;if(p>=part.stage){assert.equal(pose.lift,0);assert.equal(pose.seated,true);assert.equal(pose.visible,true);}}
+ }
+ assert.throws(()=>assembly.streetSystemAssemblyPose('missing',0));assert.throws(()=>assembly.streetSystemAssemblyPose('street-base',9));
 });
