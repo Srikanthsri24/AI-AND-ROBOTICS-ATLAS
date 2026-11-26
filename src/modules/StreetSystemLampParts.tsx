@@ -16,7 +16,7 @@ function StreetSystemLampParts({selected,choose,lamps,stage,cutaway}:Props){
  },[]);
  const tint=(id:string,color:string)=>selected===id?'#ad80dc':color;
  const owner=(id:string,node:ReactNode)=><group key={id} name={id} userData={{partId:id}} onClick={(e:ThreeEvent<MouseEvent>)=>{e.stopPropagation();choose(id);}}>{node}</group>;
- const box=(id:string,p:StreetPoint,size:StreetPoint,color:string,metal=0)=><mesh position={p} castShadow receiveShadow><boxGeometry args={[...size]}/><meshStandardMaterial color={tint(id,color)} metalness={metal} roughness={metal?.33:.7}/></mesh>;
+ const box=(id:string,p:StreetPoint,size:StreetPoint,color:string,metal=0)=><mesh key={id+p.join(",")} position={p} castShadow receiveShadow><boxGeometry args={[...size]}/><meshStandardMaterial color={tint(id,color)} metalness={metal} roughness={metal?.33:.7}/></mesh>;
  const wire=(id:string,points:StreetPoint[],color:string)=><mesh castShadow><tubeGeometry args={[new CatmullRomCurve3(points.map(p=>new Vector3(...p))),48,.45,10,false]}/><meshStandardMaterial color={tint(id,color)} roughness={.5}/></mesh>;
  return <group name="street-system-furniture">
  {owner('street-base',<>{box('street-base',[0,4,0],[380,8,240],'#b59670')}{[-105,-35,35,105].map(z=>box('street-base',[0,8.03,z],[376,.06,.4],'#9b805d'))}</>)}
@@ -32,7 +32,7 @@ function StreetSystemLampParts({selected,choose,lamps,stage,cutaway}:Props){
     {owner(prefix+'-lens',<><mesh position={[x,98,-12]}><cylinderGeometry args={[2.5,2.5,3,32]}/><meshPhysicalMaterial color="#e8e5d2" emissive="#ffe7b2" emissiveIntensity={on?2.8:0} roughness={.2} clearcoat={1} transparent opacity={.85}/></mesh><mesh position={[x,96.5,-12]} rotation={[Math.PI,0,0]}><sphereGeometry args={[2.5,32,16,0,Math.PI*2,0,Math.PI/2]}/><meshPhysicalMaterial color="#e8e5d2" emissive="#ffe7b2" emissiveIntensity={on?2.8:0} roughness={.2} clearcoat={1}/></mesh>{selected===prefix+'-lens'&&<mesh position={[x,98,-12]} rotation={[Math.PI/2,0,0]}><torusGeometry args={[3.4,.35,10,40]}/><meshBasicMaterial color="#9563ce"/></mesh>}</>)}
     {owner(prefix+'-internal-positive',wire(prefix+'-internal-positive',[branch.anode,[x-1.27,100,-17],[x-1.27,100,z],[x-1.27,18,z],branch.positiveTail],'#b84a5e'))}
     {owner(prefix+'-internal-return',wire(prefix+'-internal-return',[branch.cathode,[x+1.27,99,-17],[x+1.27,99,z],[x+1.27,18,z],branch.returnTail],'#33465c'))}
-    <pointLight position={[x,92,-12]} color="#ffe1a0" intensity={on?50:0} distance={160} decay={1.8}/>
+    <pointLight position={[x,92,-12]} color="#ffe1a0" intensity={on?.25:0} distance={1.6} decay={1.8}/>
     {on&&<mesh name={prefix+'-light-pool'} position={[x,9.46,-12]} rotation={[-Math.PI/2,0,0]} scale={[1,.65,1]}><circleGeometry args={[24,48]}/><meshBasicMaterial color="#ffe5a5" transparent opacity={.28} depthWrite={false}/></mesh>}
    </>}
   </group>;

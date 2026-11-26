@@ -1,0 +1,36 @@
+import {streetSystemBranches,streetSystemCables} from './street-system-layout';
+export type StreetSystemPart={id:string;name:string;stage:number;what:string;connection:string};
+const part=(id:string,name:string,stage:number,what:string,connection:string):StreetSystemPart=>({id,name,stage,what,connection});
+export const streetSystemParts:readonly StreetSystemPart[]=[
+ part('street-base','Timber model base',0,'Supports a miniature street, three lamp posts and a separate electronics area.','The base is mechanical support, not an electrical conductor or ground.'),
+ part('street-road','Road and pavement',0,'Shows where the model lamps cast light. The pale dashes mark the centre of the road.','Keep loose wiring away from the model road. The lamps face down toward the road.'),
+ ...streetSystemBranches.flatMap((b,index)=>{
+  const n=index+1;
+  return [
+   part(b.id+'-foot',`Lamp ${n} drilled mounting foot`,1,'A bored plate anchors the post and leaves a central passage for its two wires.','The four fixing bores receive mechanical fasteners; the centre opening carries wiring.'),
+   part(b.id+'-post',`Lamp ${n} hollow post`,1,'Supports the hood while protecting the positive and return wires. Use the cutaway to inspect inside.','The insulated red and black leads remain separate inside the channel. The post is not the circuit return.'),
+   part(b.id+'-hood',`Lamp ${n} downward-facing hood`,1,'Houses the white LED and reflector above the model road.','Anode and cathode wiring enters from the post. The hood never replaces a current-limiting resistor.'),
+   part(b.id+'-bolts',`Lamp ${n} fixing screws and washers`,1,'Hold the foot in position without pinching the two insulated wires.','Fit the foot before the washers and screws; keep the central cable passage clear.'),
+   part(b.id+'-lens',`Lamp ${n} white LED`,2,'Turns electrical current into visible light directed toward the road. Its white output is kept separate from violet selection.','Current flows from '+b.pin+' through this lamp’s own 220 Ω resistor and anode, then through its cathode to ground.'),
+   part(b.id+'-internal-positive',`Lamp ${n} internal anode wire`,2,'Carries current up the protected post to the LED’s positive terminal.','Joins the lower red tail to the LED anode under the hood; its external cable reaches the resistor output strip.'),
+   part(b.id+'-internal-return',`Lamp ${n} internal cathode wire`,2,'Completes this LED’s return path down the post.','The lower black tail connects to its own breadboard return strip, which is linked to common Uno ground.'),
+   part(b.id+'-resistor',`Lamp ${n} 220 Ω series resistor`,5,'Limits LED current. Red / red / brown / gold bands identify 220 Ω with 5% tolerance.','Bridges two separate five-hole strips: '+b.pin+' input and the lamp anode output. Each lamp needs its own resistor.'),
+  ];
+ }),
+ part('street-uno-pcb','Arduino Uno R3 PCB',3,'Carries the controller and actual digital, analogue and power sockets.','USB powers the board. A0 reads the divider; D5, D6 and D7 switch three independent LED circuits.'),
+ part('street-uno-mcu','ATmega328P controller',3,'Runs the supplied Arduino C++ sketch and remembers whether the lamps were on during twilight.','A0 ≤330 sets all three outputs HIGH. A0 ≥470 sets them LOW. Between those values, the last state is retained.'),
+ part('street-uno-headers','Uno female header sockets',3,'Receive the individual jumper pins at the actual board contact positions.','Use the printed 5 V, GND, A0, D5, D6 and D7 labels. Do not substitute the VIN or 3.3 V sockets.'),
+ part('street-uno-usb','Uno USB-B receptacle',3,'Provides upload, USB logic power and serial communication.','Use a USB data cable. Disconnect power before changing the circuit. Serial Monitor uses 115200 baud.'),
+ part('street-uno-bridge','USB serial interface',3,'Connects computer upload and serial data to the main AVR.','The sketch prints raw A0 and the commanded lamp state every 100 ms. That text is not a measurement of individual lamp current.'),
+ part('street-uno-power','Board power-conditioning components',3,'Support the Uno logic supply. The barrel jack is not used in this build.','The photoresistor divider uses Uno 5 V and GND. Each LED output supplies only its own resistor-limited branch.'),
+ part('street-uno-reset','Reset pushbutton',3,'Restarts the sketch with its initial lamps-off memory.','The first analogue sample then applies the dusk / dawn thresholds. A dark input can turn the outputs on immediately.'),
+ part('street-uno-tracks','Uno copper traces',3,'Connect the controller, headers and supporting components across the PCB.','The detailed routes belong to the Uno R3 board. External jumpers still need to land in the named header sockets.'),
+ part('street-uno-programming','Unused ICSP headers',3,'Provide low-level programming access to the main and USB-interface AVRs.','Leave these six-pin headers unconnected; this project uploads through USB.'),
+ part('street-uno-leds','Board status LEDs',3,'The ON indicator shows USB logic power. RX and TX relate to USB serial activity.','These board indicators are separate from the three street lamps on D5 / D6 / D7. The D13 indicator is not a street lamp.'),
+ part('street-uno-supports','Insulating PCB supports',3,'Hold the Uno above the base at its real mounting-hole positions.','Keep solder joints clear of the base and mounting hardware. These supports have no electrical connection.'),
+ part('street-breadboard','170-point mini breadboard',3,'Has two independent banks of seventeen five-hole strips. It has no long supply rails.','Holes in each five-hole strip connect together; adjacent columns and the centre gap do not. Individual ground links join the three lamp returns.'),
+ part('street-sensor-mount','Photoresistor support',4,'Keeps the light-sensitive face exposed at the far edge of the base, away from the lamps.','Two separate contacts support the two leads without joining them. Keep the face aimed at room light.'),
+ part('street-ldr','Light-dependent resistor',4,'Its resistance rises when shaded. The divider converts that change to a lower A0 voltage in this wiring.','One lead reaches 5 V. The other reaches the shared A0 / 10 kΩ junction. It has no polarity.'),
+ part('street-divider-resistor','10 kΩ divider resistor',4,'Works with the photoresistor to create a readable analogue voltage. Brown / black / orange / gold bands identify 10 kΩ.','Connects the A0 junction strip to the common ground strip. It is distinct from all three 220 Ω LED limiters.'),
+ ...streetSystemCables.map((w,index)=>part(w.id,w.name,index<5?6:7,'An individually routed insulated jumper joins two specific physical contacts. Its pin enters the socket while the grip remains outside.',w.node==='gnd'?'Completes a named return connection on the common ground node. The mini breadboard has no continuous ground rail.':w.node==='5v'?'Supplies only the photoresistor divider from Uno 5 V. Do not move this lead to VIN.':w.node==='a0'?'Carries the divider junction voltage to A0. An open analogue input floats, so the workshop marks its reading and outputs unknown.':w.node.startsWith('D')?'Carries this lamp’s digital output into its own 220 Ω resistor input strip.':'Connects the resistor output to this lamp’s positive tail; the post’s internal lead continues to the LED anode.')),
+];
