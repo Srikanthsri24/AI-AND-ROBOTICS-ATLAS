@@ -13,5 +13,5 @@ export function rainLinkagePose(angle:number){
 export const rainVisualServoRate=95;
 export function rainServoAdvance(angle:number,target:number,elapsedMs:number,powered:boolean){
  rainLinkagePose(angle);rainLinkagePose(target);if(!Number.isFinite(elapsedMs)||elapsedMs<0)throw new RangeError('Mechanical elapsed time must be finite and nonnegative');
- if(!powered)return angle;const step=rainVisualServoRate*elapsedMs/1000,delta=target-angle;return Math.abs(delta)<=step?target:angle+Math.sign(delta)*step;
+ if(!powered)return angle;const step=rainVisualServoRate*elapsedMs/1000,delta=target-angle;return Math.abs(delta)<=step+1e-9?target:angle+Math.sign(delta)*step;
 }
