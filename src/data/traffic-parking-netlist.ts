@@ -4,6 +4,7 @@ export type TrafficParkingWire={id:string;from:string;to:string;net:string;label
 export function trafficParkingBoardPort(board:'resistors'|'buttons',column:number,bank:-1|1,row:number){if(!Number.isInteger(column)||column<0||column>16||!Number.isInteger(row)||row<0||row>4)throw new RangeError('Invalid traffic/parking breadboard port');return `${board}.${column}.${bank}.${row}`;}
 export function trafficParkingPortLabel(port:string){const [device,pin,bank,row]=port.split('.');if(device==='resistors'||device==='buttons')return `${device==='resistors'?'LED':'Switch'} board ${+pin+1}${String.fromCharCode((+bank<0?97:102)+ +row)}`;if(device==='uno')return 'Uno '+pin;if(device==='supply')return '5 V servo supply '+(pin==='positive'?'+':'−')+' terminal '+(+bank+1);if(device==='servo')return 'Servo '+pin;if(device==='lamp')return pin.replace('tp-','').replaceAll('-',' ')+' '+bank;throw new RangeError('Unknown parking port '+port);}
 const p=trafficParkingBoardPort;
+const lampLabel=(n:number)=>{const l=trafficParkingLamps[n];return (l.head==='full'?'Parking FULL':l.head==='main'?'Main':'Cross')+' '+l.color.toLowerCase();};
 const ground=(col:number,bank:-1|1,row:number)=>p('resistors',col,bank,row);
 export const trafficParkingGroundStrips=[[14,-1],[14,1],[16,-1],[16,1]] as const;
 const returnPorts=[ground(14,-1,1),ground(14,-1,2),ground(14,-1,3),ground(14,1,1),ground(14,1,2),ground(14,1,3),ground(16,-1,1)];
@@ -16,9 +17,9 @@ export const trafficParkingNetlist:TrafficParkingWire[]=[
  wire('tp-wire-ground-bridge-2',ground(14,1,4),ground(16,-1,0),'GND','Ground bridge · adjacent strips'),
  wire('tp-wire-ground-bridge-3',ground(16,-1,4),ground(16,1,0),'GND','Ground bridge · across second gap'),
  ...trafficParkingResistors.flatMap((r,n)=>[
-  wire('tp-wire-d'+r.pin,'uno.D'+r.pin,p('resistors',r.column,-1,3),'D'+r.pin,'D'+r.pin+' → R'+(n+1)+' input'),
-  wire('tp-wire-led-'+(n+1),p('resistors',r.column,1,1),'lamp.'+r.lamp+'.anode','LED'+(n+1),'R'+(n+1)+' → LED anode'),
-  wire('tp-wire-led-return-'+(n+1),'lamp.'+r.lamp+'.cathode',returnPorts[n],'GND','LED '+(n+1)+' common return'),
+  wire('tp-wire-d'+r.pin,'uno.D'+r.pin,p('resistors',r.column,-1,3),'D'+r.pin,'D'+r.pin+' → R'+(n+1)+' · '+lampLabel(n)),
+  wire('tp-wire-led-'+(n+1),p('resistors',r.column,1,1),'lamp.'+r.lamp+'.anode','LED'+(n+1),'R'+(n+1)+' → '+lampLabel(n)+' anode'),
+  wire('tp-wire-led-return-'+(n+1),'lamp.'+r.lamp+'.cathode',returnPorts[n],'GND',lampLabel(n)+' · common return'),
  ]),
  ...trafficParkingButtons.flatMap((b,n)=>[
   wire('tp-wire-'+b.id+'-input','uno.'+b.pin,p('buttons',b.column-1,-1,3),b.pin,b.label+' · '+b.pin),
@@ -27,7 +28,7 @@ export const trafficParkingNetlist:TrafficParkingWire[]=[
  wire('tp-wire-servo-signal','uno.D9','servo.signal','D9','D9 → orange servo command'),
  wire('tp-wire-servo-positive','supply.positive.0','servo.positive','SERVO5V','Independent 5 V → red servo lead'),
  wire('tp-wire-servo-negative','supply.negative.0','servo.negative','GND','Supply return → brown servo lead'),
- wire('tp-wire-servo-reference','supply.negative.1',ground(16,1,1),'GND','Supply return → Uno ground reference'),
+ wire('tp-wire-servo-reference','supply.negative.1',ground(16,1,4),'GND','Supply return → Uno ground reference'),
 ];
 /** Permanent copper/paired-contact ties, not active components. */
 export const trafficParkingFixedTies:readonly (readonly[string,string])[]=[
