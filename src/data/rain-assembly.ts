@@ -15,7 +15,7 @@ export const rainAssemblySteps=[
  ['Place the separate servo supply','Keep its output off. It powers the servo, while Uno 5 V powers the water sensor. The ground references will be joined.'],
  ['Fit the circuit connections','Follow the highlighted terminal instructions. Fit the Grove harness as one unit, then each individual jumper end.'],
  ['Check before connecting USB','Check every terminal and the separate positive supplies. Seat the computer USB plug first, then the Uno USB-B plug. Keep the servo supply off until checked.'],
- ['Ready for the rain experiment','When the complete power connections are available, a wet bridge requests shelter immediately. Four continuously dry seconds are required before extension.'],
+ ['Ready for the rain experiment','Connect USB and enable the separate servo supply. A wet bridge requests shelter immediately. Four continuously dry seconds are required before extension.'],
 ] as const;
 export const rainAssemblyDurations=[2500,3000,3000,3500,3500,3500,4000,4000,3500,3500,3000,3500,3500,27000,3000] as const;
 export const rainAssemblyTotalMs=rainAssemblyDurations.reduce((a,b)=>a+b,0);
