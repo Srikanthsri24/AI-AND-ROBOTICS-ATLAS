@@ -72,3 +72,19 @@ test('mounts seat before supported boards, hoods and fasteners; resistors fit se
  assert.equal(pose('street-lamp-1-resistor',4.5).seated,true);
  assert.equal(pose('street-lamp-3-resistor',4.5).visible,false);
 });
+
+const faults=await import(await load(new URL('../src/data/street-system-faults.ts',import.meta.url)));
+const controller=await import(await load(new URL('../src/data/street-system-workshop.ts',import.meta.url)));
+test('each selectable fault opens one physical cable and powers down before connection changes',()=>{
+ for(const fault of faults.streetSystemFaults){
+  const settings=faults.streetFaultSettings({...controller.streetSystemDefaults,usb:true},fault.id);
+  assert.equal(settings.usb,false);
+  const open=w.streetSystemCables.filter(c=>faults.streetCableWithdrawal(c.id,settings)>0);
+  assert.deepEqual(open.map(c=>c.id),fault.cable?[fault.cable]:[]);
+  for(const c of open)assert.equal(faults.streetCableWithdrawal(c.id,settings),8);
+  const powered={...settings,usb:true,ambient:0},state=controller.streetSystemAdvance(controller.streetSystemInitial(),100,powered),lamps=controller.streetSystemLamps(state,powered);
+  if(fault.id==='a0'){assert.equal(state.raw,null);assert.deepEqual(lamps,[null,null,null]);}
+  else {assert.equal(state.command,true);assert.deepEqual(lamps,[1,2,3].map(n=>fault.id===`drive-${n}`||fault.id===`return-${n}`?false:true));}
+ }
+ assert.throws(()=>faults.streetFaultSettings(controller.streetSystemDefaults,'unknown'));
+});

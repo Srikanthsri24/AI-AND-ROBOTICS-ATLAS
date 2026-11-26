@@ -3,11 +3,13 @@ import type {ThreeEvent} from '@react-three/fiber';
 import {CatmullRomCurve3,Vector3} from 'three';
 import BluetoothCarUno from './BluetoothCarUno';
 import MiniBoard from './BluetoothMiniBreadboard';
+import {streetCableWithdrawal} from '../data/street-system-faults';
+import type {StreetSystemSettings} from '../data/street-system-workshop';
 import unoLayout from '../data/uno-r3-board-layout.json';
 import {streetSystemLayout as layout,streetSystemBranches as branches,streetSystemDivider as divider,streetSystemCables as cables,type StreetPoint as P} from '../data/street-system-layout';
 
-type Props={selected:string;choose:(id:string)=>void;stage:number;powered:boolean};
-function StreetSystemElectricalParts({selected,choose,stage,powered}:Props){
+type Props={selected:string;choose:(id:string)=>void;stage:number;powered:boolean;links?:Pick<StreetSystemSettings,'sensorConnected'|'outputs'|'returns'>};
+function StreetSystemElectricalParts({selected,choose,stage,powered,links}:Props){
  const c=(id:string,color:string)=>selected===id?'#b78be8':color;
  const owner=(id:string,node:ReactNode)=><group name={id} userData={{partId:id}} key={id} onClick={(e:ThreeEvent<MouseEvent>)=>{e.stopPropagation();choose(id);}}>{node}</group>;
  const box=(id:string,p:P,size:P,color:string,metal=0)=><mesh key={id+p.join(",")} position={p} castShadow><boxGeometry args={[...size]}/><meshStandardMaterial color={c(id,color)} metalness={metal} roughness={metal?.35:.6}/></mesh>;
@@ -17,9 +19,9 @@ function StreetSystemElectricalParts({selected,choose,stage,powered}:Props){
   return owner(id,<><mesh position={[x,y,z]} rotation={[0,0,Math.PI/2]} castShadow><cylinderGeometry args={[1.1,1.1,6,32]}/><meshStandardMaterial color={c(id,'#cdbd95')} roughness={.65}/></mesh>{bands.map((color,n)=><mesh key={n} position={[x+[-2,-1,0,2][n],y,z]} rotation={[0,0,Math.PI/2]}><cylinderGeometry args={[1.115,1.115,.45,32]}/><meshStandardMaterial color={c(id,color)} roughness={.6}/></mesh>)}{[a,b].map((p,n)=><group key={n}>{tube(id,[[x+(n?3:-3),y,z],[p[0],y,z],[p[0],p[1]+3,z],p],'#bac3ca',.25)}</group>)}</>);
  };
  const curves=useMemo(()=>cables.map((w,index)=>{
-  const a:P=[w.a[0],w.a[1]+8,w.a[2]],b:P=[w.b[0],w.b[1]+8,w.b[2]];
+  const a:P=[w.a[0],w.a[1]+8,w.a[2]],b:P=[w.b[0],w.b[1]+8+(links?streetCableWithdrawal(w.id,links):0),w.b[2]];
   return [a,[a[0],Math.max(a[1],35+index*.5),a[2]],...(w.route.length?w.route:[[a[0]+(b[0]-a[0])*.5,40+index*.6,(a[2]+b[2])*.5] as P]),[b[0],Math.max(b[1],35+index*.5),b[2]],b] as P[];
- }),[]);
+ }),[links?.sensorConnected,links?.outputs[0],links?.outputs[1],links?.outputs[2],links?.returns[0],links?.returns[1],links?.returns[2]]);
  return <group name="street-system-electronics">
  {stage>=3&&<>
   <group position={layout.uno} scale={50}><BluetoothCarUno selected={selected} select={choose} powered={powered} partPrefix="street-"/></group>
@@ -34,7 +36,7 @@ function StreetSystemElectricalParts({selected,choose,stage,powered}:Props){
  {stage>=5&&branches.map(b=>resistor(b.id+'-resistor',b.resistorInput,b.resistorOutput,['#ad424b','#ad424b','#805537','#c5ad65']))}
  {cables.map((w,index)=>stage>=(index<5?6:7)&&owner(w.id,<>
   {tube(w.id,curves[index],w.color,.45)}
-  {[w.a,w.b].map((p,n)=><group key={n}>{box(w.id,[p[0],p[1]+2,p[2]],[.55,5,.55],'#bac3ca',.8)}{box(w.id,[p[0],p[1]+5.9,p[2]],[2.1,5,2.1],'#283745')}{box(w.id,[p[0],p[1]+8.8,p[2]],[1.25,1,1.25],w.color)}</group>)}
+  {[w.a,w.b].map((p,n)=><group key={n} position={[0,n&&links?streetCableWithdrawal(w.id,links):0,0]}>{box(w.id,[p[0],p[1]+2,p[2]],[.55,5,.55],'#bac3ca',.8)}{box(w.id,[p[0],p[1]+5.9,p[2]],[2.1,5,2.1],'#283745')}{box(w.id,[p[0],p[1]+8.8,p[2]],[1.25,1,1.25],w.color)}</group>)}
  </>))}
  </group>;
 }
