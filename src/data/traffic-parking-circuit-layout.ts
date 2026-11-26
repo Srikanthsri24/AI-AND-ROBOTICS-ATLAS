@@ -2,7 +2,7 @@ import {carMiniHole} from './bluetooth-mini-breadboard';
 import uno from './uno-r3-board-layout.json';
 import {trafficParkingLamps} from './traffic-parking-signals';
 export type ParkingPoint=readonly[number,number,number];
-export const trafficParkingCircuitLayout={uno:[-95,14,75],resistors:[0,2,75],buttons:[85,2,100],supply:[135,0,100],mat:{centre:[0,-1,0],size:[350,2,310]}} as const;
+export const trafficParkingCircuitLayout={uno:[-95,14,75],resistors:[0,2,75],buttons:[85,2,100],supply:[135,0,100],mat:{centre:[0,-1,0],size:[350,2,320]}} as const;
 export function trafficParkingBoardHole(board:'resistors'|'buttons',column:number,bank:-1|1,row:number):ParkingPoint{const p=carMiniHole(column,bank,row),at=trafficParkingCircuitLayout[board];return [at[0]+p[0]*50,at[1]+p[1]*50,at[2]+p[2]*50];}
 export function trafficParkingUnoContact(name:string):ParkingPoint{const p=uno.headers.find(p=>p.name===name);if(!p)throw new RangeError('Unknown parking Uno port '+name);const at=trafficParkingCircuitLayout.uno;return [at[0]+p.x-34.29,at[1]+9.3,at[2]+26.67-p.y];}
 export const trafficParkingUnoProgrammingRotations=Object.fromEntries(uno.elements.filter(e=>['ICSP','ICSP1'].includes(e.name)).map(e=>[e.name,Number((('rot' in e?e.rot:'R0')??'R0').replace('R',''))*Math.PI/180]));

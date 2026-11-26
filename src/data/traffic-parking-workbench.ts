@@ -1,3 +1,4 @@
+import {trafficParkingVehicleParts,trafficParkingCarBays} from './traffic-parking-vehicles';
 import {trafficParkingUsbParts} from './traffic-parking-usb';
 import uno from './uno-r3-board-layout.json';
 import {trafficParkingWires} from './traffic-parking-wires';
@@ -7,7 +8,7 @@ import {trafficParkingBarrierParts} from './traffic-parking-barrier';
 import {trafficParkingCircuitParts} from './traffic-parking-circuit-layout';
 import {trafficParkingSupplyParts} from './traffic-parking-supply';
 import {trafficParkingServoLeadParts} from './traffic-parking-servo-lead';
-export const trafficParkingBays=[{id:'tp-bay-1',number:1,x:70,z:-95},{id:'tp-bay-2',number:2,x:70,z:-65},{id:'tp-bay-3',number:3,x:70,z:-35}] as const;
+export const trafficParkingBays=trafficParkingCarBays.map((z,n)=>({id:`tp-bay-${n+1}`,number:n+1,x:70,z}));
 export const trafficParkingUnoSupports=uno.holes.map(p=>({x:layout.uno[0]+ +p.x-34.29,z:layout.uno[2]+26.67- +p.y,height:layout.uno[1]-.8}));
 const part=(id:string,label:string,what:string,connection:string)=>({id,label,what,connection});
 export const trafficParkingBenchParts=[
@@ -32,4 +33,4 @@ export const trafficParkingUnoParts=[
  part('tp-uno-programming','Uno · ICSP headers','Provide dedicated programming contacts for the two AVR chips.','Leave them unconnected in this project. The normal Arduino USB upload path is used.'),
  part('tp-uno-leds','Uno · status LEDs','Indicate board power and serial activity.','The ON indicator follows Uno USB logic power. It does not prove that the independent servo supply is enabled.'),
 ];
-export const trafficParkingHardwareParts=[...trafficParkingUsbParts,...trafficParkingSignalParts,...trafficParkingBarrierParts,...trafficParkingCircuitParts,...trafficParkingSupplyParts,...trafficParkingServoLeadParts,...trafficParkingBenchParts,...trafficParkingUnoParts,...trafficParkingWires.map(w=>({id:w.id,label:w.label,what:w.what,connection:w.connection}))];
+export const trafficParkingHardwareParts=[...trafficParkingVehicleParts,...trafficParkingUsbParts,...trafficParkingSignalParts,...trafficParkingBarrierParts,...trafficParkingCircuitParts,...trafficParkingSupplyParts,...trafficParkingServoLeadParts,...trafficParkingBenchParts,...trafficParkingUnoParts,...trafficParkingWires.map(w=>({id:w.id,label:w.label,what:w.what,connection:w.connection}))];
