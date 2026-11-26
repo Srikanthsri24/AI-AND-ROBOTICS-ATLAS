@@ -2,10 +2,11 @@ import {schoolBellDisplayParts,type SchoolBellDisplayPart} from './school-bell-d
 import {schoolBellRtcPins} from './school-bell-rtc-pins';
 import {schoolBellBatteryParts} from './school-bell-battery';
 import {schoolBellSounderParts} from './school-bell-sounder';
+import {schoolBellUsbParts} from './school-bell-usb';
 import {schoolBellWires} from './school-bell-wires';
 const p=(id:string,label:string,what:string,connection:string):SchoolBellDisplayPart=>({id,label,what,connection});
 export const schoolBellHardwareParts:SchoolBellDisplayPart[]=[
- ...schoolBellDisplayParts,...schoolBellBatteryParts,...schoolBellSounderParts,
+ ...schoolBellUsbParts,...schoolBellDisplayParts,...schoolBellBatteryParts,...schoolBellSounderParts,
  ...schoolBellWires.map(w=>({id:w.id,label:w.label,what:w.what,connection:w.connection})),
  ...schoolBellRtcPins.map(pin=>p(pin.id,pin.label+' · RTC',pin.what,pin.connection)),
  p('school-rtc-board','RTC circuit board','Supports the calendar chip, backup cell and connection header.','Its copper routes join the DS3231 to main supply, ground, I²C and backup battery. The two mounting holes are mechanical.'),
