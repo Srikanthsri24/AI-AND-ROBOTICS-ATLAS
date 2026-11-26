@@ -1,0 +1,4 @@
+import {useRef} from 'react';import {createRoot} from 'react-dom/client';import {Canvas,useFrame,useThree} from '@react-three/fiber';
+import Scene from '../../src/modules/CraneWorkshopScene';import {craneSystemInitial,craneSystemDefaults} from '../../src/data/crane-system';
+function Assembly(){const state=useThree(),progress=useRef(10),system=useRef(craneSystemInitial()),settings=useRef({...craneSystemDefaults,inputs:{...craneSystemDefaults.inputs}});useFrame(()=>{(window as any).__assemblyState=state;(window as any).__assemblyProgress=progress;});return <Scene {...{system,settings,progress}} selected="" choose={()=>{}} press={()=>{}}/>;}
+export function mount(el:HTMLElement){const root=createRoot(el);root.render(<Canvas camera={{position:[4,3.4,5],fov:42,near:.001}}><Assembly/></Canvas>);return()=>root.unmount();}
