@@ -7,7 +7,7 @@ export function soapPumpPose(depression:number,flow:'idle'|'press'|'refill'='idl
 }
 export const soapPumpParts=[
  {id:'soap-bottle-shell',label:'Bottle · hollow reservoir',what:'A hollow bottle contains the liquid and supports a threaded pump neck.',connection:'The dip tube reaches near the bottom. The bottle remains fixed while only the pump head and plunger move.'},
- {id:'soap-liquid',label:'Soap · reservoir and delivered droplets',what:'Shows remaining soap, displacement-driven drops and wet marks where they land.',connection:'The inlet draws from the reservoir on return. Wet marks stay with their receiving surface; their size is an illustration rather than a calibrated liquid volume.'},
+ {id:'soap-liquid',label:'Soap · reservoir and delivered droplets',what:'Shows remaining reservoir soap, the cutaway pump charge, displacement-driven drops and wet marks where they land.',connection:'The inlet draws from the reservoir on return. The cutaway band illustrates fractional charge outside the spring and below the piston; its height is not a calibrated volume. Wet marks stay with their receiving surface; their size is an illustration rather than a calibrated liquid volume.'},
  {id:'soap-cap',label:'Pump · threaded closure',what:'Secures the pump cartridge to the bottle neck and guides the sliding stem.',connection:'Its central bore leaves the stem free to travel. The cap stays fixed when the head is pressed.'},
  {id:'soap-pump-housing',label:'Pump · fixed chamber',what:'Holds the piston, return spring and inlet valve.',connection:'The lower inlet joins the dip tube. The upper guide supports the moving hollow stem.'},
  {id:'soap-dip-tube',label:'Pump · hollow dip tube',what:'Carries liquid from near the reservoir floor to the inlet.',connection:'Its open intake stays above the bottle bottom. Its upper end fits the chamber inlet; it is not an electrical wire.'},
@@ -28,3 +28,11 @@ export function soapPumpLiquidLevel(fill:number){if(!Number.isFinite(fill)||fill
  * This contact construction maps the sketch's 35°/65° commands to 0/6 mm.
  * It defines geometry, not available servo torque or delivered liquid volume. */
 export function soapPumpFollower(angle:number){if(!Number.isFinite(angle)||angle<35||angle>65)throw new RangeError('Soap follower angle must be 35–65°');const a=(angle-35)*Math.PI/180,depression=Math.round(12*Math.sin(a)*1e10)/1e10,x=12-12*Math.cos(a);return {angle:a,depression,pivot:[12,237.25,-18] as const,roller:[x,237.25-depression,0] as const,headContact:[x,234.75-depression,0] as const,rollerRotation:-x/2.5};}
+
+/** Cutaway charge band outside the spring, below the moving piston. Its
+ * fractional height illustrates chamber charge, not calibrated fluid volume. */
+export function soapPumpChargeBand(charge:number,depression:number){
+ if(!Number.isFinite(charge)||charge<0||charge>1||!Number.isFinite(depression)||depression<0||depression>6)throw new RangeError('Invalid pump charge band');
+ const bottom=164.6,ceiling=190-depression;
+ return {inner:4.3,outer:5.25,bottom,top:bottom+(ceiling-bottom)*charge,visible:charge>1e-8};
+}
