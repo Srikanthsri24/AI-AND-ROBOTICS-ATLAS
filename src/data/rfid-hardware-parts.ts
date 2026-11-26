@@ -1,0 +1,40 @@
+import {rfidFittingInstructions} from './rfid-fitting-instructions';
+import {rfidWires} from './rfid-wires';
+export type RfidHardwarePart={id:string;name:string;what:string;connection:string};
+const p=(id:string,name:string,what:string,connection:string):RfidHardwarePart=>({id,name,what,connection});
+export const rfidHardwareParts:readonly RfidHardwarePart[]=[
+ p('rfid-uno-pcb','Arduino Uno board','Carries the controller that compares a scanned UID with one enrolled classroom UID.','USB powers the controller; D6 and D7 drive indicators, D9 commands the latch.'),
+ p('rfid-uno-mcu','ATmega328P controller','Stores one UID in volatile memory and times a three-second release.','Reads the PN532 through I²C. RESET or loss of USB power forgets the enrolled UID.'),
+ p('rfid-uno-headers','Uno pin sockets','Connect the stacked shield pins to the Uno.','A4/SDA, A5/SCL and D2/IRQ serve the reader. Reserve D3 for the library reset parameter.'),
+ p('rfid-uno-usb','USB-B socket','Receives programming data and controller power from a computer.','Upload the Arduino C++ sketch; open Serial Monitor at 115200 baud. The servo has an independent supply.'),
+ p('rfid-uno-reset','Uno RESET button','Restarts the sketch and clears its RAM enrollment.','The sketch requests the locked 35° position before attaching the servo output.'),
+ p('pn532-shield-pcb','PN532 reader shield','Supports the reader circuitry and the extended antenna area.','The four stacking header banks mate to the Uno; the antenna end rests on nonmetallic supports.'),
+ p('pn532-controller','PN532 NFC controller','Reads an ISO 14443A classroom tag UID through a 13.56 MHz RF interface.','The Uno requests a read over I²C. This demonstration compares UIDs; it does not implement secure door authentication.'),
+ ...Array.from({length:4},(_,n)=>p('pn532-antenna-'+n,'Reader antenna network '+(n+1),'Forms part of the shield’s RF antenna and matching path.','A presented passive tag couples to the field; it has no wired connection to the Uno.')),
+ p('rfid-card-a','Classroom tag A','A passive demonstration card with a synthetic UID distinct from tag B.','Send e and present this card alone to enroll it. Remove it before testing a fresh presentation.'),
+ p('rfid-fob-b','Classroom tag B','A second passive tag with a different synthetic UID.','After enrolling A, present B to trigger Rejected and the red LED without moving the latch.'),
+ p('rfid-fob-ring','Keyfob ring','A mechanical attachment through the fob hole.','The ring is not connected to the project’s ground or signal wiring.'),
+ p('rfid-breadboard','170-hole breadboard','Each column has two independent groups of five contacts.','Column 17 A–E is common ground; column 17 F–J carries isolated servo positive.'),
+ ...(['red','green'] as const).flatMap((color,n)=>[
+  p('rfid-'+color+'-led',color==='red'?'Red rejection LED':'Green release LED',color==='red'?'Shows that the most recent fresh UID was rejected.':'Shows the three-second release window requested by the controller.',`D${n?7:6} reaches the anode through its own 220 Ω resistor. The cathode returns to the common strip.`),
+  p('rfid-'+color+'-resistor',color+' LED · 220 Ω resistor','Limits the current through its indicator LED.','Red–red–brown bands mean 220 Ω; gold is the tolerance band. It is in series with the LED, not across the supply.'),
+ ]),
+ p('rfid-latch-servo','Positional micro servo','Turns its output shaft gradually toward the commanded angle.','Orange is D9 signal, red is independent regulated 5 V, brown is common ground. It does not swing the door.'),
+ p('rfid-latch-shaft','Servo output shaft','Transfers rotation from the servo gearbox to the horn.','The horn and lightweight tab rotate with this shaft between 35° and 105°.'),
+ p('rfid-latch-tab','Lightweight latch tab','Overlaps the strike when locked and rotates clear when released.','The tab is fixed to the horn. Keep the door closed while checking the three-second relock.'),
+ p('rfid-horn-screw','Horn retaining screw','Retains the horn on the splined servo shaft.','Fit the tab with the servo at the intended locked angle; do not force the horn against a stop.'),
+ p('rfid-door-strike','Folded door strike','Provides the lip that the latch tab blocks.','It is fixed to the moving door panel, while the servo stays on the fixed frame.'),
+ p('rfid-door-panel','Model door panel','Pivots on the hinge axis for inspection after release.','The servo only releases the strike. The door is opened manually; it is not motor-driven.'),
+ p('rfid-door-frame','Fixed door frame','Supports the hinges and servo mount.','The moving door clears the top and bottom of the frame. The frame rests on the model base.'),
+ p('rfid-door-base','Model base','Stabilises the tabletop door assembly.','Supports the frame, servo harness plug and door; it carries no electrical current.'),
+ p('rfid-door-knob','Door knob','Provides a grip to open the released model door.','It moves with the panel and has no electrical connection.'),
+ p('rfid-fixed-hinges','Fixed hinge leaves','Anchor the hinge axis to the frame.','Their knuckles share the hinge pins with the door-mounted leaves.'),
+ p('rfid-moving-hinges','Moving hinge leaves','Attach the door panel to the hinge axis.','Rotate around the fixed pins as the door opens.'),
+ p('rfid-hinge-pins','Hinge pins','Define the door’s rotation axis.','Pass through the fixed and moving knuckles; they do not turn the servo shaft.'),
+ p('rfid-supply','Independent regulated 5 V supply','Supplies servo motor current separately from USB power.','Use a supply rated for the servo stall current. Its negative joins Uno ground; its positive stays off the Uno 5 V header.'),
+ p('rfid-supply-cord','Low-voltage supply cable','Carries the regulated output to the barrel plug.','The model shows the low-voltage side only; polarity is preserved through the adapter.'),
+ p('rfid-dc-plug','Low-voltage DC plug','Mates with the adapter socket.','Withdrawing it removes servo supply power. Switch the supply off before inspecting the connector.'),
+ p('rfid-dc-adapter','Barrel-to-terminal adapter','Exposes separate positive and negative terminal connections.','Positive feeds 17F; negative feeds 17E. These holes are separated by the breadboard centre gap.'),
+ p('rfid-servo-plug','Three-contact servo plug','Separates signal, power and return in three chambers.','The orange, red and brown factory wires must mate to D9, independent positive and common ground respectively.'),
+ ...rfidFittingInstructions.map((s,n)=>p(s.wireId,rfidWires[n].name,s.why,s.source+' → '+s.destination+'. '+s.check)),
+];
