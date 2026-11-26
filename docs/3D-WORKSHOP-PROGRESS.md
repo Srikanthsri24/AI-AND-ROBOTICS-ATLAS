@@ -2,7 +2,7 @@
 
 ## Phase 1 — 150 published Guided Builds
 
-Current verified total: **75 / 150 workshops**. **75** remain in Phase 1; **61** additional guides remain in Phase 2. Counts embedded in earlier dated notes describe those earlier checkpoints.
+Current verified total: **76 / 150 workshops**. **74** remain in Phase 1; **61** additional guides remain in Phase 2. Counts and in-progress descriptions in earlier checkpoint notes describe those earlier states.
 
 Use the user-approved obstacle-avoiding car as the visual and interaction benchmark. Add and verify a project-specific sixth 3D Workshop for each of the 150 published guides, continuing in catalog order.
 
@@ -1169,3 +1169,14 @@ Crane insulation / coil-terminal checkpoint (unregistered; 75/150 unchanged): ex
 
 
 Crane unobscured-inspection checkpoint (unregistered; 75/150 unchanged): added multi-angle ray-tested surface discovery for explicit part-index focus. Callouts attach to actual nearest visible triangles and preserve material highlighting; the search rejects camera positions inside box solids. Added shallower underside views after the phone magnet-face case exposed a camera-in-pad angle. Both desktop and 390 px phone now pass all 71 exposed part-index inspections, including actual nearest-hit ownership, callout text / position and material colour. Added a physical USB contact-inspection control, disabled contact selection until plugs finish withdrawing, kept the mated DC centre pin unavailable, and prevented pickup-face inspection while a washer covers it. A concealed / unexposed view reports a helpful message instead of inventing an anchor. Desktop and phone operating checks pass USB / supply / hold / release and subsequent withdrawal / exposed-contact selection. All 35 focused tests and strict TypeScript pass. Remaining assembly coverage and production-route verification are still required before registering the workshop.
+
+
+## Completed milestone — Electromagnet Crane Working Model
+
+`directory-20` is now registered as the 76th completed sixth 3D Workshop. The project-specific manual gantry, real-layout Uno / MOSFET driver, separate 5 V supply, button, open connectors, washer, tray and fixed-length service loops support assembly, inspection and working transfer / cutoff lessons in the Atlas theme. All 71 exposed parts pass unobscured actual-triangle callout and material-highlight checks on desktop and phone. Detailed geometry checks cover control fitting, circuit insulation, saddle / upright separation, coil-terminal insertion, magnet tails and USB contacts / clearance. The entire assembly replay passes pause, resume and ready-state interlocks. All **1,051 repository tests**, full project TypeScript and the production build pass. The build retains the existing advisory about large shared chunks.
+
+`scripts/inspect-crane-route.cjs` passes the actual built application at 1440 px and 390 px: overview-to-sixth-tab navigation, transfer with one delivered washer, observable eight-second cutoff / release, actual-surface component inspection, byte-for-byte verified Arduino sketch download, no document overflow, fifth-stage navigation and back navigation to a fresh workshop. Reviewed both built-route screenshots. The temporary production preview was used only for verification; local development remains on port 5190.
+
+Local check: http://127.0.0.1:5190/#/project-builder/directory-20/workshop
+
+Phase 1 remains active: **74 workshops pending**. Phase 2 remains **61 additional guides**, after Phase 1. This milestone supersedes the historical crane in-progress notes above.
