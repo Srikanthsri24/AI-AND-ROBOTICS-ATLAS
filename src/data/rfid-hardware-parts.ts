@@ -1,3 +1,4 @@
+import {rfidUsbParts} from './rfid-usb';
 import {pn532SurfaceParts} from './pn532-surface';
 import {rfidServoLeads} from './rfid-servo-harness';
 import {rfidFittingInstructions} from './rfid-fitting-instructions';
@@ -5,6 +6,7 @@ import {rfidWires} from './rfid-wires';
 export type RfidHardwarePart={id:string;name:string;what:string;connection:string};
 const p=(id:string,name:string,what:string,connection:string):RfidHardwarePart=>({id,name,what,connection});
 export const rfidHardwareParts:readonly RfidHardwarePart[]=[
+ ...rfidUsbParts.map(row=>p(row[0],row[1],row[2],row[3])),
  p('rfid-work-mat','Insulating work mat','Provides a stable work area for the model and reader.','The mat is not a ground connection; the return jumpers provide the shared reference.'),
  p('rfid-uno-supports','Uno mounting standoffs','Lift the board so underside contacts clear the mat.','Support the controller through its mounting holes without bridging electrical contacts.'),
  p('rfid-antenna-supports','Antenna end supports','Support the shield overhang away from the Uno.','The hollow nonmetallic posts align with the two far shield mounting holes.'),
