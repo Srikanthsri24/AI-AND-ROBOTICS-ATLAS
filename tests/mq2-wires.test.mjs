@@ -14,7 +14,7 @@ const m=await import(await load(new URL('../src/data/mq2-wires.ts',import.meta.u
 const layout=await import(await load(new URL('../src/data/mq2-workbench-layout.ts',import.meta.url)));
 const key=p=>p.join(',');
 test('mode changes only the single A0 jumper destination and leaves DOUT open',()=>{
- const dial=m.mq2Wires('dial'),sensor=m.mq2Wires('sensor');assert.equal(dial.length,8);assert.equal(new Set(dial.map(w=>w.id)).size,8);
+ const dial=m.mq2Wires('dial'),sensor=m.mq2Wires('sensor');assert.equal(dial.length,11);assert.equal(new Set(dial.map(w=>w.id)).size,11);
  for(let i=0;i<dial.length;i++){assert.deepEqual(dial[i].from,sensor[i].from);if(i)assert.deepEqual(dial[i],sensor[i]);}
  assert.deepEqual(dial[0].to,layout.mq2Hole(14,1,0));assert.deepEqual(sensor[0].to,layout.mq2Hole(5,-1,4));
  assert.equal(dial.filter(w=>key(w.from)===key(layout.mq2UnoContact('A0'))).length,1);
@@ -31,7 +31,7 @@ test('no jumpers or component leads share a physical breadboard hole',()=>{
 test('jacket routes terminate at the assigned connector exits with finite geometry',()=>{
  for(const mode of ['dial','sensor'])m.mq2Wires(mode).forEach((w,i)=>{
  const path=m.mq2WireRoute(w,i);assert.equal(path.length,6);assert.ok(path.flat().every(Number.isFinite));
- assert.deepEqual(path.at(-1),[w.to[0],w.to[1]+7.5,w.to[2]]);
- assert.deepEqual(path[0],w.fromKind==='female'?[w.from[0]+7,w.from[1],w.from[2]]:[w.from[0],w.from[1]+7.5,w.from[2]]);
+ assert.deepEqual(path.at(-1),w.toKind==='clamp'?[w.to[0],w.to[1],w.to[2]+10.7]:[w.to[0],w.to[1]+7.5,w.to[2]]);
+ assert.deepEqual(path[0],w.fromKind==='female'?[w.from[0]+7,w.from[1],w.from[2]]:w.fromKind==='clamp'?[w.from[0],w.from[1],w.from[2]+10.7]:[w.from[0],w.from[1]+7.5,w.from[2]]);
  });
 });

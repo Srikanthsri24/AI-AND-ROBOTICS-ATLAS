@@ -1,0 +1,24 @@
+import {memo,useMemo,type ReactNode} from 'react';
+import type {ThreeEvent} from '@react-three/fiber';
+import {Text} from '@react-three/drei';
+import {CatmullRomCurve3,Path,Shape,Vector3} from 'three';
+import type {Mq2Point as P} from '../data/mq2-workbench-layout';
+const supplyLayout={supply:[112,10,-76] as P,adapter:[100,10,-23] as P};
+const font=new URL('./fonts/NotoSans-Regular.ttf',document.baseURI).href;
+function Mq2SupplyParts({selected,choose,powered=false}:{selected:string;choose:(id:string)=>void;powered?:boolean}){
+ const c=(id:string,color:string)=>id===selected?'#b78be8':color,tag=(id:string,children:ReactNode)=><group name={id} userData={{partId:id}} onClick={(e:ThreeEvent<MouseEvent>)=>{e.stopPropagation();choose(id);}}>{children}</group>,box=(id:string,p:P,size:P,color:string,metal=0)=><mesh position={p} castShadow><boxGeometry args={[...size]}/><meshStandardMaterial color={c(id,color)} metalness={metal} roughness={metal?.35:.65}/></mesh>;
+ const lid=useMemo(()=>{const s=new Shape();s.moveTo(-7,3.3);s.lineTo(7,3.3);s.lineTo(7,-8.7);s.lineTo(-7,-8.7);s.closePath();for(const x of [-3,3]){const h=new Path();h.absarc(x,-3,1.5,0,Math.PI*2,true);s.holes.push(h);}return s;},[]);
+ const dc=useMemo(()=>{const socket=new Shape();socket.moveTo(-6,0);socket.lineTo(6,0);socket.lineTo(6,9);socket.lineTo(-6,9);socket.closePath();const bore=new Path();bore.absarc(0,5,2.8,0,Math.PI*2,true);socket.holes.push(bore);const barrel=new Shape();barrel.absarc(0,0,2.75,0,Math.PI*2,false);const centre=new Path();centre.absarc(0,0,1.05,0,Math.PI*2,true);barrel.holes.push(centre);return{socket,barrel};},[]);
+ const lead=useMemo(()=>new CatmullRomCurve3([[100,15,-32],[100,15,-40],[112,15,-45],[112,15,-53]].map(p=>new Vector3(...p))),[]);
+ return <group name="mq2-low-voltage-supply">
+ {tag('mq2-supply',<group position={supplyLayout.supply}>{box('mq2-supply',[0,9,0],[36,18,46],'#343746')}{box('mq2-supply',[0,3,0],[36.2,.5,46.2],'#252936')}<Text position={[0,18.05,0]} rotation={[-Math.PI/2,0,0]} font={font} fontSize={2.2} color="#f4efff" textAlign="center">{'REGULATED DC\n5 V · MQ-2 ONLY'}</Text><mesh position={[11,18.1,16]} rotation={[-Math.PI/2,0,0]}><circleGeometry args={[1,24]}/><meshStandardMaterial color="#6bc58a" emissive="#4fbf79" emissiveIntensity={powered?1:0}/></mesh>{[-12,12].flatMap(x=>[-16,16].map(z=><group key={x+','+z}>{box('mq2-supply',[x,.5,z],[4,1,5],'#272b33')}</group>))}</group>)}
+ {tag('mq2-supply-cord',<><mesh><tubeGeometry args={[lead,96,1.25,16,false]}/><meshStandardMaterial color={c('mq2-supply-cord','#303747')} roughness={.6}/></mesh>{[0,1,2,3].map(n=><mesh key={n} position={[112,15,-53-n*.8]} rotation={[Math.PI/2,0,0]}><cylinderGeometry args={[1.65,1.65,.5,20]}/><meshStandardMaterial color={c('mq2-supply-cord','#3e4553')}/></mesh>)}</>)}
+ <group position={supplyLayout.adapter}>
+ {tag('mq2-dc-plug',<><mesh position={[0,5,-8]} rotation={[Math.PI/2,0,0]}><cylinderGeometry args={[3.3,3.3,4,32]}/><meshStandardMaterial color={c('mq2-dc-plug','#343d49')} roughness={.6}/></mesh><mesh position={[0,5,-6.4]}><extrudeGeometry args={[dc.barrel,{depth:4.4,bevelEnabled:false,curveSegments:32}]}/><meshStandardMaterial color={c('mq2-dc-plug','#b3bac0')} metalness={.8} roughness={.3}/></mesh></>)}
+ {tag('mq2-dc-adapter',<><mesh position={[0,0,-4.2]}><extrudeGeometry args={[dc.socket,{depth:6,bevelEnabled:false,curveSegments:32}]}/><meshStandardMaterial color={c('mq2-dc-adapter','#2e3540')} roughness={.65}/></mesh>{box('mq2-dc-adapter',[0,.65,3],[14,1.3,11.4],'#447c91')}{[-6.5,0,6.5].map(x=><group key={x}>{box('mq2-dc-adapter',[x,4,3],[1,6,11.4],'#447c91')}</group>)}<mesh position={[0,7.4,0]} rotation={[-Math.PI/2,0,0]}><extrudeGeometry args={[lid,{depth:.6,bevelEnabled:false,curveSegments:24}]}/><meshStandardMaterial color={c('mq2-dc-adapter','#51879b')} roughness={.65}/></mesh><Text position={[-3,8.05,7.4]} rotation={[-Math.PI/2,0,0]} font={font} fontSize={1.4} color="#f5efff">+</Text><Text position={[3,8.05,7.4]} rotation={[-Math.PI/2,0,0]} font={font} fontSize={1.4} color="#f5efff">−</Text></>)}
+ {tag('mq2-adapter-centre-contact',<mesh position={[0,5,-2.7]} rotation={[Math.PI/2,0,0]}><cylinderGeometry args={[1,1,3.1,24]}/><meshStandardMaterial color={c('mq2-adapter-centre-contact','#b8ad85')} metalness={.8} roughness={.35}/></mesh>)}
+ {[-3,3].map((x,n)=>{const id=n?'mq2-adapter-negative':'mq2-adapter-positive';return <group key={x}>{tag(id,<>{box(id,[x,4.1,3],[4,.5,9.5],'#b8ad85',.8)}{[-1.8,1.8].map(side=><group key={side}>{box(id,[x+side,5,3],[.4,1.7,6],'#b8ad85',.8)}</group>)}<mesh position={[x,6.2,3]}><cylinderGeometry args={[1.2,1.2,2.6,28]}/><meshStandardMaterial color={c(id,'#b6bec5')} metalness={.8} roughness={.35}/></mesh>{[-.7,.7].map(side=><group key={side}>{box(id,[x,7.65,3+side],[1.8,.3,.5],'#b6bec5',.8)}</group>)}</>)}</group>;})}
+ </group>
+ </group>;
+}
+export default memo(Mq2SupplyParts);

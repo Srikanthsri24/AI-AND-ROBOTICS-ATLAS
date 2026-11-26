@@ -1,7 +1,7 @@
 import {mq2Hole,mq2UnoContact,mq2WorkbenchLayout,type Mq2Point as P} from './mq2-workbench-layout';
 import {mq2ModuleLayout} from './mq2-module-layout';
 export type Mq2Mode='dial'|'sensor';
-export type Mq2Wire={id:string;name:string;from:P;to:P;color:string;fromKind:'pin'|'female';connection:string};
+export type Mq2Wire={id:string;name:string;from:P;to:P;color:string;fromKind:'pin'|'female'|'clamp';toKind?:'pin'|'clamp';connection:string};
 export function mq2ModulePin(pin:'DOUT'|'AOUT'|'GND'|'VCC'):P{
  const n=mq2ModuleLayout.header.pins.indexOf(pin),b=mq2WorkbenchLayout.module;
  return [b[0]+45.5,b[1]+2.85,b[2]-mq2ModuleLayout.header.z[n]];
@@ -16,10 +16,13 @@ export function mq2Wires(mode:Mq2Mode):readonly Mq2Wire[]{return [
  {id:'mq2-wire-led-return',name:'LED cathode return',from:mq2Hole(11,1,0),to:mq2Hole(16,1,2),color:'#48535e',fromKind:'pin',connection:'LED cathode strip → common ground. Its anode strip connects only through the 220 Ω resistor.'},
  {id:'mq2-wire-divider-return',name:'Lower divider resistor return',from:mq2Hole(9,-1,4),to:mq2Hole(16,1,3),color:'#48535e',fromKind:'pin',connection:'Lower 10 kΩ resistor → common ground. Both divider resistors meet at column 5 of the negative bank.'},
  {id:'mq2-wire-module-signal',name:'MQ-2 AOUT to upper resistor',from:mq2ModulePin('AOUT'),to:mq2Hole(1,-1,4),color:'#699cb0',fromKind:'female',connection:'Module AOUT → upper 10 kΩ resistor. DOUT remains open.'},
+ {id:'mq2-wire-module-power',name:'Separate 5 V to module VCC',from:mq2ModulePin('VCC'),to:[97,14.8,-20],color:'#bd5364',fromKind:'female',toKind:'clamp',connection:'Regulated supply positive clamp → module VCC. Uno 5 V does not supply the module heater.'},
+ {id:'mq2-wire-module-ground',name:'Module supply return',from:mq2ModulePin('GND'),to:[102.35,14.8,-20],color:'#3e4955',fromKind:'female',toKind:'clamp',connection:'Module GND → regulated supply negative clamp.'},
+ {id:'mq2-wire-supply-reference',name:'Separate supply to common ground',from:[103.65,14.8,-20],to:mq2Hole(16,1,4),color:'#3e4955',fromKind:'clamp',connection:'Second conductor in the negative supply clamp → common return strip → Uno GND.'},
  ];}
 /** Initial seated routes; fixed lanes preserve component endpoint positions.
  * Clearance / fitting sweeps remain separate from electrical-topology checks. */
 export function mq2WireRoute(w:Mq2Wire,index:number):P[]{
- const a:P=w.fromKind==='female'?[w.from[0]+7,w.from[1],w.from[2]]:[w.from[0],w.from[1]+7.5,w.from[2]],b:P=[w.to[0],w.to[1]+7.5,w.to[2]],h=43+index*2;
- return [a,w.fromKind==='female'?[a[0]+6,a[1],a[2]]:[a[0],a[1]+5,a[2]],[a[0],h,a[2]-8-index*2],[b[0],h,b[2]-8-index*2],[b[0],b[1]+5,b[2]],b];
+ const a:P=w.fromKind==='female'?[w.from[0]+7,w.from[1],w.from[2]]:w.fromKind==='clamp'?[w.from[0],w.from[1],w.from[2]+10.7]:[w.from[0],w.from[1]+7.5,w.from[2]],b:P=w.toKind==='clamp'?[w.to[0],w.to[1],w.to[2]+10.7]:[w.to[0],w.to[1]+7.5,w.to[2]],h=index===2?39:43+index*2,lane=index===0?3:index===8?40:index===9?12:8+index*2;
+ return [a,w.fromKind==='female'?[a[0]+6,a[1],a[2]]:w.fromKind==='clamp'?[a[0],a[1]+4,a[2]+4]:[a[0],a[1]+5,a[2]],[a[0],h,a[2]-lane],[b[0],h,b[2]-lane],w.toKind==='clamp'?[b[0],b[1]+4,b[2]+4]:[b[0],b[1]+5,b[2]],b];
 }
