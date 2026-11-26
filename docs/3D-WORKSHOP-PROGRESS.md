@@ -2,7 +2,7 @@
 
 ## Phase 1 — 150 published Guided Builds
 
-Current verified total: **73 / 150 workshops**. **77** remain in Phase 1; **61** additional guides remain in Phase 2. Counts embedded in earlier dated notes describe those earlier checkpoints.
+Current verified total: **74 / 150 workshops**. **76** remain in Phase 1; **61** additional guides remain in Phase 2. Counts embedded in earlier dated notes describe those earlier checkpoints.
 
 Use the user-approved obstacle-avoiding car as the visual and interaction benchmark. Add and verify a project-specific sixth 3D Workshop for each of the 150 published guides, continuing in catalog order.
 
@@ -1069,3 +1069,11 @@ Still required before registration: remaining student chapter/playback/recovery 
 
 - Street-system housing movement verification: a native vertex sweep found the hood walls overlapping their roof by 1 mm. Shortened the walls to meet the roof underside at 102 mm. The corrected model passes 600 sampled harness / cover poses (15,322,140 tested moving vertices) and the reverse 300 cover poses (10,060,725 tested vertices), with a solid-wall positive control. These are sampled mesh-volume checks, not a continuous collision solver.
 - Added a real browser Build-from-the-beginning journey: the harness freezes exactly during pause, resumes, reaches every remaining chapter, keeps Uno power off throughout assembly and finishes with all 88 actual owner groups visible. Connecting USB then shading the sensor produces all three ON readings and emission from both lens meshes on every lamp. Reviewed the completed workbench screenshot. All 997 repository tests and strict targeted TypeScript pass. Full 88-part desktop / phone label coverage and final controls are now running; route registration and production build gates remain pending. Workshop total stays 73 / 150.
+
+
+#### Street-light system workshop completed — 74 / 150
+Registered the project-specific sixth stage for **directory-18 · DIY Automatic Street Light System**. All 88 hardware owners pass native surface labels, material highlighting, delivered pointer clicks and retained labels at desktop and phone widths. Final controls pass both twilight histories, 25/50/100/0 shade coverage (695/500/180/820 ADC), full day/night playback and phone layout. The complete real-time assembly and sampled bidirectional housing sweeps passed as recorded above; prior endpoint, fixing, USB and electrical-fault checks remain applicable.
+
+The real guide and generated production application both pass overview → sixth workshop tab, complete-model inspection, USB power, all three lamps ON after shading, Finished demo → browser Back, and no horizontal overflow at 1440 / 390 pixels. Completed-model inspection now frames the whole street instead of selecting the USB cable. Reviewed whole-bench and phone views. All **997 repository tests**, full-project TypeScript, final targeted strict checking and the production Vite build pass. The street workshop is emitted as its own lazy 63.16 kB JS chunk (21.83 kB gzip). Existing large shared chunks still produce Vite’s advisory warning. `dist` was rebuilt; the production preview was stopped after verification and the 5190 development server remains available.
+
+Authoritative total: **74 / 150** completed workshops, **76** remaining in Phase 1 and **61** additional guides in Phase 2. Next: **directory-19 · Electronic Piano**. Continue with its own physical keys, sound circuit, labeled assembly and matching interactive behavior. The overall goal remains active.
