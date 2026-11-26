@@ -20,7 +20,7 @@ export const trafficParking:Build={
     ['Momentary tactile start button','2','One requests a parking entry, the other confirms that a car left. Mount both across the breadboard gap.'],
     ['Positional micro servo','1','Raises a light card barrier for a timed admission, and lowers it after 2.5 seconds.'],
     ['Regulated 5 V servo supply','1','Supplies the servo independently. Share ground with the Arduino and size the supply for the servo stall current.'],
-    ['Breadboard and jumper wires','1 set','Distributes the LED, switch and ground connections. Use a USB data cable to program and power the Uno.'],
+    ['Breadboard and jumper wires','1 set','Use two 170-contact mini breadboards: one for the seven LED resistors and linked ground strips, one for Entry / Exit switches. Use a USB data cable to program and power the Uno.'],
   ],
   assembly:[
     ['Mark the junction and three parking bays','Draw two intersecting streets and three parking bays on card. Put a stop line at each approach. Use separate craft-stick mounts for the two signal heads. Position the lot outside the intersection and give it a separate entrance and exit.','Each signal faces its approaching street. Number the parking bays 1 through 3.',[1,2]],
