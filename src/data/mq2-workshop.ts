@@ -1,0 +1,8 @@
+import {mq2Window,mq2Thresholds} from './mq2-monitor';
+export type Mq2Report=Readonly<{reading:number;average:number;delta:number;baseline:number|null;alert:boolean}>;
+export type Mq2Controller={samples:readonly number[];filled:number;next:number;sum:number;baseline:number|null;alert:boolean;iterations:number;rows:readonly Mq2Report[]};
+export function mq2Initial():Mq2Controller{return{samples:Array(mq2Window).fill(0),filled:0,next:0,sum:0,baseline:null,alert:false,iterations:0,rows:[]};}
+/** One complete iteration of the downloadable sketch, in its real read/command/output order.
+ * Values are relative ADC counts; no gas identification or ppm calibration is implied. */
+export function mq2Step(previous:Mq2Controller,reading:number,commands=''):Mq2Controller{if(!Number.isInteger(reading)||reading<0||reading>1023)throw new RangeError('A0 must be an integer ADC count from 0 to 1023');const samples=[...previous.samples],sum=previous.sum+reading-samples[previous.next],filled=Math.min(mq2Window,previous.filled+1);samples[previous.next]=reading;const next=(previous.next+1)%mq2Window,average=Math.trunc(sum/filled);let baseline=previous.baseline,alert=previous.alert;for(const c of commands)if(c==='b'&&filled===mq2Window){baseline=average;alert=false;}const delta=baseline===null?0:average-baseline;if(baseline!==null)alert=alert?delta>mq2Thresholds.off:delta>=mq2Thresholds.on;const row=Object.freeze({reading,average,delta,baseline,alert});return{samples,filled,next,sum,baseline,alert,iterations:previous.iterations+1,rows:[...previous.rows,row].slice(-120)};}
+export function mq2Serial(r:Mq2Report){return`A0=${r.reading} Average=${r.average} Delta=${r.delta} | ${r.baseline===null?'Waiting for baseline':r.alert?'Above threshold':'Indicator off'}`;}

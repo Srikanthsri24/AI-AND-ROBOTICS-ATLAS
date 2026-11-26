@@ -1180,3 +1180,7 @@ Crane unobscured-inspection checkpoint (unregistered; 75/150 unchanged): added m
 Local check: http://127.0.0.1:5190/#/project-builder/directory-20/workshop
 
 Phase 1 remains active: **74 workshops pending**. Phase 2 remains **61 additional guides**, after Phase 1. This milestone supersedes the historical crane in-progress notes above.
+
+## MQ-2 monitor controller checkpoint — workshop in progress
+
+Started `directory-21` with a pure controller matching its existing downloadable Arduino sketch: eight-sample integer average, lowercase `b` baseline capture after the buffer fills, 90-count activation / 65-count release hysteresis, and exact serial output. Four tests pass, including 400 mixed iterations against the compiled original C++ sketch; targeted strict TypeScript passes. The physical workshop, wiring, calibration interface, animation and browser verification are still pending. This checkpoint does **not** increase the completed total: **76/150**, with **74 Phase 1 workshops** and **61 Phase 2 guides** pending.
