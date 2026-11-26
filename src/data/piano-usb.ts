@@ -8,7 +8,7 @@ export function pianoUsbPose(withdrawal:number,hostWithdrawal=0){
  if(![withdrawal,hostWithdrawal].every(n=>Number.isFinite(n)&&n>=0&&n<=12))throw new RangeError('USB withdrawal must be 0–12 mm.');
  const liftFraction=Math.max(0,Math.min(1,(hostWithdrawal-6)/6)),lift=20*liftFraction*liftFraction*(3-2*liftFraction);
  const uno:P=[pianoUsbUnoFace[0]-withdrawal,pianoUsbUnoFace[1],pianoUsbUnoFace[2]],host:P=[pianoUsbHostFace[0]+hostWithdrawal,pianoUsbHostFace[1]+lift,pianoUsbHostFace[2]];
- const points:readonly P[]=[[uno[0]-24,uno[1],uno[2]],[uno[0]-34,uno[1],uno[2]],[-155,24,-62],[-155,22,-46],[-120,20,-40],[-95,19,30],[host[0]+32,host[1],host[2]],[host[0]+24,host[1],host[2]]];
+ const points:readonly P[]=[[uno[0]-24,uno[1],uno[2]],[uno[0]-34,uno[1],uno[2]],[-155,24,-62],[-140,22,-60],[-125,21,-60],[-120,20,-40],[-95,19,30],[host[0]+32,host[1],host[2]],[host[0]+24,host[1],host[2]]];
  return{uno,host,points};
 }
 export const pianoUsbParts=[
