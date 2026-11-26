@@ -5,6 +5,8 @@ export type CraneMotionInput={targetX:number;targetFaceY:number;energized:boolea
 export function craneMotionInitial():CraneMotion{return{x:-65,faceY:50,washerX:-65,washerY:12,washerVX:0,washerVY:0,attached:false,accumulator:0,elapsed:0,pickups:0,deliveries:0,lastLanding:'source',pendingDelivery:false,blocked:false};}
 const approach=(a:number,b:number,step:number)=>a+Math.sign(b-a)*Math.min(Math.abs(b-a),step);
 const clamp=(v:number,a:number,b:number)=>Math.max(a,Math.min(b,v));
+/** Flat washer support: base top 10, pad/floor 12, tray wall tops 16 mm. */
+export function craneLandingY(x:number){if(!Number.isFinite(x))throw new RangeError('Washer position must be finite');if([42,88].some(w=>Math.abs(x-w)<10))return 16;if(Math.abs(x+65)<30||Math.abs(x-65)<33)return 12;return 10;}
 /** Fixed 1 ms integration preserves pickup/drop events across rendering frame sizes.
  * Null drive is electrically indeterminate: freeze the exercise until the wiring is fixed.
  * Supply current is educational nominal current, not a simulated magnetic force law. */
@@ -23,12 +25,12 @@ export function craneMotionAdvance(previous:CraneMotion,ms:number,input:CraneMot
   if(s.faceY<wallClearance){for(const wall of [42,88]){const low=wall-11,high=wall+11;if(oldX<=low&&nextX>low){nextX=low;s.blocked=true;}else if(oldX>=high&&nextX<high){nextX=high;s.blocked=true;}}}
   s.x=nextX;
   // The magnet cannot penetrate a resting washer. A supported load has its top at faceY.
-  if(!s.attached&&Math.abs(s.x-s.washerX)<=10&&s.washerY<=12.001)s.faceY=Math.max(s.faceY,13);
+  if(!s.attached&&Math.abs(s.x-s.washerX)<=10&&s.washerY<=craneLandingY(s.washerX)+.001)s.faceY=Math.max(s.faceY,s.washerY+1);
   if(s.attached&&!input.energized){s.attached=false;s.washerVX=(s.x-oldX)/dt;s.washerVY=0;s.pendingDelivery=true;}
   if(s.attached){s.washerX=s.x;s.washerY=s.faceY-1;s.washerVY=0;s.washerVX=(s.x-oldX)/dt;}
   else{
-   if(s.washerY>12||s.washerVY!==0){s.washerVY-=9810*dt;s.washerX+=s.washerVX*dt;s.washerY+=s.washerVY*dt;}
-   if(s.washerY<=12){s.washerY=12;s.washerVY=0;s.washerVX=0;const spot=Math.abs(s.washerX-65)<=19?'tray':Math.abs(s.washerX+65)<=19?'source':'bench';s.lastLanding=spot;if(s.pendingDelivery&&spot==='tray')s.deliveries++;s.pendingDelivery=false;}
+   if(s.washerY>craneLandingY(s.washerX)||s.washerVY!==0){s.washerVY-=9810*dt;s.washerX+=s.washerVX*dt;s.washerY+=s.washerVY*dt;}
+   const landing=craneLandingY(s.washerX);if(s.washerY<=landing){s.washerY=landing;s.washerVY=0;s.washerVX=0;const spot=Math.abs(s.washerX-65)<=19?'tray':Math.abs(s.washerX+65)<=19?'source':'bench';s.lastLanding=spot;if(s.pendingDelivery&&spot==='tray')s.deliveries++;s.pendingDelivery=false;}
    const gap=s.faceY-(s.washerY+1);
    if(input.energized&&Math.abs(s.x-s.washerX)<=3&&gap>=-.02&&gap<=.65){s.attached=true;s.washerX=s.x;s.washerY=s.faceY-1;s.washerVY=0;s.washerVX=0;s.pickups++;s.pendingDelivery=false;s.lastLanding=null;}
   }

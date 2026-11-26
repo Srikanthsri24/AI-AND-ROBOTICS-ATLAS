@@ -1,3 +1,4 @@
+import {craneConnections} from './crane-layout';
 export type CraneHardwarePart={id:string;name:string;what:string;connection:string};
 const part=(id:string,name:string,what:string,connection:string):CraneHardwarePart=>({id,name,what,connection});
 export const craneHardwareParts:readonly CraneHardwarePart[]=[
@@ -23,4 +24,31 @@ export const craneHardwareParts:readonly CraneHardwarePart[]=[
  part('crane-driver-signal-led','Red signal indicator','Shows the incoming logic command separately from the power indicator.','May light with coil power disconnected if the Uno signal and ground remain connected. It is not a current sensor.'),
  part('crane-driver-input','Three-position JST PH input','A keyed 2 mm-pitch connector accepts ground, supply and logic.','Black joins shared GND; red receives the independent regulated 5 V; the signal lead receives D9.'),
  part('crane-driver-output','Two-position spring output terminal','Grips the two coil leads with separate spring contacts.','OUT+ feeds the positive coil lead; OUT− is the switched return. Unplug both supplies before changing the wiring.'),
+ part('crane-uno-pcb','Arduino Uno R3 board','Runs the crane control sketch while USB supplies its logic power.','D2 reads the hold button and D9 commands the MOSFET gate. The coil has its own regulated 5 V supply.'),
+ part('crane-uno-mcu','ATmega328P controller','Debounces the input for 20 ms, enforces an eight-second hold limit and requires release to rearm.','A held button at startup cannot energize the coil until a stable release and fresh press.'),
+ part('crane-uno-headers','Uno female sockets','Separate physical contacts accept the D2, D9 and GND leads.','The button uses INPUT_PULLUP. No external button power feed is required.'),
+ part('crane-uno-usb','Uno USB-B receptacle','Accepts the programming and logic-power cable.','Upload electromagnet_crane.ino; use the event-only Serial Monitor at 115200 baud.'),
+ part('crane-uno-bridge','USB serial interface','Carries uploads and event messages between computer and AVR.','Idle, Holding and Timeout or release to arm report firmware state, not a measured lifting force.'),
+ part('crane-uno-power','Uno power conditioning','Supports the USB-powered logic rail; the barrel jack is unused.','The independent coil supply does not feed Uno VIN or its 5 V output.'),
+ part('crane-uno-reset','Uno reset switch','Restarts the controller in its unarmed state.','Release the hold button for at least 20 ms after reset before beginning a lift.'),
+ part('crane-uno-tracks','Uno copper routes','Connect the socket contacts to the processor and board circuitry.','External wiring must still reach the real D2, D9 and GND sockets.'),
+ part('crane-uno-programming','Unused ICSP headers','Provide low-level AVR programming access.','Leave these pins unconnected; the guide uploads through USB.'),
+ part('crane-uno-leds','Uno status indicators','The ON lens indicates USB logic power; the other board lenses are not load indicators.','Watch the separate driver power and signal indicators for the coil circuit.'),
+ part('crane-uno-supports','Insulating Uno supports','Keep underside solder joints clear of the timber base.','The feet meet the PCB at its mounting holes; they do not provide ground.'),
+ part('crane-breadboard','170-contact mini breadboard','Each column has two independent five-hole strips separated by the centre gap.','The button spans the gap. Column 12 carries separate common-ground and positive-supply strips; it has no long power rails.'),
+ part('crane-driver-supports','Insulating driver supports','Support the small driver at its two mounting holes.','They keep underside copper above the base without linking separate circuit nodes.'),
+ part('crane-button-body','Tactile button body','Insulates the normally open contact mechanism.','The four feet form two permanent pairs. Pressing connects the signal pair to the grounded pair.'),
+ part('crane-button-cover','Button retaining cover','Its real centre hole guides the moving actuator.','This cover is mechanical and is not used as a circuit connection.'),
+ part('crane-button-cap','Momentary hold actuator','Hold to request coil power; releasing requests switch-off after input debounce.','D2 goes LOW on a press. The firmware stops a sustained hold at eight seconds even if the input bounces.'),
+ part('crane-button-signal','Button signal contact pair','Both feet on this side share one internal contact.','The rear-bank column 3 strip connects this pair to D2; the pull-up holds it HIGH when open.'),
+ part('crane-button-ground','Button ground contact pair','The opposite pair remains connected to the return wire.','The front-bank column 3 strip links to the shared ground strip. Pressing joins it to the D2 contact.'),
+ part('crane-supply','Independent regulated 5 V supply','Provides the coil energy without passing load current through the Uno.','The low-voltage output cord feeds the centre-positive DC adapter. The 5 V indication does not itself energize the coil.'),
+ part('crane-supply-cord','Low-voltage supply cord','Carries positive and negative supply conductors inside one insulated jacket.','Runs from the regulated output to the centre-positive barrel plug.'),
+ part('crane-dc-plug','5.5 / 2.1 mm DC barrel plug','A hollow centre-positive barrel mates with the adapter socket.','The inner contact is positive; the outside barrel is the negative return.'),
+ part('crane-dc-adapter','DC-to-terminal adapter housing','Insulates two separate screw terminals and supports the barrel socket.','The moulded + and − labels identify the two independent output connections.'),
+ part('crane-adapter-centre-contact','Positive DC socket centre pin','Mates inside the hollow barrel plug.','Feeds the adapter positive clamp; the outer sleeve feeds the negative clamp.'),
+ part('crane-adapter-positive','Positive supply clamp','Grips the stripped positive wire beneath its recessed screw.','Feeds only the separate breadboard 5 V strip and driver V+.'),
+ part('crane-adapter-negative','Negative supply clamp','Grips the stripped return wire beneath its separate screw.','Joins driver GND, Uno GND and the button return through the common strip.'),
+ part('crane-jst-plug','Keyed three-way input plug','Separate cavities hold the ground, supply and signal crimp contacts.','The keyed housing seats in the left-facing driver input. Wires carry GND, independent 5 V and D9 separately.'),
+ ...craneConnections.map(w=>part(w.id,w.name,'An insulated conductor with metal contacts at each end; its colour helps identify this circuit node.',w.node==='5V'?'Carries the independent regulated coil supply. It is isolated from the common-ground bank and does not connect to Uno 5 V.':w.node==='gnd'?'Provides the shared electrical reference and return path between the named grounded contacts.':w.node==='D2'?'Connects the button signal strip to the Uno input; an accepted press reads LOW.':'Carries only the D9 gate command. The MOSFET and separate supply carry coil current.')),
 ];

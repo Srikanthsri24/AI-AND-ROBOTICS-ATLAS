@@ -1,0 +1,4 @@
+import {craneConnections,craneLayout,type CranePoint as P} from './crane-layout';
+export function craneWireRoute(index:number,withdrawA=0,withdrawB=0):P[]{const w=craneConnections[index];if(!w)throw new RangeError('Unknown crane wire');if(![withdrawA,withdrawB].every(v=>Number.isFinite(v)&&v>=0&&v<=40))throw new RangeError('Wire withdrawal must be 0–40 mm');const a:P=w.fromKind==='jst'?[craneLayout.driver[0]-4.2-withdrawA,w.from[1],w.from[2]]:w.fromKind==='clamp'?[w.from[0],w.from[1],w.from[2]+10.7+withdrawA]:[w.from[0],w.from[1]+7.5+withdrawA,w.from[2]],b:P=[w.to[0],w.to[1]+7.5+withdrawB,w.to[2]],height=38+index*1.8;
+ const first:P=w.fromKind==='jst'?[a[0]-5,a[1],a[2]]:w.fromKind==='clamp'?[a[0],a[1]+4,a[2]+4]:[a[0],a[1]+5,a[2]];
+ return[a,first,[a[0]+(b[0]-a[0])*.3,height,a[2]+(b[2]-a[2])*.25],[a[0]+(b[0]-a[0])*.7,height,b[2]],[b[0],b[1]+5,b[2]],b];}
