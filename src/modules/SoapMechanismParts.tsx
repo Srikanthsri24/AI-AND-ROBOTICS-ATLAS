@@ -21,9 +21,9 @@ import Servo from './SoapServoParts';
 import Lead from './SoapServoLeadParts';
 import {soapPumpFollower} from '../data/soap-dispenser-pump';
 import {soapServoPlacement} from '../data/soap-dispenser-servo';
-type Props={toolsVisible?:boolean;angle?:number;foundationAssembly?:number;sensorAssembly?:number;hornFitted?:boolean;flow?:'idle'|'press'|'refill';fill?:number;pumpCutaway?:boolean;servoCutaway?:boolean;logicPowered?:boolean;servoPowered?:boolean;sonarFitting?:number;circuitFitting?:number;usbMotion?:RefObject<SoapUsbMotion>;serialRows?:readonly string[];targetTop?:readonly[number,number,number];fluid?:SoapFluid;selected:string;choose:(id:string)=>void};
-function SoapMechanismParts({toolsVisible=true,angle=35,foundationAssembly=14,sensorAssembly=7,hornFitted=true,flow='idle',fill=.8,pumpCutaway=false,servoCutaway=false,logicPowered=false,servoPowered=false,sonarFitting=8,circuitFitting=10,usbMotion,serialRows=[],targetTop,fluid,selected,choose}:Props){
- const foundation=soapFoundationPose(foundationAssembly),ready=foundationAssembly===14,linked=ready&&hornFitted;
+type Props={toolsVisible?:boolean;angle?:number;foundationAssembly?:number;sensorAssembly?:number;hornFitted?:boolean;linkageAssembly?:number;flow?:'idle'|'press'|'refill';fill?:number;pumpCutaway?:boolean;servoCutaway?:boolean;logicPowered?:boolean;servoPowered?:boolean;sonarFitting?:number;circuitFitting?:number;usbMotion?:RefObject<SoapUsbMotion>;serialRows?:readonly string[];targetTop?:readonly[number,number,number];fluid?:SoapFluid;selected:string;choose:(id:string)=>void};
+function SoapMechanismParts({toolsVisible=true,angle=35,foundationAssembly=14,sensorAssembly=7,hornFitted=true,linkageAssembly=2,flow='idle',fill=.8,pumpCutaway=false,servoCutaway=false,logicPowered=false,servoPowered=false,sonarFitting=8,circuitFitting=10,usbMotion,serialRows=[],targetTop,fluid,selected,choose}:Props){
+ const foundation=soapFoundationPose(foundationAssembly),ready=foundationAssembly===14,linked=ready&&hornFitted&&linkageAssembly===2;
  const sensorPose=soapSensorAssemblyPose(ready?sensorAssembly:0),pose=soapPumpFollower(linked?angle:35);
  const clampRelease=useMemo(()=>soapCircuitClamps(circuitFitting),[circuitFitting]);
  return <group name="soap-dispenser-mechanism">
@@ -37,7 +37,7 @@ function SoapMechanismParts({toolsVisible=true,angle=35,foundationAssembly=14,se
   <Electronics assembly={foundationAssembly} selected={selected} choose={choose} powered={ready&&logicPowered} servoPowered={ready&&servoPowered} clampRelease={clampRelease}/>
   <Frame assembly={foundationAssembly} selected={selected} choose={choose}/>
   {foundation.bottle.visible&&<group name="soap-bottle-placement" position={[0,foundation.bottle.y,0]}><Pump selected={selected} choose={choose} depression={pose.depression} flow={linked?flow:'idle'} fill={fill} charge={ready?fluid?.chamber??0:0} cutaway={pumpCutaway}/></group>}
-  {foundation.actuator.visible&&<group name="soap-servo-assembly" position={[soapServoPlacement[0],soapServoPlacement[1]+foundation.actuator.y,soapServoPlacement[2]]}><Servo hornFitted={linked} angle={ready?angle:35} cutaway={servoCutaway} selected={selected} choose={choose}/><Lead selected={selected} choose={choose}/></group>}
+  {foundation.actuator.visible&&<group name="soap-servo-assembly" position={[soapServoPlacement[0],soapServoPlacement[1]+foundation.actuator.y,soapServoPlacement[2]]}><Servo linkageAssembly={linkageAssembly} hornFitted={ready&&hornFitted} angle={ready?angle:35} cutaway={servoCutaway} selected={selected} choose={choose}/><Lead selected={selected} choose={choose}/></group>}
  </group>;
 }
 export default memo(SoapMechanismParts);
