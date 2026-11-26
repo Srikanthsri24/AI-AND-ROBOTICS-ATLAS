@@ -11,6 +11,6 @@ export const rfidAntennaSupports=shield.holes.filter(h=>Number(h.x)>100).map(h=>
 export function rfidBreadboardHole(column:number,bank:-1|1,row:number):RfidPoint{const p=carMiniHole(column,bank,row),b=rfidWorkbench.breadboard;return [b[0]+p[0]*50,b[1]+p[1]*50,b[2]+p[2]*50];}
 export function rfidShieldContact(name:string):RfidPoint{const p=pn532StackPins.find(p=>p.unoName===name);if(!p)throw new RangeError('Unknown RFID shield contact '+name);const b=rfidWorkbench.reader;return [b[0]+pn532Stack.offsetX-34.29+p.x,b[1]+pn532Stack.baseY+pn532Stack.socketTop,b[2]+26.67-p.y];}
 
-export const rfidSupplyContacts={positive:[10,4.8,-102] as RfidPoint,negative:[16,4.8,-102] as RfidPoint};
+export const rfidSupplyContacts={positive:[10,4.6,-102] as RfidPoint,negative:[16,4.6,-102] as RfidPoint};
 export const rfidSupplyCord:readonly RfidPoint[]=[[13,5,-114],[13,5,-121],[-5,5,-125.5],[-13,5,-118],[-11,5,-75],[-25,5,-71],[-35,5,-71],[-35,5,-77]];
 export function rfidDcCord(withdrawal:number):readonly RfidPoint[]{if(!Number.isFinite(withdrawal)||withdrawal<0||withdrawal>12)throw new RangeError('RFID DC withdrawal must be 0–12 mm');return rfidSupplyCord.map((p,n)=>[p[0],p[1],p[2]-withdrawal*Math.max(0,1-n/4)]);}
