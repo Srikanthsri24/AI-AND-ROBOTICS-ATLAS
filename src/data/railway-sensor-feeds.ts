@@ -1,0 +1,13 @@
+import {railwaySensorConnections,railwaySensorTerminalPoint} from './railway-sensor-wiring';
+import type {RailwayJumperEnd,RailwayWithdrawal} from './railway-control-jumpers';
+import {railwayTranslate} from './railway-control-jumpers';
+import type {RailwayPoint as P} from './railway-electrical-layout';
+const up:P=[0,1,0];
+export const railwaySensorFeeds=railwaySensorConnections.slice(0,2).map(w=>({...w,radius:.4,a:{at:railwaySensorTerminalPoint(w.from),out:up,kind:'male',travel:6.5} as RailwayJumperEnd,b:{at:railwaySensorTerminalPoint(w.to),out:up,kind:'male',travel:6.5} as RailwayJumperEnd}));
+export function railwaySensorFeedPose(n:number,aWithdrawal=0,bWithdrawal=0){const w=railwaySensorFeeds[n];if(!w)throw Error('Unknown sensor feed');for(const value of[aWithdrawal,bWithdrawal])if(!Number.isFinite(value)||value<0||value>6.5)throw Error('Sensor feed outside mating travel');const a=railwayTranslate(w.a.at,up,aWithdrawal),b=railwayTranslate(w.b.at,up,bWithdrawal),route:P[]=n===0?[[175,42,145],[130,42,145],[b[0],38,142]]:[[a[0],42,133],[177.54,38,137],[132.54,38,138],[b[0],34,144]];return{a,b,points:[railwayTranslate(a,up,8.2),railwayTranslate(a,up,n===0?16:12),...(n===1?[[a[0],a[1]+16,a[2]-4] as P]:[]),...route,railwayTranslate(b,up,20),railwayTranslate(b,up,14),railwayTranslate(b,up,8.2)]};}
+export function railwaySensorFeedSeating(progress:number):RailwayWithdrawal[]{if(!Number.isFinite(progress)||progress<0||progress>1)throw Error('Feed seating progress must be 0–1');const value=(step:number)=>{const f=Math.max(0,Math.min(1,progress*4-step));return 6.5*(1-f*f*(3-2*f));};return railwaySensorFeeds.map((_,n)=>({a:value(n*2),b:value(n*2+1)}));}
+export const railwaySensorFeedParts=railwaySensorFeeds.flatMap(w=>[
+ {id:w.id,name:w.name,what:'Feeds one dedicated five-hole sensor strip from the Uno logic supply.',connection:w.node==='logic-5v'?'The front bank’s printed column 1 distributes Uno 5 V to all four sensor housings. It stays separate from servo positive.':'The front bank’s printed column 2 joins the four sensor ground leads to Uno GND. Motor return uses its own source cable.'},
+ {id:w.id+'-a',name:w.name.split(' → ')[0]+' plug',what:'A male jumper pin enters the actual Uno power-header contact.',connection:'Seat it with USB and the separate servo output off.'},
+ {id:w.id+'-b',name:w.name.split(' → ')[1]+' plug',what:'A male pin occupies one hole in the named five-hole strip.',connection:'Four separate holes remain for the two emitters and two receivers. The centre gap keeps the warning circuit on its own bank.'},
+]);

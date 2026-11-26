@@ -2,6 +2,7 @@ import {memo,useMemo,useEffect,type ReactNode,type RefObject} from 'react';
 import {useFrame} from '@react-three/fiber';
 import {CatmullRomCurve3,MeshPhysicalMaterial,Path,Shape,Vector3} from 'three';
 import {Text} from '@react-three/drei';
+import {railwaySensorPowerHole} from '../data/railway-sensor-wiring';
 import BluetoothMiniBreadboard from './BluetoothMiniBreadboard';
 import {railwayWarningBoardAt,railwayWarningHole,railwayWarningPins as pins,railwayServoLeads,railwayServoTail,railwayServoContact} from '../data/railway-electrical-layout';
 import type {RailwayClock} from '../data/railway-workshop';
@@ -30,7 +31,7 @@ function RailwayElectricalParts({selected='',select=()=>{},clock}:{selected?:str
   {box(id,[p[0],7.65,92.9],[.8,.1,5.2],'#b8a46f',.7)}
   {[-1,1].map(side=><group key={side}>{box(id,[p[0]+side*.35,8,92.9],[.1,.8,5.2],'#b8a46f',.7)}</group>)}
  </>);})}
- {tag('railway-warning-board',<><group position={[...railwayWarningBoardAt]} scale={50}><BluetoothMiniBreadboard selected={selected==='railway-warning-board'} supplyLabel="170 pts" returnLabel="5-HOLE"/></group>{[5,9,10].map(column=><Text key={column} font={font} position={[railwayWarningHole(column,0)[0],10.12,103.5]} rotation={[-Math.PI/2,0,0]} fontSize={1.1} color="#516078" anchorX="center">{column+1}</Text>)}</>)}
+ {tag('railway-warning-board',<><group position={[...railwayWarningBoardAt]} scale={50}><BluetoothMiniBreadboard selected={selected==='railway-warning-board'} supplyLabel="170 pts" returnLabel="5-HOLE"/></group>{[5,9,10].map(column=><Text key={column} font={font} position={[railwayWarningHole(column,0)[0],10.12,103.5]} rotation={[-Math.PI/2,0,0]} fontSize={1.1} color="#516078" anchorX="center">{column+1}</Text>)}{(['logic-5v','common-ground'] as const).map((node,n)=><Text key={node} font={font} position={[railwaySensorPowerHole(node,4)[0],10.12,136.5]} rotation={[-Math.PI/2,0,0]} fontSize={1.1} color="#516078" anchorX="center">{n+1}</Text>)}</>)}
  {tag('railway-warning-resistor',<>
   <mesh position={[resX,13,resZ]} rotation={[0,0,Math.PI/2]} castShadow><cylinderGeometry args={[1.1,1.1,6,40]}/>{mat('railway-warning-resistor','#c9b58f')}</mesh>
   {[-1.9,-.9,.1,2].map((x,n)=><mesh key={n} position={[resX+x,13,resZ]} rotation={[0,0,Math.PI/2]}><cylinderGeometry args={[1.115,1.115,.42,40]}/>{mat('railway-warning-resistor',['#ad3545','#ad3545','#684e39','#b89d58'][n],n===3?.6:0)}</mesh>)}
