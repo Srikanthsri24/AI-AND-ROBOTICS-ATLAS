@@ -1,0 +1,6 @@
+CAD source: https://raw.githubusercontent.com/adafruit/Adafruit-LED-Backpacks/master/Adafruit%207seg%20backpack.brd
+SHA256: e53f1b341e43a89aedd36255b4712bee7f9056b24f402d483b7a42420949d9b6
+Derived XY board / pad / copper data: src/data/ht16k33-sevenseg-layout.json
+Extraction script: scripts/extract-sevenseg-backpack.py
+Original design by Adafruit Industries; original attribution and CC BY-SA terms are in README.md and license.txt.
+3D heights and surface materials are authored visual approximations, not manufacturer CAD.
