@@ -1,0 +1,22 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import ts from 'typescript';
+const cache=new Map();
+async function load(url){
+  if(cache.has(url.href))return cache.get(url.href);
+  if(url.pathname.endsWith('.json'))return 'data:text/javascript;base64,'+Buffer.from('export default '+await readFile(url,'utf8')).toString('base64');
+  let code=ts.transpileModule(await readFile(url,'utf8'),{compilerOptions:{module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2022}}).outputText;
+  for(const match of [...code.matchAll(/from ['"]([^'"]+)['"]/g)])code=code.replace(match[0],"from '"+await load(new URL(match[1]+(match[1].endsWith('.json')?'':'.ts'),url))+"'");
+  const uri='data:text/javascript;base64,'+Buffer.from(code).toString('base64');cache.set(url.href,uri);return uri;
+}
+const m=await import(await load(new URL('../src/data/rfid-session.ts',import.meta.url)));
+const tags=await import(await load(new URL('../src/data/rfid-tags.ts',import.meta.url)));
+function rig(){const settings={...m.rfidSessionDefaults,assembled:true,usb:true,servoPower:true};let state=m.rfidSessionAdvance(m.rfidSessionInitial(),settings,1);return {settings,get state(){return state;},advance(ms){state=m.rfidSessionAdvance(state,settings,ms);return state;},command(text){state=m.rfidSessionCommand(state,text);},reset(){state=m.rfidSessionReset(state,settings);}};}
+function enroll(r){r.command('e');r.advance(180);r.settings.tag='A';r.advance(1100);assert.deepEqual(r.state.controller.learned,tags.rfidClassroomTags.A.uid);assert.equal(r.state.angle,35);}
+function remove(r){r.settings.tag=null;r.advance(1100);}
+function release(r){r.settings.tag='A';for(let n=0;n<1300;n++){r.advance(1);if(r.state.controller.unlocked)return;}throw Error('Tag did not release');}
+test('animated tag enrollment, rejection and servo release preserve the real sequence',()=>{const r=rig();enroll(r);remove(r);r.settings.tag='B';r.advance(1100);assert.equal(r.state.controller.denied,true);assert.equal(r.state.controller.red,true);assert.equal(r.state.angle,35);remove(r);release(r);assert.equal(r.state.angle,35);assert.equal(r.state.controller.green,true);r.advance(1);assert.ok(r.state.angle>35&&r.state.angle<36);r.advance(800);assert.equal(r.state.angle,105);r.advance(4000);assert.equal(r.state.controller.unlocked,false);assert.equal(r.state.angle,35);assert.deepEqual(r.state.controller.writes,[35,105,35]);remove(r);release(r);assert.equal(r.state.controller.writeCount,4);});
+test('independent servo supply and shared reference gate movement without stopping access logic',()=>{const r=rig();enroll(r);remove(r);r.settings.servoPower=false;release(r);r.advance(500);assert.equal(r.state.angle,35);assert.equal(r.state.controller.green,true);r.settings.servoPower=true;r.settings.servoGround=false;r.advance(500);assert.equal(r.state.angle,35);r.settings.servoGround=true;r.advance(800);assert.equal(r.state.angle,105);});
+test('USB power cycle forgets enrollment and RESET preserves physical angle until it moves',()=>{const r=rig();enroll(r);remove(r);release(r);r.advance(800);assert.equal(r.state.angle,105);r.reset();assert.equal(r.state.angle,105);assert.deepEqual(r.state.controller.learned,[]);r.advance(180);assert.equal(r.state.controller.denied,true);assert.ok(r.state.angle<105&&r.state.angle>35);const actual=r.state.angle;r.settings.usb=false;r.advance(200);assert.equal(r.state.controller,null);assert.equal(r.state.angle,actual);r.settings.usb=true;r.advance(200);assert.deepEqual(r.state.controller.learned,[]);});
+test('fractional frames and tag handoff are deterministic; failed startup requires RESET',()=>{const settings={...m.rfidSessionDefaults,assembled:true,usb:true,servoPower:true,tag:'A'},one=m.rfidSessionAdvance(m.rfidSessionInitial(),settings,1000.5);let split=m.rfidSessionInitial();for(let n=0;n<100;n++)split=m.rfidSessionAdvance(split,settings,10.005);assert.deepEqual(split,one);const r=rig();r.settings.readerReady=false;r.reset();assert.equal(r.state.controller.available,false);r.settings.readerReady=true;r.advance(1000);assert.equal(r.state.controller.available,false);r.reset();assert.equal(r.state.controller.available,true);r.settings.tag='A';r.advance(900);r.settings.tag='B';r.advance(400);assert.ok(r.state.tagA>0);assert.equal(r.state.tagB,0);r.advance(1500);assert.equal(r.state.tagA,0);assert.equal(r.state.tagB,1);assert.throws(()=>r.advance(-1));});
