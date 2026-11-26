@@ -24,6 +24,7 @@ export const rainHardwareParts:readonly RainHardwarePart[]=[
  p('rain-rail-supports','Rail supports','Hold both rails at the same working height.','Their feet rest on the base; their tops support the rails.'),
  p('rain-carriage','Sliding carriage and guide sleeves','Carries the paper load along the rails.','The pushrod drives its pivot while both hollow sleeves constrain sideways movement.'),
  p('rain-servo-case','Positional micro-servo','Contains the motor, reduction gears and internal position controller.','Separate 5 V and GND power it. D9 supplies position pulses, not motor power.'),
+ p('rain-servo-mounting-screws','Servo mounting screws','Secure the fixed servo flange to the mechanism base.','Each shaft passes through an open flange hole. The slotted heads bear on the flange while the horn rotates independently.'),
  p('rain-servo-shaft','Servo output shaft','Transfers controlled rotation to the horn.','The horn mounts on this shaft; the servo case stays fixed.'),
  p('rain-servo-horn','20 mm crank horn','Turns the shaft rotation into the first end of the linkage motion.','Its outer pin connects to the fixed-length pushrod.'),
  p('rain-pushrod','65 mm pushrod','Pushes or pulls the carriage as the horn rotates.','Both pin joints pivot; the rod remains the same length throughout the stroke.'),

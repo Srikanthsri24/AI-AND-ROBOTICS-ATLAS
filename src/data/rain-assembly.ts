@@ -6,7 +6,7 @@ export const rainAssemblySteps=[
  ['Fit the controller and breadboard','Identify Uno D2, D9, 5 V and GND. The mini breadboard has separate five-hole strips on each side of its centre gap.'],
  ['Fit the rails and supports','Keep both rails parallel. Each open sleeve must slide freely without binding.'],
  ['Slide on the carriage','Fit its two guide sleeves over the rails. Its full stroke must remain clear of the canopy supports.'],
- ['Mount the servo and factory lead','The positional servo stays fixed to the base. Keep its three-wire factory harness clear of the sliding carriage.'],
+ ['Mount the servo and factory lead','The mounting screws pass through the two flange holes into the base. The positional servo stays fixed. Keep its three-wire factory harness clear of the sliding carriage.'],
  ['Fit the horn and pushrod','With the mechanism at the covered position, connect the horn, fixed-length rod and both pins. Never force the linkage past its travel.'],
  ['Add the clothesline and paper load','Fit the uprights, line, pegs and lightweight paper shirts. The demonstration load moves with the carriage.'],
  ['Install the canopy','Check that the paper load is completely under the roof at 35° and outside its edge at 130°.'],
@@ -23,7 +23,7 @@ export function rainAssemblyProgress(elapsed:number){if(!Number.isFinite(elapsed
 const entries:readonly [string,number,number][]=[
  ['rain-usb-hardware',14,0],['rain-work-mat',0,0],['rain-card-base',1,30],['rain-uno-supports',2,24],['rain-breadboard-support',2,24],['rain-uno-assembly',3,40],['rain-breadboard',3,30],
  ['rain-rail-0',4,30],['rain-rail-1',4,30],['rain-rail-supports',4,30],['rain-carriage',5,35],
- ['rain-servo-case',6,35],['rain-servo-shaft',6,35],['rain-servo-factory-harness',6,35],['rain-servo-horn',7,25],['rain-pushrod',7,25],['rain-joints',7,25],
+ ['rain-servo-mounting-screws',6,35],['rain-servo-case',6,35],['rain-servo-shaft',6,35],['rain-servo-factory-harness',6,35],['rain-servo-horn',7,25],['rain-pushrod',7,25],['rain-joints',7,25],
  ['rain-clothesline',8,30],['rain-paper-shirt-0',8,30],['rain-paper-shirt-1',8,30],['rain-clothes-pegs',8,30],['rain-canopy',9,35],
  ['rain-water-tray',10,25],['rain-water-stands',10,25],['rain-grove-water-sensor',11,25],['rain-low-voltage-supply',12,25],['rain-circuit-jumpers',13,0],
 ];
