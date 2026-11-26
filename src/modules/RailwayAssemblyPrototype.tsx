@@ -1,6 +1,6 @@
 import {memo,useRef,type RefObject} from 'react';
 import {useFrame} from '@react-three/fiber';
-import {Group,Matrix3,Vector3,type Object3D} from 'three';
+import {Group,Matrix3,Vector3,type Object3D,type Texture} from 'three';
 import Track from './RailwayTrackParts';
 import Beams from './RailwayBeamParts';
 import Barrier from './RailwayBarrierParts';
@@ -18,7 +18,7 @@ import type {RailwayUsbMotion} from '../data/railway-usb';
 export type RailwayAssemblyRuntime={clock:RefObject<RailwayClock>;inputs:RefObject<RailwayInputs>;controls:RefObject<readonly RailwayWithdrawal[]>;feeds:RefObject<readonly RailwayWithdrawal[]>;leads:RefObject<readonly RailwayWithdrawal[]>;usb:RefObject<RailwayUsbMotion>;warning:RefObject<boolean>};
 export function createRailwayAssemblyRuntime():RailwayAssemblyRuntime{return{clock:{current:railwayInitial()},inputs:{current:{...railwayDefaults}},controls:{current:[]},feeds:{current:[]},leads:{current:[]},usb:{current:{usb:false,usbUno:12,usbHost:12}},warning:{current:false}};}
 type Owner={node:Object3D;rest:Vector3;visible:boolean;id:string;ancestor:string|undefined};
-function RailwayAssemblyPrototype({progress,runtime,selected='',select=()=>{}}:{progress:RefObject<number>;runtime:RailwayAssemblyRuntime;selected?:string;select?:(id:string)=>void}){
+function RailwayAssemblyPrototype({progress,runtime,selected='',select=()=>{},screen=null}:{progress:RefObject<number>;runtime:RailwayAssemblyRuntime;selected?:string;select?:(id:string)=>void;screen?:Texture|null}){
  const root=useRef<Group>(null),owners=useRef<Owner[]>([]),lastMotion=useRef(-1),lastPose=useRef(-1);
  useFrame(()=>{const p=progress.current;if(p===lastMotion.current)return;const m=railwayAssemblyMotion(p);runtime.clock.current=m.clock;runtime.inputs.current=m.raw;runtime.controls.current=m.controls;runtime.feeds.current=m.feeds;runtime.leads.current=m.leads;runtime.usb.current=m.usb;runtime.warning.current=m.circuit.warningConnected;lastMotion.current=p;},-3);
  useFrame(()=>{const r=root.current,p=progress.current;if(!r||p===lastPose.current)return;if(!owners.current.length){const ids=new Set<string>();r.traverse(node=>{const id=node.userData.partId as string|undefined;if(!id)return;if(ids.has(id)||!railwayAssemblyParts.some(part=>part.id===id))throw Error('Invalid railway assembly owner '+id);ids.add(id);let parent=node.parent;while(parent&&parent!==r&&!parent.userData.partId)parent=parent.parent;owners.current.push({node,id,rest:node.position.clone(),visible:node.visible,ancestor:parent?.userData.partId});});if(ids.size!==railwayAssemblyParts.length)throw Error('Incomplete railway assembly scene');}
@@ -34,7 +34,7 @@ function RailwayAssemblyPrototype({progress,runtime,selected='',select=()=>{}}:{
   <Controls selected={selected} select={select} motion={runtime.controls}/>
   <Feeds selected={selected} select={select} motion={runtime.feeds}/>
   <Leads selected={selected} select={select} motion={runtime.leads} inputs={runtime.inputs}/>
-  <Usb selected={selected} select={select} motion={runtime.usb}/>
+  <Usb selected={selected} select={select} motion={runtime.usb} screen={screen}/>
  </group>;
 }
 export default memo(RailwayAssemblyPrototype);
