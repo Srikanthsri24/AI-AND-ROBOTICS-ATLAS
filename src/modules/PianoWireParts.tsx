@@ -1,0 +1,12 @@
+import {memo,useMemo,useRef,type RefObject} from 'react';
+import {useFrame,type ThreeEvent} from '@react-three/fiber';
+import {CatmullRomCurve3,Vector3,type Group,type Mesh,type TubeGeometry} from 'three';
+import {pianoConnections} from '../data/piano-layout';
+import {pianoWireRoute,pianoWireSeating,pianoWireColors} from '../data/piano-wires';
+import {rewriteCubeSatTube} from './cubesat-tube-motion';
+function PianoWireParts({selected,choose,cursor,withdrawals}:{selected:string;choose:(id:string)=>void;cursor?:RefObject<number>;withdrawals?:readonly number[]}){
+ const root=useRef<Group>(null),last=useRef<string[]>([]),curves=useMemo(()=>pianoConnections.map((_,i)=>new CatmullRomCurve3(pianoWireRoute(i).map(p=>new Vector3(...p)))),[]);
+ useFrame(()=>{if(!root.current)return;for(let n=0;n<19;n++){const w=pianoConnections[n],pose=pianoWireSeating(n,cursor?.current??19),a=pose.a,b=Math.max(pose.b,withdrawals?.[n]??0),key=a+'/'+b,owner=root.current.getObjectByName(w.id)!;owner.visible=pose.visible;if(last.current[n]===key)continue;owner.getObjectByName(w.id+'-a')!.position.y=a;owner.getObjectByName(w.id+'-b')!.position.y=b;rewriteCubeSatTube((owner.getObjectByName(w.id+'-tube') as Mesh<TubeGeometry>).geometry,new CatmullRomCurve3(pianoWireRoute(n,a,b).map(p=>new Vector3(...p))));last.current[n]=key;}},-2);
+ return <group ref={root} name="piano-jumpers">{pianoConnections.map((w,index)=>{const selectedWire=selected===w.id,color=selectedWire?'#b78be8':index<8?pianoWireColors[index]:w.node==='gnd'?'#34475a':index===16?'#956eaf':'#b25977',metal=selectedWire?'#b78be8':'#bac3ca',grip=selectedWire?'#b78be8':'#293b49';return <group key={w.id} name={w.id} userData={{partId:w.id}} onClick={(e:ThreeEvent<MouseEvent>)=>{e.stopPropagation();choose(w.id);}}><mesh name={w.id+'-tube'} castShadow><tubeGeometry args={[curves[index],128,.45,12,false]}/><meshStandardMaterial color={color} roughness={.52}/></mesh>{[w.from,w.to].map((p,end)=><group key={end} name={w.id+(end?'-b':'-a')}><mesh position={[p[0],p[1]-1.75,p[2]]}><boxGeometry args={[.64,6.5,.64]}/><meshStandardMaterial color={metal} metalness={.75} roughness={.35}/></mesh><mesh position={[p[0],p[1]+3.5,p[2]]} castShadow><boxGeometry args={[2.1,6,2.1]}/><meshStandardMaterial color={grip} roughness={.6}/></mesh><mesh position={[p[0],p[1]+7,p[2]]}><boxGeometry args={[1.25,1,1.25]}/><meshStandardMaterial color={color} roughness={.5}/></mesh></group>)}</group>;})}</group>;
+}
+export default memo(PianoWireParts);
