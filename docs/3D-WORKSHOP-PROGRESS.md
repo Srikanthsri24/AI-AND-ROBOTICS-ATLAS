@@ -1025,3 +1025,8 @@ Still required before registration: remaining student chapter/playback/recovery 
 - Fourteen assembly transitions, pause / resume, bare-servo centring, opposite-side fastener fitting, calibration, six electrical fault trials and full healthy recovery pass through the student interface. A / B station captions follow the physical brackets; the barrier close-up frames the actual crossing on phones.
 - All 175 parts pass native surface selection and highlighting at desktop and phone widths. All 975 repository tests pass. TypeScript and production build pass. The built static app passes direct workshop loading, all six stage links, reload, actual playback, station labels, desktop / phone overflow checks, Components return routing and return to Guided Builds, with no page errors.
 - Phase 1: 73 completed, 77 remaining. Phase 2: 61 additional guides remain. Next catalog guide: `directory-18`.
+
+### Automatic Street Light System — in progress, not counted
+
+- Next catalog guide `directory-18` uses three separate D5 / D6 / D7 lamps, unlike the earlier single-lamp calibrated starter workshop. Added a dedicated controller preserving original 330 / 470 hysteresis, 100 ms sampling and serial text. Separate output / return faults affect only the relevant lamp. Disconnected analogue input is explicitly unknown, including physical lamp output; USB removal clears firmware state. Authored light response is identified as simulated, not measured lux.
+- Five focused tests pass for exact boundaries and both histories, partitioned time, independent branch faults, power reset, unknown sensor input and input validation. Targeted strict TypeScript passes. Scene, assembly and student interaction verification remain pending; published count stays 73 / 150.
