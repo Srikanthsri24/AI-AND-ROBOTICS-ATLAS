@@ -30,3 +30,28 @@ test('valves follow current mechanical motion rather than a held software press 
 test('cutaway charge band stays outside the spring and below the real moving piston',async()=>{const p=await import(await load(new URL('../src/data/soap-dispenser-pump.ts',import.meta.url)));for(let i=0;i<=60;i++){const d=i/10;for(const c of[0,.125,.5,1]){const b=p.soapPumpChargeBand(c,d);assert.ok(b.inner>3.8+.45);assert.ok(b.outer<5.4);assert.ok(b.bottom>163.55);assert.ok(b.top<=190.1-d);near((b.top-b.bottom)/(190-d-b.bottom),c);assert.equal(b.visible,c>0);}}for(const args of[[-1,0],[2,0],[1,7],[NaN,0]])assert.throws(()=>p.soapPumpChargeBand(...args));});
 
 test('guided endpoint fitting follows all nine wire routes, gates real connectivity and stops when power is connected',async()=>{const l=await import(await load(new URL('../src/data/soap-dispenser-fitting.ts',import.meta.url))),w=await import(await load(new URL('../src/data/soap-dispenser-wiring.ts',import.meta.url)));const off={unoWithdrawal:12,hostWithdrawal:12,servoPower:false},on={...off,servoPower:true};assert.equal(l.soapFittingSteps.length,18);assert.equal(new Set(l.soapFittingSteps.map(s=>s.id)).size,18);let state=l.soapFittingInitial();for(let end=0;end<18;end++){assert.equal(l.soapFittingAction(state,'next',on).cursor,state.cursor);state=l.soapFittingAction(state,'next',off);const halfway=l.soapFittingAdvance(state,600,off),blocked=l.soapFittingAdvance(halfway,600,on);near(blocked.cursor,end+.5);assert.equal(blocked.playing,false);state=l.soapFittingAdvance(l.soapFittingAction(blocked,'next',off),600,off);near(state.cursor,end+1);const c=l.soapFittingCursors(state.cursor);assert.equal(w.soapDispenserWiring(c.sonarFitting,c.circuitFitting).connected,Math.floor((end+1)/2));}assert.equal(l.soapFittingAction(state,'next',off).playing,false);state=l.soapFittingAdvance(l.soapFittingAction(state,'back',off),1200,off);near(state.cursor,17);assert.deepEqual(l.soapFittingAction(state,'reset',off),l.soapFittingInitial());for(const power of[{...off,unoWithdrawal:11.9},{...off,hostWithdrawal:0},on])assert.equal(l.soapFittingIsolated(power),false);assert.throws(()=>l.soapFittingCursors(19));assert.throws(()=>l.soapFittingAdvance(state,-1,off));});
+
+test('bare-shaft calibration requires powered physical travel and a returned unpowered shaft before fitting',async()=>{const c=await import(await load(new URL('../src/data/soap-dispenser-calibration.ts',import.meta.url)));let s=c.soapCalibrationInitial();assert.equal(c.soapCalibrationCanFit(s),false);s=c.soapCalibrationSend(s,'P');assert.equal(s.command,35);s=c.soapCalibrationPower(s,true,false);s=c.soapCalibrationSend(s,'P');s=c.soapCalibrationAdvance(s,1000);assert.equal(s.angle,35);assert.equal(s.seenPress,false);s=c.soapCalibrationPower(s,true,true);s=c.soapCalibrationAdvance(s,100);near(s.angle,53);s=c.soapCalibrationAdvance(s,100);assert.equal(s.angle,65);assert.equal(s.seenPress,true);assert.equal(c.soapCalibrationCanFit(s),false);s=c.soapCalibrationSend(s,'R\r\n');s=c.soapCalibrationAdvance(s,200);assert.equal(s.angle,35);assert.equal(s.returned,true);assert.equal(c.soapCalibrationCanFit(s),false);s=c.soapCalibrationPower(s,true,false);assert.equal(c.soapCalibrationCanFit(s),true);const off=c.soapCalibrationPower(s,false,false);assert.equal(off.rows.length,0);assert.equal(c.soapCalibrationCanFit(off),false);assert.equal(c.soapCalibrationSend(s,'rp?').rows.length,s.rows.length);assert.throws(()=>c.soapCalibrationAdvance(s,-1));});
+
+test('downloaded bare-shaft sketch compiles and matches serial commands and messages',async()=>{
+ const {mkdtemp,writeFile,rm}=await import('node:fs/promises'),{join}=await import('node:path'),{tmpdir}=await import('node:os'),{execFileSync}=await import('node:child_process');
+ const c=await import(await load(new URL('../src/data/soap-dispenser-calibration.ts',import.meta.url))),dir=await mkdtemp(join(tmpdir(),'atlas-soap-cal-'));
+ try{
+  await writeFile(join(dir,'Servo.h'),'#pragma once'+String.fromCharCode(10));
+  const prefix=`#include <cassert>
+#include <string>
+#include <iostream>
+using byte=unsigned char;
+int command=0;
+struct Servo{void write(int n){assert(n==35||n==65);command=n;}void attach(int p){assert(p==9);}};
+struct {std::string input;void begin(int n){assert(n==115200);}int available(){return input.size();}char read(){char c=input[0];input.erase(0,1);return c;}void println(const char* text){std::cout<<text<<std::endl;}}Serial;
+`;
+  const sequence=[80,13,10,63,114,112,82,80,82],tail=`
+int main(){setup();const int chars[]={${sequence.join(',')}};for(int c:chars){Serial.input+=char(c);loop();}assert(command==35);return 0;}
+`;
+  await writeFile(join(dir,'main.cpp'),prefix+c.soapCalibrationProgram.source+tail);
+  execFileSync('c++',['-std=c++17','-I',dir,join(dir,'main.cpp'),'-o',join(dir,'check')]);
+  const lines=execFileSync(join(dir,'check'),{encoding:'utf8'}).trim().split(String.fromCharCode(10));
+  let state=c.soapCalibrationPower(c.soapCalibrationInitial(),true,false);state=c.soapCalibrationSend(state,String.fromCharCode(...sequence));assert.deepEqual(lines,state.rows);
+ }finally{await rm(dir,{recursive:true,force:true});}
+});
