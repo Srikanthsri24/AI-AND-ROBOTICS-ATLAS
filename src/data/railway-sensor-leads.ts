@@ -11,7 +11,7 @@ export function railwaySensorLeadPose(n:number,aWithdrawal=0,bWithdrawal=0,align
  if(!d.terminal.receiver){const lane=n,x=-567.38-lane*2.54,z=-100-lane*3;route=[[a[0],8,z],[a[0]-15,3,z],[x+22,3,z],[x+3,3,z],[x,3,z+12],[x,3,-45],[x,3,0],[x,3,45],[x,3,130],[x+3,3,147+lane*3],[x+22,3,154+lane*3],[25+lane*3,3,154+lane*3],[48+lane*3,5,150+lane*3],[b[0]-8,20+lane*3,146+lane*3]];}
  else if(d.terminal.station==='a'){const lane=d.terminal.pin;route=[[a[0],8+lane*3,93],[-210-lane*3,8+lane*3,93],[-213-lane*3,6+lane*2,108],[-213-lane*3,6+lane*2,160+lane*3],[-195,6+lane*2,170+lane*3],[40,6+lane*2,170+lane*3],[b[0]-12,24+lane*3,150+lane*3]];}
  else{const lane=d.terminal.pin,x=212-lane*3,y=75-lane*5;route=[[a[0],8+lane*4,91],[x,8+lane*4,91],[x,y,91],[145,y,95],[130,y,150+lane*3]];}
- if(w.to.type==='strip'){if(!d.terminal.receiver||d.terminal.station==='a')route.pop();const pin=d.terminal.pin,row=w.to.row,y=50+pin*10,z=b[2]+(pin?.7:-.7);route.push([25,80+row*16+pin*8,z],[45,80+row*16+pin*8,z],[55,y,z],[b[0],y,z],[b[0],40+pin*8,b[2]]);}
+ if(w.to.type==='strip'){if(!d.terminal.receiver||d.terminal.station==='a')route.pop();const pin=d.terminal.pin,row=w.to.row,y=44+pin*8,z=b[2]+(pin?.7:-.7);route.push([25,52+row*8+pin*4,z],[45,52+row*8+pin*4,z],[55,y,z],[b[0],y,z],[b[0],34+pin*6,b[2]]);}
  const anchors:P[]=[railwayTranslate(a,s.out,8.2),railwayTranslate(a,s.out,d.terminal.receiver?10:12),...route,railwayTranslate(b,up,20),railwayTranslate(b,up,14),railwayTranslate(b,up,8.2)];
  // Keep spline tangents local on long extension runs, preventing a large span
  // from pulling a neighbouring low bend through the tabletop.
