@@ -1,0 +1,29 @@
+import {memo,useMemo,type ReactNode} from 'react';
+import {Text} from '@react-three/drei';
+import type {ThreeEvent} from '@react-three/fiber';
+import {Path,Shape,Vector3} from 'three';
+import layout from '../data/crane-driver-layout.json';
+// PCB coordinates and attribution: public/licenses/adafruit-mosfet-driver.txt.
+// Component envelopes are authored reconstructions; copper/pad centres come from Eagle CAD.
+const font=new URL('./fonts/NotoSans-Regular.ttf',document.baseURI).href;
+type P=[number,number,number];
+function CraneDriverParts({selected,choose,powerLed=false,signalLed=false}:{selected:string;choose:(id:string)=>void;powerLed?:boolean;signalLed?:boolean|null}){
+ const board=useMemo(()=>{const s=new Shape();s.moveTo(0,15.24);s.lineTo(0,2.54);s.quadraticCurveTo(0,0,2.54,0);s.lineTo(22.733,0);s.quadraticCurveTo(25.4,0,25.4,2.54);s.lineTo(25.4,15.24);s.quadraticCurveTo(25.4,17.78,22.733,17.78);s.lineTo(2.54,17.78);s.quadraticCurveTo(0,17.78,0,15.24);for(const h of layout.holes){const p=new Path();p.absarc(h.x,h.y,h.drill/2,0,Math.PI*2,true);s.holes.push(p);}return s;},[]);
+ const c=(id:string,color:string)=>id===selected?'#b78be8':color;
+ const tag=(id:string,children:ReactNode)=><group name={id} userData={{partId:id}} onClick={(e:ThreeEvent<MouseEvent>)=>{e.stopPropagation();choose(id);}}>{children}</group>;
+ const box=(id:string,p:P,size:P,color:string,metalness=0)=><mesh position={p} castShadow receiveShadow><boxGeometry args={size}/><meshStandardMaterial color={c(id,color)} roughness={metalness?.35:.65} metalness={metalness}/></mesh>;
+ const text=(label:string,x:number,y:number,size=1)=><Text position={[x,1.64,-y]} rotation={[-Math.PI/2,0,0]} font={font} fontSize={size} color="#eae9ef">{label}</Text>;
+ return <group name="crane-stemma-driver">
+ {tag('crane-driver-pcb',<><mesh rotation={[-Math.PI/2,0,0]} receiveShadow castShadow><extrudeGeometry args={[board,{depth:1.6,bevelEnabled:false,curveSegments:24}]}/><meshStandardMaterial color={c('crane-driver-pcb','#23252d')} roughness={.75}/></mesh>{layout.traces.map((t,n)=>{const a=new Vector3(t.x1,1.615,-t.y1),b=new Vector3(t.x2,1.615,-t.y2),delta=b.clone().sub(a);return <mesh key={n} position={a.add(b).multiplyScalar(.5)} rotation={[-Math.PI/2,0,Math.atan2(-delta.z,delta.x)]}><planeGeometry args={[delta.length(),t.width]}/><meshStandardMaterial color={c('crane-driver-pcb','#3c4943')} roughness={.65}/></mesh>;})}{text('MOSFET',14,16.8,1)}{text('IN',2.7,12.6,.9)}{text('+',21,4.2,1.4)}{text('−',21,13.5,1.4)}{text('SIG',2.3,3.3,.8)}{text('ON',2,14.5,.8)}</>)}
+ {tag('crane-driver-pads',<>{layout.pads.map((p,n)=><group key={n} rotation={[0,p.rotation*Math.PI/180,0]} position={[p.x,1.66,-p.y]}>{box('crane-driver-pads',[0,0,0],[p.dx,.12,p.dy],'#b8bec6',.8)}</group>)}{layout.holes.map((h,n)=>{const s=new Shape();s.absarc(0,0,h.diameter/2,0,2*Math.PI,false);const hole=new Path();hole.absarc(0,0,h.drill/2,0,2*Math.PI,true);s.holes.push(hole);return <mesh key={n} position={[h.x,1.62,-h.y]} rotation={[-Math.PI/2,0,0]}><extrudeGeometry args={[s,{depth:.08,bevelEnabled:false,curveSegments:24}]}/><meshStandardMaterial color={c('crane-driver-pads','#b9a35e')} metalness={.8} roughness={.4}/></mesh>;})}</>)}
+ {layout.elements.filter(e=>['C1','R1','R2','R3','D3','Q1'].includes(e.name)).map(e=>{const id=e.name==='Q1'?'crane-mosfet':e.name==='D3'?'crane-flyback':e.name==='R2'?'crane-gate-pulldown':'crane-driver-passives',size:P=e.name==='Q1'?[2.9,1.1,1.3]:e.name==='D3'?[2.8,1.2,1.8]:e.name==='C1'?[2,.8,1.25]:[1.6,.5,.8];return <group key={e.name} position={[e.x,1.76,-e.y]} rotation={[0,e.rotation*Math.PI/180,0]}>{tag(id,<>{box(id,[0,size[1]/2,0],size,e.name==='C1'?'#ad8d65':'#33343b')}{[-1,1].map(side=><group key={side}>{box(id,[side*(size[0]/2-.12),size[1]/2,0],[.25,size[1]+.02,size[2]],'#bac0c7',.85)}</group>)}{e.name==='D3'&&box(id,[-.7,1.22,0],[.25,.03,1.4],'#b8babf')}{e.name==='Q1'&&[-.95,.95].map((x,n)=><group key={n}>{box(id,[x,.12,1],[.45,.18,1.1],'#bcc2ca',.8)}</group>)}{e.name==='Q1'&&box(id,[0,.12,-1],[.45,.18,1.1],'#bcc2ca',.8)}</>)}</group>;})}
+ {(['D1','D2'] as const).map((name,n)=>{const e=layout.elements.find(e=>e.name===name)!,id=n?'crane-driver-power-led':'crane-driver-signal-led',on=n?powerLed:signalLed,color=n?'#65cb6c':'#ef505d';return <group key={name} position={[e.x,1.8,-e.y]}>{tag(id,<>{box(id,[0,.15,0],[.8,.3,1.6],'#d4d1bd')}<mesh position={[0,.35,0]}><boxGeometry args={[.6,.12,1.1]}/><meshStandardMaterial color={color} emissive={color} emissiveIntensity={on===true?1.5:0} roughness={.4}/></mesh></>)}</group>;})}
+ {tag('crane-driver-input',<group position={[4.6355,1.75,-8.89]} rotation={[0,Math.PI/2,0]}>
+ {box('crane-driver-input',[0,.35,0],[10,.7,7.5],'#deded2')}{box('crane-driver-input',[0,3.25,3.5],[10,5.1,.5],'#e1e1d4')}{[-4.7,4.7].map(x=><group key={x}>{box('crane-driver-input',[x,3.25,0],[.6,5.1,7.5],'#e1e1d4')}</group>)}{box('crane-driver-input',[0,5.55,2.9],[10,.5,1.7],'#e1e1d4')}{[-2,0,2].map((x,n)=><group key={x}>{box('crane-driver-input',[x,2.9,.4],[.5,.5,4.3],'#b7bdc1',.8)}{box('crane-driver-input',[x,.05,-2.7],[.6,.1,4.2],'#b7bdc1',.8)}<Text position={[x,.76,3.2]} rotation={[-Math.PI/2,0,0]} font={font} fontSize={.55} color="#34323d">{['G','V','S'][n]}</Text></group>)}
+ </group>)}
+ {tag('crane-driver-output',<group position={[17.653,1.76,-8.89]}>
+ {box('crane-driver-output',[0,.5,0],[13.5,1,7.9],'#d9d8cf')}{box('crane-driver-output',[-6.35,3.2,0],[.8,4.4,7.9],'#e1e0d5')}{[-3.7,0,3.7].map(z=><group key={z}>{box('crane-driver-output',[0,3.4,z],[12.7,4.8,.5],'#e1e0d5')}</group>)}{box('crane-driver-output',[-1,5.5,0],[10.5,.5,7.9],'#e1e0d5')}{[-2,2].map(z=><group key={z}>{box('crane-driver-output',[4.5,1.7,z],[3.4,.4,2.5],'#b4bac1',.85)}{box('crane-driver-output',[1,4.7,z],[3,.6,2.5],'#e2a263')}{box('crane-driver-output',[.3,3.1,z],[3.5,.3,2.3],'#afb5bc',.8)}</group>)}
+ </group>)}
+ </group>;
+}
+export default memo(CraneDriverParts);
