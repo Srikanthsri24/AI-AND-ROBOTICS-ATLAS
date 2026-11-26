@@ -56,9 +56,9 @@ export const streetSystemCables:readonly StreetCable[]=[
 ];
 export const streetSystemAssembly=[
  {title:'Prepare the model road',instruction:'Fit the road and pavement to the timber base. Keep the rear electronics area accessible.',check:'All three pole positions are separate from the sensor.'},
- {title:'Install three hollow posts',instruction:'Fit the posts and downward-facing lamp hoods. Keep the open wiring channel accessible.',check:'Each lamp has its own labelled head.'},
- {title:'Fit the white LEDs',instruction:'Seat the LEDs under their hoods with anode and cathode separated. Route both leads down each post.',check:'No two bare LED leads touch.'},
- {title:'Mount the controller and breadboard',instruction:'Mount the Uno on insulating supports and fit the 170-point breadboard behind the road.',check:'USB remains disconnected; no underside solder joint touches timber.'},
+ {title:'Install three hollow posts',instruction:'Fit the rear post channels and open hood frames. Leave the removable front covers and roofs off for wiring.',check:'Each lamp has its own labelled head.'},
+ {title:'Fit the white LEDs',instruction:'Lower each prewired LED, its two insulated leads and lower sockets together into the open post and hood. Slide the harness back into its channel.',check:'No two bare LED leads touch.'},
+ {title:'Mount the controller and breadboard',instruction:'Close the post covers and hood front panels, then lower the reflector roofs. Mount the Uno on insulating supports and fit the 170-point breadboard behind the road.',check:'USB remains disconnected; no underside solder joint touches timber.'},
  {title:'Fit the light divider',instruction:'Place the photoresistor away from the lamps. Fit the 10 kΩ resistor between the A0 junction strip and ground strip.',check:'The junction and ground occupy different five-hole strips.'},
  {title:'Fit three current limiters',instruction:'Bridge each lamp’s input and output strips with its own 220 Ω resistor.',check:'D5, D6 and D7 each reach an LED through a separate resistor.'},
  {title:'Connect power and A0',instruction:'With power off, seat 5 V, GND and A0 jumpers. Connect both photoresistor leads to their named strips.',check:'Covering the sensor will lower the A0 reading.'},

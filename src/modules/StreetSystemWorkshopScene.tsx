@@ -19,7 +19,7 @@ import {streetSystemParts} from '../data/street-system-parts';
 type Props={busy:boolean;progress:number;selected:string;choose:(id:string)=>void;lamps:readonly(boolean|null)[];powered:boolean;cutaway:boolean;view:number;shade:number;focus:number;links:StreetSystemSettings;rows:readonly string[];usbMotion:RefObject<StreetUsbMotion>};
 function Motion({root,progress}:{root:RefObject<Group|null>;progress:number}){
  const originals=useRef(new Map<Object3D,Vector3>());
- useFrame(()=>{if(root.current)root.current.userData.assemblyProgress=progress;root.current?.updateWorldMatrix(true,true);root.current?.traverse(o=>{if(!o.userData.partId)return;let origin=originals.current.get(o);if(!origin){origin=o.position.clone();originals.current.set(o,origin);}const pose=streetSystemAssemblyPose(o.userData.partId,progress);o.visible=pose.visible;const delta=new Vector3(0,pose.lift*.01,0);if(o.parent)delta.applyMatrix3(new Matrix3().setFromMatrix4(o.parent.matrixWorld).invert());o.position.copy(origin).add(delta);});},-1);
+ useFrame(()=>{if(root.current)root.current.userData.assemblyProgress=progress;root.current?.updateWorldMatrix(true,true);root.current?.traverse(o=>{if(!o.userData.partId)return;let origin=originals.current.get(o);if(!origin){origin=o.position.clone();originals.current.set(o,origin);}const pose=streetSystemAssemblyPose(o.userData.partId,progress);o.visible=pose.visible;const delta=new Vector3(0,pose.lift*.01,(pose.shiftZ??0)*.01);if(o.parent)delta.applyMatrix3(new Matrix3().setFromMatrix4(o.parent.matrixWorld).invert());o.position.copy(origin).add(delta);});},-1);
  return null;
 }
 export default function StreetSystemWorkshopScene({progress,selected,choose,lamps,powered,cutaway,view,shade,focus,links,rows,usbMotion,busy}:Props){

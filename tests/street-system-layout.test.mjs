@@ -37,7 +37,7 @@ test('divider ground and junction are independent of the lamp bank',()=>{
 const assembly=await import(await load(new URL('../src/data/street-system-assembly.ts',import.meta.url)));
 const catalog=await import(await load(new URL('../src/data/street-system-parts.ts',import.meta.url)));
 test('every physical part has a bounded monotone assembly lift and seats at its chapter',()=>{
- assert.equal(catalog.streetSystemParts.length,79);
+ assert.equal(catalog.streetSystemParts.length,88);
  for(const part of catalog.streetSystemParts){let previous=Infinity;
   for(let n=0;n<=80;n++){const p=n/10,pose=assembly.streetSystemAssemblyPose(part.id,p);assert.ok(pose.lift>=0&&pose.lift<=70);assert.ok(pose.lift<=previous+1e-9);previous=pose.lift;if(p>=part.stage){assert.equal(pose.lift,0);assert.equal(pose.seated,true);assert.equal(pose.visible,true);}}
  }
@@ -67,8 +67,8 @@ test('mounts seat before supported boards, hoods and fasteners; resistors fit se
  assert.equal(pose('street-lamp-1-hood',.55).visible,false);
  assert.equal(pose('street-lamp-1-hood',.8).seated,true);
  assert.equal(pose('street-lamp-1-bolts',.8).visible,false);
- assert.equal(pose('street-uno-supports',2.25).seated,true);
- assert.equal(pose('street-uno-pcb',2.25).visible,false);
+ assert.equal(pose('street-uno-supports',2.65).seated,true);
+ assert.equal(pose('street-uno-pcb',2.65).visible,false);
  assert.equal(pose('street-lamp-1-resistor',4.5).seated,true);
  assert.equal(pose('street-lamp-3-resistor',4.5).visible,false);
 });
@@ -164,3 +164,11 @@ test('all twelve fixings seat their washers before screw approach and pitched ti
  assert.equal(assembly.streetAssemblyAdvance(.8,1000),.8+1/120);
  assert.throws(()=>fasteners.streetFootFastenerPose(12,1));
 });
+
+ test('prewired lamp harness stays coherent and covers close only after seating',()=>{
+ const ids=['lens','internal-positive','internal-return','positive-socket','return-socket'].map(s=>'street-lamp-1-'+s);
+ for(let n=1;n<=100;n++){const p=1+n/100,poses=ids.map(id=>assembly.streetSystemAssemblyPose(id,p));for(const pose of poses){assert.equal(pose.lift,poses[0].lift);assert.equal(pose.shiftZ,poses[0].shiftZ);}if(p<1.85)assert.equal(poses[0].shiftZ,.6);else assert.equal(poses[0].lift,0);}
+ for(const suffix of ['post-cover','hood-front','hood-roof']){const id='street-lamp-1-'+suffix;assert.equal(assembly.streetSystemAssemblyPose(id,2).visible,false);assert.equal(assembly.streetSystemAssemblyPose(id,3).seated,true);}
+ });
+
+test('manual housing steps expose covers, reflector and supported PCB separately',()=>{let p=2;const actual=[];while(p<3){p=assembly.streetAssemblyNextStop(p);actual.push(p);}assert.deepEqual(actual,[2.2,2.35,2.5,2.65,2.85,3]);});

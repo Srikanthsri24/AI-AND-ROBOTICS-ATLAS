@@ -8,12 +8,12 @@ type Props={selected:string;choose:(id:string)=>void;lamps:readonly(boolean|null
 /** Millimetre-scale street furniture. Channels and screw bores are actual openings. */
 function StreetSystemLampParts({selected,choose,lamps,stage,cutaway}:Props){
  const shapes=useMemo(()=>{
-  const post=new Shape();post.absarc(0,0,4,0,Math.PI*2,false);const bore=new Path();bore.absarc(0,0,3,0,Math.PI*2,true);post.holes.push(bore);
   const foot=new Shape();foot.moveTo(-12,-10);foot.lineTo(12,-10);foot.lineTo(12,10);foot.lineTo(-12,10);foot.closePath();
   for(const x of [-8,8])for(const y of [-6,6]){const h=new Path();h.absarc(x,y,1.2,0,Math.PI*2,true);foot.holes.push(h);}
   const centre=new Path();centre.absarc(0,0,3,0,Math.PI*2,true);foot.holes.push(centre);
   const angle=Math.asin(1.3/4),notches=[0,Math.PI].map(offset=>{const s=new Shape(),a=angle+offset,b=Math.PI-angle+offset;s.absarc(0,0,4,a,b,false);s.lineTo(3*Math.cos(b),3*Math.sin(b));s.absarc(0,0,3,b,a,true);s.closePath();return s;});
-  return {post,foot,notches};
+  const half=(front:boolean)=>{const s=new Shape(),a=front?Math.PI:0,b=a+Math.PI;s.absarc(0,0,4,a,b,false);s.lineTo(3*Math.cos(b),3*Math.sin(b));s.absarc(0,0,3,b,a,true);s.closePath();return s;};
+  return {foot,notches,back:half(false),front:half(true)};
  },[]);
  const tint=(id:string,color:string)=>selected===id?'#ad80dc':color;
  const owner=(id:string,node:ReactNode)=><group key={id} name={id} userData={{partId:id}} onClick={(e:ThreeEvent<MouseEvent>)=>{e.stopPropagation();choose(id);}}>{node}</group>;
@@ -26,8 +26,11 @@ function StreetSystemLampParts({selected,choose,lamps,stage,cutaway}:Props){
   const x=streetSystemLayout.lampXs[index],z=streetSystemLayout.lampZ,prefix=branch.id,on=lamps[index]===true;
   return <group key={prefix} name={prefix}>
    {owner(prefix+'-foot',<mesh position={[x,12,z]} rotation={[-Math.PI/2,0,0]} castShadow><extrudeGeometry args={[shapes.foot,{depth:2,bevelEnabled:false,curveSegments:32}]}/><meshStandardMaterial color={tint(prefix+'-foot','#777f86')} metalness={.65} roughness={.42}/></mesh>)}
-   {owner(prefix+'-post',cutaway?<>{[-1,1].map(side=>box(prefix+'-post',[x+side*3.5,59,z],[1,74,6],'#7e8992',.7))}{box(prefix+'-post',[x,55,z-3.5],[6,82,1],'#7e8992',.7)}</>:<><mesh position={[x,22,z]} rotation={[-Math.PI/2,0,0]} castShadow><extrudeGeometry args={[shapes.post,{depth:74,bevelEnabled:false,curveSegments:48}]}/><meshStandardMaterial color={tint(prefix+'-post','#7e8992')} metalness={.7} roughness={.36}/></mesh>{shapes.notches.map((shape,n)=><mesh key={n} position={[x,14,z]} rotation={[-Math.PI/2,0,0]} castShadow><extrudeGeometry args={[shape,{depth:8,bevelEnabled:false,curveSegments:48}]}/><meshStandardMaterial color={tint(prefix+'-post','#7e8992')} metalness={.7} roughness={.36}/></mesh>)}</>)}
-   {owner(prefix+'-hood',<>{box(prefix+'-hood',[x,103,-24],[18,2,32],'#5d6975',.55)}{[-1,1].map(side=>box(prefix+'-hood',[x+side*8.5,100,-24],[1,6,32],'#5d6975',.55))}{box(prefix+'-hood',[x,100,-39.5],[16,6,1],'#5d6975',.55)}{box(prefix+'-hood',[x,100,-8.5],[16,6,1],'#5d6975',.55)}{box(prefix+'-hood',[x,101.8,-20],[15,.2,21],'#dce0dd',.8)}</>)}
+   {owner(prefix+'-post',<><mesh position={[x,22,z]} rotation={[-Math.PI/2,0,0]} castShadow><extrudeGeometry args={[shapes.back,{depth:74,bevelEnabled:false,curveSegments:48}]}/><meshStandardMaterial color={tint(prefix+'-post','#7e8992')} metalness={.7} roughness={.36}/></mesh><mesh position={[x,14,z]} rotation={[-Math.PI/2,0,0]} castShadow><extrudeGeometry args={[shapes.notches[0],{depth:8,bevelEnabled:false,curveSegments:48}]}/><meshStandardMaterial color={tint(prefix+'-post','#7e8992')} metalness={.7} roughness={.36}/></mesh></>)}
+   {owner(prefix+'-post-cover',<group visible={!cutaway}><mesh position={[x,22,z]} rotation={[-Math.PI/2,0,0]} castShadow><extrudeGeometry args={[shapes.front,{depth:74,bevelEnabled:false,curveSegments:48}]}/><meshStandardMaterial color={tint(prefix+'-post-cover','#7e8992')} metalness={.7} roughness={.36}/></mesh><mesh position={[x,14,z]} rotation={[-Math.PI/2,0,0]} castShadow><extrudeGeometry args={[shapes.notches[1],{depth:8,bevelEnabled:false,curveSegments:48}]}/><meshStandardMaterial color={tint(prefix+'-post-cover','#7e8992')} metalness={.7} roughness={.36}/></mesh></group>)}
+   {owner(prefix+'-hood',<>{[-1,1].map(side=>box(prefix+'-hood',[x+side*8.5,100,-24],[1,6,32],'#5d6975',.55))}{box(prefix+'-hood',[x,100,-39.5],[16,6,1],'#5d6975',.55)}</>)}
+   {owner(prefix+'-hood-front',box(prefix+'-hood-front',[x,100,-8.5],[16,6,1],'#5d6975',.55))}
+   {owner(prefix+'-hood-roof',<>{box(prefix+'-hood-roof',[x,103,-24],[18,2,32],'#5d6975',.55)}{box(prefix+'-hood-roof',[x,101.8,-20],[15,.2,21],'#dce0dd',.8)}</>)}
    {stage>=2&&<>
     {owner(prefix+'-lens',<><mesh position={[x,98,-12]}><cylinderGeometry args={[2.5,2.5,3,32]}/><meshPhysicalMaterial color={selected===prefix+'-lens'?'#b78be8':'#e8e5d2'} emissive="#ffe7b2" emissiveIntensity={on?2.8:0} roughness={.2} clearcoat={1} transparent opacity={.85}/></mesh><mesh position={[x,96.5,-12]} rotation={[Math.PI,0,0]}><sphereGeometry args={[2.5,32,16,0,Math.PI*2,0,Math.PI/2]}/><meshPhysicalMaterial color={selected===prefix+'-lens'?'#b78be8':'#e8e5d2'} emissive="#ffe7b2" emissiveIntensity={on?2.8:0} roughness={.2} clearcoat={1}/></mesh></>)}
     {owner(prefix+'-internal-positive',<>{wire(prefix+'-internal-positive',streetLampTail(index,true),'#b84a5e')}{box(prefix+'-internal-positive',[x-1.27,100.25,-12],[.5,1.5,.5],'#b6bec8',.8)}</>)}
