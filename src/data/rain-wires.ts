@@ -21,6 +21,7 @@ export function rainWireRoute(index:number):readonly RainPoint[]{
  const a:RainPoint=w.fromKind==='grove'?[w.from[0],w.from[1]+7.5,w.from[2]]:w.fromKind==='clamp'?[w.from[0],w.from[1],w.from[2]+10.7]:[w.from[0],w.from[1]+7.5,w.from[2]];
  const b:RainPoint=w.toKind==='servo'?[w.to[0]-9.8,w.to[1],w.to[2]]:[w.to[0],w.to[1]+7.5,w.to[2]];
  if(w.fromKind==='grove')return [a,[a[0],a[1]+8,a[2]],[-20-index*4,36+index*2,100+index*3],[-48-index*4,42+index*2,70],[b[0],45+index*2,b[2]+12],[b[0],b[1]+12,b[2]],b];
- const first:RainPoint=w.fromKind==='clamp'?[a[0],a[1]+4,a[2]+5]:[a[0],a[1]+10,a[2]],height=40+index*2;
+ if(w.fromKind==='clamp')return [a,[a[0]+12,a[1]+5,a[2]+6],[a[0]+18,55+(index-7)*8,a[2]+12],[b[0]+14,55+(index-7)*8,b[2]+10],[b[0]+8,b[1]+9,b[2]],[b[0],b[1]+5,b[2]],b];
+ const first:RainPoint=[a[0],a[1]+10,a[2]],height=40+index*2;
  return [a,first,[a[0],height,a[2]-10],[b[0]-4,height,b[2]-12],w.toKind==='servo'?[b[0]-6,b[1],b[2]]:[b[0],b[1]+12,b[2]],b];
 }
