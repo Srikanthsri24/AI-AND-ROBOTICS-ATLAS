@@ -16,9 +16,9 @@ export function mq2Wires(mode:Mq2Mode):readonly Mq2Wire[]{return [
  {id:'mq2-wire-led-return',name:'LED cathode return',from:mq2Hole(11,1,0),to:mq2Hole(16,1,2),color:'#48535e',fromKind:'pin',connection:'LED cathode strip → common ground. Its anode strip connects only through the 220 Ω resistor.'},
  {id:'mq2-wire-divider-return',name:'Lower divider resistor return',from:mq2Hole(9,-1,4),to:mq2Hole(16,1,3),color:'#48535e',fromKind:'pin',connection:'Lower 10 kΩ resistor → common ground. Both divider resistors meet at column 5 of the negative bank.'},
  {id:'mq2-wire-module-signal',name:'MQ-2 AOUT to upper resistor',from:mq2ModulePin('AOUT'),to:mq2Hole(1,-1,4),color:'#699cb0',fromKind:'female',connection:'Module AOUT → upper 10 kΩ resistor. DOUT remains open.'},
- {id:'mq2-wire-module-power',name:'Separate 5 V to module VCC',from:mq2ModulePin('VCC'),to:[97,14.8,-20],color:'#bd5364',fromKind:'female',toKind:'clamp',connection:'Regulated supply positive clamp → module VCC. Uno 5 V does not supply the module heater.'},
- {id:'mq2-wire-module-ground',name:'Module supply return',from:mq2ModulePin('GND'),to:[102.35,14.8,-20],color:'#3e4955',fromKind:'female',toKind:'clamp',connection:'Module GND → regulated supply negative clamp.'},
- {id:'mq2-wire-supply-reference',name:'Separate supply to common ground',from:[103.65,14.8,-20],to:mq2Hole(16,1,4),color:'#3e4955',fromKind:'clamp',connection:'Second conductor in the negative supply clamp → common return strip → Uno GND.'},
+ {id:'mq2-wire-module-power',name:'Separate 5 V to module VCC',from:mq2ModulePin('VCC'),to:[127,14.8,-20],color:'#bd5364',fromKind:'female',toKind:'clamp',connection:'Regulated supply positive clamp → module VCC. Uno 5 V does not supply the module heater.'},
+ {id:'mq2-wire-module-ground',name:'Module supply return',from:mq2ModulePin('GND'),to:[132.35,14.8,-20],color:'#3e4955',fromKind:'female',toKind:'clamp',connection:'Module GND → regulated supply negative clamp.'},
+ {id:'mq2-wire-supply-reference',name:'Separate supply to common ground',from:[133.65,14.8,-20],to:mq2Hole(16,1,4),color:'#3e4955',fromKind:'clamp',connection:'Second conductor in the negative supply clamp → common return strip → Uno GND.'},
  ];}
 /** Initial seated routes; fixed lanes preserve component endpoint positions.
  * Clearance / fitting sweeps remain separate from electrical-topology checks. */
