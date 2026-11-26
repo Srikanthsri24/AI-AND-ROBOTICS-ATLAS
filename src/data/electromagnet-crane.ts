@@ -55,6 +55,15 @@ void setup() {
 
 void loop() {
   const unsigned long now = millis();
+  // Enforce the hold limit even while the button is bouncing.
+  if (wasPressed && armed && now - started >= MAX_HOLD_MS) {
+    armed = false;
+    digitalWrite(DRIVER, LOW);
+    if (previous != 2) {
+      previous = 2;
+      Serial.println("Timeout or release to arm");
+    }
+  }
   const bool rawPressed = digitalRead(BUTTON) == LOW;
   if (candidate != rawPressed) {
     candidate = rawPressed;
