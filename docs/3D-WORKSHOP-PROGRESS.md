@@ -2,7 +2,7 @@
 
 ## Phase 1 — 150 published Guided Builds
 
-Current verified total: **74 / 150 workshops**. **76** remain in Phase 1; **61** additional guides remain in Phase 2. Counts embedded in earlier dated notes describe those earlier checkpoints.
+Current verified total: **75 / 150 workshops**. **75** remain in Phase 1; **61** additional guides remain in Phase 2. Counts embedded in earlier dated notes describe those earlier checkpoints.
 
 Use the user-approved obstacle-avoiding car as the visual and interaction benchmark. Add and verify a project-specific sixth 3D Workshop for each of the 150 published guides, continuing in catalog order.
 
@@ -1124,3 +1124,15 @@ Bought switches and the prewired passive sounder move as complete modules, with 
 The full browser Build-from-the-beginning journey passes exact pause of all **95 owner positions**, resume through all ten chapters, power off during assembly, all 95 parts visible at completion, USB connection, A4 / 440 Hz, moving sound-wave visualization and its disappearance on release (`/tmp/atlas-piano-full-build.log`). The physical disc still uses the documented slowed / magnified flexing; separate violet rings visualize sound waves and do not become selectable hardware or obstruct picking. Reviewed the overall interface and keyboard close-up.
 
 Still pending before registration: complete 95-part interface labels / desktop and phone coverage; actual pointer / multi-input / guided-lesson / download / cleanup journeys; remaining assembly-fitting coverage; full repository checks, production build and real guide / built routes. The piano remains unpublished and the authoritative total remains **74 / 150**, with **76** Phase 1 and **61** Phase 2 guides pending.
+
+
+#### Electronic piano completed — 75 / 150
+Registered **directory-19 · Arduino Electronic Piano** as a project-specific sixth workshop. Complete native interface coverage passes **all 95 actual-surface labels, material highlights, delivered clicks and retained labels** at desktop and 390 px phone widths (`/tmp/atlas-piano-final-labels-desktop.log`, `/tmp/atlas-piano-final-labels-phone.log`). The first phone run timed out with much of the canvas below the fold; stage inspection now brings the model into view, and the revised phone journey passes. Cached switch body / cover extrusion settings keep geometry stable during key changes. Held-note labels follow the real cap top, while the guided performance frames the keyboard and places its explanation immediately below the model.
+
+The guided browser performance passes the complete expected pitch / silence sequence on desktop and phone, including G4 → C4 → G4 priority and automatic gesture-authorized audio. Independent pointer + keyboard holds do not override one another. Real emulated phone touch holds through a drag outside the key and releases correctly. Downloaded electronic_piano.ino is byte-identical to the original sketch; no horizontal overflow occurs; actual AudioContext closes on React unmount (`/tmp/atlas-piano-final-lesson.log`). Reviewed phone and keyboard views.
+
+The expanded assembly checker includes actual per-instance vertices. **250 sampled module-placement poses / 31,016,396 moving vertices** pass against fixed insulating hardware, with a solid timber positive control (`/tmp/atlas-piano-final-assembly-clearance.log`). Earlier complete real-time build, 38 plug-fitting / nineteen fault withdrawals, native mating contacts, serial behavior, 14 / 15 ms debounce and actual square-wave audio checks remain applicable. These are sampled geometry checks, not a continuous physical solver.
+
+All **1,016 repository tests**, the **final registered full-project TypeScript check** and the production Vite build pass (`/tmp/atlas-piano-final-repo-tests.log`, `/tmp/atlas-piano-registered-project-tsc.log`, `/tmp/atlas-piano-final-vite.log`). Real guide and generated production routes both pass overview → sixth workshop tab, complete-model inspection, USB power, A4 / 440 Hz, release, Finished demo → browser Back, and desktop / phone layout (`/tmp/atlas-piano-dev-route.log`, `/tmp/atlas-piano-production-route.log`). The piano ships as its own lazy 64.85 kB JS chunk (23.26 kB gzip); existing large shared chunks retain Vite's advisory warning. Rebuilt dist; stopped the 5191 preview after verification and retained the 5190 dev server.
+
+Authoritative total: **75 / 150** workshops complete, **75** pending in Phase 1 and **61** additional guides pending in Phase 2. Next: **directory-20 · Electromagnet Crane Working Model**. Preserve its original D2 hold input, D9 driver command, separate 5 V coil supply / common ground and 8-second coil limit. The overall goal remains active.
