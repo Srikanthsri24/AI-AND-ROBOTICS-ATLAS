@@ -1,0 +1,16 @@
+import {OrbitControls} from '@react-three/drei';
+import Wires from '../modules/RfidWireParts';
+import ServoLeads from '../modules/RfidServoLeadParts';
+import Supply from '../modules/RfidSupplyParts';
+import Indicators from '../modules/RfidIndicatorParts';
+import Bench from '../modules/RfidWorkbenchParts';
+import {rfidWorkbench} from '../data/rfid-workbench-layout';
+import Uno from '../modules/BluetoothCarUno';
+import Shield from '../modules/Pn532ShieldParts';
+import Headers from '../modules/Pn532StackHeaders';
+import Tags from '../modules/RfidTagParts';
+import Door from '../modules/RfidDoorParts';
+import {pn532Stack} from '../data/pn532-stack';
+import {rfidSessionIndicators,type RfidSession,type RfidSessionSettings} from '../data/rfid-session';
+type Props={state:RfidSession;settings:RfidSessionSettings;cursor:number;doorAngle:number;withdrawal:number;selected:string;choose:(id:string)=>void};
+export default function RfidWorkshopScene({state,settings,cursor,doorAngle,withdrawal,selected,choose}:Props){return <><color attach="background" args={['#edf0f8']}/><ambientLight intensity={1.4}/><directionalLight position={[-2,4,3]} intensity={2.5}/><group scale={.01}><Wires selected={selected} choose={choose} cursor={cursor}/><ServoLeads selected={selected} choose={choose}/><Bench selected={selected} choose={choose}/><Supply selected={selected} choose={choose} powered={settings.servoPower} withdrawal={withdrawal}/><Indicators selected={selected} choose={choose} red={rfidSessionIndicators(state,settings).red} green={rfidSessionIndicators(state,settings).green}/><group name="rfid-reader-prototype" position={[...rfidWorkbench.reader]}><group scale={50}><Uno selected={selected} select={choose} powered={!!state.controller} partPrefix="rfid-"/></group><group position={[pn532Stack.offsetX-34.29,pn532Stack.baseY,26.67]}><Shield selected={selected} choose={choose} powered={!!state.controller}/><Headers selected={selected} choose={choose}/><Tags a={state.tagA} b={state.tagB} selected={selected} choose={choose}/></group></group><group position={[...rfidWorkbench.door]}><Door doorAngle={doorAngle} angle={state.angle} selected={selected} choose={choose}/></group></group><OrbitControls makeDefault target={[-.2,.45,0]}/></>;}
