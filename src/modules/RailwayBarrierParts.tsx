@@ -10,7 +10,7 @@ function plate(x0:number,x1:number,y0:number,y1:number,holes:readonly(readonly[n
 function armPlate(end:number,holes:readonly(readonly[number,number,number])[]){const s=new Shape(),a=Math.asin(3/5);s.moveTo(4,3);s.lineTo(end,3);s.lineTo(end,-3);s.lineTo(4,-3);s.absarc(0,0,5,-a,a-Math.PI*2,true);s.closePath();for(const[x,y,r]of holes){const h=new Path();h.absarc(x,y,r,0,Math.PI*2,true);s.holes.push(h);}return s;}
 function RailwayBarrierParts({selected='',select=()=>{},actualAngle=95,clock}:{selected?:string;select?:(id:string)=>void;actualAngle?:number;clock?:RefObject<RailwayClock>}){
  const arm=useRef<Group>(null);useFrame(()=>{if(clock&&arm.current)arm.current.rotation.z=railwayBarrierAngle(clock.current.actualAngle);},-2);
- const shapes=useMemo(()=>{const cover=new Shape();cover.moveTo(-6.1,6);cover.lineTo(6.1,6);cover.lineTo(6.1,26);cover.absarc(0,26,6.1,0,Math.PI,false);cover.closePath();const bore=new Path();bore.absarc(0,26,2.5,0,Math.PI*2,true);cover.holes.push(bore);return{base:plate(-20,20,-70,-35,[-16,16].flatMap(x=>[40,65].map(z=>[x,-z,1.3] as const))),posts:[-9.8,9.8].map(x=>plate(x-2.6,x+2.6,3,26,[[x,18,1.3]])),ears:[-9.8,9.8].map(x=>plate(x-3.7,x+3.7,14,22,[[x,18,1.2]])),cover,collar:ring(4.6,2.5),shaft:ring(2.4,.65),horn:armPlate(15,[[0,0,2.45],[6,0,.8],[12,0,.8]]),arm:armPlate(130,[[0,0,3.6],[6,0,.8],[12,0,.8]]),retainer:ring(3.1,.65),washer:ring(2.5,1.3),head:ring(1.9,.65),nut:ring(2.2,1.05,6),smallNut:ring(1.2,.6,6)};},[]);
+ const shapes=useMemo(()=>{const cover=new Shape();cover.moveTo(-6.1,6);cover.lineTo(6.1,6);cover.lineTo(6.1,26);cover.absarc(0,26,6.1,0,Math.PI,false);cover.closePath();const bore=new Path();bore.absarc(0,26,2.5,0,Math.PI*2,true);cover.holes.push(bore);return{base:plate(-20,20,-70,-35,[-16,16].flatMap(x=>[40,65].map(z=>[x,-z,1.3] as const))),posts:[-9.8,9.8].map(x=>plate(x-2.6,x+2.6,3,26,[[x,18,1.3]])),ears:[-9.8,9.8].map(x=>plate(x-3.7,x+3.7,14,22,[[x,18,1.2]])),cover,entry:plate(40.5,63.5,6,30,[[45,10,2]]),collar:ring(4.6,2.5),shaft:ring(2.4,.65),horn:armPlate(15,[[0,0,2.45],[6,0,.8],[12,0,.8]]),arm:armPlate(130,[[0,0,3.6],[6,0,.8],[12,0,.8]]),retainer:ring(3.1,.65),washer:ring(2.5,1.3),head:ring(1.9,.65),nut:ring(2.2,1.05,6),smallNut:ring(1.2,.6,6)};},[]);
  const color=(id:string,c:string)=>selected===id?'#b78be8':c,mat=(id:string,c:string,metal=0)=><meshStandardMaterial color={color(id,c)} metalness={metal} roughness={metal?.3:.55}/>;
  const tag=(id:string,node:ReactNode)=><group key={id} userData={{partId:id}} onClick={e=>{e.stopPropagation();select(id);}}>{node}</group>;
  const box=(id:string,p:[number,number,number],s:[number,number,number],c:string)=><mesh position={p} castShadow receiveShadow><boxGeometry args={s}/>{mat(id,c)}</mesh>;
@@ -26,8 +26,11 @@ function RailwayBarrierParts({selected='',select=()=>{},actualAngle=95,clock}:{s
   <mesh position={[x,1.5,z]}><cylinderGeometry args={[1.1,1.1,6,20]}/>{mat('railway-barrier-foot-screws','#9ca9bb',.8)}</mesh>
   <mesh position={[x,3.5,z]} rotation={[-Math.PI/2,0,0]}><extrudeGeometry args={[shapes.head,{depth:1.2,curveSegments:48,bevelEnabled:false}]}/>{mat('railway-barrier-foot-screws','#a5b2c2',.8)}</mesh>
  </group>))}</>)}
- {tag('railway-barrier-case',<>{box('railway-barrier-case',[0,18,52],[12.2,24,23],'#264a86')}{rod('railway-barrier-case',[0,26,60.75],6.1,5.5,'#264a86',0)}
-  {[-5.9,5.9].flatMap(x=>[45,49,53].map(z=>box('railway-barrier-case',[x,18,z],[.6,20,.5],'#315e9c')))}
+ {tag('railway-barrier-case',<><mesh position={[-5.1,0,0]} rotation={[0,-Math.PI/2,0]} castShadow><extrudeGeometry args={[shapes.entry,{depth:1,curveSegments:48,bevelEnabled:false}]}/>{mat('railway-barrier-case','#264a86')}</mesh>
+  {box('railway-barrier-case',[5.6,18,52],[1,24,23],'#264a86')}
+  {[41,63].map(z=>box('railway-barrier-case',[0,18,z],[10.2,24,1],'#264a86'))}
+  {[6.5,29.5].map(y=>box('railway-barrier-case',[0,y,52],[10.2,1,21],'#264a86'))}{rod('railway-barrier-case',[0,26,60.75],6.1,5.5,'#264a86',0)}
+  {[-5.9,5.9].flatMap(x=>[45,49,53].map(z=>box('railway-barrier-case',[x,x<0&&z===45?20:18,z],[.6,x<0&&z===45?16:20,.5],'#315e9c')))}
   <Text font={font} position={[0,18,40.45]} rotation={[0,Math.PI,0]} fontSize={2.1} color="#dce5f5" anchorX="center">5V SERVO</Text>
  </>)}
  {tag('railway-barrier-cover',extrusion('railway-barrier-cover',shapes.cover,[0,0,63.5],2,'#345f9f'))}
