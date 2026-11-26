@@ -7,7 +7,7 @@ export function soapPumpPose(depression:number,flow:'idle'|'press'|'refill'='idl
 }
 export const soapPumpParts=[
  {id:'soap-bottle-shell',label:'Bottle · hollow reservoir',what:'A hollow bottle contains the liquid and supports a threaded pump neck.',connection:'The dip tube reaches near the bottom. The bottle remains fixed while only the pump head and plunger move.'},
- {id:'soap-liquid',label:'Soap · reservoir and delivered droplets',what:'Shows reservoir level and displacement-driven outlet droplets, not a calibrated liquid volume.',connection:'The inlet draws from this reservoir during the return stroke. An empty or unprimed real pump may move without dispensing.'},
+ {id:'soap-liquid',label:'Soap · reservoir and delivered droplets',what:'Shows remaining soap, displacement-driven drops and wet marks where they land.',connection:'The inlet draws from the reservoir on return. Wet marks stay with their receiving surface; their size is an illustration rather than a calibrated liquid volume.'},
  {id:'soap-cap',label:'Pump · threaded closure',what:'Secures the pump cartridge to the bottle neck and guides the sliding stem.',connection:'Its central bore leaves the stem free to travel. The cap stays fixed when the head is pressed.'},
  {id:'soap-pump-housing',label:'Pump · fixed chamber',what:'Holds the piston, return spring and inlet valve.',connection:'The lower inlet joins the dip tube. The upper guide supports the moving hollow stem.'},
  {id:'soap-dip-tube',label:'Pump · hollow dip tube',what:'Carries liquid from near the reservoir floor to the inlet.',connection:'Its open intake stays above the bottle bottom. Its upper end fits the chamber inlet; it is not an electrical wire.'},
