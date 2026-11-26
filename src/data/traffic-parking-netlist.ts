@@ -34,6 +34,7 @@ export const trafficParkingFixedTies:readonly (readonly[string,string])[]=[
  ...(['resistors','buttons'] as const).flatMap(board=>Array.from({length:17},(_,column)=>([-1,1] as const).flatMap(bank=>Array.from({length:4},(_,row)=>[p(board,column,bank,row),p(board,column,bank,row+1)] as const))).flat()),
  ...trafficParkingButtons.flatMap(b=>([-1,1] as const).map(bank=>[p('buttons',b.column-1,bank,bank<0?4:0),p('buttons',b.column+1,bank,bank<0?4:0)] as const)),
  ['supply.negative.0','supply.negative.1'],
+ ['supply.positive.0','supply.positive.1'],
 ];
 export const trafficParkingResistiveBranches=trafficParkingResistors.map(r=>({id:r.id,ohms:220,input:p('resistors',r.column,-1,4),output:p('resistors',r.column,1,0),source:'uno.D'+r.pin,anode:'lamp.'+r.lamp+'.anode',cathode:'lamp.'+r.lamp+'.cathode'}));
 export const trafficParkingLampPorts=trafficParkingLamps.flatMap(l=>['lamp.'+l.id+'.anode','lamp.'+l.id+'.cathode']);
