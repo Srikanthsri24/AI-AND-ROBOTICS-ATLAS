@@ -37,7 +37,7 @@ test('divider ground and junction are independent of the lamp bank',()=>{
 const assembly=await import(await load(new URL('../src/data/street-system-assembly.ts',import.meta.url)));
 const catalog=await import(await load(new URL('../src/data/street-system-parts.ts',import.meta.url)));
 test('every physical part has a bounded monotone assembly lift and seats at its chapter',()=>{
- assert.equal(catalog.streetSystemParts.length,59);
+ assert.equal(catalog.streetSystemParts.length,71);
  for(const part of catalog.streetSystemParts){let previous=Infinity;
   for(let n=0;n<=80;n++){const p=n/10,pose=assembly.streetSystemAssemblyPose(part.id,p);assert.ok(pose.lift>=0&&pose.lift<=70);assert.ok(pose.lift<=previous+1e-9);previous=pose.lift;if(p>=part.stage){assert.equal(pose.lift,0);assert.equal(pose.seated,true);assert.equal(pose.visible,true);}}
  }
@@ -87,4 +87,14 @@ test('each selectable fault opens one physical cable and powers down before conn
   else {assert.equal(state.command,true);assert.deepEqual(lamps,[1,2,3].map(n=>fault.id===`drive-${n}`||fault.id===`return-${n}`?false:true));}
  }
  assert.throws(()=>faults.streetFaultSettings(controller.streetSystemDefaults,'unknown'));
+});
+
+const usb=await import(await load(new URL('../src/data/street-system-usb.ts',import.meta.url)));
+test('USB Type-B seats on the authored Uno face and withdraws along its actual axis',()=>{
+ const seated=usb.streetUsbPose(0),open=usb.streetUsbPose(12);
+ assert.deepEqual(seated.uno,usb.streetUsbUnoFace);assert.equal(seated.uno[0]-open.uno[0],12);
+ assert.equal(seated.uno[1],open.uno[1]);assert.equal(seated.uno[2],open.uno[2]);
+ assert.deepEqual(seated.host,open.host);assert.deepEqual(seated.host,usb.streetUsbHostFace);
+ for(let n=0;n<=12;n++){const pose=usb.streetUsbPose(n);assert.equal(pose.points[0][0],pose.uno[0]-24);assert.equal(pose.points.at(-1)[0],pose.host[0]+24);assert.ok(pose.points.every(p=>p[1]-1.5>8));}
+ assert.throws(()=>usb.streetUsbPose(13));assert.throws(()=>usb.streetUsbPose(-1));assert.throws(()=>usb.streetUsbPose(NaN));
 });

@@ -1,0 +1,26 @@
+import uno from './uno-r3-board-layout.json';
+import {streetSystemLayout,type StreetPoint as P} from './street-system-layout';
+const socket=uno.elements.find(e=>e.name==='X2')!;
+/** Same millimetre coordinates as the detailed Uno R3 USB-B receptacle. */
+export const streetUsbUnoFace:P=[streetSystemLayout.uno[0]+Number(socket.x)-34.29-8,streetSystemLayout.uno[1]+6.3,streetSystemLayout.uno[2]+26.67-Number(socket.y)];
+export const streetUsbHostFace:P=[-205,14,90];
+export function streetUsbPose(withdrawal:number){
+ if(!Number.isFinite(withdrawal)||withdrawal<0||withdrawal>12)throw new RangeError('USB withdrawal must be 0–12 mm.');
+ const uno:P=[streetUsbUnoFace[0]-withdrawal,streetUsbUnoFace[1],streetUsbUnoFace[2]],host=streetUsbHostFace;
+ const points:readonly P[]=[[uno[0]-24,uno[1],uno[2]],[uno[0]-32,uno[1],uno[2]],[-207,25,68],[-207,24,110],[-175,20,110],[-173,14,90],[host[0]+24,host[1],host[2]]];
+ return{uno,host,points};
+}
+export const streetUsbParts=[
+ ['street-host-platform','Computer worktop extension','Supports the computer beside the model without covering the road.','The worktop meets the main base at its left edge. It has no electrical connection.'],
+ ['street-host-body','Workshop computer chassis','An authored laptop represents the host used to upload the Arduino sketch and inspect serial readings.','The open Type-A port supplies USB power and data. This browser model does not connect to real hardware.'],
+ ['street-host-input','Keyboard and touchpad','Represent the computer controls used to edit the program and open Serial Monitor.','Download the actual Arduino C++ sketch from the program section; the frontend does not pretend to upload it to a real Uno.'],
+ ['street-host-display','Workshop serial display','Shows the model host connection and the sketch’s original serial text.','Use 115200 baud on real hardware. The rows are simulated A0 readings and commands, not individual lamp-current measurements.'],
+ ['street-host-port','Open USB Type-A host port','A hollow shield and supported contact tongue receive the host-side plug.','The Type-A end stays seated while you connect or disconnect the Uno-side Type-B end.'],
+ ['street-usb-cable','USB power and data cable','A continuous insulated cable joins the two supported plugs.','Carries power, return and serial data through the Uno USB bridge. It stays separate from the lamp jumper circuits.'],
+ ['street-usb-b-shield','USB-B plug metal shield','A hollow shell with bevelled upper corners fits the actual authored Uno socket.','Its tip enters the socket; its grip stays outside. These authored contact shapes are not a USB pinout reference.'],
+ ['street-usb-b-grip','USB-B grip and strain relief','Supports the cable where it leaves the Uno-side plug.','Disconnect by the housing along the socket axis. The open pose withdraws the plug by 12 mm.'],
+ ['street-usb-b-contacts','USB-B contact insert','Insulation supports the four mating metal fingers inside the plug shield.','Transfers power and data to the Uno receptacle. Keep all contacts disconnected while assembling the circuit.'],
+ ['street-usb-a-shield','USB-A plug metal shield','An open rectangular shell mates with the computer’s actual open port.','The shell enters the port while the larger grip remains outside.'],
+ ['street-usb-a-grip','USB-A grip and strain relief','Transfers handling force to the insulated cable jacket.','The host-side grip stays outside its port and joins the continuous cable.'],
+ ['street-usb-a-contacts','USB-A contact insert','Four metal fingers sit on a supported insulating insert.','Mates with the host tongue. This represents a data cable, rather than a power-only cable.'],
+] as const;

@@ -1,3 +1,4 @@
+import {streetUsbParts} from './street-system-usb';
 import {streetSystemBranches,streetSystemCables} from './street-system-layout';
 export type StreetSystemPart={id:string;name:string;stage:number;what:string;connection:string};
 const part=(id:string,name:string,stage:number,what:string,connection:string):StreetSystemPart=>({id,name,stage,what,connection});
@@ -34,4 +35,5 @@ export const streetSystemParts:readonly StreetSystemPart[]=[
  part('street-ldr','Light-dependent resistor',4,'Its resistance rises when shaded. The divider converts that change to a lower A0 voltage in this wiring.','One lead reaches 5 V. The other reaches the shared A0 / 10 kΩ junction. It has no polarity.'),
  part('street-divider-resistor','10 kΩ divider resistor',4,'Works with the photoresistor to create a readable analogue voltage. Brown / black / orange / gold bands identify 10 kΩ.','Connects the A0 junction strip to the common ground strip. It is distinct from all three 220 Ω LED limiters.'),
  ...streetSystemCables.map((w,index)=>part(w.id,w.name,index<5?6:7,'An individually routed insulated jumper joins two specific physical contacts. Its pin enters the socket while the grip remains outside.',w.node==='gnd'?'Completes a named return connection on the common ground node. The mini breadboard has no continuous ground rail.':w.node==='5v'?'Supplies only the photoresistor divider from Uno 5 V. Do not move this lead to VIN.':w.node==='a0'?'Carries the divider junction voltage to A0. An open analogue input floats, so the workshop marks its reading and outputs unknown.':w.node.startsWith('D')?'Carries this lamp’s digital output into its own 220 Ω resistor input strip.':'Connects the resistor output to this lamp’s positive tail; the post’s internal lead continues to the LED anode.')),
+ ...streetUsbParts.map(([id,name,what,connection])=>part(id,name,id.startsWith('street-host-')?0:8,what,connection)),
 ];
