@@ -1,0 +1,25 @@
+import {mq2Hole,mq2UnoContact,mq2WorkbenchLayout,type Mq2Point as P} from './mq2-workbench-layout';
+import {mq2ModuleLayout} from './mq2-module-layout';
+export type Mq2Mode='dial'|'sensor';
+export type Mq2Wire={id:string;name:string;from:P;to:P;color:string;fromKind:'pin'|'female';connection:string};
+export function mq2ModulePin(pin:'DOUT'|'AOUT'|'GND'|'VCC'):P{
+ const n=mq2ModuleLayout.header.pins.indexOf(pin),b=mq2WorkbenchLayout.module;
+ return [b[0]+45.5,b[1]+2.85,b[2]-mq2ModuleLayout.header.z[n]];
+}
+/** One physical A0 jumper changes its destination; no second source is wired to A0. */
+export function mq2Wires(mode:Mq2Mode):readonly Mq2Wire[]{return [
+ {id:'mq2-wire-a0',name:mode==='dial'?'A0 to test-dial wiper':'A0 to divider midpoint',from:mq2UnoContact('A0'),to:mode==='dial'?mq2Hole(14,1,0):mq2Hole(5,-1,4),color:'#b9a157',fromKind:'pin',connection:mode==='dial'?'Uno A0 → dial centre strip. Sensor divider stays disconnected from A0.':'Uno A0 → shared ends of the two 10 kΩ resistors. Dial wiper stays disconnected from A0.'},
+ {id:'mq2-wire-ground',name:'Uno ground reference',from:mq2UnoContact('GND-P2'),to:mq2Hole(16,1,0),color:'#3e4955',fromKind:'pin',connection:'Uno GND → five-contact common-return strip, column 16.'},
+ {id:'mq2-wire-d6',name:'D6 to 220 Ω resistor',from:mq2UnoContact('D6'),to:mq2Hole(6,1,4),color:'#b26071',fromKind:'pin',connection:'Uno D6 → 220 Ω resistor → red LED anode.'},
+ {id:'mq2-wire-dial-power',name:'5 V to dial outer terminal',from:mq2UnoContact('5V'),to:mq2Hole(13,1,0),color:'#b45262',fromKind:'pin',connection:'Uno 5 V → one end of the separate test potentiometer.'},
+ {id:'mq2-wire-dial-return',name:'Dial return',from:mq2Hole(15,1,0),to:mq2Hole(16,1,1),color:'#48535e',fromKind:'pin',connection:'Other potentiometer end → common ground. The centre terminal is the wiper.'},
+ {id:'mq2-wire-led-return',name:'LED cathode return',from:mq2Hole(11,1,0),to:mq2Hole(16,1,2),color:'#48535e',fromKind:'pin',connection:'LED cathode strip → common ground. Its anode strip connects only through the 220 Ω resistor.'},
+ {id:'mq2-wire-divider-return',name:'Lower divider resistor return',from:mq2Hole(9,-1,4),to:mq2Hole(16,1,3),color:'#48535e',fromKind:'pin',connection:'Lower 10 kΩ resistor → common ground. Both divider resistors meet at column 5 of the negative bank.'},
+ {id:'mq2-wire-module-signal',name:'MQ-2 AOUT to upper resistor',from:mq2ModulePin('AOUT'),to:mq2Hole(1,-1,4),color:'#699cb0',fromKind:'female',connection:'Module AOUT → upper 10 kΩ resistor. DOUT remains open.'},
+ ];}
+/** Initial seated routes; fixed lanes preserve component endpoint positions.
+ * Clearance / fitting sweeps remain separate from electrical-topology checks. */
+export function mq2WireRoute(w:Mq2Wire,index:number):P[]{
+ const a:P=w.fromKind==='female'?[w.from[0]+7,w.from[1],w.from[2]]:[w.from[0],w.from[1]+7.5,w.from[2]],b:P=[w.to[0],w.to[1]+7.5,w.to[2]],h=43+index*2;
+ return [a,w.fromKind==='female'?[a[0]+6,a[1],a[2]]:[a[0],a[1]+5,a[2]],[a[0],h,a[2]-8-index*2],[b[0],h,b[2]-8-index*2],[b[0],b[1]+5,b[2]],b];
+}
