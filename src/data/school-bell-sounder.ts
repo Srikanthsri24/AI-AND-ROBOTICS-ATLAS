@@ -3,7 +3,7 @@ export type BellPoint=readonly[number,number,number];
  * A separate acoustic cavity, bonded disc and two real pin holes keep the
  * instructional model faithful to a passive transducer rather than an LED. */
 export const schoolBellPiezo={at:[0,0,0] as [number,number,number],radius:10.5,inner:9.4};
-export const schoolBellResistor={from:[-25,12,0] as BellPoint,to:[-12.3,12,0] as BellPoint,bands:['#b94343','#b94343','#784d2b','#c4a650']};
+export const schoolBellResistor={from:[-20.32,12,3.81] as BellPoint,to:[-7.62,12,3.81] as BellPoint,bands:['#b94343','#b94343','#784d2b','#c4a650']};
 export const schoolBellSounderParts=[
  {id:'school-piezo-cradle',label:'Sounder mounting cradle',what:'Raises the sounder and leaves room for the two connections below.',connection:'This support is mechanical. Its centre slot leaves the signal and ground leads accessible.'},
  {id:'school-piezo-case',label:'Hollow acoustic case',what:'Holds the vibrating disc over an air cavity.',connection:'The internal ledge supports the brass rim. Two separate holes carry the signal and ground pins through the floor.'},
