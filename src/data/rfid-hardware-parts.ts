@@ -1,8 +1,31 @@
+import {pn532SurfaceParts} from './pn532-surface';
+import {rfidServoLeads} from './rfid-servo-harness';
 import {rfidFittingInstructions} from './rfid-fitting-instructions';
 import {rfidWires} from './rfid-wires';
 export type RfidHardwarePart={id:string;name:string;what:string;connection:string};
 const p=(id:string,name:string,what:string,connection:string):RfidHardwarePart=>({id,name,what,connection});
 export const rfidHardwareParts:readonly RfidHardwarePart[]=[
+ p('rfid-work-mat','Insulating work mat','Provides a stable work area for the model and reader.','The mat is not a ground connection; the return jumpers provide the shared reference.'),
+ p('rfid-uno-supports','Uno mounting standoffs','Lift the board so underside contacts clear the mat.','Support the controller through its mounting holes without bridging electrical contacts.'),
+ p('rfid-antenna-supports','Antenna end supports','Support the shield overhang away from the Uno.','The hollow nonmetallic posts align with the two far shield mounting holes.'),
+ p('rfid-breadboard-riser','Breadboard support','Raises and supports the contact board above the work surface.','Provides mechanical support; it does not join any contact strips.'),
+ p('rfid-card-rest','Card parking stand','Keeps tag A away from the antenna until it is presented.','The card lifts from this rest and approaches the reader; the stand is not part of the circuit.'),
+ p('rfid-fob-rest','Keyfob parking stand','Supports tag B with clearance for its ring.','Keeps the second tag parked while a single classroom tag is presented to the reader.'),
+ p('rfid-uno-tracks','Uno copper tracks','Route signals between the controller and board-mounted parts.','External jumpers extend the selected header connections to the indicator and servo circuits.'),
+ p('rfid-uno-bridge','USB serial bridge','Transfers programming and serial data between computer and Uno controller.','Serial Monitor sends e and displays reader status at 115200 baud.'),
+ p('rfid-uno-power','Uno power circuitry','Conditions the controller supply on the board.','This workshop powers the Uno through USB. Its barrel input is unused; the servo supply is separate.'),
+ p('rfid-uno-programming','AVR programming headers','Expose direct programming signals for the AVR chips.','Leave these headers unused in this project; upload through the USB connector.'),
+ p('rfid-uno-leds','Uno board indicators','Show controller power and board communication activity.','These are separate from the project red rejection and green release LEDs.'),
+ p('pn532-through-hole-pads','Shield plated contact pads','Provide conductive mounting points for headers and breakout connections.','The stacked Arduino footprint mates to the Uno; internal breakout rows are not alternative stacking pins.'),
+ p('pn532-mounting-rings','Shield mounting rings','Mark the plated edges around mounting holes.','The antenna end rests on nonmetallic supports; mounting holes are not project signal sockets.'),
+ ...(['digital-high','digital-low','power','analog'] as const).map(bank=>p('pn532-header-'+bank,'Shield '+bank.replace('-',' ')+' header','Stacks the shield on the matching Uno socket bank and exposes upper sockets.','Only aligned matching pins mate. D6, D7, D9 and GND upper contacts serve the external project wires.')),
+ ...pn532SurfaceParts.map(part=>p(part.id,part.name,part.what,part.kind==='jumper'?'Leave both selector solder jumpers open for this default I²C shield configuration. The fitted bias resistors set SEL0 high and SEL1 low.':part.kind==='fiducial'?'Optical alignment only; no external wire attaches here.':part.kind==='unpopulated'?'Visible pads only. No component is fitted and no project jumper attaches here.':'A board-mounted part of the supplied reader shield. Leave it fitted; external project wires use the labelled stacked headers.')),
+ ...rfidServoLeads.map((lead,n)=>p(lead.id,lead.name+' factory lead','Runs from the servo case to its matching spring contact in the three-way plug.',n===0?'Orange carries the D9 position command. It is not a motor power connection.':n===1?'Red carries independent regulated 5 V from the isolated positive strip.':'Brown returns servo current and shares the Uno signal reference through common ground.')),
+ ...(['red','green'] as const).flatMap(color=>(['anode','cathode'] as const).map(polarity=>p('rfid-'+color+'-led-'+polarity,color+' LED '+polarity,polarity==='anode'?'The positive-side LED lead receives current through its series resistor.':'The negative-side LED lead returns current to the common ground strip.',polarity==='anode'?'Its contact column also holds the output end of the matching 220 Ω resistor.':'Its contact column connects by a return jumper to column 17 A–E. The flat lens rim marks this side.'))),
+ p('rfid-adapter-centre-contact','DC adapter centre contact','Mates to the inner positive conductor of the selected centre-positive plug.','Routes to the adapter positive terminal; verify polarity on real hardware before connecting power.'),
+ p('rfid-adapter-positive','Adapter positive terminal','Clamps the positive supply conductor in its metal cage.','Connects by the red supply jumper to the isolated breadboard servo-positive strip.'),
+ p('rfid-adapter-negative','Adapter negative terminal','Clamps the negative supply return conductor.','Connects to common ground, shared with the servo and Uno through their return jumpers.'),
+
  p('rfid-uno-pcb','Arduino Uno board','Carries the controller that compares a scanned UID with one enrolled classroom UID.','USB powers the controller; D6 and D7 drive indicators, D9 commands the latch.'),
  p('rfid-uno-mcu','ATmega328P controller','Stores one UID in volatile memory and times a three-second release.','Reads the PN532 through I²C. RESET or loss of USB power forgets the enrolled UID.'),
  p('rfid-uno-headers','Uno pin sockets','Connect the stacked shield pins to the Uno.','A4/SDA, A5/SCL and D2/IRQ serve the reader. Reserve D3 for the library reset parameter.'),
