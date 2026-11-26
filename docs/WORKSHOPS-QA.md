@@ -16,3 +16,8 @@ Final automated validation: 32 tests pass; TypeScript project build passes; Vite
 Frontend only, English only. User records remain in browser storage with backup/export support and an actual-storage-failure notice. Source notebooks do not compile or execute arbitrary code. Supported browser experiments disclose their assumptions. The 240 hardware guides use representative family-level 2D and 3D constructions, not exact CAD, pinouts or separately measured models for each named commercial variant. Materials, lighting, orbit, zoom, isolation and exploded inspection improve spatial learning without claiming engineering equivalence.
 
 Original built-in-generated image prompts and provenance: design-assets/hardware/manifest.json. Responsive image derivatives are served locally.
+
+
+## Traffic & parking workshop — 27 November 2026
+
+Rolling workshop total is now 81/150; the current detailed ledger is `docs/3D-WORKSHOP-PROGRESS.md` (older counts above describe earlier milestones). Traffic/parking's registered sixth route passes actual production desktop/phone controls, calibration, car/counter behaviour, exact downloads and back reset. The final 90-pose assembly audit includes 5,668,380 moving vertices and named spring contacts; flat board/base bearing faces and all 66 wire contacts pass. All 1,210 repository tests, full TypeScript build and Vite build pass. Production canvas visibility below the header, no page overflow and no page errors verified at 1200/390. Preview 5191 stopped; local development remains 5190. No AWS deployment.

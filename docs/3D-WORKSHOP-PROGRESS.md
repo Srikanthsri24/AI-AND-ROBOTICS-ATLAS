@@ -2,9 +2,9 @@
 
 ## Phase 1 — 150 published Guided Builds
 
-Current verified total: **80 / 150 workshops**. **70** remain in Phase 1; **61** additional guides remain in Phase 2. Counts and in-progress descriptions in earlier checkpoint notes describe those earlier states.
+Current verified total: **81 / 150 workshops**. **69** remain in Phase 1; **61** additional guides remain in Phase 2. Counts and in-progress descriptions in earlier checkpoint notes describe those earlier states.
 
-Latest completed: **Smart Digital School Bell (`directory-24`)**. Next in catalog order: **Smart Traffic Light & Parking Systems (`directory-25`)**.
+Latest completed: **Smart Traffic Light & Parking Systems (`directory-25`)**. Next in catalog order: **Automatic Liquid Soap Dispenser (`directory-26`)**.
 
 Use the user-approved obstacle-avoiding car as the visual and interaction benchmark. Add and verify a project-specific sixth 3D Workshop for each of the 150 published guides, continuing in catalog order.
 
@@ -1477,3 +1477,14 @@ The UI includes live captions, reservation/angle readouts, three bay controls, e
 Made the bare shaft visibly rotate with the last gear: an ivory output hub has 21 illustrative splines and a contrasting index mark. Metadata now explicitly instructs raised fitting at 100° with motor power off. Native barrier regression PASS the rotating mark, all spline vertices inside the actual horn bore, eight real bores, screw bearing/slot, nine calibrated poses, cover clearance and moving horn label. Splines/ratios remain authored teaching geometry rather than manufacturer CAD.
 
 PASS all 52 focused traffic/parking tests, including seven workflow integration cases and exact compiled normal/calibration firmware parity; targeted strict/no-unused TS PASS. Native full UI flow PASS at 1200/390 through component/wire setup, USB insertion, both bare-shaft positions, horn fastening, working upload, full-lot denial, physical departure/Exit confirmation, real-surface part inspection and byte-exact downloads of both sketches. Reviewed desktop/mobile trial and calibrated-servo renders. A separate final UI check PASS hover colours, compact layout, all four internal-part surface labels and restored-cover label at both sizes. This UI is mounted only by the local test fixture: no registry/publication increase. Full component-assembly travel/collision audit, complete repository/build checks and production-route/App-shell verification still precede registration; completed workshops remain 80/150, with Phase 2's 61 pending.
+
+
+### 81. Smart Traffic Light & Parking Systems — completed
+
+Registered `directory-25` as a lazy-loaded sixth workshop after the assembly and production gates passed. The project now combines detailed Uno/breadboards/resistors/switches, seven separate LED packages and signal frames, a bracketed micro servo with actual horn/screw bores and rotating shaft index, an independent supply, 33 individually fitted wires, USB/computer and four tabletop cars. All 174 physical owners have part/function/connection descriptions. The three-space trial counts debounced operator requests; it does not invent vehicle detection. Physical cars wait for the actual raised arm, occupy separate bays, leave through a clear perimeter route and retain their reservation until Exit is confirmed. Traffic timing continues independently.
+
+Final mechanical audit PASS 90 sampled component/horn fitting poses, 5,668,380 moving-vertex checks and 84 intended spring-contact intersections at the specifically named mating holes. Instanced board contacts were expanded into the audit; other wrong-bank/column contacts, plastic/body penetrations and other owners were not exempted. Fixed the discovered 0.00025 mm rounded-underside interference by opting only these two boards into a flat bearing face; the shared component's default remains unchanged for other projects. Endpoint regression PASS both real board/base bearings plus 14 resistor tips, eight switch feet, sixteen switch/spring faces and all 66 connector contacts. Prepared stock subassemblies are checked as units; this sampled geometry audit does not claim continuous swept-volume, force, exact manufacturer CAD or steering certification.
+
+Repository validation PASS all **1,210 tests**, full `tsc -b`, and Vite production build (23.29 seconds after TypeScript; existing shared-chunk size warning). Actual App-shell development route PASS at 1200. Built production files served on temporary preview 5191 PASS at **1200/390**: six tabs, unpowered/unassembled startup, named component/wire setup, sequenced USB, both bare-shaft calibration positions, unpowered horn/screw attachment, normal upload and powered lowering, three-car parking/fourth denial, physical departure and explicit Exit confirmation, actual-surface label inspection, byte-exact downloads of both Arduino sketches and fresh unpowered assembly after back navigation. The canvas stayed fully visible below the application header during the trial; no horizontal overflow or page errors. Reviewed desktop/mobile production viewport renders. Temporary preview stopped; development server remains on 5190.
+
+Current totals: **81/150 completed, 69 Phase 1 workshops remaining, 61 Phase 2 guides/workshops pending**. Next: Automatic Liquid Soap Dispenser (`directory-26`). No AWS deployment performed.
