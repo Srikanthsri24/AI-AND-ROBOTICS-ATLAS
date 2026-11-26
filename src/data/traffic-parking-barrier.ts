@@ -1,5 +1,5 @@
 /** Authored millimetre-scale micro-servo/barrier, not manufacturer CAD. */
-export const trafficParkingBarrierPlacement=[65,22,15] as const;
+export const trafficParkingBarrierPlacement=[65,18,15] as const;
 export const trafficParkingBarrierParts=[
  {id:'tp-servo-case',label:'Micro servo · blue enclosure',what:'Keeps the motor, reduction train and feedback circuit inside one stationary housing.',connection:'The drilled ears mount to the bracket. Three external conductors provide independent regulated 5 V, common ground and the D9 command.'},
  {id:'tp-servo-motor',label:'Servo · internal DC motor',what:'Turns the reduction train when the servo receives valid power and a position command.',connection:'Powered by the separate 5 V servo supply, not by an Uno digital output. Cutaway is a virtual inspection aid; do not dismantle a working servo.'},
