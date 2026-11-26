@@ -1,4 +1,5 @@
 import {pianoKeyboardParts,type PianoHardwarePart} from './piano-layout';
+import {pianoUsbParts} from './piano-usb';
 import {pianoWireParts} from './piano-wires';
 import {pianoPiezoParts} from './piano-sounder';
 const part=(id:string,name:string,what:string,connection:string):PianoHardwarePart=>({id,name,what,connection});
@@ -17,6 +18,7 @@ export const pianoHardwareParts:readonly PianoHardwarePart[]=[
  part('piano-uno-supports','Uno insulating supports','Hold the board clear of the base at the actual PCB mounting holes.','Keep underside solder joints above the timber. The supports are mechanical, not a circuit return.'),
  ...[0,1].map(i=>part('piano-board-'+i,i===0?'C4–F4 keyboard breadboard':'G4–C5 keyboard breadboard','Each has seventeen columns of two separate five-hole strips, with an isolated centre gap.','There are no long ground rails. Four switches straddle the gap; individual jumpers join the return strips.')),
  part('piano-series-resistor','220 Ω piezo series resistor','Red / red / brown / gold bands identify 220 Ω with 5% tolerance. It limits brief charging current at square-wave edges.','Its legs span separate rear-bank columns 1 and 5 on the first board. D10 reaches one strip; the piezo signal lead reaches the other.'),
+ ...pianoUsbParts.map(([id,name,what,connection])=>part(id,name,what,connection)),
  ...pianoKeyboardParts,
  ...pianoWireParts,
  ...pianoPiezoParts.map(([id,name,what,connection])=>part(id,name,what,connection)),
