@@ -1,3 +1,4 @@
+import {rainGeometricBridge,type RainWaterDrop} from './rain-water-sensor';
 import {rainUsbParts} from './rain-usb';
 import {rainConnections} from './rain-wires';
 export type RainHardwarePart={id:string;name:string;what:string;connection:string};
@@ -55,3 +56,8 @@ export const rainHardwareParts:readonly RainHardwarePart[]=[
  p('rain-adapter-negative','Negative screw terminal','Clamps the separate supply return conductor.','Its wire joins the common ground strip.'),
  ...rainConnections.map(w=>p(w.id,w.name,'This insulated conductor carries one specific connection.',`${w.fromPort} → ${w.toPort}. ${w.net==='ground'?'This joins the shared reference.':w.net==='servo-5V'?'This belongs to the independent servo positive network.':w.net==='sensor-5V'?'This powers only the water sensor from Uno 5 V.':'This carries a controller signal, not servo power.'}`)),
 ];
+
+/** Drops are selectable only while they actually exist on the sensor. */
+export function rainWorkshopParts(drops:readonly RainWaterDrop[]):readonly RainHardwarePart[]{
+ return [...rainHardwareParts,...drops.map((drop,n)=>p('rain-water-drop-'+n,`Water drop ${n+1}`,rainGeometricBridge([drop])?'This conductive drop touches both a signal strip and a ground strip.':rainGeometricBridge(drops)?'This drop belongs to an arrangement that bridges the electrode networks; touching drops can form one conductive path.':'This drop does not create a complete conductive bridge between both electrode networks.',rainGeometricBridge(drops)?'The complete water arrangement pulls SIG LOW, so D2 requests the covered position. The actual servo still needs its independent supply and time to move.':'SIG stays HIGH while the networks are unbridged. Water on plain board is not enough to trigger sheltering.'))];
+}
