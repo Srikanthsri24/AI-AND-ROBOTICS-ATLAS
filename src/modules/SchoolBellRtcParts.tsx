@@ -1,4 +1,5 @@
 import Header from './SchoolBellRtcHeaderParts';
+import Battery from './SchoolBellRtcBatteryParts';
 import {memo,useMemo,type ReactNode} from 'react';
 import {Shape,Path,Vector3,Quaternion} from 'three';
 import {Text} from '@react-three/drei';
@@ -9,13 +10,13 @@ type Pad={name:string;x:string;y:string;dx:string;dy:string};
 const font=new URL('./fonts/NotoSans-Regular.ttf',document.baseURI).href;
 /** Original Adafruit Eagle XY layout; see bundled notices. Heights/materials
  * are authored visualization dimensions, not a manufacturer 3D model. */
-function SchoolBellRtcParts({selected,choose}:{selected:string;choose:(id:string)=>void}){
+function SchoolBellRtcParts({selected,choose,batteryInsertion=0}:{selected:string;choose:(id:string)=>void;batteryInsertion?:number}){
  const board=useMemo(()=>{const s=new Shape(),pending=layout.outline.map(w=>({x1:+w.x1,y1:+w.y1,x2:+w.x2,y2:+w.y2,curve:Number(('curve' in w?w.curve:0)??0)}));let x=pending[0].x1,y=pending[0].y1;s.moveTo(x,y);while(pending.length){const n=pending.findIndex(w=>Math.hypot(w.x1-x,w.y1-y)<.001||Math.hypot(w.x2-x,w.y2-y)<.001);if(n<0)throw Error('Disconnected RTC outline');let w=pending.splice(n,1)[0];if(Math.hypot(w.x1-x,w.y1-y)>.001)w={x1:w.x2,y1:w.y2,x2:w.x1,y2:w.y1,curve:-w.curve};if(w.curve){const a=w.curve*Math.PI/180,dx=w.x2-w.x1,dy=w.y2-w.y1,d=Math.hypot(dx,dy),h=d/(2*Math.tan(a/2)),cx=(w.x1+w.x2)/2-dy/d*h,cy=(w.y1+w.y2)/2+dx/d*h,start=Math.atan2(w.y1-cy,w.x1-cx);s.absarc(cx,cy,Math.hypot(w.x1-cx,w.y1-cy),start,start+a,a<0);}else s.lineTo(w.x2,w.y2);x=w.x2;y=w.y2;}s.closePath();for(const p of layout.pads){const hole=new Path();hole.absarc(p.x,p.y,p.drill/2,0,Math.PI*2,true);s.holes.push(hole);}return s;},[]);
  const c=(id:string,color:string)=>id===selected?'#b78be8':color,tag=(id:string,node:ReactNode)=><group name={id} userData={{partId:id}} onClick={(e:ThreeEvent<MouseEvent>)=>{e.stopPropagation();choose(id);}}>{node}</group>;
  const box=(id:string,p:P,size:P,color:string,metal=0)=><mesh position={[...p]} castShadow><boxGeometry args={[...size]}/><meshStandardMaterial color={c(id,color)} roughness={metal?.3:.5} metalness={metal}/></mesh>;
  const bar=(id:string,a:P,b:P)=>{const from=new Vector3(...a),to=new Vector3(...b),q=new Quaternion().setFromUnitVectors(new Vector3(0,1,0),to.clone().sub(from).normalize());return <mesh position={from.clone().add(to).multiplyScalar(.5)} quaternion={q}><boxGeometry args={[.5,from.distanceTo(to),.15]}/><meshStandardMaterial color={c(id,'#bdc6ce')} metalness={.8} roughness={.3}/></mesh>;};
  const chip=layout.elements.find(e=>e.name==='IC1')!,chipPads=(layout.packages['adafruit/SO16W'].smd as Pad[]);
- return <group name="school-rtc-hardware"><Header selected={selected} choose={choose}/>
+ return <group name="school-rtc-hardware"><Battery selected={selected} choose={choose} insertion={batteryInsertion}/><Header selected={selected} choose={choose}/>
  {tag('school-rtc-board',<mesh name="school-rtc-substrate" rotation={[-Math.PI/2,0,0]}><extrudeGeometry args={[board,{depth:1.6,bevelEnabled:false,curveSegments:32}]}/><meshStandardMaterial color={c('school-rtc-board','#185b77')} roughness={.55}/></mesh>)}
  {tag('school-rtc-plating',<>{layout.pads.flatMap((p,n)=>[0,1.6].map(height=><mesh key={n+':'+height} name={'school-rtc-pad-'+p.element+'-'+p.name+'-'+height} position={[p.x,height+(height?.02:-.02),-p.y]} rotation={[-Math.PI/2,0,0]}><ringGeometry args={[p.drill/2,p.diameter/2,32]}/><meshStandardMaterial color={c('school-rtc-plating','#c6b781')} metalness={.8} roughness={.3}/></mesh>))}</>)}
  {tag('school-rtc-copper',<>{layout.traces.map((w,n)=><mesh key={n} name={'school-rtc-trace-'+n} position={[(+w.x1+ +w.x2)/2,w.layer==='1'?1.61:-.01,-(+w.y1+ +w.y2)/2]} rotation={[0,Math.atan2(+w.y2- +w.y1,+w.x2- +w.x1),0]}><boxGeometry args={[Math.hypot(+w.x2- +w.x1,+w.y2- +w.y1),.015,+w.width]}/><meshStandardMaterial color={c('school-rtc-copper','#6e9c9e')} metalness={.65} roughness={.4}/></mesh>)}</>)}
