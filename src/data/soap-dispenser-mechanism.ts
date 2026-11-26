@@ -1,3 +1,4 @@
+import {soapUsbParts} from './soap-dispenser-usb';
 import {soapCircuitWireParts} from './soap-dispenser-circuit-wires';
 import {soapHarnessParts} from './soap-dispenser-harness';
 import {soapSonarWireParts} from './soap-dispenser-sonar-wires';
@@ -8,4 +9,4 @@ import {soapFrameParts} from './soap-dispenser-frame';
 import {soapPumpParts} from './soap-dispenser-pump';
 import {soapServoParts} from './soap-dispenser-servo';
 import {soapServoLeadParts} from './soap-servo-lead';
-export const soapMechanismParts=[...soapCircuitWireParts,...soapHarnessParts,...soapSonarWireParts,...soapSupplyParts,...soapElectronicsParts,...soapSonarParts,...soapFrameParts,...soapPumpParts,...soapServoParts,...soapServoLeadParts];
+export const soapMechanismParts=[...soapUsbParts,...soapCircuitWireParts,...soapHarnessParts,...soapSonarWireParts,...soapSupplyParts,...soapElectronicsParts,...soapSonarParts,...soapFrameParts,...soapPumpParts,...soapServoParts,...soapServoLeadParts];
