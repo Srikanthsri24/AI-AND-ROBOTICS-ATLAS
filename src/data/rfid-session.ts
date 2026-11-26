@@ -1,11 +1,12 @@
+import {rfidLatchContact} from './rfid-latch-contact';
 import {rfidConnectionState,type RfidConnections} from './rfid-connections';
 import {rfidWorkshopInitial,rfidWorkshopBegin,rfidWorkshopRead,type RfidWorkshopState} from './rfid-workshop';
 import {rfidLatchAdvance} from './rfid-latch';
 import {rfidClassroomTags,rfidPresentedTag,type RfidTagName} from './rfid-tags';
-export type RfidSessionSettings={assembled:boolean;usb:boolean;readerReady:boolean;servoPower:boolean;servoGround:boolean;servoSignal:boolean;tag:RfidTagName|null;connections?:RfidConnections;dcSeated?:boolean};
+export type RfidSessionSettings={assembled:boolean;usb:boolean;readerReady:boolean;servoPower:boolean;servoGround:boolean;servoSignal:boolean;tag:RfidTagName|null;connections?:RfidConnections;dcSeated?:boolean;doorAngle?:number};
 export const rfidSessionDefaults:RfidSessionSettings={assembled:false,usb:false,readerReady:true,servoPower:false,servoGround:true,servoSignal:true,tag:null};
-export type RfidSession={controller:RfidWorkshopState|null;clockMs:number;readRemaining:number;remainderMs:number;angle:number;tagA:number;tagB:number;pendingSerial:string};
-export function rfidSessionInitial():RfidSession{return {controller:null,clockMs:0,readRemaining:180,remainderMs:0,angle:35,tagA:0,tagB:0,pendingSerial:''};}
+export type RfidSession={controller:RfidWorkshopState|null;clockMs:number;readRemaining:number;remainderMs:number;angle:number;tagA:number;tagB:number;pendingSerial:string;blocked:boolean};
+export function rfidSessionInitial():RfidSession{return {controller:null,clockMs:0,readRemaining:180,remainderMs:0,angle:35,tagA:0,tagB:0,pendingSerial:'',blocked:false};}
 export function rfidSessionCommand(state:RfidSession,text:string):RfidSession{return state.controller?{...state,pendingSerial:state.pendingSerial+text}:state;}
 export function rfidSessionReset(previous:RfidSession,settings:RfidSessionSettings):RfidSession{
  if(!settings.assembled||!settings.usb)return {...previous,controller:null,clockMs:0,readRemaining:180,pendingSerial:''};
@@ -28,8 +29,8 @@ export function rfidSessionAdvance(previous:RfidSession,settings:RfidSessionSett
   if(!settings.assembled||!settings.usb)s=rfidSessionReset(s,settings);
   else{
    if(s.controller===null)s=rfidSessionReset(s,settings);
-   const c=s.controller!,angle=rfidLatchAdvance(s.angle,c.commandAngle,1,settings.servoPower&&settings.servoGround&&settings.servoSignal&&(!circuit||(circuit.servoPower&&circuit.servoGround&&circuit.servoSignal))),clockMs=(s.clockMs+1)>>>0,readRemaining=s.readRemaining-1;
-   s={...s,angle,clockMs,readRemaining};
+   const c=s.controller!,requestedAngle=rfidLatchAdvance(s.angle,c.commandAngle,1,settings.servoPower&&settings.servoGround&&settings.servoSignal&&(!circuit||(circuit.servoPower&&circuit.servoGround&&circuit.servoSignal))),blocked=requestedAngle!==s.angle&&rfidLatchContact(settings.doorAngle??0,requestedAngle),angle=blocked?s.angle:requestedAngle,clockMs=(s.clockMs+1)>>>0,readRemaining=s.readRemaining-1;
+   s={...s,angle,blocked,clockMs,readRemaining};
    if(readRemaining===0){
     const tag=rfidPresentedTag(a,b),uid=settings.readerReady&&tag?rfidClassroomTags[tag].uid:null;
     const scanned=rfidWorkshopRead(c,clockMs,uid),controller=rfidWorkshopBegin(scanned,clockMs,s.pendingSerial);
