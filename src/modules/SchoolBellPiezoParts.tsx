@@ -12,11 +12,11 @@ export default function SchoolBellPiezoParts({selected='',select=()=>{},open=fal
  const pin=(id:string,x:number)=><group name={id+'-pin'}>{[[12,16],[16,17],[17,21.5]].map(([bottom,top])=><mesh key={bottom} position={[x,(bottom+top)/2,0]}><boxGeometry args={[.5,top-bottom,.5]}/><meshStandardMaterial color={c(id,'#c0c5cb')} metalness={.8} roughness={.3}/></mesh>)}</group>;
  return <group name="school-passive-piezo-mm" position={d.at}>
  {owner('school-piezo-cradle',<>{profile('school-piezo-cradle',shapes.cradle,0,shapes.cradleSettings,'#969ba8')}{[-8,8].flatMap(x=>[-5,5].map(z=><mesh key={x+'/'+z} position={[x,10,z]} castShadow><cylinderGeometry args={[1.3,1.3,14,24]}/><meshStandardMaterial color={c('school-piezo-cradle','#969ba8')} roughness={.6}/></mesh>))}</>)}
- {owner('school-piezo-case',<>{profile('school-piezo-case',shapes.floor,17,shapes.settings,'#303949')}{profile('school-piezo-case',shapes.wall,18.2,shapes.wallSettings,'#303949')}{profile('school-piezo-case',shapes.ledge,22.51,shapes.ledgeSettings,'#384354')}</>)}
+ <group name="school-piezo-capsule">{owner('school-piezo-case',<>{profile('school-piezo-case',shapes.floor,17,shapes.settings,'#303949')}{profile('school-piezo-case',shapes.wall,18.2,shapes.wallSettings,'#303949')}{profile('school-piezo-case',shapes.ledge,22.51,shapes.ledgeSettings,'#384354')}</>)}
  <group name="school-piezo-lifted-lid" position={[0,open?18:0,0]}>{owner('school-piezo-lid',profile('school-piezo-lid',shapes.lid,28,shapes.settings,'#303949'))}</group>
  {owner('school-piezo-brass',<>{disc('school-piezo-brass',6.3,.18,23,'#b7a164',.8)}<mesh name="school-piezo-brass-rim" position={[0,22.91,0]} rotation={[-Math.PI/2,0,0]} castShadow><extrudeGeometry args={[shapes.brassRim,shapes.brassSettings]}/><meshStandardMaterial color={c('school-piezo-brass','#b7a164')} metalness={.8} roughness={.3}/></mesh></>)}
  {owner('school-piezo-ceramic',<>{disc('school-piezo-ceramic',6.3,.14,23.16,'#d9d7cc',0)}{disc('school-piezo-ceramic',5.8,.02,23.24,'#b7bec7',.7)}</>)}
  {owner('school-piezo-signal',<>{pin('school-piezo-signal',-3.81)}<mesh name="school-piezo-signal-bond"><tubeGeometry args={[bonds.signal,96,.1,10,false]}/><meshStandardMaterial color={c('school-piezo-signal','#b97862')} metalness={.8} roughness={.35}/></mesh></>)}
  {owner('school-piezo-return',<>{pin('school-piezo-return',3.81)}<mesh name="school-piezo-return-bond"><tubeGeometry args={[bonds.ground,48,.1,10,false]}/><meshStandardMaterial color={c('school-piezo-return','#b97862')} metalness={.8} roughness={.35}/></mesh></>)}
- </group>;
+ </group></group>;
 }

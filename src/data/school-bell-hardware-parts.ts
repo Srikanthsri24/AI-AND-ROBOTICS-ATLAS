@@ -6,7 +6,10 @@ import {schoolBellUsbParts} from './school-bell-usb';
 import {schoolBellWires} from './school-bell-wires';
 const p=(id:string,label:string,what:string,connection:string):SchoolBellDisplayPart=>({id,label,what,connection});
 export const schoolBellHardwareParts:SchoolBellDisplayPart[]=[
- ...schoolBellUsbParts,...schoolBellDisplayParts,...schoolBellBatteryParts,...schoolBellSounderParts,
+ ...schoolBellUsbParts,...schoolBellDisplayParts,
+ p('school-display-nuts','Display rear retaining nuts','Retain the two front fasteners behind the stand brackets.','Fit from behind after the screws pass through the display mounting holes and bracket bores. The nut face rests against the back of the stand.'),
+ ...(['uno','rtc','display'] as const).map(kind=>p('school-'+kind+'-fasteners',kind==='uno'?'Uno insulating fasteners':kind==='rtc'?'RTC insulating fasteners':'Display insulating fasteners','Secure the board through its actual mounting holes without bridging electrical contacts.',kind==='display'?'Fit from the front into the stand’s open bracket bores after the display is seated. Leave the rear connection header accessible.':'The insulating shaft fits the hollow support bore. The wider head bears on the board while the support shoulder carries it below.')),
+...schoolBellBatteryParts,...schoolBellSounderParts,
  ...schoolBellWires.map(w=>({id:w.id,label:w.label,what:w.what,connection:w.connection})),
  ...schoolBellRtcPins.map(pin=>p(pin.id,pin.label+' · RTC',pin.what,pin.connection)),
  p('school-rtc-board','RTC circuit board','Supports the calendar chip, backup cell and connection header.','Its copper routes join the DS3231 to main supply, ground, I²C and backup battery. The two mounting holes are mechanical.'),
