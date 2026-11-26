@@ -1,3 +1,4 @@
+import {craneUsbParts} from './crane-usb';
 import {craneConnections} from './crane-layout';
 export type CraneHardwarePart={id:string;name:string;what:string;connection:string};
 const part=(id:string,name:string,what:string,connection:string):CraneHardwarePart=>({id,name,what,connection});
@@ -51,4 +52,9 @@ export const craneHardwareParts:readonly CraneHardwarePart[]=[
  part('crane-adapter-negative','Negative supply clamp','Grips the stripped return wire beneath its separate screw.','Joins driver GND, Uno GND and the button return through the common strip.'),
  part('crane-jst-plug','Keyed three-way input plug','Separate cavities hold the ground, supply and signal crimp contacts.','The keyed housing seats in the left-facing driver input. Wires carry GND, independent 5 V and D9 separately.'),
  ...craneConnections.map(w=>part(w.id,w.name,'An insulated conductor with metal contacts at each end; its colour helps identify this circuit node.',w.node==='5V'?'Carries the independent regulated coil supply. It is isolated from the common-ground bank and does not connect to Uno 5 V.':w.node==='gnd'?'Provides the shared electrical reference and return path between the named grounded contacts.':w.node==='D2'?'Connects the button signal strip to the Uno input; an accepted press reads LOW.':'Carries only the D9 gate command. The MOSFET and separate supply carry coil current.')),
+ part('crane-magnet-grommets','Magnet wire-exit grommets','Rubber sleeves protect the two lead jackets where they pass through the rear plate.','Each conductor has its own real opening. The bracket carries the load; the leads carry current.'),
+ part('crane-coil-positive','Positive coil lead and slack loop','A separate insulated conductor runs from OUT+ through the gantry clamp to the coil.','Its free service loop retains 280 mm of cable as the saddle and hoist move. It does not lift the magnet.'),
+ part('crane-coil-return','Switched coil-return lead and slack loop','A second insulated conductor returns coil current to OUT−.','The MOSFET joins this return to common ground while enabled. The flyback diode provides the brief current path at switch-off.'),
+ part('crane-lead-clamp','Gantry lead strain relief','A fixed drilled bracket holds both leads clear of the sliding saddle.','The stationary runs end at two rubber-lined holes; each free loop has enough slack for the full authored gantry travel.'),
+ ...craneUsbParts.map(([id,name,what,connection])=>part(id,name,what,connection)),
 ];
