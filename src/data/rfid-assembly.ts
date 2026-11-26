@@ -37,3 +37,4 @@ export const rfidAssemblyObjects:readonly {id:string;start:number;end:number;off
  {id:'rfid-circuit-jumpers',start:10,end:10,offset:[0,0,0]},
 ];
 export function rfidAssemblyPose(id:string,progress:number){rfidAssemblyWireCursor(progress);const object=rfidAssemblyObjects.find(o=>o.id===id);if(!object)throw new RangeError('Unknown RFID assembly object '+id);const t=object.end===object.start?1:Math.max(0,Math.min(1,(progress-object.start)/(object.end-object.start))),ease=t*t*(3-2*t);return {visible:progress>=object.start,offset:object.offset.map(n=>n*(1-ease)) as [number,number,number]};}
+export function rfidAssemblyElapsed(progress:number){rfidAssemblyWireCursor(progress);const chapter=Math.floor(progress);return rfidAssemblyDurations.slice(0,chapter).reduce((a,b)=>a+b,0)+(chapter<11?(progress-chapter)*rfidAssemblyDurations[chapter]:0);}
