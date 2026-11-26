@@ -3,6 +3,7 @@ import {useFrame} from '@react-three/fiber';
 import {CatmullRomCurve3,Group,Mesh,Quaternion,Vector3,type TubeGeometry} from 'three';
 import {railwayControlJumpers,railwayControlJumperPose,type RailwayWithdrawal,type RailwayJumperEnd} from '../data/railway-control-jumpers';
 import type {RailwayPoint as P} from '../data/railway-electrical-layout';
+import RailwayFemaleSocketGeometry from './RailwayFemaleSocketGeometry';
 import {rewriteCubeSatTube} from './cubesat-tube-motion';
 type HarnessCable={id:string;color:string;radius:number;a:RailwayJumperEnd;b:RailwayJumperEnd};
 type HarnessPose={a:P;b:P;points:readonly P[]};
@@ -20,7 +21,7 @@ export function RailwayJumperHarness({selected='',select=()=>{},withdrawals,moti
  return <group ref={root} name={groupName}>{jumpers.map((j,n)=><group key={j.id}>
  {tag(j.id,<mesh name={j.id+'-tube'} castShadow><tubeGeometry args={[initial[n],200,j.radius,10,false]}/>{mat(j.id,j.color)}</mesh>)}
  {(['a','b'] as const).map(end=>{const id=j.id+'-'+end;return tag(id,<group name={id+'-body'} quaternion={orientations[n][end]}>
- {j[end].kind==='banana'?<>{cylinder(id,-3.5,1.8,9,'#bfc8d4',.85)}{cylinder(id,4,3.2,6,j.color)}<mesh position={[0,8.5,0]} castShadow><cylinderGeometry args={[.65,3.2,3,40]}/>{mat(id,j.color)}</mesh>{[2.2,3.7,5.2].map(y=><mesh key={y} position={[0,y,0]} rotation={[Math.PI/2,0,0]}><torusGeometry args={[3.2,.12,8,40]}/>{mat(id,j.color)}</mesh>)}</>:<>
+ {j[end].kind==='banana'?<>{cylinder(id,-3.5,1.8,9,'#bfc8d4',.85)}{cylinder(id,4,3.2,6,j.color)}<mesh position={[0,8.5,0]} castShadow><cylinderGeometry args={[.65,3.2,3,40]}/>{mat(id,j.color)}</mesh>{[2.2,3.7,5.2].map(y=><mesh key={y} position={[0,y,0]} rotation={[Math.PI/2,0,0]}><torusGeometry args={[3.2,.12,8,40]}/>{mat(id,j.color)}</mesh>)}</>:j[end].kind==='female'?<RailwayFemaleSocketGeometry highlighted={selected===id}/>:<>
  {box(id,[0,3.2,0],[2.3,6,2.3],'#263141')}{box(id,[0,-1.5,0],[.64,6,.64],'#bfae78',.8)}{box(id,[0,3.85,0],[.55,4.7,.55],'#bfae78',.8)}<mesh position={[0,7.2,0]} castShadow><cylinderGeometry args={[.55,1.15,2,24]}/>{mat(id,'#263141')}</mesh>
  </>}
  </group>);})}

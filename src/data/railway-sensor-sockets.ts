@@ -1,0 +1,5 @@
+import {railwaySensorConnections,type RailwaySensorTerminal} from './railway-sensor-wiring';
+import {railwaySensorContact} from './railway-beam-layout';
+import type {RailwayPoint as P} from './railway-electrical-layout';
+export const railwaySensorSocketDefinitions=railwaySensorConnections.filter((w):w is typeof w & {from:Extract<RailwaySensorTerminal,{type:'sensor'}>}=>w.from.type==='sensor').map(w=>({id:w.id+'-a',name:`Beam ${w.from.station.toUpperCase()} ${w.from.receiver?'receiver':'emitter'} ${w.from.pin===0?'5 V':w.from.pin===1?'GND':'signal'} female socket`,terminal:w.from}));
+export function railwaySensorSocketPose(n:number,aligned=true,withdrawal=0){const d=railwaySensorSocketDefinitions[n];if(!d)throw Error('Unknown sensor socket');if(!Number.isFinite(withdrawal)||withdrawal<0||withdrawal>6.5)throw Error('Sensor socket outside withdrawal travel');const pin=railwaySensorContact(d.terminal.station,d.terminal.receiver,d.terminal.pin,aligned),out:P=[0,0,d.terminal.receiver?1:-1];return{at:[pin[0],pin[1],pin[2]+out[2]*(withdrawal-3)] as P,out,pin};}

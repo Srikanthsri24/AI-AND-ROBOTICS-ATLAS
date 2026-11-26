@@ -1,6 +1,6 @@
 import {railwayUnoSocket,railwaySupplySocket} from './railway-power-layout';
 import {railwayServoContact,railwayWarningPins,type RailwayPoint as P} from './railway-electrical-layout';
-export type RailwayJumperEnd={at:P;out:P;kind:'male'|'banana';travel:number};
+export type RailwayJumperEnd={at:P;out:P;kind:'male'|'banana'|'female';travel:number};
 export type RailwayWithdrawal={a:number;b:number};
 const up:P=[0,1,0],front:P=[0,0,1];
 function male(at:P,out:P=up):RailwayJumperEnd{return{at,out,kind:'male',travel:6.5};}
