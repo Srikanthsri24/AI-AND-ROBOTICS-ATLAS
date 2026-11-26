@@ -55,3 +55,5 @@ int main(){setup();const int chars[]={${sequence.join(',')}};for(int c:chars){Se
   let state=c.soapCalibrationPower(c.soapCalibrationInitial(),true,false);state=c.soapCalibrationSend(state,String.fromCharCode(...sequence));assert.deepEqual(lines,state.rows);
  }finally{await rm(dir,{recursive:true,force:true});}
 });
+
+test('sensor assembly sequences supports, hollow spacers, board, then independently seated bolts and nuts',async()=>{const m=await import(await load(new URL('../src/data/soap-dispenser-sensor-assembly.ts',import.meta.url)));assert.equal(m.soapSensorAssemblySteps.length,7);const empty=m.soapSensorAssemblyPose(0);assert.equal(empty.support.visible,false);assert.equal(empty.sensor.visible,false);for(let i=0;i<=140;i++){const c=i/20,p=m.soapSensorAssemblyPose(c);if(p.spacers.visible)near(p.support.y,0);if(p.sensor.visible){near(p.support.y,0);near(p.spacers.y,0);}for(let n=0;n<4;n++){const f=p.fasteners[n];if(f.visible)near(p.sensor.y,0);if(f.nutY>-18)near(f.boltY,0);if(c>=4+n){near(f.boltY,0);near(f.nutY,0);near(f.nutRotation,Math.PI*4);}}}assert.throws(()=>m.soapSensorAssemblyPose(-1));assert.throws(()=>m.soapSensorAssemblyPose(8));});
