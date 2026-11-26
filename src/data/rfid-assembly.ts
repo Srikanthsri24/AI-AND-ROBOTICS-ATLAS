@@ -30,11 +30,13 @@ export const rfidAssemblyObjects:readonly {id:string;start:number;end:number;off
  ...['rfid-door-base','rfid-door-frame','rfid-fixed-hinges'].map(id=>({id,start:5,end:6,offset:[0,30,0] as const})),
  ...['rfid-moving-door','rfid-hinge-pins'].map(id=>({id,start:6,end:7,offset:[0,35,0] as const})),
  ...['rfid-latch-servo','rfid-latch-shaft','rfid-servo-factory-harness'].map(id=>({id,start:7,end:8,offset:[0,0,30] as const})),
+ {id:'rfid-servo-mounting-bolts',start:7.7,end:8,offset:[0,0,15]},
+ {id:'rfid-servo-mounting-nuts',start:7.85,end:8,offset:[0,0,-15]},
  {id:'rfid-latch-tab',start:8,end:8.7,offset:[0,0,20]},
  {id:'rfid-horn-screw',start:8.7,end:9,offset:[0,0,25]},
  {id:'rfid-low-voltage-supply',start:9,end:10,offset:[0,25,0]},
  {id:'rfid-classroom-tags',start:9,end:10,offset:[0,25,0]},
  {id:'rfid-circuit-jumpers',start:10,end:10,offset:[0,0,0]},
 ];
-export function rfidAssemblyPose(id:string,progress:number){rfidAssemblyWireCursor(progress);const object=rfidAssemblyObjects.find(o=>o.id===id);if(!object)throw new RangeError('Unknown RFID assembly object '+id);const t=object.end===object.start?1:Math.max(0,Math.min(1,(progress-object.start)/(object.end-object.start))),ease=t*t*(3-2*t);return {visible:progress>=object.start,offset:object.offset.map(n=>n*(1-ease)) as [number,number,number]};}
+export function rfidAssemblyPose(id:string,progress:number){rfidAssemblyWireCursor(progress);const object=rfidAssemblyObjects.find(o=>o.id===id);if(!object)throw new RangeError('Unknown RFID assembly object '+id);const t=object.end===object.start?1:Math.max(0,Math.min(1,(progress-object.start)/(object.end-object.start))),ease=t*t*(3-2*t);return {visible:progress>=object.start,offset:object.offset.map(n=>ease===1?0:n*(1-ease)) as [number,number,number]};}
 export function rfidAssemblyElapsed(progress:number){rfidAssemblyWireCursor(progress);const chapter=Math.floor(progress);return rfidAssemblyDurations.slice(0,chapter).reduce((a,b)=>a+b,0)+(chapter<11?(progress-chapter)*rfidAssemblyDurations[chapter]:0);}

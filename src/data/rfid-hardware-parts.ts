@@ -44,6 +44,8 @@ export const rfidHardwareParts:readonly RfidHardwarePart[]=[
   p('rfid-'+color+'-led',color==='red'?'Red rejection LED':'Green release LED',color==='red'?'Shows that the most recent fresh UID was rejected.':'Shows the three-second release window requested by the controller.',`D${n?7:6} reaches the anode through its own 220 Ω resistor. The cathode returns to the common strip.`),
   p('rfid-'+color+'-resistor',color+' LED · 220 Ω resistor','Limits the current through its indicator LED.','Red–red–brown bands mean 220 Ω; gold is the tolerance band. It is in series with the LED, not across the supply.'),
  ]),
+ p('rfid-servo-mounting-nuts','Servo retaining nuts','Retain the mounting bolts from behind the fixed support block.','Each nut approaches from the back, opposite the bolt insertion direction, and seats against the rear frame face.'),
+ p('rfid-servo-mounting-bolts','Servo mounting bolts and washers','Secure the servo flange to the drilled frame support block.','Two bolt shafts pass through aligned holes. Washers bear on the flange; nuts retain the assembly behind the frame.'),
  p('rfid-latch-servo','Positional micro servo','Turns its output shaft gradually toward the commanded angle.','Orange is D9 signal, red is independent regulated 5 V, brown is common ground. It does not swing the door.'),
  p('rfid-latch-shaft','Servo output shaft','Transfers rotation from the servo gearbox to the horn.','The horn and lightweight tab rotate with this shaft between 35° and 105°.'),
  p('rfid-latch-tab','Lightweight latch tab','Overlaps the strike when locked and rotates clear when released.','The tab is fixed to the horn. Keep the door closed while checking the three-second relock.'),
