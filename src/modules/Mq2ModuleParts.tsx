@@ -1,0 +1,24 @@
+import {memo,useMemo,type ReactNode} from 'react';
+import {Text} from '@react-three/drei';
+import type {ThreeEvent} from '@react-three/fiber';
+import {Path,Shape} from 'three';
+import {mq2ModuleLayout as layout} from '../data/mq2-module-layout';
+const font=new URL('./fonts/NotoSans-Regular.ttf',document.baseURI).href;
+type P=[number,number,number];
+/** Authored reconstruction of Waveshare 9529; local units are millimetres. */
+function Mq2ModuleParts({selected,choose,powered=false,digital=false}:{selected:string;choose:(id:string)=>void;powered?:boolean;digital?:boolean}){
+ const board=useMemo(()=>{const s=new Shape();s.moveTo(0,0);s.lineTo(40,0);s.lineTo(40,21);s.lineTo(0,21);s.closePath();for(const [x,z]of layout.holes){const hole=new Path();hole.absarc(x,z,1,0,Math.PI*2,true);s.holes.push(hole);}return s;},[]);
+ const grille=useMemo(()=>{const s=new Shape();s.absarc(0,0,7.9,0,Math.PI*2,false);for(let x=-7.4;x<=7.4;x+=.65)for(let z=-7.4;z<=7.4;z+=.65)if(x*x+z*z<7.3*7.3){const h=new Path();h.absarc(x,z,.22,0,Math.PI*2,true);s.holes.push(h);}return s;},[]);
+ const color=(id:string,c:string)=>selected===id?'#b78be8':c;
+ const tag=(id:string,children:ReactNode)=><group name={id} userData={{partId:id}} onClick={(e:ThreeEvent<MouseEvent>)=>{e.stopPropagation();choose(id);}}>{children}</group>;
+ const box=(id:string,p:P,size:P,c:string,metalness=0)=><mesh position={p} castShadow receiveShadow><boxGeometry args={size}/><meshStandardMaterial color={color(id,c)} metalness={metalness} roughness={metalness?.38:.65}/></mesh>;
+ return <group name="mq2-waveshare-module">
+ {tag('mq2-pcb',<><mesh rotation={[-Math.PI/2,0,0]}><extrudeGeometry args={[board,{depth:1.6,bevelEnabled:false,curveSegments:24}]}/><meshStandardMaterial color={color('mq2-pcb','#154d83')} roughness={.62}/></mesh><Text position={[25,1.64,-18.6]} rotation={[-Math.PI/2,0,0]} font={font} fontSize={1.6} color="#f1eee5">Gas Sensor</Text></>)}
+ {tag('mq2-can',<group position={[10.5,1.6,-10.5]}><mesh position={[0,1.2,0]}><cylinderGeometry args={[9.5,9.5,2.4,64]}/><meshStandardMaterial color={color('mq2-can','#c7cbd0')} metalness={.92} roughness={.27}/></mesh>{Array.from({length:96},(_,n)=>{const a=n/96*Math.PI*2;return <mesh key={'v'+n} position={[Math.cos(a)*8.12,7.7,Math.sin(a)*8.12]}><cylinderGeometry args={[.045,.045,10.4,4]}/><meshStandardMaterial color={color('mq2-can','#aab2b6')} metalness={.85} roughness={.5}/></mesh>;})}{Array.from({length:30},(_,n)=><mesh key={'r'+n} position={[0,2.7+n*.345,0]} rotation={[Math.PI/2,0,0]}><torusGeometry args={[8.12,.045,4,96]}/><meshStandardMaterial color={color('mq2-can','#aab2b6')} metalness={.85} roughness={.5}/></mesh>)}{[2.5,12.9].map(y=><mesh key={y} position={[0,y,0]} rotation={[Math.PI/2,0,0]}><torusGeometry args={[y===2.5?8.6:7.9,.28,8,64]}/><meshStandardMaterial color={color('mq2-can','#d5d8db')} metalness={.9} roughness={.3}/></mesh>)}</group>)}
+ {tag('mq2-mesh',<mesh position={[10.5,14.6,-10.5]} rotation={[-Math.PI/2,0,0]}><extrudeGeometry args={[grille,{depth:.12,bevelEnabled:false,curveSegments:6}]}/><meshStandardMaterial color={color('mq2-mesh','#adb6ba')} metalness={.8} roughness={.55}/></mesh>)}
+ {layout.header.pins.map((pin,n)=>{const id='mq2-pin-'+pin.toLowerCase(),z=-layout.header.z[n];return <group key={pin}>{tag(id,<>{box(id,[38,2.85,z],[2.5,2.5,2.4],'#20262e')}{box(id,[42,2.85,z],[7,.64,.64],'#c3c9cc',.85)}{box(id,[38,.1,z],[.64,5.5,.64],'#c3c9cc',.85)}</>)}<Text position={[34.4,1.65,z]} rotation={[-Math.PI/2,0,0]} font={font} fontSize={.95} color="#efede6">{pin}</Text></group>;})}
+ {layout.indicators.map((item,n)=>{const id=n?'mq2-power-led':'mq2-digital-led',on=n?powered:digital,c=n?'#54bb71':'#df615c';return <group key={id}>{tag(id,<>{box(id,[item.x,1.9,-item.z],[3.2,.6,1.5],'#d2d2c1')}<mesh position={[item.x,2.23,-item.z]}><boxGeometry args={[1.5,.15,1]}/><meshStandardMaterial color={color(id,c)} emissive={c} emissiveIntensity={on?1.5:0}/></mesh></>)}<Text position={[28.2,1.65,-item.z]} rotation={[-Math.PI/2,0,0]} font={font} fontSize={1} color="#f0ece3">{item.label}</Text></group>;})}
+ {layout.underside.map((part,n)=><group key={n}>{tag(part.id,<>{box(part.id,[part.x,-part.height/2,-part.z],[part.width,part.height,part.depth],part.color)}{[-1,1].map(side=><group key={side}>{box(part.id,[part.x+side*(part.width/2-.15),-.16,-part.z],[.35,.25,part.depth+.25],'#b8c0c4',.8)}</group>)}{part.id==='mq2-trim'&&box(part.id,[part.x,-part.height-.03,-part.z],[1.9,.08,.35],'#555b64',.7)}</>)}</group>)}
+ </group>;
+}
+export default memo(Mq2ModuleParts);
