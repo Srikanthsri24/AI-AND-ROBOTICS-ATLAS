@@ -21,6 +21,7 @@ export function mq2HardwareParts(mode:Mq2Mode):readonly Mq2HardwarePart[]{return
  part('mq2-uno-supports','Uno insulating supports','Keep underside solder joints above the work surface.','Mount at the board holes without pressing on the controller or USB bridge.'),
  part('mq2-breadboard-support','Breadboard riser','Provides a stable base under the mini breadboard.','The breadboard contains the electrical contacts; the riser is a mechanical support.'),
  part('mq2-ceramic-stand','Open ceramic module stand','Supports the heated sensing module clear of the mat and loose material.','Four posts support the module at its mounting holes; the mesh remains open to the air.'),
+ part('mq2-supply-risers','Supply and adapter risers','Support the low-voltage brick and terminal adapter at their wired operating height.','Both risers rest on the mat; their top faces meet the supply feet and adapter base at 10 mm.'),
  part('mq2-supply','Separate regulated 5 V supply','Supplies the module heater independently of the Uno regulator.','Positive goes to VCC; negative goes to module GND and the shared Uno ground strip.'),
  part('mq2-supply-cord','Low-voltage supply lead','Carries the separate supply output to the barrel adapter.','This model shows the low-voltage side only; students do not assemble mains wiring.'),
  part('mq2-dc-plug','DC barrel plug','Transfers the regulated output into the screw-terminal adapter.','The plug is seated in the adapter; the red and dark wires leave the labelled screw terminals.'),

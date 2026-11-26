@@ -11,6 +11,8 @@ function Mq2SupportParts({selected,choose}:{selected:string;choose:(id:string)=>
  {tag('mq2-uno-supports',<>{uno.holes.map((h,n)=><mesh key={n} position={[layout.uno[0]+Number(h.x)-34.29,8.6,layout.uno[2]+26.67-Number(h.y)]} castShadow><cylinderGeometry args={[2.4,2.4,17.2,24]}/><meshStandardMaterial color={c('mq2-uno-supports','#ddd8ca')} roughness={.7}/></mesh>)}</>)}
  {tag('mq2-breadboard-support',<mesh position={[layout.breadboard[0],4,layout.breadboard[2]]} castShadow><boxGeometry args={[45,8,33]}/><meshStandardMaterial color={c('mq2-breadboard-support','#d9d6d0')} roughness={.8}/></mesh>)}
  {tag('mq2-ceramic-stand',<><mesh position={[layout.module[0]+20,1,layout.module[2]-10.5]} receiveShadow><boxGeometry args={[46,2,27]}/><meshStandardMaterial color={c('mq2-ceramic-stand','#d7d9df')} roughness={.5}/></mesh>{mq2ModuleLayout.holes.map(([x,z],n)=><mesh key={n} position={[layout.module[0]+x,7,layout.module[2]-z]} castShadow><cylinderGeometry args={[1.8,1.8,10,24]}/><meshStandardMaterial color={c('mq2-ceramic-stand','#d7d9df')} roughness={.5}/></mesh>)}</>)}
+ {tag('mq2-supply-risers',<><mesh position={[142,5,-76]} receiveShadow castShadow><boxGeometry args={[38,10,48]}/><meshStandardMaterial color={c('mq2-supply-risers','#d9d6d0')} roughness={.8}/></mesh><mesh position={[130,5,-23]} receiveShadow castShadow><boxGeometry args={[16,10,25]}/><meshStandardMaterial color={c('mq2-supply-risers','#d9d6d0')} roughness={.8}/></mesh></>)}
+
  </group>;
 }
 export default memo(Mq2SupportParts);

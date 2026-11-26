@@ -1,7 +1,7 @@
 import {mq2FittingOrder,mq2Wires,type Mq2Mode} from './mq2-wires';
 export const mq2AssemblySteps=[
  {title:'Prepare the workbench',instruction:'Keep both supplies off. Lay out the Uno, breadboard, two 10 kΩ resistors, 220 Ω resistor, red LED, test dial and MQ-2 module.'},
- {title:'Fit the insulating supports',instruction:'Support the Uno above its solder joints. Keep the MQ-2 upright on the open ceramic stand, away from loose material.'},
+ {title:'Fit the insulating supports',instruction:'Support the Uno above its solder joints. Place the supply and adapter on their risers. Keep the MQ-2 upright on the open ceramic stand, away from loose material.'},
  {title:'Place the Uno',instruction:'Lower the controller onto its supports. Find A0, D6, 5 V and GND before attaching any jumpers.'},
  {title:'Place the breadboard',instruction:'Each column has two separate five-hole strips. The centre gap separates the two banks; there are no long power rails.'},
  {title:'Upper 10 kΩ divider resistor',instruction:'Fit the upper resistor between the module-signal strip and the midpoint strip. Its brown, black and orange bands identify 10 kΩ.'},
@@ -23,7 +23,7 @@ export function mq2AssemblyProgress(elapsedMs:number){
 }
 const groups:Readonly<Record<string,{step:number;lift:number}>>={
  'mq2-work-mat':{step:0,lift:0},
- 'mq2-uno-supports':{step:1,lift:24},'mq2-breadboard-support':{step:1,lift:24},'mq2-ceramic-stand':{step:1,lift:24},
+ 'mq2-supply-risers':{step:1,lift:24},'mq2-uno-supports':{step:1,lift:24},'mq2-breadboard-support':{step:1,lift:24},'mq2-ceramic-stand':{step:1,lift:24},
  'mq2-controller-assembly':{step:2,lift:40},'mq2-breadboard':{step:3,lift:30},
  'mq2-divider-upper':{step:4,lift:18},'mq2-divider-lower':{step:5,lift:18},'mq2-led-resistor':{step:6,lift:18},
  'mq2-warning-led':{step:7,lift:18},'mq2-led-anode':{step:7,lift:18},'mq2-led-cathode':{step:7,lift:18},
