@@ -4,7 +4,7 @@ import {CatmullRomCurve3,Group,Mesh,Quaternion,Vector3} from 'three';
 import {SolarMeterSolid as Box} from './SolarMeterParts';
 import {bluetoothCarWires,carCableControlPoints,type CarTerminal,type CarWire} from '../data/bluetooth-car-wiring';
 const violet='#b78be8';
-function End({terminal,selected,color}:{terminal:CarTerminal;selected:boolean;color:string}){
+export function CarWireTerminal({terminal,selected,color}:{terminal:CarTerminal;selected:boolean;color:string}){
  const key=terminal.axis.join(','),rotation=useMemo(()=>new Quaternion().setFromUnitVectors(new Vector3(0,1,0),new Vector3(...terminal.axis)),[key]),plastic=selected?violet:'#222e38',metal=selected?'#c6a1ec':'#c3b99a';
  const inserted=terminal.insertion??.11,base=.12-inserted;
  return <group position={terminal.at} quaternion={rotation}>
@@ -18,7 +18,7 @@ const Cable=memo(function Cable({wire,selected,select,signature}:{wire:CarWire;s
  useFrame((_,dt)=>{elapsed.current+=dt;const progress=reduced.current?1:Math.min(1,elapsed.current/.95);tube.current?.geometry.setDrawRange(0,Math.floor(progress*64)*48);if(group.current)group.current.userData.busy=progress<1;});
  return <group ref={group} name='bluetooth-wire-route' userData={{partId:wire.id,busy:true}} onClick={e=>{e.stopPropagation();select(wire.id);}}>
   <mesh ref={tube} castShadow><tubeGeometry args={[curve,64,wire.motor?.011:.008,8,false]}/><meshStandardMaterial color={selected?violet:wire.color} roughness={.48}/></mesh>
-  {wire.ends.map((terminal,index)=><End key={index} {...{terminal,selected}} color={wire.color}/>)}
+  {wire.ends.map((terminal,index)=><CarWireTerminal key={index} {...{terminal,selected}} color={wire.color}/>)}
  </group>;
 },(a,b)=>a.signature===b.signature&&a.selected===b.selected&&a.select===b.select);
 export const CarCableRoutes=memo(function CarCableRoutes({wires,selected,select}:{wires:CarWire[];selected:string;select:(id:string)=>void}){return <>{wires.map(w=><Cable key={w.id} wire={w} selected={selected===w.id} select={select} signature={w.points.map(p=>p.join(',')).join('|')+';'+w.ends.map(e=>e.insertion??'').join(',')}/>)}</>;});
