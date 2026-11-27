@@ -1,6 +1,8 @@
 import {useCallback,useRef,useState} from 'react';
 import {CarFront,Hand,LockKeyhole} from 'lucide-react';
 import Rover from './RoverArmRoverWorkshop';
+import type{RaRoverSceneApi}from'./RoverArmRoverWorkshopScene';
+import type{RaArmSceneApi}from'./RoverArmWorkshopScene';
 import Arm from './RoverArmWorkshop';
 import {raRoverWorkflowInitial,type RaRoverWorkflow} from '../data/rover-arm-rover-workflow';
 import {raArmWorkflowInitial,type RaArmWorkflow} from '../data/rover-arm-workflow';
@@ -19,11 +21,12 @@ function armLock(s:RaArmWorkflow){
 }
 /** Alternative builds share one Uno. Their evidence is retained separately;
  * changing build unmounts the previous scene and its animation loop. */
-export default function RoverArmCombinedWorkshop(){
+type Props={onRoverStateChange?:(s:RaRoverWorkflow)=>void;onArmStateChange?:(s:RaArmWorkflow)=>void;onRoverSceneReady?:(api:RaRoverSceneApi)=>void;onArmSceneReady?:(api:RaArmSceneApi)=>void};
+export default function RoverArmCombinedWorkshop({onRoverStateChange,onArmStateChange,onRoverSceneReady,onArmSceneReady}:Props){
  const[build,setBuild]=useState<Build>('rover'),[lock,setLock]=useState('');
  const rover=useRef(raRoverWorkflowInitial()),arm=useRef(raArmWorkflowInitial());
- const saveRover=useCallback((s:RaRoverWorkflow)=>{rover.current=s;setLock(roverLock(s));},[]);
- const saveArm=useCallback((s:RaArmWorkflow)=>{arm.current=s;setLock(armLock(s));},[]);
+ const saveRover=useCallback((s:RaRoverWorkflow)=>{rover.current=s;setLock(roverLock(s));onRoverStateChange?.(s);},[onRoverStateChange]);
+ const saveArm=useCallback((s:RaArmWorkflow)=>{arm.current=s;setLock(armLock(s));onArmStateChange?.(s);},[onArmStateChange]);
  function change(next:Build){
   const reason=build==='rover'?roverLock(rover.current):armLock(arm.current);
   if(next===build||reason)return;
@@ -39,6 +42,6 @@ export default function RoverArmCombinedWorkshop(){
    </div>
    {lock&&<p className="ra-build-choice-lock" role="status"><LockKeyhole size={16}/>{lock}</p>}
   </section>
-  {build==='rover'?<Rover key="rover" initialState={rover.current} onStateChange={saveRover}/>:<Arm key="arm" initialState={arm.current} onStateChange={saveArm}/>}
+  {build==='rover'?<Rover key="rover" initialState={rover.current} onStateChange={saveRover} onSceneReady={onRoverSceneReady}/>:<Arm key="arm" initialState={arm.current} onStateChange={saveArm} onSceneReady={onArmSceneReady}/>}
  </div>;
 }
