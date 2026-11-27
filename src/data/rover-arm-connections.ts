@@ -35,7 +35,7 @@ export function raArmConnectionStart(s:RaArmConnections,id:string,assembly:RaArm
 export function raArmConnectionAdvance(s:RaArmConnections,ms:number):RaArmConnections{
  if(!Number.isFinite(ms)||ms<0)throw RangeError('Invalid connection interval');
  if(!s.active)return s;
- const progress=Math.min(1,s.progress+ms/1000);
+ const elapsed=s.progress+ms/1000,progress=elapsed>=1-1e-12?1:elapsed;
  return progress===1?{...s,active:null,progress:0,completed:[...s.completed,s.active]}:{...s,progress};
 }
 export function raArmConnectionView(s:RaArmConnections):{wiring:RaArmWiring;supply:RaArmSupply;unoWithdrawal:number;hostWithdrawal:number}{

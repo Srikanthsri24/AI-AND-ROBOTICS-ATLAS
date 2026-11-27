@@ -32,7 +32,7 @@ export function raArmAssemblyStart(s:RaArmAssembly,id:string,power:{usb:boolean;
  if(fit.horn&&!s.calibrated.some(c=>c.channel===fit.channel))throw new Error('Check unloaded neutral calibration before fitting this horn');
  return{...s,active:id,progress:0};
 }
-export function raArmAssemblyAdvance(s:RaArmAssembly,ms:number):RaArmAssembly{if(!Number.isFinite(ms)||ms<0)throw new RangeError('Invalid fitting interval');if(!s.active)return s;const progress=Math.min(1,s.progress+ms/1000);return progress<1?{...s,progress}:{...s,progress:0,active:null,completed:[...s.completed,s.active]};}
+export function raArmAssemblyAdvance(s:RaArmAssembly,ms:number):RaArmAssembly{if(!Number.isFinite(ms)||ms<0)throw new RangeError('Invalid fitting interval');if(!s.active)return s;const elapsed=s.progress+ms/1000,progress=elapsed>=1-1e-12?1:elapsed;return progress<1?{...s,progress}:{...s,progress:0,active:null,completed:[...s.completed,s.active]};}
 export function raArmAssemblyPart(s:RaArmAssembly,part:string){const fit=raArmMechanicalFits.find(f=>f.part===part);if(!fit)return{visible:false,progress:0};if(s.completed.includes(fit.id))return{visible:true,progress:1};return{visible:s.active===fit.id,progress:s.active===fit.id?s.progress:0};}
 
 /** Record the virtual bench result only while this horn is unloaded. The final

@@ -17,7 +17,7 @@ export function raArmBoardFitStart(s:RaArmBoardAssembly,id:string,arm:RaArmAssem
 }
 export function raArmBoardFitAdvance(s:RaArmBoardAssembly,ms:number):RaArmBoardAssembly{
  if(!Number.isFinite(ms)||ms<0)throw RangeError('Invalid board fitting interval');if(!s.active)return s;
- const progress=Math.min(1,s.progress+ms/1000);return progress===1?{completed:[...s.completed,s.active],active:null,progress:0}:{...s,progress};
+ const elapsed=s.progress+ms/1000,progress=elapsed>=1-1e-12?1:elapsed;return progress===1?{completed:[...s.completed,s.active],active:null,progress:0}:{...s,progress};
 }
 export function raArmBoardFitPart(s:RaArmBoardAssembly,id:string){return{visible:s.completed.includes(id)||s.active===id,progress:s.completed.includes(id)?1:s.active===id?s.progress:0};}
 export function raArmSecuredBoards(s:RaArmBoardAssembly):RaArmBoard[]{return(['uno','pca']as const).filter(board=>raArmBoardFits.filter(f=>f.board===board).every(f=>s.completed.includes(f.id)));}
