@@ -1666,3 +1666,7 @@ The internal rendered prototype now uses powered motor time to prime the nominal
 ### Automatic tap work in progress — receiving hand and runoff verified
 
 The private prototype now probes the actual rendered hand triangles for sonar detection and water landing. Clickable skin regions highlight, labels follow withdrawal, and water follows the palm to its edge before falling independently into the basin. Native Chrome checks cover five insertion positions, nine actual-part targets, moving-surface frame consistency and clear/rearm; 62 targeted tests and strict changed-module TypeScript pass. This preprimed fixture does not replace final filled/priming trial UI, session return and public-route QA, which remain pending. Published count stays **82/150**; the full 211-guide goal remains active.
+
+### Automatic tap work in progress — complete trial control layer
+
+Added serializable trial state for observed empty-water checks, source-off filling, animated calibration-card priming and actual-geometry hand reception. Four control tests and strict TypeScript pass, including three safety-limited priming cycles, mass conservation, frame partition consistency, held-hand timeout, withdrawal/rearm and freezing a restored visible hand until its geometry loads. The new layer is not yet connected to the public lesson UI; native full-flow and release QA remain pending. Count stays **82/150**.
