@@ -8,7 +8,7 @@ import FlatCopperTracks from './FlatCopperTracks';
 import {bluetoothBoardLayouts,bluetoothBoardDimensions,bluetoothBoardScale as scale,bluetoothBoardThickness as thickness,bluetoothBoardTop as top,bluetoothBoardPoint,bluetoothPadPosition,bluetoothHeaderPoints,type BluetoothBoardKind,type BoardPoint} from '../data/bluetooth-board-geometry';
 const font=new URL('./fonts/NotoSans-Regular.ttf',document.baseURI).href,violet='#b78be8';
 function disableGpuSdf(t:{gpuAccelerateSDF:boolean}|null){if(t)t.gpuAccelerateSDF=false;}
-function Print({at,text,size=.025,cpu=false}:{at:BoardPoint;text:string;size?:number;cpu?:boolean}){return <Text ref={cpu?disableGpuSdf:undefined} position={at} rotation={[-Math.PI/2,0,0]} font={font} fontSize={size} color='#ece9da'>{text}</Text>;}
+function Print({at,text,size=.025,cpu=false}:{at:BoardPoint;text:string;size?:number;cpu?:boolean}){return <Text raycast={()=>{}} ref={cpu?disableGpuSdf:undefined} position={at} rotation={[-Math.PI/2,0,0]} font={font} fontSize={size} color='#ece9da'>{text}</Text>;}
 function Track({from,to,r,color}:{from:BoardPoint;to:BoardPoint;r:number;color:string}){const key=from.join(',')+'|'+to.join(','),curve=useMemo(()=>new LineCurve3(new Vector3(...from),new Vector3(...to)),[key]);return <mesh><tubeGeometry args={[curve,1,r,6,false]}/><meshStandardMaterial color={color} roughness={.65}/></mesh>;}
 export const bluetoothBoardParts=[
  ['radio-pcb','Bluefruit circuit board','Insulating PCB supports the radio, regulator, switch and UART header.'],
