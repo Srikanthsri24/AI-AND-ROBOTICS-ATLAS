@@ -19,6 +19,6 @@ export function raArmParts(){return [
  ]),
  {id:'ra-arm-pitch-adapter',label:'Wrist offset adapter',description:'An offset bracket clears the roll servo housing and connects its cradle to the wrist pitch link.'},
  {id:'ra-arm-palm',label:'Gripper palm and slide guides',description:'The palm carries the final servo and two linear rack guides. Opposed rack teeth engage the central pinion.'},
- {id:'ra-arm-pinion',label:'Gripper pinion',description:'This gear turns with channel 5. Its pitch radius converts output rotation to equal and opposite finger translation.'},
- ...['left','right'].map(side=>({id:`ra-arm-${side}-finger`,label:side+' rack and padded finger',description:'The toothed rack slides in the palm guide. The soft inner pad contacts the object; the opposite finger travels in the other direction.'})),
+ {id:'ra-arm-pinion',label:'Gripper pinion',description:'This small gear turns with the channel 5 servo. Its teeth push one rack left and the other right, moving both fingers by the same distance.'},
+ ...['left','right'].map(side=>({id:`ra-arm-${side}-finger`,label:side+' rack and padded finger',description:'The toothed rack slides in its palm guide. A raised support brings the soft pad face to face with the opposite pad, so both fingers can grip the same object.'})),
  ];}
