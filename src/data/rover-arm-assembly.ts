@@ -1,3 +1,4 @@
+import{raArmAnchorFits}from'./rover-arm-anchors';
 import{raArmWorldOutputs,type RaArmWiring}from'./rover-arm-world';
 import type{RaArmRig}from'./rover-arm-rig';
 import{raArmValidateCalibration,type RaArmCalibration}from'./rover-arm-motion';
@@ -6,7 +7,8 @@ import{raArmJoints}from'./rover-arm-mechanics';
  * separate workshop phases; these records must not be treated as a full build. */
 export type RaArmFit={id:string;part:string;title:string;instruction:string;why:string;check:string;channel?:number;horn?:boolean};
 export const raArmMechanicalFits:readonly RaArmFit[]=[
- {id:'anchor-base',part:'ra-arm-baseplate',title:'Secure the base',instruction:'Place the base on a flat fixture. Align all four anchor holes and secure it before adding the arm.',why:'A stable base keeps joint movement from tipping the build.',check:'The base does not rock and all four anchor positions are accessible.'},
+ {id:'anchor-base',part:'ra-arm-baseplate',title:'Position the base plate',instruction:'Place the base on the drilled fixture and align all four anchor holes. The next steps insert the bolts and retain them underneath.',why:'A stable base keeps joint movement from tipping the build.',check:'The base does not rock and all four anchor positions are accessible.'},
+ ...raArmAnchorFits,
  ...raArmJoints.flatMap((j,ch)=>[
  {id:j.id+'-cradle',part:`ra-arm-${j.id}-cradle`,title:j.label+' · seat the cradle',instruction:'Align the cradle with its supporting bracket. Keep its central opening clear for the servo case.',why:'The cradle fixes the case; it must not constrain the rotating output.',check:'The case aperture and mounting bores remain open.'},
  {id:j.id+'-servo',part:`ra-arm-${j.id}-servo`,title:j.label+' · insert the servo',instruction:'Slide the case through the cradle aperture until its mounting ears sit flat. Keep the cable exit clear.',why:'The case stays fixed while the output shaft turns.',check:'Both ears sit flat without bending and the lead exit is not trapped.'},
