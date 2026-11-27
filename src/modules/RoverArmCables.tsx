@@ -1,4 +1,4 @@
-import{useMemo,useRef,useEffect,type ReactNode}from'react';import{useFrame,type ThreeEvent}from'@react-three/fiber';import{CatmullRomCurve3,Curve,Group,Matrix4,Path,Quaternion,Shape,TubeGeometry,Vector3}from'three';import{raArmJoints}from'../data/rover-arm-mechanics';import{raArmCableRoute,raArmLoomLength,raArmCoilRibbonConstraints}from'../data/rover-arm-cable-route';
+import{useMemo,useRef,useEffect,type ReactNode}from'react';import{useFrame,type ThreeEvent}from'@react-three/fiber';import{CatmullRomCurve3,Curve,Group,Matrix4,Path,Quaternion,Shape,TubeGeometry,Vector3}from'three';import{raArmJoints}from'../data/rover-arm-mechanics';import{raArmCableRoute,raArmChannelRise,raArmLoomLength,raArmCoilRibbonConstraints,raArmHeaderRibbonConstraints}from'../data/rover-arm-cable-route';
 import{RaArmRibbonFrame}from'../data/rover-arm-ribbon';
 const rows=[{id:'ground',color:'#604030',startZ:-1,endZ:8.08},{id:'power',color:'#c9483e',startZ:0,endZ:5.54},{id:'signal',color:'#dc9639',startZ:1,endZ:3}]as const;
 const socketOptions={depth:11.5,bevelEnabled:false};
@@ -26,9 +26,9 @@ class LoomWire extends Curve<Vector3>{
 /** Geometry buffers stay allocated while the route is recomputed for changed
  * joint transforms. This prototype requires all six servos and one board in the
  * same millimetre-scale parent; source frames are read from the actual meshes. */
-export default function RoverArmCables({selected,choose,seating}:{selected:string;choose:(id:string)=>void;seating?:readonly(number|null)[]}){const root=useRef<Group>(null),signature=useRef(''),routeKeys=useRef<string[]>([]),shape=useMemo(socket,[]),segments=120,sides=8;
+export default function RoverArmCables({selected,choose,seating}:{selected:string;choose:(id:string)=>void;seating?:readonly(number|null)[]}){const root=useRef<Group>(null),signature=useRef(''),routeKeys=useRef<string[]>([]),shape=useMemo(socket,[]),segments=240,sides=8;
  const initial=useMemo(()=>new CatmullRomCurve3([new Vector3(),new Vector3(1,0,0)]),[]);
- const centres=useMemo(()=>Array.from({length:121},()=>new Vector3()),[]),tangentBuffer=useMemo(()=>new Vector3(),[]),normalBuffer=useMemo(()=>new Vector3(),[]),binormalBuffer=useMemo(()=>new Vector3(),[]),previousTangent=useMemo(()=>new Vector3(),[]),transport=useMemo(()=>new Quaternion(),[]);
+ const centres=useMemo(()=>Array.from({length:241},()=>new Vector3()),[]),tangentBuffer=useMemo(()=>new Vector3(),[]),normalBuffer=useMemo(()=>new Vector3(),[]),binormalBuffer=useMemo(()=>new Vector3(),[]),previousTangent=useMemo(()=>new Vector3(),[]),transport=useMemo(()=>new Quaternion(),[]);
  const geometries=useMemo(()=>Array.from({length:36},()=>new TubeGeometry(initial,segments,.45,sides,false)),[initial]);useEffect(()=>()=>geometries.forEach(g=>g.dispose()),[geometries]);
  useFrame(()=>{const parent=root.current?.parent;if(!parent||!root.current)return;parent.updateWorldMatrix(true,true);const servos=raArmJoints.map(j=>parent.getObjectByName('ra-arm-'+j.id+'-servo')),board=parent.getObjectByName('ra-pca-model');if(servos.some(s=>!s)||!board)return;
  const key=JSON.stringify(seating??[])+'|'+[...servos,board].map(o=>o!.matrixWorld.elements.join(',')).join('|');if(key===signature.current)return;signature.current=key;const updateStart=performance.now();
@@ -36,12 +36,11 @@ export default function RoverArmCables({selected,choose,seating}:{selected:strin
  for(let ch=0;ch<6;ch++){
   if(seating?.[ch]===null){routeKeys.current[ch]='';delete root.current.userData['route'+ch];continue;}const withdrawal=seating?.[ch]??0;
   const routeKey=String(withdrawal)+'|'+[...servos.slice(0,ch+1),board].map(o=>o!.matrixWorld.elements.join(',')).join('|');if(routeKeys.current[ch]===routeKey)continue;routeKeys.current[ch]=routeKey;
-  // Fan channels into separate side lanes. Hinge-axis servos need a deeper
-  // rear lane than the upright base/roll cases to clear their ear fasteners.
-  // The long wrist leads return at their storage height instead of dipping
-  // to the base and rising again, which would consume their bend allowance.
-  const source=servos[ch]!,start=local(source,new Vector3(32.8,-35.4,0)),exit=local(source,new Vector3(45,-35.4,0)),guides=[];for(let j=ch;j>=0;j--){if(j!==ch&&j!==0)continue;guides.push(local(servos[j]!,new Vector3(46+ch*10,j===0?(ch>=4?ch*24-41:-25):j>=1&&j<=3?-55:-25,(j>=1&&j<=3?1:-1)*(18+ch*8))));}
-  const end=local(board,new Vector3(-23+ch*2.54,14.9+withdrawal,5.54)),curve=raArmCableRoute(start,exit,guides,end,ch),ribbon=new RaArmRibbonFrame(curve,local(source,new Vector3(32.8,-35.4,1)).sub(start),local(board,new Vector3(-23+ch*2.54,14.9+withdrawal,4.54)).sub(end),raArmCoilRibbonConstraints(curve)),joint=curve.getPointAt(320/raArmLoomLength),tangent=curve.getTangentAt(320/raArmLoomLength),normal=ribbon.normal(320/raArmLoomLength);root.current.userData['route'+ch]={length:curve.getLength(),start:start.toArray(),end:end.toArray()};
+  // Authored front/rear lanes keep the loose leads separate. The gripper
+  // returns around the front/left; the pitch and roll leads use rear lanes.
+  // Fixed base-frame guides align each input with its storage layer.
+  const source=servos[ch]!,start=local(source,new Vector3(32.8,-35.4,0)),exit=local(source,new Vector3(45,-35.4,0)),guides=[];for(let j=ch;j>=0;j--){if(j!==ch&&j!==0)continue;guides.push(local(servos[j]!,new Vector3(ch===5&&j===0?-80:46+ch*10-(ch===4&&j===4?40:0),j===0?(ch>0?raArmChannelRise(ch)-41:-25):j>=1&&j<=3?(ch===3?-100:ch===2?-80:-55):ch===4?10:-25,(j>=1&&j<=3?18+ch*8:ch===5?40:ch===4?(j===0?-145:-140):ch===3&&j===0?-120:ch===2&&j===0?-110:-18-ch*8))));}
+  const end=local(board,new Vector3(-23+ch*2.54,14.9+withdrawal,5.54)),curve=raArmCableRoute(start,exit,guides,end,ch),ribbon=new RaArmRibbonFrame(curve,local(source,new Vector3(32.8,-35.4,1)).sub(start),local(board,new Vector3(-23+ch*2.54,14.9+withdrawal,4.54)).sub(end),[...raArmCoilRibbonConstraints(curve),...raArmHeaderRibbonConstraints(curve,local(board,new Vector3(-23+ch*2.54,14.9+withdrawal,4.54)).sub(end))]),joint=curve.getPointAt(320/raArmLoomLength),tangent=curve.getTangentAt(320/raArmLoomLength),normal=ribbon.normal(320/raArmLoomLength);root.current.userData['route'+ch]={length:curve.getLength(),start:start.toArray(),end:end.toArray()};
   for(let r=0;r<3;r++){
    const row=rows[r],sourceNormal=local(source,new Vector3(32.8,-35.4,1)).sub(start).normalize(),boardNormal=local(board,new Vector3(-23+ch*2.54,14.9+withdrawal,4.54)).sub(end).normalize();
    for(let half=0;half<2;half++){const offset=row.startZ*2.54,coupled=joint.clone().addScaledVector(tangent,half?12:-12),path=new LoomWire(curve,ribbon,half?(320+12)/raArmLoomLength:0,half?1:(320-12)/raArmLoomLength,offset,half?coupled:start,half?end:coupled,half?tangent:exit.clone().sub(start),half?local(board,new Vector3(-23+ch*2.54,13.9+withdrawal,5.54)).sub(end):tangent,half?normal:sourceNormal,half?boardNormal:normal,half?offset:row.startZ),g=geometries[ch*6+r*2+half],pos=g.attributes.position,norm=g.attributes.normal;

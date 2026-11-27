@@ -1,15 +1,18 @@
 import{CatmullRomCurve3,Vector3}from'three';
-/** Authored extended servo loom: 320 mm servo lead plus 500 mm extension.
- * 820 mm is the complete route centreline, including connector bodies.
- * One broad service loop stores slack rather than stretching conductors. */
-export const raArmLoomLength=820;
+/** Authored extended servo loom: 320 mm servo lead plus 1000 mm extension.
+ * 1320 mm is the complete route centreline, including connector bodies.
+ * Two broad service loops store slack rather than stretching conductors. */
+export const raArmLoomLength=1320;
+export function raArmChannelRise(channel:number){return channel*32+(channel===5?12:0);}
 export function raArmCableRoute(start:Vector3,exit:Vector3,guides:readonly Vector3[],end:Vector3,channel:number){
  if(!Number.isInteger(channel)||channel<0||channel>5)throw new RangeError('Arm cable channel');
+ const rise=raArmChannelRise(channel);
  const make=(radius:number,divisions=128)=>{const points=[start.clone(),exit.clone(),...guides.map(p=>p.clone())];
   // Stagger the slack coils vertically so extension housings do not occupy
   // neighboring channel routes. Wire-pair clearance is audited separately.
-  for(let n=0;n<=24;n++){const a=n/24*Math.PI*2;points.push(new Vector3(-130+Math.cos(a)*radius,7+channel*24+n/24*8,-90+Math.sin(a)*radius));}
-  points.push(new Vector3(-130+radius+18,17+channel*24,-90),new Vector3(-130+radius+18,17+channel*24,-72+radius),new Vector3(end.x,30+channel*2,end.z),end.clone());
+  for(let n=0;n<=24;n++){const a=n/24*Math.PI*4*(channel===5?-1:1);points.push(new Vector3(-130+Math.cos(a)*radius,7+rise+n/24*16,-90+Math.sin(a)*radius));}
+  const level=Math.max(90+channel*16,33+rise);
+  points.push(new Vector3(-30-channel*6,23+rise,-90),new Vector3(-30-channel*6,level,-90),new Vector3(-30-channel*6,level,36+channel*4),new Vector3(-150,level,36+channel*4),new Vector3(-150,level,16+channel*4),new Vector3(end.x,level,16+channel*4),new Vector3(end.x,level-20,16+channel*4),new Vector3(end.x,60,end.z),new Vector3(end.x,45,end.z),end.clone());
   const c=new CatmullRomCurve3(points,false,'centripetal');c.arcLengthDivisions=divisions;return c;
  };
  let low=1,high=110;const shortest=make(low);if(shortest.getLength()>raArmLoomLength)throw new RangeError('Arm channel '+channel+' pose exceeds loom reach');
@@ -20,7 +23,9 @@ export function raArmCableRoute(start:Vector3,exit:Vector3,guides:readonly Vecto
 }
 /** Radial ribbon orientation keeps conductors ordered around the slack coil.
  * Arc fractions are measured from the same rendered centreline curve. */
-export function raArmCoilRibbonConstraints(route:CatmullRomCurve3){const lengths=route.getLengths(4096),total=lengths[lengths.length-1],first=route.points.length-29,last=route.points.length-5;return Array.from({length:last-first+1},(_,n)=>{const at=(first+n)/(route.points.length-1)*4096,lo=Math.min(4095,Math.floor(at)),t=(lengths[lo]+(lengths[lo+1]-lengths[lo])*(at-lo))/total,point=route.getPointAt(t);return{t,normal:new Vector3(point.x+130,0,point.z+90).normalize()};});}
+export function raArmCoilRibbonConstraints(route:CatmullRomCurve3){const lengths=route.getLengths(4096),total=lengths[lengths.length-1],first=route.points.length-35,last=route.points.length-11;return Array.from({length:last-first+1},(_,n)=>{const at=(first+n)/(route.points.length-1)*4096,lo=Math.min(4095,Math.floor(at)),t=(lengths[lo]+(lengths[lo+1]-lengths[lo])*(at-lo))/total,point=route.getPointAt(t);return{t,normal:new Vector3(point.x+130,0,point.z+90).normalize()};});}
+/** Keep ribbon rows parallel to the header throughout the vertical approach. */
+export function raArmHeaderRibbonConstraints(route:CatmullRomCurve3,normal:Vector3){const lengths=route.getLengths(4096),total=lengths[4096];return[5,4,3,2].map(offset=>route.points.length-offset).map(index=>{const at=index/(route.points.length-1)*4096,lo=Math.min(4095,Math.floor(at));return{t:(lengths[lo]+(lengths[lo+1]-lengths[lo])*(at-lo))/total,normal:normal.clone()};});}
 export function raArmCableParts(){return Array.from({length:6},(_,ch)=>[
  {id:`ra-arm-cable-${ch}-ground`,label:`Channel ${ch} · brown ground lead`,description:'Returns servo current through the brown conductor to the driver ground row. It travels with the case, with service-loop slack for the joints.'},
  {id:`ra-arm-cable-${ch}-power`,label:`Channel ${ch} · red servo power lead`,description:'Connects the separate actuator V+ rail to this servo. Do not connect this wire to Uno 5V.'},
