@@ -1,0 +1,11 @@
+import{raRoverSonarMount}from'./rover-arm-rover-range';
+export const raRoverSonarPins=[{id:'ra-rover-sonar-vcc',name:'VCC',x:-3.81,uno:'5 V'},{id:'ra-rover-sonar-trigger',name:'TRIG',x:-1.27,uno:'A0'},{id:'ra-rover-sonar-echo',name:'ECHO',x:1.27,uno:'A1'},{id:'ra-rover-sonar-ground',name:'GND',x:3.81,uno:'GND'}]as const;
+/** Native sensor +Z faces become rover −Z after the 180° mount rotation. */
+export function raRoverSonarNativePoint(p:readonly[number,number,number]):[number,number,number]{return[raRoverSonarMount.pcb[0]-p[0]*.02,raRoverSonarMount.pcb[1]+p[1]*.02,raRoverSonarMount.pcb[2]-p[2]*.02];}
+export const raRoverSonarParts=[
+ {id:'ra-rover-sonar-pcb',label:'Rover range sensor · PCB',description:'The upright HC-SR04-style board supports the two transducers and four electrical contacts. Its four mounting bores stay open for the supporting bracket.'},
+ {id:'ra-rover-sonar-transmitter',label:'Rover range sensor · transmitter',description:'The T transducer sends the burst requested by Uno A0. The course’s ideal centreline range starts at this actual front-face datum; sound is not visible light.'},
+ {id:'ra-rover-sonar-receiver',label:'Rover range sensor · receiver',description:'The R transducer receives the returning sound. The module’s ECHO output reports the timing to Uno A1; the receiver does not directly control motor power.'},
+ {id:'ra-rover-sonar-controller',label:'Rover range sensor · timing electronics',description:'Illustrates burst timing and receiver conditioning. The component packages are teaching detail rather than manufacturer circuit CAD. The software waits up to 10 ms for ECHO.'},
+ ...raRoverSonarPins.map(p=>({id:p.id,label:`Rover range sensor · ${p.name} → Uno ${p.uno}`,description:p.name==='VCC'?'The module receives Uno 5 V through this contact. This is separate from the motor battery.':p.name==='GND'?'Connect this actual pin to the common Uno reference. A valid pulse needs a shared ground.':p.name==='TRIG'?'Uno A0 requests the next measurement with the sketch’s 10 µs HIGH trigger. It samples about every 70 ms outside a turn.':'Uno A1 receives the timed echo. A missing valid echo makes the sketch request zero wheel drive, rather than assuming the path is clear.'})),
+];

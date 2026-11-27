@@ -25,7 +25,7 @@ export function raRoverOutputs(s:RoverArmSession,w:RaRoverWiring):readonly[RaRov
 export type RaRoverPose={x:number;z:number;yaw:number;leftAngle:number;rightAngle:number;leftVelocity:number;rightVelocity:number;casterAngle:number;casterRoll:number};
 /** Chassis-local positions match the selected two-wheel teaching chassis.
  * Pose x/z describes its origin; differential drive is integrated at the axle. */
-export const raRoverWheelRadius=.65,raRoverTrack=3.8,raRoverAxleZ=-.50,raRoverCasterZ=1.60;
+export const raRoverWheelRadius=.65,raRoverTrack=3.8,raRoverAxleZ=-.50,raRoverCasterZ=1.60,raRoverStandLift=.15;
 export const raRoverPoseInitial=():RaRoverPose=>({x:0,z:0,yaw:0,leftAngle:0,rightAngle:0,leftVelocity:0,rightVelocity:0,casterAngle:0,casterRoll:0});
 export function raRoverMotion(p:RaRoverPose,outputs:readonly[RaRoverOutput,RaRoverOutput],ms:number,onStand:boolean):RaRoverPose{
  if(!Number.isFinite(ms)||ms<0)throw RangeError('Invalid rover motion interval');if(!ms||outputs.some(o=>o.direction===null))return p;
@@ -40,10 +40,12 @@ export const raRoverWorldInitial=():RaRoverWorld=>({session:roverArmSessionIniti
 /** Integrate at each published wheel-write timestamp, including the zero-drive
  * acquisition interval at the end of a blind turn. Wiring/environment are held
  * constant during this call. Range geometry is a separate workbench layer. */
-export function raRoverAdvance(previous:RaRoverWorld,w:RaRoverWiring,environment:RaRoverEnvironment,ms:number):RaRoverWorld{
+export type RaRoverRangeProbe=(pose:RaRoverPose,pulseStartUs:number)=>{distanceCm:number;echoPresent:boolean};
+function integrateWrites(pose:RaRoverPose,old:RoverArmSession,next:RoverArmSession,dt:number,w:RaRoverWiring,onStand:boolean){let at=0,request={...old,mode:next.mode,standby:next.standby};for(const write of next.writes)if(write.id>=old.nextWriteId&&write.kind==='wheels'){const when=Math.max(at,Math.min(dt,(write.atUs-old.clockUs-old.remainderUs)/1000));pose=raRoverMotion(pose,raRoverOutputs(request,w),when-at,onStand);at=when;request={...request,wheels:[write.left,write.right]};}return raRoverMotion(pose,raRoverOutputs(request,w),dt-at,onStand);}
+export function raRoverAdvance(previous:RaRoverWorld,w:RaRoverWiring,environment:RaRoverEnvironment,ms:number,probe?:RaRoverRangeProbe):RaRoverWorld{
  if(!Number.isFinite(ms)||ms<0)throw RangeError('Invalid rover interval');
- const input={usb:w.usb,selectorGrounded:w.selectorGrounded,servoDriverAvailable:false,distanceCm:environment.distanceCm,echoPresent:environment.echoPresent&&w.sonarVcc&&w.sonarGround&&w.trig&&w.echo};let session=previous.session,pose=previous.pose,remaining=ms;
- do{const dt=Math.min(1,remaining),old=session;session=roverArmSessionAdvance(old,input,dt);let at=0,request={...old,mode:session.mode,standby:session.standby};for(const write of session.writes)if(write.id>=old.nextWriteId&&write.kind==='wheels'){const when=Math.max(at,Math.min(dt,(write.atUs-old.clockUs-old.remainderUs)/1000));pose=raRoverMotion(pose,raRoverOutputs(request,w),when-at,environment.onStand);at=when;request={...request,wheels:[write.left,write.right]};}pose=raRoverMotion(pose,raRoverOutputs(request,w),dt-at,environment.onStand);remaining=Math.max(0,remaining-dt);}while(remaining>0);
+ const sonar=w.sonarVcc&&w.sonarGround&&w.trig&&w.echo,input={usb:w.usb,selectorGrounded:w.selectorGrounded,servoDriverAvailable:false,distanceCm:environment.distanceCm,echoPresent:environment.echoPresent&&sonar};let session=previous.session,pose=previous.pose,remaining=ms;
+ do{const dt=Math.min(1,remaining),old=session,startPose=pose;session=roverArmSessionAdvance(old,input,dt,probe?(atUs,request)=>{const preview=integrateWrites(startPose,old,request,Math.max(0,(atUs-old.clockUs-old.remainderUs)/1000),w,environment.onStand),reading=probe(preview,atUs);return{...reading,echoPresent:reading.echoPresent&&sonar};}:undefined);pose=integrateWrites(pose,old,session,dt,w,environment.onStand);remaining=Math.max(0,remaining-dt);}while(remaining>0);
  return{session,pose};
 }
 export const raRoverControlLabels=[

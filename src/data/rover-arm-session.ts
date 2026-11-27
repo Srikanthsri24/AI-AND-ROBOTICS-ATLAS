@@ -10,7 +10,7 @@ export type RoverArmSession={
  pending:null|{finishUs:number;echoUs:number};queue:string;rows:readonly string[];
  reads:number;nextWriteId:number;writes:readonly RoverArmWrite[];
 };
-export type RoverArmProbe=(pulseStartUs:number)=>{distanceCm:number;echoPresent:boolean};
+export type RoverArmProbe=(pulseStartUs:number,request:RoverArmSession)=>{distanceCm:number;echoPresent:boolean};
 export const roverArmInput:RoverArmInput={usb:false,selectorGrounded:true,servoDriverAvailable:true,distanceCm:60,echoPresent:true};
 export const roverArmSessionInitial=():RoverArmSession=>({clockUs:0,nextLoopUs:0,remainderUs:0,mode:'off',halted:false,turning:false,changedMs:0,sampledMs:0,wheels:[0,0],standby:false,frequencyHz:0,servoRequests:[null,null,null,null,null,null],homed:false,active:-1,pending:null,queue:'',rows:[],reads:0,nextWriteId:1,writes:[]});
 const millis=(us:number)=>Math.floor(us/1000)>>>0;
@@ -40,7 +40,7 @@ function beginLoop(s:RoverArmSession,input:RoverArmInput,probe?:RoverArmProbe):R
   if(s.turning&&elapsed(now,s.changedMs)<320)return{...s,nextLoopUs:s.clockUs+1000};
   if(s.turning)s=wheels({...s,turning:false},0,0);
   if(elapsed(now,s.sampledMs)<70)return{...s,nextLoopUs:s.clockUs+1000};
-  const reading=probe?.(s.clockUs+12)??input,echoUs=roverArmEcho(reading.distanceCm,reading.echoPresent);
+  const reading=probe?.(s.clockUs+12,s)??input,echoUs=roverArmEcho(reading.distanceCm,reading.echoPresent);
   return{...s,sampledMs:now,pending:{echoUs,finishUs:s.clockUs+12+(echoUs||10000)}};
  }
  if(s.active>=0&&elapsed(now,s.changedMs)>=650){s=servo(s,s.active,1500);s={...s,active:-1};}
