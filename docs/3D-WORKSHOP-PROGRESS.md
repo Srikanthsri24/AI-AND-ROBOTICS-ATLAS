@@ -1650,3 +1650,7 @@ Routed screenshot review found and fixed desktop bench clipping, phone toolbar o
 ### Automatic tap work in progress — all harness routes modeled
 
 The unpublished `directory-27` candidate now has all 15 student harness routes rendered, with fitted contact geometry, protected motor routing, selectable actual parts and connector animations. Hardware/control checks pass, but the full lesson workflow, USB/programming, fluid/hand demo and public-route release checks are still pending. This does **not** increment the published total: **82/150 completed**, with the full 211-guide goal active.
+
+### Automatic tap work in progress — foundation and USB verified
+
+The candidate now includes 24 real-root assembly transitions with why/how/check instructions, a physically seated USB programming connection and tested workflow state for 29 electrical operations. Native actual-part labels, contact mating, power gating and assembly transforms pass, alongside 50 targeted tests. The styled lesson UI, progressive wiring integration, water/hand demo and public release checks remain pending; the workshop remains unpublished and the verified count stays **82/150**.

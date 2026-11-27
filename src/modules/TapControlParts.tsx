@@ -14,7 +14,7 @@ export default function TapControlParts({selected,choose,logicPowered=false,pump
  const mat=(id:string,color:string,metalness=0)=>({color:selected===id?'#c4a2ff':color,metalness,roughness:.4,emissive:selected===id?'#6e3ab5':'#000000',emissiveIntensity:.25});
  const tag=(id:string,node:ReactNode)=><group key={id} name={id} userData={{partId:id}} onClick={(e:ThreeEvent<MouseEvent>)=>{e.stopPropagation();choose(id);}}>{node}</group>;
  return <group name="tap-control-electronics">
-  <group position={[...tapElectronics.uno]} scale={50}><Uno selected={selected} select={choose} powered={logicPowered} partPrefix="tap-" programmingRotations={tapProgrammingRotations}/></group>
+  <group name="tap-uno-assembly" position={[...tapElectronics.uno]} scale={50}><Uno selected={selected} select={choose} powered={logicPowered} partPrefix="tap-" programmingRotations={tapProgrammingRotations}/></group>
   <group position={[...tapDriverPlacement]}><Driver {...{selected,choose}} powered={pumpPowered} signal={driverSignal} release={motorRelease}/></group>
   {tag('tap-breadboard',<group position={[...tapElectronics.breadboard]} rotation={[0,Math.PI/2,0]} scale={50}><Mini selected={selected==='tap-breadboard'} flatBase supplyLabel="" returnLabel=""/></group>)}
   {tag('tap-control-supports',<>{tapControlMounts.map(m=><group key={m.id}><mesh position={[m.x,223.4,m.z]}><cylinderGeometry args={[2.5,2.5,.8,32]}/><meshStandardMaterial {...mat('tap-control-supports','#e8dfc9')}/></mesh><mesh position={[m.x,223.8,m.z]} rotation={[-Math.PI/2,0,0]}><extrudeGeometry args={[post,{depth:6.4,bevelEnabled:false}]}/><meshStandardMaterial {...mat('tap-control-supports','#e8dfc9')}/></mesh></group>)}</>)}

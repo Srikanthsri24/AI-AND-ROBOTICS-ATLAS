@@ -40,6 +40,6 @@ export default function TapSensorParts({selected,choose,levelOffset=0,routedLead
    {[plate.bottom+3.5,tapSonarPlacement[1]].map(y=><mesh key={y} position={[45+x,y,40+z]} rotation={[Math.PI/2,0,0]}><extrudeGeometry args={[washer,{depth:.5,bevelEnabled:false}]}/><meshStandardMaterial {...mat(id,'#adb6c1',.85)}/></mesh>)}
    <mesh position={[45+x,tapSonarPlacement[1]-.5,40+z]} rotation={[Math.PI/2,0,0]}><extrudeGeometry args={[nut,{depth:1.4,bevelEnabled:false}]}/><meshStandardMaterial {...mat(id,'#b5bdc6',.85)}/></mesh>
   </group>;})}
-  <group position={[...tapSonarPlacement]} rotation={[Math.PI/2,0,0]}><Sonar selected={selected} select={choose} partPrefix="tap-"/></group>
+  <group name="tap-sonar-board-assembly" position={[...tapSonarPlacement]} rotation={[Math.PI/2,0,0]}><Sonar selected={selected} select={choose} partPrefix="tap-"/></group>
  </group>;
 }
