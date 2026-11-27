@@ -17,3 +17,15 @@ export const raArmUnoParts=[
  ['leds','Power and activity indicators','ON follows the Uno logic supply; RX and TX indicate USB serial traffic.'],
 ].map(([id,label,description])=>({id:'ra-uno-'+id,label,description}));
 export const raArmSocketParts=layout.headers.map(h=>({id:'ra-uno-socket-'+h.name,label:'Uno socket · '+h.name,description:raArmLogicLinks.find(l=>l.uno===h.name)?.why??(h.name==='A2'?'Leave this open at startup for arm mode. Ground it only for the alternative rover build.':'Unused by the stationary arm recipe. Do not add a wire unless a guide step calls for it.')}));
+/** Shared fixture top is Y=0; boards sit on 2.2 mm insulating spacers. */
+export const raArmBoardMounts=[
+ ...layout.holes.map(h=>({board:'uno' as const,x:raArmUnoAt[0]+Number(h.x)-34.29,z:raArmUnoAt[2]+26.67-Number(h.y)})),
+ ...[-28.5,28.5].flatMap(x=>[-9.7,9.7].map(z=>({board:'pca' as const,x:raArmPcaAt[0]+x,z:raArmPcaAt[2]+z}))),
+];
+export const raArmMountParts=[
+ {id:'ra-electronics-fixture',label:'Insulating assembly fixture',description:'A drilled fixture supports the electronics and leaves the arm’s anchor positions ready. Its top surface is the reference plane for the board spacers.'},
+ ...(['uno','pca']as const).flatMap(board=>[
+ {id:`ra-${board}-spacers`,label:(board==='uno'?'Uno':'PWM driver')+' · insulating spacers',description:'Four hollow nylon spacers support the PCB around its actual mounting holes, leaving the underside solder joints above the fixture.'},
+ {id:`ra-${board}-fasteners`,label:(board==='uno'?'Uno':'PWM driver')+' · mounting fasteners',description:'Low-profile screws and washers pass through the PCB holes and hollow spacers. Nuts below the fixture retain them; keep the small screw heads clear of adjacent sockets.'},
+ ]),
+];
