@@ -1,0 +1,5 @@
+export type RaWirePoint=readonly[number,number,number];
+const sub=(a:RaWirePoint,b:RaWirePoint):RaWirePoint=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]],dot=(a:RaWirePoint,b:RaWirePoint)=>a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
+/** Exact minimum distance between finite line segments, including parallel and
+ * degenerate cases. Used on the actual rendered cable's centreline segments. */
+export function raWireSegmentDistance(p:RaWirePoint,q:RaWirePoint,r:RaWirePoint,s:RaWirePoint):number{const u=sub(q,p),v=sub(s,r),w=sub(p,r),a=dot(u,u),b=dot(u,v),c=dot(v,v),d=dot(u,w),e=dot(v,w),clamp=(n:number)=>Math.min(1,Math.max(0,n)),distance=(x:number,y:number)=>Math.hypot(w[0]+x*u[0]-y*v[0],w[1]+x*u[1]-y*v[1],w[2]+x*u[2]-y*v[2]);let min=Math.min(distance(0,c?clamp(e/c):0),distance(1,c?clamp((e+b)/c):0),distance(a?clamp(-d/a):0,0),distance(a?clamp((b-d)/a):0,1));const denominator=a*c-b*b;if(denominator>Number.EPSILON*a*c*8){const x=(b*e-c*d)/denominator,y=(a*e-b*d)/denominator;if(x>=0&&x<=1&&y>=0&&y<=1)min=Math.min(min,distance(x,y));}return min;}

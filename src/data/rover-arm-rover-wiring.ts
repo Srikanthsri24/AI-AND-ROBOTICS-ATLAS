@@ -1,3 +1,4 @@
+import routes from'./rover-arm-rover-wire-routes.json';
 import{raRoverUnoContact,raRoverDriverContact}from'./rover-arm-rover-layout';
 import{raRoverSonarPins,raRoverSonarNativePoint}from'./rover-arm-rover-sonar';
 import{carTiePoint,carMotorTerminals,carPowerTerminals,carCableExit,type CarTerminal,type CarWire}from'./bluetooth-car-wiring';
@@ -7,7 +8,8 @@ const up:CarPoint=[0,1,0],rear:CarPoint=[0,0,1],u=(pin:string):CarTerminal=>({at
 const wire=(id:string,name:string,from:string,to:string,color:string,step:number,why:string,ends:[CarTerminal,CarTerminal],via:CarPoint[],motor=false):CarWire=>({id:'ra-rover-wire-'+id,name,from,to,color,step,why,ends,points:[carCableExit(ends[0]),...via,carCableExit(ends[1])],motor});
 export const raRoverControlLeads=[['pwma','D5','PWMA','#5096aa'],['pwmb','D6','PWMB','#547fa9'],['ain1','D4','AIN1','#659365'],['ain2','D7','AIN2','#839e50'],['bin1','D8','BIN1','#719a87'],['bin2','D12','BIN2','#589783'],['stby','D2','STBY','#9c73c3']]as const;
 /** Own terminal map and routes: no radio, A2 boot selection, A0/A1 range,
- * D2 standby and D12 right direction. Paths still require assembled clearance QA. */
+ * D2 standby and D12 right direction. Refined static vias keep the terminal
+ * stubs fixed; the native fixture checks hardware and cable-pair clearance. */
 export function raRoverWires():CarWire[]{
  const wires=[
  wire('5v','Uno 5 V → logic distribution','Uno 5 V','Supply column 0 · contact 1','#b84f4c',1,'Feeds the driver logic and range sensor. This tie must never receive the AA motor supply.',[u('5V'),tie(0,0)],[[-1.45,1.64,-.50],[-1.10,1.48,-.26]]),
@@ -24,7 +26,7 @@ export function raRoverWires():CarWire[]{
  wires.push(
  wire('aa-switch','AA positive → switch input','AA holder +','Motor switch input','#b9574d',21,'Switch the motor positive lead independently of USB logic power.',[lug(carPowerTerminals.positive),lug(carPowerTerminals.switchIn)],[[-1.16,1.34,2.12],[-.92,1.31,2.16]],true),
  wire('vm','Switch output → driver VM','Motor switch output','Driver VM','#c05b4d',22,'The nominal four-AA motor supply feeds VM. Do not connect this lead to the 5 V distribution.',[lug(carPowerTerminals.switchOut),d('VM')],[[-.68,1.45,2.16],[.18,1.68,2.05],[.18,1.74,-.05],[.44,1.47,-.69]],true),
- wire('aa-return','AA negative → driver motor return','AA holder −','Driver GND2','#34414a',23,'Motor current returns directly from the bridge to the pack, bypassing the small breadboard ties.',[lug(carPowerTerminals.negative),d('GND2')],[[-.32,1.43,2.10],[1.45,1.65,1.97],[1.44,1.60,-.13]],true));return wires;
+ wire('aa-return','AA negative → driver motor return','AA holder −','Driver GND2','#34414a',23,'Motor current returns directly from the bridge to the pack, bypassing the small breadboard ties.',[lug(carPowerTerminals.negative),d('GND2')],[[-.32,1.43,2.10],[1.45,1.65,1.97],[1.44,1.60,-.13]],true));return wires.map(w=>({...w,points:[w.points[0],...(routes[w.id as keyof typeof routes] as CarPoint[]),w.points[w.points.length-1]]}));
 }
 /** Electrical continuity follows completed physical leads, including upstream
  * five-contact ties. A downstream lead alone does not invent a powered rail. */
