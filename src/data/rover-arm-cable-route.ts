@@ -4,6 +4,10 @@ import{CatmullRomCurve3,Vector3}from'three';
  * Two broad service loops store slack rather than stretching conductors. */
 export const raArmLoomLength=1320;
 export function raArmChannelRise(channel:number){return channel*32+(channel===5?12:0);}
+const caseGuides:readonly(readonly[number,number,number])[]=[[46,-25,-18],[56,-55,26],[66,-80,34],[76,-100,42],[46,10,-140],[96,-25,40]];
+export function raArmCaseGuide(channel:number){if(!Number.isInteger(channel)||channel<0||channel>5)throw new RangeError('Arm cable channel');return new Vector3(...caseGuides[channel]);}
+/** Fixed guide coordinates relative to the stationary base-servo frame. */
+export function raArmStorageGuide(channel:number){if(!Number.isInteger(channel)||channel<0||channel>5)throw new RangeError('Arm cable channel');return new Vector3([46,56,66,76,86,-80][channel],channel?raArmChannelRise(channel)-41:-25,[-18,-26,-110,-120,-145,40][channel]);}
 export function raArmCableRoute(start:Vector3,exit:Vector3,guides:readonly Vector3[],end:Vector3,channel:number){
  if(!Number.isInteger(channel)||channel<0||channel>5)throw new RangeError('Arm cable channel');
  const rise=raArmChannelRise(channel);
