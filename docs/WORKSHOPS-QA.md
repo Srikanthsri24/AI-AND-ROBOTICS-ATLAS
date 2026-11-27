@@ -432,3 +432,13 @@ Seven new tests cover actual face/yaw/nearest-card geometry and finite target he
 The detailed common HC-SR04-style hardware is placed in this rover's own mount frame, with this guide's VCC/GND and A0 TRIG/A1 ECHO labels. Timing component packages remain explicitly illustrative. Optional CPU glyph layout preserves existing defaults. Native checks pass physical PCB dimensions, all four actual contact tips, and the exact transmitting-rim face datum/direction at the initial, translated/rotated and raised/rotated poses. All eight actual surfaces directly select, highlight and show attached labels. Front overview visually reviewed.
 
 This is a private course/model foundation, not a complete rover workshop. Vehicle rendering, sensor support, assembly and wiring animations, course controls, collision/clearance review, full calibration jig, BOM and routed activation remain. Directory-35 stays unregistered and the verified count remains 83/150.
+
+### Rover-arm rover sensor support and chassis seating
+
+Added an authored right-angle support using the actual rendered sensor's four mounting-hole positions. Hollow insulating spacers meet the PCB back and upright face; small board screws/washers pass through the complete stack and separate nuts retain them behind the upright. The foot rests on the chassis with two independent screws, washers and underside nuts. Socket-head recesses have closed floors. Dimensions are authored teaching geometry, not a drilling/manufacturing template.
+
+The reference chassis fixture uses matching additional holes and places its front orientation mark outside the support foot. Common chassis geometry retains its prior default labels and rendering; optional CPU glyphs and label placement serve this guide.
+
+Native checks pass all four PCB/spacer/upright open bore axes and both foot/chassis open bore axes, sleeve seating, washer/head seating, nut retention and shank traversal with mesh numerical tolerance. The upright meets its foot, the foot meets the chassis top, and retaining nuts meet the actual chassis underside/upright back. Rear timing electronics clear the support face, and the front washers/screws clear both actual transducer rims. Every one of the six support/fastener groups directly selects, highlights and shows its surface-attached label. Assembled overview visually reviewed. Targeted strict TypeScript and all 65 related model tests pass.
+
+This is a physical support checkpoint in the private rover branch, not a completed vehicle workshop. Full chassis/electronics placement, assembly and wiring animations, course controls, complete calibration-jig rendering, broader clearance/BOM and routed publication remain pending. Count stays 83/150.
