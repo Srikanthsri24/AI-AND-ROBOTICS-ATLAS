@@ -1,0 +1,5 @@
+import test from'node:test';import assert from'node:assert/strict';import{readFile}from'node:fs/promises';import ts from'typescript';
+const code=ts.transpileModule(await readFile(new URL('../src/data/tap-power.ts',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2022}}).outputText;
+const d=await import('data:text/javascript;base64,'+Buffer.from(code).toString('base64'));
+test('only a fully seated enabled barrel enables the nominal motor supply',()=>{assert.equal(d.tapPowerPresent(false,0),false);assert.equal(d.tapPowerPresent(true,0),true);for(const x of [.1,8,16])assert.equal(d.tapPowerPresent(true,x),false);for(const x of [-1,17,NaN,Infinity])assert.throws(()=>d.tapPowerPresent(true,x),RangeError);});
+test('terminal conductor seats share the rotated adapter coordinate system',()=>{assert.deepEqual(d.tapPowerContact('positive'),[175,227.17,-56.5]);assert.deepEqual(d.tapPowerContact('negative'),[175,227.17,-63.5]);assert.equal(d.tapPowerParts.length,14);assert.equal(new Set(d.tapPowerParts.map(p=>p[0])).size,14);});
