@@ -1690,3 +1690,5 @@ Resolved repeated static graphics captures and hardware geometry churn; moving p
 ### Rover and six-channel arm work in progress — sketch execution verified
 
 Started `directory-35` with a project-specific logical execution layer for its two startup modes. A2 is latched at boot; rover acquisition follows the 70 ms schedule, echo blocking and 320 ms blind turn. Arm startup leaves six channels full-off until h, then one selected channel receives its 650 ms jog and neutral return. Failed driver startup, serial buffering, command ordering, rollover and frame partitions are covered. Eight tests pass, including 9,000 loop-by-loop comparisons against the downloadable C++ sketch under Arduino I/O/time and driver API stubs; strict module TypeScript passes. Actual actuator power/bus delivery, authored mechanics/wiring and the workshop UI are still pending. No new workshop route is published; verified count stays **83/150**.
+
+Servo prototype checkpoint for directory-35: detailed isolated component and fifteen directly clickable part groups verified in native Chrome; strict TypeScript passed. Not registered or counted as a finished workshop.

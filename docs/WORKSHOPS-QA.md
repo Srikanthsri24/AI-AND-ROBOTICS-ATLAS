@@ -234,3 +234,9 @@ Eight tests pass, including 9,000 C++ loop comparisons across rover, arm and una
 The default receive storage follows the AVR core's [64-slot buffer definition](https://raw.githubusercontent.com/arduino/ArduinoCore-avr/master/cores/arduino/HardwareSerial.h) and [one-empty-slot receive rule](https://raw.githubusercontent.com/arduino/ArduinoCore-avr/master/cores/arduino/HardwareSerial_private.h); custom core configurations differ. Inspected the existing local six-channel kit bundle photograph: the mechanical reference uses black metal brackets and six MG996R-labelled servos. The [manufacturer's MG996R reference](https://towerpro.com.tw/product/mg996r/) lists a nominal 40.7 × 19.7 × 42.9 mm body; mounting geometry and the kit's complete assembled dimensions still need confirmation before authoring. The bundle also pictures other kit electronics; the workshop must follow this guide's Uno/PCA9685 recipe.
 
 No workshop UI/model or physical bus layer is claimed complete by this checkpoint. Candidate remains unpublished, **83/150 workshops verified**; the full 211-guide goal stays active.
+
+### Rover-arm servo component checkpoint
+
+Authored an isolated MG996R-style servo component with a nominal 40.7 × 19.7 × 42.9 mm envelope, four open mounting slots, case screws, separate spline/horn/retainer, strain relief, three conductors and a hollow three-contact plug. Mount details are teaching geometry, not verified vendor CAD. Native Chrome checks pass for the envelope, open slots, nominal 320 mm lead centreline and actual-surface selection/highlighting of all fifteen part groups. The clicked horn label follows output rotation. Reviewed the overview render; strict component/fixture TypeScript passes.
+
+This is a component prototype, not a completed arm or workshop. Assembled cable routing, mechanical hierarchy, physical power/bus behavior and routed project QA remain. No public workshop registration changed; 83/150 remain verified.
