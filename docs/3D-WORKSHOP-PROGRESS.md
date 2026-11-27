@@ -1670,3 +1670,7 @@ The private prototype now probes the actual rendered hand triangles for sonar de
 ### Automatic tap work in progress — complete trial control layer
 
 Added serializable trial state for observed empty-water checks, source-off filling, animated calibration-card priming and actual-geometry hand reception. Four control tests and strict TypeScript pass, including three safety-limited priming cycles, mass conservation, frame partition consistency, held-hand timeout, withdrawal/rearm and freezing a restored visible hand until its geometry loads. The new layer is not yet connected to the public lesson UI; native full-flow and release QA remain pending. Count stays **82/150**.
+
+### Automatic tap work in progress — complete experiment screen verified
+
+The workshop screen now exposes empty-check, animated filling, three-cycle calibration-card priming and actual receiving-hand water flow with clear student instructions/readouts. Native desktop/phone checks cover the full experiment from an assembled kit, actual card click/highlight/label, pause/remount, timeout/rearm, source-off transport and reset. All 68 targeted tap tests and strict changed-module TypeScript pass. The five-stage guide alignment and routed production release remain pending, so the completed workshop count stays **82/150**.
