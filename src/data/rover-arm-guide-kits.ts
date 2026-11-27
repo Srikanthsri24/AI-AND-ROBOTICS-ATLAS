@@ -3,7 +3,7 @@ export const raGuideKitReferences=[
  {id:'rover-motor',name:'Rover motor cradles and contact pads',label:'Authored 3D reference · one motor with its two cradle stacks and contact pads; build both sides'},
  {id:'rover-pcb',name:'Rover insulated board mounting sets',label:'Authored 3D reference · six board-mount stacks in fitted positions; PCB/chassis layers omitted'},
  {id:'rover-sensor',name:'Ultrasonic support and fastening kit',label:'Authored 3D reference · sensor in its bracket, four spaced PCB mounts and two retained chassis anchors'},
- {id:'arm-fixture',name:'Arm fixture and board mounting hardware',label:'Authored 3D reference · drilled fixture, four base anchors and eight insulated board-mount positions'},
+ {id:'arm-fixture',name:'Arm fixture and board mounting hardware',label:'Authored 3D reference · drilled fixture, preassembled cable-guide posts/eyes, four base anchors and eight insulated board-mount positions'},
  {id:'extension',name:'Three-wire servo extension leads',label:'Authored 3D reference · three-contact extension coupling detail; use six 1 m leads and preserve brown/red/orange order'},
  {id:'mini',name:'170-point mini breadboard and jumper leads',label:'Authored 3D reference · the actual 170-point board with separate five-contact ties'},
  {id:'arm-supply',name:'Matched 6 V arm actuator supply',label:'Authored 3D reference · the workshop regulated actuator source, shown set to 6.00 V with output off'},

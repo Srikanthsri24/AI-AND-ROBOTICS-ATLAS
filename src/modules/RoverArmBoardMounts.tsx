@@ -1,3 +1,4 @@
+import LoomSupport from'./RoverArmLoomSupport';
 import{raArmBoardFitPart,type RaArmBoardAssembly}from'../data/rover-arm-board-assembly';
 import{raArmAnchors}from'../data/rover-arm-anchors';
 import{memo,useMemo,type ReactNode}from'react';import type{ThreeEvent}from'@react-three/fiber';import{Shape,Path}from'three';import{raArmBoardMounts}from'../data/rover-arm-electronics';
@@ -7,9 +8,10 @@ function ring(outer:number,inner:number){const s=new Shape();s.absarc(0,0,outer,
 function shapes(){const fixture=new Shape();fixture.moveTo(-225,-150);fixture.lineTo(85,-150);fixture.lineTo(85,90);fixture.lineTo(-225,90);fixture.closePath();for(const p of raArmBoardMounts)hole(fixture,p.x,p.z,1.2);for(const a of raArmAnchors)hole(fixture,a.x,a.z,2.2);
  const head=ring(2,0);head.holes=[];const socket=new Path();for(let n=0;n<6;n++){const a=-n*Math.PI/3;n?socket.lineTo(.87*Math.cos(a),.87*Math.sin(a)):socket.moveTo(.87,0);}socket.closePath();head.holes.push(socket);
  const nut=new Shape();for(let n=0;n<6;n++){const a=n*Math.PI/3;n?nut.lineTo(2.3*Math.cos(a),2.3*Math.sin(a)):nut.moveTo(2.3,0);}nut.closePath();hole(nut,0,0,1.05);return{fixture,post:ring(2.3,1.1),washer:ring(2.15,1.1),head,nut};}
-function RoverArmBoardMounts({selected,choose,boards=['uno','pca'],assembly}:{selected:string;choose:(id:string)=>void;boards?:readonly('uno'|'pca')[];assembly?:RaArmBoardAssembly}){const s=useMemo(shapes,[]),mat=(id:string,color:string,metalness=0)=>({color:selected===id?'#c4a2ff':color,metalness,roughness:metalness ? .3 : .62});const tag=(id:string,node:ReactNode,offset=0)=><group position={[0,offset,0]} name={id} userData={{partId:id}} onClick={(e:ThreeEvent<MouseEvent>)=>{e.stopPropagation();choose(id);}}>{node}</group>;
+function RoverArmBoardMounts({selected,choose,boards=['uno','pca'],assembly,organizer=true}:{selected:string;choose:(id:string)=>void;boards?:readonly('uno'|'pca')[];assembly?:RaArmBoardAssembly;organizer?:boolean}){const s=useMemo(shapes,[]),mat=(id:string,color:string,metalness=0)=>({color:selected===id?'#c4a2ff':color,metalness,roughness:metalness ? .3 : .62});const tag=(id:string,node:ReactNode,offset=0)=><group position={[0,offset,0]} name={id} userData={{partId:id}} onClick={(e:ThreeEvent<MouseEvent>)=>{e.stopPropagation();choose(id);}}>{node}</group>;
  const plate=(shape:Shape,id:string,x:number,y:number,z:number,opt:typeof options.post,color:string,metalness=0)=><mesh position={[x,y,z]} rotation={[-Math.PI/2,0,0]}><extrudeGeometry args={[shape,opt]}/><meshStandardMaterial {...mat(id,color,metalness)}/></mesh>;
  return <group name="ra-board-mounts">
+ {organizer&&<LoomSupport {...{selected,choose}}/>}
  {tag('ra-electronics-fixture',plate(s.fixture,'ra-electronics-fixture',0,-6,0,options.fixture,'#c3b89c'))}
  {boards.map(board=>{const posts=`ra-${board}-spacers`,bolts=`ra-${board}-fasteners`,nuts=`ra-${board}-mount-nuts`,fit=(end:string)=>assembly?raArmBoardFitPart(assembly,board+'-'+end):{visible:true,progress:1},travel=(t:number)=>25*(1-t*t*(3-2*t)),post=fit('spacers'),bolt=fit('bolts'),nut=fit('nuts');return <group key={board}>
  {post.visible&&tag(posts,<>{raArmBoardMounts.filter(p=>p.board===board).map((p,i)=><group key={i}>{plate(s.post,posts,p.x,0,p.z,options.post,'#e3decd')}</group>)}</>,travel(post.progress))}
