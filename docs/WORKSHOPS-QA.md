@@ -264,3 +264,11 @@ Added a serializable workshop state composing the real sketch execution model wi
 All twenty controller, driver and world tests pass; strict changed-module TypeScript passes. Tests prove initial full-off, mandatory h, timed jog/neutral delivery, failed startup until real USB restart, loss and restoration of each startup wire, retained jog after a lost neutral transaction, distinct actuator/logic power interruption, no automatic frequency setup after a PCA-only restart, zero-duration idempotence, fractional frame equivalence and JSON save/restore continuation. In particular, sending h after PCA-only power loss can update channel registers while the reset oscillator remains asleep; a full guide restart/configuration is required. The model does not claim motor dynamics, calibrated joint angles, partial I²C writes or analog power behavior.
 
 No public workshop activation yet: detailed board/wiring geometry, motion calibration and assembly/UI integration remain. 83/150 Phase 1 workshops verified; full goal unchanged.
+
+### Rover-arm PCA9685 board geometry prototype
+
+Added an authored blue PWM breakout based on the existing kit image, with a 62.5 × 25.4 × 1.6 mm teaching envelope, four open mounting holes, through-board channel/logic pins and solder fillets, separate yellow signal/red V+/black ground header bodies, controller and 28 leads, logic header, six open address bridges, support components, bulk capacitor and a two-pole supply terminal. Dimensions and routing are not claimed as vendor CAD. The terminal has open entry cavities, separate contact clamps, recessed slotted screws and actual screw openings.
+
+Native Chrome passes the real mesh envelope, four mounting holes, all 48 servo-pin bores and positions, and both open supply entries with reachable metal contacts. All 84 metadata groups can be selected by clicking their actual surfaces, highlighted and labeled; this includes every channel pin, all six logic connections and both supply terminals. No page errors. Overview and terminal renders reviewed; strict component/fixture TypeScript passes.
+
+Private component fixture only: guide-specific arm cable routing, board mounting/connection assembly and full workshop integration/production QA remain. No public registration or completion count change: 83/150 workshops verified.

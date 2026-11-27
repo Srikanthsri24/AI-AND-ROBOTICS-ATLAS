@@ -1,0 +1,18 @@
+/** Authored blue PCA9685 breakout, mm; teaching geometry, not vendor CAD. */
+export const raPcaSize={length:62.5,width:25.4,thickness:1.6,pitch:2.54};
+export const raPcaRows=[{id:'signal',label:'Signal',z:3,color:'#e6c857',description:'A separate PWM output for this channel; connect the orange servo conductor.'},{id:'power',label:'V+',z:5.54,color:'#c34542',description:'The external actuator supply rail; connect the red servo conductor. This is not logic VCC.'},{id:'ground',label:'GND',z:8.08,color:'#252c35',description:'The shared actuator return; connect the brown servo conductor.'}] as const;
+export const raPcaLogic=[['oe','OE','Output enable, active low. The teaching board holds this low unless the output-disable control is used.'],['scl','SCL','Clock from Uno A5. Both clock and data are required for a new command.'],['sda','SDA','Data from Uno A4. The board retains its previous pulse registers when this link is disconnected.'],['vcc','VCC','Logic supply from Uno 5V. This powers the chip, not the servo motors.'],['vplus','V+','An alternative connection to the external actuator rail, separate from VCC.'],['gnd','GND','Reference from Uno ground; shared with the external servo return.']] as const;
+export function raPcaPin(channel:number,row:typeof raPcaRows[number]['id']){if(!Number.isInteger(channel)||channel<0||channel>15)throw new RangeError('PCA channel');return[-23+channel*2.54,6,raPcaRows.find(r=>r.id===row)!.z] as const;}
+export function raPcaParts(){return[
+ {id:'ra-pca-board',label:'Blue driver PCB',description:'Insulated circuit board with four open mounting holes. Keep metal supports clear of the solder joints.'},
+ {id:'ra-pca-chip',label:'PCA9685 controller',description:'Receives I²C commands and generates independent PWM outputs. Channels share a configured frequency, while their pulse widths differ.'},
+ {id:'ra-pca-chip-leads',label:'Controller soldered leads',description:'These soldered IC connections join the controller to the board traces; they are not jumper sockets.'},
+ {id:'ra-pca-capacitor',label:'Actuator rail capacitor',description:'A polarized capacitor across the external actuator supply helps with local transients; it does not replace a correctly sized supply.'},
+ {id:'ra-pca-terminal',label:'External servo supply terminal',description:'Seat the matched external supply positive and return in their separate clamps. Never route servo motor current through Uno 5V.'},
+ ...['positive','return'].map((id,i)=>({id:'ra-pca-terminal-'+id,label:'Supply terminal · '+(i?'GND return':'V+ positive'),description:i?'Clamps the external supply return, shared with the servo ground row.':'Clamps the external supply positive, feeding the red V+ header row.'})),
+ ...raPcaLogic.map(([id,label,description])=>({id:'ra-pca-logic-'+id,label:'Logic header · '+label,description})),
+ ...Array.from({length:16},(_,ch)=>({id:'ra-pca-header-'+ch,label:'Channel '+ch+' header body',description:ch<6?'Holds the three keyed-by-colour connection positions for arm channel '+ch+'. Align brown GND, red V+ and orange signal.':'Unused expansion channel in this six-servo guide; leave it unconnected.'})),
+ ...Array.from({length:16},(_,ch)=>raPcaRows.map(r=>({id:`ra-pca-ch-${ch}-${r.id}`,label:`Channel ${ch} · ${r.label}`,description:r.description}))).flat(),
+ ...Array.from({length:6},(_,i)=>({id:'ra-pca-address-'+i,label:'Address link A'+i,description:'An open address-select solder bridge. All six remain open for the guide’s default 0x40 address.'})),
+ {id:'ra-pca-passives',label:'Logic support components',description:'Small soldered resistors and bypass capacitors support the logic circuit. They are not servo wiring points.'},
+ ];}
