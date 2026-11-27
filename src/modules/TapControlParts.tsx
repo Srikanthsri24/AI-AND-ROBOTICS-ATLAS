@@ -6,16 +6,16 @@ import Mini from './BluetoothMiniBreadboard';
 import Driver from './TapMotorDriver';
 import {tapDriverPlacement,tapDriverPad} from '../data/tap-driver';
 import {tapElectronics,tapControlMounts,tapProgrammingRotations} from '../data/tap-electronics';
-type Props={selected:string;choose:(id:string)=>void;logicPowered?:boolean;pumpPowered?:boolean;driverSignal?:boolean;referenceHeaderFit?:number};
+type Props={selected:string;choose:(id:string)=>void;logicPowered?:boolean;pumpPowered?:boolean;driverSignal?:boolean;referenceHeaderFit?:number;motorRelease?:Readonly<Record<string,number>>};
 function ring(outer:number,inner:number){const s=new Shape();s.absarc(0,0,outer,0,Math.PI*2,false);const h=new Path();h.absarc(0,0,inner,0,Math.PI*2,true);s.holes.push(h);return s;}
-export default function TapControlParts({selected,choose,logicPowered=false,pumpPowered=false,driverSignal=false,referenceHeaderFit=1}:Props){
+export default function TapControlParts({selected,choose,logicPowered=false,pumpPowered=false,driverSignal=false,referenceHeaderFit=1,motorRelease={}}:Props){
  const post=useMemo(()=>ring(2.5,1.05),[]),washer=useMemo(()=>ring(2.1,.95),[]);
  const header=useMemo(()=>{const s=new Shape();s.moveTo(-1.27,-1.27);s.lineTo(1.27,-1.27);s.lineTo(1.27,1.27);s.lineTo(-1.27,1.27);s.closePath();const h=new Path();h.moveTo(-.35,-.35);h.lineTo(-.35,.35);h.lineTo(.35,.35);h.lineTo(.35,-.35);h.closePath();s.holes.push(h);return s;},[]),solder=useMemo(()=>{const s=new Shape();s.absarc(0,0,.9,0,Math.PI*2,false);const h=new Path();h.moveTo(-.32,-.32);h.lineTo(-.32,.32);h.lineTo(.32,.32);h.lineTo(.32,-.32);h.closePath();s.holes.push(h);return s;},[]),reference=tapDriverPad('JP3','1').point;
  const mat=(id:string,color:string,metalness=0)=>({color:selected===id?'#c4a2ff':color,metalness,roughness:.4,emissive:selected===id?'#6e3ab5':'#000000',emissiveIntensity:.25});
  const tag=(id:string,node:ReactNode)=><group key={id} name={id} userData={{partId:id}} onClick={(e:ThreeEvent<MouseEvent>)=>{e.stopPropagation();choose(id);}}>{node}</group>;
  return <group name="tap-control-electronics">
   <group position={[...tapElectronics.uno]} scale={50}><Uno selected={selected} select={choose} powered={logicPowered} partPrefix="tap-" programmingRotations={tapProgrammingRotations}/></group>
-  <group position={[...tapDriverPlacement]}><Driver {...{selected,choose}} powered={pumpPowered} signal={driverSignal}/></group>
+  <group position={[...tapDriverPlacement]}><Driver {...{selected,choose}} powered={pumpPowered} signal={driverSignal} release={motorRelease}/></group>
   {tag('tap-breadboard',<group position={[...tapElectronics.breadboard]} rotation={[0,Math.PI/2,0]} scale={50}><Mini selected={selected==='tap-breadboard'} flatBase supplyLabel="" returnLabel=""/></group>)}
   {tag('tap-control-supports',<>{tapControlMounts.map(m=><group key={m.id}><mesh position={[m.x,223.4,m.z]}><cylinderGeometry args={[2.5,2.5,.8,32]}/><meshStandardMaterial {...mat('tap-control-supports','#e8dfc9')}/></mesh><mesh position={[m.x,223.8,m.z]} rotation={[-Math.PI/2,0,0]}><extrudeGeometry args={[post,{depth:6.4,bevelEnabled:false}]}/><meshStandardMaterial {...mat('tap-control-supports','#e8dfc9')}/></mesh></group>)}</>)}
   {tag('tap-driver-reference-header',<group position={[reference[0],231.8+(1-referenceHeaderFit)*12,reference[2]]}><mesh rotation={[-Math.PI/2,0,0]}><extrudeGeometry args={[header,{depth:2.54,bevelEnabled:false}]}/><meshStandardMaterial {...mat('tap-driver-reference-header','#262d38')}/></mesh><mesh name="tap-driver-reference-pin" position={[0,2.1,0]}><boxGeometry args={[.64,11.2,.64]}/><meshStandardMaterial {...mat('tap-driver-reference-header','#bba77a',.8)}/></mesh>{referenceHeaderFit===1&&<mesh position={[0,-2,0]} rotation={[-Math.PI/2,0,0]}><extrudeGeometry args={[solder,{depth:.4,bevelEnabled:false}]}/><meshStandardMaterial {...mat('tap-driver-reference-header','#bac2c8',.8)}/></mesh>}</group>)}

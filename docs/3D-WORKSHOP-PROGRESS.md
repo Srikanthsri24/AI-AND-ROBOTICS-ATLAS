@@ -1646,3 +1646,7 @@ Native **built-app** desktop and phone checks pass all six outer stages, eight l
 Routed screenshot review found and fixed desktop bench clipping, phone toolbar overlap and narrow-row overflow. The final built-app checks require the camera toolbar and whole canvas below the application header, no horizontal overflow, a following real-part label and inspector scroll reset at 1200/390 px. Overview framing now bounds only visible fitted geometry, so early assembly pieces stay centred. Native final page checks report no errors. Local development remains on 5190; production QA preview 5191 is stopped after verification. No AWS deployment.
 
 **Verified rolling total: 82 / 150. Phase 1 remaining: 68. Phase 2 remaining: 61.** Next: Arduino Automatic Tap System (`directory-27`). The full 211-guide goal remains active.
+
+### Automatic tap work in progress — all harness routes modeled
+
+The unpublished `directory-27` candidate now has all 15 student harness routes rendered, with fitted contact geometry, protected motor routing, selectable actual parts and connector animations. Hardware/control checks pass, but the full lesson workflow, USB/programming, fluid/hand demo and public-route release checks are still pending. This does **not** increment the published total: **82/150 completed**, with the full 211-guide goal active.

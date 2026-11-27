@@ -15,8 +15,8 @@ const sonar=(pin:string,node:string):TapHarnessPort=>({node,label:'HC-SR04 '+({v
 const level=(name:'vcc'|'ground'|'out'):TapHarnessPort=>({node:'level-plug-'+name,label:'SEN0485 factory connector '+({vcc:'VCC',ground:'GND',out:'OUT'}[name]),point:tapLevelPlugContact(name),kind:'socket',axis:[0,0,1]});
 const stemma=(name:'ground'|'vin'|'signal'):TapHarnessPort=>({node:'stemma-'+name,label:'STEMMA factory '+({ground:'black GND',vin:'red VIN',signal:'white SIG'}[name])+' lead',point:[189,233.4,-66+({ground:2,vin:0,signal:-2}[name])],kind:'factory',axis:[-1,0,0],fixed:true});
 const supply=(polarity:'positive'|'negative'):TapHarnessPort=>({node:'supply-'+polarity,label:'Pump supply '+(polarity==='positive'?'+5 V':'negative'),point:tapPowerHeaderContact(polarity),kind:'header-clamp',axis:[1,0,0]});
-const output=(positive:boolean):TapHarnessPort=>({node:positive?'driver-out+':'driver-out-',label:positive?'Driver OUT+':'Driver OUT−',point:[215.9,234.4,-66+(positive?2:-2)],kind:'clamp',axis:[1,0,0]});
-const motor=(positive:boolean):TapHarnessPort=>({node:positive?'motor+':'motor-',label:positive?'Pump positive terminal':'Pump negative terminal',point:[tapPlumbing.pump[0]+(positive?7:-7),tapPlumbing.pump[1],tapPlumbing.pump[2]-59],kind:'motor-lug',axis:back});
+const output=(positive:boolean):TapHarnessPort=>({node:positive?'driver-out+':'driver-out-',label:positive?'Driver OUT+':'Driver OUT−',point:[215.9,235,-66+(positive?2:-2)],kind:'clamp',axis:[1,0,0]});
+const motor=(positive:boolean):TapHarnessPort=>({node:positive?'motor+':'motor-',label:positive?'Pump positive terminal':'Pump negative terminal',point:[tapPlumbing.pump[0]+(positive?7:-7),tapPlumbing.pump[1],tapPlumbing.pump[2]-62.8],kind:'motor-lug',axis:back});
 const referencePad=tapDriverPad('JP3','1');
 export const tapReferenceHeaderPoint:TapPoint=[referencePad.point[0],239.5,referencePad.point[2]];
 const wires:TapHarnessWire[]=[];

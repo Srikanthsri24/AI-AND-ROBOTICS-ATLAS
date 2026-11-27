@@ -5,10 +5,10 @@ import type{ThreeEvent}from'@react-three/fiber';
 import Tracks from './FlatCopperTracks';
 import layout from '../data/tap-mosfet-layout.json';
 const font=new URL('./fonts/NotoSans-Regular.ttf',document.baseURI).href;
-type Props={selected:string;choose:(id:string)=>void;powered?:boolean;signal?:boolean};
+type Props={selected:string;choose:(id:string)=>void;powered?:boolean;signal?:boolean;release?:Readonly<Record<string,number>>};
 /** Reference PCB positions are CC BY-SA 3.0 Adafruit; housing heights and metal
  * clamp interiors are authored explanatory geometry, not factory STEP data. */
-export default function TapMotorDriver({selected,choose,powered=false,signal=false}:Props){
+export default function TapMotorDriver({selected,choose,powered=false,signal=false,release={}}:Props){
  const shape=useMemo(()=>{const s=new Shape(),w=25.4,h=17.78,r=2.54;s.moveTo(r,0);s.lineTo(w-r,0);s.quadraticCurveTo(w,0,w,r);s.lineTo(w,h-r);s.quadraticCurveTo(w,h,w-r,h);s.lineTo(r,h);s.quadraticCurveTo(0,h,0,h-r);s.lineTo(0,r);s.quadraticCurveTo(0,0,r,0);s.closePath();for(const p of layout.pads.filter(p=>p.drill>0)){const hole=new Path();hole.absarc(p.x,p.y,p.drill/2,0,Math.PI*2,true);s.holes.push(hole);}return s;},[]);
  const face=useMemo(()=>{const s=new Shape();s.moveTo(-3.95,1.6);s.lineTo(3.95,1.6);s.lineTo(3.95,7);s.lineTo(-3.95,7);s.closePath();for(const z of[-2,2]){const h=new Path();h.absarc(z,3.4,1.05,0,Math.PI*2,true);s.holes.push(h);}return s;},[]);
  const c=(id:string,color:string)=>selected===id?'#c4a2ff':color,mat=(id:string,color:string,metalness=0)=>({color:c(id,color),metalness,roughness:.36,emissive:selected===id?'#6e3ab5':'#000000',emissiveIntensity:.25});
@@ -26,7 +26,7 @@ export default function TapMotorDriver({selected,choose,powered=false,signal=fal
  {tag('tap-driver-socket',<>{box('tap-driver-socket',[-8.3,1.05,0],[7.5,.5,10],'#e6dfc5')}{box('tap-driver-socket',[-4.95,3.95,0],[.8,5.3,10],'#e6dfc5')}{[-1,1].map(side=><group key={side}>{box('tap-driver-socket',[-8.3,3.95,side*4.6],[7.5,5.3,.8],'#e6dfc5')}{box('tap-driver-socket',[-9.2,6.1,side*3.8],[5.7,.7,1.4],'#e6dfc5')}</group>)}</>)}
  {(['ground','vin','signal'] as const).map((name,i)=>{const id='tap-driver-'+name,z=2-i*2;return tag(id,<>{box(id,[-8.1,2.4,z],[5.4,.4,.6],'#b8ad82',.8)}{box(id,[-5.5,1.7,z],[.4,1.4,.6],'#b8ad82',.8)}{box(id,[-5.36,1.0,z],[4.6,.3,1],'#bbc2c8',.8)}</>);})}
  {tag('tap-driver-terminal-block',<>{box('tap-driver-terminal-block',[5.7,1.2,0],[11.5,.8,7.9],'#e5dfca')}{box('tap-driver-terminal-block',[.25,4.2,0],[.7,5.2,7.9],'#e5dfca')}{[-1,1].map(side=><group key={side}>{box('tap-driver-terminal-block',[5.7,4.2,side*3.7],[11.5,5.2,.5],'#e5dfca')}</group>)}{box('tap-driver-terminal-block',[5.7,4.2,0],[11.5,5.2,.5],'#e5dfca')}<mesh position={[10.4,0,0]} rotation={[0,Math.PI/2,0]}><extrudeGeometry args={[face,{depth:1.3,bevelEnabled:false}]}/><meshStandardMaterial {...mat('tap-driver-terminal-block','#e5dfca')}/></mesh>{box('tap-driver-terminal-block',[9.8,6.65,0],[3.8,.7,7.9],'#e5dfca')}</>)}
- {(['positive','negative'] as const).map((name,i)=>{const id='tap-driver-'+name,z=i?-2:2;return <group key={id}>{tag(id,<>{box(id,[8.9,3.4,z],[1.8,.6,1.5],'#b6a56f',.8)}{box(id,[4.65,1.1,z],[8.5,.4,1.4],'#b7bec2',.8)}{box(id,[8.8,2.4,z],[.4,2.6,1.6],'#b7bec2',.8)}{box(id,[.4,1.02,z],[3.5,.3,2],'#c1c6c8',.8)}</>)}{tag(id+'-lever',box(id+'-lever',[3.3,6.45,z],[5,.8,2.8],'#eee7d4'))}</group>;})}
+ {(['positive','negative'] as const).map((name,i)=>{const id='tap-driver-'+name,z=i?-2:2,open=release[name]??0;return <group key={id}>{tag(id,<>{box(id,[8.9,3.4,z],[1.8,.6,1.5],'#b6a56f',.8)}{box(id,[4.65,1.1,z],[8.5,.4,1.4],'#b7bec2',.8)}{box(id,[8.8,2.4,z],[.4,2.6,1.6],'#b7bec2',.8)}{box(id,[.4,1.02,z],[3.5,.3,2],'#c1c6c8',.8)}</>)}{tag(id+'-spring',box(id+'-spring',[8.9,4.45+open,z],[1.8,.3,1.4],'#b6a56f',.8))}{tag(id+'-lever',box(id+'-lever',[3.3,6.45-.5*open,z],[5,.8,2.8],'#eee7d4'))}</group>;})}
  {tag('tap-driver-breakout',<>{layout.pads.filter(p=>p.element==='JP3').map(p=><mesh key={p.name} position={at(p.x,p.y,.83)} rotation={[-Math.PI/2,0,0]}><ringGeometry args={[.5,.9,24]}/><meshStandardMaterial {...mat('tap-driver-breakout','#b49d66',.75)}/></mesh>)}</>)}
  </group>;
 }

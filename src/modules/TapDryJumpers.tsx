@@ -4,10 +4,10 @@ import type{ThreeEvent}from'@react-three/fiber';
 import{tapDryWires,tapDryPose}from'../data/tap-dry-jumpers';
 import type{TapHarnessWire}from'../data/tap-harness';
 import type{TapPoint}from'../data/tap-plumbing';
-function curve(points:readonly TapPoint[]){const p=points.map(p=>new Vector3(...p)),path=new CurvePath<Vector3>();let last=p[0];for(let i=1;i<p.length-1;i++){const r=Math.min(3,p[i].distanceTo(p[i-1])/3,p[i].distanceTo(p[i+1])/3),a=p[i].clone().addScaledVector(p[i-1].clone().sub(p[i]).normalize(),r),b=p[i].clone().addScaledVector(p[i+1].clone().sub(p[i]).normalize(),r);path.add(new LineCurve3(last,a));path.add(new QuadraticBezierCurve3(a,p[i],b));last=b;}path.add(new LineCurve3(last,p.at(-1)!));return path;}
+export function tapJumperCurve(points:readonly TapPoint[]){const p=points.map(p=>new Vector3(...p)),path=new CurvePath<Vector3>();let last=p[0];for(let i=1;i<p.length-1;i++){const r=Math.min(3,p[i].distanceTo(p[i-1])/3,p[i].distanceTo(p[i+1])/3),a=p[i].clone().addScaledVector(p[i-1].clone().sub(p[i]).normalize(),r),b=p[i].clone().addScaledVector(p[i+1].clone().sub(p[i]).normalize(),r);path.add(new LineCurve3(last,a));path.add(new QuadraticBezierCurve3(a,p[i],b));last=b;}path.add(new LineCurve3(last,p.at(-1)!));return path;}
 type Props={selected:string;choose:(id:string)=>void;fitting?:Readonly<Record<string,readonly[number,number]>>};
 export function TapJumper({wire:w,pose,selected,choose}:{wire:TapHarnessWire;pose:{source:TapPoint;destination:TapPoint;points:readonly TapPoint[]};selected:string;choose:(id:string)=>void}){
- const id=w.id,path=useMemo(()=>curve(pose.points),[pose]);
+ const id=w.id,path=useMemo(()=>tapJumperCurve(pose.points),[pose]);
  const socket=useMemo(()=>{const s=new Shape();s.moveTo(-1.05,-1.05);s.lineTo(1.05,-1.05);s.lineTo(1.05,1.05);s.lineTo(-1.05,1.05);s.closePath();const h=new Path();h.moveTo(-.42,-.42);h.lineTo(-.42,.42);h.lineTo(.42,.42);h.lineTo(.42,-.42);h.closePath();s.holes.push(h);return s;},[]);
  const mat=(owner:string,color:string,metalness=0)=>({color:selected===id||selected===owner?'#c4a2ff':color,metalness,roughness:.4,emissive:selected===id||selected===owner?'#6e3ab5':'#000000',emissiveIntensity:.25});
  const event=(owner:string)=>(e:ThreeEvent<MouseEvent>)=>{e.stopPropagation();choose(owner);};
