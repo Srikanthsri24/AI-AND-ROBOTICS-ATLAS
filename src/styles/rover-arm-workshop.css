@@ -5,3 +5,7 @@
 .ra-workshop .ra-workshop-heading{position:static;inset:auto;height:auto;min-height:0;max-height:none;z-index:auto}.ra-workshop .ra-workshop-footer{position:static;inset:auto;height:auto;min-height:0;margin:0;flex-direction:row}.ra-workshop .ra-button-powered:hover{background:#dcefe4}
 
 .ra-course-select{display:grid;gap:8px;margin:14px 0;color:var(--ra-ink);font-size:12px;font-weight:700}.ra-course-select select{width:100%;min-width:0;max-width:100%;border:1px solid var(--ra-line);border-radius:10px;padding:11px 8px;background:#faf9ff;color:var(--ra-ink);font:inherit}.ra-course-select select:focus-visible{outline:3px solid #cbb8ff;outline-offset:2px}
+
+.ra-guide-part-view{background:#f4f3fa;border-radius:12px;overflow:hidden}.ra-guide-part-description{padding:14px 16px;border-top:1px solid #dedbed;color:#29304d;font-size:12px;line-height:1.65}.ra-guide-part-description p{margin:6px 0 0;color:#5a6380}
+
+.ra-guide-part-view{position:relative}.ra-guide-part-loading{position:absolute;z-index:2;top:12px;left:12px;padding:7px 10px;border-radius:8px;background:#ffffffed;color:#61517f;font-size:11px}

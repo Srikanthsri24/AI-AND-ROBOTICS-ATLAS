@@ -532,3 +532,7 @@
 :is(.gp-clay-results,.gp-mulch-log) :is(th,td) { padding:.55rem .4rem; border-bottom:1px solid #d9e0ed; text-align:left; }
 
 .gp-vane-cardinal { display:block; padding:2px 4px; color:#fff7e2; background:#364955; border-radius:3px; font-size:.7rem; font-weight:700; pointer-events:none; }
+
+.gp-rover-arm-guide .gp-parts article{min-width:0;grid-template-rows:auto auto 1fr auto;align-content:stretch}.gp-rover-arm-guide .gp-preview-heading{flex-direction:column;align-items:flex-start;gap:7px;min-width:0;margin-bottom:0}.gp-rover-arm-guide .gp-preview-heading h3{width:100%;min-width:0;line-height:1.4}.gp-rover-arm-guide .gp-preview-heading span{max-width:100%;white-space:normal;padding:5px 8px;border-radius:8px;background:#eee8fa;color:#5b3b87;font-size:12px;font-weight:700;line-height:1.4}.gp-rover-arm-guide .gp-part-photos figcaption{overflow-wrap:anywhere}
+
+.gp-rover-arm-guide .gp-table caption,.gp-rover-arm-guide .gp-table th,.gp-rover-arm-guide .gp-table td{color:#28344e}

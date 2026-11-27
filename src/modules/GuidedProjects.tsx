@@ -269,6 +269,7 @@ const LidarDroneDemo = lazy(() => import('./ProjectDemo').then(module => ({defau
 const SolarSweeperDemo = lazy(() => import('./ProjectDemo').then(module => ({default:module.SolarSweeperDemo})));
 const BeaconRoverDemo = lazy(() => import('./ProjectDemo').then(module => ({default:module.BeaconRoverDemo})));
 const BluetoothCarDemo = lazy(() => import('./ProjectDemo').then(module => ({default:module.BluetoothCarDemo})));
+const RoverArmGuidePartView=lazy(()=>import('./RoverArmGuidePartView'));
 const ProjectPartView = lazy(() => import('./ProjectDemo').then(module => ({ default: module.ProjectPartView })));
 const RoverWorkshop = lazy(() => import('./RoverWorkshop'));
 const TendonHandWorkshop = lazy(() => import('./TendonHandWorkshop'));
@@ -3167,7 +3168,7 @@ function Build({project, stage, art, expansion}: {project: Project;stage: number
   const python = program?.filename.endsWith('.py');
   const readyCount = checked.length;
   const demoMarkers = project.parts.map(([name],index)=>({name,index}));
-  return <div className="gp-page gp-build">
+  return <div className={'gp-page gp-build'+(project.id==='directory-35'?' gp-rover-arm-guide':'')}>
     <a className="gp-back" href={root}><ArrowLeft size={16}/> All projects</a>
     <header className="gp-title"><h1>{project.title}</h1><p>{project.outcome}</p></header>
     <nav className="gp-stages" aria-label="Project stages">{buildStages.map((name,i)=>
@@ -3380,7 +3381,7 @@ function Build({project, stage, art, expansion}: {project: Project;stage: number
             <figure className="gp-assembly-model">
               <figcaption><strong>3D part view</strong><span>Drag to rotate · Scroll to zoom</span></figcaption>
               <Suspense fallback={<p role="status">Loading the 3D part…</p>}>
-                <>{isAutomaticTap?<TapGuidePartView index={currentPart}/>:<ProjectPartView name={partName}/>}</>
+                <>{isAutomaticTap?<TapGuidePartView index={currentPart}/>:project.id==='directory-35'?<RoverArmGuidePartView index={currentPart}/>:<ProjectPartView name={partName}/>}</>
               </Suspense>
             </figure>
             <div className="gp-part-preview">

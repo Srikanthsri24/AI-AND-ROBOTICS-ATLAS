@@ -1,3 +1,4 @@
+import{raGuideKitPhotos}from'./rover-arm-guide-kits';
 type Photo = { path: string; label: string; product?: number; source?: string; reference?:boolean };
 const catalog = (file: string, label: string, product: number): Photo => ({
   path: `./images/project-parts/${file}.jpg`, label, product,
@@ -6,6 +7,8 @@ const atlas = (id: string, label: string, product: number): Photo => ({
   path: `./images/${id.startsWith('sensors') ? 'sensors' : 'components'}/${id}.webp`, label, product,
 });
 const photos: Record<string, Photo[]> = {
+  ...raGuideKitPhotos,
+  'Computer with USB and Arduino IDE': [{path:'./images/project-parts/laptop-voice-console.jpg',label:'USB computer reference · Allan Kibe, CC BY-SA 4.0',source:'https://commons.wikimedia.org/wiki/File:Dell_Laptop.jpg'}],
   'Recirculating basin and dry mounting kit':[{path:'./images/project-parts/tap-mounting-kit.png',label:'Authored 3D reference · basin, thin-wall reservoir, return, dry frame and insulated mounting hardware',reference:true}],
   'Dispenser stand and dry mounting kit':[{path:'./images/project-parts/soap-mounting-kit.png',label:'Authored 3D reference · weighted stand, dry deck and hollow Uno supports; fasteners are fitted in the workshop',reference:true}],
   'Dry calibration card and ruler':[{path:'./images/project-parts/corrugated-card.jpg',label:'Flat card stock reference · Aaakhalil, CC BY-SA 4.0',source:'https://commons.wikimedia.org/wiki/File:Corrugated_fiberboard_cross-section_2024-01-02_08-43-00vv.jpg'}],

@@ -1,0 +1,3 @@
+import{createRoot}from'react-dom/client';import{useState}from'react';import View from'../../src/modules/RoverArmGuidePartView';
+function Fixture(){const[index,setIndex]=useState(0);Object.assign(window,{__raGuidePartSet:(next:number)=>{delete(window as any).__raGuidePartApi;setIndex(next);}});return <View {...{index}} onReady={api=>Object.assign(window,{__raGuidePartApi:api,__raGuidePartIndex:index})}/>;}
+export function mount(el:HTMLElement){el.style.cssText='position:fixed;inset:0;padding:24px;background:#f4f3fa;overflow:auto;font-family:Arial';const root=createRoot(el);root.render(<Fixture/>);return()=>root.unmount();}
