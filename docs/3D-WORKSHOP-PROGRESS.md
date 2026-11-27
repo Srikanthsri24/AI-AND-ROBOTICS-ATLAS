@@ -1658,3 +1658,7 @@ The candidate now includes 24 real-root assembly transitions with why/how/check 
 ### Automatic tap work in progress — lesson interface verified
 
 Added the styled assembly, progressive wiring and Arduino programming interface, with real-part labels, camera controls and an empty-reservoir interlock trial. Native checks cover all 24 fits and 29 electrical operations, USB/upload/download, exposed sensor/roller inspection, phone layout and reset; 50 core tests and strict changed-module TypeScript pass. The filled-water/receiving-hand demonstration, session/guide return and final public-route/production checks remain pending. The candidate stays unpublished: **82/150 complete**, with the full 211-guide goal active.
+
+### Automatic tap work in progress — water transport prototype verified
+
+The internal rendered prototype now uses powered motor time to prime the nominal 9.8 mL tubing before producing a stream. It retains prime between controlled cycles, lands on the actual basin surface, conserves water through return and stops transport when motor power is removed. Actual stream click/highlight/label, three-cycle priming and rendered endpoints pass native checks; 56 targeted tests and strict changed-module TypeScript pass. The receiving-hand mesh, filled/priming trial UI, guide/session return and final public release checks remain pending. Published count stays **82/150**.

@@ -4,6 +4,7 @@ export const tapPlumbing={pump:[-205,260,-70] as TapPoint,sonarFace:[45,400,40] 
 export const tapIntakePath:readonly TapPoint[]=[[-222,218,-70],[-222,120,-70],[-90,120,-50],tapPlumbing.intake];
 export const tapOutletPath:readonly TapPoint[]=[[-188,218,-70],[-188,192,-70],[-160,192,-70],[-160,420,-70],[0,420,-70],[0,420,40],tapPlumbing.spout];
 export const tapSpoutSleeve:readonly TapPoint[]=[[0,360,-70],[0,420,-70],[0,420,40],tapPlumbing.spout];
+export const tapBasinFloorY=135,tapBasinThickness=3,tapBasinSurfaceY=tapBasinFloorY+tapBasinThickness;
 export const tapReturnPath:readonly TapPoint[]=[[95,135,35],[95,105,35]];
 export const tapTankCapacityMl=(tapPlumbing.tankTop-tapPlumbing.tankFloor)*tapPlumbing.tankInnerWidth*tapPlumbing.tankInnerDepth/1000;
 export function tapWaterHeight(volumeMl:number){if(!Number.isFinite(volumeMl)||volumeMl<0||volumeMl>tapTankCapacityMl)throw new RangeError('Invalid tap reservoir volume');return tapPlumbing.tankFloor+volumeMl*1000/(tapPlumbing.tankInnerWidth*tapPlumbing.tankInnerDepth);}
