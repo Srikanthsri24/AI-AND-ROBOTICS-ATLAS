@@ -3,8 +3,8 @@ const cache=new Map();async function load(url){if(cache.has(url.href))return cac
 const h=await import(await load(new URL('../src/data/tap-harness.ts',import.meta.url))),engine=await import(await load(new URL('../src/data/automatic-tap-session.ts',import.meta.url)));
 const input={assembled:true,usb:true,supplyEnabled:true,barrelWithdrawal:0,echoPresent:true,distanceCm:26,water:true};
 function completed(){let s=h.tapHarnessInitial();for(const t of h.tapHarnessTasks)s=h.tapHarnessSetEnd(s,t.wireId,t.end,true);return{...s,stemma:true,referenceHeader:true};}
-test('factory-attached leads are preserved and all 24 student terminations are distinct',()=>{
- const s=h.tapHarnessInitial();assert.equal(h.tapHarnessWires.length,15);assert.equal(h.tapHarnessTasks.length,24);assert.equal(new Set(h.tapHarnessWires.map(w=>w.id)).size,15);
+test('factory-attached leads are preserved and all 27 student terminations are distinct',()=>{
+ const s=h.tapHarnessInitial();assert.equal(h.tapHarnessWires.length,15);assert.equal(h.tapHarnessTasks.length,27);assert.equal(new Set(h.tapHarnessWires.map(w=>w.id)).size,15);
  const points=new Set();for(const w of h.tapHarnessWires)for(const [end,p]of [w.a,w.b].entries()){assert.ok(p.point.every(Number.isFinite));const key=p.point.join('/');assert.ok(!points.has(key),'Two terminations occupy the same physical point');points.add(key);assert.equal(s.ends[w.id][end],!!p.fixed);if(p.fixed)assert.throws(()=>h.tapHarnessSetEnd(s,w.id,end,false),/factory/);}
  assert.throws(()=>h.tapHarnessSetEnd(s,'unknown',0,true),RangeError);
  const settings=h.tapHarnessSettings(s,input);assert.equal(settings.pumpPower,false);assert.equal(settings.levelSignal,false);assert.equal(settings.sensorPower,false);

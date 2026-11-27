@@ -1,17 +1,18 @@
 import type{TapPoint}from'./tap-plumbing';
 import type{TapSettings}from'./automatic-tap-session';
 import {tapUnoContact,tapBreadboardContact}from'./tap-electronics';
-import {tapSonarContact,tapLevelPlacement}from'./tap-sensors';
+import {tapSonarContact}from'./tap-sensors';
 import {tapDriverPad}from'./tap-driver';
 import {tapPowerContact,tapPowerPresent}from'./tap-power';
 import {tapPlumbing}from'./tap-plumbing';
+import{tapLevelPlugContact}from'./tap-level-cable';
 export type TapHarnessPort={node:string;label:string;point:TapPoint;kind:'socket'|'female-header'|'factory'|'clamp'|'motor-lug';axis:TapPoint;fixed?:boolean};
 export type TapHarnessWire={id:string;label:string;color:string;a:TapHarnessPort;b:TapHarnessPort;why:string};
 const up:TapPoint=[0,1,0],back:TapPoint=[0,0,-1];
 const uno=(pin:string,node:string):TapHarnessPort=>({node,label:'Uno '+pin,point:tapUnoContact(pin),kind:'socket',axis:up});
 const bus=(column:number,row:number):TapHarnessPort=>({node:`bb:${column}:-1`,label:`Breadboard column ${column+1}, bank a–e, row ${String.fromCharCode(97+row)}`,point:tapBreadboardContact(column,-1,row),kind:'socket',axis:up});
 const sonar=(pin:string,node:string):TapHarnessPort=>({node,label:'HC-SR04 '+({vcc:'VCC',ground:'GND',trigger:'TRIG',echo:'ECHO'}[pin]??pin.toUpperCase()),point:tapSonarContact('tap-soap-sonar-'+pin),kind:'female-header',axis:back});
-const level=(name:'vcc'|'ground'|'out'):TapHarnessPort=>({node:'level-'+name,label:'SEN0485 factory '+({vcc:'red VCC',ground:'black GND',out:'green OUT'}[name])+' lead',point:[tapLevelPlacement[0]+({out:-1.2,vcc:0,ground:1.2}[name]),tapLevelPlacement[1]-24,tapLevelPlacement[2]+1.5],kind:'factory',axis:[0,-1,0],fixed:true});
+const level=(name:'vcc'|'ground'|'out'):TapHarnessPort=>({node:'level-plug-'+name,label:'SEN0485 factory connector '+({vcc:'VCC',ground:'GND',out:'OUT'}[name]),point:tapLevelPlugContact(name),kind:'socket',axis:[0,0,1]});
 const stemma=(name:'ground'|'vin'|'signal'):TapHarnessPort=>({node:'stemma-'+name,label:'STEMMA factory '+({ground:'black GND',vin:'red VIN',signal:'white SIG'}[name])+' lead',point:[189,233.4,-66+({ground:2,vin:0,signal:-2}[name])],kind:'factory',axis:[-1,0,0],fixed:true});
 const supply=(polarity:'positive'|'negative'):TapHarnessPort=>({node:'supply-'+polarity,label:'Pump supply '+(polarity==='positive'?'+5 V':'negative'),point:tapPowerContact(polarity),kind:'clamp',axis:[1,0,0]});
 const output=(positive:boolean):TapHarnessPort=>({node:positive?'driver-out+':'driver-out-',label:positive?'Driver OUT+':'Driver OUT−',point:[215.9,234.4,-66+(positive?2:-2)],kind:'clamp',axis:[1,0,0]});
@@ -26,9 +27,9 @@ wire('sonar-vcc','Sensor supply → HC-SR04 VCC','#d95b6d',bus(2,1),sonar('vcc',
 wire('sonar-ground','Sensor return → HC-SR04 GND','#43515e',bus(8,1),sonar('ground','sonar-ground'),'A valid ground is required before TRIG and ECHO have a useful voltage reference.');
 wire('trigger','Uno D2 → HC-SR04 TRIG','#d6a045',uno('D2','uno-d2'),sonar('trigger','sonar-trigger'),'Carries the sketch’s 10 µs acquisition pulse.');
 wire('echo','HC-SR04 ECHO → Uno D3','#539cca',sonar('echo','sonar-echo'),uno('D3','uno-d3'),'Carries the timed echo pulse. Unavailable echo data stops a running tap.');
-wire('level-vcc','SEN0485 red lead → sensor supply','#d45b6a',level('vcc'),bus(2,2),'This factory lead stays attached to the sensor. Fit its free end to the Uno 5 V strip.');
-wire('level-ground','SEN0485 black lead → sensor return','#344350',level('ground'),bus(8,2),'This factory lead stays attached to the sealed sensor and joins the Uno ground strip.');
-wire('level-out','SEN0485 green OUT → Uno D4','#329d79',level('out'),uno('D4','uno-d4'),'LOW means water reaches the sensor. An open signal is pulled HIGH and prevents pumping.');
+wire('level-vcc','SEN0485 red lead → sensor supply','#d45b6a',level('vcc'),bus(2,2),'Fit a male jumper between the intact factory VCC socket and the Uno 5 V strip.');
+wire('level-ground','SEN0485 black lead → sensor return','#344350',level('ground'),bus(8,2),'Fit a male jumper from the intact factory GND socket to the Uno ground strip.');
+wire('level-out','SEN0485 green OUT → Uno D4','#329d79',level('out'),uno('D4','uno-d4'),'Fit a male jumper from the intact factory OUT socket to D4. LOW means water reaches the sensor; an open signal prevents pumping.');
 wire('driver-signal','STEMMA white SIG → Uno D9','#e2dfcf',stemma('signal'),uno('D9','uno-d9'),'The factory white lead carries the control signal, not the pump current. Fit the keyed three-pin plug as one operation.');
 wire('driver-vin','STEMMA red VIN → pump supply +','#c6505a',stemma('vin'),supply('positive'),'The independent regulated supply feeds driver VIN and OUT+. Never bridge this positive rail to Uno 5 V.');
 wire('driver-ground','STEMMA black GND → pump supply −','#303b49',stemma('ground'),supply('negative'),'The motor-current return goes directly to the independent supply, avoiding the mini breadboard.');
@@ -44,7 +45,7 @@ export const tapHarnessTasks=wires.flatMap(w=>([0,1]as const).filter(end=>!(end?
  * are deliberately not treated as permanent shorts between supply nodes. */
 export function tapHarnessConnected(s:TapHarness,a:string,b:string){const edges=new Map<string,string[]>(),join=(x:string,y:string)=>{edges.set(x,[...(edges.get(x)??[]),y]);edges.set(y,[...(edges.get(y)??[]),x]);};
  for(const w of wires){const pair=s.ends[w.id]??[false,false];if((w.a.fixed||pair[0])&&(w.b.fixed||pair[1]))join(w.a.node,w.b.node);}
- join('driver-vin','driver-out+');if(s.referenceHeader)join('driver-ground','driver-reference');if(s.stemma)for(const name of['ground','vin','signal'])join('stemma-'+name,'driver-'+name);
+ for(const name of['vcc','ground','out'])join('level-'+name,'level-plug-'+name);join('driver-vin','driver-out+');if(s.referenceHeader)join('driver-ground','driver-reference');if(s.stemma)for(const name of['ground','vin','signal'])join('stemma-'+name,'driver-'+name);
  const seen=new Set<string>(),queue=[a];while(queue.length){const node=queue.pop()!;if(node===b)return true;if(seen.has(node))continue;seen.add(node);queue.push(...(edges.get(node)??[]));}return false;
 }
 export function tapHarnessSettings(s:TapHarness,input:{assembled:boolean;usb:boolean;supplyEnabled:boolean;barrelWithdrawal:number;echoPresent:boolean;distanceCm:number;water:boolean}):TapSettings{const has=(a:string,b:string)=>tapHarnessConnected(s,a,b);return{assembled:input.assembled,usb:input.usb,pumpPower:tapPowerPresent(input.supplyEnabled,input.barrelWithdrawal)&&has('driver-vin','supply-positive')&&has('driver-ground','supply-negative'),pumpCircuit:has('driver-out+','motor+')&&has('driver-out-','motor-'),driverReference:has('driver-ground','uno-ground'),driverSignal:has('driver-signal','uno-d9'),sensorPower:has('sonar-vcc','uno-5v'),sensorGround:has('sonar-ground','uno-ground'),trig:has('sonar-trigger','uno-d2'),echo:has('sonar-echo','uno-d3'),echoPresent:input.echoPresent,distanceCm:input.distanceCm,levelPower:has('level-vcc','uno-5v'),levelGround:has('level-ground','uno-ground'),levelSignal:has('level-out','uno-d4'),water:input.water};}

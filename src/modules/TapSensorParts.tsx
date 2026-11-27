@@ -5,10 +5,10 @@ import type {ThreeEvent} from '@react-three/fiber';
 import Sonar from './SoapSonarParts';
 import {soapSonar} from '../data/soap-dispenser-sonar';
 import {tapLevelPlacement,tapLevelDimensions as d,tapSonarPlacement,tapSensorPlate as plate} from '../data/tap-sensors';
-type Props={selected:string;choose:(id:string)=>void;levelOffset?:number};
+type Props={selected:string;choose:(id:string)=>void;levelOffset?:number;routedLeads?:boolean};
 const font=new URL('./fonts/NotoSans-Regular.ttf',document.baseURI).href;
 function annulus(outer:number,inner:number){const s=new Shape();s.absarc(0,0,outer,0,Math.PI*2,false);const h=new Path();h.absarc(0,0,inner,0,Math.PI*2,true);s.holes.push(h);return s;}
-export default function TapSensorParts({selected,choose,levelOffset=0}:Props){
+export default function TapSensorParts({selected,choose,levelOffset=0,routedLeads=false}:Props){
  const plateShape=useMemo(()=>{const s=new Shape();s.moveTo(-27.5,-14);s.lineTo(27.5,-14);s.lineTo(27.5,14);s.lineTo(-27.5,14);s.closePath();for(const[x,z]of soapSonar.holes){const h=new Path();h.absarc(x,z,1.15,0,Math.PI*2,true);s.holes.push(h);}return s;},[]);
  const levelShell=useMemo(()=>{const s=new Shape();s.moveTo(-d.width/2,-d.height/2);s.lineTo(d.width/2,-d.height/2);s.lineTo(d.width/2,d.height/2);s.lineTo(-d.width/2,d.height/2);s.closePath();const h=new Path();h.moveTo(-4,-6);h.lineTo(-4,6);h.lineTo(4,6);h.lineTo(4,-6);h.closePath();s.holes.push(h);return s;},[]);
  const spacer=useMemo(()=>annulus(2,1.15),[]),washer=useMemo(()=>annulus(2.1,.95),[]);
@@ -25,7 +25,7 @@ export default function TapSensorParts({selected,choose,levelOffset=0}:Props){
    </group>
    <mesh name="tap-level-face" userData={{partId:'tap-level-face'}} position={[0,0,-.25]} onClick={event('tap-level-face')}><boxGeometry args={[8,12,3.5]}/><meshStandardMaterial {...mat('tap-level-face','#8a61c2')}/></mesh>
    <group name="tap-level-potting" userData={{partId:'tap-level-potting'}} onClick={event('tap-level-potting')}>{block('tap-level-potting',[0,0,1.65],[8.2,13.3,.6],'#151d23')}{block('tap-level-potting',[0,-7.7,1.8],[4.4,1.5,.7],'#19212a')}</group>
-   {(['out','vcc','gnd'] as const).map((pin,i)=>{const id='tap-level-'+pin,color=['#269f77','#cf4d57','#252d3b'][i],x=(i-1)*1.2;return <group key={pin} name={id} userData={{partId:id}} onClick={event(id)}><mesh position={[x,-16,1.5]}><cylinderGeometry args={[.45,.45,16,16]}/><meshStandardMaterial {...mat(id,color)}/></mesh><mesh position={[x,-24.4,1.5]}><cylinderGeometry args={[.21,.21,.8,12]}/><meshStandardMaterial {...mat(id,'#c2b99d',.8)}/></mesh></group>;})}
+   {(['out','vcc','gnd'] as const).map((pin,i)=>{const id='tap-level-'+pin,color=['#329d79','#d45b6a','#344350'][i],x=(i-1)*1.2;return <group key={pin} name={id} userData={{partId:id}} onClick={event(id)}><mesh position={[x,-16,1.5]}><cylinderGeometry args={[.45,.45,16,16]}/><meshStandardMaterial {...mat(id,color)}/></mesh>{!routedLeads&&<mesh position={[x,-24.4,1.5]}><cylinderGeometry args={[.21,.21,.8,12]}/><meshStandardMaterial {...mat(id,'#c2b99d',.8)}/></mesh>}</group>;})}
   </group>
   <group name="tap-sonar-support" userData={{partId:'tap-sonar-support'}} onClick={event('tap-sonar-support')}>
    {block('tap-sonar-support',[30,429.78,-145],[90,12,12],'#929ba8')}{block('tap-sonar-support',[45,429.78,-50],[12,12,190],'#929ba8')}
