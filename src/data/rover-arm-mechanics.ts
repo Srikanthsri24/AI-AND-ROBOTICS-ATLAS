@@ -15,7 +15,7 @@ export function raArmParts(){return [
  ...raArmJoints.flatMap((j,i)=>[
  {id:`ra-arm-${j.id}-cradle`,label:j.label+' · fixed servo cradle',description:'A slotted metal plate supports the servo mounting ears. Its central aperture clears the case. '+j.connection},
  {id:`ra-arm-${j.id}-bolts`,label:j.label+' · mounting bolts',description:'Four bolts pass through the case ears and cradle. Their washers spread the clamping load; these bolts do not connect to the moving horn.'},
- ...(i<5?[{id:`ra-arm-${j.id}-link`,label:j.label+' · moving link',description:'This metal link is retained on the rotating horn and carries the next assembly. '+j.connection}]:[]),
+ ...(i<5?[{id:`ra-arm-${j.id}-link`,label:j.label+' · moving link',description:'Four mounting bores connect this plate to the rotating horn. Its open centre clears the horn retaining screw. '+j.connection}]:[]),
  ]),
  {id:'ra-arm-pitch-adapter',label:'Wrist offset adapter',description:'An offset bracket clears the roll servo housing and connects its cradle to the wrist pitch link.'},
  {id:'ra-arm-palm',label:'Gripper palm and slide guides',description:'The palm carries the final servo and two linear rack guides. Opposed rack teeth engage the central pinion.'},
