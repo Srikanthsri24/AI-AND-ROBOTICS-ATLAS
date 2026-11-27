@@ -1654,3 +1654,7 @@ The unpublished `directory-27` candidate now has all 15 student harness routes r
 ### Automatic tap work in progress — foundation and USB verified
 
 The candidate now includes 24 real-root assembly transitions with why/how/check instructions, a physically seated USB programming connection and tested workflow state for 29 electrical operations. Native actual-part labels, contact mating, power gating and assembly transforms pass, alongside 50 targeted tests. The styled lesson UI, progressive wiring integration, water/hand demo and public release checks remain pending; the workshop remains unpublished and the verified count stays **82/150**.
+
+### Automatic tap work in progress — lesson interface verified
+
+Added the styled assembly, progressive wiring and Arduino programming interface, with real-part labels, camera controls and an empty-reservoir interlock trial. Native checks cover all 24 fits and 29 electrical operations, USB/upload/download, exposed sensor/roller inspection, phone layout and reset; 50 core tests and strict changed-module TypeScript pass. The filled-water/receiving-hand demonstration, session/guide return and final public-route/production checks remain pending. The candidate stays unpublished: **82/150 complete**, with the full 211-guide goal active.
