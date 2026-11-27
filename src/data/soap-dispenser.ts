@@ -10,16 +10,18 @@ export const soapDispenser:Build={
   parts:[
     ['Arduino Uno R3','1','Reads the echo distance and remembers whether the previous hand has moved away.'],
     ['HC-SR04 ultrasonic module','1','Measures the nearest reflecting surface below the sensor.'],
-    ['Positional micro servo','1','Moves a short horn over a low-force soap pump head.'],
+    ['Positional micro servo','1','Use a compatible mounting plate, a short 12 mm horn with an offset roller, axle/spacer/retainer and a horn screw. The servo shaft is calibrated before the linkage is fitted.'],
     ['Regulated 5 V servo supply','1','Powers the servo independently. Choose a regulated supply rated for the servo stall current.'],
     ['Liquid soap pump bottle','1','The spring-loaded pump meters the liquid. Reuse a small bottle with a smooth, easy-to-press head.'],
-    ['Breadboard and jumper wires','1 set','Joins the sonar pins and grounds. Use a USB data cable for Uno power and programming.'],
+    ['Breadboard and jumper wires','1 set','Use nine jumpers: four sonar leads and five servo/common-reference leads. A mini breadboard joins the three negative references. Add a USB data cable for logic power and programming.'],
+    ['Dispenser stand and dry mounting kit','1 set','A weighted base, two fabricated uprights/bridges, a separate raised electronics deck, four hollow Uno supports and mounting fasteners, plus four sonar spacers and corner fasteners. Match real holes and hardware; the workshop is a fitting reference, not a certified fabrication drawing.'],
+    ['Dry calibration card and ruler','1 set','Use a flat dry target to check the sensor gap. The workshop includes an adjustable holder; on a physical bench, hold the card at the measured distance without touching wiring.'],
   ],
   assembly:[
-    ['Mount the bottle and catch tray','Secure a small, easy-action pump bottle upright in a shallow catch tray. Build a rigid bracket that spans the pump head, with the breadboard and wiring raised off the tray. Rotate the nozzle toward the front.','The bottle stays put when you press the head by hand. The liquid lands inside the tray.',[4,2]],
-    ['Align the sensor','Mount the sonar beside the nozzle with its two cylinders facing down and clear of the servo horn. Put a flat target in the tray about 25 cm below the sensor. With the tray empty, confirm the target produces a stable clear reading.','At rest Serial Monitor reports at least 18 cm. A hand or dry card under the nozzle gives a flat echo in the 4–12 cm trigger range.',[0,1]],
-    ['Connect and adjust the servo','With both supplies off, wire TRIG, ECHO and the servo as shown. Upload with the servo horn disconnected. Reconnect the servo supply, start at 35°, and fit a short horn just above the pump head. Test both angles against an empty pump and adjust before adding liquid.','The horn presses the pump partway without stalling and leaves it free to spring back. Keep the electronics clear of splashes.',[0,1,2,3,5]],
-    ['Try one stroke per hand','Prime the pump manually if needed. Hold a dry target in range, wait for the press and return, and keep the target still. Remove it to expose the flat tray target, then present it again.','Compared with the first presentation, a steady target produces no extra stroke. A fresh presentation after clearing produces one more stroke.',[0,1,2,4]],
+    ['Build the fixed supports','Set the upright pump bottle on its weighted base. Fit the two prepared uprights and bridges behind it, then mount the bare-shaft servo and its plate. Keep the horn and roller off. Place the separate raised dry deck beside the dispensing base.','The bottle and fixed members remain still. All feet meet the bench and the dry deck stays clear of the dispensing area.',[4,2,0]],
+    ['Mount the electronics and sensor','Seat the Uno on four hollow insulating supports and secure its mounting holes. Place the connection board and separate servo supply. Fit the overhead sensor bracket, four spacers, downward-facing PCB and four corner fasteners.','Both transducers face down and clear the bottle/nozzle. The PCB meets the spacer ends without components pressing into the bracket.',[0,1,3,5]],
+    ['Wire, calibrate, then fit the linkage','Disconnect USB and switch the servo supply off before wiring. Connect D2 to TRIG, ECHO to D3, D9 to the servo signal, separate servo power and the shared negative reference. In the 3D Workshop load the separate calibration sketch, observe bare-shaft 35° and 65° travel, return to 35° and switch motor power off. Fit the prepared short horn/roller, then its retaining screw.','The horn is fitted at rest with motor power off. The roller rests on the pump head without preloading it. Keep separate positive rails separate.',[0,1,2,3,5]],
+    ['Test empty, fill, prime and dispense','With motor power off, load the working sketch. Restore motor power, show a clear surface, then present the dry card at 8 cm for one empty-pump stroke. Park the card, switch the motor off and fill the reservoir. Restore power and run one priming cycle: its return draws soap into the dry chamber. Clear the sensor before presenting the receiving hand.','The next charged stroke delivers soap. Holding the hand still produces no extra dose; withdrawing and presenting it again permits one more stroke.',[0,1,2,4]],
   ],
   wiring:[
     ['Uno 5 V and GND','HC-SR04 VCC and GND','Sensor power'],
@@ -36,7 +38,7 @@ export const soapDispenser:Build={
 
 export const soapDispenserProgram={
   filename:'automatic_soap_dispenser.ino',
-  setup:'Install Arduino Servo. Upload with the servo supply off. Begin with the tray target visible, then follow the empty-pump motion check before filling the bottle. The sketch prints range in centimeters at 115200 baud.',
+  setup:'Arduino C++ with the Servo library. Use the separate bare-shaft calibration in the 3D Workshop first. Return to 35°, switch motor power off, fit the linkage and upload this working sketch. Begin with a clear sensor reading and perform the empty-pump check before filling and priming. Serial Monitor uses 115200 baud.',
   source:`#include <Servo.h>
 const byte TRIG=2, ECHO=3, SERVO=9;
 const int REST=${soapAngles.rest}, PRESS=${soapAngles.press};

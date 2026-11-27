@@ -21,3 +21,10 @@ Original built-in-generated image prompts and provenance: design-assets/hardware
 ## Traffic & parking workshop — 27 November 2026
 
 Rolling workshop total is now 81/150; the current detailed ledger is `docs/3D-WORKSHOP-PROGRESS.md` (older counts above describe earlier milestones). Traffic/parking's registered sixth route passes actual production desktop/phone controls, calibration, car/counter behaviour, exact downloads and back reset. The final 90-pose assembly audit includes 5,668,380 moving vertices and named spring contacts; flat board/base bearing faces and all 66 wire contacts pass. All 1,210 repository tests, full TypeScript build and Vite build pass. Production canvas visibility below the header, no page overflow and no page errors verified at 1200/390. Preview 5191 stopped; local development remains 5190. No AWS deployment.
+
+
+## Automatic Liquid Soap Dispenser workshop — 27 November 2026
+
+Rolling workshop total is **82/150**, with 68 remaining in Phase 1 and 61 in Phase 2. The registered `directory-26/workshop` route passes built-app desktop and phone checks across all six outer guide stages and the complete assembly-to-hand-delivery flow. All 39 build/wiring operations, bare-shaft calibration, two-stage linkage fitting, empty/fill/prime, two hand presentations, held-hand inhibition, real palm label/highlighting, module-return retention and reset pass. The eight component groups load their references, including an explicitly labelled authored stand/deck render. The final inspector selection restores its explanation to view.
+
+All **1,264 repository tests**, the configured full TypeScript build and Vite production build pass. The existing large-chunk warning remains. Final routed checks verify the toolbar and full canvas below the header, no horizontal overflow and no page errors at 1200/390. Physics/geometry evidence and earlier detailed pose/contact audits are retained in `docs/3D-WORKSHOP-PROGRESS.md`; liquid charges and ideal-axis sensing are disclosed as illustrations rather than calibrated volume or full acoustics. Preview 5191 stopped after QA; development 5190 remains available. No AWS deployment.

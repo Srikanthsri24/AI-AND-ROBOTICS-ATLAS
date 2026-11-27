@@ -8,3 +8,11 @@
 
 .soap-workshop{container-type:inline-size;container-name:soap}.soap-workshop-controls{border:0;background:transparent;box-shadow:none;padding:0}
 @container soap (max-width:800px){.soap-workshop-layout{grid-template-columns:1fr}.soap-workshop-visual{display:contents;position:static;top:0}.soap-canvas-stage{position:sticky;top:0;z-index:5;background:#f6f7fd;box-shadow:0 6px 18px #26304a12;border-radius:18px}.soap-workshop-canvas{height:clamp(180px,28vh,260px)}.soap-camera-bar{padding:8px;gap:5px}.soap-camera-bar .soap-button{font-size:10px;min-height:32px;padding:7px 8px}.soap-inspector{margin-top:0}.soap-workshop-intro,.soap-workshop-footer{display:block}.soap-workshop-intro h3{font-size:24px}.soap-workshop-tabs button{flex:0 0 auto}}
+
+@media(min-width:801px){.soap-workshop-visual{top:80px}.soap-workshop-canvas{height:clamp(260px,31vh,380px)}.soap-inspector{max-height:170px;overflow:auto;padding:14px}.soap-inspector h4{font-size:17px}.soap-inspector p{font-size:13px}}
+@container soap (max-width:800px){.soap-inspector{max-height:none;overflow:visible;padding:18px}.soap-workshop-canvas{height:clamp(180px,28vh,260px)}}
+.soap-camera-bar{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin}.soap-camera-bar .soap-button{flex-shrink:0}
+@media(min-width:801px){.soap-inspector{max-height:130px}}
+@container soap (max-width:800px){.soap-inspector{max-height:none}}
+.soap-canvas-stage{top:calc(var(--atlas-header-height,0px) + 8px);scroll-margin-top:calc(var(--atlas-header-height,0px) + 8px)}
+.soap-canvas-stage,.soap-camera-bar{min-width:0;max-width:100%}

@@ -1,4 +1,4 @@
-type Photo = { path: string; label: string; product?: number; source?: string };
+type Photo = { path: string; label: string; product?: number; source?: string; reference?:boolean };
 const catalog = (file: string, label: string, product: number): Photo => ({
   path: `./images/project-parts/${file}.jpg`, label, product,
 });
@@ -6,6 +6,8 @@ const atlas = (id: string, label: string, product: number): Photo => ({
   path: `./images/${id.startsWith('sensors') ? 'sensors' : 'components'}/${id}.webp`, label, product,
 });
 const photos: Record<string, Photo[]> = {
+  'Dispenser stand and dry mounting kit':[{path:'./images/project-parts/soap-mounting-kit.png',label:'Authored 3D reference · weighted stand, dry deck and hollow Uno supports; fasteners are fitted in the workshop',reference:true}],
+  'Dry calibration card and ruler':[{path:'./images/project-parts/corrugated-card.jpg',label:'Flat card stock reference · Aaakhalil, CC BY-SA 4.0',source:'https://commons.wikimedia.org/wiki/File:Corrugated_fiberboard_cross-section_2024-01-02_08-43-00vv.jpg'}],
   '12-tooth spur gear': [{path:'./images/project-parts/spur-pinion-12.jpg',label:'12-tooth brass pinion, 32 pitch · ServoCity',source:'https://www.servocity.com/3mm-bore-32-pitch-12t-shaft-mount-pinion-gear/'}],
   '36-tooth spur gear': [{path:'./images/project-parts/spur-gear-36.jpg',label:'36-tooth acetal gear, 32 pitch · ServoCity reference',source:'https://www.servocity.com/32p-36-tooth-acetyl-hub-mount-spur-gears-0-125-face/'}],
   'Matching shafts and bearings': [{path:'./images/project-parts/gear-bearing.jpg',label:'Flanged bearing mount example · match the bore to your shaft',source:'https://www.gobilda.com/8mm-bore-flat-pillow-block-16mm-x-32mm-mounting-pattern-2-pack/'}],

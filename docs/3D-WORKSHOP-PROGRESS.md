@@ -2,9 +2,9 @@
 
 ## Phase 1 — 150 published Guided Builds
 
-Current verified total: **81 / 150 workshops**. **69** remain in Phase 1; **61** additional guides remain in Phase 2. Counts and in-progress descriptions in earlier checkpoint notes describe those earlier states.
+Current verified total: **82 / 150 workshops**. **68** remain in Phase 1; **61** additional guides remain in Phase 2. Counts and in-progress descriptions in earlier checkpoint notes describe those earlier states.
 
-Latest completed: **Smart Traffic Light & Parking Systems (`directory-25`)**. Next in catalog order: **Automatic Liquid Soap Dispenser (`directory-26`)**.
+Latest completed: **Automatic Liquid Soap Dispenser (`directory-26`)**. Next in catalog order: **Arduino Automatic Tap System (`directory-27`)**.
 
 Use the user-approved obstacle-avoiding car as the visual and interaction benchmark. Add and verify a project-specific sixth 3D Workshop for each of the 150 published guides, continuing in catalog order.
 
@@ -1631,3 +1631,18 @@ The new scene uses the complete model and actual skin mesh rays at each small wo
 All 54 soap tests and targeted strict TypeScript pass. The new full workflow tests cover prerequisites, USB seating, calibration/return/fitting, working upload, empty check, filling, priming, delivery, held-target inhibition, missing hand probes, reset, card gap routing and physical-state preservation on reload. Exact-duration integration exposed a floating-point linkage completion edge; a small completion tolerance fixes it. Native full desktop and phone flows pass all 14 foundation + 7 sensor + 18 terminal operations, navigation retention, calibration/linkage fitting, empty check, fill, prime, real mesh-driven hand delivery, no held-hand repeats and full reset. Separate native moving-hand checks show all eight packets land on actual palm surfaces at both widths. Follow-up checks pass preconnected USB calibration, fluid/press-count preservation on code reload, global assembly pause/resume and a visible sticky phone bench at 750 px height. A 650 px containing region in a 1200 px browser correctly stacks the controls, retains the visible bench and has no horizontal overflow. Reviewed desktop and phone screenshots.
 
 The candidate remains unregistered pending guide-content alignment, routed application QA and full repository/production-build checks. Completed published count stays 81 / 150. The full 150 + remaining 61 objective remains active.
+
+
+### Automatic Liquid Soap Dispenser completed and registered — 27 November 2026
+
+Enabled the sixth route for `directory-26` after the complete workshop flow passed. The project-specific scene contains 107 mechanism/connection owners plus seven hand regions, with actual-surface highlighting, following labels and explanations. It includes 14 foundation operations, seven sensor-mounting operations, 18 wire-end insertions, bare-shaft calibration, two-stage horn/screw fitting, an empty check, reservoir filling, return-stroke priming and mesh-driven hand delivery. Separate motor/logic power, real connector seating, physical-vs-command counters, held-hand inhibition, clear/rearm and normalized charge/landing histories remain visible.
+
+Aligned the guide's eight component groups and assembly/program instructions with the authored kit and calibration sequence. Added an exact stand/dry-deck render, explicitly labelled as an authored 3D reference, and a credited dry-card reference. The custom reference does not create a fake external product-source link. The project workshop preserves the physical build and trial when visiting another project stage or Sensors and returning, using a bounded in-memory session; reset starts a clean workbench. Selecting a part restores the inspector to its explanation.
+
+All **1,264 repository tests** pass. The configured full TypeScript build (including a forced check) and final Vite production build pass; the existing >500 kB chunk warning remains. An earlier ad hoc file-list check did not include the project's raw-asset declarations and enabled additional unused-variable rules; it was replaced by the configured project build rather than changing unrelated modules or weakening its settings.
+
+Native **built-app** desktop and phone checks pass all six outer stages, eight loaded component references, guide assembly/program/demo pages and the registered workshop. Full production flows execute all 39 build/wiring operations, download calibration code, calibrate and fit the linkage, test empty, fill, prime, perform two hand presentations, inhibit held-hand repeats, inspect/highlight the real palm, return from Sensors with the dose/build intact and reset. Earlier mesh-coupled moving-hand audits show all eight illustrated packets land on the receiving palm at both widths.
+
+Routed screenshot review found and fixed desktop bench clipping, phone toolbar overlap and narrow-row overflow. The final built-app checks require the camera toolbar and whole canvas below the application header, no horizontal overflow, a following real-part label and inspector scroll reset at 1200/390 px. Overview framing now bounds only visible fitted geometry, so early assembly pieces stay centred. Native final page checks report no errors. Local development remains on 5190; production QA preview 5191 is stopped after verification. No AWS deployment.
+
+**Verified rolling total: 82 / 150. Phase 1 remaining: 68. Phase 2 remaining: 61.** Next: Arduino Automatic Tap System (`directory-27`). The full 211-guide goal remains active.
