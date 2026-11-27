@@ -10,7 +10,7 @@ export type TapHarnessWire={id:string;label:string;color:string;a:TapHarnessPort
 const up:TapPoint=[0,1,0],back:TapPoint=[0,0,-1];
 const uno=(pin:string,node:string):TapHarnessPort=>({node,label:'Uno '+pin,point:tapUnoContact(pin),kind:'socket',axis:up});
 const bus=(column:number,row:number):TapHarnessPort=>({node:`bb:${column}:-1`,label:`Breadboard column ${column+1}, bank a–e, row ${String.fromCharCode(97+row)}`,point:tapBreadboardContact(column,-1,row),kind:'socket',axis:up});
-const sonar=(pin:string,node:string):TapHarnessPort=>({node,label:'HC-SR04 '+pin.toUpperCase(),point:tapSonarContact('tap-soap-sonar-'+pin),kind:'female-header',axis:back});
+const sonar=(pin:string,node:string):TapHarnessPort=>({node,label:'HC-SR04 '+({vcc:'VCC',ground:'GND',trigger:'TRIG',echo:'ECHO'}[pin]??pin.toUpperCase()),point:tapSonarContact('tap-soap-sonar-'+pin),kind:'female-header',axis:back});
 const level=(name:'vcc'|'ground'|'out'):TapHarnessPort=>({node:'level-'+name,label:'SEN0485 factory '+({vcc:'red VCC',ground:'black GND',out:'green OUT'}[name])+' lead',point:[tapLevelPlacement[0]+({out:-1.2,vcc:0,ground:1.2}[name]),tapLevelPlacement[1]-24,tapLevelPlacement[2]+1.5],kind:'factory',axis:[0,-1,0],fixed:true});
 const stemma=(name:'ground'|'vin'|'signal'):TapHarnessPort=>({node:'stemma-'+name,label:'STEMMA factory '+({ground:'black GND',vin:'red VIN',signal:'white SIG'}[name])+' lead',point:[189,233.4,-66+({ground:2,vin:0,signal:-2}[name])],kind:'factory',axis:[-1,0,0],fixed:true});
 const supply=(polarity:'positive'|'negative'):TapHarnessPort=>({node:'supply-'+polarity,label:'Pump supply '+(polarity==='positive'?'+5 V':'negative'),point:tapPowerContact(polarity),kind:'clamp',axis:[1,0,0]});
