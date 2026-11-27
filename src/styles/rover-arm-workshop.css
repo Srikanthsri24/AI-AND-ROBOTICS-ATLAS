@@ -3,3 +3,5 @@
 .ra-scene-toolbar{flex-wrap:wrap}.ra-scene-controls{display:flex;gap:6px;flex-wrap:wrap}
 
 .ra-workshop .ra-workshop-heading{position:static;inset:auto;height:auto;min-height:0;max-height:none;z-index:auto}.ra-workshop .ra-workshop-footer{position:static;inset:auto;height:auto;min-height:0;margin:0;flex-direction:row}.ra-workshop .ra-button-powered:hover{background:#dcefe4}
+
+.ra-course-select{display:grid;gap:8px;margin:14px 0;color:var(--ra-ink);font-size:12px;font-weight:700}.ra-course-select select{width:100%;min-width:0;max-width:100%;border:1px solid var(--ra-line);border-radius:10px;padding:11px 8px;background:#faf9ff;color:var(--ra-ink);font:inherit}.ra-course-select select:focus-visible{outline:3px solid #cbb8ff;outline-offset:2px}

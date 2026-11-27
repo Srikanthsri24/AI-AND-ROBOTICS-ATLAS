@@ -21,15 +21,17 @@ export function raRoverOutputs(s:RoverArmSession,w:RaRoverWiring):readonly[RaRov
  })as[RaRoverOutput,RaRoverOutput];
 }
 /** Authored unloaded wheel response, scene units (50 mm/unit). Not measured
- * RPM, braking torque, tyre slip, gravity or stopping-distance certification. */
+ * RPM, braking torque, tyre slip, gravity or stopping-distance certification.
+ * Unpowered/undefined electrical outputs add no drive; existing mechanical
+ * velocity decays under the authored passive response instead of freezing. */
 export type RaRoverPose={x:number;z:number;yaw:number;leftAngle:number;rightAngle:number;leftVelocity:number;rightVelocity:number;casterAngle:number;casterRoll:number};
 /** Chassis-local positions match the selected two-wheel teaching chassis.
  * Pose x/z describes its origin; differential drive is integrated at the axle. */
 export const raRoverWheelRadius=.65,raRoverTrack=3.8,raRoverAxleZ=-.50,raRoverCasterZ=1.60,raRoverCasterPivotZ=1.52,raRoverCasterTrail=.08,raRoverStandLift=.15;
 export const raRoverPoseInitial=():RaRoverPose=>({x:0,z:0,yaw:0,leftAngle:0,rightAngle:0,leftVelocity:0,rightVelocity:0,casterAngle:0,casterRoll:0});
 export function raRoverMotion(p:RaRoverPose,outputs:readonly[RaRoverOutput,RaRoverOutput],ms:number,onStand:boolean):RaRoverPose{
- if(!Number.isFinite(ms)||ms<0)throw RangeError('Invalid rover motion interval');if(!ms||outputs.some(o=>o.direction===null))return p;
- const dt=ms/1000,integrals:number[]=[],velocities=outputs.map((o,i)=>{const old=i?p.rightVelocity:p.leftVelocity,target=o.mode==='drive'?o.direction!*4*o.duty/110:0,rate=o.mode==='drive'?12:o.mode==='short-brake'?16:o.mode==='zero-command'?8:4,e=Math.exp(-rate*dt);integrals.push(target*dt+(old-target)*(1-e)/rate);return target+(old-target)*e;});
+ if(!Number.isFinite(ms)||ms<0)throw RangeError('Invalid rover motion interval');if(!ms)return p;
+ const dt=ms/1000,integrals:number[]=[],velocities=outputs.map((o,i)=>{const old=i?p.rightVelocity:p.leftVelocity,target=o.mode==='drive'&&o.direction!==null?o.direction*4*o.duty/110:0,rate=o.mode==='drive'?12:o.mode==='short-brake'?16:o.mode==='zero-command'?8:4,e=Math.exp(-rate*dt);integrals.push(target*dt+(old-target)*(1-e)/rate);return target+(old-target)*e;});
  const next={...p,leftAngle:p.leftAngle-integrals[0],rightAngle:p.rightAngle-integrals[1],leftVelocity:velocities[0],rightVelocity:velocities[1]};if(onStand)return next;
  const left=integrals[0]*raRoverWheelRadius,right=integrals[1]*raRoverWheelRadius,distance=(left+right)/2,turn=(right-left)/raRoverTrack;
  if(Math.abs(turn)<1e-10){next.x-=distance*Math.sin(p.yaw);next.z-=distance*Math.cos(p.yaw);}else{next.x+=distance/turn*(Math.cos(p.yaw+turn)-Math.cos(p.yaw));next.z-=distance/turn*(Math.sin(p.yaw+turn)-Math.sin(p.yaw));}next.yaw+=turn;next.x+=raRoverAxleZ*(Math.sin(p.yaw)-Math.sin(next.yaw));next.z+=raRoverAxleZ*(Math.cos(p.yaw)-Math.cos(next.yaw));
