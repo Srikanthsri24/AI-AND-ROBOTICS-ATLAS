@@ -1,12 +1,14 @@
-import {memo,useMemo,type ReactNode} from 'react';
+import {memo,useMemo,useLayoutEffect,useRef,type ReactNode} from 'react';
 import type {ThreeEvent} from '@react-three/fiber';
-import {Shape,Path} from 'three';
+import {Shape,Path,Mesh,type Group} from 'three';
 import{raGripPinion,raGripTooth,raGripToothX,raGripRackZ}from'../data/rover-arm-gripper';
+import{raArmAssemblyPart,type RaArmAssembly}from'../data/rover-arm-assembly';
+import{floodVisible}from'../data/flood-surface';
 import Servo from './RoverArmServoParts';
 import {raServoMounts} from '../data/rover-arm-servo';
 import {raArmDimensions as D,raArmNeutral} from '../data/rover-arm-mechanics';
 
-type Props={selected:string;choose:(id:string)=>void;angles?:readonly number[]};
+type Props={selected:string;choose:(id:string)=>void;angles?:readonly number[];assembly?:RaArmAssembly};
 const plateOptions={depth:2.4,bevelEnabled:false},baseOptions={depth:D.baseThickness,bevelEnabled:false},rackOptions={depth:5,bevelEnabled:false},hubOptions={depth:4.4,bevelEnabled:false};
 function bore(s:Shape,x:number,y:number,r:number){const p=new Path();p.absarc(x,y,r,0,Math.PI*2,true);s.holes.push(p);}
 function rect(w:number,h:number,x=0,y=0){const s=new Shape();s.moveTo(x-w/2,y-h/2);s.lineTo(x+w/2,y-h/2);s.lineTo(x+w/2,y+h/2);s.lineTo(x-w/2,y+h/2);s.closePath();return s;}
@@ -15,23 +17,27 @@ function parts(){const cradle=rect(62,31,10.5),aperture=new Path();aperture.move
 
 /** Detailed authored mechanical hierarchy. Angles are calibrated mechanical pose,
  * never a claim that a particular microsecond pulse produces this position. */
-function RoverArmMechanics({selected,choose,angles=raArmNeutral}:Props){
+function RoverArmMechanics({selected,choose,angles=raArmNeutral,assembly}:Props){
+ const root=useRef<Group>(null);useLayoutEffect(()=>{const saved:{mesh:Mesh;raycast:Mesh['raycast']}[]=[];root.current?.traverse(o=>{if(o instanceof Mesh){const original=o.raycast;saved.push({mesh:o,raycast:original});o.raycast=(...args)=>{if(floodVisible(o))original.apply(o,args);};}});return()=>saved.forEach(({mesh,raycast})=>{mesh.raycast=raycast;});},[]);
  const s=useMemo(parts,[]),a=(i:number)=>angles[i]??raArmNeutral[i];
  const mat=(id:string,color='#333942',metal=.75)=>({color:selected===id?'#c4a2ff':color,metalness:metal,roughness:.34});
- const tag=(id:string,node:ReactNode)=><group name={id} userData={{partId:id}} onClick={(e:ThreeEvent<MouseEvent>)=>{e.stopPropagation();choose(id);}}>{node}</group>;
+ const fit=(id:string)=>assembly?raArmAssemblyPart(assembly,id):{visible:true,progress:1};
+ const lift=(p:number)=>60*(1-p*p*(3-2*p));
+ const offset=(id:string,p:number):[number,number,number]=>{const n=lift(p);return id.endsWith('-finger')?[id.includes('-left-')?-n:n,0,0]:['shoulder','elbow','pitch'].some(j=>id===`ra-arm-${j}-link`)?[0,0,n]:[0,n,0];};
+ const tag=(id:string,node:ReactNode)=><group visible={fit(id).visible} position={offset(id,fit(id).progress)} name={id} userData={{partId:id}} onClick={(e:ThreeEvent<MouseEvent>)=>{e.stopPropagation();choose(id);}}>{node}</group>;
  const box=(id:string,p:[number,number,number],size:[number,number,number],color?:string,metal?:number)=><mesh position={p}><boxGeometry args={size}/><meshStandardMaterial {...mat(id,color,metal)}/></mesh>;
  const cradle=(joint:string)=>{const id=`ra-arm-${joint}-cradle`,bolts=`ra-arm-${joint}-bolts`;return <>
  {tag(id,<mesh position={[0,-19,0]} rotation={[-Math.PI/2,0,0]}><extrudeGeometry args={[s.cradle,plateOptions]}/><meshStandardMaterial {...mat(id)}/></mesh>)}
  {tag(bolts,<>{raServoMounts.map(([x,,z],i)=><group key={i} position={[x,-16,z]}><mesh><cylinderGeometry args={[1.15,1.15,9,16]}/><meshStandardMaterial {...mat(bolts,'#aab4bd')}/></mesh><mesh position={[0,3,0]}><cylinderGeometry args={[2.4,2.4,.7,24]}/><meshStandardMaterial {...mat(bolts,'#b3bdc6')}/></mesh><mesh position={[0,4,0]}><cylinderGeometry args={[2,2,1.4,6]}/><meshStandardMaterial {...mat(bolts,'#97a5b1')}/></mesh><mesh position={[0,-4,0]}><cylinderGeometry args={[2.3,2.3,2,6]}/><meshStandardMaterial {...mat(bolts,'#b3bdc6')}/></mesh></group>)}</>)}
  </>;};
- const servo=(joint:string,angle:number)=><><Servo prefix={`ra-arm-${joint}-servo`} selected={selected} choose={choose} angle={angle} leadVisible={false}/>{cradle(joint)}</>;
+ const servo=(joint:string,angle:number)=>{const id=`ra-arm-${joint}-servo`,body=fit(id),horn=fit(id+'-horn');return <><group visible={body.visible} position={[0,lift(body.progress),0]}><Servo prefix={id} selected={selected} choose={choose} angle={angle} hornFit={horn.visible?horn.progress:0} leadVisible={false}/></group>{cradle(joint)}</>;};
  const flatLink=(joint:string,shape:Shape,length:number)=>{const id=`ra-arm-${joint}-link`;return tag(id,<><mesh position={[0,0,3.6]}><extrudeGeometry args={[shape,plateOptions]}/><meshStandardMaterial {...mat(id)}/></mesh>{box(id,[0,length-14.3,-6],[25,2.4,26])}{[[7.2,0],[-7.2,0],[0,7.2],[0,-7.2]].map(([x,y],i)=><group key={i} position={[x,y,3.6]} rotation={[Math.PI/2,0,0]}><mesh><cylinderGeometry args={[1.3,1.3,8,16]}/><meshStandardMaterial {...mat(id,'#aab4bd')}/></mesh><mesh position={[0,3.8,0]}><cylinderGeometry args={[2.3,2.3,1.5,6]}/><meshStandardMaterial {...mat(id,'#b3bdc6')}/></mesh></group>)}</>);};
  const horizontalHorn=(id:string,shape:Shape)=><><mesh position={[0,3.6,0]} rotation={[-Math.PI/2,0,0]}><extrudeGeometry args={[shape,plateOptions]}/><meshStandardMaterial {...mat(id)}/></mesh>{[[7.2,0],[-7.2,0],[0,7.2],[0,-7.2]].map(([x,z],i)=><group key={i} position={[x,3,z]}><mesh><cylinderGeometry args={[1.3,1.3,8,16]}/><meshStandardMaterial {...mat(id,'#aab4bd')}/></mesh><mesh position={[0,3.75,0]}><cylinderGeometry args={[2.3,2.3,1.5,6]}/><meshStandardMaterial {...mat(id,'#b3bdc6')}/></mesh></group>)}</>;
  const finger=(side:-1|1)=>{const id=`ra-arm-${side<0?'left':'right'}-finger`,gap=24-7.6*a(5),z=-side*raGripRackZ;return <group position={[side*gap,0,z]} name={id+'-slide'}>{tag(id,<>
  {box(id,[side*-13,0,0],[34,5,4])}{raGripToothX(side).map((x,n)=><mesh key={n} position={[x,-2.5,-z]} rotation={[-Math.PI/2,0,0]}><extrudeGeometry args={[side<0?s.leftTooth:s.rightTooth,rackOptions]}/><meshStandardMaterial {...mat(id)}/></mesh>)}
  {box(id,[0,10,0],[5,20,4])}{box(id,[0,19,-z/2],[5,5,Math.abs(z)+5])}{box(id,[0,41,-z],[5,44,10])}{box(id,[-side*3.2,55,-z],[1.4,13,10],'#625580',.03)}
  </>)}</group>;};
- return <group name="ra-arm-mechanics" userData={{units:'mm',authoredTeachingGeometry:true}}>
+ return <group ref={root} name="ra-arm-mechanics" userData={{units:'mm',authoredTeachingGeometry:true}}>
  {tag('ra-arm-baseplate',<><mesh rotation={[-Math.PI/2,0,0]}><extrudeGeometry args={[s.base,baseOptions]}/><meshStandardMaterial {...mat('ra-arm-baseplate','#373c47')}/></mesh>{[-18,39].flatMap(x=>[-13,13].map(z=><group key={x+':'+z}>{box('ra-arm-baseplate',[x,17,z],[3,24,3])}</group>))}</>)}
  <group position={[0,48,0]}>{servo('base',a(0))}<group name="ra-arm-base-output" rotation={[0,a(0),0]}>
  {tag('ra-arm-base-link',<>{horizontalHorn('ra-arm-base-link',s.baseHorn)}{[-19,40].map(x=>box('ra-arm-base-link',[x,22,-17],[2.4,32,2.4]))}{box('ra-arm-base-link',[10.5,D.shoulderHeight-48-16.7,-28],[62,2.4,30])}</>)}
