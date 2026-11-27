@@ -22,7 +22,7 @@ export function raArmPoseAdvance(previous:RaArmPose,outputs:Outputs,calibration:
   const pulse=o.pulseUs;if(pulse===null||!Number.isFinite(pulse))throw new RangeError('Tracking output requires a pulse');
   const target=c.angleA+(pulse-c.pulseA)/(c.pulseB-c.pulseA)*(c.angleB-c.angleA);
   if(pulse<Math.min(c.pulseA,c.pulseB)-1e-8||pulse>Math.max(c.pulseA,c.pulseB)+1e-8||target<c.minAngle-1e-10||target>c.maxAngle+1e-10||angles[i]<c.minAngle||angles[i]>c.maxAngle){targets.push(null);status.push('outside-calibration');continue;}
-  targets.push(target);angles[i]=target+(angles[i]-target)*Math.exp(-ms/c.responseMs);status.push(Math.abs(angles[i]-target)<1e-4?'settled':'tracking');
+  targets.push(target);if(ms>0)angles[i]=target+(angles[i]-target)*Math.exp(-ms/c.responseMs);status.push(Math.abs(angles[i]-target)<1e-4?'settled':'tracking');
  }
  return{angles,targets,status};
 }

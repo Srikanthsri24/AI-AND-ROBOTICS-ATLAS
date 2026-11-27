@@ -15,7 +15,7 @@ export function raArmWorldOutputs(s:RaArmWorld,w:RaArmWiring){return raArmDriver
  * execution slice contains at most one serial command and its six h writes.
  * This composes logical execution and atomic driver delivery, not motor motion
  * or low-level I²C transaction timing. Failed commands are consumed, not queued. */
-export function raArmWorldAdvance(previous:RaArmWorld,w:RaArmWiring,ms:number):RaArmWorld{
+export function raArmWorldAdvance(previous:RaArmWorld,w:RaArmWiring,ms:number,onInterval?:(driver:RaArmDriver,ms:number)=>void):RaArmWorld{
  if(!Number.isFinite(ms)||ms<0||previous.session.clockUs+ms*1000>Number.MAX_SAFE_INTEGER)throw new RangeError('Invalid workshop interval');
  if(w.leads.length!==6)throw new RangeError('Six servo lead states required');
  let driver=raArmDriverPower(previous.driver,w.usb&&w.logicVcc&&w.logicGround),session=previous.session;
@@ -26,7 +26,12 @@ export function raArmWorldAdvance(previous:RaArmWorld,w:RaArmWiring,ms:number):R
   const step=Math.min(1,remaining),old=session;
   session=roverArmSessionAdvance(old,input,step);
   if(old.mode==='off'&&session.mode==='arm'&&!session.halted)driver=raArmDriverConfigure50(driver,bus);
-  for(const write of session.writes)if(write.id>=old.nextWriteId&&write.kind==='servo')driver=raArmDriverWrite(driver,bus,write);
+  let integrated=0;
+  for(const write of session.writes)if(write.id>=old.nextWriteId&&write.kind==='servo'){
+   const at=Math.max(integrated,Math.min(step,(write.atUs-old.clockUs-old.remainderUs)/1000));
+   onInterval?.(driver,at-integrated);integrated=at;driver=raArmDriverWrite(driver,bus,write);
+  }
+  onInterval?.(driver,step-integrated);
   remaining=Math.max(0,remaining-step);
  }while(remaining>0);
  return{session,driver};
