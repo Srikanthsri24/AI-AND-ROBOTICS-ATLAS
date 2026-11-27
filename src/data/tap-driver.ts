@@ -19,5 +19,5 @@ export const tapDriverParts=[
  ['tap-driver-negative','Motor driver · switched OUT− contact','Connect the pump negative lead to this actual contact. The MOSFET completes the path to common ground while SIG is HIGH.'],
  ['tap-driver-positive-lever','Motor driver · OUT+ release lever','Press this lever to release the positive motor wire, with both supplies disconnected. It operates the clamp for the VIN-connected output contact.'],
  ['tap-driver-negative-lever','Motor driver · OUT− release lever','Press this lever to release the negative motor wire, with both supplies disconnected. It operates the separate switched-return output clamp.'],
- ['tap-driver-breakout','Motor driver · optional breakout pads','The four open pads expose GND, VIN, SIG and OUT. This build uses the STEMMA input and spring outputs, so leave these optional pads unconnected.'],
+ ['tap-driver-breakout','Motor driver · optional breakout pads','The four open pads expose GND, VIN, SIG and OUT. This build adds a single GND reference header alongside the STEMMA input and spring outputs. Leave VIN, SIG and OUT breakout pads unconnected.'],
 ] as const;

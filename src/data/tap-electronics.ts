@@ -20,5 +20,6 @@ export const tapElectronicsParts=[
  ['tap-uno-leds','Controller · logic power indicators','The ON light follows USB logic power. RX and TX belong to USB serial activity; the unused D13 indicator does not report water flow.'],
  ['tap-control-supports','Electronics · insulating supports','Six hollow posts hold both boards above the dry shelf. Their bonded bases stay on the shelf and their upper faces meet the PCB undersides. Fasteners enter the posts without passing into a wet area.'],
  ...tapControlMounts.map(m=>[m.id,(m.id.startsWith('tap-uno')?'Controller':'Motor driver')+' · mounting screw '+(Number(m.id.at(-1))+1),'A screw and washer retain this board through an actual open mounting bore. The insulating post beneath the board accepts the shaft; it is not an electrical connection.'] as const),
+ ['tap-driver-reference-header','Motor driver · GND-only reference header','A single square pin is soldered into the GND breakout bore. The reference jumper connects this pin to the Uno ground strip; VIN, SIG and OUT breakout pads remain unconnected.'],
  ['tap-breadboard','Connections · mini breadboard','Each numbered column has two separate five-contact banks. Opposite banks and adjacent columns are not joined. Use distinct strips for sensor 5 V, sensor ground and the independent motor supply reference.'],
 ] as const;

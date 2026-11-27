@@ -78,3 +78,13 @@ Native Chrome: all fourteen actual part owners passed mesh clicks, material high
 Primary references: https://www.adafruit.com/product/276 (5 V / 2 A, centre-positive 5.5 mm OD / 2.1 mm ID plug and 3.5 mm cable diameter); https://www.adafruit.com/product/368 (female 2.1 mm jack to positive/negative screw terminals). Local reference photos inspected before modelling.
 
 Workshop remains unpublished: full harness/sensor leads, guided fitting and assembly lessons, priming/fluid/hand demonstration, and routed/mobile release checks remain pending. Completed count remains **82/150**.
+
+### Automatic tap — conductor map and session integration checkpoint
+
+Added fifteen project-specific wire definitions with actual hardware/contact coordinates, labels, colours, connection explanations and distinct breadboard holes. Six wire sources remain factory-attached (three SEN0485 leads and the three STEMMA pigtail conductors); there are twenty-four student-fitted terminations, plus keyed STEMMA mating and the GND-reference header operation. Sensor 5 V and motor VIN are separate nets. The black STEMMA motor return runs directly to the supply negative. A single GND breakout header supplies the separate common-reference jumper; updated the breakout explanation to leave only VIN/SIG/OUT unused.
+
+The conductor graph derives every existing tap-session connectivity input from fitted ends and plug/header state rather than a single generic ready flag. Tests disconnect each of the twenty-four student ends individually, verify the corresponding path fails and restores, verify no direct VIN-to-Uno-5 V bridge, and drive the exact sketch session from the graph. Missing supply, motor wiring, D9 connection or common reference leaves commanded software RUNNING with zero physical powered time; missing sensor paths prevents a valid start. This graph models conductor continuity, not analog voltages or current distribution.
+
+Added the actual GND-only square pin, open insulating header body and underside solder bead. Native Chrome reverified thirty-six control-part owners through actual clicks/highlights/surface labels and confirmed the harness reference endpoint meets the rendered pin tip at [203.19, 239.5, -59.015] mm. All twenty-six targeted tap tests and strict TypeScript passed.
+
+This is a map/session and reference-header checkpoint, not a rendered harness release. Full wire routes, connector fitting animations, replacing short sensor pigtails with routed leads, guided lessons, priming/fluid/hand demonstration and routed/mobile verification remain pending. Completed count stays **82/150**.
