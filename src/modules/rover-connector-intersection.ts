@@ -1,10 +1,40 @@
-import{Box3,BufferAttribute,BufferGeometry,DoubleSide,Sphere,InstancedMesh,Matrix4,Mesh,Raycaster,Vector3,type TubeGeometry}from'three';
+import{Box3,BufferAttribute,BufferGeometry,DoubleSide,Sphere,Triangle,InstancedMesh,Matrix4,Mesh,Raycaster,Vector3,type TubeGeometry}from'three';
 const tolerance=1e-6,edges=new WeakMap<BufferGeometry,readonly[number,number][]>();
 function edgeIndices(g:BufferGeometry){const cached=edges.get(g);if(cached)return cached;const index=g.index,count=index?index.count:g.attributes.position.count,result:[number,number][]=[],seen=new Set<string>();for(let n=0;n<count;n+=3){const v=[0,1,2].map(k=>index?index.getX(n+k):n+k);for(let k=0;k<3;k++){const a=v[k],b=v[(k+1)%3],key=a<b?a+','+b:b+','+a;if(!seen.has(key)){seen.add(key);result.push([a,b]);}}}edges.set(g,result);return result;}
-function edgeHit(source:Mesh,target:Mesh,box:Box3,ray:Raycaster){const attribute=source.geometry.attributes.position;for(const[i,j]of edgeIndices(source.geometry)){const a=new Vector3().fromBufferAttribute(attribute,i).applyMatrix4(source.matrixWorld),b=new Vector3().fromBufferAttribute(attribute,j).applyMatrix4(source.matrixWorld);if(['x','y','z'].some(axis=>{const k=axis as'x'|'y'|'z';return a[k]<box.min[k]-tolerance&&b[k]<box.min[k]-tolerance||a[k]>box.max[k]+tolerance&&b[k]>box.max[k]+tolerance;}))continue;const length=a.distanceTo(b);if(length<=2*tolerance)continue;ray.near=tolerance;ray.far=length-tolerance;ray.set(a,b.clone().sub(a).normalize());if(ray.intersectObject(target,false).length)return true;ray.set(b,a.sub(b).normalize());if(ray.intersectObject(target,false).length)return true;}return false;}
+/** Shared-face contact is not penetration. For a closed target, split an
+ * edge at its surface crossings and require an interval strictly inside it.
+ * Open inspection bands retain the surface-crossing test. */
+function edgeHit(source:Mesh,target:Mesh,box:Box3,ray:Raycaster){
+ const attribute=source.geometry.attributes.position,g=target.geometry;
+ if(!g.boundingBox)g.computeBoundingBox();
+ const size=g.boundingBox!.getSize(new Vector3()),closed=g.type!=='TubeGeometry'&&!g.userData.inspectionOpenSurface&&Math.min(size.x,size.y,size.z)>tolerance;
+ const materials=Array.isArray(target.material)?target.material:[target.material],sides=materials.map(m=>m.side),insideRay=new Raycaster();
+ try{
+  if(closed)materials.forEach(m=>m.side=DoubleSide);
+  for(const[i,j]of edgeIndices(source.geometry)){
+   const a=new Vector3().fromBufferAttribute(attribute,i).applyMatrix4(source.matrixWorld),b=new Vector3().fromBufferAttribute(attribute,j).applyMatrix4(source.matrixWorld);
+   if(['x','y','z'].some(axis=>{const k=axis as'x'|'y'|'z';return a[k]<box.min[k]-tolerance&&b[k]<box.min[k]-tolerance||a[k]>box.max[k]+tolerance&&b[k]>box.max[k]+tolerance;}))continue;
+   const length=a.distanceTo(b);if(length<=2*tolerance)continue;
+   const direction=b.clone().sub(a).normalize();ray.near=tolerance;ray.far=length-tolerance;ray.set(a,direction);
+   const hits=ray.intersectObject(target,false);
+   if(closed){
+    if(!hits.length)continue;
+    const cuts=[0,...hits.map(h=>h.distance).filter((d,n,all)=>!n||d-all[n-1]>tolerance),length];
+    for(let n=1;n<cuts.length;n++)if(cuts[n]-cuts[n-1]>2*tolerance&&inside(a.clone().addScaledVector(direction,(cuts[n]+cuts[n-1])/2),target,insideRay))return true;
+   }else{
+    if(hits.length)return true;
+    ray.set(b,a.clone().sub(b).normalize());if(ray.intersectObject(target,false).length)return true;
+   }
+  }
+  return false;
+ }finally{materials.forEach((m,i)=>m.side=sides[i]);}
+}
 function sampleSurface(mesh:Mesh){const g=mesh.geometry,p=g.attributes.position,index=g.index,count=index?index.count:p.count;if(!g.boundingBox)g.computeBoundingBox();const size=g.boundingBox!.getSize(new Vector3()),closed=g.type!=='TubeGeometry'&&!g.userData.inspectionOpenSurface&&Math.min(size.x,size.y,size.z)>tolerance;for(let n=0;n<count;n+=3){const v=[0,1,2].map(k=>new Vector3().fromBufferAttribute(p,index?index.getX(n+k):n+k).applyMatrix4(mesh.matrixWorld)),normal=v[1].clone().sub(v[0]).cross(v[2].clone().sub(v[0]));if(normal.lengthSq()<1e-20)continue;const point=v[0].clone().add(v[1]).add(v[2]).divideScalar(3);return closed?point.addScaledVector(normal.normalize(),-4*tolerance):point;}return new Vector3().setFromMatrixPosition(mesh.matrixWorld);}
 
-function inside(point:Vector3,mesh:Mesh,ray:Raycaster){const g=mesh.geometry;if(g.type==='TubeGeometry'||g.userData.inspectionOpenSurface)return false;if(!g.boundingBox)g.computeBoundingBox();const size=g.boundingBox!.getSize(new Vector3());if(Math.min(size.x,size.y,size.z)<=tolerance)return false;const materials=Array.isArray(mesh.material)?mesh.material:[mesh.material],sides=materials.map(m=>m.side);try{materials.forEach(m=>m.side=DoubleSide);ray.set(point,new Vector3(.873,.327,.363).normalize());ray.near=0;ray.far=Infinity;const hits=ray.intersectObject(mesh,false).map(h=>h.distance);if(hits.some(d=>d<=tolerance))return false;return hits.filter((d,i,a)=>!i||Math.abs(d-a[i-1])>tolerance).length%2===1;}finally{materials.forEach((m,i)=>m.side=sides[i]);}}
+function inside(point:Vector3,mesh:Mesh,ray:Raycaster){const g=mesh.geometry;if(g.type==='TubeGeometry'||g.userData.inspectionOpenSurface)return false;if(!g.boundingBox)g.computeBoundingBox();const size=g.boundingBox!.getSize(new Vector3());if(Math.min(size.x,size.y,size.z)<=tolerance)return false;// A parity ray can miss a near-zero crossing on a shared face after rotation.
+ const p=g.attributes.position,index=g.index,count=index?index.count:p.count,triangle=new Triangle(),closest=new Vector3();
+ for(let n=0;n<count;n+=3){triangle.a.fromBufferAttribute(p,index?index.getX(n):n).applyMatrix4(mesh.matrixWorld);triangle.b.fromBufferAttribute(p,index?index.getX(n+1):n+1).applyMatrix4(mesh.matrixWorld);triangle.c.fromBufferAttribute(p,index?index.getX(n+2):n+2).applyMatrix4(mesh.matrixWorld);if(triangle.closestPointToPoint(point,closest).distanceToSquared(point)<=tolerance*tolerance)return false;}
+ const materials=Array.isArray(mesh.material)?mesh.material:[mesh.material],sides=materials.map(m=>m.side);try{materials.forEach(m=>m.side=DoubleSide);ray.set(point,new Vector3(.873,.327,.363).normalize());ray.near=0;ray.far=Infinity;const hits=ray.intersectObject(mesh,false).map(h=>h.distance);if(hits.some(d=>d<=tolerance))return false;return hits.filter((d,i,a)=>!i||Math.abs(d-a[i-1])>tolerance).length%2===1;}finally{materials.forEach((m,i)=>m.side=sides[i]);}}
 /** Inspection-only triangle edge/solid containment check. Reads current vertex
  * buffers, so a retained, deformed tube is not checked at its original shape.
  * When both meshes are tubes, both sides are split into exact open bands;

@@ -1,6 +1,6 @@
 /** Authored teaching arm, millimetres. Not a dimensional copy of a specific kit.
  * Servo pulse-to-angle calibration is deliberately separate from these joint angles. */
-export const raArmDimensions={baseRadius:63,baseThickness:5,shoulderHeight:76,upperLink:104,forearm:92,wrist:57,palm:45};
+export const raArmDimensions={baseRadius:63,baseThickness:5,shoulderHeight:76,upperLink:104,forearm:92,wrist:57,rollOffset:-40,palm:52};
 export const raArmNeutral=[0,-.3,-.7,.35,0,.25] as const;
 export const raArmJoints=[
  {id:'base',label:'Base yaw',axis:'Y',connection:'Rotates the complete shoulder support around the secured base.'},
