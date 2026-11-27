@@ -4,12 +4,12 @@ import {CatmullRomCurve3,Group,Mesh,Quaternion,Vector3} from 'three';
 import {SolarMeterSolid as Box} from './SolarMeterParts';
 import {bluetoothCarWires,carCableControlPoints,type CarTerminal,type CarWire} from '../data/bluetooth-car-wiring';
 const violet='#b78be8';
-export function CarWireTerminal({terminal,selected,color}:{terminal:CarTerminal;selected:boolean;color:string}){
+export function CarWireTerminal({terminal,selected,color,exact=false}:{terminal:CarTerminal;selected:boolean;color:string;exact?:boolean}){
  const key=terminal.axis.join(','),rotation=useMemo(()=>new Quaternion().setFromUnitVectors(new Vector3(0,1,0),new Vector3(...terminal.axis)),[key]),plastic=selected?violet:'#222e38',metal=selected?'#c6a1ec':'#c3b99a';
  const inserted=terminal.insertion??.11,base=.12-inserted;
  return <group position={terminal.at} quaternion={rotation}>
- {terminal.type==='male-jumper'?<><Box at={[0,base+.095,0]} size={[.040,.190,.040]} color={plastic}/><Box at={[0,.065-inserted,0]} size={[.012,.130,.012]} color={metal} metal={.75}/>{[-1,1].map(side=><Box key={side} at={[side*.0205,base+.12,0]} size={[.002,.016,.033]} color={selected?violet:color}/>)}</>:terminal.type==='female-jumper'?<>
- {[-1,1].map(side=><group key={side}><Box at={[side*.0145,.040,0]} size={[.011,.160,.040]} color={plastic}/><Box at={[0,.040,side*.0145]} size={[.018,.160,.011]} color={plastic}/><Box at={[side*.0065,-.012,0]} size={[.004,.065,.014]} color={metal} metal={.75}/></group>)}<Box at={[0,.115,0]} size={[.040,.010,.040]} color={plastic}/>{[-1,1].map(side=><Box key={side} at={[side*.0205,.07,0]} size={[.002,.016,.033]} color={selected?violet:color}/>)}</>:<>
+ {terminal.type==='male-jumper'?<><Box exact={exact} at={[0,base+.095,0]} size={[.040,.190,.040]} color={plastic}/><Box exact={exact} at={[0,.065-inserted,0]} size={[.012,.130,.012]} color={metal} metal={.75}/>{[-1,1].map(side=><Box exact={exact} key={side} at={[side*.0205,base+.12,0]} size={[.002,.016,.033]} color={selected?violet:color}/>)}</>:terminal.type==='female-jumper'?<>
+ {[-1,1].map(side=><group key={side}><Box exact={exact} at={[side*.0145,.040,0]} size={[.011,.160,.040]} color={plastic}/><Box exact={exact} at={[0,.040,side*.0145]} size={[.018,.160,.011]} color={plastic}/><Box exact={exact} at={[side*.0065,-.012,0]} size={[.004,.065,.014]} color={metal} metal={.75}/></group>)}<Box exact={exact} at={[0,.115,0]} size={[.040,.010,.040]} color={plastic}/>{[-1,1].map(side=><Box exact={exact} key={side} at={[side*.0205,.07,0]} size={[.002,.016,.033]} color={selected?violet:color}/>)}</>:<>
  <mesh><sphereGeometry args={[.018,14,10]}/><meshStandardMaterial color={metal} metalness={.75} roughness={.35}/></mesh><mesh position={[0,.022,0]}><cylinderGeometry args={[.006,.006,.044,10]}/><meshStandardMaterial color={selected?violet:'#bb9368'} metalness={.65} roughness={.4}/></mesh></>}
  </group>;
 }

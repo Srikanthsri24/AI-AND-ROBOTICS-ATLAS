@@ -1,9 +1,12 @@
+import{useLayoutEffect,useRef}from'react';import type{Mesh}from'three';
 import { RoundedBox } from '@react-three/drei';
 
 type Point=[number,number,number];
 
-export function SolarMeterSolid({at,size,color,metal=0}:{at:Point;size:Point;color:string;metal?:number}){
-  return <RoundedBox position={at} args={size} radius={Math.min(...size)*.18} smoothness={2}>
+/** Opt-in nominal bounds keep generated bevels within connector mating dimensions. */
+export function SolarMeterSolid({at,size,color,metal=0,exact=false}:{at:Point;size:Point;color:string;metal?:number;exact?:boolean}){
+  const ref=useRef<Mesh>(null),normalized=useRef(false);useLayoutEffect(()=>{if(!ref.current)return;const mesh=ref.current;if(!exact){if(normalized.current){mesh.scale.set(1,1,1);normalized.current=false;}return;}mesh.geometry.computeBoundingBox();const box=mesh.geometry.boundingBox!;mesh.scale.set(size[0]/(box.max.x-box.min.x),size[1]/(box.max.y-box.min.y),size[2]/(box.max.z-box.min.z));normalized.current=true;},[exact,size[0],size[1],size[2]]);
+  return <RoundedBox ref={ref} position={at} args={size} radius={Math.min(...size)*.18} smoothness={2}>
     <meshStandardMaterial color={color} roughness={metal?.32:.56} metalness={metal}/>
   </RoundedBox>;
 }
