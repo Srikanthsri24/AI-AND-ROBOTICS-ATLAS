@@ -1662,3 +1662,7 @@ Added the styled assembly, progressive wiring and Arduino programming interface,
 ### Automatic tap work in progress — water transport prototype verified
 
 The internal rendered prototype now uses powered motor time to prime the nominal 9.8 mL tubing before producing a stream. It retains prime between controlled cycles, lands on the actual basin surface, conserves water through return and stops transport when motor power is removed. Actual stream click/highlight/label, three-cycle priming and rendered endpoints pass native checks; 56 targeted tests and strict changed-module TypeScript pass. The receiving-hand mesh, filled/priming trial UI, guide/session return and final public release checks remain pending. Published count stays **82/150**.
+
+### Automatic tap work in progress — receiving hand and runoff verified
+
+The private prototype now probes the actual rendered hand triangles for sonar detection and water landing. Clickable skin regions highlight, labels follow withdrawal, and water follows the palm to its edge before falling independently into the basin. Native Chrome checks cover five insertion positions, nine actual-part targets, moving-surface frame consistency and clear/rearm; 62 targeted tests and strict changed-module TypeScript pass. This preprimed fixture does not replace final filled/priming trial UI, session return and public-route QA, which remain pending. Published count stays **82/150**; the full 211-guide goal remains active.
