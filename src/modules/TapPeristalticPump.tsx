@@ -1,4 +1,4 @@
-import {useEffect,useMemo} from 'react';
+import {useEffect,useMemo,useLayoutEffect} from 'react';
 import type {ThreeEvent} from '@react-three/fiber';
 import {BufferGeometry,Float32BufferAttribute,Shape,Path} from 'three';
 import {tapRollerCenters,tapTubePoint,tapTubeLeadPoint} from '../data/tap-peristaltic-geometry';
@@ -24,8 +24,11 @@ function tubeGeometry(phase:number,side?:-1|1){
  for(const ring of [0,rings-1])for(let j=0;j<sides;j++){const a=ring*stride+j,b=a+offset;indices.push(a,a+1,b,a+1,b+1,b);}
  const g=new BufferGeometry();g.setAttribute('position',new Float32BufferAttribute(positions,3));g.setIndex(indices);g.computeVertexNormals();return g;
 }
+function updateTubeGeometry(g:BufferGeometry,phase:number,side?:-1|1){const positions=g.getAttribute('position'),rings=side?49:145,sides=24;let n=0;for(let layer=0;layer<2;layer++)for(let i=0;i<rings;i++)for(let j=0;j<=sides;j++){const p=side?tapTubeLeadPoint(side,i/(rings-1),j/sides*2*Math.PI,phase,layer===1):tapTubePoint(-3*Math.PI/4+i/(rings-1)*3*Math.PI/2,j/sides*2*Math.PI,phase,layer===1);positions.setXYZ(n++,...p);}positions.needsUpdate=true;g.computeVertexNormals();g.computeBoundingBox();g.computeBoundingSphere();}
+const fixedExtrusions=[{depth:3,bevelEnabled:false},{depth:13,bevelEnabled:false}];
 export default function TapPeristalticPump({phase=0,cutaway=false,selected,choose}:Props){
- const tube=useMemo(()=>tubeGeometry(phase),[phase]),inlet=useMemo(()=>tubeGeometry(phase,-1),[phase]),outlet=useMemo(()=>tubeGeometry(phase,1),[phase]);
+ const tube=useMemo(()=>tubeGeometry(0),[]),inlet=useMemo(()=>tubeGeometry(0,-1),[]),outlet=useMemo(()=>tubeGeometry(0,1),[]);
+ useLayoutEffect(()=>{updateTubeGeometry(tube,phase);updateTubeGeometry(inlet,phase,-1);updateTubeGeometry(outlet,phase,1);},[tube,inlet,outlet,phase]);
  useEffect(()=>()=>{tube.dispose();inlet.dispose();outlet.dispose();},[tube,inlet,outlet]);
  const flange=useMemo(()=>{const s=new Shape();s.moveTo(-29,-9);s.lineTo(29,-9);s.lineTo(29,9);s.lineTo(-29,9);s.closePath();for(const x of [-25,25]){const h=new Path();h.absarc(x,0,1.85,0,2*Math.PI,true);s.holes.push(h);}return s;},[]);
  const shell=useMemo(()=>{
@@ -41,10 +44,10 @@ export default function TapPeristalticPump({phase=0,cutaway=false,selected,choos
    <mesh position={[0,0,-29]} rotation={[Math.PI/2,0,0]}><cylinderGeometry args={[14.02,14.02,24,64]}/><meshStandardMaterial {...mat('tap-pump-can','#f0f1ec')}/></mesh>
    {Array.from({length:10},(_,i)=><mesh key={i} position={[13.98*Math.sin(i*.32-1.44),13.98*Math.cos(i*.32-1.44),-28]} rotation={[0,0,-(i*.32-1.44)]}><boxGeometry args={[1.3,.35,12]}/><meshStandardMaterial {...mat('tap-pump-can','#222735')}/></mesh>)}
   </group>
-  <mesh name="tap-pump-mount" userData={{partId:"tap-pump-mount"}} position={[0,0,-12]} onClick={event('tap-pump-mount')}><extrudeGeometry args={[flange,{depth:3,bevelEnabled:false}]}/><meshStandardMaterial {...mat('tap-pump-mount','#171b24')}/></mesh>
+  <mesh name="tap-pump-mount" userData={{partId:"tap-pump-mount"}} position={[0,0,-12]} onClick={event('tap-pump-mount')}><extrudeGeometry args={[flange,fixedExtrusions[0]]}/><meshStandardMaterial {...mat('tap-pump-mount','#171b24')}/></mesh>
   <group name="tap-pump-head" userData={{partId:"tap-pump-head"}} onClick={event('tap-pump-head')}>
    <mesh position={[0,0,-7.5]} rotation={[Math.PI/2,0,0]}><cylinderGeometry args={[23,23,1,72]}/><meshStandardMaterial {...mat('tap-pump-head','#131722')}/></mesh>
-   {shell.map((shape,i)=><mesh key={i} position={[0,0,-7]}><extrudeGeometry args={[shape,{depth:13,bevelEnabled:false}]}/><meshStandardMaterial {...mat('tap-pump-head','#202532')}/></mesh>)}
+   {shell.map((shape,i)=><mesh key={i} position={[0,0,-7]}><extrudeGeometry args={[shape,fixedExtrusions[1]]}/><meshStandardMaterial {...mat('tap-pump-head','#202532')}/></mesh>)}
    <mesh position={[0,0,-11]} rotation={[Math.PI/2,0,0]}><cylinderGeometry args={[10,10,6,48]}/><meshStandardMaterial {...mat('tap-pump-head','#202532')}/></mesh>
   </group>
   <group name="tap-pump-rotor" userData={{partId:"tap-pump-rotor"}} rotation={[0,0,-phase]} onClick={event('tap-pump-rotor')}>

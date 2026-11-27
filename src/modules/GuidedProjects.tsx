@@ -106,7 +106,7 @@ import { esp32Car } from '../data/esp32-car';
 import { completedGuidedBuildIds } from '../data/completed-guided-builds';
 import { demoReadings, projectStories } from '../data/project-stories';
 import { projectPartPhotos } from '../data/project-part-photos';
-import { lazy, Suspense, useEffect, useRef, useState } from 'react';
+import { useLayoutEffect, lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, Activity, Check, ChevronLeft, ChevronRight, Plus, ListChecks, Play, Square, Wrench, Rocket, MoveUpRight, Ruler, Radio, Bell, Monitor, Satellite, Camera, RadioTower } from 'lucide-react';
 import { guidedProjects } from '../data/guided-projects';
 import { download } from './state';
@@ -354,7 +354,7 @@ const MulchMoistureWorkshop = lazy(() => import('./MulchMoistureWorkshop'));
 const ClaySoilWorkshop = lazy(() => import('./ClaySoilWorkshop'));
 const SandySoilWorkshop = lazy(() => import('./SandySoilWorkshop'));
 const SeedlingMoistureWorkshop = lazy(() => import('./SeedlingMoistureWorkshop'));
-const workshopProjectIds = new Set(['directory-26','directory-25','directory-24','directory-23','directory-22','directory-21','directory-20','directory-19','directory-18','directory-17','directory-16','directory-15','directory-14','directory-13','directory-12','directory-11','directory-10','directory-9','directory-8','directory-7','directory-6','directory-5','directory-4','directory-3','directory-2','directory-1','rover-project','hand-project','soil-observer','home-project','ambient-light','traffic-sequencer','button-indicator','mechanism-study','desktop-arm','vision-counter','model-streetlight','wardrobe-light','reading-corner-indicator','greenhouse-shade-monitor','display-case-light','stair-model-marker','window-shadow-detector','school-diorama-night-mode','camping-model-lantern','tunnel-model-light','terrarium-temperature-flag','desk-comfort-monitor','seed-tray-temperature-flag','sunlit-window-monitor','model-incubator-temperature-alert','aquarium-model-temperature-alert','solar-oven-model-monitor','vent-outlet-temperature-indicator','cold-pack-warming-indicator','equipment-enclosure-monitor','basil-pot-moisture-flag','seedling-tray-moisture-check','sandy-soil-calibration','clay-soil-calibration','mulch-moisture-experiment','drainage-bottle-experiment','plant-pot-depth-comparison','capillary-watering-model','soil-drying-timer-study','window-box-comparison','library-help-button','quiz-desk-response-button','model-doorbell-panel','model-elevator-call-light','accessible-desk-switch','model-crossing-request','mailbox-test-flag','drawer-closed-indicator','handheld-signal-paddle','game-controller-input-tester','model-parking-barrier','cardboard-dial-gauge','mini-drawbridge-model','model-letter-sorter-flap','desktop-camera-pan-model','model-wind-vane-pointer']);
+const workshopProjectIds = new Set(['directory-27','directory-26','directory-25','directory-24','directory-23','directory-22','directory-21','directory-20','directory-19','directory-18','directory-17','directory-16','directory-15','directory-14','directory-13','directory-12','directory-11','directory-10','directory-9','directory-8','directory-7','directory-6','directory-5','directory-4','directory-3','directory-2','directory-1','rover-project','hand-project','soil-observer','home-project','ambient-light','traffic-sequencer','button-indicator','mechanism-study','desktop-arm','vision-counter','model-streetlight','wardrobe-light','reading-corner-indicator','greenhouse-shade-monitor','display-case-light','stair-model-marker','window-shadow-detector','school-diorama-night-mode','camping-model-lantern','tunnel-model-light','terrarium-temperature-flag','desk-comfort-monitor','seed-tray-temperature-flag','sunlit-window-monitor','model-incubator-temperature-alert','aquarium-model-temperature-alert','solar-oven-model-monitor','vent-outlet-temperature-indicator','cold-pack-warming-indicator','equipment-enclosure-monitor','basil-pot-moisture-flag','seedling-tray-moisture-check','sandy-soil-calibration','clay-soil-calibration','mulch-moisture-experiment','drainage-bottle-experiment','plant-pot-depth-comparison','capillary-watering-model','soil-drying-timer-study','window-box-comparison','library-help-button','quiz-desk-response-button','model-doorbell-panel','model-elevator-call-light','accessible-desk-switch','model-crossing-request','mailbox-test-flag','drawer-closed-indicator','handheld-signal-paddle','game-controller-input-tester','model-parking-barrier','cardboard-dial-gauge','mini-drawbridge-model','model-letter-sorter-flap','desktop-camera-pan-model','model-wind-vane-pointer']);
 const stages = ['Overview','Components','Assembly','Program & test','Finished demo'];
 const routes = ['overview','components','assembly','test','demo','workshop'];
 const image = (id: string) => `./images/blueprint-illustrations/${id}.webp`;
@@ -3143,12 +3143,15 @@ function Build({project, stage, art, expansion}: {project: Project;stage: number
   }
   const [checked,setChecked] = useState<number[]>([]);
   const heading = useRef<HTMLHeadingElement>(null);
-  useEffect(() => {
-    const frame = requestAnimationFrame(() => {
-      window.scrollTo({ top: 0, behavior: 'instant' });
-      heading.current?.focus({ preventScroll: true });
-    });
-    return () => cancelAnimationFrame(frame);
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    heading.current?.focus({ preventScroll: true });
+    const nav=heading.current?.closest('.gp-build')?.querySelector<HTMLElement>('.gp-stages');
+    if(!nav)return;
+    const align=()=>{const active=nav.querySelector<HTMLElement>('[aria-current=step]');if(!active)return;const a=active.getBoundingClientRect(),b=nav.getBoundingClientRect();nav.scrollLeft+=a.left-b.left-(b.width-a.width)/2;};
+    align();
+    const observer=new ResizeObserver(align);observer.observe(nav);
+    return()=>observer.disconnect();
   }, [project.id, stage]);
   const buildStages = workshopProjectIds.has(project.id) ? [...stages,'3D Workshop'] : stages;
   const assembly = project.assembly[step];

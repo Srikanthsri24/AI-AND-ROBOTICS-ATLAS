@@ -2,9 +2,9 @@
 
 ## Phase 1 — 150 published Guided Builds
 
-Current verified total: **82 / 150 workshops**. **68** remain in Phase 1; **61** additional guides remain in Phase 2. Counts and in-progress descriptions in earlier checkpoint notes describe those earlier states.
+Current verified total: **83 / 150 workshops**. **67** remain in Phase 1; **61** additional guides remain in Phase 2. Counts and in-progress descriptions in earlier checkpoint notes describe those earlier states.
 
-Latest completed: **Automatic Liquid Soap Dispenser (`directory-26`)**. Next in catalog order: **Arduino Automatic Tap System (`directory-27`)**.
+Latest completed: **Arduino Automatic Tap System (`directory-27`)**. Next in catalog order: **Obstacle-avoiding car & 6-axis robotic arm (`directory-35`)**.
 
 Use the user-approved obstacle-avoiding car as the visual and interaction benchmark. Add and verify a project-specific sixth 3D Workshop for each of the 150 published guides, continuing in catalog order.
 
@@ -1678,3 +1678,11 @@ The workshop screen now exposes empty-check, animated filling, three-cycle calib
 ### Automatic tap work in progress — guide aligned, release investigation ongoing
 
 The five-stage guide now has all ten kit entries, actual workshop component previews and a high-resolution authored mounting reference. All 1,334 repository tests, configured TypeScript build and Vite build pass. The production five-stage checks pass, and complete assembly/wiring replay passes, but final routed trial/return verification is investigating headless graphics stalls. Sixth-stage activation remains gated and is excluded from this pushed checkpoint. Verified total stays **82/150**.
+
+### 83. Arduino Automatic Tap System — completed and verified
+
+Activated the project-specific sixth workshop after final production verification. Includes 24 animated real-root fits, 29 electrical operations, actual-part highlighting/attached labels, seated USB upload and independent motor power, the observed empty-tank interlock, source-off 2,600 mL filling, three safety-limited priming-card cycles, actual receiving-hand sensing/landing, wet skin/runoff, four-second cutoff and clear/rearm. The ten-item guide and component previews match the authored rig. Both sensor-guide links return to the same paused trial.
+
+Resolved repeated static graphics captures and hardware geometry churn; moving pump tubes/lumen reuse buffers, and serial glyph preparation avoids experimental GPU readbacks. Stage scrolling now settles in the layout phase and the active outer stage remains visible on phones. Final native Chrome production replay passes all six stages, all 53 assembly/electrical operations, fill/prime/palm flow, both sensor returns, phone navigation, rearming and reset without diagnostic reads before clicks. Desktop/phone screenshots reviewed. All **1,334 repository tests**, configured **tsc -b**, and Vite production build pass (existing large-chunk warning). Temporary preview stopped; local development server remains on port 5190. No AWS deployment.
+
+**Verified total: 83 / 150. Phase 1 remaining: 67. Phase 2 remaining: 61.** The full 211-guide goal remains active; next is `directory-35`.
