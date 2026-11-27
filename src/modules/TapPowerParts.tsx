@@ -2,7 +2,7 @@ import {useMemo,type ReactNode} from 'react';
 import {Text,RoundedBox} from '@react-three/drei';
 import {Shape,Path,CatmullRomCurve3,Vector3,Vector2} from 'three';
 import type{ThreeEvent}from'@react-three/fiber';
-import {tapPowerLayout,tapPowerWorld,tapPowerTerminals,tapPowerCableDiameter} from '../data/tap-power';
+import {tapPowerLayout,tapPowerWorld,tapPowerTerminals,tapPowerCableDiameter,tapPowerHeaderClampOffset} from '../data/tap-power';
 const font=new URL('./fonts/NotoSans-Regular.ttf',document.baseURI).href;
 type Props={selected:string;choose:(id:string)=>void;withdrawal?:number;clampRelease?:Readonly<Record<string,number>>};
 function rect(x0:number,y0:number,x1:number,y1:number){const s=new Shape();s.moveTo(x0,y0);s.lineTo(x1,y0);s.lineTo(x1,y1);s.lineTo(x0,y1);s.closePath();return s;}
@@ -31,7 +31,7 @@ export default function TapPowerParts({selected,choose,withdrawal=0,clampRelease
    {tag('tap-supply-terminal-housing',<>{box('tap-supply-terminal-housing',[0,1.1,12],[14,.8,8],'#4c997d')}<mesh position={[0,0,15]}><extrudeGeometry args={[shapes.front,{depth:1,bevelEnabled:false}]}/><meshStandardMaterial {...mat('tap-supply-terminal-housing','#4c997d')}/></mesh><mesh position={[0,9.5,0]} rotation={[-Math.PI/2,0,0]}><extrudeGeometry args={[shapes.top,{depth:.5,bevelEnabled:false}]}/><meshStandardMaterial {...mat('tap-supply-terminal-housing','#4c997d')}/></mesh>{[-6.7,0,6.7].map(x=><group key={x}>{box('tap-supply-terminal-housing',[x,5.5,11.5],[.6,8,7],'#4c997d')}</group>)}</>)}
    {tapPowerTerminals.map(t=>{const id='tap-supply-'+t.polarity,release=clampRelease[id]??0;return <group key={id} position={[t.x,0,0]}>
     {tag(id,<mesh position={[0,0,9]}><extrudeGeometry args={[shapes.metal,{depth:6,bevelEnabled:false,curveSegments:32}]}/><meshStandardMaterial {...mat(id,'#b9a66d',.8)}/></mesh>)}
-    {tag(id+'-screw',<group position={[0,release,12]} rotation={[0,release*6*Math.PI,0]}><mesh position={[0,6.745,0]}><cylinderGeometry args={[.75,.75,4.51,32]}/><meshStandardMaterial {...mat(id+'-screw','#b9c1c7',.8)}/></mesh><mesh position={[0,9.1,0]}><cylinderGeometry args={[1.1,1.1,.2,32]}/><meshStandardMaterial {...mat(id+'-screw','#b9c1c7',.8)}/></mesh>{shapes.caps.map((shape,i)=><mesh key={i} position={[0,9.2,0]} rotation={[-Math.PI/2,0,0]}><extrudeGeometry args={[shape,{depth:.5,bevelEnabled:false}]}/><meshStandardMaterial {...mat(id+'-screw','#b9c1c7',.8)}/></mesh>)}</group>)}
+    {tag(id+'-screw',<group position={[0,release+tapPowerHeaderClampOffset,12]} rotation={[0,release*6*Math.PI,0]}><mesh position={[0,6.745,0]}><cylinderGeometry args={[.75,.75,4.51,32]}/><meshStandardMaterial {...mat(id+'-screw','#b9c1c7',.8)}/></mesh><mesh position={[0,9.1,0]}><cylinderGeometry args={[1.1,1.1,.2,32]}/><meshStandardMaterial {...mat(id+'-screw','#b9c1c7',.8)}/></mesh>{shapes.caps.map((shape,i)=><mesh key={i} position={[0,9.2,0]} rotation={[-Math.PI/2,0,0]}><extrudeGeometry args={[shape,{depth:.5,bevelEnabled:false}]}/><meshStandardMaterial {...mat(id+'-screw','#b9c1c7',.8)}/></mesh>)}</group>)}
     <Text font={font} position={[0,10.05,9.3]} rotation={[-Math.PI/2,0,0]} fontSize={1.6} color={t.polarity==='positive'?'#ffe5de':'#dce9f0'}>{t.polarity==='positive'?'+':'−'}</Text>
    </group>;})}
   </group>

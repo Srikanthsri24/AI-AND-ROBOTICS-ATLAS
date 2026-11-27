@@ -6,6 +6,8 @@ export const tapPowerLayout={adapter:[164,223,-60] as TapPoint,source:[230,12,13
 export function tapPowerWorld(p:TapPoint):[number,number,number]{const a=tapPowerLayout.adapter;return [a[0]+p[2],a[1]+p[1],a[2]-p[0]];}
 export const tapPowerTerminals=[{polarity:'positive',x:-3.5},{polarity:'negative',x:3.5}] as const;
 export function tapPowerContact(polarity:'positive'|'negative'){const p=tapPowerTerminals.find(p=>p.polarity===polarity)!;return tapPowerWorld([p.x,4.17,11]);}
+export function tapPowerHeaderContact(polarity:'positive'|'negative'):[number,number,number]{const p=tapPowerContact(polarity);return[p[0]+5,p[1]+.1,p[2]];}
+export const tapPowerHeaderClampOffset=.1;
 export function tapPowerPresent(enabled:boolean,withdrawal:number){if(!Number.isFinite(withdrawal)||withdrawal<0||withdrawal>tapPowerLayout.plugTravel)throw new RangeError('Invalid tap barrel plug travel');return enabled&&withdrawal===0;}
 export const tapPowerParts=[
  ['tap-supply-case','Pump supply · enclosed regulated 5 V source','Represents the separate regulated 5 V, 2 A supply. Its closed enclosure is outside the wet apparatus. The model shows its low-voltage output, not internal mains circuitry.'],
@@ -20,6 +22,6 @@ export const tapPowerParts=[
  ['tap-supply-terminal-housing','Power adapter · insulated terminal block','The green block keeps positive and negative clamps separate. The actual front conductor openings and top screw bores remain open in the model.'],
  ...tapPowerTerminals.flatMap(t=>[
   ['tap-supply-'+t.polarity,'Pump supply · '+(t.polarity==='positive'?'+5 V':'negative / GND')+' wire clamp',t.polarity==='positive'?'Connect this actual brass contact to driver VIN through the red STEMMA lead. Keep the independent motor-positive line separate from the Uno sensor 5 V rail.':'Connect this actual brass contact to the driver GND and shared Uno reference. It carries the motor return; the Uno D9 pin carries only the control signal.'] as const,
-  ['tap-supply-'+t.polarity+'-screw','Pump supply · '+(t.polarity==='positive'?'+':'−')+' clamp screw','Loosen this slotted screw with power disconnected, insert the stripped conductor through the front opening and tighten it. Leave insulation outside the clamp.'] as const,
+  ['tap-supply-'+t.polarity+'-screw','Pump supply · '+(t.polarity==='positive'?'+':'−')+' clamp screw','Loosen this slotted screw with power disconnected, insert the conductive factory male-header pin through the front opening and tighten it. Keep its insulated grip outside the clamp.'] as const,
  ]),
 ] as const;
