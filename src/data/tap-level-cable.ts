@@ -2,8 +2,8 @@ import{tapLevelPlacement,tapLevelDimensions}from'./tap-sensors';
 import type{TapPoint}from'./tap-plumbing';
 export const tapLevelChannels=[{name:'out',x:-1.2,color:'#329d79'},{name:'vcc',x:0,color:'#d45b6a'},{name:'ground',x:1.2,color:'#344350'}]as const;
 export type TapLevelChannel=typeof tapLevelChannels[number]['name'];
-export const tapLevelPlug={center:[178,224.27,-82]as TapPoint,pitch:2.54,rear:-86,mouth:-78};
-export function tapLevelPlugContact(name:TapLevelChannel):TapPoint{const i=tapLevelChannels.findIndex(c=>c.name===name);if(i<0)throw new RangeError('Unknown level connector channel');return[178+(i-1)*2.54,224.27,-78];}
+export const tapLevelPlug={center:[188,224.27,-82]as TapPoint,pitch:2.54,rear:-86,mouth:-78};
+export function tapLevelPlugContact(name:TapLevelChannel):TapPoint{const i=tapLevelChannels.findIndex(c=>c.name===name);if(i<0)throw new RangeError('Unknown level connector channel');return[tapLevelPlug.center[0]+(i-1)*2.54,224.27,-78];}
 export type TapCableSegment={a:TapPoint;b:TapPoint;control?:TapPoint};
 const blend=(a:TapPoint,b:TapPoint,t:number):TapPoint=>a.map((v,i)=>v+(b[i]-v)*t)as unknown as TapPoint;
 const distance=(a:TapPoint,b:TapPoint)=>Math.hypot(...a.map((v,i)=>v-b[i]));
