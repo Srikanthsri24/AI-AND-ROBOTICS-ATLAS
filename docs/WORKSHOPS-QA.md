@@ -36,3 +36,9 @@ Added a project-specific peristaltic pump component with selectable motor, head,
 Validation: ten tap controller/session and pump geometry tests passed, including parity against the downloadable Arduino sketch; targeted strict TypeScript check passed. Native Chrome fixture (`scripts/inspect-tap-pump.cjs`) rendered covered/cutaway states and exercised rotation and part controls without runtime errors. Screenshots inspected locally. Actual mesh raycasting, intake/spout leads, full workbench, assembly, wiring and routed verification remain pending. Completed count remains **82/150**.
 
 Reference: https://www.adafruit.com/product/3910 ; local product photograph `public/images/project-parts/peristaltic-pump.jpg`.
+
+### Automatic tap — tube leads and actual-surface interaction checkpoint
+
+Added separate reservoir inlet and spout outlet leads, with continuous inner/outer end rings across every sampled pump phase and recovery to the reference tubing bore at fixed connection points. Head wall has explicit lead exits; motor neck and roller axles connect the previously separated solids. All eleven part owners now support actual surface selection.
+
+Native Chrome verification now finds unobscured triangles and clicks the canvas for every part (including the fitted cover), checks the selected material colour on actual meshes, and checks an actual clicked roller anchor moves with the roller after rotation. Fixed pointer-down propagation so a rear surface cannot replace the clicked front anchor. Covered/cutaway screenshots inspected. All eleven tap controller/session/geometry tests passed; targeted strict TypeScript passed. This proves component interaction, not a completed routed workshop. Full classroom basin, intake/spout paths, assembly, wiring and working demonstration remain pending; count remains **82/150**.

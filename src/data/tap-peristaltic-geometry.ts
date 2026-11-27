@@ -19,3 +19,15 @@ export function tapTubePoint(theta:number,sectionAngle:number,phase:number,insid
  const s=tapTubeSection(theta,phase),r=s.center+(inside?s.innerRadial:s.radial)*Math.cos(sectionAngle);
  return [r*Math.sin(theta),r*Math.cos(theta),(inside?s.innerAxial:s.axial)*Math.sin(sectionAngle)];
 }
+
+/** Flexible port leads continue the same inner/outer rings, then recover to the
+ * reference 5/3.5 mm tube before fixed connection points below the head. */
+export function tapTubeLeadPoint(side:-1|1,t:number,sectionAngle:number,phase:number,inside=false):readonly[number,number,number]{
+ if(!Number.isFinite(t)||t<0||t>1||!Number.isFinite(sectionAngle))throw new RangeError('Invalid pump tube lead');
+ const theta=side*3*Math.PI/4,s=tapTubeSection(theta,phase),sin=Math.sin(theta),cos=Math.cos(theta);
+ const p0=[s.center*sin,s.center*cos],p1=[p0[0]+side*6*cos,p0[1]-side*6*sin],p2=[side*17,-28],p3=[side*17,-42],u=1-t;
+ const x=u**3*p0[0]+3*u*u*t*p1[0]+3*u*t*t*p2[0]+t**3*p3[0],y=u**3*p0[1]+3*u*u*t*p1[1]+3*u*t*t*p2[1]+t**3*p3[1];
+ const blend=t*t*(3-2*t),a=s.radial+(2.5-s.radial)*blend,b=5-a,wall=inside?.75:0;
+ const nx=sin*(1-blend)+side*blend,ny=cos*(1-blend),length=Math.hypot(nx,ny),r=(a-wall)*Math.cos(sectionAngle);
+ return [x+nx/length*r,y+ny/length*r,(b-wall)*Math.sin(sectionAngle)];
+}
