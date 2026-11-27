@@ -6,7 +6,9 @@ export const raArmLoomLength=820;
 export function raArmCableRoute(start:Vector3,exit:Vector3,guides:readonly Vector3[],end:Vector3,channel:number){
  if(!Number.isInteger(channel)||channel<0||channel>5)throw new RangeError('Arm cable channel');
  const make=(radius:number,divisions=128)=>{const points=[start.clone(),exit.clone(),...guides.map(p=>p.clone())];
-  for(let n=0;n<=24;n++){const a=n/24*Math.PI*4;points.push(new Vector3(-75+Math.cos(a)*radius,7+channel*4+n/24*4,-76+Math.sin(a)*radius));}
+  // Stagger the slack coils vertically so extension housings do not occupy
+  // neighboring channel routes. Wire-pair clearance is audited separately.
+  for(let n=0;n<=24;n++){const a=n/24*Math.PI*4;points.push(new Vector3(-75+Math.cos(a)*radius,7+channel*12+n/24*4,-76+Math.sin(a)*radius));}
   points.push(new Vector3(end.x,30+channel*2,end.z),end.clone());
   const c=new CatmullRomCurve3(points,false,'centripetal');c.arcLengthDivisions=divisions;return c;
  };

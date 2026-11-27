@@ -31,7 +31,9 @@ export default function RoverArmCables({selected,choose,seating}:{selected:strin
  for(let ch=0;ch<6;ch++){
   if(seating?.[ch]===null){routeKeys.current[ch]='';delete root.current.userData['route'+ch];continue;}const withdrawal=seating?.[ch]??0;
   const routeKey=String(withdrawal)+'|'+[...servos.slice(0,ch+1),board].map(o=>o!.matrixWorld.elements.join(',')).join('|');if(routeKeys.current[ch]===routeKey)continue;routeKeys.current[ch]=routeKey;
-  const source=servos[ch]!,start=local(source,new Vector3(32.8,-35.4,0)),exit=local(source,new Vector3(45,-35.4,0)),guides=[];for(let j=ch;j>=0;j--)guides.push(local(servos[j]!,new Vector3(46,-25,-18)));
+  // Fan channels into separate side lanes. Hinge-axis servos need a deeper
+  // rear lane than the upright base/roll cases to clear their ear fasteners.
+  const source=servos[ch]!,start=local(source,new Vector3(32.8,-35.4,0)),exit=local(source,new Vector3(45,-35.4,0)),guides=[];for(let j=ch;j>=0;j--)guides.push(local(servos[j]!,new Vector3(46+ch*10,j>=1&&j<=3?-55:-25,-18-ch*8)));
   const end=local(board,new Vector3(-23+ch*2.54,14.9+withdrawal,5.54)),curve=raArmCableRoute(start,exit,guides,end,ch),joint=curve.getPointAt(320/raArmLoomLength),tangent=curve.getTangentAt(320/raArmLoomLength),normal=normalAt(curve,320/raArmLoomLength);root.current.userData['route'+ch]={length:curve.getLength(),start:start.toArray(),end:end.toArray()};
   for(let r=0;r<3;r++){
    const row=rows[r],a=local(source,new Vector3(32.8,-35.4,row.startZ)),b=local(board,new Vector3(-23+ch*2.54,14.9+withdrawal,row.endZ));
