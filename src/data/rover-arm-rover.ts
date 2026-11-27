@@ -25,7 +25,7 @@ export function raRoverOutputs(s:RoverArmSession,w:RaRoverWiring):readonly[RaRov
 export type RaRoverPose={x:number;z:number;yaw:number;leftAngle:number;rightAngle:number;leftVelocity:number;rightVelocity:number;casterAngle:number;casterRoll:number};
 /** Chassis-local positions match the selected two-wheel teaching chassis.
  * Pose x/z describes its origin; differential drive is integrated at the axle. */
-export const raRoverWheelRadius=.65,raRoverTrack=3.8,raRoverAxleZ=-.50,raRoverCasterZ=1.60,raRoverStandLift=.15;
+export const raRoverWheelRadius=.65,raRoverTrack=3.8,raRoverAxleZ=-.50,raRoverCasterZ=1.60,raRoverCasterPivotZ=1.52,raRoverCasterTrail=.08,raRoverStandLift=.15;
 export const raRoverPoseInitial=():RaRoverPose=>({x:0,z:0,yaw:0,leftAngle:0,rightAngle:0,leftVelocity:0,rightVelocity:0,casterAngle:0,casterRoll:0});
 export function raRoverMotion(p:RaRoverPose,outputs:readonly[RaRoverOutput,RaRoverOutput],ms:number,onStand:boolean):RaRoverPose{
  if(!Number.isFinite(ms)||ms<0)throw RangeError('Invalid rover motion interval');if(!ms||outputs.some(o=>o.direction===null))return p;
@@ -33,7 +33,7 @@ export function raRoverMotion(p:RaRoverPose,outputs:readonly[RaRoverOutput,RaRov
  const next={...p,leftAngle:p.leftAngle-integrals[0],rightAngle:p.rightAngle-integrals[1],leftVelocity:velocities[0],rightVelocity:velocities[1]};if(onStand)return next;
  const left=integrals[0]*raRoverWheelRadius,right=integrals[1]*raRoverWheelRadius,distance=(left+right)/2,turn=(right-left)/raRoverTrack;
  if(Math.abs(turn)<1e-10){next.x-=distance*Math.sin(p.yaw);next.z-=distance*Math.cos(p.yaw);}else{next.x+=distance/turn*(Math.cos(p.yaw+turn)-Math.cos(p.yaw));next.z-=distance/turn*(Math.sin(p.yaw+turn)-Math.sin(p.yaw));}next.yaw+=turn;next.x+=raRoverAxleZ*(Math.sin(p.yaw)-Math.sin(next.yaw));next.z+=raRoverAxleZ*(Math.cos(p.yaw)-Math.cos(next.yaw));
- const forward=distance/dt,lateral=turn/dt*(raRoverCasterZ-raRoverAxleZ);if(Math.hypot(forward,lateral)>.005){const target=Math.atan2(-lateral,forward),difference=Math.atan2(Math.sin(target-p.casterAngle),Math.cos(target-p.casterAngle));next.casterAngle+=difference*(1-Math.exp(-8*dt));}next.casterRoll-=(forward*Math.cos(next.casterAngle)-lateral*Math.sin(next.casterAngle))/.20*dt;return next;
+ const forward=distance/dt,lateral=turn/dt*(raRoverCasterPivotZ-raRoverAxleZ);if(Math.hypot(forward,lateral)>.005){const target=Math.atan2(-lateral,forward),difference=Math.atan2(Math.sin(target-p.casterAngle),Math.cos(target-p.casterAngle));next.casterAngle+=difference*(1-Math.exp(-8*dt));}next.casterRoll-=(forward*Math.cos(next.casterAngle)-lateral*Math.sin(next.casterAngle))/.20*dt;return next;
 }
 export type RaRoverWorld={session:RoverArmSession;pose:RaRoverPose};
 export const raRoverWorldInitial=():RaRoverWorld=>({session:roverArmSessionInitial(),pose:raRoverPoseInitial()});
