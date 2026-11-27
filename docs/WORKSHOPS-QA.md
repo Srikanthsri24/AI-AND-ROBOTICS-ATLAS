@@ -360,3 +360,9 @@ Private bench only. Full connection sequencing/animation, arm anchors and loom c
 The combined private rig now includes the detailed Uno, seated logic jumpers, USB host/cable, separate actuator source/leads, driver, fixture, board fasteners and all eight base-anchor groups alongside the moving six-channel arm and loom. Native Chrome testing passes direct surface selection/highlight/labels for all eight anchors in this composed scene. Their complete world matrices remain unchanged through all six commanded joint cycles. Live RAF horn motion and a label attached to its rotating surface pass, along with delivered jog/timed neutral on every channel, lost-neutral/no-replay/fresh-home recovery and independent actuator-rail interruption/restoration. No page errors.
 
 This verifies the combined private rig regression, not a finished public guide. Public workflow, full clearance review and the alternate rover build remain outstanding. Count stays 83/150.
+
+### Rover-arm final-assembly wiring state
+
+Added an ordered 18-step connection model with part targets and instruction/why/check text. It covers GND/5V/A4/A5, servo outputs 0–5 with explicit ground/V+/signal polarity, positive and return source/terminal/clamp operations, and independent USB host/Uno seating. The final wiring model is separate from the unloaded calibration bench and alternate rover topology. Mechanical completion and both secured boards are prerequisites supplied by the containing workflow.
+
+Three new tests exercise out-of-order/powered/unfinished assembly and missing board rejection, every half-complete fitting through JSON save/resume, partial source/terminal/USB seating, full topology boot into arm mode with all six channels FULL OFF, explicit home delivery (307 ticks), controller-first startup and reverse shutdown. All 40 related model tests and strict TypeScript pass. No new public wiring screen or connector animation is claimed by this checkpoint.
