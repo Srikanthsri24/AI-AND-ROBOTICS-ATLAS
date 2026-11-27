@@ -10,8 +10,8 @@ export class RaArmRibbonFrame{
   for(let i=1;i<this.anchors.length;i++){const previous=this.anchors[i-1].angle;while(this.anchors[i].angle-previous>Math.PI)this.anchors[i].angle-=2*Math.PI;while(this.anchors[i].angle-previous< -Math.PI)this.anchors[i].angle+=2*Math.PI;}
 
  }
- normal(t:number,target=new Vector3()){
-  const at=Math.min(1,Math.max(0,t))*512,lo=Math.min(511,Math.floor(at)),tangent=this.route.getTangentAt(t),normal=this.frames.normals[lo].clone().lerp(this.frames.normals[lo+1],at-lo);normal.addScaledVector(tangent,-normal.dot(tangent)).normalize();const binormal=new Vector3().crossVectors(tangent,normal).normalize(),right=this.anchors.findIndex(a=>a.t>=t),last=this.anchors[Math.max(1,right)],first=this.anchors[Math.max(0,right-1)],u=(t-first.t)/(last.t-first.t),angle=first.angle+(last.angle-first.angle)*u;
+ normal(t:number,target=new Vector3(),tangentOverride?:Vector3){
+  const at=Math.min(1,Math.max(0,t))*512,lo=Math.min(511,Math.floor(at)),tangent=tangentOverride??this.route.getTangentAt(t),normal=this.frames.normals[lo].clone().lerp(this.frames.normals[lo+1],at-lo);normal.addScaledVector(tangent,-normal.dot(tangent)).normalize();const binormal=new Vector3().crossVectors(tangent,normal).normalize(),right=this.anchors.findIndex(a=>a.t>=t),last=this.anchors[Math.max(1,right)],first=this.anchors[Math.max(0,right-1)],u=(t-first.t)/(last.t-first.t),angle=first.angle+(last.angle-first.angle)*u;
   return target.copy(normal).multiplyScalar(Math.cos(angle)).addScaledVector(binormal,Math.sin(angle)).normalize();
  }
 }

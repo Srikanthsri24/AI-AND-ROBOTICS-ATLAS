@@ -14,13 +14,15 @@ class LoomWire extends Curve<Vector3>{
   for(const atStart of[true,false]){const distance=atStart?t:1-t;if(distance>=.06)continue;const u=Math.min(1,Math.max(0,(distance-.025)/.035)),blend=u*u*(3-2*u),line=(atStart?this.start:this.end).clone().addScaledVector(atStart?this.startDirection:this.endDirection,(atStart?t:t-1)*length);target.lerp(line,1-blend);}
   return target;
  }
- getPoint(t:number,target=new Vector3()){
-  const u=this.from+(this.to-this.from)*t,tangent=this.centre(Math.min(1,t+1e-5)).sub(this.centre(Math.max(0,t-1e-5))).normalize(),normal=this.ribbon.normal(u).applyQuaternion(new Quaternion().setFromUnitVectors(this.route.getTangentAt(u),tangent));
+ sample(t:number,centreTarget:Vector3,normalTarget:Vector3){
+  const u=this.from+(this.to-this.from)*t,tangent=this.centre(Math.min(1,t+1e-5)).sub(this.centre(Math.max(0,t-1e-5))).normalize(),routeTangent=this.route.getTangentAt(u),normal=this.ribbon.normal(u,normalTarget,routeTangent).applyQuaternion(new Quaternion().setFromUnitVectors(routeTangent,tangent));
   // Rotate unit ribbon directions; blending complete offset positions can
   // collapse opposing rows through one another beside a connector.
   for(const atStart of[true,false]){const distance=atStart?t:1-t;if(distance>=.06)continue;const q=Math.min(1,Math.max(0,(distance-.025)/.035)),blend=1-q*q*(3-2*q),desired=(atStart?this.startNormal:this.endNormal).clone();desired.addScaledVector(tangent,-desired.dot(tangent)).normalize();normal.applyQuaternion(new Quaternion().slerp(new Quaternion().setFromUnitVectors(normal,desired),blend));}
   const spread=Math.max(0,1-t/.1),finish=Math.max(0,1-(1-t)/.1),serviceRadius=this.offset/2,radius=serviceRadius+(this.startRadius-serviceRadius)*spread*spread*(3-2*spread)+(this.offset-serviceRadius)*finish*finish*(3-2*finish);
-  return this.centre(t,target).addScaledVector(normal,radius);
+  this.centre(t,centreTarget);return radius;
+ }
+ getPoint(t:number,target=new Vector3()){const normal=new Vector3(),radius=this.sample(t,target,normal);return target.addScaledVector(normal,radius);
  }
 }
 /** Geometry buffers stay allocated while the route is recomputed for changed
@@ -28,6 +30,7 @@ class LoomWire extends Curve<Vector3>{
  * same millimetre-scale parent; source frames are read from the actual meshes. */
 export default function RoverArmCables({selected,choose,seating}:{selected:string;choose:(id:string)=>void;seating?:readonly(number|null)[]}){const root=useRef<Group>(null),signature=useRef(''),routeKeys=useRef<string[]>([]),shape=useMemo(socket,[]),segments=240,sides=8;
  const initial=useMemo(()=>new CatmullRomCurve3([new Vector3(),new Vector3(1,0,0)]),[]);
+ const spanCentres=useMemo(()=>Array.from({length:241},()=>new Vector3()),[]),spanNormals=useMemo(()=>Array.from({length:241},()=>new Vector3()),[]),spanRadii=useMemo(()=>new Float64Array(241),[]);
  const centres=useMemo(()=>Array.from({length:241},()=>new Vector3()),[]),tangentBuffer=useMemo(()=>new Vector3(),[]),normalBuffer=useMemo(()=>new Vector3(),[]),binormalBuffer=useMemo(()=>new Vector3(),[]),previousTangent=useMemo(()=>new Vector3(),[]),transport=useMemo(()=>new Quaternion(),[]);
  const geometries=useMemo(()=>Array.from({length:36},()=>new TubeGeometry(initial,segments,.45,sides,false)),[initial]);useEffect(()=>()=>geometries.forEach(g=>g.dispose()),[geometries]);
  useFrame(()=>{const parent=root.current?.parent;if(!parent||!root.current)return;parent.updateWorldMatrix(true,true);const servos=raArmJoints.map(j=>parent.getObjectByName('ra-arm-'+j.id+'-servo')),board=parent.getObjectByName('ra-pca-model');if(servos.some(s=>!s)||!board)return;
@@ -40,11 +43,16 @@ export default function RoverArmCables({selected,choose,seating}:{selected:strin
   // returns around the front/left; the pitch and roll leads use rear lanes.
   // Fixed base-frame guides align each input with its storage layer.
   const source=servos[ch]!,start=local(source,new Vector3(32.8,-35.4,0)),exit=local(source,new Vector3(45,-35.4,0)),guides=[];for(let j=ch;j>=0;j--){if(j!==ch&&j!==0)continue;guides.push(local(servos[j]!,new Vector3(ch===5&&j===0?-80:46+ch*10-(ch===4&&j===4?40:0),j===0?(ch>0?raArmChannelRise(ch)-41:-25):j>=1&&j<=3?(ch===3?-100:ch===2?-80:-55):ch===4?10:-25,(j>=1&&j<=3?18+ch*8:ch===5?40:ch===4?(j===0?-145:-140):ch===3&&j===0?-120:ch===2&&j===0?-110:-18-ch*8))));}
-  const end=local(board,new Vector3(-23+ch*2.54,14.9+withdrawal,5.54)),curve=raArmCableRoute(start,exit,guides,end,ch),ribbon=new RaArmRibbonFrame(curve,local(source,new Vector3(32.8,-35.4,1)).sub(start),local(board,new Vector3(-23+ch*2.54,14.9+withdrawal,4.54)).sub(end),[...raArmCoilRibbonConstraints(curve),...raArmHeaderRibbonConstraints(curve,local(board,new Vector3(-23+ch*2.54,14.9+withdrawal,4.54)).sub(end))]),joint=curve.getPointAt(320/raArmLoomLength),tangent=curve.getTangentAt(320/raArmLoomLength),normal=ribbon.normal(320/raArmLoomLength);root.current.userData['route'+ch]={length:curve.getLength(),start:start.toArray(),end:end.toArray()};
-  for(let r=0;r<3;r++){
-   const row=rows[r],sourceNormal=local(source,new Vector3(32.8,-35.4,1)).sub(start).normalize(),boardNormal=local(board,new Vector3(-23+ch*2.54,14.9+withdrawal,4.54)).sub(end).normalize();
-   for(let half=0;half<2;half++){const offset=row.startZ*2.54,coupled=joint.clone().addScaledVector(tangent,half?12:-12),path=new LoomWire(curve,ribbon,half?(320+12)/raArmLoomLength:0,half?1:(320-12)/raArmLoomLength,offset,half?coupled:start,half?end:coupled,half?tangent:exit.clone().sub(start),half?local(board,new Vector3(-23+ch*2.54,13.9+withdrawal,5.54)).sub(end):tangent,half?normal:sourceNormal,half?boardNormal:normal,half?offset:row.startZ),g=geometries[ch*6+r*2+half],pos=g.attributes.position,norm=g.attributes.normal;
-    for(let i=0;i<=segments;i++)path.getPoint(i/segments,centres[i]);
+  const end=local(board,new Vector3(-23+ch*2.54,14.9+withdrawal,5.54)),curve=raArmCableRoute(start,exit,guides,end,ch),arcLengths=curve.getLengths(4096),ribbon=new RaArmRibbonFrame(curve,local(source,new Vector3(32.8,-35.4,1)).sub(start),local(board,new Vector3(-23+ch*2.54,14.9+withdrawal,4.54)).sub(end),[...raArmCoilRibbonConstraints(curve,arcLengths),...raArmHeaderRibbonConstraints(curve,local(board,new Vector3(-23+ch*2.54,14.9+withdrawal,4.54)).sub(end),arcLengths)]),joint=curve.getPointAt(320/raArmLoomLength),tangent=curve.getTangentAt(320/raArmLoomLength),normal=ribbon.normal(320/raArmLoomLength);root.current.userData['route'+ch]={length:curve.getLength(),start:start.toArray(),end:end.toArray()};
+  const sourceNormal=local(source,new Vector3(32.8,-35.4,1)).sub(start).normalize(),boardNormal=local(board,new Vector3(-23+ch*2.54,14.9+withdrawal,4.54)).sub(end).normalize();
+  // Position and ribbon orientation are shared by the three conductors.
+  // Only their signed distance from the centreline differs.
+  for(let half=0;half<2;half++){
+   const coupled=joint.clone().addScaledVector(tangent,half?12:-12),path=new LoomWire(curve,ribbon,half?(320+12)/raArmLoomLength:0,half?1:(320-12)/raArmLoomLength,2.54,half?coupled:start,half?end:coupled,half?tangent:exit.clone().sub(start),half?local(board,new Vector3(-23+ch*2.54,13.9+withdrawal,5.54)).sub(end):tangent,half?normal:sourceNormal,half?boardNormal:normal,half?2.54:1);
+   for(let i=0;i<=segments;i++)spanRadii[i]=path.sample(i/segments,spanCentres[i],spanNormals[i]);
+   for(let r=0;r<3;r++){
+    const g=geometries[ch*6+r*2+half],pos=g.attributes.position,norm=g.attributes.normal;
+    for(let i=0;i<=segments;i++)centres[i].copy(spanCentres[i]).addScaledVector(spanNormals[i],spanRadii[i]*rows[r].startZ);
     for(let i=0;i<=segments;i++){const p=centres[i],t=tangentBuffer.copy(centres[Math.min(segments,i+1)]).sub(centres[Math.max(0,i-1)]).normalize(),n=normalBuffer;if(i===0){n.set(-t.z,0,t.x);if(n.lengthSq()<1e-8)n.set(1,0,0);n.normalize();}else n.applyQuaternion(transport.setFromUnitVectors(previousTangent,t)).addScaledVector(t,-n.dot(t)).normalize();previousTangent.copy(t);const b=binormalBuffer.crossVectors(t,n).normalize();for(let k=0;k<=sides;k++){const angle=k/sides*Math.PI*2,c=-Math.cos(angle),s=Math.sin(angle),nx=n.x*c+b.x*s,ny=n.y*c+b.y*s,nz=n.z*c+b.z*s,at=i*(sides+1)+k;pos.setXYZ(at,p.x+nx*.45,p.y+ny*.45,p.z+nz*.45);norm.setXYZ(at,nx,ny,nz);}}pos.needsUpdate=norm.needsUpdate=true;g.computeBoundingBox();g.computeBoundingSphere();
    }
   }
