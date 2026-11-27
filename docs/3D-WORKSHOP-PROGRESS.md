@@ -1674,3 +1674,7 @@ Added serializable trial state for observed empty-water checks, source-off filli
 ### Automatic tap work in progress — complete experiment screen verified
 
 The workshop screen now exposes empty-check, animated filling, three-cycle calibration-card priming and actual receiving-hand water flow with clear student instructions/readouts. Native desktop/phone checks cover the full experiment from an assembled kit, actual card click/highlight/label, pause/remount, timeout/rearm, source-off transport and reset. All 68 targeted tap tests and strict changed-module TypeScript pass. The five-stage guide alignment and routed production release remain pending, so the completed workshop count stays **82/150**.
+
+### Automatic tap work in progress — guide aligned, release investigation ongoing
+
+The five-stage guide now has all ten kit entries, actual workshop component previews and a high-resolution authored mounting reference. All 1,334 repository tests, configured TypeScript build and Vite build pass. The production five-stage checks pass, and complete assembly/wiring replay passes, but final routed trial/return verification is investigating headless graphics stalls. Sixth-stage activation remains gated and is excluded from this pushed checkpoint. Verified total stays **82/150**.

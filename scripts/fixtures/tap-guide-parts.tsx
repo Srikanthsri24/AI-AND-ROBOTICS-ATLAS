@@ -1,0 +1,2 @@
+import{useState}from'react';import{createRoot}from'react-dom/client';import Part from'../../src/modules/TapGuidePartView';
+export function mount(el:HTMLElement){const root=createRoot(el);function Fixture(){const[index,setIndex]=useState(7);return <div style={{width:1000}}><div>{Array.from({length:10},(_,i)=><button key={i} onClick={()=>setIndex(i)}>Part {i+1}</button>)}</div><Part height={700} index={index} onSceneReady={s=>Object.assign(window,{__tapGuideScene:s})}/></div>;}root.render(<Fixture/>);return()=>root.unmount();}

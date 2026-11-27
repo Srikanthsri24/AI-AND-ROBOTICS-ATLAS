@@ -277,7 +277,8 @@ export const programWalkthroughs: Record<string, string[]> = {
     'The arm sketch centers on h and jogs one channel at a time. The gripper is the sixth servo channel.',
   ],
   'directory-27': [
-    'Three valid clear echoes arm the tap. Three close echoes start the pump when the tank sensor reports water.',
+    'First observe the empty-tank interlock, then fill with motor power off. The independent pump source never powers the Uno positive rail.',
+    'Three valid clear echoes arm the tap. Three close echoes start the pump when the tank sensor reports water. Prime the approximately 9.8 mL line through three safety-limited card cycles before hand use.',
     'Water low, a missing echo, withdrawal or four seconds of flow switches the pump off.',
     'After any stop, the tap waits for a new clear reading sequence before it can start again.',
   ],

@@ -292,6 +292,8 @@ const PianoWorkshop = lazy(() => import('./PianoWorkshop'));
 const CraneWorkshop = lazy(() => import('./CraneWorkshop'));
 const RainWorkshop = lazy(() => import('./RainWorkshop'));
 const RfidWorkshop = lazy(() => import('./RfidWorkshop'));
+const AutomaticTapWorkshop = lazy(() => import('./AutomaticTapWorkshop').then(module=>({default:module.AutomaticTapProjectWorkshop})));
+const TapGuidePartView = lazy(() => import('./TapGuidePartView'));
 const SoapDispenserWorkshop = lazy(() => import('./SoapDispenserWorkshop').then(module=>({default:module.SoapDispenserProjectWorkshop})));
 const TrafficParkingWorkshop = lazy(() => import('./TrafficParkingWorkshop'));
 const SchoolBellWorkshop = lazy(() => import('./SchoolBellWorkshop'));
@@ -3222,6 +3224,7 @@ function Build({project, stage, art, expansion}: {project: Project;stage: number
       {stage===5 && project.id==='traffic-sequencer' && <Suspense fallback={<p role="status">Loading the traffic signal workshop…</p>}><TrafficSignalWorkshop/></Suspense>}
       {stage===5 && project.id==='ambient-light' && <Suspense fallback={<p role="status">Loading the night-light workshop…</p>}><NightLightWorkshop/></Suspense>}
       {stage===5 && project.id==='home-project' && <Suspense fallback={<p role="status">Loading the room climate workshop…</p>}><RoomClimateWorkshop/></Suspense>}
+      {stage===5 && project.id==='directory-27' && <Suspense fallback={<p role="status">Loading the recirculating tap workshop…</p>}><AutomaticTapWorkshop/></Suspense>}
       {stage===5 && project.id==='directory-26' && <Suspense fallback={<p role="status">Loading the soap dispenser workshop…</p>}><SoapDispenserWorkshop/></Suspense>}
       {stage===5 && project.id==='directory-25' && <Suspense fallback={<p role="status">Loading the traffic and parking workshop…</p>}><TrafficParkingWorkshop/></Suspense>}
       {stage===5 && project.id==='directory-24' && <Suspense fallback={<p role="status">Loading the school bell workshop…</p>}><SchoolBellWorkshop/></Suspense>}
@@ -3374,7 +3377,7 @@ function Build({project, stage, art, expansion}: {project: Project;stage: number
             <figure className="gp-assembly-model">
               <figcaption><strong>3D part view</strong><span>Drag to rotate · Scroll to zoom</span></figcaption>
               <Suspense fallback={<p role="status">Loading the 3D part…</p>}>
-                <ProjectPartView name={partName}/>
+                <>{isAutomaticTap?<TapGuidePartView index={currentPart}/>:<ProjectPartView name={partName}/>}</>
               </Suspense>
             </figure>
             <div className="gp-part-preview">
