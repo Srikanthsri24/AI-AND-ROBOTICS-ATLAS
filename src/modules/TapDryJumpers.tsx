@@ -1,0 +1,20 @@
+import{useMemo,type ReactNode}from'react';
+import{CurvePath,LineCurve3,QuadraticBezierCurve3,Vector3,Shape,Path}from'three';
+import type{ThreeEvent}from'@react-three/fiber';
+import{tapDryWires,tapDryPose}from'../data/tap-dry-jumpers';
+import type{TapPoint}from'../data/tap-plumbing';
+function curve(points:readonly TapPoint[]){const p=points.map(p=>new Vector3(...p)),path=new CurvePath<Vector3>();let last=p[0];for(let i=1;i<p.length-1;i++){const r=Math.min(3,p[i].distanceTo(p[i-1])/3,p[i].distanceTo(p[i+1])/3),a=p[i].clone().addScaledVector(p[i-1].clone().sub(p[i]).normalize(),r),b=p[i].clone().addScaledVector(p[i+1].clone().sub(p[i]).normalize(),r);path.add(new LineCurve3(last,a));path.add(new QuadraticBezierCurve3(a,p[i],b));last=b;}path.add(new LineCurve3(last,p.at(-1)!));return path;}
+type Props={selected:string;choose:(id:string)=>void;fitting?:Readonly<Record<string,readonly[number,number]>>};
+function Jumper({id,selected,choose,sourcePhase,destinationPhase}:{id:string;selected:string;choose:(id:string)=>void;sourcePhase:number;destinationPhase:number}){
+ const w=tapDryWires.find(w=>w.id===id)!,pose=useMemo(()=>tapDryPose(id,sourcePhase,destinationPhase),[id,sourcePhase,destinationPhase]),path=useMemo(()=>curve(pose.points),[pose]);
+ const socket=useMemo(()=>{const s=new Shape();s.moveTo(-1.05,-1.05);s.lineTo(1.05,-1.05);s.lineTo(1.05,1.05);s.lineTo(-1.05,1.05);s.closePath();const h=new Path();h.moveTo(-.42,-.42);h.lineTo(-.42,.42);h.lineTo(.42,.42);h.lineTo(.42,-.42);h.closePath();s.holes.push(h);return s;},[]);
+ const mat=(owner:string,color:string,metalness=0)=>({color:selected===id||selected===owner?'#c4a2ff':color,metalness,roughness:.4,emissive:selected===id||selected===owner?'#6e3ab5':'#000000',emissiveIntensity:.25});
+ const event=(owner:string)=>(e:ThreeEvent<MouseEvent>)=>{e.stopPropagation();choose(owner);};
+ const box=(owner:string,name:string,position:[number,number,number],size:[number,number,number],color:string,metalness=0)=><mesh name={name} position={position}><boxGeometry args={size}/><meshStandardMaterial {...mat(owner,color,metalness)}/></mesh>;
+ const tag=(owner:string,node:ReactNode)=><group key={owner} name={owner} userData={{partId:owner}} onClick={event(owner)}>{node}</group>;
+ return <group name={id} userData={{partId:id}} onClick={event(id)}><mesh name={id+'-jacket'}><tubeGeometry args={[path,100,.45,12,false]}/><meshStandardMaterial {...mat(id,w.color)}/></mesh><mesh name={id+'-core'}><tubeGeometry args={[path,100,.22,8,false]}/><meshStandardMaterial {...mat(id,'#b69c6d',.8)}/></mesh>
+ {[w.a,w.b].map((port,i)=>{const owner=id+'-end-'+i;return tag(owner,<group position={[...(i?pose.destination:pose.source)]}>
+ {port.kind==='socket'?<>{box(owner,owner+'-pin',[0,-1,0],[.64,8,.64],'#b7c1ca',.8)}{box(owner,owner+'-grip',[0,4,0],[2.1,6,2.1],'#293442')}{box(owner,owner+'-boot',[0,7.6,0],[1.25,1.2,1.25],w.color)}<mesh position={[0,5.6,0]}><cylinderGeometry args={[.22,.22,5.2,12]}/><meshStandardMaterial {...mat(owner,'#b69c6d',.8)}/></mesh></>:<><mesh name={owner+'-female-housing'} position={[0,-4.8,0]} rotation={[-Math.PI/2,0,0]}><extrudeGeometry args={[socket,{depth:8,bevelEnabled:false}]}/><meshStandardMaterial {...mat(owner,'#293442')}/></mesh>{[-1,1].map(side=><group key={side}>{box(owner,owner+'-leaf-'+side,[side*.355,-1.425,0],[.07,3.15,.5],'#b8a371',.8)}</group>)}{box(owner,owner+'-bridge',[0,.15,0],[.78,.3,.5],'#b8a371',.8)}{box(owner,owner+'-boot',[0,4.2,0],[1.25,2,1.25],w.color)}<mesh position={[0,2.75,0]}><cylinderGeometry args={[.22,.22,4.9,12]}/><meshStandardMaterial {...mat(owner,'#b69c6d',.8)}/></mesh></>}
+ </group>);})}</group>;
+}
+export default function TapDryJumpers({selected,choose,fitting={}}:Props){return <group name="tap-dry-jumpers">{tapDryWires.map(w=><Jumper key={w.id} id={w.id} selected={selected} choose={choose} sourcePhase={fitting[w.id]?.[0]??1} destinationPhase={fitting[w.id]?.[1]??1}/>)}</group>;}

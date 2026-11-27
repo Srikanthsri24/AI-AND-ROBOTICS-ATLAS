@@ -88,3 +88,11 @@ The conductor graph derives every existing tap-session connectivity input from f
 Added the actual GND-only square pin, open insulating header body and underside solder bead. Native Chrome reverified thirty-six control-part owners through actual clicks/highlights/surface labels and confirmed the harness reference endpoint meets the rendered pin tip at [203.19, 239.5, -59.015] mm. All twenty-six targeted tap tests and strict TypeScript passed.
 
 This is a map/session and reference-header checkpoint, not a rendered harness release. Full wire routes, connector fitting animations, replacing short sensor pigtails with routed leads, guided lessons, priming/fluid/hand demonstration and routed/mobile verification remain pending. Completed count stays **82/150**.
+
+### Automatic tap — first three visible jumper routes and fitting animations
+
+Rendered the sensor-supply, sensor-ground and GND-reference jumpers from the actual harness map. Each has coloured insulation, an inner conductor and independently selectable end connectors. Male pins extend into the actual sockets while their grips remain above the openings. The GND-header end uses an open female housing with two metal leaves and a rear contact bridge. Routes use separate raised bends above the dry shelf and deform as either end is lifted or fitted.
+
+Native Chrome verified all nine actual wire/connector owners via canvas clicks, material highlights and surface labels. Six sequential insertion animations return to seated coordinates; a clicked endpoint anchor follows an independent 10 mm withdrawal and returns after fitting. Actual mesh bounds show 5 mm male insertion and 1 mm grip clearance; the female leaves meet the reference pin faces and the contact bridge meets its tip. Sampled route centreline separation is 2.54 mm minimum for 0.9 mm wire jackets (not a global collision/physics proof). Close-up screenshot inspected. All twenty-eight targeted tap tests and strict jumper-module TypeScript passed. Verifier: `scripts/inspect-tap-dry-jumpers.cjs`.
+
+Only three of fifteen full harness routes are rendered at this checkpoint. The twelve remaining routes, keyed STEMMA plug, complete sensor leads, power interlocks in the final lesson UI, whole-build assembly, water/hand demonstration and routed/mobile release checks remain pending. No completed-workshop count change: **82/150**.
