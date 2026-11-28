@@ -1,6 +1,6 @@
 /** Millimetres/radians/seconds. Authored lightweight foam-block teaching rig;
  * these dimensions and response constants are not a kit/load rating. */
-export const pickRoverRig={wheelRadius:32.5,track:142,pivotY:90,linkLength:100,palmReach:35,lowAngle:-40*Math.PI/180,highAngle:0,blockWidth:40,blockHeight:50,blockDepth:30,openGap:60,closedGap:34,padCompression:1,servoResponseMs:60,wheelResponseMs:80,maximumSpeed:360,gravity:9810,releaseClearance:4};
+export const pickRoverRig={wheelRadius:32.5,track:142,pivotY:90,linkLength:100,palmReach:50,lowAngle:-40*Math.PI/180,highAngle:0,blockWidth:40,blockHeight:50,blockDepth:30,openGap:60,closedGap:34,padCompression:1,servoResponseMs:60,wheelResponseMs:80,maximumSpeed:360,gravity:9810,releaseClearance:4};
 export type PickRoverMotion={clockMs:number;remainderMs:number;z:number;speed:number;wheelAngle:number;liftAngle:number;jawGap:number;block:{x:number;y:number;z:number;vy:number;held:boolean};captures:number;releases:number;landings:number;delivered:boolean};
 export type PickRoverActuation={wheelPwm:number;liftPulse:number|null;jawPulse:number|null;motorPower:boolean;servoPower:boolean;logicReference:boolean};
 export function pickRoverTip(s:Pick<PickRoverMotion,'z'|'liftAngle'>){return{x:0,y:pickRoverRig.pivotY+pickRoverRig.linkLength*Math.sin(s.liftAngle),z:s.z-pickRoverRig.linkLength*Math.cos(s.liftAngle)-pickRoverRig.palmReach};}

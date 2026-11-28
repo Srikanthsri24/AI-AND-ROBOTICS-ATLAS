@@ -10,5 +10,6 @@ export const pickLiftParts=[
  {id:'pick-lift-upper-links',label:'Parallel upper links',description:'Matching 100 mm links follow the upper fixed axis. Together with the end carrier they keep the gripper level while it rises.'},
  {id:'pick-lift-end-carrier',label:'Level end carrier',description:'The 26 mm spacing matches the fixed towers. Its two moving pivots keep this carrier upright throughout the calibrated lift arc.'},
  {id:'pick-lift-pivot-pins',label:'Four pivot shafts',description:'Steel shafts run through the open link and carrier bores. Their exposed ends carry retaining collars; the shafts align with the four linkage axes.'},
- {id:'pick-lift-palm-mount',label:'Horizontal gripper mount',description:'A 35 mm forward-reaching bracket stays level. Its end is the same reference used for the physical foam-block contact model.'},
+ {id:'pick-lift-palm-mount',label:'Horizontal gripper mount',description:'A 50 mm forward-reaching fork stays level. Its end is the same reference used for the physical foam-block contact model.'},
 ]as const;
+export const pickLiftForkFastenerPart={id:'pick-lift-fork-fasteners',label:'Carrier-to-fork through-bolts',description:'Two opposing bolts pass through the actual carrier and fork-tab bores. Washers seat on the outer tabs, while hollow retaining nuts seat against the inner carrier faces. These move with the level carrier, not with the rotating links.'};
