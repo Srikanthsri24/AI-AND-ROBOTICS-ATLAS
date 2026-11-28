@@ -17,7 +17,7 @@ export const pickLogicLinks=[
 /** Plug body starts just above a socket, or around a projecting header pin. */
 export function pickLogicSeat(e:PickLogicEndpoint){return e.at[1]+(e.kind==='driver'?-2.75:e.kind==='pca'?-3.85:.001);}
 export function pickLogicRoute(index:number){const link=pickLogicLinks[index];if(!link)throw new RangeError('Unknown logic supply lead');const start=new Vector3(link.from.at[0],pickLogicSeat(link.from)+8.05,link.from.at[2]),end=new Vector3(link.to.at[0],pickLogicSeat(link.to)+8.05,link.to.at[2]),height=94+index*4;
-const escape=(e:PickLogicEndpoint,p:Vector3)=>{const q=p.clone().add(new Vector3(0,5,0));if(e.kind==='tie')q.x+=link.ground?10+index*3:-10-index*3;else if(e.kind==='uno')q.z+=10+index*2;else q.x+=10+index*2;return q;};
+const escape=(e:PickLogicEndpoint,p:Vector3)=>{const q=p.clone().add(new Vector3(0,5,0));if(e.kind==='tie')q.x+=link.ground?10+index*3:-10-index*3;else if(e.kind==='uno')q.z+=10+index*2;else if(e.kind==='pca')q.x-=link.ground?12.5:16.5;else q.x+=10+index*2;return q;};
 const a=escape(link.from,start),b=escape(link.to,end),rear=174+index*4;
 return{link,start,end,curve:new CatmullRomCurve3([start,start.clone().add(new Vector3(0,2,0)),a,new Vector3(a.x,height,a.z),new Vector3(a.x,height,rear),new Vector3(b.x,height,rear),new Vector3(b.x,height,b.z),b,end.clone().add(new Vector3(0,2,0)),end],false,'catmullrom',.04)};}
 
