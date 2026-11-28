@@ -1,7 +1,7 @@
-/** Four alkaline AA cells in series, not a lithium pack or servo source. */
+import{pickBatteryCircuitParts}from'./pick-rover-battery-circuit';/** Four alkaline AA cells in series, not a lithium pack or servo source. */
 export const pickWheelBattery={at:[48,38.8,160]as const,width:58,length:64,height:17.5,cellLength:49,cellRadius:7.2,rows:[-23.25,-7.75,7.75,23.25]as const};
 export const pickBatteryMountPads=[-18,18].map((x,i)=>({id:'pick-wheel-battery-mount-'+i,x,width:8,length:55,thickness:.8}));
-export const pickWheelBatteryParts=[
+export const pickWheelBatteryParts=[...pickBatteryCircuitParts,
  ...pickBatteryMountPads.map((p,i)=>({id:p.id,label:'Battery mounting foam · '+(i?'right':'left')+' strip',description:'This 0.8 mm double-sided mounting strip bonds the flat holder underside to the acrylic deck. Clean and dry both surfaces, remove both protective liners and press the holder firmly. Keep the cable lugs and switch clear. Check that the holder cannot slide before every floor trial; replace loose tape. The teaching model shows the bonded contact faces, not an adhesive strength rating.'})),
  {id:'pick-wheel-battery-holder',label:'Four-AA wheel battery holder',description:'Four separate cell bays hold the alkaline cells in alternating directions. Series contacts add their nominal voltages to about 6 V. This source feeds motor-driver VM, never Uno 5V or servo V+.'},
  ...pickWheelBattery.rows.map((_,i)=>({id:'pick-wheel-cell-'+i,label:'AA alkaline cell '+(i+1),description:'A nominal 1.5 V alkaline AA cell. Its raised button is positive; its flat end is negative. Follow the alternating bay polarity. Four cells in series provide nominal 6 V; actual voltage falls under load and as cells discharge.'})),
