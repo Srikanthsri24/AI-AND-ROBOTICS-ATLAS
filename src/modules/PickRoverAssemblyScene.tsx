@@ -10,13 +10,14 @@ import{createPickAssemblyMotion,type PickAssemblyMotion}from'./pick-rover-assemb
 import{inspectCraneSurface}from'./crane-inspection';
 import{floodOwner,floodVisible,floodSurfaceAnchor,floodAnchorWorld,type FloodAnchor}from'../data/flood-surface';
 import{pickRoverParts}from'../data/pick-rover-parts';
+import{pickMechanicalAssembly}from'../data/pick-rover-assembly';
 import{pickRoverRig}from'../data/pick-rover-motion';
 import{pickServoSupplyLinks}from'../data/pick-rover-servo-supply-leads';
 import{pickWheelSupplyLinks}from'../data/pick-rover-wheel-supply-leads';
 import{pickMotorLinks}from'../data/pick-rover-motor-leads';
 import{pickLogicLinks}from'../data/pick-rover-power-leads';
 const links={servoFeedIds:pickServoSupplyLinks.map(l=>l.id),wheelSupplyLeadIds:pickWheelSupplyLinks.map(l=>l.id),motorLeadIds:pickMotorLinks.map(l=>l.id),logicLeadIds:pickLogicLinks.map(l=>l.id)};
-const Hardware=memo(function Hardware({selected,choose,connectorCutaway}:{selected:string;choose:(id:string)=>void;connectorCutaway:boolean}){return <Platform angle={pickRoverRig.lowAngle} gap={60} showUsb showWheelBattery showServoSupply showLiftCable showJawCable assemblyFeed liftCableCutaway={connectorCutaway} {...links} {...{selected,choose}}/>;});
+const Hardware=memo(function Hardware({selected,choose,connectorCutaway}:{selected:string;choose:(id:string)=>void;connectorCutaway:'lift'|'jaw'|null}){return <Platform angle={pickRoverRig.lowAngle} gap={60} showUsb showWheelBattery showServoSupply showLiftCable showJawCable assemblyFeed liftCableCutaway={connectorCutaway==='lift'} jawCableCutaway={connectorCutaway==='jaw'} {...links} {...{selected,choose}}/>;});
 export type PickAssemblyApi={scene:Scene;camera:Camera;motion:PickAssemblyMotion;home:()=>void;inspect:(id:string,select?:boolean)=>{x:number;y:number}|null};
 type Props={connectorCutaway:boolean;step:number;progress:number;selected:string;choose:(id:string)=>void;onReady:(api:PickAssemblyApi)=>void};
 export default function PickRoverAssemblyScene({step,progress,selected,choose,onReady,connectorCutaway}:Props){
@@ -30,6 +31,6 @@ export default function PickRoverAssemblyScene({step,progress,selected,choose,on
  <group scale={.01} name="pick-assembly-workspace">
  <mesh position={[0,-83,60]} receiveShadow><boxGeometry args={[290,6,400]}/><meshStandardMaterial color="#d6d8e4" roughness={.85}/></mesh>
  {[[50,-35],[-50,-35],[79,185],[-79,185]].map(([x,z])=><group key={x+'/'+z} position={[x,-80,z]}><mesh position={[0,57.5,0]} castShadow><boxGeometry args={[6,115,6]}/><meshStandardMaterial color="#716092" metalness={.35} roughness={.45}/></mesh><mesh position={[0,1.5,0]}><boxGeometry args={[15,3,15]}/><meshStandardMaterial color="#45455d"/></mesh></group>)}
- <group ref={hardware} name="pick-assembly-hardware" onPointerDown={(e:ThreeEvent<PointerEvent>)=>{if(!floodOwner(e.object))return;e.stopPropagation();anchor.current=floodSurfaceAnchor(e.object,e.point,e.face,e.instanceId);r.invalidate();}}><Hardware {...{selected,choose,connectorCutaway}}/></group>
+ <group ref={hardware} name="pick-assembly-hardware" onPointerDown={(e:ThreeEvent<PointerEvent>)=>{if(!floodOwner(e.object))return;e.stopPropagation();anchor.current=floodSurfaceAnchor(e.object,e.point,e.face,e.instanceId);r.invalidate();}}><Hardware {...{selected,choose}} connectorCutaway={connectorCutaway?(pickMechanicalAssembly[step].id==='jaw-servo-plug'?'jaw':'lift'):null}/></group>
  </group><Label selected={selected} anchor={anchor} name={part?.label??'Selected component'}/><OrbitControls makeDefault target={[0,.3,.4]} minDistance={.12} maxDistance={14}/></>;
 }
