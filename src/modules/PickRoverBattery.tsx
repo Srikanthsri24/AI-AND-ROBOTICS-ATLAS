@@ -1,20 +1,23 @@
-import{memo,useMemo,type ReactNode}from'react';
-import type{ThreeEvent}from'@react-three/fiber';
+import{memo,useMemo,useRef,type ReactNode}from'react';
+import{useFrame,type ThreeEvent}from'@react-three/fiber';
 import{Text}from'@react-three/drei';
-import{CatmullRomCurve3,Vector3,Shape,Path}from'three';
-import{pickWheelBattery as B}from'../data/pick-rover-battery';
+import{CatmullRomCurve3,Vector3,Shape,Path,type Group}from'three';
+import{pickWheelBattery as B,pickBatteryMountPads}from'../data/pick-rover-battery';
 const wallOptions={depth:2,bevelEnabled:false};
 const font=new URL('./fonts/NotoSans-Regular.ttf',document.baseURI).href;
 function cpu(t:{gpuAccelerateSDF:boolean}|null){if(t)t.gpuAccelerateSDF=false;}
-function PickRoverBattery({selected,choose,on=false,onToggle}:{selected:string;choose:(id:string)=>void;on?:boolean;onToggle?:()=>void}){
+function PickRoverBattery({selected,choose,on=false,onToggle,assemblyLift=0}:{assemblyLift?:number;selected:string;choose:(id:string)=>void;on?:boolean;onToggle?:()=>void}){
+ const lifted=useRef<Group>(null);useFrame((_,dt)=>{const g=lifted.current;if(g){const d=assemblyLift-g.position.y;g.position.y=Math.abs(d)<.002?assemblyLift:g.position.y+d*(1-Math.exp(-dt*9));}});
  const wall=useMemo(()=>{const s=new Shape();s.moveTo(-32,1.5);s.lineTo(32,1.5);s.lineTo(32,17.5);s.lineTo(-32,17.5);s.closePath();for(const z of [B.rows[0],B.rows[3]]){const h=new Path();h.absarc(-z,8.7,.8,0,Math.PI*2,true);s.holes.push(h);}return s;},[]);const springs=useMemo(()=>B.rows.map((z,i)=>{const side=i%2?1:-1;return new CatmullRomCurve3(Array.from({length:101},(_,n)=>{const a=n/100*Math.PI*8;return new Vector3(side*(24.8+n/100*1.8),8.7+2.4*Math.cos(a),z+2.4*Math.sin(a));}));}),[]);
  const mat=(id:string,color:string,metalness=0)=>({color:selected===id?'#c4a2ff':color,metalness,roughness:.4}),tag=(id:string,node:ReactNode,action?:()=>void)=><group name={id} userData={{partId:id}} onClick={(e:ThreeEvent<MouseEvent>)=>{e.stopPropagation();choose(id);action?.();}}>{node}</group>,box=(id:string,p:[number,number,number],size:[number,number,number],color:string,metalness=0)=><mesh position={p}><boxGeometry args={size}/><meshStandardMaterial {...mat(id,color,metalness)}/></mesh>;
  return <group name="pick-wheel-battery" position={[...B.at]} userData={{units:'mm',authoredTeachingGeometry:true}}>
+ {pickBatteryMountPads.map(p=>tag(p.id,<mesh name={p.id+'-foam'} position={[p.x,-p.thickness/2,0]}><boxGeometry args={[p.width,p.thickness,p.length]}/><meshStandardMaterial {...mat(p.id,'#555660')} roughness={.95}/></mesh>))}
+ <group ref={lifted} name="pick-wheel-battery-lifted-body">
  {tag('pick-wheel-battery-holder',<>{box('pick-wheel-battery-holder',[0,.75,0],[58,1.5,64],'#242a36')}{[-1,1].map(side=><group key={side}>{side>0?box('pick-wheel-battery-holder',[28,9.5,0],[2,16,64],'#242a36'):<mesh position={[-29,0,0]} rotation={[0,Math.PI/2,0]}><extrudeGeometry args={[wall,wallOptions]}/><meshStandardMaterial {...mat('pick-wheel-battery-holder','#242a36')}/></mesh>}{box('pick-wheel-battery-holder',[0,9.5,side*31.5],[54,16,1],'#242a36')}</group>)}{[-15.5,0,15.5].map(z=>box('pick-wheel-battery-holder',[0,4,z],[54,5,1],'#242a36'))}</>)}
  {B.rows.map((z,i)=>{const id='pick-wheel-cell-'+i,positive=i%2?-1:1;return <group key={id}>{tag(id,<group position={[0,8.7,z]}><mesh rotation={[0,0,Math.PI/2]}><cylinderGeometry args={[7.2,7.2,49,40]}/><meshStandardMaterial {...mat(id,'#bd963e',.45)}/></mesh>{[-1,1].map(side=><mesh key={side} name={id+'-cap-'+side} position={[side*24.45,0,0]} rotation={[0,0,Math.PI/2]}><cylinderGeometry args={[6.95,6.95,.3,32]}/><meshStandardMaterial {...mat(id,'#b8bec5',.8)}/></mesh>)}<mesh position={[positive*25.05,0,0]} rotation={[0,0,Math.PI/2]}><cylinderGeometry args={[2.5,2.5,.9,24]}/><meshStandardMaterial {...mat(id,'#b8bec5',.8)}/></mesh><Text ref={cpu} raycast={()=>null} font={font} position={[0,7.23,0]} rotation={[-Math.PI/2,0,0]} fontSize={2.25} color="#242a36">AA · 1.5 V</Text><Text ref={cpu} raycast={()=>null} font={font} position={[positive*18,7.1,0]} rotation={[-Math.PI/2,0,0]} fontSize={3} color="#242a36">+</Text></group>)}</group>;})}
  {tag('pick-wheel-battery-series',<>{B.rows.map((z,i)=>{const positive=i%2?-1:1;return <group key={i}><mesh name={'pick-aa-spring-'+i}><tubeGeometry args={[springs[i],100,.22,8,false]}/><meshStandardMaterial {...mat('pick-wheel-battery-series','#b9a675',.75)}/></mesh>{box('pick-wheel-battery-series',[-positive*26.7,8.7,z],[.4,6,6],'#b9a675',.75)}{box('pick-wheel-battery-series',[positive*25.7,8.7,z],[.4,6,6],'#b9a675',.75)}{box('pick-wheel-battery-series',[positive*26.25,8.7,z],[.7,3,.4],'#b9a675',.75)}</group>;})}{[{x:26.7,z:-15.5},{x:-26.7,z:0},{x:26.7,z:15.5}].map((p,i)=>box('pick-wheel-battery-series',[p.x,8.7,p.z],[.4,3,15.5],'#b9a675',.75))}</>)}
  {tag('pick-wheel-battery-switch',<>{box('pick-wheel-battery-switch',[0,9,33],[12,8,2],'#1d2432')}{box('pick-wheel-battery-switch',[on?2:-2,9,34.3],[5,5,.6],on?'#9062c8':'#5c6576')}<Text ref={cpu} raycast={()=>null} font={font} position={[0,15,34.1]} fontSize={2} color="#ddd5ee">{on?'ON':'OFF'}</Text></>,onToggle)}
  {(['negative','positive']as const).map((polarity,i)=>{const id='pick-wheel-battery-'+polarity;return tag(id,<group position={[-27,8.7,B.rows[i?3:0]]}><mesh position={[-.75,0,0]} rotation={[0,0,Math.PI/2]}><cylinderGeometry args={[.6,.6,3.5,16]}/><meshStandardMaterial {...mat(id,'#b9a675',.75)}/></mesh></group>);})}
- </group>;
+ </group></group>;
 }
 export default memo(PickRoverBattery);
