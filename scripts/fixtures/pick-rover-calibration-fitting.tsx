@@ -1,3 +1,4 @@
+import type{PickOperatingSceneApi}from'../../src/modules/PickRoverOperatingScene';
 import type{PickCableDressingSceneApi}from'../../src/modules/PickRoverCableDressingScene';
 import type{PickLiftFittingSceneApi}from'../../src/modules/PickRoverLiftFittingScene';
 import{createRoot}from'react-dom/client';
@@ -10,4 +11,5 @@ const calibration=(value:PickUnloadedSceneApi)=>Object.assign(window,{__pickUnlo
 const fitting=(value:PickJawFittingSceneApi)=>Object.assign(window,{__pickJawFittingApi:value});
 const lift=(value:PickLiftFittingSceneApi)=>Object.assign(window,{__pickLiftFittingApi:value});
 const dressing=(value:PickCableDressingSceneApi)=>Object.assign(window,{__pickDressingApi:value});
-const el=document.querySelector('#root')as HTMLElement;el.style.cssText='position:fixed;inset:0;overflow:auto;background:#f5f3fb;color:#202b4a;padding:clamp(10px,2vw,24px)';createRoot(el).render(<Bench onState={state} onCalibrationReady={calibration} onFittingReady={fitting} onLiftFittingReady={lift} onDressingReady={dressing}/>);
+const operating=(value:PickOperatingSceneApi)=>Object.assign(window,{__pickOperatingApi:value});
+const el=document.querySelector('#root')as HTMLElement;el.style.cssText='position:fixed;inset:0;overflow:auto;background:#f5f3fb;color:#202b4a;padding:clamp(10px,2vw,24px)';createRoot(el).render(<Bench onState={state} onCalibrationReady={calibration} onFittingReady={fitting} onLiftFittingReady={lift} onDressingReady={dressing} onOperatingReady={operating}/>);
