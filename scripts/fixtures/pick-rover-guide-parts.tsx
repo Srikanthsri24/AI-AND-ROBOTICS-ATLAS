@@ -1,0 +1,3 @@
+import{createRoot}from'react-dom/client';import{useState}from'react';import View from'../../src/modules/PickRoverGuidePartView';import{pickBalance}from'../../src/data/pick-balance';import '../../src/styles/app.css';
+function Fixture(){const[index,setIndex]=useState(0);Object.assign(window,{__pickGuidePartSet:(index:number)=>{delete(window as any).__pickGuidePartApi;setIndex(index);}});return <View index={index} name={pickBalance.parts[index][0]} onReady={api=>Object.assign(window,{__pickGuidePartApi:api,__pickGuidePartIndex:index})}/>;}
+const el=document.querySelector('#root')as HTMLElement;el.style.cssText='position:fixed;inset:0;padding:24px;overflow:auto;background:#f4f3fa;color:#202b4a';createRoot(el).render(<Fixture/>);

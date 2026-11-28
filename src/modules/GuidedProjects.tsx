@@ -1,3 +1,4 @@
+import{pickGuidePartModes}from'../data/pick-rover-guide-kits';
 import { recyclingVending } from '../data/recycling-vending';
 import { vendingMachine } from '../data/four-slot-vending';
 import { gestureLamp } from '../data/gesture-lamp';
@@ -270,6 +271,7 @@ const SolarSweeperDemo = lazy(() => import('./ProjectDemo').then(module => ({def
 const BeaconRoverDemo = lazy(() => import('./ProjectDemo').then(module => ({default:module.BeaconRoverDemo})));
 const BluetoothCarDemo = lazy(() => import('./ProjectDemo').then(module => ({default:module.BluetoothCarDemo})));
 const RoverArmGuidePartView=lazy(()=>import('./RoverArmGuidePartView'));
+const PickRoverGuidePartView=lazy(()=>import('./PickRoverGuidePartView'));
 const ProjectPartView = lazy(() => import('./ProjectDemo').then(module => ({ default: module.ProjectPartView })));
 const RoverWorkshop = lazy(() => import('./RoverWorkshop'));
 const TendonHandWorkshop = lazy(() => import('./TendonHandWorkshop'));
@@ -2949,7 +2951,7 @@ function EnclosureTest() {
   </div>;
 }
 
-function Build({project, stage, art, expansion}: {project: Project;stage: number;art:string;expansion?:ExpansionInfo}) {
+export function Build({project, stage, art, expansion}: {project: Project;stage: number;art:string;expansion?:ExpansionInfo}) {
   const [step,setStep] = useState(0);
   const [assemblyPart,setAssemblyPart] = useState<number | null>(null);
   const [demoRun,setDemoRun] = useState(0);
@@ -3383,7 +3385,7 @@ function Build({project, stage, art, expansion}: {project: Project;stage: number
             <figure className="gp-assembly-model">
               <figcaption><strong>3D part view</strong><span>Drag to rotate · Scroll to zoom</span></figcaption>
               <Suspense fallback={<p role="status">Loading the 3D part…</p>}>
-                <>{isAutomaticTap?<TapGuidePartView index={currentPart}/>:project.id==='directory-35'?<RoverArmGuidePartView index={currentPart}/>:<ProjectPartView name={partName}/>}</>
+                <>{isAutomaticTap?<TapGuidePartView index={currentPart}/>:project.id==='directory-35'?<RoverArmGuidePartView index={currentPart}/>:isPickBalance&&pickGuidePartModes[currentPart]?<PickRoverGuidePartView index={currentPart} name={partName}/>:<ProjectPartView name={partName}/>}</>
               </Suspense>
             </figure>
             <div className="gp-part-preview">

@@ -1,6 +1,6 @@
 import FrameClamps from'./PickGripperFrameClamps';import{useMemo,type ReactNode}from'react';import type{ThreeEvent}from'@react-three/fiber';import{Shape,Path}from'three';
 import Servo from'./RoverArmServoParts';import Gripper from'./PickRoverGripper';import{pickGripper as G,pickGripperPose}from'../data/pick-rover-gripper';import{raServoMounts}from'../data/rover-arm-servo';import{pickGripperHub as H}from'../data/pick-rover-gripper-hub';
-type Point=readonly[number,number,number];const plateOptions={depth:2.4,bevelEnabled:false},hubOptions={depth:H.socketDepth,bevelEnabled:false},hubBodyOptions={depth:H.shoulderY-H.baseY,bevelEnabled:false},nutOptions={depth:2,bevelEnabled:false},washerOptions={depth:.7,bevelEnabled:false};
+type Point=readonly[number,number,number];const plateOptions={depth:2.4,bevelEnabled:false},hubOptions={depth:H.socketDepth,bevelEnabled:false,curveSegments:64},hubBodyOptions={depth:H.shoulderY-H.baseY,bevelEnabled:false,curveSegments:64},nutOptions={depth:2,bevelEnabled:false},washerOptions={depth:.7,bevelEnabled:false};
 function hole(s:Shape,x:number,y:number,r:number){const p=new Path();p.absarc(x,y,r,0,Math.PI*2,true);s.holes.push(p);}
 function rectangle(w:number,h:number,x=0,y=0){const s=new Shape();s.moveTo(x-w/2,y-h/2);s.lineTo(x+w/2,y-h/2);s.lineTo(x+w/2,y+h/2);s.lineTo(x-w/2,y+h/2);s.closePath();return s;}
 /** Inverted servo stays above the rack window. A small splined hub drives the

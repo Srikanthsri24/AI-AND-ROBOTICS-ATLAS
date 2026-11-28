@@ -1,3 +1,4 @@
+import{pickGuideKitPhotos}from'./pick-rover-guide-kits';
 import{raGuideKitPhotos}from'./rover-arm-guide-kits';
 type Photo = { path: string; label: string; product?: number; source?: string; reference?:boolean };
 const catalog = (file: string, label: string, product: number): Photo => ({
@@ -8,6 +9,7 @@ const atlas = (id: string, label: string, product: number): Photo => ({
 });
 const photos: Record<string, Photo[]> = {
   ...raGuideKitPhotos,
+  ...pickGuideKitPhotos,
   'Computer with USB and Arduino IDE': [{path:'./images/project-parts/laptop-voice-console.jpg',label:'USB computer reference · Allan Kibe, CC BY-SA 4.0',source:'https://commons.wikimedia.org/wiki/File:Dell_Laptop.jpg'}],
   'Recirculating basin and dry mounting kit':[{path:'./images/project-parts/tap-mounting-kit.png',label:'Authored 3D reference · basin, thin-wall reservoir, return, dry frame and insulated mounting hardware',reference:true}],
   'Dispenser stand and dry mounting kit':[{path:'./images/project-parts/soap-mounting-kit.png',label:'Authored 3D reference · weighted stand, dry deck and hollow Uno supports; fasteners are fitted in the workshop',reference:true}],
