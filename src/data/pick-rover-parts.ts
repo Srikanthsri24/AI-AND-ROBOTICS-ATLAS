@@ -1,3 +1,4 @@
+import{pickCableProtectorParts}from'./pick-rover-cable-dressing';
 import{pickSplitHubParts}from'./pick-rover-split-hub';
 import{pickLiftRetentionParts}from'./pick-rover-lift-retention';
 import{pickGripFrameClampParts}from'./pick-gripper-frame-clamps';import{pickDriveHubParts}from'./pick-rover-drive-hub';import{pickUsbParts}from'./pick-rover-usb';import{pickChassisParts}from'./pick-rover-chassis';
@@ -20,7 +21,7 @@ import{pickServoSupplyLeadParts}from'./pick-rover-servo-supply-leads';
 import{pickLiftCableParts}from'./pick-rover-lift-cable';
 import{pickJawCableParts}from'./pick-rover-jaw-cable';
 /** Includes service/cutaway descriptions; UI shortcuts only target fitted parts. */
-export const pickRoverParts=[...pickSplitHubParts,...pickLiftRetentionParts,...pickGripFrameClampParts,...pickDriveHubParts,...pickUsbParts,...pickChassisParts,...pickBaseAnchorParts,...pickMotorMountParts,...pickLiftParts,pickLiftForkFastenerPart,...pickLiftDriveParts,...pickGripperParts,...pickGripperDriveParts,...raServoParts('pick-lift-servo','Lift servo'),...raServoParts('pick-grip-servo','Jaw servo'),...pickElectronicsParts,...pickDistributionParts,...pickControlParts,...pickI2cParts,...pickLogicParts,...pickMotorLeadParts,...pickWheelBatteryParts,...pickWheelSupplyParts,...pickServoSupplyParts,...pickServoSupplyLeadParts,...pickLiftCableParts,...pickJawCableParts];
+export const pickRoverParts=[...pickCableProtectorParts,...pickSplitHubParts,...pickLiftRetentionParts,...pickGripFrameClampParts,...pickDriveHubParts,...pickUsbParts,...pickChassisParts,...pickBaseAnchorParts,...pickMotorMountParts,...pickLiftParts,pickLiftForkFastenerPart,...pickLiftDriveParts,...pickGripperParts,...pickGripperDriveParts,...raServoParts('pick-lift-servo','Lift servo'),...raServoParts('pick-grip-servo','Jaw servo'),...pickElectronicsParts,...pickDistributionParts,...pickControlParts,...pickI2cParts,...pickLogicParts,...pickMotorLeadParts,...pickWheelBatteryParts,...pickWheelSupplyParts,...pickServoSupplyParts,...pickServoSupplyLeadParts,...pickLiftCableParts,...pickJawCableParts];
 export const pickRoverInspectShortcuts=[
  ['Controller','pick-uno-mcu'],['USB power','pick-usb-bank-switch'],['Wheel power','pick-wheel-battery-switch'],['Servo power','pick-servo-supply-switch'],['Lift','pick-lift-lower-links'],['Gripper','pick-grip-left-pad'],['Motor driver','pick-driver-chip'],['Servo driver','pick-pca-chip'],['Moving cable','pick-jaw-cable-ground'],['Caster','pick-rover-caster-fork'],
 ]as const;
