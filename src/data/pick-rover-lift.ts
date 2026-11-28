@@ -6,10 +6,10 @@ export function pickLiftJoints(angle:number){if(!Number.isFinite(angle)||angle<p
 export const pickLiftParts=[
  {id:'pick-lift-base',label:'Bolted lift base',description:'A broad mounting foot transfers the payload and linkage forces into the rover chassis. Its four open bores receive the chassis fasteners.'},
  {id:'pick-lift-fixed-frame',label:'Fixed pivot towers',description:'Two fixed pivot axes sit 26 mm apart. They support the parallelogram links; the frame stays attached to the chassis.'},
- {id:'pick-lift-lower-links',label:'Driven lower links',description:'The two 100 mm links rotate about the lower fixed axis. The lift servo couples to the left link through its horn; both ends have actual pivot bores.'},
+ {id:'pick-lift-lower-links',label:'Driven lower links',description:'The two 100 mm links rotate about the lower fixed axis. The lift servo turns a keyed axle through both lower links; the opposite ends retain round pivot bores.'},
  {id:'pick-lift-upper-links',label:'Parallel upper links',description:'Matching 100 mm links follow the upper fixed axis. Together with the end carrier they keep the gripper level while it rises.'},
  {id:'pick-lift-end-carrier',label:'Level end carrier',description:'The 26 mm spacing matches the fixed towers. Its two moving pivots keep this carrier upright throughout the calibrated lift arc.'},
- {id:'pick-lift-pivot-pins',label:'Four pivot shafts',description:'Steel shafts run through the open link and carrier bores. Their exposed ends carry retaining collars; the shafts align with the four linkage axes.'},
+ {id:'pick-lift-pivot-pins',label:'Passive pivot shafts',description:'Steel shafts run through the open link and carrier bores; the lower driven axis is shown separately. Their exposed ends carry retaining collars; the shafts align with the four linkage axes.'},
  {id:'pick-lift-palm-mount',label:'Horizontal gripper mount',description:'A 50 mm forward-reaching fork stays level. Its end is the same reference used for the physical foam-block contact model.'},
 ]as const;
 export const pickLiftForkFastenerPart={id:'pick-lift-fork-fasteners',label:'Carrier-to-fork through-bolts',description:'Two opposing bolts pass through the actual carrier and fork-tab bores. Washers seat on the outer tabs, while hollow retaining nuts seat against the inner carrier faces. These move with the level carrier, not with the rotating links.'};
