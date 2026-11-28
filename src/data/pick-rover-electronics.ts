@@ -1,4 +1,4 @@
-import uno from'./uno-r3-board-layout.json';import{bluetoothBoardLayouts,bluetoothHeaderPoints}from'./bluetooth-board-geometry';import{raPcaParts,raPcaPin,raPcaRows}from'./rover-arm-pca';
+import uno from'./uno-r3-board-layout.json';import{bluetoothBoardLayouts,bluetoothHeaderPoints}from'./bluetooth-board-geometry';import{raPcaParts,raPcaPin,raPcaRows,raPcaLogic}from'./rover-arm-pca';
 export const pickElectronics={uno:[-38,44,76],pca:[35,44,69],driver:[38,44,112]}as const;
 export function pickUnoPin(name:string){const p=uno.headers.find(p=>p.name===name);if(!p)throw new RangeError('Unknown Uno socket');const a=pickElectronics.uno;return[a[0]+p.x-34.29,a[1]+9.3,a[2]+26.67-p.y]as const;}
 export function pickDriverPin(name:string){const p=bluetoothHeaderPoints('tb6612').find(p=>p.name===name);if(!p)throw new RangeError('Unknown driver header');const a=pickElectronics.driver;return[a[0]+p.at[0]/.03,a[1]+6,a[2]+p.at[2]/.03]as const;}
@@ -24,3 +24,5 @@ export const pickElectronicsParts=[...pickUnoParts,...pickPcaParts,...pickDriver
 
 /** Height of the rendered mounting annulus, including its thin plating. */
 export const pickBoardPadTop={uno:44.85,pca:44.82,driver:44.8+1/30}as const;
+
+export function pickPcaLogicPin(name:typeof raPcaLogic[number][0]){const i=raPcaLogic.findIndex(p=>p[0]===name);if(i<0)throw new RangeError('Unknown PWM logic contact');return[pickElectronics.pca[0]-28.5,pickElectronics.pca[1]+7.1,pickElectronics.pca[2]-6.35+i*2.54]as const;}
