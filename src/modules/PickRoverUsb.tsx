@@ -2,6 +2,7 @@ import{memo,useLayoutEffect,useMemo,useRef,type ReactNode}from'react';
 import type{ThreeEvent}from'@react-three/fiber';
 import{Group,Mesh,Path,Shape,Vector2,type TubeGeometry}from'three';
 import{pickUsbBank as B,pickUsbBankFace,pickUsbPose}from'../data/pick-rover-usb';
+import{pickUsbInsertion}from'../data/pick-rover-usb-insertion';
 import{rewriteCubeSatTube}from'./cubesat-tube-motion';
 type P=[number,number,number];
 function rect(w:number,h:number){const s=new Shape();s.moveTo(-w/2,-h/2);s.lineTo(w/2,-h/2);s.lineTo(w/2,h/2);s.lineTo(-w/2,h/2);s.closePath();return s;}
@@ -9,10 +10,11 @@ function hole(s:Shape,w:number,h:number,x=0,y=0){const p=new Path();p.moveTo(x-w
 function ring(w:number,h:number,t:number){return hole(rect(w,h),w-2*t,h-2*t);}
 const extrusion={depth:10,bevelEnabled:false},wallExtrusion={depth:1,bevelEnabled:false};
 /** Native millimetres. Independent insulated inserts, real contact faces and hollow boots. */
-function PickRoverUsb({selected,choose,on=false,onToggle,unoWithdrawal=0,bankWithdrawal=0,bankShift=0}:{selected:string;choose:(id:string)=>void;on?:boolean;onToggle?:()=>void;unoWithdrawal?:number;bankWithdrawal?:number;bankShift?:number}){
- const root=useRef<Group>(null),pose=pickUsbPose(unoWithdrawal,bankWithdrawal);
+function PickRoverUsb({selected,choose,on=false,onToggle,unoWithdrawal=0,bankWithdrawal=0,bankShift=0,assembly=false}:{selected:string;choose:(id:string)=>void;on?:boolean;onToggle?:()=>void;unoWithdrawal?:number;bankWithdrawal?:number;bankShift?:number;assembly?:boolean}){
+ const root=useRef<Group>(null),loom=useRef<Group>(null),cache=useRef<number|null>(null),pose=useMemo(()=>pickUsbPose(unoWithdrawal,bankWithdrawal),[unoWithdrawal,bankWithdrawal]);
  const geo=useMemo(()=>{const b=new Shape();for(const [i,p]of [[-4.9,-4.4],[4.9,-4.4],[4.9,3],[3.5,4.4],[-3.5,4.4],[-4.9,3]].entries())i?b.lineTo(p[0],p[1]):b.moveTo(p[0],p[1]);b.closePath();const inner=new Path();for(const[i,p]of[[-4.55,-4.05],[-4.55,2.86],[-3.36,4.05],[3.36,4.05],[4.55,2.86],[4.55,-4.05]].entries())i?inner.lineTo(p[0],p[1]):inner.moveTo(p[0],p[1]);inner.closePath();b.holes.push(inner);return{b,a:ring(11.8,4.4,.35),socket:ring(12.8,5.4,.35),wall:hole(rect(30,12),13,5.6),boot:[[1.6,-3],[4,-3],[1.8,3],[1.6,3],[1.6,-3]].map(([x,y])=>new Vector2(x,y)),curve:pickUsbPose().curve};},[]);
  useLayoutEffect(()=>{const mesh=root.current?.getObjectByName('pick-usb-cable-tube')as Mesh<TubeGeometry>|undefined;if(mesh)rewriteCubeSatTube(mesh.geometry,pickUsbPose(unoWithdrawal,bankWithdrawal).curve);},[unoWithdrawal,bankWithdrawal]);
+ useLayoutEffect(()=>{if(!assembly)return;const object=loom.current,tube=root.current?.getObjectByName('pick-usb-cable-tube')as Mesh<TubeGeometry>|undefined,b=root.current?.getObjectByName('pick-usb-b-body'),a=root.current?.getObjectByName('pick-usb-a-body');if(!object||!tube||!b||!a)throw Error('Missing USB assembly geometry');object.userData.applyAssemblyPose=(progress:number)=>{if(cache.current===progress)return;const state=pickUsbInsertion(progress);rewriteCubeSatTube(tube.geometry,state.curve);b.position.copy(state.uno);a.position.copy(state.bank);cache.current=progress;};return()=>{object.userData.applyAssemblyPose?.(1);delete object.userData.applyAssemblyPose;cache.current=null;};},[assembly]);
  const material=(id:string,c:string,metalness=0)=><meshStandardMaterial color={selected===id?'#c4a2ff':c} metalness={metalness} roughness={metalness?.32:.58}/>;
  const tag=(id:string,node:ReactNode,toggle=false)=><group key={id} name={id} userData={{partId:id}} onClick={(e:ThreeEvent<MouseEvent>)=>{e.stopPropagation();choose(id);if(toggle)onToggle?.();}}>{node}</group>;
  const box=(id:string,p:P,s:P,c:string,m=0)=><mesh position={p} castShadow receiveShadow><boxGeometry args={s}/>{material(id,c,m)}</mesh>;
@@ -28,7 +30,7 @@ function PickRoverUsb({selected,choose,on=false,onToggle,unoWithdrawal=0,bankWit
  {tag('pick-usb-bank-led',<mesh position={[10,6,-15.2]}><boxGeometry args={[2,1,.4]}/><meshStandardMaterial color={selected==='pick-usb-bank-led'?'#c4a2ff':on?'#71d6b0':'#344a48'} emissive={on?'#42b58b':'#000000'} emissiveIntensity={on?.7:0}/></mesh>)}
  </group></group>
  {tag('pick-usb-bank-port',<group position={[pickUsbBankFace[0]+bankShift,pickUsbBankFace[1],pickUsbBankFace[2]]}>{extrude('pick-usb-bank-port',geo.socket,0,'#b8c2cd')}{box('pick-usb-bank-port',[4.5,-1.2,0],[9,1.2,10],'#d6cdb7')}{[-3.75,-1.25,1.25,3.75].map(z=><group key={z}>{box('pick-usb-bank-port',[3.25,-.55,z],[4.5,.1,.8],'#c6b27a',.8)}</group>)}</group>)}
- </group><group name="pick-usb-loom">
+ </group><group ref={loom} name="pick-usb-loom">
  {tag('pick-usb-cable',<mesh name="pick-usb-cable-tube" castShadow><tubeGeometry args={[geo.curve,240,1.5,12,false]}/>{material('pick-usb-cable','#384965')}</mesh>)}
  <group name="pick-usb-b-body" position={pose.uno}>
  {tag('pick-usb-b-shield',extrude('pick-usb-b-shield',geo.b,-6,'#b8c2cd'))}

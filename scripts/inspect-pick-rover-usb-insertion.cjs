@@ -1,0 +1,16 @@
+const assert=require('node:assert/strict'),{chromium}=require('playwright');
+(async()=>{const browser=await chromium.launch({channel:'chrome',args:['--enable-unsafe-swiftshader']});try{
+ const page=await browser.newPage({viewport:{width:1200,height:950}});await page.goto('http://127.0.0.1:5190/scripts/fixtures/pick-rover-assembly.html');await page.waitForFunction(()=>!!window.__pickAssemblyApi);
+ await page.evaluate(()=>{const m=window.__pickAssemblyApi.scene.getObjectByName('pick-usb-cable-tube');window.__usbInsertionBuffer={mesh:m,geometry:m.geometry,attribute:m.geometry.attributes.position,array:m.geometry.attributes.position.array};});
+ for(const progress of[0,.25,.5,.75,.9,1]){
+  const result=await page.evaluate(async progress=>{
+   const{Box3,Vector3}=await import('/node_modules/three/build/three.module.js'),{roverConnectorMeshesIntersect:hit}=await import('/src/modules/rover-connector-intersection.ts'),{pickUsbInsertion}=await import('/src/data/pick-rover-usb-insertion.ts'),{pickUsbConnected}=await import('/src/data/pick-rover-usb.ts'),{pickMechanicalAssembly}=await import('/src/data/pick-rover-assembly.ts');
+   const api=window.__pickAssemblyApi;api.motion.apply(pickMechanicalAssembly.findIndex(s=>s.id==='usb-cable-insertion'),progress);api.scene.updateMatrixWorld(true);const scene=api.scene,pose=pickUsbInsertion(progress),a=[],source=[],b=[],uno=[];
+   const collect=(id,metal,list)=>scene.getObjectByName(id).traverse(o=>{if(o.isMesh&&o.material.metalness===metal)list.push(o);});collect('pick-usb-a-contacts',.8,a);collect('pick-usb-bank-port',.8,source);collect('pick-usb-b-contacts',.8,b);collect('pick-uno-usb',.7,uno);
+   const contactFaces=a.map((m,i)=>{const p=new Box3().setFromObject(m,true),q=new Box3().setFromObject(source[i],true);return{gap:Math.abs(p.min.y-q.max.y),overlap:Math.min(p.max.x,q.max.x)-Math.max(p.min.x,q.min.x)};});let bContacts=0;for(const p of b)for(const q of uno)if(hit(p,q))bContacts++;
+   const buffer=window.__usbInsertionBuffer,attribute=buffer.mesh.geometry.attributes.position,ring=n=>{const v=new Vector3();for(let j=0;j<12;j++)v.add(new Vector3().fromBufferAttribute(attribute,n+j));return v.divideScalar(12);};
+   return{contactFaces,bContacts,powered:pickUsbConnected(true,pose.unoWithdrawal,pose.bankWithdrawal),offGate:pickUsbConnected(false,pose.unoWithdrawal,pose.bankWithdrawal),indicatorOff:scene.getObjectByName('pick-usb-bank-led').children[0].material.emissiveIntensity===0,startError:ring(0).distanceTo(pose.start),endError:ring(attribute.count-13).distanceTo(pose.end),retained:buffer.mesh.geometry===buffer.geometry&&attribute===buffer.attribute&&attribute.array===buffer.array};
+  },progress);
+  assert.equal(result.contactFaces.length,4);assert.ok(result.contactFaces.every(p=>p.gap<1e-8));assert.equal(result.powered,result.bContacts===4&&result.contactFaces.every(p=>p.overlap>1e-8));assert.ok(!result.offGate&&result.indicatorOff&&result.retained);assert.ok(result.startError<1e-4&&result.endError<1e-4);if(progress===1){assert.equal(result.bContacts,4);assert.ok(result.contactFaces.every(p=>Math.abs(p.overlap-.028)<1e-6));}console.log('ACTUAL USB CONTACTS / BOTH BOOT EXITS / POWER GATE / RETAINED BUFFER PASS',progress,JSON.stringify(result));
+ }
+}finally{await browser.close();}})().then(()=>process.exit(0)).catch(e=>{console.error(e);process.exit(1);});
