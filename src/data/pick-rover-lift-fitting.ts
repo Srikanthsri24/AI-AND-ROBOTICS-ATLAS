@@ -1,0 +1,8 @@
+const ease=(v:number)=>{const t=Math.max(0,Math.min(1,v));return t*t*(3-2*t);};
+export const pickLiftFittingPhases=[
+ {until:.25,title:'Fit adapter half A',instruction:'Keep all sources OFF and both reference-A positions unchanged. Support the lift links. Bring the open spline and D profiles of half A around the aligned shafts from the side; the fixed tower and axle rings stay in place.'},
+ {until:.5,title:'Close adapter half B',instruction:'Match the second half to the first around the same spline and D flat. The split faces meet without forcing either shaft to turn. Align both pairs of bored ears before adding hardware.'},
+ {until:.75,title:'Insert the two cross-bolts',instruction:'Slide each cross-bolt through its aligned ear bores from the head side. Its head rests on the outer ear; its shank clears the opposite bore. A bolt is a retainer, not a tool for forcing a misaligned adapter shut.'},
+ {until:1,title:'Seat both retaining nuts',instruction:'Fit each hollow nut from the opposite side and seat it against the ear. Check both halves and both bolt/nut pairs, and verify the axle rings remain in their grooves. Keep power OFF for the remaining cable-dressing and test stages. Fine thread engagement, preload and load capacity are not simulated.'},
+]as const;
+export function pickLiftFittingPose(progress:number){if(!Number.isFinite(progress)||progress<0||progress>1)throw new RangeError('Invalid lift fitting position');const step=(a:number,b:number)=>ease((progress-a)/(b-a));return{halves:[-16*(1-step(0,.25)),16*(1-step(.25,.5))]as const,halfBVisible:progress>=.25,boltVisible:progress>=.5,boltOffset:12*(1-step(.5,.75)),nutVisible:progress>=.75,nutOffset:-12*(1-step(.75,1)),phase:Math.min(3,pickLiftFittingPhases.findIndex(p=>progress<=p.until))};}
