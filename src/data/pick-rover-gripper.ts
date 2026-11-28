@@ -14,8 +14,8 @@ export const pickGripperParts=[
  {id:'pick-grip-guides',label:'Open rack guides',description:'Two guide channels constrain the racks to slide sideways. The central opening clears the drive gear and leaves the tooth engagement visible.'},
 ]as const;
 export const pickGripperDriveParts=[
- {id:'pick-grip-spline-hub',label:'Compact splined drive hub',description:'This small-bore adapter joins the servo spline to the pinion. Its compact outside diameter clears both racks; a full-size circular horn would sweep through their teeth.'},
- {id:'pick-grip-drive-retainer',label:'Pinion retaining screw',description:'The axial screw passes through the pinion bore and engages the servo output. Its head seats below the gear; the hub supports the opposite face.'},
+ {id:'pick-grip-spline-hub',label:'Compact splined drive hub',description:'The upper socket fits the servo spline. A smaller round screw passage below it leaves an internal shoulder that seats against the output face. The lower annular face meets the pinion; tightening the central screw clamps these faces together to transfer torque. Its compact outside diameter clears both racks.'},
+ {id:'pick-grip-drive-retainer',label:'Pinion retaining screw',description:'The axial screw passes through the pinion and the hub’s small through-bore into the servo output. Its head seats below the gear while the hub’s internal shoulder seats on the servo face. This clamps the pinion against the hub. Fine thread flanks, preload and friction capacity are not simulated.'},
  {id:'pick-grip-servo-bracket',label:'Inverted servo bracket',description:'The slotted servo ears seat beneath this bored plate. An edge notch clears the cable outlet during insertion. Rear posts support the case above the transmission, clear of the moving finger bridges.'},
  {id:'pick-grip-mount-fasteners',label:'Servo mounting bolts and nuts',description:'Four separate fasteners pass through the plate and servo-ear slots. The nuts seat below the ears and the washers seat on the bracket.'},
 ]as const;
