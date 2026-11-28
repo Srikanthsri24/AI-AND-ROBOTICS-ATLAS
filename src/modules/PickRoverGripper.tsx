@@ -1,0 +1,14 @@
+import{useMemo,type ReactNode}from'react';import type{ThreeEvent}from'@react-three/fiber';
+import{raGripPinion,raGripTooth,raGripRackZ}from'../data/rover-arm-gripper';import{pickGripper as G,pickGripperPose,pickGripperToothX}from'../data/pick-rover-gripper';
+type Point=readonly[number,number,number];const gearOptions={depth:2.4,bevelEnabled:false},rackOptions={depth:5,bevelEnabled:false};
+/** Transmission subassembly at the contact model's pad-centre reference.
+ * Servo, mount and cable are deliberately composed separately. */
+export default function PickRoverGripper({gap,selected,choose}:{gap:number;selected:string;choose:(id:string)=>void}){const pose=pickGripperPose(gap),shapes=useMemo(()=>({pinion:raGripPinion(),left:raGripTooth(-1),right:raGripTooth(1)}),[]),mat=(id:string,color='#a6afb8',metalness=.55)=>({color:selected===id?'#c4a2ff':color,metalness,roughness:.38}),tag=(id:string,children:ReactNode)=><group key={id} name={id} userData={{partId:id}} onClick={(e:ThreeEvent<MouseEvent>)=>{e.stopPropagation();choose(id);}}>{children}</group>,box=(id:string,at:Point,size:Point,color?:string,metalness?:number)=><mesh position={[...at]}><boxGeometry args={[...size]}/><meshStandardMaterial {...mat(id,color,metalness)}/></mesh>;
+ return <group name="pick-rover-gripper-transmission" userData={{units:'mm',authoredTeachingGeometry:true}}>
+ <group name="pick-grip-drive" position={[0,G.gearY,G.gearZ]} rotation={[0,pose.pinionAngle,0]}>{tag('pick-grip-pinion',<mesh rotation={[-Math.PI/2,0,0]}><extrudeGeometry args={[shapes.pinion,gearOptions]}/><meshStandardMaterial {...mat('pick-grip-pinion')}/></mesh>)}</group>
+ {([-1,1]as const).map(side=>{const id=side<0?'pick-grip-left-rack':'pick-grip-right-rack',pad=side<0?'pick-grip-left-pad':'pick-grip-right-pad',z=-side*raGripRackZ,x=side<0?pose.leftX:pose.rightX;return <group key={side} name={id+'-slide'} position={[x,G.rackY,G.gearZ+z]}>
+ {tag(id,<>{box(id,[-side*13,0,0],[58,5,4])}{pickGripperToothX(side).map((tx,i)=><mesh key={i} position={[tx,-2.5,-z]} rotation={[-Math.PI/2,0,0]}><extrudeGeometry args={[side<0?shapes.left:shapes.right,rackOptions]}/><meshStandardMaterial {...mat(id)}/></mesh>)}{box(id,[0,5,0],[5,10,4])}{box(id,[0,10,-(G.gearZ+z)/2],[5,5,G.gearZ+z+4])}{box(id,[0,-G.rackY/2+5,-G.gearZ-z],[5,G.rackY+15,6])}{box(id,[0,-G.rackY,-G.gearZ-z],[5,G.padHeight,G.padDepth])}</>)}
+ {tag(pad,box(pad,[-side*(G.fingerWidth/2+G.padWidth/2),-G.rackY,-G.gearZ-z],[G.padWidth,G.padHeight,G.padDepth],'#695982',.02))}
+ </group>;})}
+ {tag('pick-grip-guides',<>{([-1,1]as const).map(side=><group key={side}>{box('pick-grip-guides',[0,G.rackY,G.gearZ+side*14],[100,7.4,2.4],'#4b5664')}{[-31,31].map(x=><group key={x}>{box('pick-grip-guides',[x,G.rackY,G.gearZ+side*5.2],[38,7.4,2.4],'#4b5664')}</group>)}{box('pick-grip-guides',[0,G.rackY-4.4,G.gearZ+side*10.55],[100,1.4,9.2],'#4b5664')}</group>)}</>)}
+ </group>;}
