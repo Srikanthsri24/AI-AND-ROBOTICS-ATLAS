@@ -10,7 +10,7 @@ function ring(out:number,inside:number){const s=new Shape();s.absarc(0,0,out,0,M
  * are real holes. Units mm; caller sets world scale. No balancing behaviour is
  * inferred from a static frame or from moving the assembly slider. */
 export default function BalanceRobotFrame({selected='',choose=()=>{},step=-1,progress=1}:{selected?:string;choose?:(id:string)=>void;step?:number;progress?:number}){
- const shapes=useMemo(()=>{const lower=polygon([[-84,-65],[84,-65],[84,-52],[62.2,-52],[62.2,25],[84,25],[84,65],[-84,65],[-84,25],[-62.2,25],[-62.2,-52],[-84,-52]]),shelf=()=>polygon([[-54,-62],[54,-62],[58,-58],[58,58],[54,62],[-54,62],[-58,58],[-58,-58]]),middle=shelf(),upper=shelf();
+ const shapes=useMemo(()=>{const lower=polygon([[-84,-65],[84,-65],[84,-52],[F.motorPocketX,-52],[F.motorPocketX,25],[84,25],[84,65],[-84,65],[-84,25],[-F.motorPocketX,25],[-F.motorPocketX,-52],[-84,-52]]),shelf=()=>polygon([[-54,-62],[54,-62],[58,-58],[58,58],[54,62],[-54,62],[-58,58],[-58,-58]]),middle=shelf(),upper=shelf();
   for(const plate of[lower,middle,upper])for(const c of corners)circleHole(plate,c.x,-c.z,F.plateBore);
   for(const x of[-54,54])for(const z of[8,22])circleHole(lower,x,-z,2.2);
   for(const[plate,w,h]of[[middle,32,38],[upper,18,30]]as const){const cut=new Path();cut.moveTo(-w/2,-h/2);cut.lineTo(-w/2,h/2);cut.lineTo(w/2,h/2);cut.lineTo(w/2,-h/2);cut.closePath();plate.holes.push(cut);}

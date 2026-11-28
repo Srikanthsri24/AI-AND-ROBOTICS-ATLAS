@@ -1,6 +1,6 @@
 /** Separate two-wheel balance frame, in mm. This is an authored teaching kit,
  * not a dimensioned claim about a commercially supplied balancing robot. */
-export const balanceFrame={wheelRadius:32.5,track:200,axleY:32.5,lowerY:35,middleY:102,upperY:180,thickness:3,postX:44,postZ:50,postRadius:3.5,postBore:2.1,plateBore:2.2,studRadius:1.9} as const;
+export const balanceFrame={wheelRadius:32.5,track:200,axleY:32.5,lowerY:35,middleY:102,upperY:180,thickness:3,postX:44,postZ:50,postRadius:3.5,postBore:2.1,motorPocketX:61.2,plateBore:2.2,studRadius:1.9} as const;
 export const balanceFrameCorners=([-1,1]as const).flatMap(x=>[-1,1].map(z=>({key:`${x<0?'left':'right'}-${z<0?'front':'rear'}`,x:x*balanceFrame.postX,z:z*balanceFrame.postZ})));
 const part=(id:string,label:string,description:string)=>({id:'balance-'+id,label,description});
 export const balanceFrameParts=[
