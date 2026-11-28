@@ -5,3 +5,7 @@
 
 /* Keep long assembly sequences beside the workbench, with their own scroll area. */
 .pick-assembly-steps{max-height:min(760px,calc(100vh - 80px));overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable}@media(max-width:700px){.pick-assembly-steps{max-height:260px}}
+
+.pick-assembly-canvas{position:relative}.pick-assembly-cutaway-note{position:absolute;z-index:2;left:12px;right:12px;top:12px;width:fit-content;max-width:calc(100% - 24px);padding:8px 12px;border:1px solid #cbb8ed;border-radius:9px;background:#f5efffcc;color:#4c337a;font-size:12px;pointer-events:none}
+.pick-assembly-tools{flex-wrap:wrap}.pick-assembly-tools>span{flex:1 1 180px;min-width:0}.pick-assembly-tools button{flex:0 0 auto}
+@media(max-width:600px){.pick-assembly-tools>span{flex-basis:100%;max-width:none}.pick-assembly-tools button{flex:1 1 auto}}
