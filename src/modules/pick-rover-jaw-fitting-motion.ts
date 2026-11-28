@@ -1,0 +1,12 @@
+import{Vector3,type Object3D,type Mesh,type TubeGeometry}from'three';
+import{pickJawFittingPose}from'../data/pick-rover-jaw-fitting';
+import{pickJawFrameService}from'../data/pick-rover-jaw-frame-service';
+import{rewriteCubeSatTube}from'./cubesat-tube-motion';
+/** Capture only after the USB stage has placed the power-isolated rig. */
+export function createPickJawFittingMotion(root:Object3D,angle:number){
+ const names=['pick-grip-servo-bracket','pick-grip-servo','pick-grip-mount-fasteners','pick-grip-spline-hub','pick-grip-drive-retainer',...[0,1].flatMap(i=>['pick-grip-frame-clamp-'+i+'-body','pick-grip-frame-clamp-'+i+'-screw'])];
+ const parts=names.map(name=>{const object=root.getObjectByName(name);if(!object)throw Error('Missing jaw fitting part '+name);return{name,object,base:object.position.clone(),visible:object.visible};});
+ const set=(name:string,offset:readonly[number,number,number])=>{const p=parts.find(p=>p.name===name)!;p.object.position.copy(p.base);p.object.updateWorldMatrix(true,false);const delta=root.localToWorld(new Vector3(...offset)).sub(root.localToWorld(new Vector3())),world=p.object.getWorldPosition(new Vector3()).add(delta);p.object.position.copy(p.object.parent!.worldToLocal(world));};
+ function apply(progress:number){const pose=pickJawFittingPose(progress);for(const p of parts){p.object.position.copy(p.base);p.object.visible=true;}root.updateWorldMatrix(true,true);for(const name of names.slice(0,3))set(name,[0,pose.frameLift,0]);for(const i of[0,1]){set('pick-grip-frame-clamp-'+i+'-body',[pose.clampX,0,0]);set('pick-grip-frame-clamp-'+i+'-screw',[pose.clampX,pose.clampScrewLift,0]);}set('pick-grip-spline-hub',pose.hubOffset);set('pick-grip-drive-retainer',[0,pose.retainerOffset,0]);root.getObjectByName('pick-grip-spline-hub')!.visible=pose.hubVisible;root.getObjectByName('pick-grip-drive-retainer')!.visible=pose.retainerVisible;for(const r of pickJawFrameService(angle,pose.frameLift)){const tube=root.getObjectByName('pick-jaw-cable-'+r.wire.id+'-insulation')as Mesh<TubeGeometry>;if(!tube)throw Error('Missing jaw fitting cable '+r.wire.id);rewriteCubeSatTube(tube.geometry,r.curve);}root.updateWorldMatrix(true,true);return pose;}
+ return{apply,parts,restore(){for(const p of parts){p.object.position.copy(p.base);p.object.visible=p.visible;}for(const r of pickJawFrameService(angle,0))rewriteCubeSatTube((root.getObjectByName('pick-jaw-cable-'+r.wire.id+'-insulation')as Mesh<TubeGeometry>).geometry,r.curve);root.updateWorldMatrix(true,true);}};
+}
