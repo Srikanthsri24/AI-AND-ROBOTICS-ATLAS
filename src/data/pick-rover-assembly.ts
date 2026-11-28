@@ -1,3 +1,4 @@
+import{pickBoardMounts}from'./pick-rover-electronics';
 import{pickBaseAnchors}from'./pick-rover-base-anchors';
 import{pickMotorAnchors}from'./pick-rover-motor-mount';
 export type PickAssemblyPathPoint={at:number;offset:readonly[number,number,number]};
@@ -9,6 +10,11 @@ const clamps=(anchors:readonly {id:string}[])=>anchors.flatMap(a=>[
 ]);
 const wheel=(side:'left'|'right',sign:number):PickAssemblyUnit[]=>[
  unit(`pick-rover-${side}-wheel`,[sign*55,0,0],[0,.55]),unit(`pick-drive-${side}-washer`,[sign*65,0,0],[.55,.75]),unit(`pick-drive-${side}-screw`,[sign*80,0,0],[.75,1]),
+];
+const boardUnits=(board:'uno'|'pca'|'driver'):PickAssemblyUnit[]=>[
+ unit('pick-'+board+'-standoffs',[0,25,0],[0,.2]),unit('pick-rover-'+board+'-hardware',[0,45,0],[.2,.45]),...pickBoardMounts.filter(m=>m.board===board).flatMap(m=>[
+ unit('pick-board-clamp-'+m.key+'-washer-placement',[0,30,0],[.45,.6]),unit('pick-board-clamp-'+m.key+'-bolt-placement',[0,45,0],[.6,.8]),unit('pick-board-clamp-'+m.key+'-nut-placement',[0,-20,0],[.8,1]),
+ ]),
 ];
 /** Mechanical assembly section; servo fitting, electrical wiring and calibration follow. */
 export const pickMechanicalAssembly:readonly PickAssemblyStep[]=[
@@ -32,9 +38,13 @@ export const pickMechanicalAssembly:readonly PickAssemblyStep[]=[
  unit('pick-grip-fastener-'+i+'-nut-placement',[0,75,35],[0,1],[{at:0,offset:[0,75,35]},{at:.2,offset:[0,75,35]},{at:.45,offset:[0,75,0]},{at:.6,offset:[0,90,0]},{at:.85,offset:[0,0,0]}]),
  ]).flat(),...[0,1].flatMap(i=>[unit('pick-grip-frame-clamp-'+i+'-body',[15,0,0],[.85,.925]),unit('pick-grip-frame-clamp-'+i+'-screw',[15,.8,0],[0,1],[{at:0,offset:[15,.8,0]},{at:.85,offset:[15,.8,0]},{at:.925,offset:[0,.8,0]},{at:1,offset:[0,0,0]}])])]},
 
+ {id:'uno-board',title:'Mount the Uno controller',duration:11000,intro:'Place the four insulating spacers, then lower the real Uno PCB onto its mounting holes.',why:'The Uno runs the sketch and supplies logic signals. Nylon spacers keep the board’s solder joints clear of the acrylic and let the retaining nuts stay beneath the deck.',instructions:['Seat the hollow spacers on the four Uno mounting axes.','Lower the board with its USB-B socket toward the left side, keeping all four bores aligned with the spacers.','Place the upper washers, insert the M2 bolts from above, then fit the nuts from below. Leave USB and every actuator source disconnected.','For this pick-and-place build, A2 stays open before reboot. The same sketch selects the separate balancing build only when A2 is grounded before boot.'],check:'All four spacers support the PCB, the washers seat on its mounting pads, and no solder joint rests on the deck.',inspect:[['Uno PCB','pick-uno-pcb'],['Controller chip','pick-uno-mcu'],['Insulating spacers','pick-uno-standoffs'],['Board fasteners','pick-uno-board-fasteners']],units:boardUnits('uno')},
+ {id:'pca-board',title:'Mount the servo pulse driver',duration:11000,intro:'Seat the PCA9685 on its own four spacers beside the controller.',why:'This board creates the two servo pulse signals: channel 0 for lift and channel 1 for jaws. Its logic VCC and actuator V+ rails have different jobs and will be wired separately.',instructions:['Seat the four hollow spacers on the PCA9685 mounting axes.','Lower the board onto the spacers without bending its three-row channel pins.','Add the upper washers and bolts; bring the retaining nuts up from below the deck.','Keep all headers unwired for now. Later steps connect Uno A4/A5 to SDA/SCL, logic power to VCC, and the separate servo source to V+.'],check:'The PCB sits on all four spacers and the logic header, channel rows and actuator-power terminal remain accessible.',inspect:[['PWM-driver PCB','pick-pca-board'],['PWM chip','pick-pca-chip'],['SDA contact','pick-pca-logic-sda'],['Actuator terminal','pick-pca-terminal-positive'],['Board fasteners','pick-pca-board-fasteners']],units:boardUnits('pca')},
+ {id:'motor-board',title:'Mount the wheel motor driver',duration:10500,intro:'Fit the TB6612FNG breakout on its two insulating supports behind the servo driver.',why:'Its two H-bridges switch the left and right motors. VCC powers the logic; VM receives separate wheel-battery power. The common ground is a reference, not a substitute for either supply.',instructions:['Seat the two insulating spacers on the motor-driver mounting axes.','Lower the breakout with both header rows accessible, keeping the mounting holes aligned.','Fit the upper washers and bolts, then secure the nuts beneath the deck.','Leave the pins disconnected in this mounting step. Later wiring joins A01/A02 to the left motor, B01/B02 to the right, and the Uno control pins to the input row.'],check:'Both supports carry the board, the header pins are straight, and VM remains separate from logic VCC.',inspect:[['Motor-driver PCB','pick-driver-pcb'],['Dual H-bridge','pick-driver-chip'],['Logic VCC','pick-driver-inputs-pin-VCC'],['Wheel supply VM','pick-driver-inputs-pin-VM'],['Board fasteners','pick-driver-board-fasteners']],units:boardUnits('driver')},
+
 ];
 /** Explicitly hidden pending sections; never let unassigned hardware appear as assembled. */
 export const pickAssemblyDeferred=[
  'pick-grip-spline-hub','pick-grip-drive-retainer',
- 'pick-lift-drive-hub','pick-rover-electronics','pick-rover-control-leads','pick-rover-i2c-leads','pick-rover-distribution','pick-rover-logic-leads','pick-rover-motor-leads','pick-rover-wheel-supply-leads','pick-wheel-battery','pick-servo-supply','pick-servo-supply-leads','pick-lift-servo-cable','pick-jaw-servo-cable','pick-usb-hardware',
+ 'pick-lift-drive-hub','pick-rover-control-leads','pick-rover-i2c-leads','pick-rover-distribution','pick-rover-logic-leads','pick-rover-motor-leads','pick-rover-wheel-supply-leads','pick-wheel-battery','pick-servo-supply','pick-servo-supply-leads','pick-lift-servo-cable','pick-jaw-servo-cable','pick-usb-hardware',
 ]as const;
