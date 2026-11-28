@@ -1,0 +1,9 @@
+import{createRoot}from'react-dom/client';
+import Bench,{type PickCalibrationFittingState}from'../../src/modules/PickRoverCalibrationFittingBench';
+import type{PickUnloadedSceneApi}from'../../src/modules/PickRoverUnloadedScene';
+import type{PickJawFittingSceneApi}from'../../src/modules/PickRoverJawFittingScene';
+import '../../src/styles/app.css';
+const state=(value:PickCalibrationFittingState)=>Object.assign(window,{__pickCalibrationFittingState:value});
+const calibration=(value:PickUnloadedSceneApi)=>Object.assign(window,{__pickUnloadedApi:value});
+const fitting=(value:PickJawFittingSceneApi)=>Object.assign(window,{__pickJawFittingApi:value});
+const el=document.querySelector('#root')as HTMLElement;el.style.cssText='position:fixed;inset:0;overflow:auto;background:#f5f3fb;color:#202b4a;padding:clamp(10px,2vw,24px)';createRoot(el).render(<Bench onState={state} onCalibrationReady={calibration} onFittingReady={fitting}/>);

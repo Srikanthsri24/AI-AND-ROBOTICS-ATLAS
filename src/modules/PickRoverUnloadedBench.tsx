@@ -6,8 +6,8 @@ import Scene, { type PickUnloadedSceneApi } from './PickRoverUnloadedScene';
 import { pickUnloadedInitial, pickUnloadedInspect, pickUnloadedPower, pickUnloadedRequest, pickUnloadedAdvance, pickUnloadedCanRecord, pickUnloadedRecord, pickUnloadedReturn, pickUnloadedReady, pickUnloadedAtReference, pickUnloadedOutputs, pickUnloadedReferences, type PickUnloadedCalibration, type CalibrationChannel } from '../data/pick-rover-unloaded-calibration';
 import { pickRoverTeachingCalibration } from '../data/pick-rover-rig';
 import '../styles/pick-rover-unloaded.css';
-export default function PickRoverUnloadedBench({ onState, onReady }: { onState?: (state: PickUnloadedCalibration) => void; onReady?: (api: PickUnloadedSceneApi) => void }) {
-  const [state, setState] = useState(pickUnloadedInitial), [channel, setChannel] = useState<CalibrationChannel>(0), [selected, choose] = useState(''), [notice, setNotice] = useState('Inspect both bare splines before enabling power.'), [sceneReady, setSceneReady] = useState(0);
+export default function PickRoverUnloadedBench({ onState, onReady, initialState }: { initialState?:PickUnloadedCalibration; onState?: (state: PickUnloadedCalibration) => void; onReady?: (api: PickUnloadedSceneApi) => void }) {
+  const [state, setState] = useState(()=>initialState??pickUnloadedInitial()), [channel, setChannel] = useState<CalibrationChannel>(0), [selected, choose] = useState(''), [notice, setNotice] = useState('Inspect both bare splines before enabling power.'), [sceneReady, setSceneReady] = useState(0);
   const api = useRef<PickUnloadedSceneApi | null>(null), live = useRef(state); live.current = state;
   const ready = useCallback((value: PickUnloadedSceneApi) => { api.current = value; setSceneReady(v => v + 1); onReady?.(value); }, [onReady]);
   useEffect(() => { onState?.(state); }, [state, onState]);
