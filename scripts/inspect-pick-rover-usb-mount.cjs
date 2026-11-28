@@ -1,0 +1,10 @@
+const assert=require('node:assert/strict'),{chromium}=require('playwright');
+(async()=>{const browser=await chromium.launch({channel:'chrome',args:['--enable-unsafe-swiftshader']});try{
+ const page=await browser.newPage({viewport:{width:1200,height:950}});await page.goto('http://127.0.0.1:5190/scripts/fixtures/pick-rover-assembly.html');await page.waitForFunction(()=>!!window.__pickAssemblyApi);
+ const result=await page.evaluate(async()=>{
+  const{Box3,Vector3}=await import('/node_modules/three/build/three.module.js'),{pickMechanicalAssembly}=await import('/src/data/pick-rover-assembly.ts');const api=window.__pickAssemblyApi,index=pickMechanicalAssembly.findIndex(s=>s.id==='usb-source-mount');api.motion.apply(index,1);api.scene.updateMatrixWorld(true);const root=api.scene.getObjectByName('pick-assembly-hardware'),source=root.getObjectByName('pick-usb-source-assembly'),deck=root.getObjectByName('pick-rover-deck'),top=[];source.traverse(o=>{if(o.isMesh&&o.geometry.parameters.width===58&&o.geometry.parameters.height===1&&o.geometry.parameters.depth===30)top.push(o);});
+  const bounds=o=>{const box=new Box3().setFromObject(o,true);return{min:root.worldToLocal(box.min).toArray(),max:root.worldToLocal(box.max).toArray()};};const covers=top.map(bounds).sort((a,b)=>b.max[1]-a.max[1]);
+  return{deck:bounds(deck),cover:covers[0],pads:[0,1].map(i=>bounds(root.getObjectByName('pick-usb-bank-mount-'+i))),loomHidden:!root.getObjectByName('pick-usb-loom').visible,off:root.getObjectByName('pick-usb-bank-led').children[0].material.emissiveIntensity===0};
+ });
+ assert.ok(result.loomHidden&&result.off);for(const pad of result.pads){assert.ok(Math.abs(pad.max[1]-result.deck.min[1])<1e-8);assert.ok(Math.abs(pad.min[1]-result.cover.max[1])<1e-8);for(const axis of[0,2])assert.ok(pad.min[axis]>=result.cover.min[axis]&&pad.max[axis]<=result.cover.max[axis]);}console.log('ACTUAL TWO PAD / DECK / SOURCE TOP SEATS / DARK OUTPUT / DISCONNECTED CABLE PASS',JSON.stringify(result));
+}finally{await browser.close();}})().then(()=>process.exit(0)).catch(e=>{console.error(e);process.exit(1);});

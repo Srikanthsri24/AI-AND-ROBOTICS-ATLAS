@@ -20,14 +20,15 @@ function PickRoverUsb({selected,choose,on=false,onToggle,unoWithdrawal=0,bankWit
  const boot=(id:string)=><mesh position={[-21,0,0]} rotation={[0,0,Math.PI/2]} castShadow><latheGeometry args={[geo.boot,32]}/>{material(id,'#384965')}</mesh>;
  const caseId='pick-usb-bank-case';
  return <group ref={root} name="pick-usb-hardware" userData={{units:'mm'}}>
- <group position={[...B.at]}>
- {[-18,18].map((x,i)=>tag('pick-usb-bank-mount-'+i,box('pick-usb-bank-mount-'+i,[x,12.4,0],[8,.8,24],'#555660')))}
+ {[-18,18].map((x,i)=>tag('pick-usb-bank-mount-'+i,<group position={[...B.at]}>{box('pick-usb-bank-mount-'+i,[x,12.4,0],[8,.8,24],'#555660')}</group>))}
+ <group name="pick-usb-source-assembly"><group position={[...B.at]}>
  <group name="pick-usb-bank-body" position={[bankShift,0,0]}>
  {tag(caseId,<>{[.5,11.5].map(y=><group key={y}>{box(caseId,[0,y,0],[58,1,30],'#29334c')}</group>)}{box(caseId,[28.5,6,0],[1,10,30],'#29334c')}{[-14.5,14.5].map(z=><group key={z}>{box(caseId,[0,6,z],[57,10,1],'#29334c')}</group>)}<mesh position={[-29,6,0]} rotation={[0,Math.PI/2,0]}><extrudeGeometry args={[geo.wall,wallExtrusion]}/>{material(caseId,'#394262')}</mesh></>)}
  {tag('pick-usb-bank-switch',box('pick-usb-bank-switch',[0,6,-15.6],[10,4,1.2],on?'#9562d4':'#69748a'),true)}
  {tag('pick-usb-bank-led',<mesh position={[10,6,-15.2]}><boxGeometry args={[2,1,.4]}/><meshStandardMaterial color={selected==='pick-usb-bank-led'?'#c4a2ff':on?'#71d6b0':'#344a48'} emissive={on?'#42b58b':'#000000'} emissiveIntensity={on?.7:0}/></mesh>)}
  </group></group>
  {tag('pick-usb-bank-port',<group position={[pickUsbBankFace[0]+bankShift,pickUsbBankFace[1],pickUsbBankFace[2]]}>{extrude('pick-usb-bank-port',geo.socket,0,'#b8c2cd')}{box('pick-usb-bank-port',[4.5,-1.2,0],[9,1.2,10],'#d6cdb7')}{[-3.75,-1.25,1.25,3.75].map(z=><group key={z}>{box('pick-usb-bank-port',[3.25,-.55,z],[4.5,.1,.8],'#c6b27a',.8)}</group>)}</group>)}
+ </group><group name="pick-usb-loom">
  {tag('pick-usb-cable',<mesh name="pick-usb-cable-tube" castShadow><tubeGeometry args={[geo.curve,240,1.5,12,false]}/>{material('pick-usb-cable','#384965')}</mesh>)}
  <group name="pick-usb-b-body" position={pose.uno}>
  {tag('pick-usb-b-shield',extrude('pick-usb-b-shield',geo.b,-6,'#b8c2cd'))}
@@ -38,6 +39,6 @@ function PickRoverUsb({selected,choose,on=false,onToggle,unoWithdrawal=0,bankWit
  {tag('pick-usb-a-shield',<group scale={[-1,1,1]}>{extrude('pick-usb-a-shield',geo.a,-4,'#b8c2cd')}</group>)}
  {tag('pick-usb-a-grip',<>{box('pick-usb-a-grip',[-12,0,0],[12,8,14],'#384965')}{boot('pick-usb-a-grip')}</>)}
  {tag('pick-usb-a-contacts',<>{box('pick-usb-a-contacts',[-1.1,.5,0],[9.8,1.7,10],'#d6cdb7')}{[-3.75,-1.25,1.25,3.75].map(z=><group key={z}>{box('pick-usb-a-contacts',[-.6,-.425,z],[8.8,.15,.8],'#c6b27a',.8)}</group>)}</>)}
- </group></group>;
+ </group></group></group>;
 }
 export default memo(PickRoverUsb);
