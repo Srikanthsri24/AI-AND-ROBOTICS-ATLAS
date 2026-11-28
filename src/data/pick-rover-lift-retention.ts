@@ -1,0 +1,4 @@
+/** Authored 4 mm D-axle with two shallow retaining-ring grooves.
+ * mm; the rings capture the fixed towers, not the rotating link plates. */
+export const pickLiftRetention={grooveRadius:1.7,grooveFlat:1.5,ringInner:1.73,ringOuter:3.4,ringThickness:.3,grooves:[[-27,-26.6],[26.6,27]]as const};
+export const pickLiftRetentionParts=([-1,1]as const).map((side,i)=>({id:`pick-lift-axle-ring-${i}`,label:`${side<0?'Left':'Right'} lift-axle retaining ring`,description:'This open spring ring sits in a shallow machined groove outside the fixed tower. Its outside diameter cannot pass through the tower bearing, so the two rings limit axial axle travel while allowing rotation. The left ring also stops the floating spline-to-D adapter leaving the servo spline. Remove the rings before withdrawing the axle. Spring deflection, stress and tool force are not simulated.'}));
