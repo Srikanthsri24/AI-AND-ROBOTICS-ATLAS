@@ -2,9 +2,9 @@
 
 ## Phase 1 — 150 published Guided Builds
 
-Current verified total: **83 / 150 workshops**. **67** remain in Phase 1; **61** additional guides remain in Phase 2. Counts and in-progress descriptions in earlier checkpoint notes describe those earlier states.
+Current verified total: **84 / 150 workshops**. **66** remain in Phase 1; **61** additional guides remain in Phase 2. Counts and in-progress descriptions in earlier checkpoint notes describe those earlier states.
 
-Latest completed: **Arduino Automatic Tap System (`directory-27`)**. Next in catalog order: **Obstacle-avoiding car & 6-axis robotic arm (`directory-35`)**.
+Latest completed: **Obstacle-avoiding car & 6-axis robotic arm (`directory-35`)**. Next in catalog order: **Pick-and-place rover & Self-balancing robot (`directory-36`)**.
 
 Use the user-approved obstacle-avoiding car as the visual and interaction benchmark. Add and verify a project-specific sixth 3D Workshop for each of the 150 published guides, continuing in catalog order.
 
@@ -1937,3 +1937,19 @@ Native picks pass the actual pitch adapter, roll support and both wrist servo ca
 Adjacent-link interfaces (including shoulder/elbow and elbow/pitch plates), wider mechanical contact review, final current-geometry travel checks, animation tuning and routed/layout QA remain. The candidate stays private, published workshops stay 83/150, Phase 2 remains 61 pending guides/workshops, and the full 211-guide goal stays active.
 
 Final production Vite build passes after regenerating the arm-kit asset (existing large-chunk warning retained). The dist output includes the updated reference image.
+
+Directory-35 joint and palm clearance checkpoint: staggered the elbow/pitch mounting planes by 9 mm and rounded the moving-link ends. Shortened unused distal tips to the crossbar face so a new servo/link can enter without passing through the preceding plate; the elbow/pitch cradles approach from behind. Shifted the shoulder-support posts outside its cradle. Palm supports now stand outside the case ears/fasteners, and the inner guide rails leave an open window for the pinion. Updated the corresponding instructions and part descriptions.
+
+All 39 individual/combined hardware poses pass the joint, wrist and gripper separation checks. Reviewed every recorded arm contact: only four named, same-servo manufactured interfaces remain (body/mounts, body/relief, gearcase/mounts and case-screws/mounts). The new whole-arm review gets its scope from actual scene ownership, requires all six cases, and rejects other arm/station contacts; three tests protect against cross-servo, rotating-part and unknown-owner exemptions. Final report: /tmp/atlas-ra-joint-palm-final-hardware-39-clear.json; log: /tmp/atlas-ra-joint-palm-final-hardware-39.log. It covers 1349 non-tube meshes, with no unowned physical meshes. Static circuit-package contacts are reported separately, not declared mechanically collision-free.
+
+The hardware diagnostic now caches unchanged relative poses with world metric and geometry/version identities. No poses, meshes or contact categories are removed. Contact counts and owner-pair summaries match seven saved uncached samples from the corresponding pre-palm geometry. That interrupted uncached run was intentionally stopped to improve repeated rigid-pair work, not treated as a completed 39-pose check.
+
+The revised harness passes all 39 poses and all 54 connector-fitting configurations with the complete station and organizer present: no wire/hardware, wire-pair, moving plug-body or organizer contacts; endpoints and buffers remain correct. Reports: /tmp/atlas-ra-joint-palm-loom-39-clear.json and /tmp/atlas-ra-joint-palm-fitting-54-clear.json. Joint stacking initially exposed two guide conflicts. Raised the channel-3 support and routed its return outside neighbouring collars, then aligned channel 4's original-sized eye to the measured incoming ribbon. The failed wider-eye attempt was removed. The eye-route diagnostic reads actual rendered tube vertices at the known pose-23 regression; the clearance script can select validated pose indices for focused reproduction.
+
+All 126 arm/rover tests and targeted strict TypeScript pass. The final combined cold-start arm flow passes six unloaded records, 43 mechanical fits, eight board fits, eighteen connections, all six live timed-return commands, shutdown and completed progress retention after switching builds. Log: /tmp/atlas-ra-joint-palm-final-cold-ui.log. Both affected 1920 × 1440 kit references were regenerated and visually reviewed; the renderer supports multiple validated reference names.
+
+Final fastener-animation correction: screws enter from the ear side while hollow hex nuts rise from 12 mm below the cradle, avoiding the old nut-through-plate motion. Native checks pass all 43 fits plus all 24 nut bores/lands at intermediate and seated states. Actual nut vertices remain inside the former seated hex-prism envelope, preserving prior assembled-model clearance; all four base anchor axes/clamp stacks also pass. Log: /tmp/atlas-ra-final-fastener-assembly.log. The unchanged controller/workflow cold flow predates this final nut-animation detail; its actual assembly path is covered by the updated 43-fit test.
+
+The sixth tab is now enabled locally for final routed/layout checks. Publication count must not advance until those checks and the final build pass. The full goal remains all 150 existing workshops followed by the remaining 61 guides/workshops (211 total).
+
+Directory-35 publication checkpoint: the actual sixth-tab route passes actual fitting/highlighting, unloaded calibration, power interlocks, retained independent build progress, all-stage navigation, desktop and 390 px phone overflow checks without page errors. Reviewed both screenshots after compacting the repeated headings and selector; foreground/button contrast retains the Atlas theme. Log: /tmp/atlas-ra-routed-final.log. Full TypeScript and the final production build pass (existing large-chunk warning only); local server remains available. Registered the verified workshop: 84/150 complete, 66 Phase 1 workshops remain, followed by 61 Phase 2 guides/workshops. The full 211-guide goal remains active.

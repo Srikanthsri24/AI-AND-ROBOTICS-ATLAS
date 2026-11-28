@@ -7,7 +7,9 @@ export const raArmLoomFrames:readonly{key:FrameKey;id:string;label:string;at:XYZ
  {key:'front',id:'ra-arm-loom-frame-front',label:'Front gripper-lead post',at:[-100,0,80],height:190,foot:12},
 ];
 type Guide={id:string;label:string;description:string;at:XYZ;axis:XYZ;frame:FrameKey};
-const inputAxes:readonly XYZ[]=[[-.5,.24,-.83],[-.8,-.32,.5],[-.82,-.53,-.22],[-.93,-.35,-.1],[-.88,-.42,.24],[-.74,-.11,-.67]];
+// Channel 4 follows the sampled incoming ribbon direction so its rim clears
+// both the straightened extension lead and the neighbouring channel 3 run.
+const inputAxes:readonly XYZ[]=[[-.5,.24,-.83],[-.8,-.32,.5],[-.82,-.53,-.22],[-.93,-.35,-.1],[-.65,-.65,.4],[-.74,-.11,-.67]];
 /** Authored, preassembled teaching-fixture guides. Loose eyes preserve slack;
  * the model does not calculate friction, adhesive strength or cable gravity. */
 export const raArmLoomGuides:readonly Guide[]=[

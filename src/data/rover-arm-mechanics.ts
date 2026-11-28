@@ -1,6 +1,6 @@
 /** Authored teaching arm, millimetres. Not a dimensional copy of a specific kit.
  * Servo pulse-to-angle calibration is deliberately separate from these joint angles. */
-export const raArmDimensions={baseRadius:63,baseThickness:5,shoulderHeight:76,upperLink:104,forearm:92,wrist:57,rollOffset:-40,palm:52};
+export const raArmDimensions={baseRadius:63,baseThickness:5,shoulderHeight:76,upperLink:104,jointStack:-9,forearm:92,wrist:57,rollOffset:-40,palm:52};
 export const raArmNeutral=[0,-.3,-.7,.35,0,.25] as const;
 export const raArmJoints=[
  {id:'base',label:'Base yaw',axis:'Y',connection:'Rotates the complete shoulder support around the secured base.'},
@@ -15,10 +15,10 @@ export function raArmParts(){return [
  ...raArmJoints.flatMap((j,i)=>[
  {id:`ra-arm-${j.id}-cradle`,label:j.label+' · fixed servo cradle',description:'A slotted metal plate supports the servo mounting ears. Its central aperture clears the case. '+j.connection},
  {id:`ra-arm-${j.id}-bolts`,label:j.label+' · mounting bolts',description:'Four bolts pass through the case ears and cradle. Their washers spread the clamping load; these bolts do not connect to the moving horn.'},
- ...(i<5?[{id:`ra-arm-${j.id}-link`,label:j.label+' · moving link',description:'Four mounting bores connect this plate to the rotating horn. Its open centre clears the horn retaining screw. '+j.connection}]:[]),
+ ...(i<5?[{id:`ra-arm-${j.id}-link`,label:j.label+' · moving link',description:(['shoulder','elbow','pitch'].includes(j.id)?'Four bores attach the rounded plate to its rotating horn. The stepped mounting plane clears the neighbouring link; '+(j.id==='pitch'?'the offset adapter supports the next fixed cradle. ':'the rear crossbar supports the next fixed cradle. '):'Four mounting bores connect this plate to the rotating horn. Its open centre clears the horn retaining screw. ')+j.connection}]:[]),
  ]),
  {id:'ra-arm-pitch-adapter',label:'Wrist offset adapter',description:'An offset bracket clears the roll servo housing and connects its cradle to the wrist pitch link.'},
- {id:'ra-arm-palm',label:'Gripper palm and slide guides',description:'The palm carries the final servo and two linear rack guides. Opposed rack teeth engage the central pinion.'},
+ {id:'ra-arm-palm',label:'Gripper palm and slide guides',description:'The palm supports both rack guides above the gripper servo. Its outside legs clear the case ears and fasteners, and its centre window gives the pinion room to turn.'},
  {id:'ra-arm-pinion',label:'Gripper pinion',description:'This small gear turns with the channel 5 servo. Its teeth push one rack left and the other right, moving both fingers by the same distance.'},
  ...['left','right'].map(side=>({id:`ra-arm-${side}-finger`,label:side+' rack and padded finger',description:'The toothed rack slides in its palm guide. A raised support brings the soft pad face to face with the opposite pad, so both fingers can grip the same object.'})),
  ];}

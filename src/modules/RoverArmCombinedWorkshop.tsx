@@ -34,7 +34,7 @@ export default function RoverArmCombinedWorkshop({onRoverStateChange,onArmStateC
  }
  return <div className="ra-combined-workshop">
   <section className="ra-build-choice" aria-label="Choose your workshop build">
-   <div className="ra-build-choice-heading"><span>ONE KIT · TWO BUILDS</span><h2>What will you build?</h2><p>Use the Uno for one build at a time. Each build keeps its own assembly progress while you explore the other.</p></div>
+   <div className="ra-build-choice-heading"><span>ONE KIT · TWO BUILDS</span><h2>What will you build?</h2><p>Use one Uno at a time. Your assembly progress stays here when you switch builds.</p></div>
    <div className="ra-build-choice-options">
     {(['rover','arm']as const).map(id=><button key={id} type="button" aria-pressed={build===id} disabled={build!==id&&!!lock} onClick={()=>change(id)}>
      <span className="ra-build-choice-icon">{id==='rover'?<CarFront/>:<Hand/>}</span><span><strong>{id==='rover'?'Obstacle-avoiding rover':'Six-axis robotic arm'}</strong><small>{id==='rover'?'Assemble the car, wire its sensor and try the course.':'Calibrate six servos, fit the joints and control the arm.'}</small><b>{id==='rover'?'A2 linked to GND at startup':'A2 open at startup'}</b></span><span className="ra-build-choice-status">{build===id?'Selected':'Choose build'}</span>
