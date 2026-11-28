@@ -1,0 +1,8 @@
+export const pickServoSupply={at:[-46,38.8,172]as const,voltage:6,width:60,length:38,height:20};
+export const pickServoSupplyParts=[
+ {id:'pick-servo-supply-case',label:'Separate regulated servo source',description:'This authored portable-source enclosure represents a matched regulated 6 V supply for the two servos. Its internal energy source and regulator are not exposed. Match the real kit voltage and peak current; this geometry does not certify a product rating. It does not feed Uno 5V or wheel VM.'},
+ {id:'pick-servo-supply-switch',label:'Servo-source output switch',description:'Enables the separate servo-power rail. Turning it off removes actuator power while USB logic and the wheel battery keep their own states. Switch off before changing the supply connections.'},
+ {id:'pick-servo-supply-led',label:'Servo-source output indicator',description:'Shows this source output state only. It does not prove that either supply lead or servo cable is connected correctly.'},
+ ...(['positive','negative']as const).map(p=>({id:'pick-servo-supply-'+p,label:p==='positive'?'Servo supply · red +6 V socket':'Servo supply · black return socket',description:p==='positive'?'The red lead must connect to PCA9685 V+, separate from its logic VCC header. Never power both servos from Uno 5V.':'The black lead returns servo current directly from the PCA9685 supply terminal. The controller also needs its separate Uno ground reference.'})),
+ ...[0,1].map(i=>({id:'pick-servo-supply-mount-'+i,label:'Servo-source mounting strip '+(i+1),description:'A 0.8 mm mounting-foam strip bonds the source case underside to the clean, dry chassis. Check that the source cannot slide before running. This is a geometric mounting illustration, not an adhesive strength rating.'})),
+];
